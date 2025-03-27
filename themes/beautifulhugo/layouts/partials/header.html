@@ -1,5 +1,3 @@
-{{- partial "load-photoswipe-theme.html" . }}
-
 {{ if .IsHome }}
   {{ if .Site.Params.homeTitle }}{{ $.Scratch.Set "title" .Site.Params.homeTitle }}{{ else }}{{ $.Scratch.Set "title" .Site.Title }}{{ end }}
   {{ if .Site.Params.subtitle }}{{ $.Scratch.Set "subtitle" .Site.Params.subtitle }}{{ end }}
@@ -57,13 +55,31 @@
     {{ if $title }}
     <div class="intro-header no-img">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="header-row">
+          {{ if .IsHome }}
+          <div class="avatar-container">
+            <div class="avatar-img-border">
+              <a title="{{ .Site.Title }}" href="{{ "/" }}">
+              {{- $image := resources.Get ( $.Site.Params.logo) -}}
+              {{ if $image }}
+              <img class="avatar-img" src="{{ ($image.Fit "300x300 webp q100").Permalink }}" alt="{{ .Site.Title }}" />
+              {{else}}
+              <img class="avatar-img" src="{{ .Site.Params.logo }}" alt="{{ .Site.Title }}" />
+              {{end}}
+              </a>
+            </div>
+            {{ partial "media_icons.html" }}
+          </div>
+
+          {{ end }}
+
             <div class="{{ .Type }}-heading">
               {{ if eq .Type "list" }}
                 <h1>{{ if .Data.Singular }}#{{ end }}{{ .Title }}</h1>
               {{ else }}
-                <h1>{{ with $title }}{{.}}{{ else }}<br/>{{ end }}</h1>
+                <h1>{{ with $title }}{{.}}{{ else }}<br/>{{ end }}  {{ if eq .Type "post" }}
+                  {{ partial "post_meta.html" . }}
+                  {{ end }}</h1>
               {{ end }}
               {{ if ne .Type "post" }}
                 <hr class="small">
@@ -75,11 +91,8 @@
                   <h2 class="{{ .Type }}-subheading">{{ $subtitle }}</h2>
                 {{ end }}
               {{ end }}
-              {{ if eq .Type "post" }}
-                {{ partial "post_meta.html" . }}
-              {{ end }}
+
             </div>
-          </div>
         </div>
       </div>
     </div>

@@ -6,93 +6,100 @@
     <description>Recent content on Antranig Basman</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <managingEditor>youremail@domain.com (Some Person)</managingEditor>
-    <webMaster>youremail@domain.com (Some Person)</webMaster>
-    <lastBuildDate>Mon, 20 Mar 2017 00:00:00 +0000</lastBuildDate>
+    <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
+    <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
+    <lastBuildDate>Thu, 20 Mar 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ponder.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Photoswipe Gallery Sample</title>
-      <link>https://ponder.github.io/post/2017-03-20-photoswipe-gallery-sample/</link>
-      <pubDate>Mon, 20 Mar 2017 00:00:00 +0000</pubDate><author>youremail@domain.com (Some Person)</author>
-      <guid>https://ponder.github.io/post/2017-03-20-photoswipe-gallery-sample/</guid>
-      <description>&lt;p&gt;Beautiful Hugo adds a few custom shortcodes created by &lt;a href=&#34;https://www.liwen.id.au/heg/&#34;&gt;Li-Wen Yip&lt;/a&gt; and &lt;a href=&#34;https://github.com/GjjvdBurg/HugoPhotoSwipe&#34;&gt;Gert-Jan van den Berg&lt;/a&gt; for making galleries with &lt;a href=&#34;https://photoswipe.com&#34;&gt;PhotoSwipe&lt;/a&gt; .&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&lt;div class=&#34;gallery caption-position-bottom caption-effect-fade hover-effect-zoom hover-transition&#34; itemscope itemtype=&#34;http://schema.org/ImageGallery&#34;&gt;&#xA;&#x9;  &#xA;  &#xA;  &lt;link rel=&#34;stylesheet&#34; href=&#34;https://ponder.github.io/css/hugo-easy-gallery.css&#34; /&gt;&#xA;  &lt;div class=&#34;box&#34; &gt;&#xA;    &lt;figure  itemprop=&#34;associatedMedia&#34; itemscope itemtype=&#34;http://schema.org/ImageObject&#34;&gt;&#xA;      &lt;div class=&#34;img&#34; style=&#34;background-image: url(&#39;https://ponder.github.ioimg/hexagon-thumb.jpg&#39;);&#34;&gt;&#xA;        &lt;img itemprop=&#34;thumbnail&#34; src=&#34;img/hexagon-thumb.jpg&#34; alt=&#34;img/hexagon-thumb.jpg&#34;/&gt;&#xA;      &lt;/div&gt;&#xA;      &lt;a href=&#34;img/hexagon.jpg&#34; itemprop=&#34;contentUrl&#34;&gt;&lt;/a&gt;&#xA;    &lt;/figure&gt;&#xA;  &lt;/div&gt;&#xA;&#xA;  &#xA;  &#xA;  &lt;div class=&#34;box&#34; &gt;&#xA;    &lt;figure  itemprop=&#34;associatedMedia&#34; itemscope itemtype=&#34;http://schema.org/ImageObject&#34;&gt;&#xA;      &lt;div class=&#34;img&#34; style=&#34;background-image: url(&#39;https://ponder.github.ioimg/sphere-thumb.jpg&#39;);&#34;&gt;&#xA;        &lt;img itemprop=&#34;thumbnail&#34; src=&#34;img/sphere-thumb.jpg&#34; alt=&#34;Sphere&#34;/&gt;&#xA;      &lt;/div&gt;&#xA;      &lt;a href=&#34;img/sphere.jpg&#34; itemprop=&#34;contentUrl&#34;&gt;&lt;/a&gt;&#xA;        &lt;figcaption&gt;&#xA;            &lt;p&gt;Sphere&lt;/p&gt;&#xA;        &lt;/figcaption&gt;&#xA;    &lt;/figure&gt;&#xA;  &lt;/div&gt;&#xA;&#xA;  &#xA;  &#xA;  &lt;div class=&#34;box&#34; &gt;&#xA;    &lt;figure  itemprop=&#34;associatedMedia&#34; itemscope itemtype=&#34;http://schema.org/ImageObject&#34;&gt;&#xA;      &lt;div class=&#34;img&#34; style=&#34;background-image: url(&#39;https://ponder.github.ioimg/triangle-thumb.jpg&#39;);&#34;&gt;&#xA;        &lt;img itemprop=&#34;thumbnail&#34; src=&#34;img/triangle-thumb.jpg&#34; alt=&#34;This is a long comment about a triangle&#34;/&gt;&#xA;      &lt;/div&gt;&#xA;      &lt;a href=&#34;img/triangle.jpg&#34; itemprop=&#34;contentUrl&#34;&gt;&lt;/a&gt;&#xA;        &lt;figcaption&gt;&#xA;            &lt;p&gt;Triangle&lt;/p&gt;&#xA;        &lt;/figcaption&gt;&#xA;    &lt;/figure&gt;&#xA;  &lt;/div&gt;&#xA;&#xA;&#xA;&lt;/div&gt;</description>
+      <title>On UI as code</title>
+      <link>https://ponder.github.io/post/2025-03-20-ui-as-code/</link>
+      <pubDate>Thu, 20 Mar 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.github.io/post/2025-03-20-ui-as-code/</guid>
+      <description>UI as Code as a named slogan originated in the context of Dart&amp;rsquo;s Flutter UI toolkit created by Google. It is centrally described by Bob Nystrom in this thoughtful posting Marking Dart a Better Language for UI. I see it as part of a wider trend in many environments to express designs in general-purpose programming language code rather than configuration languages with less expressive power. For example, ESLint&amp;rsquo;s flat config system introduced in 2022 moves its previous JSON-based linting configuration into JavaScript code.</description>
     </item>
     <item>
-      <title>Big Image Sample</title>
-      <link>https://ponder.github.io/post/2017-03-07-bigimg-sample/</link>
-      <pubDate>Tue, 07 Mar 2017 00:00:00 +0000</pubDate><author>youremail@domain.com (Some Person)</author>
-      <guid>https://ponder.github.io/post/2017-03-07-bigimg-sample/</guid>
-      <description>&lt;p&gt;The image banners at the top of the page are refered to as &amp;ldquo;bigimg&amp;rdquo; in this theme. They are optional, and one more more can be specified. If more than one is specified, the images rotate every 10 seconds. In the front matter, bigimgs are specified using an array of hashes.&lt;/p&gt;</description>
+      <title>On Development Speed</title>
+      <link>https://ponder.github.io/post/2025-03-14-development-speed/</link>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.github.io/post/2025-03-14-development-speed/</guid>
+      <description>A recent posting Why the Latest JavaScript Frameworks Are a Waste of Time sparks a short train of thought. As well as the characteristically disrespectful tone of discussion that technical people often adopt, and the suggestion, contrary to my speculations looking at DOM reconciliation, that people really do use low-level benchmarks when choosing frameworks, is the notion of frameworks contributing to development speed. One commentor invites us to watch him against the clock to implement a front end in Svelte rather than React.</description>
     </item>
     <item>
-      <title>Math Sample</title>
-      <link>https://ponder.github.io/post/2017-03-05-math-sample/</link>
-      <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate><author>youremail@domain.com (Some Person)</author>
-      <guid>https://ponder.github.io/post/2017-03-05-math-sample/</guid>
-      <description>&lt;p&gt;KaTeX can be used to generate complex math formulas server-side.&lt;/p&gt;&#xA;&lt;p&gt;$$&#xA;\phi = \frac{(1+\sqrt{5})}{2} = 1.6180339887\cdots&#xA;$$&lt;/p&gt;&#xA;&lt;p&gt;Additional details can be found on &lt;a href=&#34;https://github.com/KaTeX/KaTeX&#34;&gt;GitHub&lt;/a&gt; or on the &lt;a href=&#34;https://katex.org/&#34;&gt;project homepage&lt;/a&gt;.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Code Sample</title>
-      <link>https://ponder.github.io/post/2016-03-08-code-sample/</link>
-      <pubDate>Tue, 08 Mar 2016 00:00:00 +0000</pubDate><author>youremail@domain.com (Some Person)</author>
-      <guid>https://ponder.github.io/post/2016-03-08-code-sample/</guid>
-      <description>&lt;p&gt;The following are two code samples using syntax highlighting.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Flake it till you make it</title>
-      <link>https://ponder.github.io/post/2015-02-26-flake-it-till-you-make-it/</link>
-      <pubDate>Thu, 26 Feb 2015 00:00:00 +0000</pubDate><author>youremail@domain.com (Some Person)</author>
-      <guid>https://ponder.github.io/post/2015-02-26-flake-it-till-you-make-it/</guid>
-      <description>Under what circumstances should we step off a path? When is it essential that we finish what we start? If I bought a bag of peanuts and had an allergic reaction, no one would fault me if I threw it out. If I ended a relationship with a woman who hit me, no one would say that I had a commitment problem. But if I walk away from a seemingly secure route because my soul has other ideas, I am a flake?</description>
-    </item>
-    <item>
-      <title>Test markdown</title>
-      <link>https://ponder.github.io/post/2015-02-20-test-markdown/</link>
-      <pubDate>Fri, 20 Feb 2015 00:00:00 +0000</pubDate><author>youremail@domain.com (Some Person)</author>
-      <guid>https://ponder.github.io/post/2015-02-20-test-markdown/</guid>
-      <description>You can write regular markdown here and Hugo will automatically convert it to a nice webpage. I strongly encourage you to take 5 minutes to learn how to write in markdown - it&amp;rsquo;ll teach you how to transform regular text into bold/italics/headings/tables/etc.&#xA;Here is some bold text&#xA;Here is a secondary heading Here&amp;rsquo;s a useless table:&#xA;Number Next number Previous number Five Six Four Ten Eleven Nine Seven Eight Six Two Three One How about a yummy crepe?</description>
-    </item>
-    <item>
-      <title>To be</title>
-      <link>https://ponder.github.io/post/2015-02-13-hamlet-monologue/</link>
-      <pubDate>Fri, 13 Feb 2015 00:00:00 +0000</pubDate><author>youremail@domain.com (Some Person)</author>
-      <guid>https://ponder.github.io/post/2015-02-13-hamlet-monologue/</guid>
-      <description>To be, or not to be&amp;ndash;that is the question: Whether &amp;rsquo;tis nobler in the mind to suffer The slings and arrows of outrageous fortune Or to take arms against a sea of troubles And by opposing end them. To die, to sleep&amp;ndash; No more&amp;ndash;and by a sleep to say we end The heartache, and the thousand natural shocks That flesh is heir to. &amp;lsquo;Tis a consummation Devoutly to be wished. To die, to sleep&amp;ndash; To sleep&amp;ndash;perchance to dream: ay, there&amp;rsquo;s the rub, For in that sleep of death what dreams may come When we have shuffled off this mortal coil, Must give us pause.</description>
-    </item>
-    <item>
-      <title>Dear diary</title>
-      <link>https://ponder.github.io/post/2015-01-27-dear-diary/</link>
-      <pubDate>Tue, 27 Jan 2015 00:00:00 +0000</pubDate><author>youremail@domain.com (Some Person)</author>
-      <guid>https://ponder.github.io/post/2015-01-27-dear-diary/</guid>
-      <description>What is it with that Mary girl? Dragging me to school every day. As if I had a choice. What you don&amp;rsquo;t hear in those nursery rhymes is that she starves me if I don&amp;rsquo;t go to school with her; it&amp;rsquo;s the only way I can stay alive! I&amp;rsquo;m thinking about being adopted by Little Bo Peep, sure I may get lost, but anything is better than being with Mary and those little brats at school (shudder, shudder).</description>
-    </item>
-    <item>
-      <title>Soccer</title>
-      <link>https://ponder.github.io/post/2015-01-19-soccer/</link>
-      <pubDate>Mon, 19 Jan 2015 00:00:00 +0000</pubDate><author>youremail@domain.com (Some Person)</author>
-      <guid>https://ponder.github.io/post/2015-01-19-soccer/</guid>
-      <description>From Wikipedia:&#xA;Association football, more commonly known as football or soccer,[2] is a sport played between two teams of eleven players with a spherical ball. It is played by 250 million players in over 200 countries, making it the world&amp;rsquo;s most popular sport.[3][4][5][6] The game is played on a rectangular field with a goal at each end. The object of the game is to score by getting the ball into the opposing goal.</description>
-    </item>
-    <item>
-      <title>Pirates arrrr</title>
-      <link>https://ponder.github.io/post/2015-01-15-pirates/</link>
-      <pubDate>Thu, 15 Jan 2015 00:00:00 +0000</pubDate><author>youremail@domain.com (Some Person)</author>
-      <guid>https://ponder.github.io/post/2015-01-15-pirates/</guid>
-      <description>Piracy is typically an act of robbery or criminal violence at sea. The term can include acts committed on land, in the air, or in other major bodies of water or on a shore. It does not normally include crimes committed against persons traveling on the same vessel as the perpetrator (e.g. one passenger stealing from others on the same vessel). The term has been used throughout history to refer to raids across land borders by non-state agents.</description>
-    </item>
-    <item>
-      <title>First post!</title>
-      <link>https://ponder.github.io/post/2015-01-04-first-post/</link>
-      <pubDate>Mon, 05 Jan 2015 00:00:00 +0000</pubDate><author>youremail@domain.com (Some Person)</author>
-      <guid>https://ponder.github.io/post/2015-01-04-first-post/</guid>
-      <description>This is my first post, how exciting!</description>
+      <title>Benchmarking DOM reconciliation algorithms</title>
+      <link>https://ponder.github.io/post/2025-02-07-benchmarking-dom-reconciliation/</link>
+      <pubDate>Fri, 07 Feb 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.github.io/post/2025-02-07-benchmarking-dom-reconciliation/</guid>
+      <description>Since the Infusion 6 renderer is close to being a reality, it is time to understand the characteristics of some of the various DOM reconciliation algorithms out there.&#xA;Could we do without a virtual DOM entirely? To start with is the question of whether we even really want one at all — the classic Svelte Virtual DOM is pure overhead post has been though its various hype cycles but 7 years later the majority of frameworks out there still have one so the consequences are clearly not as clear-cut as the argument would have it.</description>
     </item>
     <item>
       <title>About me</title>
       <link>https://ponder.github.io/page/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>youremail@domain.com (Some Person)</author>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
       <guid>https://ponder.github.io/page/about/</guid>
-      <description>My name is Inigo Montoya. I have the following qualities:&#xA;I rock a great mustache I&amp;rsquo;m extremely loyal to my family What else do you need?&#xA;my history To be honest, I&amp;rsquo;m having some trouble remembering right now, so why don&amp;rsquo;t you just watch my movie and it will answer all your questions.</description>
+      <description>After training in mathematics at Cambridge University, I devolved firstly into a Computer Science Diploma and then branched out into a PhD in Computer Vision at the Engineering Department&amp;rsquo;s Speech, Vision and Robotics group.&#xA;After working in various startups in the Cambridge area I spent a while working at CARET, the Centre for Applied Research in Educational Technologies.&#xA;Following that I spent 5 years as a Visiting Scholar at the University of Colorado at Boulder as a guest of Clayton Lewis.</description>
+    </item>
+    <item>
+      <title>Divergence</title>
+      <link>https://ponder.github.io/term/divergence/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.github.io/term/divergence/</guid>
+      <description>Defined in my 2016 paper, divergence represents any discrepancy between the runtime state of an application, and the state through which it can be authored. Typical sources of divergence include the program&amp;rsquo;s call stack, unintepreted addresses within the heap, event listeners and typical sources of object representation such as vtables and the like.&#xA;In a tradition of materialised programming, divergence should be minimised, in order to reduce the mental burden on those trying to visualise the effects of their edits.</description>
+    </item>
+    <item>
+      <title>End user programming</title>
+      <link>https://ponder.github.io/term/end-user-programming/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.github.io/term/end-user-programming/</guid>
+      <description>End-user programming is a time-honoured discipline but end-user tools such as spreadsheets are held in contempt by specialised developers. The discipline actively works to raise barriers of abstraction and tooling to ensure that it is only accessible by specialists and what investment is made in end-user tools is done under the assumption, like Gabriel&amp;rsquo;s, that the gulf between those empowered to build software and those empowered to use it will stay unbridgeable.</description>
+    </item>
+    <item>
+      <title>Externalisability</title>
+      <link>https://ponder.github.io/term/externalisability/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.github.io/term/externalisability/</guid>
+      <description>Defined in my 2018 paper, externalisability, together with its dual property of addressibility, represents an essential property of a substrate supporting open authorship. An externalisable design is one which is serialisable in a form in which every design element has more or less stable and legible coordinates. An addressible, externalised serialisation of a design could be in terms of a JSON document with human-readable keys, to be contrasted with relatively opaque kinds of serialisation such as Python&amp;rsquo;s pickling or Java&amp;rsquo;s object serialization systems, designed to round-trip arbitrary in-memory structures allocated in a general-purpose programming language.</description>
+    </item>
+    <item>
+      <title>Habitable</title>
+      <link>https://ponder.github.io/term/habitable/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.github.io/term/habitable/</guid>
+      <description>Habitability as applied to software technology is a term coined by Richard Gabriel in his 1993 article &amp;ldquo;Habitability and Piecemeal Growth&amp;rdquo;. You can see part of this article reproduced on Kartik Agaram&amp;rsquo;s excellent blog, as republished in Gabriel&amp;rsquo;s book Patterns of Software which I hugely recommend – I consider Gabriel the finest writer on software technology of his generation.&#xA;Connecting this idea with Christopher Alexander&amp;rsquo;s idea of organic growth in the context of the architecture of buildings, Gabriel says</description>
+    </item>
+    <item>
+      <title>Infusion</title>
+      <link>https://ponder.github.io/infusion/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.github.io/infusion/</guid>
+      <description>Infusion, originally an initiative of the Fluid community since 2008, is a JavaScript library enabling the creation of flexible software. Versions 1 through 4 of Infusion, documented and hosted on the Fluid project&amp;rsquo;s site, were relatively conventionally structured libraries supporting the development of various UI widgets.&#xA;Since 2024 a comprehensive rewrite of Infusion has been underway for version 6 based on reactive primitives throughout, structuring it as a software substrate constituting an integration domain.</description>
+    </item>
+    <item>
+      <title>Integration Domain</title>
+      <link>https://ponder.github.io/term/integration-domain/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.github.io/term/integration-domain/</guid>
+      <description>An integration domain is defined in Stephen Kell&amp;rsquo;s 2009 paper The Mythical Matched Modules as a domain where&#xA;languages and tools are specialised towards composition of software, and so do not resemble conventional languages relations are expressed between runtime values, predicated on the context in which they occur In addition through Stephen&amp;rsquo;s principle of interface hiding, dependencies do not explicitly manifest themselves in the domain except through the contextualised values which the domain puts into relation.</description>
+    </item>
+    <item>
+      <title>My Communities</title>
+      <link>https://ponder.github.io/communities/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.github.io/communities/</guid>
+      <description>Since 2017 I have been Biodiversity Informatics lead for IMERSS, the Institute for Multidisciplinary Ecological Research in the Salish Sea. I have been working to help communities&#xD;with different models for knowledge &amp;mdash; expert naturalists, citizen scientists, and Indigenous individuals and&#xD;others &amp;mdash; respectfully cooperate to share their knowledge of the natural world and be empowered&#xD;as stewards of their natural environment. Some visualisations I&#39;ve produced can be seen on the IMERSS&#xD;portal.</description>
+    </item>
+    <item>
+      <title>My Projects</title>
+      <link>https://ponder.github.io/projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.github.io/projects/</guid>
+      <description>Since 2022 I have worked for the Oregon Bee Atlas to help landowners understand plant-pollinator&#xD;interactions and guide their land use decisions including evaluation of seed mixes, as well as supporting their&#xD;volunteers&#39; observation work. I have implemented the Melittoflora tool using a provisional version of the [Infusion](/infusion) framework which filters the project&#39;s data on wild bees by geographical, temporal and taxonomic filters and visualises the resulting interactions as a live, attractive bipartite ribbon graph.</description>
+    </item>
+    <item>
+      <title>Substrate</title>
+      <link>https://ponder.github.io/term/substrate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.github.io/term/substrate/</guid>
+      <description>A substrate is a kind of self-sufficent model or material for the construction of software. Jonathan Edwards&amp;rsquo; definition is a great starting point comprising the following points:&#xA;A complete and self-sufficient programming system Persistent code &amp;amp; data store Direct-manipulation UI on that state Live programming Programming &amp;amp; using are on a spectrum, not distinct Conceptually unified — not a “stack” Summarized as a slogan: “A PL, DB, &amp;amp; WYSIWYG document unified together.</description>
     </item>
   </channel>
 </rss>

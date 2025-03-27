@@ -1,7 +1,6 @@
 /* --- General --- */
 
 body {
-  font-family: 'Lora', 'Times New Roman', serif;
   font-size: 18px;
   color: #404040;
   position: relative;
@@ -10,6 +9,7 @@ body {
   flex-flow: column;
   height: 100vh;
 }
+
 @media (prefers-color-scheme: dark) {
   body {
     background: black;
@@ -35,44 +35,26 @@ p {
 p + p {
     margin: 24px 0 6px 0;
 }
-p a {
-  /* text-decoration: underline */
-  color: #008AFF;
-}
-@media (prefers-color-scheme: dark) {
-  p a {
-    color: #50afff;
-  }
-}
 
 h1,h2,h3,h4,h5,h6 {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 800;
+  font-weight: 400;
 }
-a {
-  color: #008AFF;
-}
-@media (prefers-color-scheme: dark) {
-  a {
-    color: #50afff;
-  }
-}
+
+
 a:hover,
 a:focus {
   color: #0085a1;
 }
+
 blockquote {
   color: #808080;
   font-style: italic;
 }
+
 blockquote p:first-child {
   margin-top: 0;
 }
-@media (prefers-color-scheme: dark) {
-  blockquote {
-    border-left: 5px solid #444;
-  }
-}
+
 hr.small {
   max-width: 100px;
   margin: 15px auto;
@@ -84,6 +66,7 @@ hr.small {
 .main-content {
   padding-top: 80px;
 }
+
 @media only screen and (min-width: 768px) {
   .main-content {
     padding-top: 130px;
@@ -92,7 +75,7 @@ hr.small {
 
 .main-explain-area {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  padding: 15px inherit;
+  padding: 15px;
 }
 
 .hideme {
@@ -122,6 +105,7 @@ div.panel-body a.list-group-item.view-all {
   text-shadow: none;
   background: #0085a1;
 }
+
 img::selection, img::-moz-selection {
   color: white;
   background: transparent;
@@ -132,11 +116,7 @@ img {
   display: block;
   margin: auto;
   max-width: 100%;
-}
-@media (prefers-color-scheme: dark) {
-figure:not(.dark) img, img.white {
-  background-color: white;
-}
+  object-fit: contain;
 }
 
 .img-title {
@@ -173,11 +153,11 @@ figure:not(.dark) img, img.white {
 
 .navbar-custom .nav li a {
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 16px;
   letter-spacing: 1px;
 }
 
-.navbar-custom .navbar-brand,
+.navbar-custom .navbar-ponder-brand,
 .navbar-custom .nav li a {
   font-weight: 800;
   color: #404040;
@@ -197,26 +177,11 @@ figure:not(.dark) img, img.white {
   color: #0085a1;
 }
 
-.navbar-custom .navbar-brand:hover,
-.navbar-custom .navbar-brand:focus ,
-.navbar-custom .nav li a:hover,
-.navbar-custom .nav li a:focus {
-  @media (prefers-color-scheme: dark) {
-    color: #b0e0ff;
-  }
-}
-
 .navbar-custom .navbar-brand-logo {
   padding-top: 0;
-  -webkit-transition: padding .5s ease-in-out;
-  -moz-transition: padding .5s ease-in-out;
-  transition: padding .5s ease-in-out;
 }
 .navbar-custom .navbar-brand-logo img {
   height: 50px;
-  -webkit-transition: height .5s ease-in-out;
-  -moz-transition: height .5s ease-in-out;
-  transition: height .5s ease-in-out;
 }
 .navbar-custom.top-nav-short .navbar-brand-logo {
   padding-top: 5px;
@@ -225,12 +190,62 @@ figure:not(.dark) img, img.white {
   height: 40px;
 }
 
+/** AMB header row on index page */
+.header-row {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.navbar-toggle {
+  display: flex;
+}
+
+.navbar-custom {
+  min-height: 40px;
+  margin-bottom: 15px;
+}
+
+.navbar-brand {
+  height: 40px;
+  padding: 10px 15px;
+}
+
+@media (min-width: 768px) {
+  .navbar-toggle {
+    display: none;
+  }
+
+  .navbar-right {
+    margin-right: 0;
+  }
+
+  .navbar-brand {
+    margin-left: 0;
+  }
+
+  .navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+}
+
+.post-preview-header {
+  display: flex;
+  align-items: baseline;
+}
+
+/** Undo malign bootstrap which projects stuff into margins **/
+.row {
+  margin: 0;
+}
+
+/** End AMB */
+
 @media only screen and (min-width: 768px) {
   .navbar-custom {
     padding: 20px 0;
-    -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
-    -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
-    transition: background .5s ease-in-out,padding .5s ease-in-out;
   }
 
   .navbar-custom.top-nav-short {
@@ -238,57 +253,38 @@ figure:not(.dark) img, img.white {
   }
 }
 
-.navbar-custom .avatar-container {
+.avatar-container {
   opacity: 1;
   visibility: visible;
-  position: absolute;
-  -webkit-transition: visibility 0.5s, opacity 0.5s ease-in-out;
-  -moz-transition: visibility 0.5s, opacity 0.5s ease-in-out;
-  transition: visibility 0.5s, opacity 0.5s ease-in-out;
-  left: 50%;
-  width: 50px;
-  margin-top: -25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.navbar-custom .avatar-container  .avatar-img-border {
-  width: 100%;
+
+.avatar-container .avatar-img-border {
   border-radius: 50%;
-  margin-left: -50%;
   display: inline-block;
   box-shadow: 0 0 8px rgba(0, 0, 0, .8);
   -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .8);
   -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+/** AMB - centre image yet leave space for icons **/
+  position: relative;
+  bottom: -15px;
 }
-.navbar-custom .avatar-container  .avatar-img {
-  width: 100%;
+.avatar-container .avatar-img {
   border-radius: 50%;
   display: block;
 }
 
-.navbar-custom.top-nav-short .avatar-container{
-  opacity: 0;
-  visibility: hidden;
-}
-
-.navbar-custom.top-nav-expanded .avatar-container  {
-  display: none;
-}
 
 @media only screen and (min-width: 768px) {
-  .navbar-custom .avatar-container {
-    width: 100px;
-    margin-top: -50px;
-  }
 
-  .navbar-custom .avatar-container  .avatar-img-border {
-    width: 100%;
+  .avatar-container  .avatar-img-border {
     box-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
     -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
     -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
   }
 
-  .navbar-custom .avatar-container  .avatar-img {
-    width: 100%;
-  }
 }
 
 /* Multi-level navigation links */
@@ -354,7 +350,7 @@ figure:not(.dark) img, img.white {
 /* --- Footer --- */
 
 footer {
-  padding: 30px 0;
+  padding: 8px 0 12px 0;
   background: #F5F5F5;
   border-top: 1px #EAEAEA solid;
   margin-top: auto;
@@ -395,24 +391,11 @@ footer div.disclaimer {
 }
 
 @media only screen and (min-width: 768px) {
-  footer {
-    padding: 50px 0;
-  }
   footer .footer-links {
     font-size: 18px;
   }
   footer .copyright {
     font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  footer {
-    background: #444;
-    border-top: 1px #AAA solid;
-  }
-  footer a {
-    color: #AAA;
   }
 }
 
@@ -422,24 +405,9 @@ footer div.disclaimer {
   padding: 20px 0;
   border-bottom: 1px solid #eee;
 }
-@media only screen and (min-width: 768px) {
-  .post-preview {
-    padding: 35px 0;
-  }
-}
 
 .post-preview:last-child {
   border-bottom: 0;
-}
-
-.post-preview a {
-  text-decoration: none;
-  color: #404040;
-}
-@media (prefers-color-scheme: dark) {
-  .post-preview a {
-    color: #AAA;
-  }
 }
 
 .post-preview a:focus,
@@ -448,23 +416,16 @@ footer div.disclaimer {
   color: #0085a1;
 }
 
-.post-preview .post-title {
-  font-size: 30px;
-  margin-top: 0;
-}
-.post-preview .post-subtitle {
-  margin: 0;
-  font-weight: 300;
-  margin-bottom: 10px;
-}
+/** AMB nudge this text a bit **/
 .post-preview .post-meta,
 .post-heading .post-meta,
 .page-meta {
-  color: #808080;
   font-size: 18px;
-  font-style: italic;
-  margin: 0 0 10px;
+  margin-left: 3px;
+  position: relative;
+  bottom: 0.5px;
 }
+
 .page-meta {
   align-self: center;
 }
@@ -500,15 +461,10 @@ footer div.disclaimer {
   height: 192px;
   width: 192px;
 }
-.post-preview .post-read-more {
+
+.post-read-more {
   font-weight: 800;
   float: right;
-}
-
-@media only screen and (min-width: 768px) {
-  .post-preview .post-title {
-    font-size: 36px;
-  }
 }
 
 /* --- Tags --- */
@@ -570,6 +526,7 @@ footer div.disclaimer {
   margin: 80px 0 20px;
   position: relative;
 }
+
 .intro-header.big-img {
   background: no-repeat center center;
   -webkit-background-size: cover;
@@ -579,6 +536,7 @@ footer div.disclaimer {
   margin-top: 51px; /* The small navbar is 50px tall + 1px border */
   margin-bottom: 35px;
 }
+
 .intro-header.big-img  .big-img-transition {
   position: absolute;
   width: 100%;
@@ -593,6 +551,7 @@ footer div.disclaimer {
   -moz-transition: opacity 1s linear;
   transition: opacity 1s linear;
 }
+
 .intro-header .page-heading,
 .intro-header .tags-heading,
 .intro-header .categories-heading {
@@ -608,7 +567,7 @@ footer div.disclaimer {
 .intro-header .tags-heading h1,
 .intro-header .categories-heading h1 {
   margin-top: 0;
-  font-size: 50px;
+  font-size: 35px;
 }
 .intro-header .post-heading h1 {
   margin-top: 0;
@@ -638,6 +597,7 @@ footer div.disclaimer {
 .intro-header.big-img .post-heading .post-meta {
   color: #EEE;
 }
+
 .intro-header.big-img .img-desc {
   background: rgba(30, 30, 30, 0.6);
   position: absolute;
@@ -649,9 +609,10 @@ footer div.disclaimer {
   bottom: 0;
   display: none;
 }
+
 @media only screen and (min-width: 768px) {
   .intro-header {
-    margin-top: 130px;
+    margin-top: 100px;
   }
   .intro-header.big-img {
     margin-top: 91px;  /* Full navbar is small navbar + 20px padding on each side when expanded */
@@ -663,10 +624,10 @@ footer div.disclaimer {
   .intro-header .page-heading h1,
   .intro-header .tags-heading h1,
   .intro-header .categories-heading h1 {
-    font-size: 80px;
+    font-size: 40px;
   }
   .intro-header .post-heading h1 {
-    font-size: 50px;
+    font-size: 30px;
   }
   .intro-header.big-img .img-desc {
     font-size: 14px;
@@ -740,13 +701,6 @@ footer div.disclaimer {
   color: #FFF;
   background: #0085a1;
   border: 1px solid #0085a1;
-}
-
-@media (prefers-color-scheme: dark) {
-.pager li a {
-  background: #444;
-  color: white;
-}
 }
 
 .pager {
@@ -869,7 +823,7 @@ div.splitbox div.right {
     padding: 15px 25px;
   }
 }
-.disqus-comments button:hover, 
+.disqus-comments button:hover,
 .disqus-comments button:focus {
   color: #FFF;
   background: #0085a1;
@@ -918,45 +872,6 @@ h4.see-also {
   transform: scale(1.4)
 }
 
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  code {
-    background-color: #222;
-    color: #fbb;
-  }
-  pre code {
-    color: #ccc;
-  }
-  .well {
-    background-color: #444;
-  }
-  .panel {
-    background-color: #222;
-  }
-  .list-group-item {
-    background-color: #333;
-  }
-
-  pre.chroma {
-    color: white;
-    background-color: #444;
-  }
-  pre.chroma .k {
-    color: #44AACC;
-  }
-  pre.chroma .kt {
-    color: #33CCCC;
-  }
-  pre.chroma .o {
-    color: #AAA;
-  }
-  pre.chroma .nb {
-    color: #00fee9;
-  }
-  pre.chroma .ow {
-    color: #CC0;
-  }
-}
 
 /* --- Make long KaTeX equations scrollable in the x-axis --- */
 .katex-display>.katex {

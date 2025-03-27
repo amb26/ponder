@@ -1,16 +1,18 @@
 ---
 title: About me
-subtitle: Why you'd want to go on a date with me
 comments: false
 ---
 
-My name is Inigo Montoya. I have the following qualities:
+After training in mathematics at Cambridge University, I devolved firstly into a Computer Science Diploma and then
+branched out into a PhD in Computer Vision at the Engineering Department's 
+[Speech, Vision and Robotics group](https://mi.eng.cam.ac.uk/Main/MiOverview).
 
-- I rock a great mustache
-- I'm extremely loyal to my family
+After working in various startups in the Cambridge area I spent a while working at 
+[CARET](http://web.archive.org/web/20080706064423/http://www.caret.cam.ac.uk/), 
+the Centre for Applied Research in Educational Technologies.
 
-What else do you need?
+Following that I spent 5 years as a Visiting Scholar at the 
+[University of Colorado at Boulder](https://www.colorado.edu/) as a guest of 
+[Clayton Lewis](https://www.colorado.edu/cmci/people/information-science/clayton-lewis).
 
-### my history
-
-To be honest, I'm having some trouble remembering right now, so why don't you just watch [my movie](https://en.wikipedia.org/wiki/The_Princess_Bride_%28film%29) and it will answer **all** your questions.
+Since then I have been at work on various malleable and community-oriented projects from my base in London, UK.

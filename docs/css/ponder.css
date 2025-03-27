@@ -1,0 +1,109 @@
+.navbar-ponder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.community-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.community-picture {
+    width: 30%;
+}
+
+.community-desc {
+    width: 70%;
+    margin-left: 30px;
+}
+
+a.front-link {
+    color: #404040;
+}
+
+a.malleable-picture {
+    background-color: #000;
+    color: hsla(0,0%,100%,.9);
+    display: flex;
+}
+
+.boxer-picture a {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.boxer-picture img {
+    margin: 0;
+}
+
+.boxer-boxer-picture {
+    position: relative;
+    bottom: -10px;
+}
+
+@media (max-width: 620px) {
+    a.malleable-picture {
+        flex-direction: column;
+    }
+}
+
+.avatar-img {
+    width: 128px;
+    height: 128px;
+}
+
+@media (max-width: 768px) {
+    a.malleable-picture {
+        flex-direction: column;
+    }
+
+    .avatar-img {
+        width: 64px;
+        height: 64px;
+    }
+
+    .community-row {
+        flex-direction: column;
+        margin-bottom: 30px;
+    }
+
+    .community-picture {
+        margin-bottom: 10px;
+        width: 70%;
+    }
+}
+
+
+/** Another of the mad bootstrap breakpoints - move our headings into the margin on big pages **/
+
+@media (min-width: 992px) {
+    .ponder-front-page .ponder-content h2 {
+        margin-left: -8%;
+        margin-top: 45px;
+    }
+}
+
+a.malleable-picture * {
+    margin: 7px 12px;
+}
+
+a.dci-picture {
+    background-color: #342f25;
+    height: 65px;
+    color: #ffffff;
+    display: flex;
+}
+
+.dci-picture img {
+    max-width: 90%;
+    max-height: 100%;
+}
+
+.media-icons {
+    margin-top: 30px;
+    height: 0;
+}
