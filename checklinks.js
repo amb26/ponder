@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { parseHTML } = require("linkedom");
+const readline = require("readline");
 
 const docsDir = "docs";
 
@@ -25,11 +26,11 @@ function extractLinks(htmlContent) {
     const { document } = parseHTML(htmlContent);
     return [...document.querySelectorAll("a")]
         .map(a => a.getAttribute("href"))
-        .filter(Boolean);
+        .filter(href => href && !href.startsWith("mailto:"))
+        .map(href => href.split("#")[0]);
 }
 
 function checkLocalPath(filePath) {
-    // console.log(`Checking path: ${filePath}`);
     return fs.existsSync(filePath);
 }
 
@@ -45,38 +46,68 @@ function resolveLocalPath(target, sourceFile) {
     if (checkLocalPath(indexPath)) {
         return indexPath;
     }
-    //console.warn(`Broken local path: ${target} in ${sourceFile}`);
     return null;
 }
 
-async function checkLink(target, sourceFile) {
+async function checkLink(target, sourceFile, brokenLinks) {
     const fetch = await getFetch();
     if (target.startsWith("http")) {
         try {
             const res = await fetch(target, { method: "HEAD" });
-            if (!res.ok) console.warn(`Broken external link: ${target} in ${sourceFile}`);
+            if (res.status === 404) {
+                brokenLinks.push(`Broken external link: ${target} in ${sourceFile}`);
+            }
         } catch (err) {
-            console.warn(`Failed to fetch external link: ${target} in ${sourceFile}`);
+            brokenLinks.push(`Failed to fetch external link: ${target} in ${sourceFile}`);
         }
     } else {
         const resolvedPath = resolveLocalPath(target, sourceFile);
-        if (resolvedPath) {
-            // console.log(`Valid local link: ${target} -> ${resolvedPath}`);
-        } else {
-            console.warn(`Broken local link: ${target} in ${sourceFile}`);
+        if (!resolvedPath) {
+            brokenLinks.push(`Broken local link: ${target} in ${sourceFile}`);
         }
     }
 }
 
 async function validateLinks() {
     const htmlFiles = getHtmlFiles(docsDir);
+    const linksToCheck = [];
+
+    // Gather all links, ensuring each external link is only added once
+    const seenExternalLinks = new Set();
     for (const file of htmlFiles) {
         console.log(`        checking links in file ${file}`);
         const content = fs.readFileSync(file, "utf8");
         const links = extractLinks(content);
         for (const link of links) {
-            await checkLink(link, file);
+            if (link.startsWith("http") && !seenExternalLinks.has(link)) {
+                seenExternalLinks.add(link);
+                linksToCheck.push({ target: link, sourceFile: file });
+            } else if (!link.startsWith("http")) {
+                linksToCheck.push({ target: link, sourceFile: file });
+            }
         }
+    }
+
+    const totalLinks = linksToCheck.length;
+    let completedLinks = 0;
+
+    const brokenLinks = [];
+
+    const linkPromises = linksToCheck.map(async (link, index) => {
+        await checkLink(link.target, link.sourceFile, brokenLinks);
+        completedLinks++;
+        readline.cursorTo(process.stdout, 0);
+        process.stdout.write(`Progress: ${completedLinks}/${totalLinks} links checked`);
+    });
+
+    await Promise.all(linkPromises);
+
+    // Print out the broken links at the end
+    console.log("\nBroken Links:");
+    if (brokenLinks.length === 0) {
+        console.log("No broken links found!");
+    } else {
+        brokenLinks.forEach((brokenLink) => console.log(brokenLink));
     }
 }
 

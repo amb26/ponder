@@ -42,5 +42,6 @@ In any case we have a workable lift-off vehicle &ndash; the entire (tiny) design
 is to check that it is perfectly workable to embed a self-hosted demo inside Infusion's README file &ndash; it's puzzling
 that pell's own demo takes the form of a little video.
 
-[^1] And to me the "pell" name is a pleasing signpost back to the great [Pelle Ehn](https://www.interaction-design.org/literature/author/pelle-ehn)
+[^1] And to me the "pell" name is a pleasing signpost back to the great
+[Pelle Ehn](https://www.interaction-design.org/literature/author/pelle-ehn)
 one of the founding fathers of malleable software thinking.
