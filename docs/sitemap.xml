@@ -2,49 +2,57 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://ponder.github.io/</loc>
+    <loc>https://ponder.org.uk/</loc>
+    <lastmod>2025-03-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ponder.org.uk/wip/2025-03-28-hunting-rich-editors/</loc>
+    <lastmod>2025-03-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ponder.org.uk/wip/</loc>
+    <lastmod>2025-03-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ponder.org.uk/post/2025-03-20-ui-as-code/</loc>
     <lastmod>2025-03-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ponder.github.io/post/2025-03-20-ui-as-code/</loc>
+    <loc>https://ponder.org.uk/post/</loc>
     <lastmod>2025-03-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ponder.github.io/post/</loc>
-    <lastmod>2025-03-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://ponder.github.io/post/2025-03-14-development-speed/</loc>
+    <loc>https://ponder.org.uk/post/2025-03-14-development-speed/</loc>
     <lastmod>2025-03-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ponder.github.io/post/2025-02-07-benchmarking-dom-reconciliation/</loc>
+    <loc>https://ponder.org.uk/post/2025-02-07-benchmarking-dom-reconciliation/</loc>
     <lastmod>2025-02-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ponder.github.io/page/about/</loc>
+    <loc>https://ponder.org.uk/page/about/</loc>
   </url><url>
-    <loc>https://ponder.github.io/categories/</loc>
+    <loc>https://ponder.org.uk/categories/</loc>
   </url><url>
-    <loc>https://ponder.github.io/term/divergence/</loc>
+    <loc>https://ponder.org.uk/term/divergence/</loc>
   </url><url>
-    <loc>https://ponder.github.io/term/end-user-programming/</loc>
+    <loc>https://ponder.org.uk/term/end-user-programming/</loc>
   </url><url>
-    <loc>https://ponder.github.io/term/externalisability/</loc>
+    <loc>https://ponder.org.uk/term/externalisability/</loc>
   </url><url>
-    <loc>https://ponder.github.io/term/habitable/</loc>
+    <loc>https://ponder.org.uk/term/habitable/</loc>
   </url><url>
-    <loc>https://ponder.github.io/infusion/</loc>
+    <loc>https://ponder.org.uk/infusion/</loc>
   </url><url>
-    <loc>https://ponder.github.io/term/integration-domain/</loc>
+    <loc>https://ponder.org.uk/term/integration-domain/</loc>
   </url><url>
-    <loc>https://ponder.github.io/communities/</loc>
+    <loc>https://ponder.org.uk/term/lithification/</loc>
   </url><url>
-    <loc>https://ponder.github.io/projects/</loc>
+    <loc>https://ponder.org.uk/communities/</loc>
   </url><url>
-    <loc>https://ponder.github.io/page/</loc>
+    <loc>https://ponder.org.uk/projects/</loc>
   </url><url>
-    <loc>https://ponder.github.io/term/substrate/</loc>
+    <loc>https://ponder.org.uk/page/</loc>
   </url><url>
-    <loc>https://ponder.github.io/tags/</loc>
+    <loc>https://ponder.org.uk/term/substrate/</loc>
   </url><url>
-    <loc>https://ponder.github.io/categories/term/</loc>
+    <loc>https://ponder.org.uk/tags/</loc>
   </url><url>
-    <loc>https://ponder.github.io/term/</loc>
+    <loc>https://ponder.org.uk/categories/term/</loc>
+  </url><url>
+    <loc>https://ponder.org.uk/term/</loc>
   </url>
 </urlset>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Works in Progress on Antranig Basman</title>
+    <link>https://ponder.org.uk/wip/</link>
+    <description>Recent content in Works in Progress on Antranig Basman</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
+    <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
+    <lastBuildDate>Fri, 28 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://ponder.org.uk/wip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hunting rich editors</title>
+      <link>https://ponder.org.uk/wip/2025-03-28-hunting-rich-editors/</link>
+      <pubDate>Fri, 28 Mar 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-03-28-hunting-rich-editors/</guid>
+      <description>The substrate&amp;rsquo;s transition to editability will need to present a &amp;ldquo;mostly rendered&amp;rdquo; view of itself – managed by some form of rich text editor. A huge &amp;ldquo;grab-bag list&amp;rdquo; is at JefMari&amp;rsquo;s curated list of Awesome Wysiwyg Editors which can rapidly be whittled down to a shortlist. CKEditor 5 and TinyMCE are familiar from decades ago. But the gold standard is clearly Marijn&amp;rsquo;s ProseMirror – basic example here and really nice markdown editing example here.</description>
+    </item>
+  </channel>
+</rss>

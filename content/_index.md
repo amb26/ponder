@@ -66,8 +66,8 @@ visualises the resulting interactions as a live, attractive bipartite ribbon gra
 Since 2008 I have been the lead developer of the [Infusion](/infusion) framework, a JavaScript framework supporting
 the development of flexible software. Versions 1 through 4 of Infusion were relatively conventionally structured libraries supporting the development
 of various UI widgets. Since 2024 a [comprehensive rewrite](https://github.com/fluid-project/infusion-6) of Infusion has been underway for version 6
-based on reactive primitives throughout, structuring it as a [software substrate](/terms/substrate) constituting
-an [integration domain](/terms/integration-domain).
+based on reactive primitives throughout, structuring it as a [software substrate](/term/substrate) constituting
+an [integration domain](/term/integration-domain).
 <a href="./projects/" class="post-read-more">[More Projects]</a>
 </div>
 </div>

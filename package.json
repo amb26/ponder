@@ -1,0 +1,25 @@
+{
+  "name": "ponder",
+  "version": "1.0.0",
+  "description": "JavaScript infrastructure for hugo site backing ponder.org.uk",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "node checklinks.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amb26/ponder.git"
+  },
+  "author": "Antranig Basman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amb26/ponder/issues"
+  },
+  "homepage": "https://github.com/amb26/ponder#readme",
+  "dependencies": {
+    "linkedom": "0.18.9",
+    "node-fetch": "3.3.2"
+  }
+}

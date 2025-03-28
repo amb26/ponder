@@ -12,4 +12,4 @@ of various UI widgets.
 
 Since 2024 a [comprehensive rewrite](https://github.com/fluid-project/infusion-6) of Infusion has been underway for 
 [version 6](https://github.com/fluid-project/infusion-6) based on reactive primitives throughout, structuring it as
-a [software substrate](/terms/substrate) constituting an [integration domain](/terms/integration-domain).
+a [software substrate](/term/substrate) constituting an [integration domain](/term/integration-domain).

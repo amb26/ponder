@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Antranig Basman</title>
-    <link>https://ponder.github.io/tags/</link>
+    <link>https://ponder.org.uk/tags/</link>
     <description>Recent content in Tags on Antranig Basman</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <atom:link href="https://ponder.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://ponder.org.uk/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

@@ -2,103 +2,117 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Antranig Basman</title>
-    <link>https://ponder.github.io/</link>
+    <link>https://ponder.org.uk/</link>
     <description>Recent content on Antranig Basman</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <lastBuildDate>Thu, 20 Mar 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://ponder.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 28 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://ponder.org.uk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hunting rich editors</title>
+      <link>https://ponder.org.uk/wip/2025-03-28-hunting-rich-editors/</link>
+      <pubDate>Fri, 28 Mar 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-03-28-hunting-rich-editors/</guid>
+      <description>The substrate&amp;rsquo;s transition to editability will need to present a &amp;ldquo;mostly rendered&amp;rdquo; view of itself – managed by some form of rich text editor. A huge &amp;ldquo;grab-bag list&amp;rdquo; is at JefMari&amp;rsquo;s curated list of Awesome Wysiwyg Editors which can rapidly be whittled down to a shortlist. CKEditor 5 and TinyMCE are familiar from decades ago. But the gold standard is clearly Marijn&amp;rsquo;s ProseMirror – basic example here and really nice markdown editing example here.</description>
+    </item>
     <item>
       <title>On UI as code</title>
-      <link>https://ponder.github.io/post/2025-03-20-ui-as-code/</link>
+      <link>https://ponder.org.uk/post/2025-03-20-ui-as-code/</link>
       <pubDate>Thu, 20 Mar 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/post/2025-03-20-ui-as-code/</guid>
+      <guid>https://ponder.org.uk/post/2025-03-20-ui-as-code/</guid>
       <description>UI as Code as a named slogan originated in the context of Dart&amp;rsquo;s Flutter UI toolkit created by Google. It is centrally described by Bob Nystrom in this thoughtful posting Marking Dart a Better Language for UI. I see it as part of a wider trend in many environments to express designs in general-purpose programming language code rather than configuration languages with less expressive power. For example, ESLint&amp;rsquo;s flat config system introduced in 2022 moves its previous JSON-based linting configuration into JavaScript code.</description>
     </item>
     <item>
       <title>On Development Speed</title>
-      <link>https://ponder.github.io/post/2025-03-14-development-speed/</link>
+      <link>https://ponder.org.uk/post/2025-03-14-development-speed/</link>
       <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/post/2025-03-14-development-speed/</guid>
+      <guid>https://ponder.org.uk/post/2025-03-14-development-speed/</guid>
       <description>A recent posting Why the Latest JavaScript Frameworks Are a Waste of Time sparks a short train of thought. As well as the characteristically disrespectful tone of discussion that technical people often adopt, and the suggestion, contrary to my speculations looking at DOM reconciliation, that people really do use low-level benchmarks when choosing frameworks, is the notion of frameworks contributing to development speed. One commentor invites us to watch him against the clock to implement a front end in Svelte rather than React.</description>
     </item>
     <item>
       <title>Benchmarking DOM reconciliation algorithms</title>
-      <link>https://ponder.github.io/post/2025-02-07-benchmarking-dom-reconciliation/</link>
+      <link>https://ponder.org.uk/post/2025-02-07-benchmarking-dom-reconciliation/</link>
       <pubDate>Fri, 07 Feb 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/post/2025-02-07-benchmarking-dom-reconciliation/</guid>
+      <guid>https://ponder.org.uk/post/2025-02-07-benchmarking-dom-reconciliation/</guid>
       <description>Since the Infusion 6 renderer is close to being a reality, it is time to understand the characteristics of some of the various DOM reconciliation algorithms out there.&#xA;Could we do without a virtual DOM entirely? To start with is the question of whether we even really want one at all — the classic Svelte Virtual DOM is pure overhead post has been though its various hype cycles but 7 years later the majority of frameworks out there still have one so the consequences are clearly not as clear-cut as the argument would have it.</description>
     </item>
     <item>
       <title>About me</title>
-      <link>https://ponder.github.io/page/about/</link>
+      <link>https://ponder.org.uk/page/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/page/about/</guid>
+      <guid>https://ponder.org.uk/page/about/</guid>
       <description>After training in mathematics at Cambridge University, I devolved firstly into a Computer Science Diploma and then branched out into a PhD in Computer Vision at the Engineering Department&amp;rsquo;s Speech, Vision and Robotics group.&#xA;After working in various startups in the Cambridge area I spent a while working at CARET, the Centre for Applied Research in Educational Technologies.&#xA;Following that I spent 5 years as a Visiting Scholar at the University of Colorado at Boulder as a guest of Clayton Lewis.</description>
     </item>
     <item>
       <title>Divergence</title>
-      <link>https://ponder.github.io/term/divergence/</link>
+      <link>https://ponder.org.uk/term/divergence/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/term/divergence/</guid>
+      <guid>https://ponder.org.uk/term/divergence/</guid>
       <description>Defined in my 2016 paper, divergence represents any discrepancy between the runtime state of an application, and the state through which it can be authored. Typical sources of divergence include the program&amp;rsquo;s call stack, unintepreted addresses within the heap, event listeners and typical sources of object representation such as vtables and the like.&#xA;In a tradition of materialised programming, divergence should be minimised, in order to reduce the mental burden on those trying to visualise the effects of their edits.</description>
     </item>
     <item>
       <title>End user programming</title>
-      <link>https://ponder.github.io/term/end-user-programming/</link>
+      <link>https://ponder.org.uk/term/end-user-programming/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/term/end-user-programming/</guid>
+      <guid>https://ponder.org.uk/term/end-user-programming/</guid>
       <description>End-user programming is a time-honoured discipline but end-user tools such as spreadsheets are held in contempt by specialised developers. The discipline actively works to raise barriers of abstraction and tooling to ensure that it is only accessible by specialists and what investment is made in end-user tools is done under the assumption, like Gabriel&amp;rsquo;s, that the gulf between those empowered to build software and those empowered to use it will stay unbridgeable.</description>
     </item>
     <item>
       <title>Externalisability</title>
-      <link>https://ponder.github.io/term/externalisability/</link>
+      <link>https://ponder.org.uk/term/externalisability/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/term/externalisability/</guid>
+      <guid>https://ponder.org.uk/term/externalisability/</guid>
       <description>Defined in my 2018 paper, externalisability, together with its dual property of addressibility, represents an essential property of a substrate supporting open authorship. An externalisable design is one which is serialisable in a form in which every design element has more or less stable and legible coordinates. An addressible, externalised serialisation of a design could be in terms of a JSON document with human-readable keys, to be contrasted with relatively opaque kinds of serialisation such as Python&amp;rsquo;s pickling or Java&amp;rsquo;s object serialization systems, designed to round-trip arbitrary in-memory structures allocated in a general-purpose programming language.</description>
     </item>
     <item>
       <title>Habitable</title>
-      <link>https://ponder.github.io/term/habitable/</link>
+      <link>https://ponder.org.uk/term/habitable/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/term/habitable/</guid>
+      <guid>https://ponder.org.uk/term/habitable/</guid>
       <description>Habitability as applied to software technology is a term coined by Richard Gabriel in his 1993 article &amp;ldquo;Habitability and Piecemeal Growth&amp;rdquo;. You can see part of this article reproduced on Kartik Agaram&amp;rsquo;s excellent blog, as republished in Gabriel&amp;rsquo;s book Patterns of Software which I hugely recommend – I consider Gabriel the finest writer on software technology of his generation.&#xA;Connecting this idea with Christopher Alexander&amp;rsquo;s idea of organic growth in the context of the architecture of buildings, Gabriel says</description>
     </item>
     <item>
       <title>Infusion</title>
-      <link>https://ponder.github.io/infusion/</link>
+      <link>https://ponder.org.uk/infusion/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/infusion/</guid>
+      <guid>https://ponder.org.uk/infusion/</guid>
       <description>Infusion, originally an initiative of the Fluid community since 2008, is a JavaScript library enabling the creation of flexible software. Versions 1 through 4 of Infusion, documented and hosted on the Fluid project&amp;rsquo;s site, were relatively conventionally structured libraries supporting the development of various UI widgets.&#xA;Since 2024 a comprehensive rewrite of Infusion has been underway for version 6 based on reactive primitives throughout, structuring it as a software substrate constituting an integration domain.</description>
     </item>
     <item>
       <title>Integration Domain</title>
-      <link>https://ponder.github.io/term/integration-domain/</link>
+      <link>https://ponder.org.uk/term/integration-domain/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/term/integration-domain/</guid>
+      <guid>https://ponder.org.uk/term/integration-domain/</guid>
       <description>An integration domain is defined in Stephen Kell&amp;rsquo;s 2009 paper The Mythical Matched Modules as a domain where&#xA;languages and tools are specialised towards composition of software, and so do not resemble conventional languages relations are expressed between runtime values, predicated on the context in which they occur In addition through Stephen&amp;rsquo;s principle of interface hiding, dependencies do not explicitly manifest themselves in the domain except through the contextualised values which the domain puts into relation.</description>
     </item>
     <item>
-      <title>My Communities</title>
-      <link>https://ponder.github.io/communities/</link>
+      <title>Lithification</title>
+      <link>https://ponder.org.uk/term/lithification/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/communities/</guid>
-      <description>Since 2017 I have been Biodiversity Informatics lead for IMERSS, the Institute for Multidisciplinary Ecological Research in the Salish Sea. I have been working to help communities&#xD;with different models for knowledge &amp;mdash; expert naturalists, citizen scientists, and Indigenous individuals and&#xD;others &amp;mdash; respectfully cooperate to share their knowledge of the natural world and be empowered&#xD;as stewards of their natural environment. Some visualisations I&#39;ve produced can be seen on the IMERSS&#xD;portal.</description>
+      <guid>https://ponder.org.uk/term/lithification/</guid>
+      <description>The term lithification in software development was coined by r0ml (Robert Lefkowitz) in his incendiary 2017 talk Keeping Linux Great which is written up further in his equally trenchant article Giving up on Open Source Software. It describes a mode of software reuse that appears entirely anti-religious to anyone with a traditional programming education, of simply appropriating the source code for any library or implementation one needs, incorporating it into one&amp;rsquo;s own codebase and then bashing on it.</description>
+    </item>
+    <item>
+      <title>My Communities</title>
+      <link>https://ponder.org.uk/communities/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/communities/</guid>
+      <description>Since 2017 I have been Biodiversity Informatics lead for IMERSS, the Institute for Multidisciplinary Ecological Research in the Salish Sea. I have been working to help communities with different models for knowledge &amp;mdash; expert naturalists, citizen scientists, and Indigenous individuals and others &amp;mdash; respectfully cooperate to share their knowledge of the natural world and be empowered as stewards of their natural environment. Some visualisations I&#39;ve produced can be seen on the IMERSS portal.</description>
     </item>
     <item>
       <title>My Projects</title>
-      <link>https://ponder.github.io/projects/</link>
+      <link>https://ponder.org.uk/projects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/projects/</guid>
-      <description>Since 2022 I have worked for the Oregon Bee Atlas to help landowners understand plant-pollinator&#xD;interactions and guide their land use decisions including evaluation of seed mixes, as well as supporting their&#xD;volunteers&#39; observation work. I have implemented the Melittoflora tool using a provisional version of the [Infusion](/infusion) framework which filters the project&#39;s data on wild bees by geographical, temporal and taxonomic filters and visualises the resulting interactions as a live, attractive bipartite ribbon graph.</description>
+      <guid>https://ponder.org.uk/projects/</guid>
+      <description>Since 2022 I have worked for the Oregon Bee Atlas to help landowners understand plant-pollinator interactions and guide their land use decisions including evaluation of seed mixes, as well as supporting their volunteers&#39; observation work. I have implemented the Melittoflora tool using a provisional version of the [Infusion](/infusion) framework which filters the project&#39;s data on wild bees by geographical, temporal and taxonomic filters and visualises the resulting interactions as a live, attractive bipartite ribbon graph.</description>
     </item>
     <item>
       <title>Substrate</title>
-      <link>https://ponder.github.io/term/substrate/</link>
+      <link>https://ponder.org.uk/term/substrate/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/term/substrate/</guid>
+      <guid>https://ponder.org.uk/term/substrate/</guid>
       <description>A substrate is a kind of self-sufficent model or material for the construction of software. Jonathan Edwards&amp;rsquo; definition is a great starting point comprising the following points:&#xA;A complete and self-sufficient programming system Persistent code &amp;amp; data store Direct-manipulation UI on that state Live programming Programming &amp;amp; using are on a spectrum, not distinct Conceptually unified — not a “stack” Summarized as a slogan: “A PL, DB, &amp;amp; WYSIWYG document unified together.</description>
     </item>
   </channel>

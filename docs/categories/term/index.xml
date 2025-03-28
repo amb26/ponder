@@ -2,53 +2,60 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>term on Antranig Basman</title>
-    <link>https://ponder.github.io/categories/term/</link>
+    <link>https://ponder.org.uk/categories/term/</link>
     <description>Recent content in term on Antranig Basman</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <atom:link href="https://ponder.github.io/categories/term/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://ponder.org.uk/categories/term/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Divergence</title>
-      <link>https://ponder.github.io/term/divergence/</link>
+      <link>https://ponder.org.uk/term/divergence/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/term/divergence/</guid>
+      <guid>https://ponder.org.uk/term/divergence/</guid>
       <description>Defined in my 2016 paper, divergence represents any discrepancy between the runtime state of an application, and the state through which it can be authored. Typical sources of divergence include the program&amp;rsquo;s call stack, unintepreted addresses within the heap, event listeners and typical sources of object representation such as vtables and the like.&#xA;In a tradition of materialised programming, divergence should be minimised, in order to reduce the mental burden on those trying to visualise the effects of their edits.</description>
     </item>
     <item>
       <title>End user programming</title>
-      <link>https://ponder.github.io/term/end-user-programming/</link>
+      <link>https://ponder.org.uk/term/end-user-programming/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/term/end-user-programming/</guid>
+      <guid>https://ponder.org.uk/term/end-user-programming/</guid>
       <description>End-user programming is a time-honoured discipline but end-user tools such as spreadsheets are held in contempt by specialised developers. The discipline actively works to raise barriers of abstraction and tooling to ensure that it is only accessible by specialists and what investment is made in end-user tools is done under the assumption, like Gabriel&amp;rsquo;s, that the gulf between those empowered to build software and those empowered to use it will stay unbridgeable.</description>
     </item>
     <item>
       <title>Externalisability</title>
-      <link>https://ponder.github.io/term/externalisability/</link>
+      <link>https://ponder.org.uk/term/externalisability/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/term/externalisability/</guid>
+      <guid>https://ponder.org.uk/term/externalisability/</guid>
       <description>Defined in my 2018 paper, externalisability, together with its dual property of addressibility, represents an essential property of a substrate supporting open authorship. An externalisable design is one which is serialisable in a form in which every design element has more or less stable and legible coordinates. An addressible, externalised serialisation of a design could be in terms of a JSON document with human-readable keys, to be contrasted with relatively opaque kinds of serialisation such as Python&amp;rsquo;s pickling or Java&amp;rsquo;s object serialization systems, designed to round-trip arbitrary in-memory structures allocated in a general-purpose programming language.</description>
     </item>
     <item>
       <title>Habitable</title>
-      <link>https://ponder.github.io/term/habitable/</link>
+      <link>https://ponder.org.uk/term/habitable/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/term/habitable/</guid>
+      <guid>https://ponder.org.uk/term/habitable/</guid>
       <description>Habitability as applied to software technology is a term coined by Richard Gabriel in his 1993 article &amp;ldquo;Habitability and Piecemeal Growth&amp;rdquo;. You can see part of this article reproduced on Kartik Agaram&amp;rsquo;s excellent blog, as republished in Gabriel&amp;rsquo;s book Patterns of Software which I hugely recommend – I consider Gabriel the finest writer on software technology of his generation.&#xA;Connecting this idea with Christopher Alexander&amp;rsquo;s idea of organic growth in the context of the architecture of buildings, Gabriel says</description>
     </item>
     <item>
       <title>Integration Domain</title>
-      <link>https://ponder.github.io/term/integration-domain/</link>
+      <link>https://ponder.org.uk/term/integration-domain/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/term/integration-domain/</guid>
+      <guid>https://ponder.org.uk/term/integration-domain/</guid>
       <description>An integration domain is defined in Stephen Kell&amp;rsquo;s 2009 paper The Mythical Matched Modules as a domain where&#xA;languages and tools are specialised towards composition of software, and so do not resemble conventional languages relations are expressed between runtime values, predicated on the context in which they occur In addition through Stephen&amp;rsquo;s principle of interface hiding, dependencies do not explicitly manifest themselves in the domain except through the contextualised values which the domain puts into relation.</description>
     </item>
     <item>
-      <title>Substrate</title>
-      <link>https://ponder.github.io/term/substrate/</link>
+      <title>Lithification</title>
+      <link>https://ponder.org.uk/term/lithification/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/term/substrate/</guid>
+      <guid>https://ponder.org.uk/term/lithification/</guid>
+      <description>The term lithification in software development was coined by r0ml (Robert Lefkowitz) in his incendiary 2017 talk Keeping Linux Great which is written up further in his equally trenchant article Giving up on Open Source Software. It describes a mode of software reuse that appears entirely anti-religious to anyone with a traditional programming education, of simply appropriating the source code for any library or implementation one needs, incorporating it into one&amp;rsquo;s own codebase and then bashing on it.</description>
+    </item>
+    <item>
+      <title>Substrate</title>
+      <link>https://ponder.org.uk/term/substrate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/substrate/</guid>
       <description>A substrate is a kind of self-sufficent model or material for the construction of software. Jonathan Edwards&amp;rsquo; definition is a great starting point comprising the following points:&#xA;A complete and self-sufficient programming system Persistent code &amp;amp; data store Direct-manipulation UI on that state Live programming Programming &amp;amp; using are on a spectrum, not distinct Conceptually unified — not a “stack” Summarized as a slogan: “A PL, DB, &amp;amp; WYSIWYG document unified together.</description>
     </item>
   </channel>

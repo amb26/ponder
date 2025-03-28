@@ -1,4 +1,4 @@
-baseurl = "https://ponder.github.io"
+baseurl = "https://ponder.org.uk"
 relativeURLs = true
 DefaultContentLanguage = "en"
 title = "Antranig Basman"
@@ -95,6 +95,11 @@ unsafe = true # Allow HTML content
 [[menu.main]]
     name = "Posts"
     url = "post"
+    weight = 1
+
+[[menu.main]]
+    name = "WiP"
+    url = "wip"
     weight = 1
 
 [[menu.main]]

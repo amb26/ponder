@@ -2,33 +2,33 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Antranig Basman</title>
-    <link>https://ponder.github.io/post/</link>
+    <link>https://ponder.org.uk/post/</link>
     <description>Recent content in Posts on Antranig Basman</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
     <lastBuildDate>Thu, 20 Mar 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://ponder.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://ponder.org.uk/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>On UI as code</title>
-      <link>https://ponder.github.io/post/2025-03-20-ui-as-code/</link>
+      <link>https://ponder.org.uk/post/2025-03-20-ui-as-code/</link>
       <pubDate>Thu, 20 Mar 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/post/2025-03-20-ui-as-code/</guid>
+      <guid>https://ponder.org.uk/post/2025-03-20-ui-as-code/</guid>
       <description>UI as Code as a named slogan originated in the context of Dart&amp;rsquo;s Flutter UI toolkit created by Google. It is centrally described by Bob Nystrom in this thoughtful posting Marking Dart a Better Language for UI. I see it as part of a wider trend in many environments to express designs in general-purpose programming language code rather than configuration languages with less expressive power. For example, ESLint&amp;rsquo;s flat config system introduced in 2022 moves its previous JSON-based linting configuration into JavaScript code.</description>
     </item>
     <item>
       <title>On Development Speed</title>
-      <link>https://ponder.github.io/post/2025-03-14-development-speed/</link>
+      <link>https://ponder.org.uk/post/2025-03-14-development-speed/</link>
       <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/post/2025-03-14-development-speed/</guid>
+      <guid>https://ponder.org.uk/post/2025-03-14-development-speed/</guid>
       <description>A recent posting Why the Latest JavaScript Frameworks Are a Waste of Time sparks a short train of thought. As well as the characteristically disrespectful tone of discussion that technical people often adopt, and the suggestion, contrary to my speculations looking at DOM reconciliation, that people really do use low-level benchmarks when choosing frameworks, is the notion of frameworks contributing to development speed. One commentor invites us to watch him against the clock to implement a front end in Svelte rather than React.</description>
     </item>
     <item>
       <title>Benchmarking DOM reconciliation algorithms</title>
-      <link>https://ponder.github.io/post/2025-02-07-benchmarking-dom-reconciliation/</link>
+      <link>https://ponder.org.uk/post/2025-02-07-benchmarking-dom-reconciliation/</link>
       <pubDate>Fri, 07 Feb 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.github.io/post/2025-02-07-benchmarking-dom-reconciliation/</guid>
+      <guid>https://ponder.org.uk/post/2025-02-07-benchmarking-dom-reconciliation/</guid>
       <description>Since the Infusion 6 renderer is close to being a reality, it is time to understand the characteristics of some of the various DOM reconciliation algorithms out there.&#xA;Could we do without a virtual DOM entirely? To start with is the question of whether we even really want one at all — the classic Svelte Virtual DOM is pure overhead post has been though its various hype cycles but 7 years later the majority of frameworks out there still have one so the consequences are clearly not as clear-cut as the argument would have it.</description>
     </item>
   </channel>
