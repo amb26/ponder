@@ -27,7 +27,7 @@
                 View all</a>
                 <div class="list-group">
                   {{ range $item := $value.WeightedPages }}
-                    <a href="{{$item.Permalink}}" class="list-group-item">{{ $item.Title }}</a>
+                    <a href="{{$item.RelPermalink}}" class="list-group-item">{{ $item.Title }}</a>
                   {{ end }}
                 </div>
               </div>

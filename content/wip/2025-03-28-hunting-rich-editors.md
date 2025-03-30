@@ -42,6 +42,15 @@ In any case we have a workable lift-off vehicle &ndash; the entire (tiny) design
 is to check that it is perfectly workable to embed a self-hosted demo inside Infusion's README file &ndash; it's puzzling
 that pell's own demo takes the form of a little video.
 
+[Edit 2025-03-30:] This experiment failed, as one might have predicted it would. Of course we can't inject arbitary JavaScript into
+GitHub's rendering of the README markdown in its own interface. It appeared there might be a 
+[loophole](https://stackoverflow.com/questions/14951321/how-to-display-html-content-in-github-readme-md) involving
+the use of SVG files referencing a ``foreignObject`` holding arbitrary HTML but it seems that GitHub carefully renders
+any images in a [sandboxed environment](https://stackoverflow.com/questions/57857193/github-image-without-camo)
+which are then hosted in a special domain ``camo.githubusercontent.com``. We'll have to host our experiment in a 
+standard GitHub page. Looks like there was a live demo on Jared's personal Netlify website as recently as 2024.
+
+
 [^1] And to me the "pell" name is a pleasing signpost back to the great
 [Pelle Ehn](https://www.interaction-design.org/literature/author/pelle-ehn)
 one of the founding fathers of malleable software thinking.

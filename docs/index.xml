@@ -39,6 +39,13 @@
       <description>Since the Infusion 6 renderer is close to being a reality, it is time to understand the characteristics of some of the various DOM reconciliation algorithms out there.&#xA;Could we do without a virtual DOM entirely? To start with is the question of whether we even really want one at all — the classic Svelte Virtual DOM is pure overhead post has been though its various hype cycles but 7 years later the majority of frameworks out there still have one so the consequences are clearly not as clear-cut as the argument would have it.</description>
     </item>
     <item>
+      <title>A good function</title>
+      <link>https://ponder.org.uk/term/a-good-function/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/a-good-function/</guid>
+      <description>A good function is:&#xA;A pure function, one without side-effects whose return value depends only on its arguments Available at a stable public name in a global namespace Performs work only linearly proportional to the size of its arguments (considered as structures) This notion was first described the Fluid wiki on this 2005 page which goes into some somewhat crusty historical detail for justification. The main upshot is that such a definition aids transparency &amp;mdash; the ability to reason from effects to causes, and liveness &amp;mdash; for the system to responsively adapt to the user&amp;rsquo;s gestures.</description>
+    </item>
+    <item>
       <title>About me</title>
       <link>https://ponder.org.uk/page/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>

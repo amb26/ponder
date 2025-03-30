@@ -10,6 +10,13 @@
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
     <atom:link href="https://ponder.org.uk/term/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>A good function</title>
+      <link>https://ponder.org.uk/term/a-good-function/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/a-good-function/</guid>
+      <description>A good function is:&#xA;A pure function, one without side-effects whose return value depends only on its arguments Available at a stable public name in a global namespace Performs work only linearly proportional to the size of its arguments (considered as structures) This notion was first described the Fluid wiki on this 2005 page which goes into some somewhat crusty historical detail for justification. The main upshot is that such a definition aids transparency &amp;mdash; the ability to reason from effects to causes, and liveness &amp;mdash; for the system to responsively adapt to the user&amp;rsquo;s gestures.</description>
+    </item>
+    <item>
       <title>Divergence</title>
       <link>https://ponder.org.uk/term/divergence/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>

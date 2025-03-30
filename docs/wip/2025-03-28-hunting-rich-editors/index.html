@@ -59,7 +59,7 @@
   "headline": "Hunting rich editors",
   "description" : "The substrate\u0026rsquo;s transition to editability will need to present a \u0026ldquo;mostly rendered\u0026rdquo; view of itself – managed by some form of rich text editor. A huge \u0026ldquo;grab-bag list\u0026rdquo; is at JefMari\u0026rsquo;s curated list of Awesome Wysiwyg Editors which can rapidly be whittled down to a shortlist. CKEditor 5 and TinyMCE are familiar from decades ago. But the gold standard is clearly Marijn\u0026rsquo;s ProseMirror – basic example here and really nice markdown editing example here.",
   "inLanguage" : "en",
-  "wordCount":  531 ,
+  "wordCount":  629 ,
   "datePublished" : "2025-03-28T00:00:00\u002b00:00",
   "dateModified" : "2025-03-28T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/20230209_135356%20-%20bio%20-%20cropped.jpg",
@@ -244,6 +244,13 @@ of stringing together adjacent sibling nodes with <code>contentEditable</code> v
 <p>In any case we have a workable lift-off vehicle – the entire (tiny) design can be Infusionised and first experiment
 is to check that it is perfectly workable to embed a self-hosted demo inside Infusion&rsquo;s README file – it&rsquo;s puzzling
 that pell&rsquo;s own demo takes the form of a little video.</p>
+<p>[Edit 2025-03-30:] This experiment failed, as one might have predicted it would. Of course we can&rsquo;t inject arbitary JavaScript into
+GitHub&rsquo;s rendering of the README markdown in its own interface. It appeared there might be a
+<a href="https://stackoverflow.com/questions/14951321/how-to-display-html-content-in-github-readme-md">loophole</a> involving
+the use of SVG files referencing a <code>foreignObject</code> holding arbitrary HTML but it seems that GitHub carefully renders
+any images in a <a href="https://stackoverflow.com/questions/57857193/github-image-without-camo">sandboxed environment</a>
+which are then hosted in a special domain <code>camo.githubusercontent.com</code>. We&rsquo;ll have to host our experiment in a
+standard GitHub page. Looks like there was a live demo on Jared&rsquo;s personal Netlify website as recently as 2024.</p>
 <p>[^1] And to me the &ldquo;pell&rdquo; name is a pleasing signpost back to the great
 <a href="https://www.interaction-design.org/literature/author/pelle-ehn">Pelle Ehn</a>
 one of the founding fathers of malleable software thinking.</p>

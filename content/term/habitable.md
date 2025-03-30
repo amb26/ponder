@@ -47,3 +47,6 @@ As I remark in my rather ranty [2016 PPIG paper](https://ppig.org/files/2016-PPI
 Similarly, there is a habitability for software, but it is not (yet) for the user. My goal in designing a
 [substrate](/term/substrate) for software is to bring the worlds of "users" and developers into close enough
 contact that the users of software might manage to find livable places of their own.
+
+A neighbouring notion to habitability is the *ownability* I describe in my 2018 PPIG paper [What Lies in the Path of the
+Revolution](https://ppig.org/files/2018-PPIG-29th-basman.pdf).
