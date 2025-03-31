@@ -34,7 +34,7 @@ environments such as C, as recommended by
 environments there is a relatively direct connection between expressions (source code) and results (in this case
 represented by emitted assembler). I am interested to see if these extremes can be harmonised &ndash; whether there
 could be kinds of frameworks or [substrates](/term/substrate) which allow for a more direct correspondence between
-expressions and results in the space of user interface &ndash; in particular, which allow the full train of design
+expressions and results in the space of a user interface &ndash; in particular, which allow the full train of design
 decisions leading to a particular interface element being a certain way to be traced back to their original
 expressions from the interface itself. We have a precedent for such systems inside the powerful CSS inspectors
 now built into every mainstream browser. 
