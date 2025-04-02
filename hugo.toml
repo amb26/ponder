@@ -15,7 +15,9 @@ pygmentsCodefencesGuessSyntax = true
 #pygmentOptions = "linenos=inline"
 
 [markup.goldmark.renderer]
-unsafe = true # Allow HTML content
+  unsafe = true # Allow HTML content
+[markup.goldmark.parser.attribute]
+  block = true
 
 [Services]
   [Services.Disqus]
@@ -66,7 +68,7 @@ unsafe = true # Allow HTML content
   github = "username"
   gitlab = "username"
   bitbucket = "username"
-  twitter = "username"
+  twitter = "amb26ponder"
   reddit = "username"
   linkedin = "username"
   xing = "username"

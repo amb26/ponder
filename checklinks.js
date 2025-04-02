@@ -26,7 +26,7 @@ function extractLinks(htmlContent) {
     const { document } = parseHTML(htmlContent);
     return [...document.querySelectorAll("a")]
         .map(a => a.getAttribute("href"))
-        .filter(href => href && !href.startsWith("mailto:"))
+        .filter(href => href && !href.startsWith("mailto:") && !href.startsWith("https://bsky.app/intent"))
         .map(href => href.split("#")[0]);
 }
 

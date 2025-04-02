@@ -2,6 +2,14 @@
 <!-- Social Share Button HTML -->
 <div class="share-box" aria-hidden="true">
     <ul class="share">
+      <!-- BlueSky taken from https://justinjbird.com/blog/2024/adding-bluesky-links-and-logos-to-my-hugo-site/ -->
+      <li>
+        {{ $blueText := printf "%s%s%s%s" "Just reading a post called " .Title " on Antranig Basman's blog: " .Permalink  }}
+        <a href="https://bsky.app/intent/compose?text={{ $blueText | urlquery }}" target="_blank" title="Share on BlueSky">
+          <i class="fab fa-fw fa-bluesky"></i>
+        </a>
+      </li>
+
       <!-- Twitter -->
       <li>
         <a href="https://twitter.com/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ .Site.Params.author.twitter }}" target="_blank" title="Share on Twitter">
@@ -30,19 +38,6 @@
         </a>
       </li>
 
-      <!-- StumbleUpon -->
-      <li>
-        <a href="https://www.stumbleupon.com/submit?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on StumbleUpon">
-          <i class="fab fa-stumbleupon"></i>
-        </a>
-      </li>
-
-      <!-- Pinterest -->
-      <li>
-        <a href="https://www.pinterest.com/pin/create/button/?url={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="Share on Pinterest">
-          <i class="fab fa-pinterest"></i>
-        </a>
-      </li>
     </ul>
   </div>
   {{ end }}

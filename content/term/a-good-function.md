@@ -3,7 +3,7 @@ title: A good function
 categories: ["term"]
 ---
 
-A _good function_ is:
+A **good function** is:
 
 * A pure function, one without side-effects whose return value depends only on its arguments
 * Available at a stable public name in a global namespace
