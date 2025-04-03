@@ -3,7 +3,7 @@ title: Substrate
 categories: ["term"]
 ---
 
-A **substrate** is a kind of self-sufficent model or material for the construction of software. 
+A **substrate** is a kind of self-sufficient model or material for the construction of software. 
 [Jonathan Edwards](https://alarmingdevelopment.org/)' definition is a great starting point comprising the following points:
 
 * A complete and self-sufficient programming system
