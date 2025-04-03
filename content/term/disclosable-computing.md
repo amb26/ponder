@@ -30,7 +30,8 @@ the fact it is no longer editabls.
 
 ![Excel formula bar](/img/excel-disclose.png)
 
-Another interesting substrate, the most recent version 4 of [Lively Kernel](https://lively-kernel.org/lively4/lively4-core/start.html) organises
+Another interesting substrate, the most recent version 4 of
+the [Lively Kernel](https://github.com/LivelyKernel/lively4-core) organises
 components in window panes with a standard "hamburger menu" at top left, from which various substrate-oriented activities
 are available including "edit":
 

@@ -96,6 +96,9 @@ async function validateLinks() {
     const linkPromises = linksToCheck.map(async (link, index) => {
         await checkLink(link.target, link.sourceFile, brokenLinks);
         completedLinks++;
+        if (completedLinks > linksToCheck.length - 2) {
+            console.log("Resolved link ", link.target);
+        }
         readline.cursorTo(process.stdout, 0);
         process.stdout.write(`Progress: ${completedLinks}/${totalLinks} links checked`);
     });
