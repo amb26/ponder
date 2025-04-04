@@ -8,8 +8,15 @@
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <lastBuildDate>Thu, 03 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 04 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ponder.org.uk/wip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Staring at the wand</title>
+      <link>https://ponder.org.uk/wip/2025-04-04-staring-at-the-wand/</link>
+      <pubDate>Fri, 04 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-04-04-staring-at-the-wand/</guid>
+      <description>OK, so we have now imported a visually reasonable and properly lithified version of Pell into a tiny static page which is itself lithified from the rendered output of the substrates page, which will be where the most basic editing demo gets scaffolded.&#xA;I mused about making the disclosing tool into a pencil of the kind we see in the Lively Kernel UI but the &amp;ldquo;magic wand&amp;rdquo; was hard to resist and fits in with some rhetoric about this gesture.</description>
+    </item>
     <item>
       <title>Change of Tack on Templating</title>
       <link>https://ponder.org.uk/wip/2025-04-03-change-of-tack-on-templating/</link>
