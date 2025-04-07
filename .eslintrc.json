@@ -1,0 +1,28 @@
+{
+    "extends": "eslint-config-fluid",
+    "rules": {
+        "strict": ["error", "global"],
+        "no-loop-func": 0,
+        "no-console": 0,
+        "quotes": [
+            "error",
+            "double",
+            { "allowTemplateLiterals": true }
+        ]
+    },
+    "settings": {
+        "jsdoc": {
+            "preferredTypes": {
+                "*": "any",
+                "any": "any"
+            }
+        }
+    },
+    "parserOptions": {
+        "ecmaVersion": 2022
+    },
+    "env": {
+        "es6": true,
+        "node": true
+    }
+}

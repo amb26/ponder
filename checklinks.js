@@ -1,3 +1,5 @@
+"use strict";
+
 const fs = require("fs");
 const path = require("path");
 const { parseHTML } = require("linkedom");
@@ -38,7 +40,9 @@ function resolveLocalPath(target, sourceFile) {
     const sourceDir = path.dirname(sourceFile);
     const absoluteTarget = path.resolve(sourceDir, target);
 
-    if (checkLocalPath(absoluteTarget)) return absoluteTarget;
+    if (checkLocalPath(absoluteTarget)) {
+        return absoluteTarget;
+    }
     if (checkLocalPath(absoluteTarget + ".html")) {
         return absoluteTarget + ".html";
     }
@@ -93,7 +97,7 @@ async function validateLinks() {
 
     const brokenLinks = [];
 
-    const linkPromises = linksToCheck.map(async (link, index) => {
+    const linkPromises = linksToCheck.map(async link => {
         await checkLink(link.target, link.sourceFile, brokenLinks);
         completedLinks++;
         if (completedLinks > linksToCheck.length - 2) {
