@@ -8,8 +8,15 @@
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <lastBuildDate>Fri, 04 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 07 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ponder.org.uk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Templates and weird attributes together</title>
+      <link>https://ponder.org.uk/wip/2025-04-07-templates-and-weird-attributes-together/</link>
+      <pubDate>Mon, 07 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-04-07-templates-and-weird-attributes-together/</guid>
+      <description>Trying to put into practice thoughts from the previous two postings on template thinking and weird attributes for event binding revealed some interesting problems.&#xA;Firing up ${ }-based templates revealed an awkward problem. This prevents us using backtick template literals in code since these automatically interpret ${} syntax and so will break as soon as they are evaluated.&#xA;At the same time, use of @click style event binding revealed a really interesting limitation.</description>
+    </item>
     <item>
       <title>Staring at the wand</title>
       <link>https://ponder.org.uk/wip/2025-04-04-staring-at-the-wand/</link>

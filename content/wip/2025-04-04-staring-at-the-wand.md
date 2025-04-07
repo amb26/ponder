@@ -9,7 +9,7 @@ lithified from the rendered output of the [substrates](/term/substrate) page, wh
 [most basic editing demo](https://fluid-project.github.io/infusion-6/demo/) gets scaffolded.
 
 I mused about making the [disclosing tool](/term/disclosable-computing) into a pencil of the kind we see
-in the [Lively Kernel](https://lively-kernel.org/lively4/lively4-core/start.html) UI but the "magic wand" was
+in the [Lively Kernel](https://github.com/LivelyKernel/lively4-core) UI but the "magic wand" was
 hard to resist and fits in with some rhetoric about this gesture. I recently dug out my original
 [2013 Tweet](https://x.com/amb26ponder/status/304536562820063232)
 about having invented a CSS-like design extension scheme[^1] and this lovely [Mulla Nasruddin cartoon](https://ponder.org.uk/public/patent3.png)
@@ -68,7 +68,7 @@ any value in advertising custom elements right now even though we do indeed have
 civilising the horrific race-laden workflow of Web Component startup in terms of timing of the
 [lifecycle callbacks](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements#custom_element_lifecycle_callbacks).
 
-Choosing between ``{{v-on:click="handler"}}`` and ``{{@click="handler"}}`` &ndash; the errors triggered in Webstorm are
+Choosing between ``v-on:click="handler"`` and ``@click="handler"`` &ndash; the errors triggered in Webstorm are
 rather less obnoxious for the latter (highly scientific criterion!). Also the latter is more concise, doesn't visibly
 associate us with Vue, and must be widely attested/supported since most Vue apps use it!
 

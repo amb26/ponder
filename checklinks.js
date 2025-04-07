@@ -114,4 +114,4 @@ async function validateLinks() {
     }
 }
 
-validateLinks().catch(console.error);
+validateLinks().catch(console.error).finally(() => process.exit());
