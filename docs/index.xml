@@ -8,8 +8,15 @@
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <lastBuildDate>Mon, 07 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 19 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ponder.org.uk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>An era for new notations</title>
+      <link>https://ponder.org.uk/post/2025-04-19-new-notation-era/</link>
+      <pubDate>Sat, 19 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-04-19-new-notation-era/</guid>
+      <description>I argue that there has never been a more promising time for developing fruitful new notations.&#xA;Some, considering the enormous success of modern LLMs in solving increasingly complex &amp;ldquo;problems&amp;rdquo; – in terms of translating a verbal or pictorial design specification into code – means programming is now a &amp;ldquo;solved&amp;rdquo; problem. They imagine a future where humans no longer need to understand or write code.&#xA;I believe this is wrong on several accounts.</description>
+    </item>
     <item>
       <title>Templates and weird attributes together</title>
       <link>https://ponder.org.uk/wip/2025-04-07-templates-and-weird-attributes-together/</link>
@@ -85,7 +92,7 @@
       <link>https://ponder.org.uk/term/divergence/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
       <guid>https://ponder.org.uk/term/divergence/</guid>
-      <description>Defined in my 2016 paper, divergence represents any discrepancy between the runtime state of an application, and the state through which it can be authored. Typical sources of divergence include the program&amp;rsquo;s call stack, unintepreted addresses within the heap, event listeners and typical sources of object representation such as vtables and the like.&#xA;In a tradition of materialised programming, divergence should be minimised, in order to reduce the mental burden on those trying to visualise the effects of their edits.</description>
+      <description>Defined in my 2016 paper, divergence represents any discrepancy between the runtime state of a program, and the state through which it can be authored. Typical sources of divergence include the program&amp;rsquo;s call stack, uninterpreted addresses within the heap, event listeners and typical sources of object representation such as vtables and the like.&#xA;In a tradition of materialised programming, divergence should be minimised, in order to reduce the mental burden on those trying to visualise the effects of their edits.</description>
     </item>
     <item>
       <title>End user programming</title>

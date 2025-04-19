@@ -28,7 +28,7 @@
       <link>https://ponder.org.uk/term/divergence/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
       <guid>https://ponder.org.uk/term/divergence/</guid>
-      <description>Defined in my 2016 paper, divergence represents any discrepancy between the runtime state of an application, and the state through which it can be authored. Typical sources of divergence include the program&amp;rsquo;s call stack, unintepreted addresses within the heap, event listeners and typical sources of object representation such as vtables and the like.&#xA;In a tradition of materialised programming, divergence should be minimised, in order to reduce the mental burden on those trying to visualise the effects of their edits.</description>
+      <description>Defined in my 2016 paper, divergence represents any discrepancy between the runtime state of a program, and the state through which it can be authored. Typical sources of divergence include the program&amp;rsquo;s call stack, uninterpreted addresses within the heap, event listeners and typical sources of object representation such as vtables and the like.&#xA;In a tradition of materialised programming, divergence should be minimised, in order to reduce the mental burden on those trying to visualise the effects of their edits.</description>
     </item>
     <item>
       <title>End user programming</title>

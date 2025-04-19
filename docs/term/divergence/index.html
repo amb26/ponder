@@ -8,7 +8,7 @@
 
       <title>Divergence - Antranig Basman</title>
 
-  <meta name="description" content="Defined in my 2016 paper, divergence represents any discrepancy between the runtime state of an application, and the state through which it can be authored. Typical sources of divergence include the program&rsquo;s call stack, unintepreted addresses within the heap, event listeners and typical sources of object representation such as vtables and the like.
+  <meta name="description" content="Defined in my 2016 paper, divergence represents any discrepancy between the runtime state of a program, and the state through which it can be authored. Typical sources of divergence include the program&rsquo;s call stack, uninterpreted addresses within the heap, event listeners and typical sources of object representation such as vtables and the like.
 In a tradition of materialised programming, divergence should be minimised, in order to reduce the mental burden on those trying to visualise the effects of their edits.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
@@ -58,9 +58,9 @@ In a tradition of materialised programming, divergence should be minimised, in o
     "name" : "Antranig Basman"
   },
   "headline": "Divergence",
-  "description" : "Defined in my 2016 paper, divergence represents any discrepancy between the runtime state of an application, and the state through which it can be authored. Typical sources of divergence include the program\u0026rsquo;s call stack, unintepreted addresses within the heap, event listeners and typical sources of object representation such as vtables and the like.\nIn a tradition of materialised programming, divergence should be minimised, in order to reduce the mental burden on those trying to visualise the effects of their edits.",
+  "description" : "Defined in my 2016 paper, divergence represents any discrepancy between the runtime state of a program, and the state through which it can be authored. Typical sources of divergence include the program\u0026rsquo;s call stack, uninterpreted addresses within the heap, event listeners and typical sources of object representation such as vtables and the like.\nIn a tradition of materialised programming, divergence should be minimised, in order to reduce the mental burden on those trying to visualise the effects of their edits.",
   "inLanguage" : "en",
-  "wordCount":  80 ,
+  "wordCount":  305 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -81,7 +81,7 @@ In a tradition of materialised programming, divergence should be minimised, in o
 
 
 <meta property="og:title" content="Divergence" />
-<meta property="og:description" content="Defined in my 2016 paper, divergence represents any discrepancy between the runtime state of an application, and the state through which it can be authored. Typical sources of divergence include the program&rsquo;s call stack, unintepreted addresses within the heap, event listeners and typical sources of object representation such as vtables and the like.
+<meta property="og:description" content="Defined in my 2016 paper, divergence represents any discrepancy between the runtime state of a program, and the state through which it can be authored. Typical sources of divergence include the program&rsquo;s call stack, uninterpreted addresses within the heap, event listeners and typical sources of object representation such as vtables and the like.
 In a tradition of materialised programming, divergence should be minimised, in order to reduce the mental burden on those trying to visualise the effects of their edits.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/term/divergence/" />
@@ -89,7 +89,7 @@ In a tradition of materialised programming, divergence should be minimised, in o
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="Divergence" />
-  <meta name="twitter:description" content="Defined in my 2016 paper, divergence represents any discrepancy between the runtime state of an application, and the state through which it can be authored. Typical sources of divergence include the …">
+  <meta name="twitter:description" content="Defined in my 2016 paper, divergence represents any discrepancy between the runtime state of a program, and the state through which it can be authored. Typical sources of divergence include the …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
@@ -214,13 +214,36 @@ In a tradition of materialised programming, divergence should be minimised, in o
 
       <article role="main" class="blog-post">
         <p>Defined in my <a href="https://www.ppig.org/files/2016-PPIG-27th-Basman1.pdf">2016 paper</a>, <strong>divergence</strong> represents
-any discrepancy between the runtime state of an application, and the state through which it can be authored. Typical
+any discrepancy between the runtime state of a program, and the state through which it can be authored. Typical
 sources of divergence include the program&rsquo;s <a href="https://en.wikipedia.org/wiki/Call_stack"><em>call stack</em></a>,
-unintepreted addresses within the <a href="https://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap"><em>heap</em></a>,
+uninterpreted addresses within the <a href="https://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap"><em>heap</em></a>,
 <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Events">event listeners</a> and
 typical sources of object representation such as <a href="https://en.wikipedia.org/wiki/Virtual_method_table">vtables</a> and the like.</p>
 <p>In a tradition of materialised programming, divergence should be minimised, in order to reduce the mental burden on
 those trying to visualise the effects of their edits.</p>
+<p>Closely related notions are the <strong>Gulf of Execution</strong>, and <strong>Gulf of Evaluation</strong>, originally coined by Don Norman in
+his 1988 <a href="https://en.wikipedia.org/wiki/The_Design_of_Everyday_Things">Design of Everyday Things</a>.</p>
+<p>Jonathan Edwards centres bridging these gulfs in his 2005 paper
+<a href="https://www.subtext-lang.org/OOPSLA05.pdf">Subtext: Uncovering the Simplicity of Programming</a>:</p>
+<blockquote>
+<p>The Gulf of Execution is the difficulty
+of translating a desired goal into an action to be executed. The
+Gulf of Evaluation is the difficulty of determining whether an
+observable state meets the desired goals.</p>
+</blockquote>
+<p>and announces</p>
+<blockquote>
+<p>Subtext is a new medium in which the representation of a program
+is the same thing as its execution.</p>
+</blockquote>
+<p>Subtext is thus a medium or <a href="../../term/substrate">substrate</a> in which divergence is minimised.</p>
+<p>However, it seems that a slight pun may emerge between these two notions of &ldquo;execution&rdquo; – one, the execution
+of the user&rsquo;s intention, and the other, the execution of the program. I argue that by reframing the activity of
+substrates away from execution in the programming sense, there is better scope for the minimisation of divergence
+to bridge these gulfs, in the typical case where minimal or no computation is required.</p>
+<p>Instead of execution we focus on the correlation or organisation of state, in line with the responsibilities of an
+<a href="../../term/integration-domain">integration domain</a>. Computation, where necessary, is expressed in a dialect of
+<a href="../../term/a-good-function">good functions</a> in a syntax which will be familiar to users from grade school or spreadsheets.</p>
 
 
         

@@ -50,7 +50,7 @@ Since 2022 I have worked for the
 interactions and guide their land use decisions including evaluation of seed mixes, as well as supporting their
 volunteers' observation work. I have implemented the 
 <a href="https://oregon-bee-project.github.io/melittoflora/viz.html">Melittoflora</a> tool using a provisional version 
-of the [Infusion](/infusion) framework which filters the project's data on wild bees by geographical, temporal and taxonomic filters and 
+of the <a href="/infusion">Infusion</a> framework which filters the project's data on wild bees by geographical, temporal and taxonomic filters and 
 visualises the resulting interactions as a live, attractive bipartite ribbon graph. 
 </div>
 </div>
