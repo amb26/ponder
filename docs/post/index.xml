@@ -18,6 +18,13 @@
       <description>I argue that there has never been a more promising time for developing fruitful new notations.&#xA;Some, considering the enormous success of modern LLMs in solving increasingly complex &amp;ldquo;problems&amp;rdquo; – in terms of translating a verbal or pictorial design specification into code – means programming is now a &amp;ldquo;solved&amp;rdquo; problem. They imagine a future where humans no longer need to understand or write code.&#xA;I believe this is wrong on several accounts.</description>
     </item>
     <item>
+      <title>Coming Out of the Shadows</title>
+      <link>https://ponder.org.uk/post/2025-04-13-coming-out-of-the-shadows/</link>
+      <pubDate>Sun, 13 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-04-13-coming-out-of-the-shadows/</guid>
+      <description>Or – &amp;ldquo;Evading Gilad&amp;rsquo;s Comparison&amp;rdquo;.&#xA;A 2014 posting of Gilad Bracha&amp;rsquo;s, A DOMain of shadows, has prompted a lot of thought over the years. I refer to it in passing in last month&amp;rsquo;s On UI as Code but this week a line of argument became a bit clearer on how the comparison in the posting might be dodged.&#xA;Gilad&amp;rsquo;s note is about the design tension constantly pushing complexity into any purportedly &amp;ldquo;simple&amp;rdquo; user-facing language, that we might call a DSL.</description>
+    </item>
+    <item>
       <title>On UI as code</title>
       <link>https://ponder.org.uk/post/2025-03-20-ui-as-code/</link>
       <pubDate>Thu, 20 Mar 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>

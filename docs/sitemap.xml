@@ -2,19 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://ponder.org.uk/post/2025-04-19-new-notation-era/</loc>
-    <lastmod>2025-04-19T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://ponder.org.uk/</loc>
+    <lastmod>2025-04-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ponder.org.uk/wip/2025-04-24-learning-from-codestrates/</loc>
+    <lastmod>2025-04-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ponder.org.uk/wip/</loc>
+    <lastmod>2025-04-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ponder.org.uk/wip/2025-04-21-co-occurrences-are-here-again/</loc>
+    <lastmod>2025-04-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ponder.org.uk/post/2025-04-19-new-notation-era/</loc>
     <lastmod>2025-04-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ponder.org.uk/post/</loc>
     <lastmod>2025-04-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ponder.org.uk/wip/2025-04-07-templates-and-weird-attributes-together/</loc>
-    <lastmod>2025-04-07T00:00:00+00:00</lastmod>
+    <loc>https://ponder.org.uk/post/2025-04-13-coming-out-of-the-shadows/</loc>
+    <lastmod>2025-04-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ponder.org.uk/wip/</loc>
+    <loc>https://ponder.org.uk/wip/2025-04-07-templates-and-weird-attributes-together/</loc>
     <lastmod>2025-04-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ponder.org.uk/wip/2025-04-04-staring-at-the-wand/</loc>

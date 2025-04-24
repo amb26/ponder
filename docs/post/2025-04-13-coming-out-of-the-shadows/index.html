@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+      <title>Coming Out of the Shadows - Antranig Basman</title>
+
+  <meta name="description" content="Or – &ldquo;Evading Gilad&rsquo;s Comparison&rdquo;.
+A 2014 posting of Gilad Bracha&rsquo;s, A DOMain of shadows, has prompted a lot of thought over the years. I refer to it in passing in last month&rsquo;s On UI as Code but this week a line of argument became a bit clearer on how the comparison in the posting might be dodged.
+Gilad&rsquo;s note is about the design tension constantly pushing complexity into any purportedly &ldquo;simple&rdquo; user-facing language, that we might call a DSL.">
+  <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Antranig Basman",
+    
+    "url": "https:\/\/ponder.org.uk"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/ponder.org.uk"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk\/post\/2025-04-13-coming-out-of-the-shadows\/",
+          "name": "Coming out of the shadows"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Antranig Basman"
+  },
+  "headline": "Coming Out of the Shadows",
+  "description" : "Or – \u0026ldquo;Evading Gilad\u0026rsquo;s Comparison\u0026rdquo;.\nA 2014 posting of Gilad Bracha\u0026rsquo;s, A DOMain of shadows, has prompted a lot of thought over the years. I refer to it in passing in last month\u0026rsquo;s On UI as Code but this week a line of argument became a bit clearer on how the comparison in the posting might be dodged.\nGilad\u0026rsquo;s note is about the design tension constantly pushing complexity into any purportedly \u0026ldquo;simple\u0026rdquo; user-facing language, that we might call a DSL.",
+  "inLanguage" : "en",
+  "wordCount":  960 ,
+  "datePublished" : "2025-04-13T00:00:00\u002b00:00",
+  "dateModified" : "2025-04-13T00:00:00\u002b00:00",
+  "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+  "keywords" : [ "" ],
+  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/post\/2025-04-13-coming-out-of-the-shadows\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/ponder.org.uk",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="Coming Out of the Shadows" />
+<meta property="og:description" content="Or – &ldquo;Evading Gilad&rsquo;s Comparison&rdquo;.
+A 2014 posting of Gilad Bracha&rsquo;s, A DOMain of shadows, has prompted a lot of thought over the years. I refer to it in passing in last month&rsquo;s On UI as Code but this week a line of argument became a bit clearer on how the comparison in the posting might be dodged.
+Gilad&rsquo;s note is about the design tension constantly pushing complexity into any purportedly &ldquo;simple&rdquo; user-facing language, that we might call a DSL.">
+<meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
+<meta property="og:url" content="https://ponder.org.uk/post/2025-04-13-coming-out-of-the-shadows/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Antranig Basman" />
+
+  <meta name="twitter:title" content="Coming Out of the Shadows" />
+  <meta name="twitter:description" content="Or – &ldquo;Evading Gilad&rsquo;s Comparison&rdquo;.
+A 2014 posting of Gilad Bracha&rsquo;s, A DOMain of shadows, has prompted a lot of thought over the years. I refer to it in passing in last …">
+  <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@amb26ponder" />
+  <meta name="twitter:creator" content="@amb26ponder" />
+  <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.121.0">
+  <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
+  <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-ponder">
+      <a class="navbar-ponder-brand" href="../../">Antranig Basman</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <svg width="36" height="36" viewBox="0 0 24 24" stroke="#888" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 7L4 7" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 12L4 12" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 17L4 17" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="nav navbar-nav navbar-right">
+          
+          
+          <li>
+            <a title="Posts" href="../../post">Posts</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="WiP" href="../../wip">WiP</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="About" href="../../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Communities" href="../../communities">Communities</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Projects" href="../../projects">Projects</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Terms" href="../../term">Terms</a>
+          </li>
+          
+          
+
+          
+
+          
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="header-row">
+          
+
+            <div class="post-heading">
+              
+                <h1>Coming Out of the Shadows  
+                  <span class="post-meta">
+  
+    
+     – April 13, 2025
+  
+  
+</span>
+
+                  </h1>
+              
+              
+              
+
+            </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <article role="main" class="blog-post">
+        <p>Or – &ldquo;Evading Gilad&rsquo;s Comparison&rdquo;.</p>
+<p>A 2014 posting of Gilad Bracha&rsquo;s, <a href="https://gbracha.blogspot.com/2014/09/a-domain-of-shadows.html">A DOMain of shadows</a>,
+has prompted a lot of thought over the years. I refer to it in passing in last month&rsquo;s
+<a href="../../post/2025-03-20-ui-as-code">On UI as Code</a> but this week a line of argument became a bit clearer on how
+the comparison in the posting might be dodged.</p>
+<p>Gilad&rsquo;s note is about the design tension constantly pushing complexity into any purportedly &ldquo;simple&rdquo; user-facing language,
+that we might call a DSL. He argues that any DSL is constantly under pressure to become a general-purpose computing
+language, since if it does not, it ends up evolving &ldquo;shadow constructs&rdquo; which ape those which are more competently
+implemented in such a language. If his argument can&rsquo;t be counterbalanced, the &ldquo;UI as code&rdquo; idiom pushed by Flutter etc.
+must be accepted, along with the tool chains and social constructs that come with it. However, at a practical level,
+<a href="../../post/2025-03-20-ui-as-code">my posting</a> shows the kinds of consequences that we typically have to accept with such a choice.</p>
+<p>But to go along with this practical demonstration, how can we evade the criticism at a moral level? Gilad&rsquo;s second example
+is of a view templating language, Polymer – it is a thing of its day, but every view templating system is forced
+into similar choices. For example, Vue&rsquo;s <a href="https://vuejs.org/guide/essentials/list.html">list rendering template syntax</a>
+(one has to say, a highly successful one) duly includes &ldquo;shadow constructs&rdquo; for looping and conditionals. A fully
+fledged &ldquo;shadom domain&rdquo; that should be better implemented in code? Maybe.</p>
+<p>From my point of view what is problematic about these shadow domains is not just that they ape constructs in general-purpose
+programming language, but that they are just as opaque as them. For example, here is a section of templating language
+from the Hugo theme underlying this site (earlier version of <a href="https://github.com/halogenica/beautifulhugo/blob/master/layouts/partials/nav.html">Beautiful Hugo&rsquo;s nav.html</a>):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  &lt;div class=&#34;{{ .Type }}-heading&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;h1&gt;{{ with $.Scratch.Get &#34;title&#34; }}{{.}}{{ else }}&lt;br/&gt;{{ end }}&lt;/h1&gt;
+</span></span><span class="line"><span class="cl">      {{ if $subtitle }}
+</span></span><span class="line"><span class="cl">        {{ if eq .Type &#34;page&#34; }}
+</span></span><span class="line"><span class="cl">          &lt;hr class=&#34;small&#34;&gt;
+</span></span><span class="line"><span class="cl">          &lt;span class=&#34;{{ .Type }}-subheading&#34;&gt;{{ $subtitle }}&lt;/span&gt;
+</span></span><span class="line"><span class="cl">        {{ else }}
+</span></span><span class="line"><span class="cl">          &lt;h2 class=&#34;{{ .Type }}-subheading&#34;&gt;{{ $subtitle }}&lt;/h2&gt;
+</span></span><span class="line"><span class="cl">        {{ end }}
+</span></span><span class="line"><span class="cl">      {{ end }}
+</span></span><span class="line"><span class="cl">      {{ if eq .Type &#34;post&#34; }}
+</span></span><span class="line"><span class="cl">        {{ partial &#34;post_meta.html&#34; . }}
+</span></span><span class="line"><span class="cl">      {{ end }}
+</span></span><span class="line"><span class="cl">  &lt;/div&gt;
+</span></span></code></pre></div><p>Whether or not you consider this template would better have been implemented
+in a general-purpose programming language, it is pretty hard to discover, given the rendered markup in the UI,
+how it got there. Have a look in this page&rsquo;s markup and see how easily it leaps out at you – bearing in mind
+that we are aiming here at a system which brings computation to the general public.</p>
+<p>This is the same argument with the same consequences as in <a href="../../post/2025-03-20-ui-as-code">On UI as Code</a>.</p>
+<p>Now, given that Infusion now implements what look like the same constructs <code>@for</code> and <code>@if</code>
+in the view/configuration layer, how do we evade the &ldquo;shadow domain&rdquo; criticism?</p>
+<h3 id="this-is-not-control-flow">This is not control flow</h3>
+<p>One answer is that, despite their superficial resemblance, these are not control flow constructs. Rather than,
+for example, <code>@for</code> being a looping construct, it is actually a construct that <em>puts one part of the system in
+correspondence with another</em>. It says – &ldquo;There are as many components here as there are elements in this
+data structure&rdquo;. Similarly, <code>@if</code> puts a component in correspondence with a reactive boolean value.</p>
+<p>Somewhere in the &ldquo;base language&rdquo; which may or may not underlie the substrate, there may indeed be an <code>if</code> statement
+which produced the boolean we are corresponding with – but maybe there isn&rsquo;t.</p>
+<p>Philosophically then there are not two or more &ldquo;shadow constructs&rdquo; here, there is just one, the &ldquo;put into correspondence&rdquo;
+construct, which just has two syntactically different sugars reflecting whether the corresponding item is a composite
+or a boolean. &ldquo;Old Infusion&rdquo; was a little clearer about this, with the configuration named
+<a href="https://docs.fluidproject.org/infusion/development/SubcomponentDeclaration#dynamic-subcomponents-with-a-source-array">source/sources</a>
+rather than <code>if/for</code> but there is no point confounding users with unfamiliar names for potentially familiar things.</p>
+<p>A valid response to this distinction is &ldquo;at the end of the day it&rsquo;s the same thing – the same computation is
+designated and occurs&rdquo; but I consider the difference of emphasis is important.
+The operation of &ldquo;putting into correspondence&rdquo; plans for the
+relationship to be maintained, and also to be traceable in either direction. It is this which will be at the
+heart of Infusion&rsquo;s ability to trace causes from effects, and given a piece of UI, allow a UI gesture which
+directly navigates to the pieces of data and code responsible.</p>
+<h3 id="the-new-paradigm-is-an-old-paradigm">The new paradigm is an old paradigm</h3>
+<p>As it turns out, as we are announcing &ldquo;the death of the execution paradigm&rdquo;, the alternative we are looking at is far
+from a new one. It is in fact closely reminiscent of the <a href="https://en.wikipedia.org/wiki/Relational_algebra">relational algebra</a>
+underlying the highly successful SQL query model.
+Codd introduced this model in his <a href="https://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf">1970 paper</a>, and it is a close
+match for our requirements – as befits an inhabitant of an <a href="../../term/integration-domain">integration domain</a> it is
+not Turing complete and allows for the expression of what we call <a href="../../term/a-good-function">good functions</a> whose work
+does not grow faster than the structural size of its arguments. The wrinkle in our formulation is that the entities
+being related are part of different domains – whilst Codd&rsquo;s algebra relates data-to-data, ours relates data-to-substrate.
+One can perhaps draw a lesson on the uphill struggle that faces this model from the fact I considered Codd&rsquo;s laws
+far and away the most boring part of my Computer Science syllabus. Like the rest of the industry, I was computation-mad
+and only wanted stuff that gave me more power rather than less.</p>
+<p>Whilst it is colloquially true that &ldquo;an SQL query executes&rdquo; – one sees data centres grinding, and power being
+dissipated – technically speaking it does not. It merely establishes a relation.</p>
+
+
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        
+        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;Coming&#43;Out&#43;of&#43;the&#43;Shadows&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fpost%2F2025-04-13-coming-out-of-the-shadows%2F" target="_blank" title="Share on BlueSky">
+          <i class="fab fa-fw fa-bluesky"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fpost%2f2025-04-13-coming-out-of-the-shadows%2f&amp;text=Coming%20Out%20of%20the%20Shadows&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fpost%2f2025-04-13-coming-out-of-the-shadows%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fpost%2f2025-04-13-coming-out-of-the-shadows%2f&amp;title=Coming%20Out%20of%20the%20Shadows" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fpost%2f2025-04-13-coming-out-of-the-shadows%2f&amp;title=Coming%20Out%20of%20the%20Shadows" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="../../post/2025-03-20-ui-as-code/" data-toggle="tooltip" data-placement="top" title="On UI as code">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="../../post/2025-04-19-new-notation-era/" data-toggle="tooltip" data-placement="top" title="An era for new notations">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+
+      
+
+      
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="../../">Antranig Basman</a>
+            
+          
+          &nbsp;&copy;
+          2025
+
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.121.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="../../js/katex.min.js"></script>
+<script defer src="../../js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script src="../../js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>

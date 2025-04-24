@@ -8,14 +8,35 @@
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <lastBuildDate>Sat, 19 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 24 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ponder.org.uk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Learning from Codestrates</title>
+      <link>https://ponder.org.uk/wip/2025-04-24-learning-from-codestrates/</link>
+      <pubDate>Thu, 24 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-04-24-learning-from-codestrates/</guid>
+      <description>For the last few days I&amp;rsquo;ve been looking at the amazing Codestrates project, a development from Webstrates that has been under development by Clemens Klokmose and his team at CAVI since 2015. This has always been a close sibling project since the days of our 2016 paper and the development into Codestrates with its powerful in-browser IDE makes the convergence even more interesting.&#xA;Reuse and abstractions in Substrates There has always been a fundamental difference in philosophy between Webstrates and Infusion, in that the substrate underlying Webstrates is simply the DOM itself.</description>
+    </item>
+    <item>
+      <title>Co-occurrences are here again</title>
+      <link>https://ponder.org.uk/wip/2025-04-21-co-occurrences-are-here-again/</link>
+      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-04-21-co-occurrences-are-here-again/</guid>
+      <description>Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter features at the expense of what might have been &amp;ldquo;speculative nonsense&amp;rdquo; in its earlier history. However, implementing something pretty basic – the ability to render lists of components – brought me right back to an old conversation.&#xA;Here&amp;rsquo;s the situation – one author wrote a todoItem which is a templateViewComponent:&#xA;fluid.def(&amp;#34;fluid.tests.todoItem&amp;#34;, { $layers: &amp;#34;fluid.</description>
+    </item>
     <item>
       <title>An era for new notations</title>
       <link>https://ponder.org.uk/post/2025-04-19-new-notation-era/</link>
       <pubDate>Sat, 19 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
       <guid>https://ponder.org.uk/post/2025-04-19-new-notation-era/</guid>
       <description>I argue that there has never been a more promising time for developing fruitful new notations.&#xA;Some, considering the enormous success of modern LLMs in solving increasingly complex &amp;ldquo;problems&amp;rdquo; – in terms of translating a verbal or pictorial design specification into code – means programming is now a &amp;ldquo;solved&amp;rdquo; problem. They imagine a future where humans no longer need to understand or write code.&#xA;I believe this is wrong on several accounts.</description>
+    </item>
+    <item>
+      <title>Coming Out of the Shadows</title>
+      <link>https://ponder.org.uk/post/2025-04-13-coming-out-of-the-shadows/</link>
+      <pubDate>Sun, 13 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-04-13-coming-out-of-the-shadows/</guid>
+      <description>Or – &amp;ldquo;Evading Gilad&amp;rsquo;s Comparison&amp;rdquo;.&#xA;A 2014 posting of Gilad Bracha&amp;rsquo;s, A DOMain of shadows, has prompted a lot of thought over the years. I refer to it in passing in last month&amp;rsquo;s On UI as Code but this week a line of argument became a bit clearer on how the comparison in the posting might be dodged.&#xA;Gilad&amp;rsquo;s note is about the design tension constantly pushing complexity into any purportedly &amp;ldquo;simple&amp;rdquo; user-facing language, that we might call a DSL.</description>
     </item>
     <item>
       <title>Templates and weird attributes together</title>

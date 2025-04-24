@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+      <title>Learning from Codestrates - Antranig Basman</title>
+
+  <meta name="description" content="For the last few days I&rsquo;ve been looking at the amazing Codestrates project, a development from Webstrates that has been under development by Clemens Klokmose and his team at CAVI since 2015. This has always been a close sibling project since the days of our 2016 paper and the development into Codestrates with its powerful in-browser IDE makes the convergence even more interesting.
+Reuse and abstractions in Substrates There has always been a fundamental difference in philosophy between Webstrates and Infusion, in that the substrate underlying Webstrates is simply the DOM itself.">
+  <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Antranig Basman",
+    
+    "url": "https:\/\/ponder.org.uk"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/ponder.org.uk"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk\/wip\/2025-04-24-learning-from-codestrates\/",
+          "name": "Learning from codestrates"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Antranig Basman"
+  },
+  "headline": "Learning from Codestrates",
+  "description" : "For the last few days I\u0026rsquo;ve been looking at the amazing Codestrates project, a development from Webstrates that has been under development by Clemens Klokmose and his team at CAVI since 2015. This has always been a close sibling project since the days of our 2016 paper and the development into Codestrates with its powerful in-browser IDE makes the convergence even more interesting.\nReuse and abstractions in Substrates There has always been a fundamental difference in philosophy between Webstrates and Infusion, in that the substrate underlying Webstrates is simply the DOM itself.",
+  "inLanguage" : "en",
+  "wordCount":  1659 ,
+  "datePublished" : "2025-04-24T00:00:00\u002b00:00",
+  "dateModified" : "2025-04-24T00:00:00\u002b00:00",
+  "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+  "keywords" : [ "" ],
+  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/wip\/2025-04-24-learning-from-codestrates\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/ponder.org.uk",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="Learning from Codestrates" />
+<meta property="og:description" content="For the last few days I&rsquo;ve been looking at the amazing Codestrates project, a development from Webstrates that has been under development by Clemens Klokmose and his team at CAVI since 2015. This has always been a close sibling project since the days of our 2016 paper and the development into Codestrates with its powerful in-browser IDE makes the convergence even more interesting.
+Reuse and abstractions in Substrates There has always been a fundamental difference in philosophy between Webstrates and Infusion, in that the substrate underlying Webstrates is simply the DOM itself.">
+<meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
+<meta property="og:url" content="https://ponder.org.uk/wip/2025-04-24-learning-from-codestrates/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Antranig Basman" />
+
+  <meta name="twitter:title" content="Learning from Codestrates" />
+  <meta name="twitter:description" content="For the last few days I&rsquo;ve been looking at the amazing Codestrates project, a development from Webstrates that has been under development by Clemens Klokmose and his team at CAVI since 2015. …">
+  <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@amb26ponder" />
+  <meta name="twitter:creator" content="@amb26ponder" />
+  <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.121.0">
+  <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
+  <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-ponder">
+      <a class="navbar-ponder-brand" href="../../">Antranig Basman</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <svg width="36" height="36" viewBox="0 0 24 24" stroke="#888" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 7L4 7" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 12L4 12" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 17L4 17" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="nav navbar-nav navbar-right">
+          
+          
+          <li>
+            <a title="Posts" href="../../post">Posts</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="WiP" href="../../wip">WiP</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="About" href="../../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Communities" href="../../communities">Communities</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Projects" href="../../projects">Projects</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Terms" href="../../term">Terms</a>
+          </li>
+          
+          
+
+          
+
+          
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="header-row">
+          
+
+            <div class="wip-heading">
+              
+                <h1>Learning from Codestrates  </h1>
+              
+              
+                <hr class="small">
+              
+              
+
+            </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <article role="main" class="blog-post">
+        <p>For the last few days I&rsquo;ve been looking at the amazing <a href="https://codestrates.projects.cavi.au.dk/">Codestrates</a> project,
+a development from Webstrates that has been under development by Clemens Klokmose and his team at <a href="https://cavi.au.dk/">CAVI</a>
+since 2015. This has always been a close sibling project since the days of our <a href="https://www.ppig.org/files/2016-PPIG-27th-Basman1.pdf">2016 paper</a>
+and the development into Codestrates with its powerful in-browser IDE makes the convergence even more interesting.</p>
+<h3 id="reuse-and-abstractions-in-substrates">Reuse and abstractions in Substrates</h3>
+<p>There has always been a fundamental difference in philosophy between Webstrates and Infusion,
+in that the substrate underlying Webstrates is simply
+the DOM itself. Whilst in the latest <a href="https://cs.au.dk/~clemens/files/MyWebstrates-UIST2024.pdf">MyWebstrates</a> this has
+been displaced one level lower in the stack into an <a href="https://github.com/automerge/automerge">Automerge</a> document,
+the representation of the UI held in the substrate is still isomorphic to the DOM and so does not permit idiomatic
+abstraction or reuse. I talk a little about the vexed concept of &ldquo;objects/types/abstractions&rdquo; in my
+<a href="../../papers/Substrates-25_paper_8.pdf">position paper</a> for the upcoming
+<a href="https://2025.programming-conference.org/home/substrates-2025">Substrates Workshop</a>
+at &lt;Programming 2025&gt;. Folding together design time and run time causes many notions of &ldquo;types&rdquo; to collapse, but there
+remains a core notion of a named, reusable design unit. Boxer, one of the few true substrates created, apparently
+lacks such a notion, but there is a functional standin – at the moment a &ldquo;doit&rdquo; box begins to execute, a
+(recursive, lazy) copy is made of it. This copying process is at the core of Boxer&rsquo;s reuse model, which otherwise
+relies on wholesale copying of material adopted into one&rsquo;s microworld through <a href="../../term/lithification">lithification</a>.</p>
+<p>The Webstrates family features some models for reuse but these are those inherited from traditional file-based
+programming – the <a href="https://webstrate.projects.cavi.au.dk/docs/wpmv2/WPMv2.html">Webstrates Package Manager</a> maintains
+a library of JavaScript packages which are largely lightly wrapped versions of conventional JavaScript libraries available
+in mainstream repositories. This reuse doesn&rsquo;t penetrate into the substrate itself, which is noted as a limitation
+in the <a href="https://cs.au.dk/~clemens/files/MyWebstrates-UIST2024.pdf">MyWebstrates paper</a> on its model of transclusion.</p>
+<p>Nonetheless our projects have so much in common that there is a great deal to learn from both at the
+implementation and interaction level. For a start, both projects necessarily eschew complex design-time tooling such
+as bundlers and transpilers, for the same reasons that these are incompatible with local-first, locally-delivered
+design experiences. I see that this stretches further into so far avoiding <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules">ES6 modules</a>
+with their peculiar &ldquo;viral&rdquo;
+idiom – any consumer of an ES6 module has to buy in fully to a new syntax and isolated world which is passed
+on virally to any upstream dependencies. I think there are ways to deliver Infusion in an ES6 module world but for now it
+represents an unnecessary annoyance which can be deferred for the time being. Similarly, the Webstrates idiom depends commendably
+on access to a shared global namespace which stuff is injected into, as every moral programming system ought.</p>
+<h3 id="taking-a-codestrate-for-a-spin">Taking a Codestrate for a Spin</h3>
+<p>Firing up for example the TODO sample available at the first link on the CodeStrates <a href="https://codestrates.projects.cavi.au.dk/examples/">Example Gallery</a>
+and peering at its markup reveals a number of interesting things. Firstly in terms of initiating
+<a href="../../term/disclosable-computing">disclosure</a> this is very simple – there is simply a button named Edit which
+floats at the top right of the browser pane.</p>
+<p>Putting this together with the Export facility available from the File menu in the development UI the button reveals
+sparked off some interesting trains of thought. As always with Webstrates, it stretches my categories of
+&ldquo;things necessary to deliver a successful substrate&rdquo; since I was greatly surprised to find that the resulting ZIP
+file, delivered by code executing in the browser, harboured an <code>index.html</code> file which successfully executed
+the resulting WebStrate together with its editing interface. A Codestrate is a successful <a href="https://en.wikipedia.org/wiki/Quine_(computing)">Quine</a>,
+even more so than Boxer, which is something I&rsquo;d thought essential to the delivery of a true substrate.</p>
+<p>I saw that the filesystem substrate did depend on loading its dependencies online from the WebStrates Package Manager,
+but there&rsquo;s no essential reason why this would have to be so. The dependencies could have been baked into the downloaded
+ZIP package together with some kind of equivalent of an <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script/type/importmap">import map</a>
+so that the substrate was self-sufficient, in rather the way that Tom Larkworthy&rsquo;s <a href="https://github.com/tomlarkworthy/lopecode">LopeCode</a>
+attains its virtues of Durability.</p>
+<p>As with most of Jonathan&rsquo;s substrate virtues, this looks like a capability that isn&rsquo;t actually definitional but rather,
+an essential <em>capability</em>. Some users (actually most users in my community) will want complete isolation and durability,
+others will want to offload responsibility for dependencies.</p>
+<h3 id="the-quine-flame">The Quine Flame</h3>
+<p>But staring at the self-editing markup in detail in a Codestrate makes me think more carefully about the whole &ldquo;disclosure&rdquo; angle.
+Now – either a given substrate is editable or it isn&rsquo;t. It seems that every Codestrate (that I can see) is obligately
+editable – much like a Boxer microworld. Now the difference here is that the UI by default is almost completely
+unpolluted by the disclosure facility – but it is still there. This is the form it takes – to start with, on the
+root html node there is an attribute <code>transient-data-docking-area-component-mode</code> which defaults to <code>right-edge</code>. This then,
+on all top-level document elements, activates a CSS rule</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">html[transient-data-docking-area-component-mode~=&#34;edge&#34;] &gt; *:not(.docking-area--ignore) {
+</span></span><span class="line"><span class="cl">    flex: 1 1 auto;
+</span></span><span class="line"><span class="cl">    overflow: auto;
+</span></span><span class="line"><span class="cl">    contain: paint;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>The other UI elements, the slider bar and docking pane have similar stuff, and interestingly the docked pane is
+a direct descendent of <code>&lt;html&gt;</code> <em>outside</em> <code>&lt;body&gt;</code> with a custom tag of <code>component-area</code>. All of these are new
+possibilities to me and are doubtless the result of studied experiment from the CodeStrates team which is well
+worth learning from. The Edit button itself is injected as
+a <a href="https://webstrates.github.io/userguide/api/transient.html">transient</a> sibling of the body&rsquo;s actual content.</p>
+<p>But the interesting philosophical/practical issue here is how all of these pieces of &ldquo;framing&rdquo; material actually
+get there in the first place. It appears that WebStrates suffers from a very minor instance of SmallTalk&rsquo;s &ldquo;image problem&rdquo;
+in that the only idiomatic way to get a WebStrate is to start with one and to transmit it via its &ldquo;sacred flame&rdquo;
+of Quining. Now it is clearly fantastically easier to create a WebStrate than it is to create a SmallTalk VM but
+all the same it is not quite nothing, reflecting the fact that WebStrates editing ecology is still in a sense &ldquo;closed&rdquo;.
+It is not intended to be idiomatic to work on a WebStrate through anything other than itself (although one
+could work on JS libraries that it loads from WPM), even if this is massively more convenient than working on
+a SmallTalk VM with something. One could load up a WebStrate <code>index.html</code> in a text editor and hack on it intelligibly,
+or even commit it to GitHub, but there are idiomatic issues which make this undesirable.</p>
+<p>This points to a core Infusion goal which is to much more closely bridge between community idioms of users and developers.
+Whilst in practice we expect it to be the developers who make the most significant concessions – since they are the
+ones blessed with the powerful tools, elite education and grandiose epistemology<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>  – we can&rsquo;t expect them to make
+<em>total</em> concessions and abandon the use of their specialised tools and workflows entirely. I envisage, for example,
+a trajectory where a substrate grows beyond a certain level of complexity and then needs to have substantial parts of it
+worked on by traditional heavyweight IDEs. And without a route to managing longer-lived designs of greater complexity, there&rsquo;s
+little point in having a substrate in the first place, since all designs below a certain scale and longevity can
+now handily be synthesized by AIs.</p>
+<p>Also, I expect it to be pretty common to deploy substrated apps in lightweight and static contexts – for example
+static sites such as this blog. Whilst it can be cute to have an &ldquo;edit this blog post&rdquo; button in such contexts it doesn&rsquo;t
+appeal to a relevant need there – people largely come to blogs to read. This implies an idiomatic way
+to &ldquo;publish&rdquo; content from a substrate in such a way that the disclosure functionality is not included, but could easily
+be reinjected.</p>
+<p>What form could this reinjection take? The simplest possible form would be to produce a &ldquo;one stop shop igniter&rdquo; in the form
+of a single JS file that could be injected into the <code>&lt;head&gt;</code> of the document to produce all of the machinery above. How the
+user actually arranges to have this done is a matter for another discussion – there could be, say, a
+<a href="https://www.tampermonkey.net/">Tampermonkey</a> script, but if the injection were done via a browser extension this may as
+well produce a UI via the browser&rsquo;s dev tools UI plugin system with much better integration with base language
+debugging and other goodies such as access to the File System API. But still, we expect this kind of gesture to be as
+minimal as possible and be compatible with the use of a substrate appearing as a conventional JS dependency in
+a lightweight project. I&rsquo;m targetting the kind of applications that might find the use of
+<a href="https://www.webcomponents.org/libraries">Web Components</a> attractive.</p>
+<p>These in themselves are not showstopping issues in WebStrates. It&rsquo;s clear that the WebStrates team are highly sympathetic
+to the &ldquo;one stop shop flame&rdquo; model since this is how the <a href="https://github.com/Webstrates/WPM">WPM package resolver</a>
+itself is meant to be included:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;script id=&#34;WPMv2-script&#34; src=&#34;https://cdn.jsdelivr.net/gh/Webstrates/WPM@v2.22/WPMv2.js&#34;&gt;&lt;/script&gt;
+</span></span></code></pre></div><p>But the fact that WebStrates, as delivered, are primarily a self-replicating &ldquo;flame&rdquo; ecology is reflective of
+the deeper idiomatic issues I mention before – underlying them that
+&ldquo;being a webstrate&rdquo; is an all or nothing deal that affects the entire page.</p>
+<p>Given the close relationship between aims I see a lot of value in going along with technological and UX choices
+behind CodeStrates where they are in scope, and also scratch my head to see whether there could even be complementary
+development – for example trying to fit Infusion layers into the WPM package format, or as a dedicated
+top-level entry in a MyWebstrates AutoMerge document.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>I include, by extension, AI developers in this category since they result from the same worldview.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        
+        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;Learning&#43;from&#43;Codestrates&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-04-24-learning-from-codestrates%2F" target="_blank" title="Share on BlueSky">
+          <i class="fab fa-fw fa-bluesky"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-04-24-learning-from-codestrates%2f&amp;text=Learning%20from%20Codestrates&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fwip%2f2025-04-24-learning-from-codestrates%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-04-24-learning-from-codestrates%2f&amp;title=Learning%20from%20Codestrates" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-04-24-learning-from-codestrates%2f&amp;title=Learning%20from%20Codestrates" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="../../wip/2025-04-21-co-occurrences-are-here-again/" data-toggle="tooltip" data-placement="top" title="Co-occurrences are here again">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+
+      
+
+      
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="../../">Antranig Basman</a>
+            
+          
+          &nbsp;&copy;
+          2025
+
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.121.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="../../js/katex.min.js"></script>
+<script defer src="../../js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script src="../../js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>

@@ -8,8 +8,22 @@
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <lastBuildDate>Mon, 07 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 24 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ponder.org.uk/wip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Learning from Codestrates</title>
+      <link>https://ponder.org.uk/wip/2025-04-24-learning-from-codestrates/</link>
+      <pubDate>Thu, 24 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-04-24-learning-from-codestrates/</guid>
+      <description>For the last few days I&amp;rsquo;ve been looking at the amazing Codestrates project, a development from Webstrates that has been under development by Clemens Klokmose and his team at CAVI since 2015. This has always been a close sibling project since the days of our 2016 paper and the development into Codestrates with its powerful in-browser IDE makes the convergence even more interesting.&#xA;Reuse and abstractions in Substrates There has always been a fundamental difference in philosophy between Webstrates and Infusion, in that the substrate underlying Webstrates is simply the DOM itself.</description>
+    </item>
+    <item>
+      <title>Co-occurrences are here again</title>
+      <link>https://ponder.org.uk/wip/2025-04-21-co-occurrences-are-here-again/</link>
+      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-04-21-co-occurrences-are-here-again/</guid>
+      <description>Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter features at the expense of what might have been &amp;ldquo;speculative nonsense&amp;rdquo; in its earlier history. However, implementing something pretty basic – the ability to render lists of components – brought me right back to an old conversation.&#xA;Here&amp;rsquo;s the situation – one author wrote a todoItem which is a templateViewComponent:&#xA;fluid.def(&amp;#34;fluid.tests.todoItem&amp;#34;, { $layers: &amp;#34;fluid.</description>
+    </item>
     <item>
       <title>Templates and weird attributes together</title>
       <link>https://ponder.org.uk/wip/2025-04-07-templates-and-weird-attributes-together/</link>
