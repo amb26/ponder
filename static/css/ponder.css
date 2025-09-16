@@ -1,3 +1,7 @@
+h4 {
+    font-weight: 600;
+}
+
 .navbar-ponder {
     display: flex;
     justify-content: space-between;

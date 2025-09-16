@@ -312,7 +312,7 @@ isn&rsquo;t emerging in user programs yet we can for the time being hack this ve
 </span></span><span class="line"><span class="cl">};
 </span></span></code></pre></div><p>[Edit 2025-04-22:] It turns out merge policies are not returning just yet – rather thankfully. The above merge
 policy is no use without even further unnecessary complexity (such as &ldquo;local merge policies&rdquo;) because the only
-way we can express the output of the <a href="https://en.wikipedia.org/wiki/C3_linearization">C3 algorithm</a> we use to linearize
+way we can express the output of the <a href="https://en.wikipedia.org/wiki/Draft:C3_linearization">C3 algorithm</a> we use to linearize
 layer hierarchies is to push it to the top of the layer stack so that it definitively trumps any previous attempts
 to assign layers. In tidying this up we also presented a slightly better front end to C3 which up front accepts an
 array of layer names rather than the single &ldquo;class name&rdquo; in the classic implementation. This means we don&rsquo;t need

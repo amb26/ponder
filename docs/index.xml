@@ -8,8 +8,15 @@
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <lastBuildDate>Thu, 24 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 03 Jun 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ponder.org.uk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Substrates Vision Statement</title>
+      <link>https://ponder.org.uk/post/2025-06-03-substrates-vision/</link>
+      <pubDate>Tue, 03 Jun 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-06-03-substrates-vision/</guid>
+      <description>This is my vision statement submitted to the Substrates-25 workshop held in Prague in June 2025, co-located with &amp;lt;Programming 2025&amp;gt;.&#xA;To disclosable computing through concrete abstractions What is a substrate? Jonathan Edwards defines a substrate as embodying the following properties:&#xA;A complete and self-sufficient programming system, with a persistent code &amp;amp; data store, providing a direct-manipulation UI on that state. Supports live programming. Programming &amp;amp; using are on a spectrum, not distinct.</description>
+    </item>
     <item>
       <title>Learning from Codestrates</title>
       <link>https://ponder.org.uk/wip/2025-04-24-learning-from-codestrates/</link>

@@ -61,7 +61,7 @@ layer names can be folded on to the equivalent of class names. This suggests we 
 the ``is`` syntax that we see when customising builtin HTML elements as
 [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define#defining_a_customized_built-in_element).
 Remind ourselves that Hugo Daniel used a ``data-component``
-attribute in his hilarious [BoreDOM](https://hugodaniel.com/pages/boredom/). Here's an [interesting example](https://www.w3schools.com/vue/ref_is.php) of
+attribute in his hilarious [BoreDOM](https://hugodaniel.com/posts/boredom-another-js-framework/). Here's an [interesting example](https://www.w3schools.com/vue/ref_is.php) of
 dynamically binding the Web Component ``is`` attribute using Vue but note that this doesn't represent any dedicated Vue facility,
 beyond the ability to hook into its registration of web components using the ``vue:`` prefix. Unclear whether there's
 any value in advertising custom elements right now even though we do indeed have something to offer in long run in terms of 
