@@ -61,48 +61,23 @@
       {{ end }}
 
 
-      {{ if (.Params.comments) | or (and (or (not (isset .Params "comments")) (eq .Params.comments nil)) (and .Site.Params.comments (ne .Type "page"))) }}
-
-      {{ if .Site.Params.cusdisID }}
-
-        <div id="cusdis_thread"
-          data-host="https://cusdis.com"
-          data-app-id="{{ .Site.Params.cusdisID }}"
-          data-page-id="{{ .Permalink }}"
-          data-page-url="{{ .Permalink }}"
-          data-page-title="{{ .Title }}"
-          data-theme="auto"
-        ></div>
-        <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
-
-      {{ end }}
-
-      {{ if .Site.Config.Services.Disqus.Shortname }}
-          {{ if .Site.Params.delayDisqus }}
-          <div class="disqus-comments">
-            <button id="show-comments" class="btn btn-default" type="button">{{ i18n "show" }} <span class="disqus-comment-count" data-disqus-url="{{ trim .Permalink "/" }}">{{ i18n "comments" }}</span></button>
-            <div id="disqus_thread"></div>
-
-            <script type="text/javascript">
-              var disqus_config = function () {
-              this.page.url = '{{ trim .Permalink "/" }}';
-            };
-
-          </script>
-          </div>
-          {{ else }}
-          <div class="disqus-comments">
-            {{ template "_internal/disqus.html" . }}
-          </div>
-          {{ end }}
-        {{ end }}
-        {{ if .Site.Params.staticman }}
-          <div class="staticman-comments">
-            {{ partial "staticman-comments.html" . }}
-          </div>
-        {{ end }}
-      {{ end }}
-
+      {{- if (eq (.Params.disableComments | default false) false) -}}
+        <script src="https://giscus.app/client.js"
+                data-repo="amb26/ponder"
+                data-repo-id="R_kgDOOKllGA"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOOKllGM4CvhAS"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      {{- end -}}
     </div>
   </div>
 </div>
