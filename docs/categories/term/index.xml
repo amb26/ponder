@@ -45,6 +45,13 @@
       <description>Defined in my 2018 paper, externalisability, together with its dual property of addressibility, represents an essential property of a substrate supporting open authorship. An externalisable design is one which is serialisable in a form in which every design element has more or less stable and legible coordinates. An addressible, externalised serialisation of a design could be in terms of a JSON document with human-readable keys, to be contrasted with relatively opaque kinds of serialisation such as Python&amp;rsquo;s pickling or Java&amp;rsquo;s object serialization systems, designed to round-trip arbitrary in-memory structures allocated in a general-purpose programming language.</description>
     </item>
     <item>
+      <title>Glitch</title>
+      <link>https://ponder.org.uk/term/glitch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/glitch/</guid>
+      <description>The term glitch in the sense of a reactive miscomputation first entered the literature in Cooper &amp;amp; Krishnamurthi&amp;rsquo;s 2006 FrTime paper, &amp;ldquo;Embedding Dynamic Dataflow in a Call-by-Value Language&amp;rdquo;. They define it as&#xA;where a signal is recomputed before all of its subordinate signals are up-to-date&#xA;This definition appears helpful and clearcut, but the more one thinks about how to operationalise this definition in a particular concrete context, and verify that a system is rigorously glitch-free, the less clear it seems.</description>
+    </item>
+    <item>
       <title>Habitable</title>
       <link>https://ponder.org.uk/term/habitable/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
@@ -71,6 +78,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
       <guid>https://ponder.org.uk/term/substrate/</guid>
       <description>A substrate is a kind of self-sufficient model or material for the construction of software. Jonathan Edwards&amp;rsquo; definition is a great starting point comprising the following points:&#xA;A complete and self-sufficient programming system Persistent code &amp;amp; data store Direct-manipulation UI on that state Live programming Programming &amp;amp; using are on a spectrum, not distinct Conceptually unified — not a “stack” Summarized as a slogan: “A PL, DB, &amp;amp; WYSIWYG document unified together.</description>
+    </item>
+    <item>
+      <title>Unavailable Value</title>
+      <link>https://ponder.org.uk/term/unavailable-value/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/unavailable-value/</guid>
+      <description>An unavailable value is a special payload to a reactive system unifying handling of errors and asynchrony under a common mechanism responding to &amp;ldquo;design incompletion for any reason&amp;rdquo;. I named a special reactive payload as an &amp;ldquo;unavailable value&amp;rdquo; indicating that the design was incomplete either as a result of depending on pending I/O or else on a design/syntax error in the system.&#xA;My first 2024 simplistic version of this simply repurposed the JavaScript undefined value as a special reactive payload that would short-circuit behaviour of any computed and cull the action of any effect that was geared through it.</description>
     </item>
   </channel>
 </rss>

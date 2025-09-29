@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+      <title>Archaeology of Glitches - Antranig Basman</title>
+
+  <meta name="description" content="In 2024 I was working on a small project that I wanted to be able to be handed over, and wondered what was the most congenial way out there of rendering apps that wouldn&rsquo;t bring in too heavy a dependency. My eye was caught by the following passage in preact-signals&rsquo; test cases:
+it(&#34;should drop A-&gt;B-&gt;A updates&#34;, async () =&gt; { // A // / | // B | &lt;- Looks like a flag doesn&#39;t it?">
+  <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Antranig Basman",
+    
+    "url": "https:\/\/ponder.org.uk"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/ponder.org.uk"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk\/post\/2025-07-01-archaeology-of-glitches\/",
+          "name": "Archaeology of glitches"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Antranig Basman"
+  },
+  "headline": "Archaeology of Glitches",
+  "description" : "In 2024 I was working on a small project that I wanted to be able to be handed over, and wondered what was the most congenial way out there of rendering apps that wouldn\u0026rsquo;t bring in too heavy a dependency. My eye was caught by the following passage in preact-signals\u0026rsquo; test cases:\nit(\u0026#34;should drop A-\u0026gt;B-\u0026gt;A updates\u0026#34;, async () =\u0026gt; { \/\/ A \/\/ \/ | \/\/ B | \u0026lt;- Looks like a flag doesn\u0026#39;t it?",
+  "inLanguage" : "en",
+  "wordCount":  1959 ,
+  "datePublished" : "2025-07-01T00:00:00\u002b00:00",
+  "dateModified" : "2025-07-01T00:00:00\u002b00:00",
+  "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+  "keywords" : [ "" ],
+  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/post\/2025-07-01-archaeology-of-glitches\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/ponder.org.uk",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="Archaeology of Glitches" />
+<meta property="og:description" content="In 2024 I was working on a small project that I wanted to be able to be handed over, and wondered what was the most congenial way out there of rendering apps that wouldn&rsquo;t bring in too heavy a dependency. My eye was caught by the following passage in preact-signals&rsquo; test cases:
+it(&#34;should drop A-&gt;B-&gt;A updates&#34;, async () =&gt; { // A // / | // B | &lt;- Looks like a flag doesn&#39;t it?">
+<meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
+<meta property="og:url" content="https://ponder.org.uk/post/2025-07-01-archaeology-of-glitches/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Antranig Basman" />
+
+  <meta name="twitter:title" content="Archaeology of Glitches" />
+  <meta name="twitter:description" content="In 2024 I was working on a small project that I wanted to be able to be handed over, and wondered what was the most congenial way out there of rendering apps that wouldn&rsquo;t bring in too heavy a …">
+  <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@amb26ponder" />
+  <meta name="twitter:creator" content="@amb26ponder" />
+  <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.121.0">
+  <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
+  <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-ponder">
+      <a class="navbar-ponder-brand" href="../../">Antranig Basman</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <svg width="36" height="36" viewBox="0 0 24 24" stroke="#888" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 7L4 7" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 12L4 12" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 17L4 17" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="nav navbar-nav navbar-right">
+          
+          
+          <li>
+            <a title="Posts" href="../../post">Posts</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="WiP" href="../../wip">WiP</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="About" href="../../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Communities" href="../../communities">Communities</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Projects" href="../../projects">Projects</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Terms" href="../../term">Terms</a>
+          </li>
+          
+          
+
+          
+
+          
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="header-row">
+          
+
+            <div class="post-heading">
+              
+                <h1>Archaeology of Glitches  
+                  <span class="post-meta">
+  
+    
+     – July 1, 2025
+  
+  
+</span>
+
+                  </h1>
+              
+              
+              
+
+            </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <article role="main" class="blog-post">
+        <p>In 2024 I was working on a <a href="https://datacommunities.ca/toolkit/sewa-saamarth-app/">small project</a> that I wanted to be able to be handed over,
+and wondered what was the most congenial way out there of rendering apps that wouldn&rsquo;t bring in too heavy a dependency.
+My eye was caught by the
+<a href="https://github.com/preactjs/signals/blob/b5334c55443a46a94605685d27d19e5495f30303/packages/core/test/signal.test.tsx#L1572-L1596">following passage</a>
+in preact-signals&rsquo; test cases:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">    <span class="n">it</span><span class="p">(</span><span class="s2">&#34;should drop A-&gt;B-&gt;A updates&#34;</span><span class="p">,</span> <span class="n">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span>     <span class="n">A</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span>   <span class="o">/</span> <span class="o">|</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span>  <span class="n">B</span>  <span class="o">|</span> <span class="o">&lt;-</span> <span class="n">Looks</span> <span class="n">like</span> <span class="n">a</span> <span class="n">flag</span> <span class="n">doesn</span><span class="s1">&#39;t it? :D</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span>   \ <span class="o">|</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span>     <span class="n">C</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span>     <span class="o">|</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span>     <span class="n">D</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">a</span> <span class="o">=</span> <span class="k">signal</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">b</span> <span class="o">=</span> <span class="n">computed</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">value</span> <span class="err">–</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">c</span> <span class="o">=</span> <span class="n">computed</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">value</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">compute</span> <span class="o">=</span> <span class="n">sinon</span><span class="o">.</span><span class="n">spy</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="s2">&#34;d: &#34;</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">d</span> <span class="o">=</span> <span class="n">computed</span><span class="p">(</span><span class="n">compute</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="n">Trigger</span> <span class="n">read</span>
+</span></span><span class="line"><span class="cl">        <span class="n">expect</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="s2">&#34;d: 3&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">expect</span><span class="p">(</span><span class="n">compute</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">been</span><span class="o">.</span><span class="n">calledOnce</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">compute</span><span class="o">.</span><span class="n">resetHistory</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">a</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">d</span><span class="o">.</span><span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">expect</span><span class="p">(</span><span class="n">compute</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">been</span><span class="o">.</span><span class="n">calledOnce</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span></code></pre></div><p>I was mostly in pursuit of the <a href="https://preactjs.com/guide/v10/getting-started/#alternatives-to-jsx">Preact + HTM templating</a>
+rendering approach that seemed harmless and minimal, but with also the promise of <a href="https://preactjs.com/guide/v10/signals/#rendering-optimizations">rendering optimisations</a>
+which could route signal updates directly to leaves in the DOM, bypassing the horrors of React-style top-down global updates.</p>
+<p>However, as I stared at this test case, a lightbulb went off in my head about something that had niggled me perhaps through
+a decade of Infusion development – a kind of subliminal sense that if there was a &ldquo;slow path&rdquo; and a &ldquo;fast path&rdquo; through
+a dataflow network, one really needed the fast path to wait for the slow path so that the computation could see a
+consistent data horizon. I realised I had encountered this hazard countless times without properly articulating it
+to myself until this moment.</p>
+<p>Comparing a few different reactive frameworks for this property and seeing this helpful but not fully satisfying
+<a href="https://www.builder.io/blog/signals-vs-observables">Signals vs Observables</a> /
+push vs pull reactive posting on builder.io, I asked a
+<a href="https://stackoverflow.com/questions/78703449/can-observables-support-data-consistency-in-flow-graphs-which-rejoin">Stack Overflow question</a>
+about the relationship between this consistency property and the push/pull distinction, to resounding silence.</p>
+<h4 id="glitches-appear-in-the-literature">Glitches appear in the literature</h4>
+<p>In the meantime my research tracked the term `<a href="../../term/glitch">glitch</a>&rsquo; to the seminal Cooper &amp; Krishnamurthi 2006 <a href="http://static.cs.brown.edu/~sk/Publications/Papers/Published/ck-frtime/paper.pdf">FrTime paper</a>,
+the site where this term first emerged in the visible literature. Their definition is very clear and helpful – a glitch occurs</p>
+<blockquote>
+<p>where a signal is recomputed before all of its subordinate signals are up-to-date</p>
+</blockquote>
+<p>Cognitively this appears clear-cut, but the more one thinks about how to operationalise this definition in a particular
+concrete context, and verify that a system is rigorously glitch-free, the less clear it seems. More on this later.</p>
+<p>This research uncovered a further kind of glitch since
+Cooper &amp; Krishnamurthi cite for this term their reference [5], Antony Courtney&rsquo;s 2001
+<a href="https://www.antonycourtney.com/pubs/frappe-padl01.pdf">Frappé: FRP in Java</a> in which the term doesn&rsquo;t appear! I wrote to Sriram
+and Greg about this anomaly and got a helpful response describing a visit to Paul Hudak&rsquo;s research group in Yale:</p>
+<blockquote>
+<p>&hellip; We spent a day with him, John Peterson, and Antony Courtney.</p>
+<p>During this time, Paul told us to look out for glitches. The actual origin of the term is digital circuit design: see for instance</p>
+<p><a href="http://web.cecs.pdx.edu/~mperkows/CLASS_573/febr-2007/hazards.pdf">http://web.cecs.pdx.edu/~mperkows/CLASS_573/febr-2007/hazards.pdf</a></p>
+<p>At the time I don&rsquo;t think we knew that, and we wanted to credit Paul&rsquo;s group for alerting us to glitches (even though we were
+solving them in a somewhat different way). And we were given the impression by the Yale group that Frappé addressed this
+problem. So the combination (Yale told us about the problem, Yale said their Frappé system addressed the problem) caused us to cite Frappé.</p>
+</blockquote>
+<p>What is particularly ironic is that the crucial review paper Bainomugisha et al 2012
+<a href="https://soft.vub.ac.be/Publications/2012/vub-soft-tr-12-13.pdf">A Survey on Reactive Programming</a> which surveys 15 reactive
+systems, had determined that 4 of them are subject to glitches, amongst them Frappé itself!</p>
+<h4 id="how-can-glitch-freedom-be-demonstrated">How can glitch-freedom be demonstrated?</h4>
+<p>This in turn raises questions about the methodology of Bainomugisha et al itself. On this I wrote to the authors, asking
+if they had been able to verify the absence of glitchiness in the frameworks in any formal or consistent way. However,
+they responded that all they had done is what anyone would do informally, that is</p>
+<blockquote>
+<p>The way you would test if a given language or framework supports glitch-freedom is to define a small program where an
+expression depends on more than one reactive variable, and then to observe how dependencies are updated when the input
+variables are updated (like the simple example we give in Fig 3 of the paper). The expression should describe some
+mathematical constraint that should always hold, unless glitches may occur.</p>
+</blockquote>
+<p>This approach can of course only detect glitchiness and not rigorously demonstrate its absence. So the plot thickens.
+Our next port of call is the prestigious <a href="https://www.dagstuhl.de/seminars/seminar-calendar/seminar-details/16402">2016 Dagstuhl on Reactive Programming</a>
+which gathered together the field&rsquo;s greatest experts on incremental and reactive programming. One of the stated goals
+of day 2&rsquo;s working group on &ldquo;Incremental Computing (IC) vs Reactive Programming (RP)&rdquo; (section 3.2 in
+the <a href="https://www.pl.informatik.uni-mainz.de/files/2019/04/IC-dagstuhl.pdf">Dagstuhl&rsquo;s report</a>) was to develop
+&ldquo;systematic abstractions&rdquo;, in the view that</p>
+<blockquote>
+<p>&hellip; we broadly consider ad hoc approaches “harmful”, in
+the sense that they lack systematic abstractions, and consequently, may suffer from
+undefined or inconsistent behavior (“glitches”). The alternative to ad hoc approaches
+are programming language abstractions and carefully-designed libraries that offer
+reusable abstractions, with well-defined semantics.</p>
+</blockquote>
+<p>In service of this, an outcome of the Dagstuhl was a series of edits to the Wikipedia articles on Reactive Programming
+and Incremental Computing, one of which introduced the text (still present as of 2025) in the Reactive Programming article&rsquo;s
+<a href="https://en.wikipedia.org/wiki/Reactive_programming#glitches">Glitches section</a></p>
+<blockquote>
+<p>Some reactive languages are glitch-free and prove this property</p>
+</blockquote>
+<p>Shortly after its appearance in 2016 this text rightly received the [citation needed] tag, and so I wrote
+recently to the Dagstuhl committee to ask whether they had authored or seen any citation that could back up this
+assertion. Since I&rsquo;ve received no response, my conclusion is that the Dagstuhl has not achieved its aim of producing
+these systematic abstractions which are capable of verifying the absence of this inconsistent behaviour.</p>
+<p>Section 4 of <a href="http://static.cs.brown.edu/~sk/Publications/Papers/Published/ck-frtime/paper.pdf">FrTime</a> develops a formal
+semantics for their update rules, and the authors state</p>
+<blockquote>
+<p>they enforce a topological order, which guarantees the absence of glitches and
+makes the state at the end of each update cycle well-defined</p>
+</blockquote>
+<p>but this reasoning is verbal and indirect.</p>
+<h4 id="glitch-freedom-in-practice-without-this-being-in-focus">Glitch-freedom in practice without this being in focus</h4>
+<p>In the years since then, work has all the same continued vigorously in this area, especially in the JS view framework
+community, but in a way largely unguided by
+this pursuit of well-defined semantics or reliable tools for assessing them. This brings us back to the
+preact-signals test cases at the head of this post.</p>
+<p>The test cases are not just attractively filled with ASCII art but they are also fairly compendious. Along with the
+flag, there are diamonds, diamonds with tails and heads, diamonds with two tails, etc. in sufficient variety that the
+reader is substantially convinced that the system really is glitch-free, but, one has to note, in the absence
+of this term being mentioned<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, and certainly in the absence of a proof or a well-defined semantic asserting it.
+This is the only convincing demonstration for a real system that I&rsquo;m aware of, and as
+I roved around I found that other frameworks that had interested themselves in glitch-freedom
+(e.g. <a href="https://github.com/solidjs/signals/blob/d92142095f290e3d091fc9532a0ed541ccc169bc/tests/graph.test.ts#L8">solid-signals</a>,
+<a href="https://github.com/maverick-js/signals/blob/main/tests/graph.test.ts">maverick-js</a>) had simply adopted preact-signals'
+test cases wholesale.</p>
+<p>Finding alien-signals as an attractive target I <a href="https://github.com/stackblitz/alien-signals/issues/37">approached Jackson</a> asking whether he knew whether it was glitch-free.
+His answer was pretty interesting – that he couldn&rsquo;t be entirely sure, but given it was being used in substantive
+contexts in Vue.js&rsquo; language tooling, he expected that it was. I asked whether he&rsquo;d appreciate test cases being
+contributed checking this, he was welcoming, so I ported the preact-signals test cases and <a href="https://github.com/stackblitz/alien-signals/pull/39">contributed them</a>. Interestingly,
+they all passed.</p>
+<h4 id="commodity-signals-implementations">Commodity signals implementations</h4>
+<p>This is perhaps less mysterious than it appears – it seems that with very few exceptions (ignoring obvious blunders
+like RxJS) all of the modern JS signals libraries implement essentially the same algorithm, with some inessential
+tweaking of how invalidation flags are encoded and updated, whether dependencies are tracked in arrays or linked
+lists, etc. Reactively has a brilliant <a href="https://milomg.dev/2022-12-01/reactivity">graphical summary</a> of the differences
+between some of the major lineages (Mobx, preact-signals, Solid, reactively itself), and whilst there are clear structural
+differences it seems likely the algorithms are really isomorphic<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> – they would have just the same profile if they had
+been implemented early enough to have been surveyed in the 2012 Bainomugisha et al survey. I call this group of
+implementations &ldquo;commodity signals&rdquo; and indeed they enjoy enough uniformity that they are coming to be standardised
+under the banner of the <a href="https://github.com/tc39/proposal-signals">TC39 proposal</a> for inclusion in JS.</p>
+<h4 id="two-important-non-commodity-systems-adapton-and-observable">Two important non-commodity systems: Adapton and Observable</h4>
+<p>Two important other systems to discuss before we finish. Firstly, the very well-motivated
+<a href="http://matthewhammer.org/adapton/adapton-pldi2014.pdf">Adapton</a>/<a href="https://arxiv.org/pdf/1609.05337">mini-Adapton</a> system
+from Hammer et al, 2014 &amp; 2016. Again despite many differences of packaging it seems likely that these implement
+&ldquo;the same&rdquo; algorithm as commodity signals. I stared at the algorithm a bit and <a href="https://chatgpt.com/share/68502246-26f8-8013-8eb5-74490aabdb89">quizzed ChatGPT</a>
+and whilst it was able to hallucinate a plausible extra capability in Adapton – that it supported the allocation of fresh
+reactive cells during the progress of a computation, this proved to be illusory. The commodity signals implementations
+I tested handled this just fine, and the error that the chat proposed would be emitted by solid-signals is
+nonexistent.</p>
+<p>This seems to be an interesting case of &ldquo;convergent evolution&rdquo; since I see no evidence that commodity signals implementations
+in JS have been in any way informed by Adapton (or indeed by any of the academic literature stemming from the 2016 Dagstuhl)
+but as far as I can see their capabilities are the same. And ironically, the only one of the group, preact-signals,
+which made any convincing attempt to demonstrate glitch-freedom did so simply by exhibiting exhaustive test cases
+without any appeal to the named notion of glitches at all.</p>
+<p>Finally a significant JS implementation is Mike Bostock&rsquo;s reactive
+core of the <a href="https://observablehq.com/framework/">Observable</a> notebook system. This is
+clearly part of a separate lineage to commodity signals and Adapton and enjoys important excess capabilities over them with
+native support for asynchronous updates.
+Observable&rsquo;s reactive system is housed
+in <a href="https://github.com/observablehq/runtime/blob/main/src/runtime.js">runtime.js</a> and
+whilst it doesn&rsquo;t have a strong dependency on the rest of Observable feels more like an &ldquo;evolved solution to a problem
+in a context&rdquo; (together with a soft dependency on the DOM) rather than a library which is intended to be repurposed
+elsewhere.</p>
+<p>Tom Larkworthy has been investigating Observable&rsquo;s reactivity as part of his
+amazing <a href="https://tomlarkworthy.github.io/lopecode/">Lopecode</a> system, and his notes on it are <a href="https://observablehq.com/@tomlarkworthy/observable-notes">here</a> as
+part of our <a href="https://x.com/tomlarkworthy/status/1933594600247009570">June 13th 2025 X discussion</a>. Observable&rsquo;s
+<a href="https://observablehq.com/framework/reactivity">reactivity</a> has greater power than commodity signals since it has
+a native semantic for asynchronous processes in the reactive graph, supporting data arising from JS
+<a href="https://observablehq.com/framework/reactivity#promises">Promises</a> and
+<a href="https://observablehq.com/framework/reactivity#generators">Generators</a>. Of commodity signals implementations, only <a href="https://github.com/solidjs/signals/blob/main/tests/createAsync.test.ts">@solidjs/signals</a>
+has nascent support for glitch-free asynchronous updates as part of a library which is (as of Sep 2025) marked as pre-alpha.</p>
+<p>The Observable implementation is highly promising and if it weren&rsquo;t for the lack of support for bidirectional
+relations I&rsquo;d consider adopting it for Infusion, but it certainly needs studying carefully especially to understand
+what the semantics are for overlapping asynchronous updates. As with commodity signals it is clear that it grew up in
+isolation from the academic tradition, the term &ldquo;glitch&rdquo; does not appear and some terms (e.g. &ldquo;indegree&rdquo;) are used in
+idiosyncratic senses.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>The term &ldquo;glitch&rdquo; does not occur anywhere in the preact documentation or codebase in this sense.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>In a somewhat loose sense. They clearly differ significantly in their efficiency and schedule for visiting
+the reactive graph, and some may even unnecessarily recompute values or notify effects more often than others – but
+they don&rsquo;t seem to differ in terms of the graph topologies and update patterns they support.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        
+        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;Archaeology&#43;of&#43;Glitches&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fpost%2F2025-07-01-archaeology-of-glitches%2F" target="_blank" title="Share on BlueSky">
+          <i class="fab fa-fw fa-bluesky"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fpost%2f2025-07-01-archaeology-of-glitches%2f&amp;text=Archaeology%20of%20Glitches&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fpost%2f2025-07-01-archaeology-of-glitches%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fpost%2f2025-07-01-archaeology-of-glitches%2f&amp;title=Archaeology%20of%20Glitches" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fpost%2f2025-07-01-archaeology-of-glitches%2f&amp;title=Archaeology%20of%20Glitches" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="../../post/2025-06-03-substrates-vision/" data-toggle="tooltip" data-placement="top" title="Substrates Vision Statement">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      <script src="https://giscus.app/client.js"
+                data-repo="amb26/ponder"
+                data-repo-id="R_kgDOOKllGA"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOOKllGM4CvhAS"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="0"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script></div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="../../">Antranig Basman</a>
+            
+          
+          &nbsp;&copy;
+          2025
+
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.121.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="../../js/katex.min.js"></script>
+<script defer src="../../js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script src="../../js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+
+
+
+
+
+    
+  </body>
+</html>

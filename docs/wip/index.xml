@@ -8,8 +8,15 @@
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <lastBuildDate>Thu, 24 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 26 Sep 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ponder.org.uk/wip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>This week&#39;s reactive chats</title>
+      <link>https://ponder.org.uk/wip/2025-09-26-this-weeks-reactive-chat/</link>
+      <pubDate>Fri, 26 Sep 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-09-26-this-weeks-reactive-chat/</guid>
+      <description>Some good chats this week on reactive matters. Firstly on Tuesday with Patrick Dubroy, a fellow substratist. Patrick is a splendid chap who amongst many other works is the maintainer of a powerful, user-friendly parsing toolkit Ohm.&#xA;Patrick pinged me last week explaining that he was contemplating a collaboration with with Camille and Yann who were building a document publishing pipeline sourced from, amongst other formats, AsciiDoc (for related details see Camille&amp;rsquo;s recent PhD thesis).</description>
+    </item>
     <item>
       <title>Learning from Codestrates</title>
       <link>https://ponder.org.uk/wip/2025-04-24-learning-from-codestrates/</link>

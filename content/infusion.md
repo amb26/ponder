@@ -13,3 +13,5 @@ of various UI widgets.
 Since 2024 a [comprehensive rewrite](https://github.com/fluid-project/infusion-6) of Infusion has been underway for 
 [version 6](https://github.com/fluid-project/infusion-6) based on reactive primitives throughout, structuring it as
 a [software substrate](/term/substrate) constituting an [integration domain](/term/integration-domain).
+
+Here is a [short video](https://youtu.be/ai2fbWi3kUU) demonstrating the state of Infusion 6 as of July 2025.

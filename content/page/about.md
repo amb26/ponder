@@ -13,6 +13,6 @@ the Centre for Applied Research in Educational Technologies.
 
 Following that I spent 5 years as a Visiting Scholar at the 
 [University of Colorado at Boulder](https://www.colorado.edu/) as a guest of 
-[Clayton Lewis](https://www.colorado.edu/cmci/people/information-science/clayton-lewis).
+[Clayton Lewis](https://www.colorado.edu/cs/clayton-lewis).
 
 Since then I have been at work on various malleable and community-oriented projects from my base in London, UK.

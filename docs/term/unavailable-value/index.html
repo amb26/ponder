@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+      <title>Unavailable Value - Antranig Basman</title>
+
+  <meta name="description" content="An unavailable value is a special payload to a reactive system unifying handling of errors and asynchrony under a common mechanism responding to &ldquo;design incompletion for any reason&rdquo;. I named a special reactive payload as an &ldquo;unavailable value&rdquo; indicating that the design was incomplete either as a result of depending on pending I/O or else on a design/syntax error in the system.
+My first 2024 simplistic version of this simply repurposed the JavaScript undefined value as a special reactive payload that would short-circuit behaviour of any computed and cull the action of any effect that was geared through it.">
+  <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Antranig Basman",
+    
+    "url": "https:\/\/ponder.org.uk"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/ponder.org.uk"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk\/term\/unavailable-value\/",
+          "name": "Unavailable value"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Antranig Basman"
+  },
+  "headline": "Unavailable Value",
+  "description" : "An unavailable value is a special payload to a reactive system unifying handling of errors and asynchrony under a common mechanism responding to \u0026ldquo;design incompletion for any reason\u0026rdquo;. I named a special reactive payload as an \u0026ldquo;unavailable value\u0026rdquo; indicating that the design was incomplete either as a result of depending on pending I\/O or else on a design\/syntax error in the system.\nMy first 2024 simplistic version of this simply repurposed the JavaScript undefined value as a special reactive payload that would short-circuit behaviour of any computed and cull the action of any effect that was geared through it.",
+  "inLanguage" : "en",
+  "wordCount":  1520 ,
+  "datePublished" : "0001-01-01T00:00:00\u002b00:00",
+  "dateModified" : "0001-01-01T00:00:00\u002b00:00",
+  "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+  "keywords" : [ "" ],
+  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/term\/unavailable-value\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/ponder.org.uk",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="Unavailable Value" />
+<meta property="og:description" content="An unavailable value is a special payload to a reactive system unifying handling of errors and asynchrony under a common mechanism responding to &ldquo;design incompletion for any reason&rdquo;. I named a special reactive payload as an &ldquo;unavailable value&rdquo; indicating that the design was incomplete either as a result of depending on pending I/O or else on a design/syntax error in the system.
+My first 2024 simplistic version of this simply repurposed the JavaScript undefined value as a special reactive payload that would short-circuit behaviour of any computed and cull the action of any effect that was geared through it.">
+<meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
+<meta property="og:url" content="https://ponder.org.uk/term/unavailable-value/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Antranig Basman" />
+
+  <meta name="twitter:title" content="Unavailable Value" />
+  <meta name="twitter:description" content="An unavailable value is a special payload to a reactive system unifying handling of errors and asynchrony under a common mechanism responding to &ldquo;design incompletion for any reason&rdquo;. I …">
+  <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@amb26ponder" />
+  <meta name="twitter:creator" content="@amb26ponder" />
+  <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.121.0">
+  <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
+  <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-ponder">
+      <a class="navbar-ponder-brand" href="../../">Antranig Basman</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <svg width="36" height="36" viewBox="0 0 24 24" stroke="#888" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 7L4 7" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 12L4 12" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 17L4 17" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="nav navbar-nav navbar-right">
+          
+          
+          <li>
+            <a title="Posts" href="../../post">Posts</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="WiP" href="../../wip">WiP</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="About" href="../../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Communities" href="../../communities">Communities</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Projects" href="../../projects">Projects</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Terms" href="../../term">Terms</a>
+          </li>
+          
+          
+
+          
+
+          
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="header-row">
+          
+
+            <div class="term-heading">
+              
+                <h1>Unavailable Value  </h1>
+              
+              
+                <hr class="small">
+              
+              
+
+            </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <article role="main" class="blog-post">
+        <p>An <strong>unavailable value</strong> is a special payload to a reactive system unifying handling of errors and asynchrony under
+a common mechanism responding to &ldquo;design incompletion for any reason&rdquo;. I named a special reactive payload as an &ldquo;unavailable
+value&rdquo; indicating that the design was incomplete either as a result of depending on pending I/O or else on a design/syntax
+error in the system.</p>
+<p>My first 2024 simplistic version of this simply
+repurposed the JavaScript <code>undefined</code> value as a special reactive payload that would short-circuit behaviour of any <code>computed</code>
+and cull the action of any <code>effect</code> that was geared through it. An advantage of this scheme is that it can be layered
+on top of any commodity reactive system, and here is my very first pass at this for preact-signals:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">fluid</span><span class="o">.</span><span class="n">processSignalArgs</span> <span class="o">=</span> <span class="n">function</span> <span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">let</span> <span class="n">undefinedSignals</span> <span class="o">=</span> <span class="bp">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">designalArgs</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">arg</span> <span class="n">of</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">arg</span> <span class="n">instanceof</span> <span class="n">preactSignalsCore</span><span class="o">.</span><span class="n">Signal</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">const</span> <span class="n">value</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">designalArgs</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">value</span> <span class="o">===</span> <span class="n">undefined</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">undefinedSignals</span> <span class="o">=</span> <span class="bp">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">designalArgs</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span><span class="n">designalArgs</span><span class="p">,</span> <span class="n">undefinedSignals</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">fluid</span><span class="o">.</span><span class="n">dispatchUnavailable</span> <span class="o">=</span> <span class="p">(</span><span class="k">func</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="p">{</span><span class="n">designalArgs</span><span class="p">,</span> <span class="n">undefinedSignals</span><span class="p">}</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">processSignalArgs</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">undefinedSignals</span> <span class="err">?</span> <span class="n">undefined</span> <span class="p">:</span> <span class="k">func</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">null</span><span class="p">,</span> <span class="n">designalArgs</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">fluid</span><span class="o">.</span><span class="n">computed</span> <span class="o">=</span> <span class="n">function</span> <span class="p">(</span><span class="k">func</span><span class="p">,</span> <span class="o">...</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">computed</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">fluid</span><span class="o">.</span><span class="n">dispatchUnavailable</span><span class="p">(</span><span class="k">func</span><span class="p">,</span> <span class="n">args</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">fluid</span><span class="o">.</span><span class="n">effect</span> <span class="o">=</span> <span class="n">function</span> <span class="p">(</span><span class="k">func</span><span class="p">,</span> <span class="o">...</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">effect</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">fluid</span><span class="o">.</span><span class="n">dispatchUnavailable</span><span class="p">(</span><span class="k">func</span><span class="p">,</span> <span class="n">args</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>One uses the <code>fluid.computed</code> and <code>fluid.effect</code> wrappers rather than the underlying primitives and gets access
+to more coherent behaviour especially as a system is starting up and I/O may not be completed or integration
+libraries initialised. This defeats the annoying &ldquo;dry run&rdquo; behaviour of commodity reactive systems which expect to
+discover dependencies by executing reactive functions on startup before their pre-requisites may be ready.</p>
+<p>In the more mature system in 2025&rsquo;s Infusion, the unavailable payload is a specialised type including a
+list of incompletion causes accumulated as the short-circuit process runs through the graph. This is analogous
+to the good practice in language supporting
+exceptions of <a href="https://softwareengineering.stackexchange.com/questions/278034/rethrow-the-same-exception-to-provide-more-info">re-throwing an exception payload to add context</a>.
+As well as messages, these causes also include externally resolvable <a href="../../term/externalisability">addresses</a> of the
+sites in the graph where the incompletion (I/O, error) occurred.</p>
+<p>Here&rsquo;s an excerpt of the current unavailable value support, with much work still in progress:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">    <span class="n">fluid</span><span class="o">.</span><span class="n">unavailablePriority</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;I/O&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;config&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;error&#34;</span><span class="p">:</span> <span class="mi">3</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="n">Create</span> <span class="n">a</span> <span class="n">marker</span> <span class="n">representing</span> <span class="n">an</span> <span class="s2">&#34;Unavailable&#34;</span> <span class="n">state</span> <span class="n">with</span> <span class="n">an</span> <span class="n">associated</span> <span class="n">waitset</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="n">The</span> <span class="n">marker</span> <span class="n">is</span> <span class="n">mutable</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="ne">Object</span><span class="o">|</span><span class="ne">Array</span><span class="p">}</span> <span class="p">[</span><span class="n">cause</span><span class="o">=</span><span class="p">{}]</span> <span class="o">-</span> <span class="n">A</span> <span class="n">list</span> <span class="n">of</span> <span class="n">dependencies</span> <span class="ow">or</span> <span class="n">reasons</span> <span class="k">for</span> <span class="n">unavailability</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="ne">String</span><span class="p">}</span> <span class="p">[</span><span class="n">variety</span><span class="o">=</span><span class="s2">&#34;error&#34;</span><span class="p">]</span> <span class="o">-</span> <span class="n">The</span> <span class="n">variety</span> <span class="n">of</span> <span class="n">unavailable</span> <span class="n">value</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="o">*</span> <span class="s2">&#34;error&#34;</span> <span class="n">indicates</span> <span class="n">a</span> <span class="n">syntax</span> <span class="n">issue</span> <span class="n">that</span> <span class="n">needs</span> <span class="n">design</span> <span class="n">intervention</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="o">*</span> <span class="s2">&#34;config&#34;</span> <span class="n">indicates</span> <span class="n">configuration</span> <span class="n">designed</span> <span class="n">to</span> <span class="n">short</span><span class="o">-</span><span class="n">circuit</span> <span class="n">evaluation</span> <span class="n">which</span> <span class="n">is</span> <span class="ow">not</span> <span class="n">required</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="o">*</span> <span class="s2">&#34;I/O&#34;</span> <span class="n">indicates</span> <span class="n">pending</span> <span class="n">I</span><span class="o">/</span><span class="n">O</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="k">return</span> <span class="p">{</span><span class="n">fluid</span><span class="o">.</span><span class="n">marker</span><span class="p">}</span> <span class="n">A</span> <span class="n">marker</span> <span class="n">of</span> <span class="n">type</span> <span class="s2">&#34;Unavailable&#34;</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fluid</span><span class="o">.</span><span class="n">unavailable</span> <span class="o">=</span> <span class="p">(</span><span class="n">cause</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">variety</span> <span class="o">=</span> <span class="s2">&#34;error&#34;</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">togo</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">makeMarker</span><span class="p">(</span><span class="s2">&#34;Unavailable&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">causes</span><span class="p">:</span> <span class="n">fluid</span><span class="o">.</span><span class="n">makeArray</span><span class="p">(</span><span class="n">cause</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">oneCause</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="nb">typeof</span><span class="p">(</span><span class="n">oneCause</span><span class="p">)</span> <span class="o">===</span> <span class="s2">&#34;string&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">oneCause</span> <span class="o">=</span> <span class="p">{</span><span class="n">message</span><span class="p">:</span> <span class="n">oneCause</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">oneCause</span><span class="o">.</span><span class="n">variety</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">oneCause</span><span class="o">.</span><span class="n">variety</span> <span class="o">=</span> <span class="n">variety</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">oneCause</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">})</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="bp">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">togo</span><span class="o">.</span><span class="n">variety</span> <span class="o">=</span> <span class="n">togo</span><span class="o">.</span><span class="n">causes</span><span class="o">.</span><span class="n">reduce</span><span class="p">((</span><span class="n">acc</span><span class="p">,</span> <span class="p">{</span><span class="n">variety</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">const</span> <span class="n">priority</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">unavailablePriority</span><span class="p">[</span><span class="n">variety</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">priority</span> <span class="o">&gt;</span> <span class="n">acc</span><span class="o">.</span><span class="n">priority</span> <span class="err">?</span> <span class="p">{</span><span class="n">variety</span><span class="p">,</span> <span class="n">priority</span><span class="p">}</span> <span class="p">:</span> <span class="n">acc</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="p">{</span><span class="n">priority</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">})</span><span class="o">.</span><span class="n">variety</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">togo</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="n">Process</span> <span class="n">an</span> <span class="n">array</span> <span class="n">of</span> <span class="n">arguments</span><span class="p">,</span> <span class="n">unwrapping</span> <span class="n">values</span> <span class="n">from</span> <span class="err">`</span><span class="n">preactSignalsCore</span><span class="o">.</span><span class="n">Signal</span><span class="err">`</span> <span class="n">objects</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="ow">and</span> <span class="n">identifying</span> <span class="ow">and</span> <span class="n">coalescing</span> <span class="s2">&#34;unavailable&#34;</span> <span class="n">values</span> <span class="k">if</span> <span class="n">present</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="ne">Array</span><span class="o">|</span><span class="n">any</span><span class="p">}</span> <span class="n">args</span> <span class="o">-</span> <span class="n">The</span> <span class="n">array</span> <span class="n">of</span> <span class="n">arguments</span> <span class="ow">or</span> <span class="n">single</span> <span class="n">argument</span> <span class="n">to</span> <span class="n">process</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span>     <span class="n">Arguments</span> <span class="n">may</span> <span class="n">include</span> <span class="err">`</span><span class="n">preactSignalsCore</span><span class="o">.</span><span class="n">Signal</span><span class="err">`</span> <span class="n">instances</span> <span class="ow">or</span> <span class="n">plain</span> <span class="n">values</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="ne">Object</span><span class="p">}</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span> <span class="o">-</span> <span class="n">Additional</span> <span class="n">specifications</span> <span class="k">for</span> <span class="n">processing</span> <span class="n">arguments</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="n">any</span><span class="p">}</span> <span class="p">[</span><span class="n">oldValue</span><span class="p">]</span> <span class="o">-</span> <span class="n">If</span> <span class="n">these</span> <span class="n">are</span> <span class="n">arguments</span> <span class="n">to</span> <span class="n">a</span> <span class="s2">&#34;computed&#34;</span><span class="p">,</span> <span class="n">the</span> <span class="n">previous</span> <span class="n">value</span> <span class="n">of</span> <span class="n">the</span> <span class="n">computed</span> <span class="n">is</span> <span class="n">supplied</span> <span class="n">here</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="k">return</span> <span class="p">{</span><span class="ne">Object</span><span class="p">}</span> <span class="n">An</span> <span class="n">object</span> <span class="n">with</span> <span class="n">the</span> <span class="n">following</span> <span class="n">properties</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span>     <span class="o">-</span> <span class="err">`</span><span class="n">designalArgs</span><span class="err">`</span> <span class="p">(</span><span class="ne">Array</span><span class="p">):</span> <span class="n">The</span> <span class="n">array</span> <span class="n">of</span> <span class="n">arguments</span> <span class="n">with</span> <span class="err">`</span><span class="n">Signal</span><span class="err">`</span> <span class="n">values</span> <span class="n">replaced</span> <span class="n">by</span> <span class="n">their</span> <span class="n">unwrapped</span> <span class="n">values</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span>     <span class="o">-</span> <span class="err">`</span><span class="n">unavailable</span><span class="err">`</span> <span class="p">(</span><span class="ne">Object</span><span class="o">|</span><span class="n">undefined</span><span class="p">):</span> <span class="n">The</span> <span class="n">most</span> <span class="s2">&#34;unavailable&#34;</span> <span class="n">value</span> <span class="p">(</span><span class="k">if</span> <span class="n">any</span><span class="p">)</span> <span class="n">based</span> <span class="n">on</span> <span class="n">priority</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span>       <span class="ow">or</span> <span class="err">`</span><span class="n">undefined</span><span class="err">`</span> <span class="k">if</span> <span class="n">no</span> <span class="n">unavailable</span> <span class="n">values</span> <span class="n">are</span> <span class="n">found</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fluid</span><span class="o">.</span><span class="n">processSignalArgs</span> <span class="o">=</span> <span class="n">function</span> <span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">oldValue</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">let</span> <span class="n">unavailable</span> <span class="o">=</span> <span class="n">undefined</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">designalArgs</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="ne">Array</span><span class="o">.</span><span class="n">isArray</span><span class="p">(</span><span class="n">args</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">args</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">flattenArg</span> <span class="o">=</span> <span class="n">options</span><span class="err">?</span><span class="o">.</span><span class="n">flattenArg</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">let</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">args</span><span class="o">.</span><span class="n">length</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">let</span> <span class="n">arg</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">arg</span> <span class="n">instanceof</span> <span class="n">preactSignalsCore</span><span class="o">.</span><span class="n">Signal</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">arg</span> <span class="o">=</span> <span class="n">flattenArg</span> <span class="err">?</span> <span class="n">flattenArg</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="p">:</span> <span class="n">arg</span><span class="o">.</span><span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">arg</span> <span class="o">===</span> <span class="n">fluid</span><span class="o">.</span><span class="n">OldValue</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">arg</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">isUnavailable</span><span class="p">(</span><span class="n">oldValue</span><span class="p">)</span> <span class="err">?</span> <span class="n">null</span> <span class="p">:</span> <span class="n">oldValue</span><span class="p">;</span> <span class="o">//</span> <span class="n">User</span> <span class="n">doesn</span><span class="s1">&#39;t want a short-circuit</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">fluid</span><span class="o">.</span><span class="n">isUnavailable</span><span class="p">(</span><span class="n">arg</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">unavailable</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">mergeUnavailable</span><span class="p">(</span><span class="n">unavailable</span><span class="p">,</span> <span class="n">arg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">designalArgs</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span><span class="n">designalArgs</span><span class="p">,</span> <span class="n">unavailable</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="n">Appends</span> <span class="n">a</span> <span class="n">site</span> <span class="n">to</span> <span class="n">the</span> <span class="err">`</span><span class="n">site</span><span class="err">`</span> <span class="n">array</span> <span class="n">of</span> <span class="n">the</span> <span class="n">last</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">the</span> <span class="err">`</span><span class="n">causes</span><span class="err">`</span> <span class="n">array</span> <span class="n">of</span> <span class="n">the</span> <span class="n">given</span> <span class="s2">&#34;unavailable&#34;</span> <span class="n">marker</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="n">If</span> <span class="n">the</span> <span class="err">`</span><span class="n">site</span><span class="err">`</span> <span class="n">array</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">exist</span><span class="p">,</span> <span class="n">it</span> <span class="n">is</span> <span class="n">allocated</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="n">fluid</span><span class="o">.</span><span class="n">unavailable</span><span class="p">}</span> <span class="n">unavailable</span> <span class="o">-</span> <span class="n">The</span> <span class="s2">&#34;unavailable&#34;</span> <span class="n">marker</span> <span class="n">containing</span> <span class="n">the</span> <span class="err">`</span><span class="n">causes</span><span class="err">`</span> <span class="n">array</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="n">Site</span><span class="p">}</span> <span class="p">[</span><span class="n">site</span><span class="p">]</span> <span class="o">-</span> <span class="n">The</span> <span class="n">site</span> <span class="n">to</span> <span class="n">append</span> <span class="n">to</span> <span class="n">the</span> <span class="err">`</span><span class="n">site</span><span class="err">`</span> <span class="n">array</span> <span class="n">of</span> <span class="n">the</span> <span class="n">last</span> <span class="n">cause</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="k">return</span> <span class="p">{</span><span class="n">fluid</span><span class="o">.</span><span class="n">unavailable</span><span class="p">}</span> <span class="n">The</span> <span class="n">supplied</span> <span class="n">unavailable</span> <span class="n">value</span> <span class="n">with</span> <span class="n">a</span> <span class="n">cause</span> <span class="n">site</span> <span class="n">filled</span> <span class="ow">in</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fluid</span><span class="o">.</span><span class="n">accumulateUnavailableSite</span> <span class="o">=</span> <span class="n">function</span> <span class="p">(</span><span class="n">unavailable</span><span class="p">,</span> <span class="n">site</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="n">TODO</span><span class="p">:</span> <span class="n">Causes</span> <span class="n">should</span> <span class="n">actually</span> <span class="n">form</span> <span class="n">independent</span> <span class="n">chains</span> <span class="n">rather</span> <span class="n">than</span> <span class="n">being</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">linear</span> <span class="n">array</span> <span class="o">-</span> <span class="n">can</span><span class="s1">&#39;t guarantee</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="n">right</span> <span class="n">now</span> <span class="n">that</span> <span class="n">the</span> <span class="n">last</span> <span class="n">cause</span> <span class="n">is</span> <span class="ow">not</span> <span class="n">an</span> <span class="n">irrelevant</span> <span class="n">failure</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">site</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">const</span> <span class="n">lastCause</span> <span class="o">=</span> <span class="n">unavailable</span><span class="o">.</span><span class="n">causes</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="ne">Array</span><span class="o">.</span><span class="n">isArray</span><span class="p">(</span><span class="n">lastCause</span><span class="o">.</span><span class="n">site</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">lastCause</span><span class="o">.</span><span class="n">site</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">makeArray</span><span class="p">(</span><span class="n">lastCause</span><span class="o">.</span><span class="n">site</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">lastCause</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">includes</span><span class="p">(</span><span class="n">site</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">lastCause</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">site</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">unavailable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="n">Create</span> <span class="n">a</span> <span class="n">computed</span> <span class="n">value</span> <span class="n">based</span> <span class="n">on</span> <span class="n">a</span> <span class="n">function</span> <span class="ow">and</span> <span class="n">its</span> <span class="n">arguments</span><span class="p">,</span> <span class="n">resolving</span> <span class="n">any</span> <span class="n">signals</span> <span class="ow">and</span> <span class="n">handling</span> <span class="n">unavailability</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="n">Function</span><span class="o">|</span><span class="n">Signal</span><span class="o">&lt;</span><span class="n">Function</span><span class="o">&gt;</span><span class="p">}</span> <span class="n">funcSignal</span> <span class="o">-</span> <span class="n">The</span> <span class="n">function</span> <span class="n">to</span> <span class="n">compute</span> <span class="n">the</span> <span class="n">value</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="ne">Array</span><span class="o">|</span><span class="n">any</span><span class="p">}</span> <span class="n">argSignals</span> <span class="o">-</span> <span class="n">The</span> <span class="n">arguments</span> <span class="ow">or</span> <span class="n">argument</span> <span class="n">to</span> <span class="k">pass</span> <span class="n">to</span> <span class="n">the</span> <span class="n">function</span><span class="o">.</span> <span class="n">These</span> <span class="n">may</span> <span class="n">include</span> <span class="n">signals</span><span class="p">,</span> <span class="n">which</span> <span class="n">will</span> <span class="n">be</span> <span class="n">resolved</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="ne">Object</span><span class="p">}</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span> <span class="o">-</span> <span class="n">Additional</span> <span class="n">specifications</span> <span class="k">for</span> <span class="n">processing</span> <span class="n">arguments</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="k">return</span> <span class="p">{</span><span class="ne">Object</span><span class="p">}</span> <span class="n">A</span> <span class="n">computed</span> <span class="n">value</span> <span class="n">that</span> <span class="n">resolves</span> <span class="n">the</span> <span class="n">function</span><span class="s1">&#39;s result, or an &#34;unavailable&#34; marker if any argument is unavailable.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fluid</span><span class="o">.</span><span class="n">computed</span> <span class="o">=</span> <span class="n">function</span> <span class="p">(</span><span class="n">funcSignal</span><span class="p">,</span> <span class="n">argSignals</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">computed</span><span class="p">(</span><span class="n">function</span> <span class="n">fluidComputed</span><span class="p">(</span><span class="n">oldValue</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">const</span> <span class="n">acc</span> <span class="o">=</span> <span class="n">u</span> <span class="o">=&gt;</span> <span class="n">fluid</span><span class="o">.</span><span class="n">accumulateUnavailableSite</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">this</span><span class="o">.</span><span class="n">site</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">const</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">designalArgs</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">unavailable</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">processSignalArgs</span><span class="p">(</span><span class="n">argSignals</span><span class="p">,</span> <span class="n">options</span> <span class="o">||</span> <span class="n">fluid</span><span class="o">.</span><span class="n">defaultSignalOptions</span><span class="p">,</span> <span class="n">oldValue</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">const</span> <span class="k">func</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">deSignal</span><span class="p">(</span><span class="n">funcSignal</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">unavailable</span> <span class="err">?</span> <span class="n">acc</span><span class="p">(</span><span class="n">unavailable</span><span class="p">)</span> <span class="p">:</span> <span class="n">fluid</span><span class="o">.</span><span class="n">isUnavailable</span><span class="p">(</span><span class="k">func</span><span class="p">)</span> <span class="err">?</span> <span class="n">acc</span><span class="p">(</span><span class="k">func</span><span class="p">)</span> <span class="p">:</span> <span class="k">func</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">null</span><span class="p">,</span> <span class="n">designalArgs</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="n">Create</span> <span class="n">an</span> <span class="n">effect</span> <span class="n">that</span> <span class="n">executes</span> <span class="n">a</span> <span class="n">function</span> <span class="n">with</span> <span class="n">resolved</span> <span class="n">arguments</span><span class="p">,</span> <span class="n">resolving</span> <span class="n">any</span> <span class="n">signals</span> <span class="ow">and</span> <span class="n">handling</span> <span class="n">unavailability</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="n">Function</span><span class="p">}</span> <span class="k">func</span> <span class="o">-</span> <span class="n">The</span> <span class="n">function</span> <span class="n">to</span> <span class="n">execute</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="ne">Array</span><span class="o">|</span><span class="n">any</span><span class="p">}</span> <span class="n">args</span> <span class="o">-</span> <span class="n">The</span> <span class="n">arguments</span> <span class="ow">or</span> <span class="n">argument</span> <span class="n">to</span> <span class="k">pass</span> <span class="n">to</span> <span class="n">the</span> <span class="n">function</span><span class="o">.</span> <span class="n">These</span> <span class="n">may</span> <span class="n">include</span> <span class="n">signals</span><span class="p">,</span> <span class="n">which</span> <span class="n">will</span> <span class="n">be</span> <span class="n">resolved</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="ne">Object</span><span class="p">}</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span> <span class="o">-</span> <span class="n">Additional</span> <span class="n">specifications</span> <span class="k">for</span> <span class="n">processing</span> <span class="n">arguments</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="k">return</span> <span class="p">{</span><span class="ne">Object</span><span class="p">}</span> <span class="n">An</span> <span class="n">effect</span> <span class="n">that</span> <span class="n">executes</span> <span class="n">the</span> <span class="n">function</span> <span class="k">if</span> <span class="n">all</span> <span class="n">arguments</span> <span class="n">are</span> <span class="n">available</span><span class="p">,</span> <span class="ow">or</span> <span class="n">does</span> <span class="n">nothing</span> <span class="k">if</span> <span class="n">any</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">unavailable</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fluid</span><span class="o">.</span><span class="n">effect</span> <span class="o">=</span> <span class="n">function</span> <span class="p">(</span><span class="k">func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">togo</span> <span class="o">=</span> <span class="n">effect</span><span class="p">(</span><span class="n">function</span> <span class="n">fluidEffect</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">const</span> <span class="p">{</span><span class="n">designalArgs</span><span class="p">,</span> <span class="n">unavailable</span><span class="p">}</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">processSignalArgs</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">options</span> <span class="o">||</span> <span class="n">fluid</span><span class="o">.</span><span class="n">defaultSignalOptions</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">unavailable</span> <span class="o">||</span> <span class="n">options</span><span class="err">?</span><span class="o">.</span><span class="n">free</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">untracked</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">func</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">designalArgs</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="n">togo</span><span class="o">.$</span><span class="k">func</span> <span class="o">=</span> <span class="k">func</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">togo</span><span class="o">.$</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">togo</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span></code></pre></div><p>To illustrate how this is meant to work at the &ldquo;supply end&rdquo; here is the <code>fluid.fetch</code> wrapper which wraps the underlying
+<code>fetch</code> API with appropriate signalling of unavailability during the fetch, and harder unavailability (&ldquo;error&rdquo;) if
+it fails:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">    <span class="o">/**</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="n">Fetches</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">given</span> <span class="n">URL</span> <span class="ow">and</span> <span class="n">processes</span> <span class="n">the</span> <span class="n">response</span> <span class="n">using</span> <span class="n">a</span> <span class="n">provided</span> <span class="n">strategy</span> <span class="n">function</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="n">Whilst</span> <span class="n">the</span> <span class="n">fetch</span> <span class="n">is</span> <span class="n">pending</span><span class="p">,</span> <span class="n">the</span> <span class="k">signal</span> <span class="n">is</span> <span class="n">set</span> <span class="n">to</span> <span class="n">an</span> <span class="s2">&#34;unavailable&#34;</span> <span class="n">state</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="n">If</span> <span class="n">the</span> <span class="n">fetch</span> <span class="n">fails</span><span class="p">,</span> <span class="n">the</span> <span class="k">signal</span> <span class="n">is</span> <span class="n">set</span> <span class="n">to</span> <span class="n">an</span> <span class="s2">&#34;unavailable&#34;</span> <span class="n">state</span> <span class="n">with</span> <span class="n">an</span> <span class="n">error</span> <span class="n">message</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="ne">String</span><span class="p">}</span> <span class="n">url</span> <span class="o">-</span> <span class="n">The</span> <span class="n">URL</span> <span class="n">to</span> <span class="n">fetch</span> <span class="n">data</span> <span class="n">from</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="n">RequestInit</span><span class="p">}</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span> <span class="o">-</span> <span class="n">Optional</span> <span class="n">fetch</span> <span class="n">configuration</span> <span class="n">options</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="n">Function</span><span class="p">}</span> <span class="n">strategy</span> <span class="o">-</span> <span class="n">An</span> <span class="n">async</span> <span class="n">function</span> <span class="n">to</span> <span class="n">process</span> <span class="n">the</span> <span class="n">response</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="k">return</span> <span class="p">{</span><span class="k">signal</span><span class="o">&lt;</span><span class="n">any</span><span class="o">&gt;</span><span class="p">}</span> <span class="n">A</span> <span class="k">signal</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">processed</span> <span class="n">data</span> <span class="ow">or</span> <span class="n">an</span> <span class="s2">&#34;unavailable&#34;</span> <span class="n">state</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fluid</span><span class="o">.</span><span class="n">fetch</span> <span class="o">=</span> <span class="n">function</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">strategy</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">togo</span> <span class="o">=</span> <span class="k">signal</span><span class="p">(</span><span class="n">fluid</span><span class="o">.</span><span class="n">unavailable</span><span class="p">({</span><span class="n">message</span><span class="p">:</span> <span class="err">`</span><span class="n">Pending</span> <span class="n">I</span><span class="o">/</span><span class="n">O</span> <span class="k">for</span> <span class="n">URL</span> <span class="o">$</span><span class="p">{</span><span class="n">url</span><span class="p">}</span><span class="err">`</span><span class="p">,</span> <span class="n">variety</span><span class="p">:</span> <span class="s2">&#34;I/O&#34;</span><span class="p">}));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fetch</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="p">{</span><span class="o">...</span><span class="n">options</span><span class="p">,</span> <span class="o">...</span><span class="n">fluid</span><span class="o">.</span><span class="n">cacheOptions</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">response</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">response</span><span class="o">.</span><span class="n">ok</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">togo</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">unavailable</span><span class="p">({</span><span class="n">message</span><span class="p">:</span> <span class="err">`</span><span class="n">HTTP</span> <span class="n">error</span> <span class="o">$</span><span class="p">{</span><span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">}</span> <span class="k">for</span> <span class="n">URL</span> <span class="o">$</span><span class="p">{</span><span class="n">url</span><span class="p">}</span><span class="err">`</span><span class="p">,</span> <span class="n">variety</span><span class="p">:</span> <span class="s2">&#34;error&#34;</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="n">strategy</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">})</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">data</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">fluid</span><span class="o">.</span><span class="n">isErrorUnavailable</span><span class="p">(</span><span class="n">togo</span><span class="o">.</span><span class="n">peek</span><span class="p">()))</span> <span class="p">{</span> <span class="o">//</span> <span class="n">Fetch</span> <span class="n">API</span> <span class="n">provides</span> <span class="n">an</span> <span class="n">undefined</span> <span class="n">response</span> <span class="ow">in</span> <span class="n">the</span> <span class="k">case</span> <span class="n">response</span> <span class="n">is</span> <span class="ow">not</span> <span class="n">OK</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="p">(</span><span class="n">options</span><span class="err">?</span><span class="o">.</span><span class="n">delay</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">window</span><span class="o">.</span><span class="n">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="n">togo</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="n">options</span><span class="o">.</span><span class="n">delay</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">togo</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">})</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="n">catch</span><span class="p">(</span><span class="n">err</span> <span class="o">=&gt;</span> <span class="n">togo</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">unavailable</span><span class="p">({</span><span class="n">message</span><span class="p">:</span> <span class="err">`</span><span class="n">I</span><span class="o">/</span><span class="n">O</span> <span class="n">failure</span> <span class="k">for</span> <span class="n">URL</span> <span class="o">$</span><span class="p">{</span><span class="n">url</span><span class="p">}</span> <span class="o">-</span> <span class="o">$</span><span class="p">{</span><span class="n">err</span><span class="p">}</span><span class="err">`</span><span class="p">,</span> <span class="n">variety</span><span class="p">:</span> <span class="s2">&#34;error&#34;</span><span class="p">}));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">togo</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">   <span class="o">/**</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="n">Fetches</span> <span class="n">JSON</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">given</span> <span class="n">URL</span> <span class="ow">and</span> <span class="n">stores</span> <span class="n">the</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">a</span> <span class="k">signal</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="n">Whilst</span> <span class="n">the</span> <span class="n">fetch</span> <span class="n">is</span> <span class="n">pending</span><span class="p">,</span> <span class="n">the</span> <span class="k">signal</span> <span class="n">is</span> <span class="n">set</span> <span class="n">to</span> <span class="n">an</span> <span class="s2">&#34;unavailable&#34;</span> <span class="n">state</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="n">If</span> <span class="n">the</span> <span class="n">fetch</span> <span class="n">fails</span><span class="p">,</span> <span class="n">the</span> <span class="k">signal</span> <span class="n">is</span> <span class="n">set</span> <span class="n">to</span> <span class="n">an</span> <span class="s2">&#34;unavailable&#34;</span> <span class="n">state</span> <span class="n">with</span> <span class="n">an</span> <span class="n">error</span> <span class="n">message</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="ne">String</span><span class="p">}</span> <span class="n">url</span> <span class="o">-</span> <span class="n">The</span> <span class="n">URL</span> <span class="n">to</span> <span class="n">fetch</span> <span class="n">JSON</span> <span class="n">data</span> <span class="n">from</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="p">{</span><span class="n">RequestInit</span><span class="p">}</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span> <span class="o">-</span> <span class="n">Optional</span> <span class="n">fetch</span> <span class="n">configuration</span> <span class="n">options</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="k">return</span> <span class="p">{</span><span class="k">signal</span><span class="o">&lt;</span><span class="ne">Object</span><span class="o">&gt;</span><span class="p">}</span> <span class="n">A</span> <span class="k">signal</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">fetched</span> <span class="n">JSON</span> <span class="n">data</span> <span class="ow">or</span> <span class="n">an</span> <span class="s2">&#34;unavailable&#34;</span> <span class="n">state</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fluid</span><span class="o">.</span><span class="n">fetchJSON</span> <span class="o">=</span> <span class="n">function</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">fluid</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">async</span> <span class="n">response</span> <span class="o">=&gt;</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span></code></pre></div><p>This can then be used to lift a synchronous computation primitive (addition) to an asynchronous one without the need
+for explicit synchronisation (<a href="https://github.com/fluid-project/infusion-6/blob/590803081e8243c07e30360cecd07eb4167178f1/tests/framework-tests/core/js/FluidILTests.js#L564">test case</a>):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fluid.def(&#34;fluid.tests.fetchCompute&#34;, {
+</span></span><span class="line"><span class="cl">    $layers: &#34;fluid.component&#34;,
+</span></span><span class="line"><span class="cl">    first: &#34;$compute:fluid.fetchJSON(../testData/data-2.json)&#34;,
+</span></span><span class="line"><span class="cl">    second: &#34;$compute:fluid.fetchJSON(../testData/data-3.json)&#34;,
+</span></span><span class="line"><span class="cl">    result: {
+</span></span><span class="line"><span class="cl">        &#34;$compute&#34;: {
+</span></span><span class="line"><span class="cl">            func: (a, b) =&gt; a + b,
+</span></span><span class="line"><span class="cl">            args: [&#34;{self}.first.value&#34;, &#34;{self}.second.value&#34;]
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">});
+</span></span></code></pre></div>
+
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        
+        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;Unavailable&#43;Value&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fterm%2Funavailable-value%2F" target="_blank" title="Share on BlueSky">
+          <i class="fab fa-fw fa-bluesky"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fterm%2funavailable-value%2f&amp;text=Unavailable%20Value&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fterm%2funavailable-value%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fterm%2funavailable-value%2f&amp;title=Unavailable%20Value" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fterm%2funavailable-value%2f&amp;title=Unavailable%20Value" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+          
+            <li class="next">
+              <a href="../../term/substrate/" data-toggle="tooltip" data-placement="top" title="Substrate">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      <script src="https://giscus.app/client.js"
+                data-repo="amb26/ponder"
+                data-repo-id="R_kgDOOKllGA"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOOKllGM4CvhAS"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="0"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script></div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="../../">Antranig Basman</a>
+            
+          
+          &nbsp;&copy;
+          2025
+
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.121.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="../../js/katex.min.js"></script>
+<script defer src="../../js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script src="../../js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+
+
+
+
+
+    
+  </body>
+</html>

@@ -5,6 +5,12 @@ const path = require("path");
 const { parseHTML } = require("linkedom");
 const readline = require("readline");
 
+const https = require("https");
+
+const httpsAgent = new https.Agent({
+    rejectUnauthorized: false,
+});
+
 const docsDir = "docs";
 
 async function getFetch() {
@@ -57,12 +63,16 @@ async function checkLink(target, sourceFile, brokenLinks) {
     const fetch = await getFetch();
     if (target.startsWith("http")) {
         try {
-            const res = await fetch(target, { method: "HEAD" });
+            const res = await fetch(target, {
+                method: "HEAD",
+                agent: target.startsWith("https") ? httpsAgent : null
+            });
             if (res.status === 404) {
                 brokenLinks.push(`Broken external link: ${target} in ${sourceFile}`);
             }
         } catch (err) {
             brokenLinks.push(`Failed to fetch external link: ${target} in ${sourceFile}`);
+            console.log(err);
         }
     } else {
         const resolvedPath = resolveLocalPath(target, sourceFile);

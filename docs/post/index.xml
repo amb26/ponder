@@ -8,8 +8,15 @@
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <lastBuildDate>Tue, 03 Jun 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 01 Jul 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ponder.org.uk/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Archaeology of Glitches</title>
+      <link>https://ponder.org.uk/post/2025-07-01-archaeology-of-glitches/</link>
+      <pubDate>Tue, 01 Jul 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-07-01-archaeology-of-glitches/</guid>
+      <description>In 2024 I was working on a small project that I wanted to be able to be handed over, and wondered what was the most congenial way out there of rendering apps that wouldn&amp;rsquo;t bring in too heavy a dependency. My eye was caught by the following passage in preact-signals&amp;rsquo; test cases:&#xA;it(&amp;#34;should drop A-&amp;gt;B-&amp;gt;A updates&amp;#34;, async () =&amp;gt; { // A // / | // B | &amp;lt;- Looks like a flag doesn&amp;#39;t it?</description>
+    </item>
     <item>
       <title>Substrates Vision Statement</title>
       <link>https://ponder.org.uk/post/2025-06-03-substrates-vision/</link>

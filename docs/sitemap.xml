@@ -3,18 +3,24 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ponder.org.uk/</loc>
-    <lastmod>2025-06-03T00:00:00+00:00</lastmod>
+    <lastmod>2025-09-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ponder.org.uk/wip/2025-09-26-this-weeks-reactive-chat/</loc>
+    <lastmod>2025-09-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ponder.org.uk/wip/</loc>
+    <lastmod>2025-09-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ponder.org.uk/post/2025-07-01-archaeology-of-glitches/</loc>
+    <lastmod>2025-07-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ponder.org.uk/post/</loc>
-    <lastmod>2025-06-03T00:00:00+00:00</lastmod>
+    <lastmod>2025-07-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ponder.org.uk/post/2025-06-03-substrates-vision/</loc>
     <lastmod>2025-06-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ponder.org.uk/wip/2025-04-24-learning-from-codestrates/</loc>
-    <lastmod>2025-04-24T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://ponder.org.uk/wip/</loc>
     <lastmod>2025-04-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ponder.org.uk/wip/2025-04-21-co-occurrences-are-here-again/</loc>
@@ -61,6 +67,8 @@
   </url><url>
     <loc>https://ponder.org.uk/term/externalisability/</loc>
   </url><url>
+    <loc>https://ponder.org.uk/term/glitch/</loc>
+  </url><url>
     <loc>https://ponder.org.uk/term/habitable/</loc>
   </url><url>
     <loc>https://ponder.org.uk/infusion/</loc>
@@ -82,5 +90,7 @@
     <loc>https://ponder.org.uk/categories/term/</loc>
   </url><url>
     <loc>https://ponder.org.uk/term/</loc>
+  </url><url>
+    <loc>https://ponder.org.uk/term/unavailable-value/</loc>
   </url>
 </urlset>
