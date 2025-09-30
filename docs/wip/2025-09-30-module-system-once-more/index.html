@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+      <title>The Module System Once More - Antranig Basman</title>
+
+  <meta name="description" content="It finally seems to be time to do something decisive about this issue which seems to have been pending for longer than I&rsquo;ve been alive, the Infusion Module System. There are Notes on the Infusion Module Loader and Notes on Modularisation of Infusion as well as ancient tickets going back as far as 2014 which read as if before the era of the printing press. The landscape has changed profoundly since then -">
+  <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Antranig Basman",
+    
+    "url": "https:\/\/ponder.org.uk"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/ponder.org.uk"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk\/wip\/2025-09-30-module-system-once-more\/",
+          "name": "The module system once more"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Antranig Basman"
+  },
+  "headline": "The Module System Once More",
+  "description" : "It finally seems to be time to do something decisive about this issue which seems to have been pending for longer than I\u0026rsquo;ve been alive, the Infusion Module System. There are Notes on the Infusion Module Loader and Notes on Modularisation of Infusion as well as ancient tickets going back as far as 2014 which read as if before the era of the printing press. The landscape has changed profoundly since then -",
+  "inLanguage" : "en",
+  "wordCount":  724 ,
+  "datePublished" : "2025-09-30T00:00:00\u002b00:00",
+  "dateModified" : "2025-09-30T00:00:00\u002b00:00",
+  "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+  "keywords" : [ "" ],
+  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/wip\/2025-09-30-module-system-once-more\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/ponder.org.uk",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="The Module System Once More" />
+<meta property="og:description" content="It finally seems to be time to do something decisive about this issue which seems to have been pending for longer than I&rsquo;ve been alive, the Infusion Module System. There are Notes on the Infusion Module Loader and Notes on Modularisation of Infusion as well as ancient tickets going back as far as 2014 which read as if before the era of the printing press. The landscape has changed profoundly since then -">
+<meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
+<meta property="og:url" content="https://ponder.org.uk/wip/2025-09-30-module-system-once-more/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Antranig Basman" />
+
+  <meta name="twitter:title" content="The Module System Once More" />
+  <meta name="twitter:description" content="It finally seems to be time to do something decisive about this issue which seems to have been pending for longer than I&rsquo;ve been alive, the Infusion Module System. There are Notes on the …">
+  <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@amb26ponder" />
+  <meta name="twitter:creator" content="@amb26ponder" />
+  <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.121.0">
+  <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
+  <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-ponder">
+      <a class="navbar-ponder-brand" href="../../">Antranig Basman</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <svg width="36" height="36" viewBox="0 0 24 24" stroke="#888" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 7L4 7" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 12L4 12" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 17L4 17" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="nav navbar-nav navbar-right">
+          
+          
+          <li>
+            <a title="Posts" href="../../post">Posts</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="WiP" href="../../wip">WiP</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="About" href="../../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Communities" href="../../communities">Communities</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Projects" href="../../projects">Projects</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Terms" href="../../term">Terms</a>
+          </li>
+          
+          
+
+          
+
+          
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="header-row">
+          
+
+            <div class="wip-heading">
+              
+                <h1>The Module System Once More  </h1>
+              
+              
+                <hr class="small">
+              
+              
+
+            </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <article role="main" class="blog-post">
+        <p>It finally seems to be time to do something decisive about this issue which seems to have been pending for longer
+than I&rsquo;ve been alive, the Infusion Module System. There are <a href="https://fluidproject.atlassian.net/wiki/spaces/fluid/pages/11643260/Notes+on+the+Infusion+Module+Loader">Notes on the Infusion Module Loader</a>
+and <a href="https://fluidproject.atlassian.net/wiki/spaces/fluid/pages/11527165/Notes+on+Modularisation+of+Infusion">Notes on Modularisation of Infusion</a>
+as well as ancient <a href="https://fluidproject.atlassian.net/browse/FLUID-5521">tickets</a>
+going back as far as 2014 which read as if before the era of the printing press. The landscape has changed profoundly
+since then -</p>
+<ul>
+<li>There are numerous other package managers than npm for node, and even npm changed its module layout pretty significantly</li>
+<li>There are several alternatives to node itself for JS on the server</li>
+<li>Various monorepo orchestrators solve many of the problems described here</li>
+<li>The already highly confused state of JS module loading, which had 5 major competing variants then, has been totally
+shredded by the &ldquo;nuclear option&rdquo; of ES6 modules with their impermissive &ldquo;viral&rdquo; footprint - only an ES6 module can load
+another ES6 module.</li>
+</ul>
+<p>On the other hand the way we are thinking about Infusion itself, as a &ldquo;reactive-first&rdquo; system, has changed significantly too.
+This promises to ease several of the deeper conundrums around how Infusion coexists with code loading schemes, and more
+deeply, how it is meant to cooperate with a &ldquo;foreign Infusion&rdquo; that it finds loaded into a neighbouring context.</p>
+<p>There had been a long-standing plan<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> to split the responsibilities of Infusion into two parts, <code>fluid-store</code> responsible
+for storing an retrieving grade (layer) definitions, and <code>fluid-runtime</code> which actually animated them in a particular
+context. The dawn of reactivity implies that essentially anything can be a <code>fluid-store</code> (a git url? an automerge doc?
+the end of a WebSocket?) and so perhaps little to do there now.</p>
+<h4 id="when-one-infusion-meets-another">When one Infusion meets another</h4>
+<p>The great conundrum of &ldquo;how many runtimes&rdquo; remains - the mission of Infusion to be a universal, catholic substance crossing
+all boundaries hits the metal when two apps load slightly different versions of Infusion using their respective module
+loaders and then expect to share layer definitions and component references. As I say, with reactivity this is all much
+more doable and hopefully without the horrors of
+stuf like <a href="https://www.researchgate.net/publication/220828927_Proxies_Design_Principles_for_Robust_Object-oriented_Intercession_APIs">membranes</a>
+implied by taking the proxy model to its conclusion.</p>
+<p>I&rsquo;m perversely proud of the &ldquo;<a href="https://github.com/fluid-project/infusion/blob/main/src/module/fluid.js#L194">look 5 directory levels above you</a>&rdquo;
+filesystem inspection scheme that was used to arbitrate between multiple Infusions loaded by npm in the same module tree but
+it&rsquo;s clear the world no longer has room for such a thing.</p>
+<h4 id="start-simple---consolidate-build-code">Start simple - consolidate build code</h4>
+<p>In the short term what needs to happen is to unify all the <a href="https://github.com/IMERSS/xetthecum-storymap-story/blob/main/src/js/reknit.js">build code</a> <a href="../../term/lithification">lithified</a> all around our
+various visualisations into something shareable, and, for example, enable the use of <code>%self</code> to allow such
+build code to refer to its own module. This code is still touchingly using the name <code>maxwell</code> in honour of the
+<a href="https://github.com/IMERSS/maxwell">Maxwell Creek Watershed Project</a>, the first paid work I received after leaving the
+IDRC and the site of our very first &ldquo;reweaving/<a href="https://lichen-community-systems.github.io/knitting-data-communities/">reknitting</a>&rdquo; workflow.</p>
+<p>This use of <code>self</code> raises spectres of Gilad&rsquo;s <a href="https://bracha.org/newspeak-modules.pdf">Modules as Objects in Newspeak</a> which
+I really do think is where we need to go, but there&rsquo;s a lot of water to go under the bridge before we can think of mounting
+content hosted by foreign Infusions in our tree space, and trusting our reactive system not to stuff up if/when it encounters
+some foreign reactivity within the same JS VM. I think reactivity plus transparent asynchrony mediated by
+<a href="../../term/unavailable-value">unavailable values</a> is going to carry us a long way.</p>
+<p>But first, the build system, and then also its interaction with browser-directed module loading of the form in our samples,
+which currently looks like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;!--</span> <span class="n">Upstream</span> <span class="n">loader</span> <span class="n">needs</span> <span class="n">to</span> <span class="n">define</span> <span class="n">libUrlBase</span> <span class="ow">and</span> <span class="n">editUrlbase</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;!--</span> <span class="o">&lt;</span><span class="n">fluid</span><span class="o">-</span><span class="n">url</span><span class="o">-</span><span class="n">base</span> <span class="n">id</span><span class="o">=</span><span class="s2">&#34;libUrlBase&#34;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&#34;../../../src/lib&#34;</span><span class="o">&gt;&lt;/</span><span class="n">fluid</span><span class="o">-</span><span class="n">url</span><span class="o">-</span><span class="n">base</span><span class="o">&gt;</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="n">fluid</span><span class="o">-</span><span class="n">import</span> <span class="n">layer</span><span class="o">=</span><span class="s2">&#34;fluid.editorRoot&#34;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&#34;@{editUrlBase}/sfc/EditorRoot.vue&#34;</span><span class="o">&gt;&lt;/</span><span class="n">fluid</span><span class="o">-</span><span class="n">import</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="n">fluid</span><span class="o">-</span><span class="n">import</span> <span class="n">layer</span><span class="o">=</span><span class="s2">&#34;fluid.editor.layerList&#34;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&#34;@{editUrlBase}/sfc/EditorLayerList.vue&#34;</span><span class="o">&gt;&lt;/</span><span class="n">fluid</span><span class="o">-</span><span class="n">import</span><span class="o">&gt;</span>
+</span></span></code></pre></div><p>instantiated by stuff like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    &lt;div&gt;
+</span></span><span class="line"><span class="cl">        &lt;!-- Instantiate the app on this div --&gt;
+</span></span><span class="line"><span class="cl">        &lt;div fluid-layers=&#34;fluid.demos.todoApp&#34;&gt;
+</span></span><span class="line"><span class="cl">        &lt;/div&gt;
+</span></span><span class="line"><span class="cl">    &lt;/div&gt;
+</span></span></code></pre></div><p>Thus, the second substrate will boot into the third substrate.</p>
+<p>Today I am watching the impressive
+<a href="https://www.youtube.com/watch?v=pks83J2HqJo">Hyperclay</a> talk for Live 2025 and am excited for the potential
+of DOM-mediated interoperability. Another benefit of thorough-going reactivity is not having to care if something
+is instantiated as a Web Component, included in an iframe, or rendered by something totally alien, etc.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>By 2014 there was already enough code depending on &ldquo;old Infusion&rdquo; that doing this split at the time felt
+really prohibitive.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        
+        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;The&#43;Module&#43;System&#43;Once&#43;More&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-09-30-module-system-once-more%2F" target="_blank" title="Share on BlueSky">
+          <i class="fab fa-fw fa-bluesky"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-09-30-module-system-once-more%2f&amp;text=The%20Module%20System%20Once%20More&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fwip%2f2025-09-30-module-system-once-more%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-09-30-module-system-once-more%2f&amp;title=The%20Module%20System%20Once%20More" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-09-30-module-system-once-more%2f&amp;title=The%20Module%20System%20Once%20More" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="../../wip/2025-09-26-this-weeks-reactive-chats/" data-toggle="tooltip" data-placement="top" title="This week&#39;s reactive chats">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      <script src="https://giscus.app/client.js"
+                data-repo="amb26/ponder"
+                data-repo-id="R_kgDOOKllGA"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOOKllGM4CvhAS"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="0"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script></div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="../../">Antranig Basman</a>
+            
+          
+          &nbsp;&copy;
+          2025
+
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.121.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="../../js/katex.min.js"></script>
+<script defer src="../../js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script src="../../js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+
+
+
+
+
+    
+  </body>
+</html>

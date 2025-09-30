@@ -8,7 +8,7 @@ a fellow [substratist](https://2025.programming-conference.org/home/substrates-2
 many other works is the maintainer of a powerful, user-friendly parsing toolkit [Ohm](https://ohmjs.org/).
 
 Patrick pinged me last week
-explaining that he was contemplating a collaboration with with [Camille](https://www.lri.fr/~gobert/) and 
+explaining that he was contemplating a collaboration with [Camille](https://www.lri.fr/~gobert/) and 
 [Yann](https://www.yanntrividic.fr/?lang=en) who were building a document publishing pipeline sourced from, amongst other
 formats, [AsciiDoc](https://asciidoc.org/)
 (for related details see Camille's recent [PhD thesis](https://theses.hal.science/tel-04551620v1/file/125450_GOBERT_2024_diffusion.pdf)).
@@ -30,14 +30,14 @@ As well as [performing very well](https://github.com/transitive-bullshit/js-reac
 the great flexibility of the core/personality split implementation style in producing a [polyfill](https://github.com/proposal-signals/signal-polyfill/pull/44) 
 for the upcoming [TC39 signals standard proposal](https://github.com/tc39/proposal-signals). This is pretty helpful
 stuff and in particular unpacks the great flexibility needed around the implementation of "effects" which whilst in many
-signals implementations are a baked-in primitive, which in practice need some unbundling around the details of a framework's
+signals implementations are a baked-in primitive, in practice need some unbundling around the details of a framework's
 rendering pipeline. However IMO much more flexibility is required – more on this later.
 
 Patrick said that a core requirement for his work is the ability to write relatively arbitrary computations that depend
 on Ohm's internal mechanisms and can apply incremental parsing – 
 you have some computation that transitively depends on some part of the input – one part can be marked dirty and
-just that portion of the output is recomputed. He has been surveying the space a bit and see what approaches make
-sense – he was that in JS frontend frameworks signals have become a big thing. 
+just that portion of the output is recomputed. He has been surveying the space a bit to see what approaches make
+sense – he saw that in JS frontend frameworks signals have become a big thing. 
 He was familiar with Adapton/[miniAdapton](https://arxiv.org/pdf/1609.05337) – what's unclear is how different is it to these.
 
 This turns out to have been a strong interest of mine in recent months. When I pinged Geoffrey Litt earlier in the
@@ -52,7 +52,7 @@ of preact-signals because I was attracted to its unusually comprehensive suite o
 I recapped to Patrick the [archaeology of glitches](/post/2025-07-01-archaeology-of-glitches) I had done in 2024, now
 written up in their own page. He had also been intrigued whether Adapton implemented the same algorithm as commodity
 signals and had come to pretty much the same conclusion. He also bemoaned the fact that such work had long been going
-on in separate silos with essentially no cross-citation or cross-pollination. One isloated exception was the Rust incremental
+on in separate silos with essentially no cross-citation or cross-pollination. One isolated exception was the Rust incremental
 computation framework [salsa](https://github.com/salsa-rs/salsa) which is influenced both by Adapton and the JS
 incremental view framework [glimmer](https://github.com/glimmerjs/glimmer-vm).
 
@@ -84,7 +84,7 @@ even if it weren't for the precedent that we already have of Jonathan's 2009 [Co
 in the [2012 Bainomugisha review](https://soft.vub.ac.be/Publications/2012/vub-soft-tr-12-13.pdf) as being the only reactive system supporting both glitch freedom and bidirectional
 relations. Cooper & Krishnamurthi's
 2006 [FrTime paper](http://static.cs.brown.edu/~sk/Publications/Papers/Published/ck-frtime/paper.pdf) is likely another
-example, since the review is probably in error as this just this capability is advertised in section 3.5 on Cycles.
+example, since the review is probably in error as just this capability is advertised in section 3.5 on Cycles.
 
 I don't find either of those systems' support for bidirectional relations fully satisfactory. I'd prefer a Fabrik-type
 system which computes just the portion of dataflow relevant for a particular update and which pushes the description of
@@ -141,12 +141,15 @@ epiphenomena that a real reactive system needs to deal with, specially under the
 FrTime has unusually good handling of the first point, Observable of the second, and Coherence of the third. We need
 a system with stable and excellent behaviour in all three headings.
 
+Note that these directions are somewhat orthogonal to glitches – the difficulty and value of being glitch-free increases
+with our increasing competence in these directions.
+
 #### Unavailable values
 
 I sketched to Patrick my proposed solution to the 2nd and 3rd points, unifying handling of errors and asynchrony under
 a common mechanism responding to "design incompletion for any reason". I named a special reactive payload as an "unavailable
-value" indicating that the design was incomplete either as a result of depending on pending I/O or else on a design/syntax
-error in the system. This described on its own page at [unavailable value](/term/unavailable-value).
+value" indicating that the design was incomplete either as a result of depending on pending I/O or else of a design/syntax
+error in the system. This is described on its own page at [unavailable value](/term/unavailable-value).
 
 #### Helpful pointers
 
@@ -175,9 +178,9 @@ Finally the idea of the "hierarchy of goodness" that could be enjoyed by functio
 along the arcs:
 
 * The identity – which in imperative memory ontologies appears as "aliasing". "The same content knowably in more than one place",
-which could be honoured by genuine aliasing in the underly memory model, but at the very least should be trivially
+which could be honoured by genuine aliasing in the underlying memory model, but at the very least should be trivially
 write-through, that is, "The same content knowably writeable at more than one address".
-* Linear functions – genuine linear functions such as `C = 5 * (F – 32) / 9`, boolean NOT, etc. which can be
+* Linear functions – genuine linear functions such as `C = 5 * (F - 32) / 9`, boolean NOT, etc. which can be
 "invertible on sight" when seen by the parser without the user needing to do anything about it.
 * Manually inverted functions – the user manually supplies an inverse and is assumed to know what they are doing.
 * [Good functions](/term/a-good-function) – A closed algebra of blessed functions not doing excessive computation and

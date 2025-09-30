@@ -8,14 +8,28 @@
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <lastBuildDate>Fri, 26 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 30 Sep 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ponder.org.uk/wip/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>The Module System Once More</title>
+      <link>https://ponder.org.uk/wip/2025-09-30-module-system-once-more/</link>
+      <pubDate>Tue, 30 Sep 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-09-30-module-system-once-more/</guid>
+      <description>It finally seems to be time to do something decisive about this issue which seems to have been pending for longer than I&amp;rsquo;ve been alive, the Infusion Module System. There are Notes on the Infusion Module Loader and Notes on Modularisation of Infusion as well as ancient tickets going back as far as 2014 which read as if before the era of the printing press. The landscape has changed profoundly since then -</description>
+    </item>
+    <item>
       <title>This week&#39;s reactive chats</title>
-      <link>https://ponder.org.uk/wip/2025-09-26-this-weeks-reactive-chat/</link>
+      <link>https://ponder.org.uk/wip/2025-09-26-this-weeks-reactive-chats/</link>
       <pubDate>Fri, 26 Sep 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
-      <guid>https://ponder.org.uk/wip/2025-09-26-this-weeks-reactive-chat/</guid>
-      <description>Some good chats this week on reactive matters. Firstly on Tuesday with Patrick Dubroy, a fellow substratist. Patrick is a splendid chap who amongst many other works is the maintainer of a powerful, user-friendly parsing toolkit Ohm.&#xA;Patrick pinged me last week explaining that he was contemplating a collaboration with with Camille and Yann who were building a document publishing pipeline sourced from, amongst other formats, AsciiDoc (for related details see Camille&amp;rsquo;s recent PhD thesis).</description>
+      <guid>https://ponder.org.uk/wip/2025-09-26-this-weeks-reactive-chats/</guid>
+      <description>Some good chats this week on reactive matters. Firstly on Tuesday with Patrick Dubroy, a fellow substratist. Patrick is a splendid chap who amongst many other works is the maintainer of a powerful, user-friendly parsing toolkit Ohm.&#xA;Patrick pinged me last week explaining that he was contemplating a collaboration with Camille and Yann who were building a document publishing pipeline sourced from, amongst other formats, AsciiDoc (for related details see Camille&amp;rsquo;s recent PhD thesis).</description>
+    </item>
+    <item>
+      <title>More iNaturalist Shenanigans</title>
+      <link>https://ponder.org.uk/wip/2025-09-25-more-inaturalist-shenanigans/</link>
+      <pubDate>Thu, 25 Sep 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-09-25-more-inaturalist-shenanigans/</guid>
+      <description>This story has a familiar beginning. As with UI as Code, an innocuous UI request from Dana has unexpectedly deep consequences. Dana noticed that the Douglas fir image on the Xetthecum Forest community pane was no longer showing up&amp;hellip; here is what we see:&#xA;The cause in itself is indeed fairly innocuous. We are sourcing these images from iNaturalist&amp;rsquo;s CDN which has been for many years in the slow process of migrating from URLs like https://static.</description>
     </item>
     <item>
       <title>Learning from Codestrates</title>

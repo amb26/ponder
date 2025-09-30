@@ -55,7 +55,8 @@ about the relationship between this consistency property and the push/pull disti
 
 #### Glitches appear in the literature
 
-In the meantime my research tracked the term `[glitch](/term/glitch)' to the seminal Cooper & Krishnamurthi 2006 [FrTime paper](http://static.cs.brown.edu/~sk/Publications/Papers/Published/ck-frtime/paper.pdf),
+In the meantime my research tracked the term `[glitch](/term/glitch)' to the seminal Cooper & Krishnamurthi 2006
+[FrTime paper](http://static.cs.brown.edu/~sk/Publications/Papers/Published/ck-frtime/paper.pdf),
 the site where this term first emerged in the visible literature. Their definition is very clear and helpful – a glitch occurs
 
 > where a signal is recomputed before all of its subordinate signals are up-to-date

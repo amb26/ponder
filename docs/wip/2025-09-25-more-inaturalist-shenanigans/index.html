@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+      <title>More iNaturalist Shenanigans - Antranig Basman</title>
+
+  <meta name="description" content="This story has a familiar beginning. As with UI as Code, an innocuous UI request from Dana has unexpectedly deep consequences. Dana noticed that the Douglas fir image on the Xetthecum Forest community pane was no longer showing up&hellip; here is what we see:
+The cause in itself is indeed fairly innocuous. We are sourcing these images from iNaturalist&rsquo;s CDN which has been for many years in the slow process of migrating from URLs like https://static.">
+  <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Antranig Basman",
+    
+    "url": "https:\/\/ponder.org.uk"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/ponder.org.uk"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk\/wip\/2025-09-25-more-inaturalist-shenanigans\/",
+          "name": "More i naturalist shenanigans"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Antranig Basman"
+  },
+  "headline": "More iNaturalist Shenanigans",
+  "description" : "This story has a familiar beginning. As with UI as Code, an innocuous UI request from Dana has unexpectedly deep consequences. Dana noticed that the Douglas fir image on the Xetthecum Forest community pane was no longer showing up\u0026hellip; here is what we see:\nThe cause in itself is indeed fairly innocuous. We are sourcing these images from iNaturalist\u0026rsquo;s CDN which has been for many years in the slow process of migrating from URLs like https:\/\/static.",
+  "inLanguage" : "en",
+  "wordCount":  1461 ,
+  "datePublished" : "2025-09-25T00:00:00\u002b00:00",
+  "dateModified" : "2025-09-25T00:00:00\u002b00:00",
+  "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+  "keywords" : [ "" ],
+  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/wip\/2025-09-25-more-inaturalist-shenanigans\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/ponder.org.uk",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="More iNaturalist Shenanigans" />
+<meta property="og:description" content="This story has a familiar beginning. As with UI as Code, an innocuous UI request from Dana has unexpectedly deep consequences. Dana noticed that the Douglas fir image on the Xetthecum Forest community pane was no longer showing up&hellip; here is what we see:
+The cause in itself is indeed fairly innocuous. We are sourcing these images from iNaturalist&rsquo;s CDN which has been for many years in the slow process of migrating from URLs like https://static.">
+<meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
+<meta property="og:url" content="https://ponder.org.uk/wip/2025-09-25-more-inaturalist-shenanigans/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Antranig Basman" />
+
+  <meta name="twitter:title" content="More iNaturalist Shenanigans" />
+  <meta name="twitter:description" content="This story has a familiar beginning. As with UI as Code, an innocuous UI request from Dana has unexpectedly deep consequences. Dana noticed that the Douglas fir image on the Xetthecum Forest community …">
+  <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@amb26ponder" />
+  <meta name="twitter:creator" content="@amb26ponder" />
+  <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.121.0">
+  <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
+  <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-ponder">
+      <a class="navbar-ponder-brand" href="../../">Antranig Basman</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <svg width="36" height="36" viewBox="0 0 24 24" stroke="#888" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 7L4 7" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 12L4 12" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 17L4 17" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="nav navbar-nav navbar-right">
+          
+          
+          <li>
+            <a title="Posts" href="../../post">Posts</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="WiP" href="../../wip">WiP</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="About" href="../../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Communities" href="../../communities">Communities</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Projects" href="../../projects">Projects</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Terms" href="../../term">Terms</a>
+          </li>
+          
+          
+
+          
+
+          
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="header-row">
+          
+
+            <div class="wip-heading">
+              
+                <h1>More iNaturalist Shenanigans  </h1>
+              
+              
+                <hr class="small">
+              
+              
+
+            </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <article role="main" class="blog-post">
+        <p>This story has a familiar beginning. As with <a href="../../post/2025-03-20-ui-as-code">UI as Code</a>, an innocuous UI request from Dana has
+unexpectedly deep consequences. Dana noticed that the Douglas fir image on the <a href="https://imerss.github.io/xetthecum-storymap-story/Xetthecum-Storymap-Reknitted.html">Xetthecum</a> Forest community pane
+was no longer showing up&hellip; here is what we see:</p>
+<p><img src="../../img/douglas-fir.png" alt="Douglas fir in forest"></p>
+<p>The cause in itself is indeed fairly innocuous. We are sourcing these images from iNaturalist&rsquo;s CDN which has been
+for many years in the slow process of migrating from URLs like <a href="https://static.inaturalist.org/photos/641410/medium.jpg">https://static.inaturalist.org/photos/641410/medium.jpg</a>
+to URLs like <a href="https://inaturalist-open-data.s3.amazonaws.com/photos/641410/medium.jpg">https://inaturalist-open-data.s3.amazonaws.com/photos/641410/medium.jpg</a>.
+The fix should be straightforward – rerunning the data pipeline behind the app will re-scrape the API and update the URL.</p>
+<p>However, when we do this, an unrelated and peculiar problem emerges. The entire taxon record behind this
+rather attractive fern, <a href="https://www.inaturalist.org/taxa/52676-Pentagramma-triangularis"><em>Pentagramma triangularis</em></a>
+(pictured here) appears to be gone from the app&rsquo;s data and because of this inconsistency the app fails to start up.</p>
+<p><img src="../../img/Pentagramma%20triangularis.jpg" alt="Pentagramma triangularis"></p>
+<p>This isn&rsquo;t entirely unbelievable since in practice taxonomies are gradually shifting all the time, but the circumstances
+here are a little odd. To start with, the observations in question were sourced from iNaturalist itself, and also,
+the <a href="https://www.inaturalist.org/taxa/52676-Pentagramma-triangularis">taxon record itself</a> is still in place, marked
+as valid, and still has the same id number of 52676. So what on earth has happened?</p>
+<p>Looking at the trace of the underlying API call to iNaturalist&rsquo;s name resolver, the plot thickens:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://api.inaturalist.org/v1/taxa/autocomplete?q=Pentagramma%20triangularis&amp;phylum=Tracheophyta&amp;rank=species
+</span></span><span class="line"><span class="cl"> --&gt;
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  total_results: 5,
+</span></span><span class="line"><span class="cl">  page: 1,
+</span></span><span class="line"><span class="cl">  per_page: 10,
+</span></span><span class="line"><span class="cl">  results: [
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">      id: 966161,
+</span></span><span class="line"><span class="cl">      rank: &#39;species&#39;,
+</span></span><span class="line"><span class="cl">      rank_level: 10,
+</span></span><span class="line"><span class="cl">      is_active: true,
+</span></span><span class="line"><span class="cl">      name: &#39;Pentagramma viscosa&#39;,
+</span></span><span class="line"><span class="cl">      parent_id: 52677,
+</span></span><span class="line"><span class="cl">      ancestry: &#39;48460/47126/211194/121943/764796/47754/1224538/48437/545701/52677&#39;,
+</span></span><span class="line"><span class="cl">      extinct: false,
+</span></span><span class="line"><span class="cl">      observations_count: 657,
+</span></span><span class="line"><span class="cl">      matched_term: &#39;Pentagramma triangularis viscosa&#39;,
+</span></span><span class="line"><span class="cl">      preferred_common_name: &#39;Sticky goldback fern&#39;
+</span></span><span class="line"><span class="cl">    }, {
+</span></span><span class="line"><span class="cl">      id: 966158,
+</span></span><span class="line"><span class="cl">      rank: &#39;species&#39;,
+</span></span><span class="line"><span class="cl">      rank_level: 10,
+</span></span><span class="line"><span class="cl">      is_active: true,
+</span></span><span class="line"><span class="cl">      name: &#39;Pentagramma maxonii&#39;,
+</span></span><span class="line"><span class="cl">      parent_id: 52677,
+</span></span><span class="line"><span class="cl">      ancestry: &#39;48460/47126/211194/121943/764796/47754/1224538/48437/545701/52677&#39;,
+</span></span><span class="line"><span class="cl">      extinct: false,
+</span></span><span class="line"><span class="cl">      observations_count: 189,
+</span></span><span class="line"><span class="cl">      matched_term: &#39;Pentagramma triangularis maxonii&#39;,
+</span></span><span class="line"><span class="cl">      preferred_common_name: &#34;Maxon&#39;s Goldback Fern&#34;
+</span></span><span class="line"><span class="cl">    }, {
+</span></span><span class="line"><span class="cl">      id: 623010,
+</span></span><span class="line"><span class="cl">      rank: &#39;species&#39;,
+</span></span><span class="line"><span class="cl">      rank_level: 10,
+</span></span><span class="line"><span class="cl">      is_active: true,
+</span></span><span class="line"><span class="cl">      name: &#39;Pentagramma rebmanii&#39;,
+</span></span><span class="line"><span class="cl">      parent_id: 52677,
+</span></span><span class="line"><span class="cl">      ancestry: &#39;48460/47126/211194/121943/764796/47754/1224538/48437/545701/52677&#39;,
+</span></span><span class="line"><span class="cl">      extinct: false,
+</span></span><span class="line"><span class="cl">      observations_count: 187,
+</span></span><span class="line"><span class="cl">      matched_term: &#39;Pentagramma triangularis rebmanii&#39;,
+</span></span><span class="line"><span class="cl">      preferred_common_name: &#34;Rebman&#39;s Silverback Fern&#34;
+</span></span><span class="line"><span class="cl">    }, {
+</span></span><span class="line"><span class="cl">      id: 58767,
+</span></span><span class="line"><span class="cl">      rank: &#39;subspecies&#39;,
+</span></span><span class="line"><span class="cl">      rank_level: 5,
+</span></span><span class="line"><span class="cl">      is_active: true,
+</span></span><span class="line"><span class="cl">      name: &#39;Pentagramma triangularis triangularis&#39;,
+</span></span><span class="line"><span class="cl">      parent_id: 52676,
+</span></span><span class="line"><span class="cl">      ancestry: &#39;48460/47126/211194/121943/764796/47754/1224538/48437/545701/52677/52676&#39;,
+</span></span><span class="line"><span class="cl">      extinct: false,
+</span></span><span class="line"><span class="cl">      observations_count: 160,
+</span></span><span class="line"><span class="cl">      matched_term: &#39;Pentagramma triangularis triangularis&#39;
+</span></span><span class="line"><span class="cl">    }, {
+</span></span><span class="line"><span class="cl">      id: 181546,
+</span></span><span class="line"><span class="cl">      rank: &#39;subspecies&#39;,
+</span></span><span class="line"><span class="cl">      rank_level: 5,
+</span></span><span class="line"><span class="cl">      is_active: true,
+</span></span><span class="line"><span class="cl">      name: &#39;Pentagramma triangularis semipallida&#39;,
+</span></span><span class="line"><span class="cl">      parent_id: 52676,
+</span></span><span class="line"><span class="cl">      ancestry: &#39;48460/47126/211194/121943/764796/47754/1224538/48437/545701/52677/52676&#39;,
+</span></span><span class="line"><span class="cl">      extinct: false,
+</span></span><span class="line"><span class="cl">      observations_count: 12,
+</span></span><span class="line"><span class="cl">      matched_term: &#39;Pentagramma triangularis semipallida&#39;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  ]
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>This shows a (tidied) rendition of the response to iNaturalist&rsquo;s <code>autocomplete</code> API, one of a few routes
+it has for looking up taxa by name. Note the use of the &ldquo;phylum hack&rdquo; of priming the query to only look
+within vascular plants with <code>phylum=Tracheophyta</code>. This reflects some experience on finding that the name of
+taxa are far from unique, especially if what one is looking up is a bare genus name. For example, the name <em>Porella</em>
+matches not only a <a href="https://www.inaturalist.org/taxa/55250-Porella">quite popular liverwort</a> but a
+<a href="https://www.inaturalist.org/taxa/627210-Porella">fairly unpopular bryozoan</a>. I was quite surprised when I found this,
+but there are only so many names in the world and one can&rsquo;t expect naturalists divided by huge disciplinary
+boundaries to avoid treading on each other&rsquo;s toes. Choosing the phylum level seems like a good compromise between
+a level that one should be able to easily determine based on the context of a project, and not being too coarse to
+permit too many false matches.</p>
+<p>In any case, the transcript above shows that something quite unfortunate has happened – despite <em>Pentagramma triangularis</em>
+still being a valid taxon itself, and the one we had previously recorded, it is no longer being returned by the API.
+This is likely because all of its observations have now been divided up amongst its newly characterised subspecies.
+Most of these have gone to the <a href="https://en.wikipedia.org/wiki/Subspecies#Nominotypical_subspecies_and_subspecies_autonyms">nominate subspecies</a>
+<em>Pentagramma triangularis triangularis</em> which is likely the one we want to return. But what has happened in own
+own API code that led us to now return nothing at all? Turns out to be an unfortunate interaction of assumptions.</p>
+<p>In the result scoring function, we have</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hortis.scoreNameMatch = async function (result, query, byIdSource) {
+</span></span><span class="line"><span class="cl">    let score = (query.name === result.matched_term ? 512 : 0)
+</span></span><span class="line"><span class="cl">        + (query.name === result.name ? 256 : 0)
+</span></span><span class="line"><span class="cl">        + (128 - result.rank_level);
+</span></span><span class="line"><span class="cl">    ...
+</span></span></code></pre></div><p>followed by</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">Don</span><span class="s1">&#39;t hit the DB for any results which are not already an exact match for the query</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">phylum</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">score</span> <span class="o">&amp;</span> <span class="mi">512</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">rankTarget</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">        <span class="n">await</span> <span class="n">hortis</span><span class="o">.</span><span class="n">iNat</span><span class="o">.</span><span class="n">getRanks</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">rankTarget</span><span class="p">,</span> <span class="n">byIdSource</span><span class="p">,</span> <span class="p">[</span><span class="s2">&#34;phylum&#34;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">phylum</span> <span class="o">===</span> <span class="n">rankTarget</span><span class="o">.</span><span class="n">phylum</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">score</span> <span class="o">|=</span> <span class="mi">1024</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><p>which was an attempt to avoid spamming the iNaturalist API for very poor matches, which already has quite tough rate limits.
+And then on the outside of the API, given we fail the phylum test, the entire match is axed since it is considered
+likely to be nonsense:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    if (looked &amp;&amp; looked.doc &amp;&amp; looked.doc.phylumMatch) {
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">    } else {
+</span></span><span class="line"><span class="cl">        assign(row, s.iNatId, 0);
+</span></span><span class="line"><span class="cl">        assign(row, s.assignedINatName, &#34;&#34;);
+</span></span><span class="line"><span class="cl">        row[s.nameStatus] = &#34;unknown&#34;;
+</span></span><span class="line"><span class="cl">        unmappedTaxa[iNatName] = {scientificName};
+</span></span><span class="line"><span class="cl">    }
+</span></span></code></pre></div><p>So what to do? To start, a match which shares the species prefix should be at least <em>considered</em> for the
+phylum check otherwise the rest of the system isn&rsquo;t going to believe in it. We juggle the flags around a bit like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hortis.scoreNameMatch = async function (result, query, byIdSource) {
+</span></span><span class="line"><span class="cl">    // Extra branch in result.name copes with Pentagramma triangularis -&gt; Pentagramma triangularis triangularis
+</span></span><span class="line"><span class="cl">    let score = (query.name === result.matched_term ? 512 : 0)
+</span></span><span class="line"><span class="cl">        + (query.name === result.name || result.name.startsWith(query.name) ? 256 : 0) + (128 – result.rank_level);
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">    // Don&#39;t hit the DB for any results which are not already an exact(ish) match for the query
+</span></span><span class="line"><span class="cl">    if (query.phylum &amp;&amp; (score &amp; (512 | 256))) {
+</span></span></code></pre></div><p>This isn&rsquo;t brilliant – we&rsquo;re relying on the assumption that the more popular taxon is going to be returned first,
+which seems justified by the decreasing observation count in the API response but we should really disambiguate this
+ourselves, but it gets out of the hole we&rsquo;re in, in having to spend an hour or so of engineering effort on what
+should have been a few minutes quick fix of an image URL.</p>
+<h4 id="commentary">Commentary</h4>
+<p>I wrote this up because I think the situation is interesting from a few points of view. To start with, the whole
+ontological issue of multiplicity – the reassignment of one entity to two
+(<em>Pentagramma triangularis</em> -&gt; <em>Pentagramma triangularis triangularis</em> + <em>Pentagramma triangularis semipallida</em>) is exactly
+the kind of ontological hazard I wrote about in my <a href="https://www.shift-society.org/salon/papers/2018/critiques/critique-semprola.pdf">critique of Oli Sharpe&rsquo;s Semprola system</a>
+in 2018. A mismatch in perceived multiplicity is perhaps the most problematic mismatch
+there can be between different authors looking at the same system, and one which artefacts created by technologists
+tend to handle very poorly. Someone looking at the world from the lens of a rigid &ldquo;type system&rdquo; is likely to neglect such
+problems completely.</p>
+<p>Secondly, this situation is interesting from the point of view of the meaning and function of the code which has been
+written. When I was visiting <a href="https://ppig.org/workshops/2024-annual-workshop/">PPIG 2024</a> I got into conversation with
+a naive person who believed that the task of automated translation of large bodies of code from one language/platform
+to another was straightforward because all one needed to do was &ldquo;derive the specification of the code&rdquo; and then
+translate according to that. But where is the specification of this code? Instead, it embodies a relation which has
+only emerged interactionally with a particular external system and its ontology, from the point of view of the needs
+of a particular community. This relation is also contingent and fragile – this site is likely to be patched again
+before long, as ontological plates continue to shift, but as it stands it represents a kind of embodied knowledge<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
+that needs to be treated with caution. I see this an example of Peter Wegner&rsquo;s 1997 thesis,
+that <a href="https://dl.acm.org/doi/10.1145/253769.253801">interaction is more powerful than algorithms</a> – whilst we have
+what looks like an algorithm here, it is really only a contingent expression of the state of a particular
+community interaction at a particular moment. Long ago,
+<a href="https://socialsci.libretexts.org/Courses/Western_Washington_University/Political_Science_Theory_(Hsueh_and_Deylami)/01%3A_Readings/1.14%3A_Edmund_Burke__Excerpts_from_Reflections_on_the_Revolution_in_France_1790">Burke</a>
+urged the value of epistemological caution in
+tinkering with things that require &ldquo;even more experience than any person can gain in his whole life&rdquo; and
+&ldquo;pulling down an edifice which has answered in any tolerable degree for ages the common purposes of society&rdquo;
+and I see this situation as a small microscosm of a kind of Burkean caution<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.
+<a href="https://www.youtube.com/watch?v=hkDqadw-fJE">Ian Shapiro</a> gives a fine introduction to this thought as part of the Yale
+Moral Foundations of Politics course.</p>
+<p>Anyway, there it is, we live to fight another day – and with every interaction with an external API comes a tussle of this
+kind, for example, the <a href="https://github.com/IMERSS/pnw-bryo-atlas/blob/main/js/query-gbif-api.js#L29-L94">similar but distinct tussle</a>
+with the <a href="https://www.gbif.org/">GBIF</a> taxon API which has its own discontents.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Perhaps, <a href="https://abroadlifestyles.com/metis-techne/">Metis</a> rather than Techne.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>If I were a consistent person, I&rsquo;d be enthusiastic about the application of Burkean caution to wider social and
+moral issues, but thankfully I am not a consistent person.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        
+        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;More&#43;iNaturalist&#43;Shenanigans&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-09-25-more-inaturalist-shenanigans%2F" target="_blank" title="Share on BlueSky">
+          <i class="fab fa-fw fa-bluesky"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-09-25-more-inaturalist-shenanigans%2f&amp;text=More%20iNaturalist%20Shenanigans&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fwip%2f2025-09-25-more-inaturalist-shenanigans%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-09-25-more-inaturalist-shenanigans%2f&amp;title=More%20iNaturalist%20Shenanigans" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-09-25-more-inaturalist-shenanigans%2f&amp;title=More%20iNaturalist%20Shenanigans" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="../../wip/2025-04-24-learning-from-codestrates/" data-toggle="tooltip" data-placement="top" title="Learning from Codestrates">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="../../wip/2025-09-26-this-weeks-reactive-chats/" data-toggle="tooltip" data-placement="top" title="This week&#39;s reactive chats">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      <script src="https://giscus.app/client.js"
+                data-repo="amb26/ponder"
+                data-repo-id="R_kgDOOKllGA"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOOKllGM4CvhAS"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="0"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script></div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="../../">Antranig Basman</a>
+            
+          
+          &nbsp;&copy;
+          2025
+
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.121.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="../../js/katex.min.js"></script>
+<script defer src="../../js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script src="../../js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+
+
+
+
+
+    
+  </body>
+</html>

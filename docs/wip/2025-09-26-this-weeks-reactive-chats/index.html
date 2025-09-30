@@ -9,7 +9,7 @@
       <title>This week&#39;s reactive chats - Antranig Basman</title>
 
   <meta name="description" content="Some good chats this week on reactive matters. Firstly on Tuesday with Patrick Dubroy, a fellow substratist. Patrick is a splendid chap who amongst many other works is the maintainer of a powerful, user-friendly parsing toolkit Ohm.
-Patrick pinged me last week explaining that he was contemplating a collaboration with with Camille and Yann who were building a document publishing pipeline sourced from, amongst other formats, AsciiDoc (for related details see Camille&rsquo;s recent PhD thesis).">
+Patrick pinged me last week explaining that he was contemplating a collaboration with Camille and Yann who were building a document publishing pipeline sourced from, amongst other formats, AsciiDoc (for related details see Camille&rsquo;s recent PhD thesis).">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -45,7 +45,7 @@ Patrick pinged me last week explaining that he was contemplating a collaboration
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/ponder.org.uk\/wip\/2025-09-26-this-weeks-reactive-chat\/",
+          "@id": "https:\/\/ponder.org.uk\/wip\/2025-09-26-this-weeks-reactive-chats\/",
           "name": "This week\u0027s reactive chats"
         }
     }]
@@ -58,14 +58,14 @@ Patrick pinged me last week explaining that he was contemplating a collaboration
     "name" : "Antranig Basman"
   },
   "headline": "This week\u0027s reactive chats",
-  "description" : "Some good chats this week on reactive matters. Firstly on Tuesday with Patrick Dubroy, a fellow substratist. Patrick is a splendid chap who amongst many other works is the maintainer of a powerful, user-friendly parsing toolkit Ohm.\nPatrick pinged me last week explaining that he was contemplating a collaboration with with Camille and Yann who were building a document publishing pipeline sourced from, amongst other formats, AsciiDoc (for related details see Camille\u0026rsquo;s recent PhD thesis).",
+  "description" : "Some good chats this week on reactive matters. Firstly on Tuesday with Patrick Dubroy, a fellow substratist. Patrick is a splendid chap who amongst many other works is the maintainer of a powerful, user-friendly parsing toolkit Ohm.\nPatrick pinged me last week explaining that he was contemplating a collaboration with Camille and Yann who were building a document publishing pipeline sourced from, amongst other formats, AsciiDoc (for related details see Camille\u0026rsquo;s recent PhD thesis).",
   "inLanguage" : "en",
-  "wordCount":  1887 ,
+  "wordCount":  1910 ,
   "datePublished" : "2025-09-26T00:00:00\u002b00:00",
   "dateModified" : "2025-09-26T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
   "keywords" : [ "" ],
-  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/wip\/2025-09-26-this-weeks-reactive-chat\/",
+  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/wip\/2025-09-26-this-weeks-reactive-chats\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/ponder.org.uk",
@@ -82,9 +82,9 @@ Patrick pinged me last week explaining that he was contemplating a collaboration
 
 <meta property="og:title" content="This week&#39;s reactive chats" />
 <meta property="og:description" content="Some good chats this week on reactive matters. Firstly on Tuesday with Patrick Dubroy, a fellow substratist. Patrick is a splendid chap who amongst many other works is the maintainer of a powerful, user-friendly parsing toolkit Ohm.
-Patrick pinged me last week explaining that he was contemplating a collaboration with with Camille and Yann who were building a document publishing pipeline sourced from, amongst other formats, AsciiDoc (for related details see Camille&rsquo;s recent PhD thesis).">
+Patrick pinged me last week explaining that he was contemplating a collaboration with Camille and Yann who were building a document publishing pipeline sourced from, amongst other formats, AsciiDoc (for related details see Camille&rsquo;s recent PhD thesis).">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
-<meta property="og:url" content="https://ponder.org.uk/wip/2025-09-26-this-weeks-reactive-chat/" />
+<meta property="og:url" content="https://ponder.org.uk/wip/2025-09-26-this-weeks-reactive-chats/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Antranig Basman" />
 
@@ -217,7 +217,7 @@ Patrick pinged me last week explaining that he was contemplating a collaboration
 a fellow <a href="https://2025.programming-conference.org/home/substrates-2025">substratist</a>. Patrick is a splendid chap who amongst
 many other works is the maintainer of a powerful, user-friendly parsing toolkit <a href="https://ohmjs.org/">Ohm</a>.</p>
 <p>Patrick pinged me last week
-explaining that he was contemplating a collaboration with with <a href="https://www.lri.fr/~gobert/">Camille</a> and
+explaining that he was contemplating a collaboration with <a href="https://www.lri.fr/~gobert/">Camille</a> and
 <a href="https://www.yanntrividic.fr/?lang=en">Yann</a> who were building a document publishing pipeline sourced from, amongst other
 formats, <a href="https://asciidoc.org/">AsciiDoc</a>
 (for related details see Camille&rsquo;s recent <a href="https://theses.hal.science/tel-04551620v1/file/125450_GOBERT_2024_diffusion.pdf">PhD thesis</a>).
@@ -235,13 +235,13 @@ in upcoming versions of Vue.js.</p>
 the great flexibility of the core/personality split implementation style in producing a <a href="https://github.com/proposal-signals/signal-polyfill/pull/44">polyfill</a>
 for the upcoming <a href="https://github.com/tc39/proposal-signals">TC39 signals standard proposal</a>. This is pretty helpful
 stuff and in particular unpacks the great flexibility needed around the implementation of &ldquo;effects&rdquo; which whilst in many
-signals implementations are a baked-in primitive, which in practice need some unbundling around the details of a framework&rsquo;s
+signals implementations are a baked-in primitive, in practice need some unbundling around the details of a framework&rsquo;s
 rendering pipeline. However IMO much more flexibility is required – more on this later.</p>
 <p>Patrick said that a core requirement for his work is the ability to write relatively arbitrary computations that depend
 on Ohm&rsquo;s internal mechanisms and can apply incremental parsing –
 you have some computation that transitively depends on some part of the input – one part can be marked dirty and
-just that portion of the output is recomputed. He has been surveying the space a bit and see what approaches make
-sense – he was that in JS frontend frameworks signals have become a big thing.
+just that portion of the output is recomputed. He has been surveying the space a bit to see what approaches make
+sense – he saw that in JS frontend frameworks signals have become a big thing.
 He was familiar with Adapton/<a href="https://arxiv.org/pdf/1609.05337">miniAdapton</a> – what&rsquo;s unclear is how different is it to these.</p>
 <p>This turns out to have been a strong interest of mine in recent months. When I pinged Geoffrey Litt earlier in the
 year about reactivity he pointed me to miniAdapton and his own <a href="https://github.com/geoffreylitt/mini-adapton/blob/main/index.ts">TS implementation</a> of it.
@@ -253,7 +253,7 @@ of preact-signals because I was attracted to its unusually comprehensive suite o
 <p>I recapped to Patrick the <a href="../../post/2025-07-01-archaeology-of-glitches">archaeology of glitches</a> I had done in 2024, now
 written up in their own page. He had also been intrigued whether Adapton implemented the same algorithm as commodity
 signals and had come to pretty much the same conclusion. He also bemoaned the fact that such work had long been going
-on in separate silos with essentially no cross-citation or cross-pollination. One isloated exception was the Rust incremental
+on in separate silos with essentially no cross-citation or cross-pollination. One isolated exception was the Rust incremental
 computation framework <a href="https://github.com/salsa-rs/salsa">salsa</a> which is influenced both by Adapton and the JS
 incremental view framework <a href="https://github.com/glimmerjs/glimmer-vm">glimmer</a>.</p>
 <h4 id="dan-ingalls-fabrik">Dan Ingalls&rsquo; Fabrik</h4>
@@ -279,7 +279,7 @@ even if it weren&rsquo;t for the precedent that we already have of Jonathan&rsqu
 in the <a href="https://soft.vub.ac.be/Publications/2012/vub-soft-tr-12-13.pdf">2012 Bainomugisha review</a> as being the only reactive system supporting both glitch freedom and bidirectional
 relations. Cooper &amp; Krishnamurthi&rsquo;s
 2006 <a href="http://static.cs.brown.edu/~sk/Publications/Papers/Published/ck-frtime/paper.pdf">FrTime paper</a> is likely another
-example, since the review is probably in error as this just this capability is advertised in section 3.5 on Cycles.</p>
+example, since the review is probably in error as just this capability is advertised in section 3.5 on Cycles.</p>
 <p>I don&rsquo;t find either of those systems&rsquo; support for bidirectional relations fully satisfactory. I&rsquo;d prefer a Fabrik-type
 system which computes just the portion of dataflow relevant for a particular update and which pushes the description of
 computations out of the system.</p>
@@ -327,11 +327,13 @@ epiphenomena that a real reactive system needs to deal with, specially under the
 </ul>
 <p>FrTime has unusually good handling of the first point, Observable of the second, and Coherence of the third. We need
 a system with stable and excellent behaviour in all three headings.</p>
+<p>Note that these directions are somewhat orthogonal to glitches – the difficulty and value of being glitch-free increases
+with our increasing competence in these directions.</p>
 <h4 id="unavailable-values">Unavailable values</h4>
 <p>I sketched to Patrick my proposed solution to the 2nd and 3rd points, unifying handling of errors and asynchrony under
 a common mechanism responding to &ldquo;design incompletion for any reason&rdquo;. I named a special reactive payload as an &ldquo;unavailable
-value&rdquo; indicating that the design was incomplete either as a result of depending on pending I/O or else on a design/syntax
-error in the system. This described on its own page at <a href="../../term/unavailable-value">unavailable value</a>.</p>
+value&rdquo; indicating that the design was incomplete either as a result of depending on pending I/O or else of a design/syntax
+error in the system. This is described on its own page at <a href="../../term/unavailable-value">unavailable value</a>.</p>
 <h4 id="helpful-pointers">Helpful pointers</h4>
 <p>Patrick finished with a few helpful pointers to related frameworks. Firstly an RPC framework from Cloudflare/Kenton Varda
 named <a href="https://blog.cloudflare.com/capnweb-javascript-rpc-library/">Cap&rsquo;n Web</a> that was a kind of dual to GraphQL in its
@@ -355,9 +357,9 @@ provenance/transportability&rdquo;.</p>
 along the arcs:</p>
 <ul>
 <li>The identity – which in imperative memory ontologies appears as &ldquo;aliasing&rdquo;. &ldquo;The same content knowably in more than one place&rdquo;,
-which could be honoured by genuine aliasing in the underly memory model, but at the very least should be trivially
+which could be honoured by genuine aliasing in the underlying memory model, but at the very least should be trivially
 write-through, that is, &ldquo;The same content knowably writeable at more than one address&rdquo;.</li>
-<li>Linear functions – genuine linear functions such as <code>C = 5 * (F – 32) / 9</code>, boolean NOT, etc. which can be
+<li>Linear functions – genuine linear functions such as <code>C = 5 * (F - 32) / 9</code>, boolean NOT, etc. which can be
 &ldquo;invertible on sight&rdquo; when seen by the parser without the user needing to do anything about it.</li>
 <li>Manually inverted functions – the user manually supplies an inverse and is assumed to know what they are doing.</li>
 <li><a href="../../term/a-good-function">Good functions</a> – A closed algebra of blessed functions not doing excessive computation and
@@ -379,35 +381,35 @@ likely not invertible at all</li>
       
       <li>
         
-        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;This&#43;week%27s&#43;reactive&#43;chats&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-09-26-this-weeks-reactive-chat%2F" target="_blank" title="Share on BlueSky">
+        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;This&#43;week%27s&#43;reactive&#43;chats&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-09-26-this-weeks-reactive-chats%2F" target="_blank" title="Share on BlueSky">
           <i class="fab fa-fw fa-bluesky"></i>
         </a>
       </li>
 
       
       <li>
-        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-09-26-this-weeks-reactive-chat%2f&amp;text=This%20week%27s%20reactive%20chats&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
+        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-09-26-this-weeks-reactive-chats%2f&amp;text=This%20week%27s%20reactive%20chats&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
 
       
       <li>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fwip%2f2025-09-26-this-weeks-reactive-chat%2f" target="_blank" title="Share on Facebook">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fwip%2f2025-09-26-this-weeks-reactive-chats%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
 
       
       <li>
-        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-09-26-this-weeks-reactive-chat%2f&amp;title=This%20week%27s%20reactive%20chats" target="_blank" title="Share on Reddit">
+        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-09-26-this-weeks-reactive-chats%2f&amp;title=This%20week%27s%20reactive%20chats" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
 
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-09-26-this-weeks-reactive-chat%2f&amp;title=This%20week%27s%20reactive%20chats" target="_blank" title="Share on LinkedIn">
+        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-09-26-this-weeks-reactive-chats%2f&amp;title=This%20week%27s%20reactive%20chats" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
@@ -431,9 +433,13 @@ likely not invertible at all</li>
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="../../wip/2025-04-24-learning-from-codestrates/" data-toggle="tooltip" data-placement="top" title="Learning from Codestrates">&larr; Previous Post</a>
+              <a href="../../wip/2025-09-25-more-inaturalist-shenanigans/" data-toggle="tooltip" data-placement="top" title="More iNaturalist Shenanigans">&larr; Previous Post</a>
             </li>
           
+          
+            <li class="next">
+              <a href="../../wip/2025-09-30-module-system-once-more/" data-toggle="tooltip" data-placement="top" title="The Module System Once More">Next Post &rarr;</a>
+            </li>
           
         </ul>
       <script src="https://giscus.app/client.js"
