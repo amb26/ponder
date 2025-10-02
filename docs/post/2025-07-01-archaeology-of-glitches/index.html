@@ -60,7 +60,7 @@ it(&#34;should drop A-&gt;B-&gt;A updates&#34;, async () =&gt; { // A // / | // 
   "headline": "Archaeology of Glitches",
   "description" : "In 2024 I was working on a small project that I wanted to be able to be handed over, and wondered what was the most congenial way out there of rendering apps that wouldn\u0026rsquo;t bring in too heavy a dependency. My eye was caught by the following passage in preact-signals\u0026rsquo; test cases:\nit(\u0026#34;should drop A-\u0026gt;B-\u0026gt;A updates\u0026#34;, async () =\u0026gt; { \/\/ A \/\/ \/ | \/\/ B | \u0026lt;- Looks like a flag doesn\u0026#39;t it?",
   "inLanguage" : "en",
-  "wordCount":  1959 ,
+  "wordCount":  2072 ,
   "datePublished" : "2025-07-01T00:00:00\u002b00:00",
   "dateModified" : "2025-07-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -312,14 +312,14 @@ reusable abstractions, with well-defined semantics.</p>
 </blockquote>
 <p>In service of this, an outcome of the Dagstuhl was a series of edits to the Wikipedia articles on Reactive Programming
 and Incremental Computing, one of which introduced the text (still present as of 2025) in the Reactive Programming article&rsquo;s
-<a href="https://en.wikipedia.org/wiki/Reactive_programming#glitches">Glitches section</a></p>
+<a href="https://en.wikipedia.org/wiki/Reactive_programming#glitches">Glitches section</a>:</p>
 <blockquote>
 <p>Some reactive languages are glitch-free and prove this property</p>
 </blockquote>
 <p>Shortly after its appearance in 2016 this text rightly received the [citation needed] tag, and so I wrote
 recently to the Dagstuhl committee to ask whether they had authored or seen any citation that could back up this
-assertion. Since I&rsquo;ve received no response, my conclusion is that the Dagstuhl has not achieved its aim of producing
-these systematic abstractions which are capable of verifying the absence of this inconsistent behaviour.</p>
+assertion. Since I&rsquo;ve received no response, the suggestion is that the Dagstuhl has not achieved its aim of producing
+systematic abstractions which are capable of verifying the absence of this inconsistent behaviour.</p>
 <p>Section 4 of <a href="http://static.cs.brown.edu/~sk/Publications/Papers/Published/ck-frtime/paper.pdf">FrTime</a> develops a formal
 semantics for their update rules, and the authors state</p>
 <blockquote>
@@ -327,6 +327,13 @@ semantics for their update rules, and the authors state</p>
 makes the state at the end of each update cycle well-defined</p>
 </blockquote>
 <p>but this reasoning is verbal and indirect.</p>
+<p>Another interesting anomaly is that the first <a href="https://www.pl.informatik.uni-mainz.de/files/2019/04/IC-dagstuhl.pdf">Dagstuhl discussion</a>
+centred on the relative reponsibilities of IC and RP. They consider that &ldquo;IC, unlike RP, is concerned with computational cost. It attempts
+to <em>improve the algorithmic efficiency</em> of computations that terminate, but repeat over
+time in a changing environment&rdquo;, and that whereas appropiate exercises of RP might be &ldquo;aviotics and control systems,
+OS kernels and financial analytics&rdquo;, more appropriate to IC are &ldquo;HTML rendering and spreadsheet evaluation&rdquo;. It&rsquo;s
+therefore ironic that the predominant idiom for rendering HTML documents established by commodity signals
+implementations has been considered part of reactive programming and not incremental computing.</p>
 <h4 id="glitch-freedom-in-practice-without-this-being-in-focus">Glitch-freedom in practice without this being in focus</h4>
 <p>In the years since then, work has all the same continued vigorously in this area, especially in the JS view framework
 community, but in a way largely unguided by
@@ -392,6 +399,7 @@ relations I&rsquo;d consider adopting it for Infusion, but it certainly needs st
 what the semantics are for overlapping asynchronous updates. As with commodity signals it is clear that it grew up in
 isolation from the academic tradition, the term &ldquo;glitch&rdquo; does not appear and some terms (e.g. &ldquo;indegree&rdquo;) are used in
 idiosyncratic senses.</p>
+<p>Further notes in context can be seen in <a href="../../wip/2025-09-26-this-weeks-reactive-chats#reactivity-and-glitches">reactivity chat 2025-09-26</a>.</p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>

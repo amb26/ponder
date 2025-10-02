@@ -109,14 +109,14 @@ the [Dagstuhl's report](https://www.pl.informatik.uni-mainz.de/files/2019/04/IC-
 
 In service of this, an outcome of the Dagstuhl was a series of edits to the Wikipedia articles on Reactive Programming
 and Incremental Computing, one of which introduced the text (still present as of 2025) in the Reactive Programming article's
-[Glitches section](https://en.wikipedia.org/wiki/Reactive_programming#glitches)
+[Glitches section](https://en.wikipedia.org/wiki/Reactive_programming#glitches):
 
 > Some reactive languages are glitch-free and prove this property
 
 Shortly after its appearance in 2016 this text rightly received the \[citation needed] tag, and so I wrote
 recently to the Dagstuhl committee to ask whether they had authored or seen any citation that could back up this
-assertion. Since I've received no response, my conclusion is that the Dagstuhl has not achieved its aim of producing
-these systematic abstractions which are capable of verifying the absence of this inconsistent behaviour.
+assertion. Since I've received no response, the suggestion is that the Dagstuhl has not achieved its aim of producing
+systematic abstractions which are capable of verifying the absence of this inconsistent behaviour.
 
 Section 4 of [FrTime](http://static.cs.brown.edu/~sk/Publications/Papers/Published/ck-frtime/paper.pdf) develops a formal
 semantics for their update rules, and the authors state
@@ -125,6 +125,14 @@ semantics for their update rules, and the authors state
 > makes the state at the end of each update cycle well-defined
 
 but this reasoning is verbal and indirect.
+
+Another interesting anomaly is that the first [Dagstuhl discussion](https://www.pl.informatik.uni-mainz.de/files/2019/04/IC-dagstuhl.pdf)
+centred on the relative reponsibilities of IC and RP. They consider that "IC, unlike RP, is concerned with computational cost. It attempts
+to *improve the algorithmic efficiency* of computations that terminate, but repeat over
+time in a changing environment", and that whereas appropiate exercises of RP might be "aviotics and control systems,
+OS kernels and financial analytics", more appropriate to IC are "HTML rendering and spreadsheet evaluation". It's
+therefore ironic that the predominant idiom for rendering HTML documents established by commodity signals
+implementations has been considered part of reactive programming and not incremental computing.
 
 #### Glitch-freedom in practice without this being in focus
 
@@ -203,7 +211,7 @@ what the semantics are for overlapping asynchronous updates. As with commodity s
 isolation from the academic tradition, the term "glitch" does not appear and some terms (e.g. "indegree") are used in
 idiosyncratic senses.
 
-
+Further notes in context can be seen in [reactivity chat 2025-09-26](</wip/2025-09-26-this-weeks-reactive-chats#reactivity-and-glitches>).
 
 
 [^1]: The term "glitch" does not occur anywhere in the preact documentation or codebase in this sense.
