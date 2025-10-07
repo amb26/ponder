@@ -8,8 +8,15 @@
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <lastBuildDate>Tue, 30 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 07 Oct 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ponder.org.uk/wip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Josh Horowitz Review</title>
+      <link>https://ponder.org.uk/wip/2025-10-07-josh-horowitz-review/</link>
+      <pubDate>Tue, 07 Oct 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-10-07-josh-horowitz-review/</guid>
+      <description>Last month I received some great feedback and searching questions from Josh Horowitz about my 2025 Live submission. Whilst it was rejected this time round, the submission achieved its aim of engaging with the most thoughtful minds in the field, and starting the long process of sharpening up these ideas so that they can be widely intelligible and adopted.&#xA;There&amp;rsquo;s been no substantial writing on Infusion&amp;rsquo;s goals since the 2018 Open Authorial Principle and since then both the ideas and implementation have evolved significantly.</description>
+    </item>
     <item>
       <title>The Module System Once More</title>
       <link>https://ponder.org.uk/wip/2025-09-30-module-system-once-more/</link>
