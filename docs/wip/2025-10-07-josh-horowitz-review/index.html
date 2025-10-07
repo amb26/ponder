@@ -60,7 +60,7 @@ There&rsquo;s been no substantial writing on Infusion&rsquo;s goals since the 20
   "headline": "Josh Horowitz Review",
   "description" : "Last month I received some great feedback and searching questions from Josh Horowitz about my 2025 Live submission. Whilst it was rejected this time round, the submission achieved its aim of engaging with the most thoughtful minds in the field, and starting the long process of sharpening up these ideas so that they can be widely intelligible and adopted.\nThere\u0026rsquo;s been no substantial writing on Infusion\u0026rsquo;s goals since the 2018 Open Authorial Principle and since then both the ideas and implementation have evolved significantly.",
   "inLanguage" : "en",
-  "wordCount":  3222 ,
+  "wordCount":  3305 ,
   "datePublished" : "2025-10-07T00:00:00\u002b00:00",
   "dateModified" : "2025-10-07T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -241,24 +241,19 @@ We learn that an Infusion app consists of &ldquo;layers&rdquo;, which can be mer
 But there&rsquo;s so many questions of ontology and mechanism which gets skimmed over. For instance:</p>
 </blockquote>
 <blockquote>
-<ul>
-<li>The video shows fluid.demos.todoItem.withAssignee being added as an extension of fluid.demos.todoItem.
-<ol>
-<li>How does this extension work internally? Is it a full re-write of the original todoItem? Or does it partially extend it?</li>
-<li>How does this extension come to be active in the environment?</li>
-</ol>
-</li>
-<li>What system determines which version to use, when both the old and new versions exist in the computational universe?</li>
-</ul>
+<p>– The video shows fluid.demos.todoItem.withAssignee being added as an extension of fluid.demos.todoItem.
+1. How does this extension work internally? Is it a full re-write of the original todoItem? Or does it partially extend it?
+2. How does this extension come to be active in the environment?
+– What system determines which version to use, when both the old and new versions exist in the computational universe?</p>
 </blockquote>
 <p>Infusion&rsquo;s layers are merged in a live way through a reactive version of the aligned, recursive dictionary merge
 system which is standard to algorithms like <a href="https://lodash.com/docs#merge">lodash.merge</a>,
 <a href="https://api.jquery.com/jQuery.extend/">jQuery.extend</a> or <a href="https://pypi.org/project/deepmerge/">Python deepmerge</a>.
-Infusion&rsquo;s layer contextualises this merge algorithm in the following way:</p>
+Infusion contextualises this merge algorithm in the following way:</p>
 <ul>
 <li>Each layer has a globally unique <em>namespaced name</em> such as <a href="https://github.com/fluid-project/infusion-6/blob/main/demo/todo-list-assign/sfc/fluid-demos-todoList.vue"><code>fluid.demos.todoList</code></a></li>
 <li>The ordering of parent layers to be merged is determined by the standard <a href="https://en.wikipedia.org/wiki/Draft:C3_linearization">C3 linearisation algorithm</a>
-applied to layer names which are held in a layer property <code>$layers</code> which holds one or more parent layer names</li>
+applied to layer names stored in a layer property <code>$layers</code> which holds one or more parent layer names</li>
 <li>The contents of each layer are considered immutable for the purposes of the merge algorithm, and whilst any form of
 JS object is permitted within layers, any material not directly descended from <code>Object</code> or <code>Array</code> will be considered atomic
 and not cloned or recursed over</li>
@@ -266,13 +261,16 @@ and not cloned or recursed over</li>
 <li>The provenance of the resulting merged structure is tracked in a <code>layerMap</code> which records for each merged path the
 name of the topmost layer which is responsible for it</li>
 </ul>
+<p>The resulting merged structure forms the configuration for an Infusion <em>component</em> which reads the topmost visible layer
+at each path and uses it to construct some live material from it. This may be a plain reactive value that just consists
+of the layer&rsquo;s value itself, a reference to a live value elswhere, or may be a reactive computation designated by <code>$compute</code>,
+a reactive effect designated by <code>$effect</code> or one of a small number of other things.</p>
 <p>So answering question 1. <a href="https://github.com/fluid-project/infusion-6/blob/main/demo/todo-list-assign/sfc/fluid-demos-todoItem-withAssignee.vue"><code>fluid.demos.todoItem.withAssignee</code></a>
-is a layer which is applied on top of <a href="https://github.com/fluid-project/infusion-6/blob/main/demo/todo-list-assign/sfc/fluid-demos-todoItem.vue"><code>fluid.demos.todoItem</code></a>
+is a layer which is applied on top of a component&rsquo;s existing <a href="https://github.com/fluid-project/infusion-6/blob/main/demo/todo-list-assign/sfc/fluid-demos-todoItem.vue"><code>fluid.demos.todoItem</code></a>
 in order to extend it. Other questions answered below.</p>
 <blockquote>
-<ul>
-<li>It looks like the original todoList system explicitly exposes an &ldquo;filters&rdquo; extension point, so that extensions can contribute filters.
-Is that right? In that case
+<p>– It looks like the original todoList system explicitly exposes an &ldquo;filters&rdquo; extension point, so that extensions can contribute filters.
+Is that right? In that case</p>
 <ol>
 <li>What mechanism allows multiple extensions to contribute to the same extension point?
 (I&rsquo;m reminded here of CodeMirror&rsquo;s &ldquo;facets&rdquo; system for extensions, but I don&rsquo;t know if you&rsquo;re doing anything similar.)</li>
@@ -281,8 +279,6 @@ Is that right? In that case
 (having the material be inherently extensible, so extensions can be performed in ways unanticipated by the original
 application&rsquo;s authors). Do you agree with this assessment? If so, does this limit the malleability of systems made with Infusion?</li>
 </ol>
-</li>
-</ul>
 </blockquote>
 <p>&ldquo;cooperative&rdquo; vs &ldquo;preemptive&rdquo; is a great distinction. In fact Infusion does support fully preemptive extensibility given any part
 of any component can be overridden by a higher priority layer. But in many cases it feels that preemption isn&rsquo;t the most
@@ -341,7 +337,7 @@ the same since it has been filtered. Infusion would perfectly well allow either 
 remains that these two authors can&rsquo;t comfortably live in the same authorial universe since one of them
 sees two objects whilst the other sees one. I talk about these multiplicity problems in my 2018
 <a href="https://www.shift-society.org/salon/papers/2018/critiques/critique-semprola.pdf">Semprola critique</a> and they seem
-like the most problematic mismatches in allowing different authors to share a design. I think there are some
+like the most problematic mismatches preventing different authors from sharing a design. I think there are some
 contortions that could be done with naming and structuring in the substrate<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> but on balance it seems safer not to be too categorical
 about the value of reuse in this situation and instead say that these authors have to consider that they are
 parts of different designs, one with filtering and one without. Once we have admitted that there is <em>some</em> filtering,
@@ -385,34 +381,32 @@ simultaneously adapted:</p>
 <li>The set of filters, which needs to include the filter definition to filter items by assignee and the control for choosing this</li>
 </ul>
 <blockquote>
-<ul>
-<li>Just how does this system differ from Varv?</li>
-</ul>
+<p>– Just how does this system differ from Varv?</p>
 </blockquote>
 <p>Some big differences with Varv are:</p>
 <ul>
 <li>Infusion permits differential extension of both the app definitions and the rendered markup.
 <a href="https://github.com/fluid-project/infusion-6/blob/main/demo/todo-list-assign/sfc/fluid-demos-todoItem-withAssignee.vue"><code>fluid.demos.todoItem.withAssignee</code></a>
-is a <code>partialViewComponent</code> which doesn&rsquo;t need to repeat the markup definitions from the component it is extending - instead
+is a <code>partialViewComponent</code> which doesn&rsquo;t need to repeat the markup definitions from the component it is extending – instead
 it can direct the renderer to composite together just the extra piece of template relative to some landmark in the
 existing content, through a definition like <code>relativeContainer: &quot;after: .item-text&quot;,</code> which indicates that the written
 template which just holds the dropdown should be injected directly after the selector match of <code>.item-text</code></li>
 <li>Infusion is wholly reactive as regards adaptation, and incrementally computes the substrate contents from its
 constituent layer definitions and data at each moment. This means we don&rsquo;t need to do anything special
-when adaptations happen - the user&rsquo;s data naturally &ldquo;slips along&rdquo; the substrate surface in its own layer.
+when adaptations happen – the user&rsquo;s data naturally &ldquo;slips along&rdquo; the substrate surface in its own layer.
 This produces a general framework for state-preserving live adaptations of the kind seen in <a href="https://docs.hyperclay.com/docs/how-hyperclay-works/">Hyperclay</a>&rsquo;s
 &ldquo;Strip-Save-Restore&rdquo; cycle. In Varv user state must be explicitly reread from data stores after the model
 is rebuilt following a change in concept structure.</li>
 </ul>
-<p>Varv also doesn&rsquo;t fully form a &ldquo;substrate&rdquo; in the strongest sense - the definitions in it are not referred to a global
-coordinate system so it is hard to see how to further extend a system which has already been extended, or
+<p>Varv also doesn&rsquo;t fully form a &ldquo;substrate&rdquo; in the strongest sense – the definitions in it are not referred to a global
+coordinate system so it&rsquo;s hard to see how they can themselves be targetted for extension, or
 how to access these extensions via navigation over the running application. It isn&rsquo;t built
 out of a homogeneous material because its &ldquo;concepts&rdquo; live at a meta-level of design to the data which is being
 operated on. In Infusion, this is organised somewhat differently. Infusion data and system design are co-located in a single-rooted, consistently
 addressed tree structure. This allows the system to operate on itself at its own meta-level, deriving adaptations from
 data held in the system (e.g. the &ldquo;Assignee Facet&rdquo; checkbox in the UI) and recruiting them in a cross-cutting way
-across multiple levels of design as the example shows. Note that, for example, Varv&rsquo;s design doesn&rsquo;t solve the
-3rd problem, to show a collection of filters whose members are drawn from a set of different concepts, nor for
+across multiple levels of design as the example shows. Note that, for example, Varv&rsquo;s design doesn&rsquo;t provide the
+3rd adaptation listed above, to show a collection of filters whose members are drawn from a set of different concepts, nor for
 allowing control over the set of concepts in play to be derived from the substrate&rsquo;s own contents.</p>
 <p>Finally, the role of computation. Whilst Varv does allow concepts to be decorated with arbitrary JavaScript, it
 includes a core ontology for computation in its concept meta-level via logical primitives
@@ -427,18 +421,16 @@ with conventional development communities.</p>
 </blockquote>
 <h4 id="other-things-im-curious-about-roughly-chronologically">Other things I&rsquo;m curious about, roughly chronologically</h4>
 <blockquote>
-<ul>
-<li>You note that &ldquo;One of the most important aspects of Infusion development is that the rendering process
+<p>– You note that &ldquo;One of the most important aspects of Infusion development is that the rendering process
 is not simply a one-way function.&rdquo; As far as I can tell, the only consequence of this aspect you show
 is that you can hover a node in the outline (the &ldquo;substrate&rdquo;) and see its rendered representation and visa versa.
 This is great, but it&rsquo;s also something we are all very used to from development dev tools
 (e.g. for the DOM tree, or the React component tree). So if this is indeed an important aspect,
-I&rsquo;m going to need more explanation of &ldquo;why&rdquo; that goes beyond this familiar development convenience.</li>
-</ul>
+I&rsquo;m going to need more explanation of &ldquo;why&rdquo; that goes beyond this familiar development convenience.</p>
 </blockquote>
-<p>Thanks, there was clearly more to unpack here than I went into. It&rsquo;s true that this is by now a very familiar interaction -
-half of the LIVE submissions this year featured some kind of bidirectional updating interaction. I think it&rsquo;s well worth
-drawing a distinction between the two examples you gave - the DOM, and react. In the case of the DOM, the browser is
+<p>Thanks, there was clearly more to unpack here than I went into. It&rsquo;s true that this is by now a very familiar interaction –
+half of the Live submissions this year featured some kind of bidirectional updating interaction. I think it&rsquo;s worth
+drawing a distinction between the two examples you gave – the DOM, and React. In the case of the DOM, the browser is
 using just the same front door API that the developer uses in order to render its view, whereas in the case of React,
 with its unidirectional dataflow idiom, the devtools need to go behind the back of the visible contract in order to
 produce the interface. For example, devtools need to be aware of the details of the <a href="https://github.com/acdlite/react-fiber-architecture">React Fiber</a>
@@ -448,8 +440,7 @@ which don&rsquo;t privilege particular kinds of tools or workflows, and allow ev
 be delivered along with it. The fact that the DOM API is public and consistent is what allows the DOM to represent
 a substrate (as seen in Webstrates), whilst React and similar systems fail to do so.</p>
 <blockquote>
-<ul>
-<li>You show how the &ldquo;todos&rdquo; data is contained within the &ldquo;todoList&rdquo; view component.
+<p>– You show how the &ldquo;todos&rdquo; data is contained within the &ldquo;todoList&rdquo; view component.
 I get the sense that incorporating data into your substrate is an important design aspect.
 It feels under-explained here. This feels like an interesting novelty of your system.
 I didn&rsquo;t really understand how Infusion serves as an example of transclusion. In part this is
@@ -457,8 +448,7 @@ because my understanding of &ldquo;transclusion&rdquo; is grounded in the idea o
 another media artifact. I don&rsquo;t usually think of, say, one application transcluding parts of
 another. (I&rsquo;m not sure Ted Nelson cares very much about that sense of transclusion.)
 I am left wondering in what sense what you show is different from one conventional React project
-importing and using components defined in another React project.</li>
-</ul>
+importing and using components defined in another React project.</p>
 </blockquote>
 <p>There&rsquo;s a good distinction between &ldquo;importing components&rdquo; at the (traditionally hidden) source
 level of a system, and &ldquo;transcluding content&rdquo; which is part of the visible surface that is interacted with. So
@@ -467,24 +457,20 @@ representation, which is a capability denied to those using the running system. 
 essentially impossible to make use of the knowledge that a system is built using React, in order to get useful access
 to the component definitions which form part of it and adapt them into another system.</p>
 <p>In Infusion, the distinction between the visible material, and the definitions which are responsible for it,
-is largely closed up - since it is possible to query any bit of the visible system to find the corresponding piece of
+is largely closed up – since it is possible to query any bit of the visible system to find the corresponding piece of
 substrate, and then go from there (via the provenance of the coloured layers) to the definitions responsible for it.</p>
 <p>In talking with Clemens I think it&rsquo;s clear that the next Infusion talk/demo needs to foreground this story and show how one could use its
 substrate nature to perform wholesale adaption of an existing system to another one on the outside, rather than just
 the internal adaptation in this demo. Clemens called this idea &ldquo;inheriting from entire apps&rdquo; rather than just
 inheriting from the individual layers that constitute the app.</p>
 <blockquote>
-<ul>
-<li>The demo of &ldquo;direct editing of the UI&rdquo; is enticing. However, it is not clear to me how it synergizes
+<p>– The demo of &ldquo;direct editing of the UI&rdquo; is enticing. However, it is not clear to me how it synergizes
 (or doesn&rsquo;t) with Infusion&rsquo;s unique substrate qualities. As is, it feels orthogonal.
 And we all know that direct-manipulation editing of programmatic output is a very tricky problem&hellip;
-the basic string-editing you&rsquo;re doing feels like a barest hint of what would need to be done for a practical system.</li>
-</ul>
+the basic string-editing you&rsquo;re doing feels like a barest hint of what would need to be done for a practical system.</p>
 </blockquote>
 <blockquote>
-<ul>
-<li>I did not understand the &ldquo;reactive relational algebra&rdquo; claims. I also do not understand how Infusion functions as an integration domain.</li>
-</ul>
+<p>– I did not understand the &ldquo;reactive relational algebra&rdquo; claims. I also do not understand how Infusion functions as an integration domain.</p>
 </blockquote>
 <p>These need to be explained far better. Infusion is reactive in the traditional sense since the visible application is
 derived reactively from the constituent layer contents. It is a kind of relational algebra because the correspondence
@@ -497,21 +483,19 @@ the reactive values which are traded in the information domain do not expose the
 depend on. Infusion&rsquo;s tooling doesn&rsquo;t currently enforce this, but only the parts of the substrate which are
 JSON-equivalent and so can be straightforwardly serialised are considered part of its public representation.</p>
 <blockquote>
-<ul>
-<li>I was excited to see examples of previous versions of Infusion in use. However, the artifacts
+<p>– I was excited to see examples of previous versions of Infusion in use. However, the artifacts
 you show here look like conventional websites, and the story you tell of the creation of these
 artifacts is indistinguishable from conventional web-development stories.
 I would love to hear more details about how Infusion changed how people were able to work together,
-or some other novel aspect, but they&rsquo;re not in this submission, so these examples don&rsquo;t seem to contribute much.</li>
-</ul>
+or some other novel aspect, but they&rsquo;re not in this submission, so these examples don&rsquo;t seem to contribute much.</p>
 </blockquote>
 <p>Yes it&rsquo;s true that they contribute little to the technical explanation but I was hoping they would serve as examples
 of the communities which Infusion has been serving and which I hope to serve better through producing better substrates.</p>
 <p>To the extent these communities have benefited from (old) Infusion&rsquo;s substrate nature, it has been due to the fact that
 their preferred authoring tools and computational idioms, R and R markdown, are quite distant from the web,
 and I have been developing workflows to allow content authored in these to be
-<a href="https://lichen-community-systems.github.io/knitting-data-communities/#mxcw"><code>reknitted</code></a> into more interactive forms.
-This to a certain extent unpicks the <a href="https://cran.r-project.org/web/packages/knitr/index.html"><code>knitting</code></a> process
+&ldquo;<a href="https://lichen-community-systems.github.io/knitting-data-communities/#mxcw">reknitted</a>&rdquo; into more interactive forms.
+This to a certain extent unpicks the &ldquo;<a href="https://cran.r-project.org/web/packages/knitr/index.html">knitting</a>&rdquo; process
 where R markdown produces not terribly interactive web content, and reknits the content into a more interactive and
 compelling form.</p>
 <p>This was aided by old Infusion&rsquo;s orientation to composing applications by recursively merging JSON blocks rather than
@@ -528,7 +512,7 @@ clarity to these so far poorly expressed ideas.</p>
 <ol>
 <li id="fn:1">
 <p>See slide 11 in
-<a href="https://docs.google.com/presentation/d/12vLg_zWS6uXaHRy8LWQLzfNPBYa1E6L-WWyLqH1iWJ4/edit?slide=id.ge3dc635994_0_27#slide=id.ge3dc635994_0_27">Openly authored data pipelines</a> -
+<a href="https://docs.google.com/presentation/d/12vLg_zWS6uXaHRy8LWQLzfNPBYa1E6L-WWyLqH1iWJ4/edit?slide=id.ge3dc635994_0_27#slide=id.ge3dc635994_0_27">Openly authored data pipelines</a> –
 on paper this seems to solve the problem &ldquo;How to present one author with a modified artefact which bears the same name
 as another author&rsquo;s unmodified artefact&rdquo; by means of a scoping trick letting one author see it as <code>joined</code> and another
 see it as <code>joined.joined</code> but I can&rsquo;t think how a UI could really let this seem graceful and natural.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
