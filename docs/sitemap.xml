@@ -3,12 +3,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ponder.org.uk/</loc>
-    <lastmod>2025-10-07T00:00:00+00:00</lastmod>
+    <lastmod>2025-12-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ponder.org.uk/wip/2025-10-07-josh-horowitz-review/</loc>
-    <lastmod>2025-10-07T00:00:00+00:00</lastmod>
+    <loc>https://ponder.org.uk/wip/2025-12-15-understanding-reactivity/</loc>
+    <lastmod>2025-12-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ponder.org.uk/wip/</loc>
+    <lastmod>2025-12-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ponder.org.uk/wip/2025-12-12-infinite-apps-and-unshaking/</loc>
+    <lastmod>2025-12-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ponder.org.uk/wip/2025-10-07-josh-horowitz-review/</loc>
     <lastmod>2025-10-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ponder.org.uk/wip/2025-09-30-module-system-once-more/</loc>
@@ -72,9 +78,13 @@
   </url><url>
     <loc>https://ponder.org.uk/term/divergence/</loc>
   </url><url>
+    <loc>https://ponder.org.uk/docs/</loc>
+  </url><url>
     <loc>https://ponder.org.uk/term/end-user-programming/</loc>
   </url><url>
     <loc>https://ponder.org.uk/term/externalisability/</loc>
+  </url><url>
+    <loc>https://ponder.org.uk/docs/fluid-signals/</loc>
   </url><url>
     <loc>https://ponder.org.uk/term/glitch/</loc>
   </url><url>

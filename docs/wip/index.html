@@ -49,9 +49,10 @@
   <link rel="stylesheet" href="../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../css/bootstrap.min.css" /><link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/highlight.min.css" /><link rel="stylesheet" href="../css/codeblock.css" /><link rel="stylesheet" href="../css/ponder.css" />
+<script type="text/javascript" src="../js/ponder.js" ></script>
 
   </head>
-  <body>
+  <body class="wip" >
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
   <div class="container-fluid">
     <div class="navbar-ponder">
@@ -84,6 +85,12 @@
           
           <li>
             <a title="About" href="../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Docs" href="../docs">Docs</a>
           </li>
           
           
@@ -168,6 +175,69 @@
           </div>
         
         <div class="posts-list">
+          
+            <article class="post-preview">
+    <div class="post-preview-header">
+        <a href="../wip/2025-12-15-understanding-reactivity/">
+            <h2 class="post-title">Understanding Reactivity</h2>
+            
+            
+        </a>
+
+        <p class="post-meta">
+            <span class="post-meta">
+  
+    
+     – December 15, 2025
+  
+  
+</span>
+
+        </p>
+    </div>
+    <div class="post-entry">
+        
+        Since late 2023 when I found myself fatefully staring at the test case in preact-signals that I describe in my Archaeology of Glitches posting, along with my lightbulb moment that there was this guarantee of data consistency that a reactive system could provide, I also realised that it could be possible for Infusion to be turned into a fully reactive system, rather than the somewhat opportunistic system I&rsquo;d been building through the 2010s.
+        <a href="../wip/2025-12-15-understanding-reactivity/" class="post-read-more">[Read More]</a>
+        
+    </div>
+
+    
+
+</article>
+
+          
+            <article class="post-preview">
+    <div class="post-preview-header">
+        <a href="../wip/2025-12-12-infinite-apps-and-unshaking/">
+            <h2 class="post-title">Infinite Apps, Asynchrony and Tree Unshaking</h2>
+            
+            
+        </a>
+
+        <p class="post-meta">
+            <span class="post-meta">
+  
+    
+     – December 12, 2025
+  
+  
+</span>
+
+        </p>
+    </div>
+    <div class="post-entry">
+        
+        This has been a period of consolidation since pushing on demos of Infusion 6 for the Substrates 2025 workshop and my 2025 Live incurred a good amount of technical debt. Lots of demo features were hacked on by banging on framework internals rather than by proper userland constructs, and the tidyup has proved more meaty than I imagined, with several test cases still failing for fairly fundamental reasons.
+However this has been a great opportunity to deliver more soundly on some of Infusion&rsquo;s goals and work out more of the implications of its model for software&rsquo;s material.
+        <a href="../wip/2025-12-12-infinite-apps-and-unshaking/" class="post-read-more">[Read More]</a>
+        
+    </div>
+
+    
+
+</article>
+
           
             <article class="post-preview">
     <div class="post-preview-header">
@@ -426,69 +496,16 @@ I mused about making the disclosing tool into a pencil of the kind we see in the
 </article>
 
           
-            <article class="post-preview">
-    <div class="post-preview-header">
-        <a href="../wip/2025-04-03-change-of-tack-on-templating/">
-            <h2 class="post-title">Change of Tack on Templating</h2>
-            
-            
-        </a>
-
-        <p class="post-meta">
-            <span class="post-meta">
-  
-    
-     – April 3, 2025
-  
-  
-</span>
-
-        </p>
-    </div>
-    <div class="post-entry">
-        
-        I get to staring at the markup templates that were already implemented for the Galiano 2023 Bioblitz and thinking how to adapt/reuse them for the upcoming Diatoms of the Salish Sea viz forces me to put some things in focus about how templating is going to have to work for these communities. I&rsquo;d vaguely hoped that the details of how Infusion templating was going to interact with Hugo templating would somehow just &ldquo;come out in the wash&rdquo; but naturally this isn&rsquo;t going to happen without some kind of focused plan!
-        <a href="../wip/2025-04-03-change-of-tack-on-templating/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-
-</article>
-
-          
-            <article class="post-preview">
-    <div class="post-preview-header">
-        <a href="../wip/2025-03-28-hunting-rich-editors/">
-            <h2 class="post-title">Hunting rich editors</h2>
-            
-            
-        </a>
-
-        <p class="post-meta">
-            <span class="post-meta">
-  
-    
-     – March 28, 2025
-  
-  
-</span>
-
-        </p>
-    </div>
-    <div class="post-entry">
-        
-        The substrate&rsquo;s transition to editability will need to present a &ldquo;mostly rendered&rdquo; view of itself – managed by some form of rich text editor. A huge &ldquo;grab-bag list&rdquo; is at JefMari&rsquo;s curated list of Awesome Wysiwyg Editors which can rapidly be whittled down to a shortlist. CKEditor 5 and TinyMCE are familiar from decades ago. But the gold standard is clearly Marijn&rsquo;s ProseMirror – basic example here and really nice markdown editing example here.
-        <a href="../wip/2025-03-28-hunting-rich-editors/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-
-</article>
-
-          
         </div>
+        
+          <ul class="pager main-pager">
+            
+            
+              <li class="next">
+                <a href="../wip/page/2/">Older Posts &rarr;</a>
+              </li>
+            
+          </ul>
         
       </div>
     </div>

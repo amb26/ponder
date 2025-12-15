@@ -132,7 +132,7 @@ fluid.staticMergePolicy = {
 
 [Edit 2025-04-22:] It turns out merge policies are not returning just yet &ndash; rather thankfully. The above merge
 policy is no use without even further unnecessary complexity (such as "local merge policies") because the only
-way we can express the output of the [C3 algorithm](https://en.wikipedia.org/wiki/Draft:C3_linearization) we use to linearize
+way we can express the output of the [C3 algorithm](https://web.archive.org/web/20250409185200/https://en.wikipedia.org/wiki/C3_linearization)[^1] we use to linearize
 layer hierarchies is to push it to the top of the layer stack so that it definitively trumps any previous attempts
 to assign layers. In tidying this up we also presented a slightly better front end to C3 which up front accepts an
 array of layer names rather than the single "class name" in the classic implementation. This means we don't need
@@ -148,3 +148,5 @@ which would otherwise require us to create some special node in the layer graph 
 layer hierarchy. Thus we squarely align ourselves with Gilad's other great direction forged in his [Newspeak](https://newspeaklanguage.org/)
 system &ndash; that "kinds of things are just things too" &ndash; which can be seen as a generalisation of the notion
 of protoypal inheritance, another ancient paradigm whose time is to come.
+
+[^1]: Insufferably, this extremely helpful Wikipedia article has now been deleted.

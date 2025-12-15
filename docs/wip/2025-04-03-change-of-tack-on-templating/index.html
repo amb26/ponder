@@ -59,7 +59,7 @@
   "headline": "Change of Tack on Templating",
   "description" : "I get to staring at the markup templates that were already implemented for the Galiano 2023 Bioblitz and thinking how to adapt\/reuse them for the upcoming Diatoms of the Salish Sea viz forces me to put some things in focus about how templating is going to have to work for these communities. I\u0026rsquo;d vaguely hoped that the details of how Infusion templating was going to interact with Hugo templating would somehow just \u0026ldquo;come out in the wash\u0026rdquo; but naturally this isn\u0026rsquo;t going to happen without some kind of focused plan!",
   "inLanguage" : "en",
-  "wordCount":  874 ,
+  "wordCount":  890 ,
   "datePublished" : "2025-04-03T00:00:00\u002b00:00",
   "dateModified" : "2025-04-03T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -98,9 +98,10 @@
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
   <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
+<script type="text/javascript" src="../../js/ponder.js" ></script>
 
   </head>
-  <body>
+  <body class="wip" >
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
   <div class="container-fluid">
     <div class="navbar-ponder">
@@ -133,6 +134,12 @@
           
           <li>
             <a title="About" href="../../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Docs" href="../../docs">Docs</a>
           </li>
           
           
@@ -237,7 +244,7 @@ paths from the 404 page, but it is as least thankfully extremely good at its <em
 shit across the filesystem extremely fast, and its layered design for directory structure of themes and projects
 makes a lot of sense and is very reminiscent of Infusion layers. It is still building this site in &lt; 300ms on this
 10 year old machine which is just great and will make a night and day difference to the horrific Quarto-based
-<a href="https://imerss.github.io/bc-bryo-atlas/">Bryophytes of British Columbia</a> site which can take nearly <strong>2 hours</strong> (!!?!)
+<a href="https://github.com/IMERSS/bc-bryo-atlas">Bryophytes of British Columbia</a> site<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> which can take nearly <strong>2 hours</strong> (!!?!)
 for a clean rebuild. To mangle Arthur C. Clark &ldquo;Any sufficiently rapid imperative system is indistinguishable from
 a malleable one&rdquo; which is perhaps Kartik&rsquo;s point. But I believe that is only true up to a point.</p>
 <p>The awkward train-wreck is that Vue&rsquo;s templating syntax is based on <code>{{ }}</code> which is just the same as Vue&rsquo;s (and
@@ -254,7 +261,7 @@ avoid it colliding with Hugo&rsquo;s – and we at a sufficiently early stage of
 is just fine. We&rsquo;d already noted the strange anomaly that Vue itself moved away from <code>{{ }}</code> syntax for attributes
 – this was done 9 years ago in the transition from Vue 1 to Vue 2 written up in <a href="https://github.com/vuejs/vue/issues/4042">issue 4042</a>
 but the reasoning was never explained. The newer kind of &ldquo;weird attribute syntax&rdquo; <code>vbind:id</code> or <code>:id</code>
-is thus something that could perfectly well be supported in a Hugo post-processor or any kind of &ldquo;markup functor system&rdquo;<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+is thus something that could perfectly well be supported in a Hugo post-processor or any kind of &ldquo;markup functor system&rdquo;<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
 <p>We might support &ldquo;weird attribute syntax&rdquo; but to start with we need a replacement for <code>{{ }}</code> for which case simply
 dropping back to ES6 template syntax <code>${ }</code> seems just fine. There will never be a confusion with actual ES6 templates
 since as we lamented these things are only supported within <em>code</em> in the first place and so can never be externalised.
@@ -267,8 +274,11 @@ we had never planned to support.</p>
 <hr>
 <ol>
 <li id="fn:1">
+<p>Now running a lot better since it has been converted to a much leaner <a href="https://imerss.github.io/pnw-bryo-atlas/">Hugo site</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
 <p>Somewhere I have a scrawled drawing from the RSF days elaborating how self-templating can be seen as some funky
-kind of &ldquo;endofunctor on the category of markup&rdquo;.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+kind of &ldquo;endofunctor on the category of markup&rdquo;.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>

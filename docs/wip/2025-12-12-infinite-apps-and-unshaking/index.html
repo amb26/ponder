@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+      <title>Infinite Apps, Asynchrony and Tree Unshaking - Antranig Basman</title>
+
+  <meta name="description" content="This has been a period of consolidation since pushing on demos of Infusion 6 for the Substrates 2025 workshop and my 2025 Live incurred a good amount of technical debt. Lots of demo features were hacked on by banging on framework internals rather than by proper userland constructs, and the tidyup has proved more meaty than I imagined, with several test cases still failing for fairly fundamental reasons.
+However this has been a great opportunity to deliver more soundly on some of Infusion&rsquo;s goals and work out more of the implications of its model for software&rsquo;s material.">
+  <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Antranig Basman",
+    
+    "url": "https:\/\/ponder.org.uk"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/ponder.org.uk"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk\/wip\/2025-12-12-infinite-apps-and-unshaking\/",
+          "name": "Infinite apps, asynchrony and tree unshaking"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Antranig Basman"
+  },
+  "headline": "Infinite Apps, Asynchrony and Tree Unshaking",
+  "description" : "This has been a period of consolidation since pushing on demos of Infusion 6 for the Substrates 2025 workshop and my 2025 Live incurred a good amount of technical debt. Lots of demo features were hacked on by banging on framework internals rather than by proper userland constructs, and the tidyup has proved more meaty than I imagined, with several test cases still failing for fairly fundamental reasons.\nHowever this has been a great opportunity to deliver more soundly on some of Infusion\u0026rsquo;s goals and work out more of the implications of its model for software\u0026rsquo;s material.",
+  "inLanguage" : "en",
+  "wordCount":  1868 ,
+  "datePublished" : "2025-12-12T00:00:00\u002b00:00",
+  "dateModified" : "2025-12-12T00:00:00\u002b00:00",
+  "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+  "keywords" : [ "" ],
+  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/wip\/2025-12-12-infinite-apps-and-unshaking\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/ponder.org.uk",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="Infinite Apps, Asynchrony and Tree Unshaking" />
+<meta property="og:description" content="This has been a period of consolidation since pushing on demos of Infusion 6 for the Substrates 2025 workshop and my 2025 Live incurred a good amount of technical debt. Lots of demo features were hacked on by banging on framework internals rather than by proper userland constructs, and the tidyup has proved more meaty than I imagined, with several test cases still failing for fairly fundamental reasons.
+However this has been a great opportunity to deliver more soundly on some of Infusion&rsquo;s goals and work out more of the implications of its model for software&rsquo;s material.">
+<meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
+<meta property="og:url" content="https://ponder.org.uk/wip/2025-12-12-infinite-apps-and-unshaking/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Antranig Basman" />
+
+  <meta name="twitter:title" content="Infinite Apps, Asynchrony and Tree Unshaking" />
+  <meta name="twitter:description" content="This has been a period of consolidation since pushing on demos of Infusion 6 for the Substrates 2025 workshop and my 2025 Live incurred a good amount of technical debt. Lots of demo features were …">
+  <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@amb26ponder" />
+  <meta name="twitter:creator" content="@amb26ponder" />
+  <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.121.0">
+  <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
+  <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
+<script type="text/javascript" src="../../js/ponder.js" ></script>
+
+  </head>
+  <body class="wip" >
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-ponder">
+      <a class="navbar-ponder-brand" href="../../">Antranig Basman</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <svg width="36" height="36" viewBox="0 0 24 24" stroke="#888" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 7L4 7" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 12L4 12" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 17L4 17" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="nav navbar-nav navbar-right">
+          
+          
+          <li>
+            <a title="Posts" href="../../post">Posts</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="WiP" href="../../wip">WiP</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="About" href="../../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Docs" href="../../docs">Docs</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Communities" href="../../communities">Communities</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Projects" href="../../projects">Projects</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Terms" href="../../term">Terms</a>
+          </li>
+          
+          
+
+          
+
+          
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="header-row">
+          
+
+            <div class="wip-heading">
+              
+                <h1>Infinite Apps, Asynchrony and Tree Unshaking  </h1>
+              
+              
+                <hr class="small">
+              
+              
+
+            </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <article role="main" class="blog-post">
+        <p>This has been a period of consolidation since pushing on demos of Infusion 6 for the
+<a href="https://2025.programming-conference.org/home/substrates-2025">Substrates 2025</a> workshop and my
+<a href="https://www.youtube.com/watch?v=ai2fbWi3kUU">2025 Live</a> incurred a good amount of technical debt.
+Lots of demo features were hacked on by banging on framework internals rather than by proper userland constructs, and the
+tidyup has proved more meaty than I imagined, with several test cases still failing for fairly fundamental reasons.</p>
+<p>However this has been a great opportunity to deliver more soundly on some of Infusion&rsquo;s goals and work out more
+of the implications of its model for software&rsquo;s material.</p>
+<h3 id="infinite-software">Infinite software</h3>
+<p>In the summer I had a really interesting chat with
+<a href="https://www.komoroske.com/">Alex Komoroske</a> who was in the grip of the notion of <a href="https://abovethelaw.com/2025/07/how-one-1990s-browser-decision-created-big-techs-data-monopolies-and-how-we-might-finally-fix-it/">infinite software</a>,
+contrasted with &ldquo;infinite apps&rdquo; which are billed as the &ldquo;endless custom tools tailored to every conceivable need&rdquo; that our
+supercharged vehicle of LLMs is rolling out to us. He noted in his rolling <a href="https://groups.google.com/g/komoroske-updates/c/lU04FFJsFuU">Bits and bobs</a>
+journal that &ldquo;Instead with infinite software, the software will melt away. It will feel like your data coming alive.&rdquo;
+But how could this work, in practice?</p>
+<p>To me, the notion of &ldquo;infinite apps&rdquo; suggests something a little different. Rather than an endless <em>profusion</em> of
+isolated, siloed apps<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, I imagine apps which are instead <em>infinite in extent</em>, that is, uniting their users and putting them
+into communication via a continuous, catholic<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> substance.</p>
+<p>Now an app which is infinite in extent clearly can&rsquo;t be expected to load all of its code at once. This brings into
+relief a sharp preoccupation of today&rsquo;s endlessly frenetic build systems, that of <a href="https://en.wikipedia.org/wiki/Tree_shaking">tree shaking</a>.
+A great virtue of the ES6 modules system is that it hugely eases the static analysis required to eliminate the delivery
+of code that designers of an app&rsquo;s build have determined that the user is not going to need, and today&rsquo;s build systems are expected to take
+advantage of this capability aggressively.</p>
+<p>Readers of this blog with an enthusiasm for malleable software will already be wondering &mdash; this is all very well, but
+whose job is it to undo this process when a change in the user&rsquo;s needs requires some of this dead code to come back again?
+It&rsquo;s naturally impossible without running the build chain from the start, since the fact that the tree shaken code ever even existed
+has been ruthlessly scrubbed from the system. This pattern of &ldquo;erasure as virtue&rdquo; is something of course that we are well
+familiar with, even down to the execution paradigm itself where a function&rsquo;s arguments on the stack are erased and replaced
+with its return value &mdash; it is a central technocratic virtue that a system keeps absolutely the minimum records it needs
+to do its job<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>, and one that is at the heart of user disempowerment.</p>
+<h3 id="tree-unshaking">Tree unshaking</h3>
+<p>When the user desires the system to adapt, it needs to gracefully and in-place go through a process of <em>tree unshaking</em> &mdash;
+locating and loading code that a previous analysis considered &ldquo;dead&rdquo;, or perhaps which the original designer never considered
+relevant at all, and perhaps in the middle of a user gesture (event handler) which invokes the adaptation &mdash; or more sharply,
+the system may only discover the need for adaptation partway through the process of constructing a component.</p>
+<p>This was a topic of the <a href="https://chee.party/2025/w30/">memorable conversation</a> I had with the lovely <a href="https://chee.party/">Rabbits</a> as we stood at the
+corner of the Old Street roundabout until midnight &hellip;</p>
+<p>Things brings into scope a great mesh of issues related to how execution and construction needs to be structured
+in a malleable system. In my 2025 <a href="../../post/2025-06-03-substrates-vision#errors-and-asynchrony">substrates vision</a> I refer
+to Bob Nystrom&rsquo;s insightful <a href="https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/">What Color is Your Function</a>
+story of how asynchrony, in our current paradigm, is a viral and disruptive issue in a way that is inconsistent with malleable
+software values. The user should not be troubled by the issue of whether a piece of data or implementation is available
+in the current app&rsquo;s image via a synchronous function call or needs to be unshaken or loaded from somewhere.</p>
+<p>These days JavaScript&rsquo;s <code>async/await</code> construct closes up a lot of the syntactic gap between synchronous and asynchronous
+availability, but as Bob points out, imperfectly. And the ergonomics are not in our favour &mdash; whilst the stack is a
+<a href="../../term/divergence">divergent</a> construct, it&rsquo;s usually our main source of explanation as developers as to why the
+system is in a particular state, which an asynchronous activity largely erases.</p>
+<h3 id="asynchronous-and-partial-construction">Asynchronous and partial construction</h3>
+<p>Our dominant paradigms (functional, object-oriented,
+procedural, what-have-you) do not permit construction to be interrupted by an asynchronous activity. In a
+<a href="https://fluidproject.atlassian.net/wiki/spaces/fluid/pages/11607547/On+The+End+of+TIME+and+BEING#OnTheEndofTIMEandBEING-TheObject-OrientedTheorist'sHiddenAxiomofAtomicDelivery:">ranty 2014 wiki posting</a>
+which I&rsquo;m otherwise embarrassed by, I try to uncover this hidden axiom underlying the workflow through which subobjects or subcomponents are expected to be
+instantiated and delivered to their parents. All of their prerequisites are expected to be met before construction
+begins, and they are expected to be delivered to their parents fully constructed when the function returns. Neither
+of these expectations are compatible with the goals of malleable software.</p>
+<p>I think that reactive programming paradigms, which are becoming increasingly popular, offer an attractive way
+out of these problems, but only if they are improved substantially by increasing the forgivingness of their
+constructs, and increasing their explanatory power about their workflow, at the same time as we start to work
+with increasingly short call stacks and increasing agnosticism about whether operations are asynchronous.</p>
+<h3 id="signals-from-selectors">Signals from selectors</h3>
+<p>So what have I managed to do about this?</p>
+<p>A significant painpoint in the implementation of my <a href="https://codestrates.projects.cavi.au.dk/">Codestrates</a>-like in-browser IDE related to the moment of construction
+of the editor pane for a particular layer. The requirements of this editor (in Infusion, the layers it needs to load for its own implementation)
+can&rsquo;t be known in advance since they are content and context-dependent, yet the user expects it to appear directly and become focused in response to a mouse click.
+This was one of the sites where my summer demo banged horribly on framework internals and also was not even
+prepared for the discipline of asynchronous layer discovery and loading. Now, this site looks like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">    <span class="n">editorHolderForLayer</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">method</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">func</span><span class="p">:</span> <span class="n">async</span> <span class="p">(</span><span class="n">editorsPane</span><span class="p">,</span> <span class="n">layerName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">const</span> <span class="n">children</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">liveQueryILSelector</span><span class="p">(</span><span class="n">editorsPane</span><span class="p">,</span> <span class="s2">&#34;fluid.editor&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">await</span><span class="p">(</span><span class="n">fluid</span><span class="o">.</span><span class="n">signalToPromise</span><span class="p">(</span><span class="n">children</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">children</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">child</span> <span class="o">=&gt;</span> <span class="n">child</span><span class="o">.</span><span class="n">layerRec</span><span class="o">.</span><span class="n">layerName</span> <span class="o">===</span> <span class="n">layerName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="n">args</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;{editorsPane}&#34;</span><span class="p">,</span> <span class="s2">&#34;{0}:layerName&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span></code></pre></div><p>You can go through the interaction which passes through this site by opening up the <a href="https://fluid-project.github.io/infusion-6/demo/todo-list-sfc/">simple SFC Todo List demo</a>,
+pressing the Edit button at the top right, and then double clicking on, say, the pale blue <code>fluid.demos.todoApp</code> layer at the top.</p>
+<p>The code knows that it expects some kind of <code>fluid.editor</code> to be instantiated below a node (<code>editorsPane</code>) in the substrate tree,
+but it can&rsquo;t know exactly when or what its type or address is going to be. However, it knows that when it does construct, it
+is going to be the one whose <code>layerName</code> matches the one that was clicked on. The new construct <code>fluid.liveQueryILSelector</code> is
+strongly analogous with live selector queries that we are familiar with in jQuery-era DOM manipulation, only in this
+case it returns a signal for a component, which will produce an <em>available value</em> when the reactive graph that it addresses has settled.
+We can then directly gear this into an <code>await</code>able <code>Promise</code> by passing it through <code>fluid.signalToPromise</code>.</p>
+<p>I&rsquo;m pretty pleased with the improvement here and it also seems to have resolved a nasty race condition which would
+sometimes observe when loading the IDE. Whilst in plain JavaScript it is somewhat clunky, I find it fairly readable and
+feel it could plausibly be &ldquo;sugared away&rdquo; into a future <a href="../../term/integration-domain">integration language</a>.</p>
+<h3 id="anticipatory-construction">Anticipatory construction</h3>
+<p>Another improvement I&rsquo;ve made in this period is to relax a central dogma that I&rsquo;d subscribed to after bad experiences in &ldquo;old Infusion&rdquo;, that
+one should refuse to even start to instatiate a component until all of its layers are defined. In old Infusion, there
+were some bad ergonomics related to a layer whose definition was completely missing being treated as equivalent
+to an empty layer, meaning that typos in layer names were hard to diagnose. But since Infusion 6 is a fully
+reactive system with a notion of <a href="../../term/unavailable-value">unavailable values</a>,
+we can now distinguish between a value which is permanently missing as a result of misconfiguration, and one which is
+temporarily missing because it depends on I/O which has not completed yet.</p>
+<p>In several situations, for example when implementing SSR, it became necessary to know what DOM node, and hence
+which document, a component was bound to, before knowing anything
+about it at all other than that it was a view component. It became clear that the system needed to be able to make
+progress on the layer merging algorithm as soon as any information was available, whilst at the same time marking the overall
+component value as unavailable until all of its layers were loaded.</p>
+<h3 id="mapping-the-infinite-world">Mapping the infinite world</h3>
+<p>Another crucial improvement during this period is allowing layers which have already loaded to map the space of
+other layers which might potentially load if their names are demanded, using an  <code>$importMap</code> construct, inspired
+by the similarly named highly useful ES6 feature<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>. This definition of an import map attached to a layer definition</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fluid.def(&#34;fluid.edit&#34;, {
+</span></span><span class="line"><span class="cl">    $layers: &#34;fluid.viewComponent&#34;,
+</span></span><span class="line"><span class="cl">    $importMap: {
+</span></span><span class="line"><span class="cl">        &#34;fluid.fullPageEditor&#34;: &#34;%fluid-edit/sfc/fluid-fullPageEditor.vue&#34;
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    ```
+</span></span></code></pre></div><p>will ensure that when a component with the <code>fluid.edit</code> layer enters the substrate, the definition of layer <code>fluid.fullPageEditor</code>
+will become resolvable for a further component with that layer which starts to instantiate<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>.</p>
+<p>This definition collaborates with a <em>module definition</em> for <code>fluid-edit</code> which establishes a related family of
+strategies for resolving layer definitions, perhaps via HTTP, local storage or AutoMerge, etc. which definition would typically
+be made by a different substrate author. In this case, the definition is placed directly in the DOM substrate by the
+head integrator with a DOM node</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    &lt;fluid-module id=&#34;fluid-edit&#34; src=&#34;../../src/framework/edit&#34;&gt;&lt;/fluid-module&gt;
+</span></span></code></pre></div><p>I&rsquo;m excited that this dreamed-of alternative workflow for construction,
+anticipation of construction, and mapping the space of on-demand adaptation is already real. In another posting I will explain the complementary work I&rsquo;ve done in
+making the underlying reactive primitives more explainable (being able to trace notifications back to their causes) and
+more forgiving (being able to deal with bidirectional and cyclic graphs) in the cause of infinite, or at least indefinite,
+software.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>How I see these &ldquo;infinite apps&rdquo; is as a swarm of trillions of small, isolated tough steel spheres, malevolently
+fuelled by the planet-busting emissions which produced them, reminiscent of the iconic Dr. Who villain
+<a href="https://tardis.fandom.com/wiki/Toclafane">the Toclafane</a> which is apparently a possible fate of the human race.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>OED sense 2: Universally prevalent: said e.g. of substances, actions, laws, principles, customs, conditions, etc.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>A classic member of this genre is the <a href="https://dl.acm.org/doi/pdf/10.1145/99370.99385">spineless, tagless, G-machine</a>
+which executes programs written in functional languages more efficiently through having erased any type information (&ldquo;tags&rdquo;)
+that might make the running program state externally intelligible, and operates through repeated graph reduction
+in which the causes of execution are steadily erased.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>Note that an important aspect of Infusion import maps is that they are fully reactive, unlike ES6 import maps which <a href="https://tomashubelbauer.github.io/esm-import-map/">may not be modified</a>
+after the moment any module begins to load.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>A mature design would put these definitions elsewhere, perhaps mediated by their own reactive datasource, but this
+is fine as an illustration.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        
+        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;Infinite&#43;Apps%2C&#43;Asynchrony&#43;and&#43;Tree&#43;Unshaking&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-12-12-infinite-apps-and-unshaking%2F" target="_blank" title="Share on BlueSky">
+          <i class="fab fa-fw fa-bluesky"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-12-12-infinite-apps-and-unshaking%2f&amp;text=Infinite%20Apps%2c%20Asynchrony%20and%20Tree%20Unshaking&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fwip%2f2025-12-12-infinite-apps-and-unshaking%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-12-12-infinite-apps-and-unshaking%2f&amp;title=Infinite%20Apps%2c%20Asynchrony%20and%20Tree%20Unshaking" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-12-12-infinite-apps-and-unshaking%2f&amp;title=Infinite%20Apps%2c%20Asynchrony%20and%20Tree%20Unshaking" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="../../wip/2025-10-07-josh-horowitz-review/" data-toggle="tooltip" data-placement="top" title="Josh Horowitz Review">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="../../wip/2025-12-15-understanding-reactivity/" data-toggle="tooltip" data-placement="top" title="Understanding Reactivity">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      <script src="https://giscus.app/client.js"
+                data-repo="amb26/ponder"
+                data-repo-id="R_kgDOOKllGA"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOOKllGM4CvhAS"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="0"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script></div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="../../">Antranig Basman</a>
+            
+          
+          &nbsp;&copy;
+          2025
+
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.121.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="../../js/katex.min.js"></script>
+<script defer src="../../js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script src="../../js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+
+
+
+
+
+    
+  </body>
+</html>

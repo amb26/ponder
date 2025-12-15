@@ -3,6 +3,97 @@ h4 {
     margin-top: 20px;
 }
 
+ul > li > ul > li {
+    list-style: "";
+}
+
+/** Anchor hover links **/
+/** Liberated from octicons.css and infusion-docs.css **/
+
+@font-face {
+    font-family: 'octicons';
+    src: url('octicons.eot?#iefix') format('embedded-opentype'),
+    url('octicons.woff') format('woff'),
+    url('octicons.ttf') format('truetype'),
+    url('octicons.svg#octicons') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*
+
+.octicon is optimized for 16px.
+.mega-octicon is optimized for 32px but can be used larger.
+
+*/
+.octicon, .mega-octicon {
+    font: normal normal normal 16px/1 octicons;
+    display: inline-block;
+    text-decoration: none;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.mega-octicon { font-size: 32px; }
+
+.octicon-link:before { content: '\f05c'} /*  */
+.octicon-link-external:before { content: '\f07f'} /*  */
+
+.infusion-docs-anchor {
+    margin-left: -3rem;
+    padding-right: 4px;
+    position: absolute;
+}
+
+.infusion-docs-anchor .octicon-link {
+    color: #000;
+    vertical-align: middle;
+    visibility: hidden;
+}
+
+a.infusion-docs-anchor:hover {
+    background: inherit;
+}
+
+h1:hover .octicon-link,
+h1:focus .octicon-link,
+h2:hover .octicon-link,
+h2:focus .octicon-link,
+h3:hover .octicon-link,
+h3:focus .octicon-link,
+h4:hover .octicon-link,
+h4:focus .octicon-link {
+    visibility: visible;
+}
+
+.infusion-docs-anchor span {
+    font-size: 2.5rem
+}
+
+.infusion-docs h2 {
+    margin-left: -0.5rem;
+}
+
+/** This is what is emitted by the Hugo "figure" shortcode **/
+
+.box {
+    margin: 1em auto;
+}
+
+figure {
+}
+
+figcaption {
+    display: flex;
+    justify-content: center;
+    font-size: smaller;
+}
+
+
 .hljs-comment, .hljs-quote {
     font-style: unset;
 }
@@ -84,6 +175,7 @@ a.malleable-picture {
         margin-bottom: 10px;
         width: 70%;
     }
+
 }
 
 
@@ -93,6 +185,10 @@ a.malleable-picture {
     .ponder-front-page .ponder-content h2 {
         margin-left: -8%;
         margin-top: 45px;
+    }
+
+    .infusion-docs h2 {
+        margin-left: -3rem;
     }
 }
 

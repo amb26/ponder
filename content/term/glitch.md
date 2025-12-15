@@ -58,9 +58,16 @@ too closely during the glitch, the harmful consequences will be small. The probl
 embedded in their environment in quite the same way that analogue circuits are. Especially when interacting with
 external systems via a mechanism like `effect`, the consequences of a miscomputation may be arbitrarily bad. Given I'm
 positioning reactive primitives in [Infusion](/infusion) as a wholly satisfactory substitute for execution,
-it is essential that they are as reliable as execution, and I'd prefer a name drawn from a closer discipline. Jonathan
-Edwards' 2009 [Coherent Reaction](http://dspace.mit.edu/bitstream/handle/1721.1/45563/MIT-CSAIL-TR-2009-024.pdf) system
+it is essential that they are as reliable as execution, and I'd prefer a name drawn from a closer discipline.
+
+Before the term "glitch" became widespread, other researchers had characterised this phenomenon and given different names to it.
+
+Jonathan Edwards' 2009 [Coherent Reaction](http://dspace.mit.edu/bitstream/handle/1721.1/45563/MIT-CSAIL-TR-2009-024.pdf) system
 gives the name "coherence" to a closely related property.
+
+Ken Tilton's 2001 [Cells](https://smuglispweeny.blogspot.com/2008/02/cells-manifesto.html) reactive system,
+which seems mostly isomorphic to contemporary commodity signals systema and anticipated them by roughly 20 years, 
+refers to this property as "data integrity".
 
 #### Glitching is widespread and underappreciated
 

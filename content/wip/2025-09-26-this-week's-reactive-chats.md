@@ -22,6 +22,8 @@ To prime intuition, Patrick sent along an interactive Ohm grammar for
 
 [![Ohm arithmetic grammar](/img/ohm-grammar.png)](https://ohmjs.org/editor/#30325d346a6e803cc35344ca218d8636)
 
+#### Alien signals and Adapton
+
 In turn I pinged with a link to Jackson Chu's very interesting work on [alien-signals](https://github.com/stackblitz/alien-signals?tab=readme-ov-file#background)
 which is being used in [language tooling contexts](https://github.com/vuejs/language-tools/blob/a40c6d8c0ba7b2ae5fcf774098eda11242a49995/packages/language-core/lib/virtualFile/computedVueSfc.ts#L18)
 in upcoming versions of Vue.js. 
@@ -174,8 +176,9 @@ type system. Note that Infusion designs are already "opportunistically writeable
 arbitrary "yellow" data layers wherever they like – this represents a similar dynamic "user-driven change of 
 provenance/transportability".
 
-Finally the idea of the "hierarchy of goodness" that could be enjoyed by functions
-along the arcs:
+#### Hierarchy of good functions
+
+Finally the idea of the "hierarchy of goodness" that could be enjoyed by functions along the arcs:
 
 * The identity – which in imperative memory ontologies appears as "aliasing". "The same content knowably in more than one place",
 which could be honoured by genuine aliasing in the underlying memory model, but at the very least should be trivially
@@ -183,6 +186,6 @@ write-through, that is, "The same content knowably writeable at more than one ad
 * Linear functions – genuine linear functions such as `C = 5 * (F - 32) / 9`, boolean NOT, etc. which can be
 "invertible on sight" when seen by the parser without the user needing to do anything about it.
 * Manually inverted functions – the user manually supplies an inverse and is assumed to know what they are doing.
-* [Good functions](/term/a-good-function) – A closed algebra of blessed functions not doing excessive computation and
+* [Good functions](/term/a-good-function) proper – A closed algebra of blessed functions not doing excessive computation and
 likely not invertible at all
 * Anything else

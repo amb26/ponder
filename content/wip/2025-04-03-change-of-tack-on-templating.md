@@ -32,7 +32,7 @@ paths from the 404 page, but it is as least thankfully extremely good at its _on
 shit across the filesystem extremely fast, and its layered design for directory structure of themes and projects
 makes a lot of sense and is very reminiscent of Infusion layers. It is still building this site in < 300ms on this
 10 year old machine which is just great and will make a night and day difference to the horrific Quarto-based
-[Bryophytes of British Columbia](https://imerss.github.io/bc-bryo-atlas/) site which can take nearly **2 hours** (!!?!)
+[Bryophytes of British Columbia](https://github.com/IMERSS/bc-bryo-atlas) site[^1] which can take nearly **2 hours** (!!?!)
 for a clean rebuild. To mangle Arthur C. Clark "Any sufficiently rapid imperative system is indistinguishable from
 a malleable one" which is perhaps Kartik's point. But I believe that is only true up to a point.
 
@@ -51,7 +51,7 @@ avoid it colliding with Hugo's &ndash; and we at a sufficiently early stage of d
 is just fine. We'd already noted the strange anomaly that Vue itself moved away from ``{{ }}`` syntax for attributes
 &ndash; this was done 9 years ago in the transition from Vue 1 to Vue 2 written up in [issue 4042](https://github.com/vuejs/vue/issues/4042)
 but the reasoning was never explained. The newer kind of "weird attribute syntax" ``vbind:id`` or ``:id`` 
-is thus something that could perfectly well be supported in a Hugo post-processor or any kind of "markup functor system"[^1].
+is thus something that could perfectly well be supported in a Hugo post-processor or any kind of "markup functor system"[^2].
 
 We might support "weird attribute syntax" but to start with we need a replacement for ``{{ }}`` for which case simply
 dropping back to ES6 template syntax ``${ }`` seems just fine. There will never be a confusion with actual ES6 templates
@@ -62,5 +62,6 @@ clarity that it is only intended to support interpolation of **values**, as agai
 well as Handlebars has always supported a variety of other exotic control flow constructs such as ``{{ if }}`` which
 we had never planned to support.
 
-[^1]: Somewhere I have a scrawled drawing from the RSF days elaborating how self-templating can be seen as some funky
+[^1]: Now running a lot better since it has been converted to a much leaner [Hugo site](https://imerss.github.io/pnw-bryo-atlas/)
+[^2]: Somewhere I have a scrawled drawing from the RSF days elaborating how self-templating can be seen as some funky
 kind of "endofunctor on the category of markup".

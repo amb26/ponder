@@ -8,8 +8,22 @@
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <lastBuildDate>Tue, 07 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 15 Dec 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ponder.org.uk/wip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Understanding Reactivity</title>
+      <link>https://ponder.org.uk/wip/2025-12-15-understanding-reactivity/</link>
+      <pubDate>Mon, 15 Dec 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-12-15-understanding-reactivity/</guid>
+      <description>Since late 2023 when I found myself fatefully staring at the test case in preact-signals that I describe in my Archaeology of Glitches posting, along with my lightbulb moment that there was this guarantee of data consistency that a reactive system could provide, I also realised that it could be possible for Infusion to be turned into a fully reactive system, rather than the somewhat opportunistic system I&amp;rsquo;d been building through the 2010s.</description>
+    </item>
+    <item>
+      <title>Infinite Apps, Asynchrony and Tree Unshaking</title>
+      <link>https://ponder.org.uk/wip/2025-12-12-infinite-apps-and-unshaking/</link>
+      <pubDate>Fri, 12 Dec 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-12-12-infinite-apps-and-unshaking/</guid>
+      <description>This has been a period of consolidation since pushing on demos of Infusion 6 for the Substrates 2025 workshop and my 2025 Live incurred a good amount of technical debt. Lots of demo features were hacked on by banging on framework internals rather than by proper userland constructs, and the tidyup has proved more meaty than I imagined, with several test cases still failing for fairly fundamental reasons.&#xA;However this has been a great opportunity to deliver more soundly on some of Infusion&amp;rsquo;s goals and work out more of the implications of its model for software&amp;rsquo;s material.</description>
+    </item>
     <item>
       <title>Josh Horowitz Review</title>
       <link>https://ponder.org.uk/wip/2025-10-07-josh-horowitz-review/</link>

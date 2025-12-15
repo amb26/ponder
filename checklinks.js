@@ -34,7 +34,9 @@ function extractLinks(htmlContent) {
     const { document } = parseHTML(htmlContent);
     return [...document.querySelectorAll("a")]
         .map(a => a.getAttribute("href"))
-        .filter(href => href && !href.startsWith("mailto:") && !href.startsWith("https://bsky.app/intent"))
+        .filter(href => href && !href.startsWith("mailto:") &&
+            !href.startsWith("https://bsky.app/intent") &&
+            !href.startsWith("https://reddit.com/submit"))
         .map(href => href.split("#")[0]);
 }
 

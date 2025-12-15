@@ -106,19 +106,24 @@ pygmentsCodefencesGuessSyntax = true
     weight = 1
 
 [[menu.main]]
+    name = "Docs"
+    url = "docs"
+    weight = 3
+
+[[menu.main]]
     name = "About"
     url = "page/about/"
-    weight = 2
+    weight = 3
 
 [[menu.main]]
     name = "Communities"
     url = "communities"
-    weight = 3
+    weight = 4
 
 [[menu.main]]
     name = "Projects"
     url = "projects"
-    weight = 4
+    weight = 5
 
 
 [[menu.main]]

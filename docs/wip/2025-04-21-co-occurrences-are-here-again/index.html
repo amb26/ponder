@@ -61,7 +61,7 @@ fluid.def(&#34;fluid.tests.todoItem&#34;, { $layers: &#34;fluid.">
   "headline": "Co-occurrences are here again",
   "description" : "Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter features at the expense of what might have been \u0026ldquo;speculative nonsense\u0026rdquo; in its earlier history. However, implementing something pretty basic – the ability to render lists of components – brought me right back to an old conversation.\nHere\u0026rsquo;s the situation – one author wrote a todoItem which is a templateViewComponent:\nfluid.def(\u0026#34;fluid.tests.todoItem\u0026#34;, { $layers: \u0026#34;fluid.",
   "inLanguage" : "en",
-  "wordCount":  1248 ,
+  "wordCount":  1258 ,
   "datePublished" : "2025-04-21T00:00:00\u002b00:00",
   "dateModified" : "2025-04-21T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -102,9 +102,10 @@ fluid.def(&#34;fluid.tests.todoItem&#34;, { $layers: &#34;fluid.">
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
   <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
+<script type="text/javascript" src="../../js/ponder.js" ></script>
 
   </head>
-  <body>
+  <body class="wip" >
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
   <div class="container-fluid">
     <div class="navbar-ponder">
@@ -137,6 +138,12 @@ fluid.def(&#34;fluid.tests.todoItem&#34;, { $layers: &#34;fluid.">
           
           <li>
             <a title="About" href="../../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Docs" href="../../docs">Docs</a>
           </li>
           
           
@@ -312,7 +319,7 @@ isn&rsquo;t emerging in user programs yet we can for the time being hack this ve
 </span></span><span class="line"><span class="cl">};
 </span></span></code></pre></div><p>[Edit 2025-04-22:] It turns out merge policies are not returning just yet – rather thankfully. The above merge
 policy is no use without even further unnecessary complexity (such as &ldquo;local merge policies&rdquo;) because the only
-way we can express the output of the <a href="https://en.wikipedia.org/wiki/Draft:C3_linearization">C3 algorithm</a> we use to linearize
+way we can express the output of the <a href="https://web.archive.org/web/20250409185200/https://en.wikipedia.org/wiki/C3_linearization">C3 algorithm</a><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> we use to linearize
 layer hierarchies is to push it to the top of the layer stack so that it definitively trumps any previous attempts
 to assign layers. In tidying this up we also presented a slightly better front end to C3 which up front accepts an
 array of layer names rather than the single &ldquo;class name&rdquo; in the classic implementation. This means we don&rsquo;t need
@@ -324,6 +331,14 @@ to do weird stuff when the user writes (in that rare, exiguous world of direct f
 layer hierarchy. Thus we squarely align ourselves with Gilad&rsquo;s other great direction forged in his <a href="https://newspeaklanguage.org/">Newspeak</a>
 system – that &ldquo;kinds of things are just things too&rdquo; – which can be seen as a generalisation of the notion
 of protoypal inheritance, another ancient paradigm whose time is to come.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Insufferably, this extremely helpful Wikipedia article has now been deleted.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
 
 
         

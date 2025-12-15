@@ -60,7 +60,7 @@ Patrick pinged me last week explaining that he was contemplating a collaboration
   "headline": "This week\u0027s reactive chats",
   "description" : "Some good chats this week on reactive matters. Firstly on Tuesday with Patrick Dubroy, a fellow substratist. Patrick is a splendid chap who amongst many other works is the maintainer of a powerful, user-friendly parsing toolkit Ohm.\nPatrick pinged me last week explaining that he was contemplating a collaboration with Camille and Yann who were building a document publishing pipeline sourced from, amongst other formats, AsciiDoc (for related details see Camille\u0026rsquo;s recent PhD thesis).",
   "inLanguage" : "en",
-  "wordCount":  1910 ,
+  "wordCount":  1919 ,
   "datePublished" : "2025-09-26T00:00:00\u002b00:00",
   "dateModified" : "2025-09-26T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -100,9 +100,10 @@ Patrick pinged me last week explaining that he was contemplating a collaboration
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
   <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
+<script type="text/javascript" src="../../js/ponder.js" ></script>
 
   </head>
-  <body>
+  <body class="wip" >
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
   <div class="container-fluid">
     <div class="navbar-ponder">
@@ -135,6 +136,12 @@ Patrick pinged me last week explaining that he was contemplating a collaboration
           
           <li>
             <a title="About" href="../../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Docs" href="../../docs">Docs</a>
           </li>
           
           
@@ -228,6 +235,7 @@ publishing 300-pages books and the like.
 To prime intuition, Patrick sent along an interactive Ohm grammar for
 <a href="https://ohmjs.org/editor/#30325d346a6e803cc35344ca218d8636">arithmetic expressions</a>.</p>
 <p><a href="https://ohmjs.org/editor/#30325d346a6e803cc35344ca218d8636"><img src="../../img/ohm-grammar.png" alt="Ohm arithmetic grammar"></a></p>
+<h4 id="alien-signals-and-adapton">Alien signals and Adapton</h4>
 <p>In turn I pinged with a link to Jackson Chu&rsquo;s very interesting work on <a href="https://github.com/stackblitz/alien-signals?tab=readme-ov-file#background">alien-signals</a>
 which is being used in <a href="https://github.com/vuejs/language-tools/blob/a40c6d8c0ba7b2ae5fcf774098eda11242a49995/packages/language-core/lib/virtualFile/computedVueSfc.ts#L18">language tooling contexts</a>
 in upcoming versions of Vue.js.</p>
@@ -353,8 +361,8 @@ through from-scratch consistency. We need to retain a dynamic version of this af
 type system. Note that Infusion designs are already &ldquo;opportunistically writeable&rdquo; since the user is permitted to layer
 arbitrary &ldquo;yellow&rdquo; data layers wherever they like – this represents a similar dynamic &ldquo;user-driven change of
 provenance/transportability&rdquo;.</p>
-<p>Finally the idea of the &ldquo;hierarchy of goodness&rdquo; that could be enjoyed by functions
-along the arcs:</p>
+<h4 id="hierarchy-of-good-functions">Hierarchy of good functions</h4>
+<p>Finally the idea of the &ldquo;hierarchy of goodness&rdquo; that could be enjoyed by functions along the arcs:</p>
 <ul>
 <li>The identity – which in imperative memory ontologies appears as &ldquo;aliasing&rdquo;. &ldquo;The same content knowably in more than one place&rdquo;,
 which could be honoured by genuine aliasing in the underlying memory model, but at the very least should be trivially
@@ -362,7 +370,7 @@ write-through, that is, &ldquo;The same content knowably writeable at more than 
 <li>Linear functions – genuine linear functions such as <code>C = 5 * (F - 32) / 9</code>, boolean NOT, etc. which can be
 &ldquo;invertible on sight&rdquo; when seen by the parser without the user needing to do anything about it.</li>
 <li>Manually inverted functions – the user manually supplies an inverse and is assumed to know what they are doing.</li>
-<li><a href="../../term/a-good-function">Good functions</a> – A closed algebra of blessed functions not doing excessive computation and
+<li><a href="../../term/a-good-function">Good functions</a> proper – A closed algebra of blessed functions not doing excessive computation and
 likely not invertible at all</li>
 <li>Anything else</li>
 </ul>

@@ -60,7 +60,7 @@ My first 2024 simplistic version of this simply repurposed the JavaScript undefi
   "headline": "Unavailable Value",
   "description" : "An unavailable value is a special payload to a reactive system unifying handling of errors and asynchrony under a common mechanism responding to \u0026ldquo;design incompletion for any reason\u0026rdquo;. I named a special reactive payload as an \u0026ldquo;unavailable value\u0026rdquo; indicating that the design was incomplete either as a result of depending on pending I\/O or else on a design\/syntax error in the system.\nMy first 2024 simplistic version of this simply repurposed the JavaScript undefined value as a special reactive payload that would short-circuit behaviour of any computed and cull the action of any effect that was geared through it.",
   "inLanguage" : "en",
-  "wordCount":  1520 ,
+  "wordCount":  1519 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -100,9 +100,10 @@ My first 2024 simplistic version of this simply repurposed the JavaScript undefi
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
   <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
+<script type="text/javascript" src="../../js/ponder.js" ></script>
 
   </head>
-  <body>
+  <body class="term" >
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
   <div class="container-fluid">
     <div class="navbar-ponder">
@@ -135,6 +136,12 @@ My first 2024 simplistic version of this simply repurposed the JavaScript undefi
           
           <li>
             <a title="About" href="../../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Docs" href="../../docs">Docs</a>
           </li>
           
           
@@ -281,7 +288,7 @@ sites in the graph where the incompletion (I/O, error) occurred.</p>
 </span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="o">*</span> <span class="s2">&#34;error&#34;</span> <span class="n">indicates</span> <span class="n">a</span> <span class="n">syntax</span> <span class="n">issue</span> <span class="n">that</span> <span class="n">needs</span> <span class="n">design</span> <span class="n">intervention</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="o">*</span> <span class="s2">&#34;config&#34;</span> <span class="n">indicates</span> <span class="n">configuration</span> <span class="n">designed</span> <span class="n">to</span> <span class="n">short</span><span class="o">-</span><span class="n">circuit</span> <span class="n">evaluation</span> <span class="n">which</span> <span class="n">is</span> <span class="ow">not</span> <span class="n">required</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="o">*</span> <span class="s2">&#34;I/O&#34;</span> <span class="n">indicates</span> <span class="n">pending</span> <span class="n">I</span><span class="o">/</span><span class="n">O</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="k">return</span> <span class="p">{</span><span class="n">fluid</span><span class="o">.</span><span class="n">marker</span><span class="p">}</span> <span class="n">A</span> <span class="n">marker</span> <span class="n">of</span> <span class="n">type</span> <span class="s2">&#34;Unavailable&#34;</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="k">return</span> <span class="p">{</span><span class="n">Unavailable</span><span class="p">}</span> <span class="n">An</span> <span class="n">unavailable</span> <span class="n">value</span> <span class="n">marker</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">     <span class="o">*/</span>
 </span></span><span class="line"><span class="cl">    <span class="n">fluid</span><span class="o">.</span><span class="n">unavailable</span> <span class="o">=</span> <span class="p">(</span><span class="n">cause</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">variety</span> <span class="o">=</span> <span class="s2">&#34;error&#34;</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">togo</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">makeMarker</span><span class="p">(</span><span class="s2">&#34;Unavailable&#34;</span><span class="p">,</span> <span class="p">{</span>

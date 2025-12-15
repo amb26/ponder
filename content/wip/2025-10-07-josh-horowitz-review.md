@@ -39,7 +39,7 @@ system which is standard to algorithms like [lodash.merge](https://lodash.com/do
 Infusion contextualises this merge algorithm in the following way:
 
 * Each layer has a globally unique *namespaced name* such as [`fluid.demos.todoList`](https://github.com/fluid-project/infusion-6/blob/main/demo/todo-list-assign/sfc/fluid-demos-todoList.vue)
-* The ordering of parent layers to be merged is determined by the standard [C3 linearisation algorithm](https://en.wikipedia.org/wiki/Draft:C3_linearization)
+* The ordering of parent layers to be merged is determined by the standard [C3 linearisation algorithm](https://web.archive.org/web/20250409185200/https://en.wikipedia.org/wiki/C3_linearization)
 applied to layer names stored in a layer property `$layers` which holds one or more parent layer names
 * The contents of each layer are considered immutable for the purposes of the merge algorithm, and whilst any form of
 JS object is permitted within layers, any material not directly descended from `Object` or `Array` will be considered atomic

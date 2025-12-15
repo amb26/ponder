@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docs on Antranig Basman</title>
+    <link>https://ponder.org.uk/docs/</link>
+    <description>Recent content in Docs on Antranig Basman</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
+    <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
+    <atom:link href="https://ponder.org.uk/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fluid Signals API</title>
+      <link>https://ponder.org.uk/docs/fluid-signals/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/fluid-signals/</guid>
+      <description>This page documents the reactive library underlying Fluid Infusion 6, based around the primitive fluid.cell. I chose the name &amp;ldquo;cell&amp;rdquo;, rather than &amp;ldquo;signal&amp;rdquo; which is more common in the 2020s JavaScript reactive community, in honour of 3 traditions:&#xA;Spreadsheet cells, which are the public&amp;rsquo;s primeval grounding in reactivity. Kenny Tilton&amp;rsquo;s Cells system for CLOS, which in 2001, 5 years before the coining of the terms &amp;ldquo;glitch&amp;rdquo; and &amp;ldquo;reactive programming&amp;rdquo;, had already solved all the problems of reactivity embedded in imperative programming languages.</description>
+    </item>
+  </channel>
+</rss>

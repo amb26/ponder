@@ -8,8 +8,22 @@
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <lastBuildDate>Tue, 07 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 15 Dec 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ponder.org.uk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Understanding Reactivity</title>
+      <link>https://ponder.org.uk/wip/2025-12-15-understanding-reactivity/</link>
+      <pubDate>Mon, 15 Dec 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-12-15-understanding-reactivity/</guid>
+      <description>Since late 2023 when I found myself fatefully staring at the test case in preact-signals that I describe in my Archaeology of Glitches posting, along with my lightbulb moment that there was this guarantee of data consistency that a reactive system could provide, I also realised that it could be possible for Infusion to be turned into a fully reactive system, rather than the somewhat opportunistic system I&amp;rsquo;d been building through the 2010s.</description>
+    </item>
+    <item>
+      <title>Infinite Apps, Asynchrony and Tree Unshaking</title>
+      <link>https://ponder.org.uk/wip/2025-12-12-infinite-apps-and-unshaking/</link>
+      <pubDate>Fri, 12 Dec 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-12-12-infinite-apps-and-unshaking/</guid>
+      <description>This has been a period of consolidation since pushing on demos of Infusion 6 for the Substrates 2025 workshop and my 2025 Live incurred a good amount of technical debt. Lots of demo features were hacked on by banging on framework internals rather than by proper userland constructs, and the tidyup has proved more meaty than I imagined, with several test cases still failing for fairly fundamental reasons.&#xA;However this has been a great opportunity to deliver more soundly on some of Infusion&amp;rsquo;s goals and work out more of the implications of its model for software&amp;rsquo;s material.</description>
+    </item>
     <item>
       <title>Josh Horowitz Review</title>
       <link>https://ponder.org.uk/wip/2025-10-07-josh-horowitz-review/</link>
@@ -170,6 +184,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
       <guid>https://ponder.org.uk/term/externalisability/</guid>
       <description>Defined in my 2018 paper, externalisability, together with its dual property of addressibility, represents an essential property of a substrate supporting open authorship. An externalisable design is one which is serialisable in a form in which every design element has more or less stable and legible coordinates. An addressible, externalised serialisation of a design could be in terms of a JSON document with human-readable keys, to be contrasted with relatively opaque kinds of serialisation such as Python&amp;rsquo;s pickling or Java&amp;rsquo;s object serialization systems, designed to round-trip arbitrary in-memory structures allocated in a general-purpose programming language.</description>
+    </item>
+    <item>
+      <title>Fluid Signals API</title>
+      <link>https://ponder.org.uk/docs/fluid-signals/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/fluid-signals/</guid>
+      <description>This page documents the reactive library underlying Fluid Infusion 6, based around the primitive fluid.cell. I chose the name &amp;ldquo;cell&amp;rdquo;, rather than &amp;ldquo;signal&amp;rdquo; which is more common in the 2020s JavaScript reactive community, in honour of 3 traditions:&#xA;Spreadsheet cells, which are the public&amp;rsquo;s primeval grounding in reactivity. Kenny Tilton&amp;rsquo;s Cells system for CLOS, which in 2001, 5 years before the coining of the terms &amp;ldquo;glitch&amp;rdquo; and &amp;ldquo;reactive programming&amp;rdquo;, had already solved all the problems of reactivity embedded in imperative programming languages.</description>
     </item>
     <item>
       <title>Glitch</title>

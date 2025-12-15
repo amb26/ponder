@@ -81,7 +81,7 @@ Here's an excerpt of the current unavailable value support, with much work still
      * * "error" indicates a syntax issue that needs design intervention.
      * * "config" indicates configuration designed to short-circuit evaluation which is not required.
      * * "I/O" indicates pending I/O
-     * @return {fluid.marker} A marker of type "Unavailable".
+     * @return {Unavailable} An unavailable value marker.
      */
     fluid.unavailable = (cause = {}, variety = "error") => {
         const togo = fluid.makeMarker("Unavailable", {
