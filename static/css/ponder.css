@@ -78,6 +78,10 @@ h4:focus .octicon-link {
     margin-left: -0.5rem;
 }
 
+.post-single h3 {
+    margin-left: -0.5rem;
+}
+
 /** This is what is emitted by the Hugo "figure" shortcode **/
 
 .box {
@@ -187,8 +191,12 @@ a.malleable-picture {
         margin-top: 45px;
     }
 
-    .infusion-docs h2 {
+    .infusion-docs h2, .post-single h2 {
         margin-left: -3rem;
+    }
+
+    .post-single h3 {
+        margin-left: -2rem
     }
 }
 

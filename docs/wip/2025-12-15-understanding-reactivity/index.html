@@ -59,7 +59,7 @@
   "headline": "Understanding Reactivity",
   "description" : "Since late 2023 when I found myself fatefully staring at the test case in preact-signals that I describe in my Archaeology of Glitches posting, along with my lightbulb moment that there was this guarantee of data consistency that a reactive system could provide, I also realised that it could be possible for Infusion to be turned into a fully reactive system, rather than the somewhat opportunistic system I\u0026rsquo;d been building through the 2010s.",
   "inLanguage" : "en",
-  "wordCount":  2108 ,
+  "wordCount":  2143 ,
   "datePublished" : "2025-12-15T00:00:00\u002b00:00",
   "dateModified" : "2025-12-15T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -101,7 +101,7 @@
 <script type="text/javascript" src="../../js/ponder.js" ></script>
 
   </head>
-  <body class="wip" >
+  <body class="post-single" >
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
   <div class="container-fluid">
     <div class="navbar-ponder">
@@ -195,7 +195,7 @@
         <div class="header-row">
           
 
-            <div class="wip-heading">
+            <div class="post-single-heading">
               
                 <h1>Understanding Reactivity  </h1>
               
@@ -386,23 +386,27 @@ specifying them. In my naive days I imagined that handling such things was one t
 until Rabbits pointed out to me that Adapton is less rather than more capable than commodity signals since it doesn&rsquo;t
 even satisfy the <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2018/03/build-systems.pdf">early cutoff</a> property.</p>
 <p>The community would like to pretend that the graph is not modified during reactions<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, but this is not realistic,
-especially in a self-reactive malleable environment. In solid-signals, there has for some years been a helpful test
+especially in a self-reactive malleable environment. In solid-signals, there has for a few years been a helpful test
 <a href="https://github.com/solidjs/signals/blob/af7e8f5bc2fe962eb980857eb021d0c0c1ca5f6a/tests/graph.test.ts#L383-L408"><code>&quot;updates downstream pending computations&quot;</code></a>
 which checks that just such a situation is covered. Porting this test to a few other commodity frameworks
 reassuringly produces the same order of notification <code>&quot;c1c2t1c2_1&quot;</code> but somewhat alarmingly as of November 2025 there
-has been an <a href="https://github.com/solidjs/signals/blob/48fbd676602961e2bd0777c4ecb724317357bfc7/tests/graph.test.ts#L382-L408">update to the test</a> that flips the order
+has been an <a href="https://github.com/solidjs/signals/blob/48fbd676602961e2bd0777c4ecb724317357bfc7/tests/graph.test.ts#L382-L408">update to Solid&rsquo;s test</a> that flips the order
 to <code>&quot;t1c1c2c2_1&quot;</code>. This comes along with a new propagation mode which expects that previously synchronous computations
 will not propagate across the graph unless they are manually cranked with a call to <code>flush()</code>. To the extent I understand
-the new model, I am not averse to it &mdash; deprivileging authors in the space of code by shortening their stacks,
+the new model, I feel positive towards it &mdash; deprivileging authors in the space of code by shortening their stacks,
 in favour of those living in the substrate who expect naive realism with as <a href="../../term/divergence">few hidden coordinates</a> as possible feels like
-a good direction. But I imagine that a generation of coders who have grown up with the expectation that an effect or
-manual pull of a value will immediately cause it to be brought up to date might find this model to be confounding.
-We will continue to watch this space.</p>
+a good direction. But I imagine that a generation of coders<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> who have grown up with the expectation that an effect or
+manual pull of a value will immediately cause it to be brought up to date might find this model to be confounding.</p>
+<p>A clear question is &mdash; is this reversal of the order of notification a necessary consequence of moving to a universally
+asynchronous model of notification? Enquiring minds will sift this out.</p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn:1">
-<p>Except through changing subscriptions to pre-existing dependencies&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Except through changing subscriptions to pre-existing dependencies.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>3 years counts as a generation amongst JavaScript frameworks, I think.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>

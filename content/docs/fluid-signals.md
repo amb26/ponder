@@ -51,7 +51,7 @@ Support for bidirectional relationships entails support for multiple computed re
 capable of updating the value of a single cell. This is a capability not found in any popular reactive library.
 In isolation, this capability might lead to the possibility for inconsistent or conflicting updates --- however,
 `fluid.cell` follows the insight from Dan Ingall's [Fabrik](https://dl.acm.org/doi/pdf/10.1145/62083.62100) system which
-recognizes "utilize bidirectional dataflow connections as a shorthand for multiple paths of flow". As one leg of a bidirectional
+recognizes "bidirectional dataflow connections as a shorthand for multiple paths of flow". As one leg of a bidirectional
 relationship is activated, the reverse leg is removed from consideration for this reactive update cycle (I name this a "fit"),
 removing the chance for cyclic updates.
 

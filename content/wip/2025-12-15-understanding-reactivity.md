@@ -1,6 +1,7 @@
 ---
 title: Understanding Reactivity
 date: 2025-12-15
+type: post-single
 ---
 
 Since late 2023 when I found myself fatefully staring at the test case in preact-signals that I describe in my
@@ -181,17 +182,20 @@ until Rabbits pointed out to me that Adapton is less rather than more capable th
 even satisfy the [early cutoff](https://www.microsoft.com/en-us/research/wp-content/uploads/2018/03/build-systems.pdf) property.
 
 The community would like to pretend that the graph is not modified during reactions[^1], but this is not realistic,
-especially in a self-reactive malleable environment. In solid-signals, there has for some years been a helpful test
+especially in a self-reactive malleable environment. In solid-signals, there has for a few years been a helpful test
 [`"updates downstream pending computations"`](https://github.com/solidjs/signals/blob/af7e8f5bc2fe962eb980857eb021d0c0c1ca5f6a/tests/graph.test.ts#L383-L408)
 which checks that just such a situation is covered. Porting this test to a few other commodity frameworks
 reassuringly produces the same order of notification `"c1c2t1c2_1"` but somewhat alarmingly as of November 2025 there
-has been an [update to the test](https://github.com/solidjs/signals/blob/48fbd676602961e2bd0777c4ecb724317357bfc7/tests/graph.test.ts#L382-L408) that flips the order
+has been an [update to Solid's test](https://github.com/solidjs/signals/blob/48fbd676602961e2bd0777c4ecb724317357bfc7/tests/graph.test.ts#L382-L408) that flips the order
 to `"t1c1c2c2_1"`. This comes along with a new propagation mode which expects that previously synchronous computations
 will not propagate across the graph unless they are manually cranked with a call to `flush()`. To the extent I understand
-the new model, I am not averse to it --- deprivileging authors in the space of code by shortening their stacks,
+the new model, I feel positive towards it --- deprivileging authors in the space of code by shortening their stacks,
 in favour of those living in the substrate who expect naive realism with as [few hidden coordinates](/term/divergence) as possible feels like
-a good direction. But I imagine that a generation of coders who have grown up with the expectation that an effect or
-manual pull of a value will immediately cause it to be brought up to date might find this model to be confounding. 
-We will continue to watch this space.
+a good direction. But I imagine that a generation of coders[^2] who have grown up with the expectation that an effect or
+manual pull of a value will immediately cause it to be brought up to date might find this model to be confounding.
 
-[^1]: Except through changing subscriptions to pre-existing dependencies
+A clear question is --- is this reversal of the order of notification a necessary consequence of moving to a universally
+asynchronous model of notification? Enquiring minds will sift this out.
+
+[^1]: Except through changing subscriptions to pre-existing dependencies.
+[^2]: 3 years counts as a generation amongst JavaScript frameworks, I think.
