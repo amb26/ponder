@@ -164,7 +164,7 @@ img {
 }
 
 @media (prefers-color-scheme: dark) {
-  .navbar-custom .navbar-brand,
+  .navbar-custom .navbar-ponder-brand,
   .navbar-custom .nav li a {
     color: #b0b0b0;
   }
