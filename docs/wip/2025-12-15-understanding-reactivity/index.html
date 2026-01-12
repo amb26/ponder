@@ -8,7 +8,8 @@
 
       <title>Understanding Reactivity - Antranig Basman</title>
 
-  <meta name="description" content="Since late 2023 when I found myself fatefully staring at the test case in preact-signals that I describe in my Archaeology of Glitches posting, along with my lightbulb moment that there was this guarantee of data consistency that a reactive system could provide, I also realised that it could be possible for Infusion to be turned into a fully reactive system, rather than the somewhat opportunistic system I&rsquo;d been building through the 2010s.">
+  <meta name="description" content="In late 2023, staring at the &ldquo;flag&rdquo; test case in preact-signals that I describe in my Archaeology of Glitches posting, I realised something decisive: reactive systems can provide a strong, structural guarantee of data consistency. Given that, it became clear that Infusion could be reworked as a fully reactive system, rather than the opportunistic hybrid I had been building through the 2010s.
+This post will notice that the apparent diversity of reactive systems masks a simple unifying principle, related to a principle I had already been following in Infusion&rsquo;s development.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -57,9 +58,9 @@
     "name" : "Antranig Basman"
   },
   "headline": "Understanding Reactivity",
-  "description" : "Since late 2023 when I found myself fatefully staring at the test case in preact-signals that I describe in my Archaeology of Glitches posting, along with my lightbulb moment that there was this guarantee of data consistency that a reactive system could provide, I also realised that it could be possible for Infusion to be turned into a fully reactive system, rather than the somewhat opportunistic system I\u0026rsquo;d been building through the 2010s.",
+  "description" : "In late 2023, staring at the \u0026ldquo;flag\u0026rdquo; test case in preact-signals that I describe in my Archaeology of Glitches posting, I realised something decisive: reactive systems can provide a strong, structural guarantee of data consistency. Given that, it became clear that Infusion could be reworked as a fully reactive system, rather than the opportunistic hybrid I had been building through the 2010s.\nThis post will notice that the apparent diversity of reactive systems masks a simple unifying principle, related to a principle I had already been following in Infusion\u0026rsquo;s development.",
   "inLanguage" : "en",
-  "wordCount":  2143 ,
+  "wordCount":  2146 ,
   "datePublished" : "2025-12-15T00:00:00\u002b00:00",
   "dateModified" : "2025-12-15T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -80,14 +81,15 @@
 
 
 <meta property="og:title" content="Understanding Reactivity" />
-<meta property="og:description" content="Since late 2023 when I found myself fatefully staring at the test case in preact-signals that I describe in my Archaeology of Glitches posting, along with my lightbulb moment that there was this guarantee of data consistency that a reactive system could provide, I also realised that it could be possible for Infusion to be turned into a fully reactive system, rather than the somewhat opportunistic system I&rsquo;d been building through the 2010s.">
+<meta property="og:description" content="In late 2023, staring at the &ldquo;flag&rdquo; test case in preact-signals that I describe in my Archaeology of Glitches posting, I realised something decisive: reactive systems can provide a strong, structural guarantee of data consistency. Given that, it became clear that Infusion could be reworked as a fully reactive system, rather than the opportunistic hybrid I had been building through the 2010s.
+This post will notice that the apparent diversity of reactive systems masks a simple unifying principle, related to a principle I had already been following in Infusion&rsquo;s development.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/wip/2025-12-15-understanding-reactivity/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="Understanding Reactivity" />
-  <meta name="twitter:description" content="Since late 2023 when I found myself fatefully staring at the test case in preact-signals that I describe in my Archaeology of Glitches posting, along with my lightbulb moment that there was this …">
+  <meta name="twitter:description" content="In late 2023, staring at the &ldquo;flag&rdquo; test case in preact-signals that I describe in my Archaeology of Glitches posting, I realised something decisive: reactive systems can provide a strong, …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
@@ -218,11 +220,13 @@
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
       <article role="main" class="blog-post">
-        <p>Since late 2023 when I found myself fatefully staring at the test case in preact-signals that I describe in my
-<a href="../../post/2025-07-01-archaeology-of-glitches">Archaeology of Glitches</a> posting, along with my lightbulb moment that
-there <em>was</em> this guarantee of data consistency that a reactive system could provide, I also realised that
-it could be possible for Infusion to be turned into a fully reactive system, rather than the somewhat opportunistic
-system I&rsquo;d been building through the 2010s.</p>
+        <p>In late 2023, staring at the &ldquo;flag&rdquo; test case in preact-signals that I describe in my
+<a href="../../post/2025-07-01-archaeology-of-glitches">Archaeology of Glitches</a> posting, I realised something decisive:
+reactive systems can provide a strong, structural guarantee of data consistency.
+Given that, it became clear that Infusion could be reworked as a fully reactive system,
+rather than the opportunistic hybrid I had been building through the 2010s.</p>
+<p>This post will notice that the apparent diversity of reactive systems masks a simple unifying principle, related to
+a principle I had already been following in Infusion&rsquo;s development.</p>
 <h3 id="attractions-of-preact-signals">Attractions of preact-signals</h3>
 <p>preact-signals was an attractive vehicle for several reasons. Firstly there was the really small, dependence-free
 and pretty widely-used codebase that promised that it could be fairly readily understood, but also was the fact that
@@ -231,32 +235,30 @@ though somewhat inflexibly-minded, were pretty non-ideological and happy to see 
 rendering engines such as <a href="https://github.com/developit/htm">htm templating</a>, and then of course there was the
 very comforting set of test cases with their attractive ASCII art topologies which convinced me that there was
 an important property of consistency here, and preact-signals definitely enjoyed it.</p>
-<p>However there have also been <a href="../../wip/2025-09-26-this-weeks-reactive-chats/#ergonomic-problems-with-preact-signals">several downsides</a>
-to the use of preact-signals which arguably have slowed down my work
-somewhat over the last year and some of these contributed to a low-level sense of moral panic that there must still be
-something fundamental about reactivity that I still didn&rsquo;t understand.</p>
+<p>However, <a href="../../wip/2025-09-26-this-weeks-reactive-chats/#ergonomic-problems-with-preact-signals">several downsides</a>
+to the use of preact-signals did slow my work over the last year, as well as
+producing a persistent anxiety that I was still missing something fundamental about reactivity itself.</p>
 <h3 id="apparent-pluralism-of-reactivity">Apparent pluralism of reactivity</h3>
 <p>Over this period I returned to Milo Mighdoll&rsquo;s admirable <a href="https://milomg.dev/2022-12-01/reactivity">Super Charging
 Fine-Grained Reactivity</a> illustration in several different waves. I reproduce
 one of his crucial diagrams here to focus our minds:</p>
 <p><img src="../../img/milo-reactivity.svg" alt="A classic Milo diagram"></p>
-<p>Milo&rsquo;s treatment seemed admirably clear, but there remained something disturbing about the very pluralism of these
-algorithms, together with the fact that there seemed to be other aspects of preact-signal&rsquo;s behaviour that I was likely
+<p>Milo’s treatment was admirably clear. What troubled me was not his explanation, but the sheer plurality of algorithms
+it seemed to sit alongside. In this confused space, it seemed likely there were several other aspects of preact-signal&rsquo;s behaviour that I was likely
 relying on without there being necessarily tests which validated them, that kept me from digging in too much further.</p>
 <p>Over the period I returned to this page from time to time, especially in a big wave this summer when dear <a href="https://chee.party/">Rabbits</a>,
 who has far deeper reading and understanding of reactivity than me, pointed me again to Milo and Ryan Carniato&rsquo;s writings, as well as
 other related material such as Jane Street&rsquo;s <a href="https://www.janestreet.com/tech-talks/seven-implementations-of-incremental/">Seven Implementations of Incremental</a>.
-This generally increased my moral panic still further as the complexity here is furious as well as the lack of convincing
-regularities that could let one believe that there is some kind of well-defined phenomenon that these people are
-pursuing. How much of this junk am I going to have to understand, I found myself asking.</p>
+This only raised my unease, since the furious complexity of these systems, combined with the lack of obvious unifying principles,
+made it difficult to see reactivity as a single, well-defined phenomenon rather than a loose collection of techniques.
+I began to wonder how much of this landscape I would actually need to understand in order to make progress.</p>
 <h3 id="why-was-i-notified">Why was I notified?</h3>
 <p>The beginning of unjamming myself cognitively came alongside a <a href="https://claude.ai/share/d67d50cc-5e30-414a-9d8c-d9e91acb6b99">Claude conversation</a>
 where I asked it if it could indeed, given the information available in preact-signals&rsquo; runtime, actually implement
-a <a href="../../docs/fluid-signals/#fluidfindcausecell"><code>findCause</code></a> utility that could determine why a particular update has occurred. A big contributor to my moral panic
-over the time had been my sense of incompetence rummaging around in preact-signals&rsquo; ingeniously structured linked lists
-from time to time, never quite being able to pin down why it was that I was sitting on a bland-looking <code>endBatch</code> stack
-frame being notified when I was pretty sure that I shouldn&rsquo;t be.</p>
-<p>Here&rsquo;s the kind of stack trace one is very frequently staring at inside an effect. Certainly one knows one has done <em>something</em>
+a <a href="../../docs/fluid-signals/#fluidfindcausecell"><code>findCause</code></a> utility that could determine why a particular update has occurred.
+What unsettled me most was not the complexity of preact-signals&rsquo; internals, but a recurring uncertainty: although I could
+often see what I had notionally done to trigger an effect, I often could not tell what the connecting reason was.</p>
+<p>Here&rsquo;s the kind of <code>endBatch</code> stack trace one is very frequently staring at inside an effect. Certainly one knows one has done <em>something</em>
 to provoke the effect by calling <code>set</code> a few levels down but in a non-trivial design the actual relationship can be
 far from clear:</p>
 
@@ -275,8 +277,9 @@ far from clear:</p>
 
 <p>Whilst I didn&rsquo;t trust the actual AI reasoning much further than I could throw it, it was convincing enough to suggest
 to me that the question really might not be answerable. This brought me back to Milo&rsquo;s explanation and diagram above with a
-vengeance. Armed with this specific suspicion it suddenly became extremely clear that this question really can&rsquo;t
-be answered in any commodity signals system. The virtue of the extreme simplicity of Milo&rsquo;s own
+vengeance. This led to a clear realisation: commodity signal systems are not designed to explain why an update occurred
+&mdash; only to ensure that it propagates correctly.</p>
+<p>The virtue of the extreme simplicity of Milo&rsquo;s own
 reactivity and explanation suddenly leaped out at me, because it was in his system that the reason the question couldn&rsquo;t
 be answered was as clear as possible. When an originally updated node has been flipped from
 dirty to clean, that is the end of one&rsquo;s acquaintance with it, and once one has returned from the stack frame where
@@ -337,7 +340,8 @@ of commodity and malleable reactivity than I imagined:</p>
 
 <p>Someone with more foresight than me wouldn&rsquo;t have been surprised by this, but if you stare at the <code>C</code> node in the
 centre of the diagram you will realise that it requires a fundamental break from the conventional reactive representation of
-&ldquo;a node&rdquo; as &ldquo;a computed node&rdquo; since it has <em>two incoming arcs</em>. We needn&rsquo;t panic about this immoral cyclicity since
+&ldquo;a node&rdquo; as &ldquo;a computed node&rdquo; since it has <em>two incoming arcs</em>. This apparent cycle looks alarming, but it does not imply instability or inconsistency,
+since
 we still have <a href="../../wip/2025-09-26-this-weeks-reactive-chats/#dan-ingalls-fabrik">Dan Ingalls</a>
 in our back pocket reassuring us that we are just seeking &ldquo;alternate paths of control flow&rdquo;,
 but still something quite fundamental needs to be done to the representation and it needs to be returned to a
@@ -375,8 +379,8 @@ update, &ldquo;other things being equal&rdquo; one would prefer to choose those 
 really pleased to realise that the same principle which guides self-reflective reactive systems in general is
 also the one which assures glitch-freedom. And this makes sense in literal terms too &mdash; the relation at the top of
 a diamond is <em>a priori</em> likely to be information-destroying, since two arcs go in and one comes out.</p>
-<p>So in the face of Milo&rsquo;s demonstration and having this principle in hand, we can now be confident that most excess complexity
-we run into out there is the exhaust fumes of benchmarking games.</p>
+<p>So in the face of Milo&rsquo;s demonstration and having this principle in hand, we can be confident that much of the excess complexity
+we run into out there is driven less by necessity than by benchmarking constraints.</p>
 <h3 id="the-mysterious-frontier">The mysterious frontier</h3>
 <p>Some wrinkles still remain. Most significantly, the rather vexing question of what priority should be given to
 parts of the graph which construct as &ldquo;side effects&rdquo; of compute arcs themselves. To start with, the community
@@ -512,7 +516,7 @@ asynchronous model of notification? Enquiring minds will sift this out.</p>
             
           
           &nbsp;&copy;
-          2025
+          2026
 
         </p>
         

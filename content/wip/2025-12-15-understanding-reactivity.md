@@ -4,11 +4,14 @@ date: 2025-12-15
 type: post-single
 ---
 
-Since late 2023 when I found myself fatefully staring at the test case in preact-signals that I describe in my
-[Archaeology of Glitches](/post/2025-07-01-archaeology-of-glitches) posting, along with my lightbulb moment that
-there *was* this guarantee of data consistency that a reactive system could provide, I also realised that
-it could be possible for Infusion to be turned into a fully reactive system, rather than the somewhat opportunistic
-system I'd been building through the 2010s.
+In late 2023, staring at the "flag" test case in preact-signals that I describe in my
+[Archaeology of Glitches](/post/2025-07-01-archaeology-of-glitches) posting, I realised something decisive:
+reactive systems can provide a strong, structural guarantee of data consistency.
+Given that, it became clear that Infusion could be reworked as a fully reactive system,
+rather than the opportunistic hybrid I had been building through the 2010s.
+
+This post will notice that the apparent diversity of reactive systems masks a simple unifying principle, related to
+a principle I had already been following in Infusion's development.
 
 ### Attractions of preact-signals
 
@@ -20,10 +23,9 @@ rendering engines such as [htm templating](https://github.com/developit/htm), an
 very comforting set of test cases with their attractive ASCII art topologies which convinced me that there was
 an important property of consistency here, and preact-signals definitely enjoyed it.
 
-However there have also been [several downsides](/wip/2025-09-26-this-weeks-reactive-chats/#ergonomic-problems-with-preact-signals)
-to the use of preact-signals which arguably have slowed down my work
-somewhat over the last year and some of these contributed to a low-level sense of moral panic that there must still be
-something fundamental about reactivity that I still didn't understand.
+However, [several downsides](/wip/2025-09-26-this-weeks-reactive-chats/#ergonomic-problems-with-preact-signals)
+to the use of preact-signals did slow my work over the last year, as well as 
+producing a persistent anxiety that I was still missing something fundamental about reactivity itself.
 
 ### Apparent pluralism of reactivity
 
@@ -33,27 +35,26 @@ one of his crucial diagrams here to focus our minds:
 
 ![A classic Milo diagram](/img/milo-reactivity.svg)
 
-Milo's treatment seemed admirably clear, but there remained something disturbing about the very pluralism of these
-algorithms, together with the fact that there seemed to be other aspects of preact-signal's behaviour that I was likely
+Milo’s treatment was admirably clear. What troubled me was not his explanation, but the sheer plurality of algorithms
+it seemed to sit alongside. In this confused space, it seemed likely there were several other aspects of preact-signal's behaviour that I was likely
 relying on without there being necessarily tests which validated them, that kept me from digging in too much further.
 
 Over the period I returned to this page from time to time, especially in a big wave this summer when dear [Rabbits](https://chee.party/),
 who has far deeper reading and understanding of reactivity than me, pointed me again to Milo and Ryan Carniato's writings, as well as
 other related material such as Jane Street's [Seven Implementations of Incremental](https://www.janestreet.com/tech-talks/seven-implementations-of-incremental/).
-This generally increased my moral panic still further as the complexity here is furious as well as the lack of convincing
-regularities that could let one believe that there is some kind of well-defined phenomenon that these people are
-pursuing. How much of this junk am I going to have to understand, I found myself asking.
+This only raised my unease, since the furious complexity of these systems, combined with the lack of obvious unifying principles,
+made it difficult to see reactivity as a single, well-defined phenomenon rather than a loose collection of techniques.
+I began to wonder how much of this landscape I would actually need to understand in order to make progress.
 
 ### Why was I notified?
 
 The beginning of unjamming myself cognitively came alongside a [Claude conversation](https://claude.ai/share/d67d50cc-5e30-414a-9d8c-d9e91acb6b99)
 where I asked it if it could indeed, given the information available in preact-signals' runtime, actually implement
-a [`findCause`](/docs/fluid-signals/#fluidfindcausecell) utility that could determine why a particular update has occurred. A big contributor to my moral panic
-over the time had been my sense of incompetence rummaging around in preact-signals' ingeniously structured linked lists
-from time to time, never quite being able to pin down why it was that I was sitting on a bland-looking `endBatch` stack
-frame being notified when I was pretty sure that I shouldn't be.
+a [`findCause`](/docs/fluid-signals/#fluidfindcausecell) utility that could determine why a particular update has occurred.
+What unsettled me most was not the complexity of preact-signals' internals, but a recurring uncertainty: although I could
+often see what I had notionally done to trigger an effect, I often could not tell what the connecting reason was.
 
-Here's the kind of stack trace one is very frequently staring at inside an effect. Certainly one knows one has done *something*
+Here's the kind of `endBatch` stack trace one is very frequently staring at inside an effect. Certainly one knows one has done *something*
 to provoke the effect by calling `set` a few levels down but in a non-trivial design the actual relationship can be
 far from clear:
 
@@ -62,8 +63,10 @@ caption="The kind of stack one is often staring at">}}
 
 Whilst I didn't trust the actual AI reasoning much further than I could throw it, it was convincing enough to suggest
 to me that the question really might not be answerable. This brought me back to Milo's explanation and diagram above with a
-vengeance. Armed with this specific suspicion it suddenly became extremely clear that this question really can't
-be answered in any commodity signals system. The virtue of the extreme simplicity of Milo's own
+vengeance. This led to a clear realisation: commodity signal systems are not designed to explain why an update occurred
+--- only to ensure that it propagates correctly.
+
+The virtue of the extreme simplicity of Milo's own
 reactivity and explanation suddenly leaped out at me, because it was in his system that the reason the question couldn't
 be answered was as clear as possible. When an originally updated node has been flipped from
 dirty to clean, that is the end of one's acquaintance with it, and once one has returned from the stack frame where
@@ -123,7 +126,8 @@ caption="The Power of Three">}}
 
 Someone with more foresight than me wouldn't have been surprised by this, but if you stare at the `C` node in the
 centre of the diagram you will realise that it requires a fundamental break from the conventional reactive representation of 
-"a node" as "a computed node" since it has *two incoming arcs*. We needn't panic about this immoral cyclicity since
+"a node" as "a computed node" since it has *two incoming arcs*. This apparent cycle looks alarming, but it does not imply instability or inconsistency,
+since
 we still have [Dan Ingalls](/wip/2025-09-26-this-weeks-reactive-chats/#dan-ingalls-fabrik)
 in our back pocket reassuring us that we are just seeking "alternate paths of control flow",
 but still something quite fundamental needs to be done to the representation and it needs to be returned to a 
@@ -168,8 +172,8 @@ really pleased to realise that the same principle which guides self-reflective r
 also the one which assures glitch-freedom. And this makes sense in literal terms too --- the relation at the top of
 a diamond is *a priori* likely to be information-destroying, since two arcs go in and one comes out.
 
-So in the face of Milo's demonstration and having this principle in hand, we can now be confident that most excess complexity
-we run into out there is the exhaust fumes of benchmarking games.
+So in the face of Milo's demonstration and having this principle in hand, we can be confident that much of the excess complexity
+we run into out there is driven less by necessity than by benchmarking constraints.
 
 ### The mysterious frontier
 

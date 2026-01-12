@@ -60,7 +60,7 @@ Spreadsheet cells, which are the public&rsquo;s primeval grounding in reactivity
   "headline": "Fluid Signals API",
   "description" : "This page documents the reactive library underlying Fluid Infusion 6, based around the primitive fluid.cell. I chose the name \u0026ldquo;cell\u0026rdquo;, rather than \u0026ldquo;signal\u0026rdquo; which is more common in the 2020s JavaScript reactive community, in honour of 3 traditions:\nSpreadsheet cells, which are the public\u0026rsquo;s primeval grounding in reactivity. Kenny Tilton\u0026rsquo;s Cells system for CLOS, which in 2001, 5 years before the coining of the terms \u0026ldquo;glitch\u0026rdquo; and \u0026ldquo;reactive programming\u0026rdquo;, had already solved all the problems of reactivity embedded in imperative programming languages.",
   "inLanguage" : "en",
-  "wordCount":  1672 ,
+  "wordCount":  2119 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -233,25 +233,28 @@ and and other functional languages, taking the form of an object + key or 1-elem
 a pointer in languages which lack them.</li>
 </ul>
 <p>There is now a consensus notion of the capabilities of a reactive library in JavaScript, amongst such popular implementations
-as preact-signals, alien-signals, Angular signals, solid-signals, etc. which has led to the proposal of a
+as <a href="https://github.com/preactjs/signals/blob/main/packages/core/README.md">preact-signals</a>,
+<a href="https://github.com/stackblitz/alien-signals">alien-signals</a>,
+<a href="https://angular.dev/guide/signals">Angular signals</a>,
+<a href="https://docs.solidjs.com/concepts/signals">Solid signal</a>, etc. which has led to the proposal of a
 <a href="https://github.com/tc39/proposal-signals">standardised JS implementation</a> by the TC39 committee. This consensus
 baseline is often called &ldquo;commodity signals&rdquo; in pages on this site.</p>
-<p>Whilst the core implementation of fluid.cell is consistent with this consensus implementation &mdash; in fact, it has been
+<p>Whilst the core implementation of <code>fluid.cell</code> is consistent with this consensus implementation &mdash; in fact, it has been
 adopted directly from Milo Mighdoll&rsquo;s amazing and minimal <a href="https://github.com/milomg/reactively">reactively</a> system &mdash; this implementation
-departs from the consensus in several significant ways. These departures mostly widen the domain
+departs from the consensus in some significant ways. These departures mostly widen the domain
 of validity of the implementation, relaxing restrictions which are incompatible with the demands of a
 <a href="../../term/substrate">substrate</a> supporting malleable programming.</p>
 <p>Whilst its idiom and goals are aligned with support for the Infusion 6 substrate, <code>fluid.cell</code> is a <a href="https://github.com/fluid-project/infusion-6/blob/main/src/framework/core/js/FluidSignals.js">self-contained
 library</a>
 with no dependencies which could be adopted for other purposes.</p>
-<p>You can read its test cases <a href="https://github.com/fluid-project/infusion-6/blob/main/tests/framework-tests/core/js/FluidJSTests.js">here</a> and run them
+<p>You can read its test cases <a href="https://github.com/fluid-project/infusion-6/blob/main/tests/framework-tests/core/js/FluidSignalsTests.js">here</a> and run them
 <a href="https://fluid-project.github.io/infusion-6/tests/framework-tests/core/html/FluidSignalsTests.html">here</a>.</p>
 <p>The best guide to reactive programming in general and fluid.cell&rsquo;s algorithm in particular is Milo&rsquo;s 2022 <a href="https://milomg.dev/2022-12-01/reactivity">Super Charging
 Fine-Grained Reactivity</a> which contrasts a variety of implementations including
 Reactively&rsquo;s, about 2/3 of the way down the page with the red and green squares, which I have adopted.</p>
 <h2 id="extra-capabilities-in-fluidcell">Extra capabilities in fluid.cell</h2>
 <h3 id="bidirectional-relationships">Bidirectional relationships</h3>
-<p>The most significant ergonomic difference in fluid.cell is support for bidirectional relationships between cells,
+<p>The most significant ergonomic difference in <code>fluid.cell</code> is support for bidirectional relationships between cells,
 which supports democratic constructs such as <a href="https://en.wikipedia.org/wiki/Bidirectional_transformation">lenses</a> without
 recourse to gratuitous asymmetries such as <a href="https://vuejs.org/guide/essentials/computed#writable-computed">writable computed</a>
 relations.</p>
@@ -261,10 +264,10 @@ capable of updating the value of a single cell. This is a capability not found i
 In isolation, this capability might lead to the possibility for inconsistent or conflicting updates &mdash; however,
 <code>fluid.cell</code> follows the insight from Dan Ingall&rsquo;s <a href="https://dl.acm.org/doi/pdf/10.1145/62083.62100">Fabrik</a> system which
 recognizes &ldquo;bidirectional dataflow connections as a shorthand for multiple paths of flow&rdquo;. As one leg of a bidirectional
-relationship is activated, the reverse leg is removed from consideration for this reactive update cycle (I name this a &ldquo;fit&rdquo;),
+relationship is activated, the reverse leg is removed from consideration for this reactive update cycle (this kind of cycle is named a &ldquo;fit&rdquo;),
 removing the chance for cyclic updates.</p>
 <h3 id="static-compute-arguments">Static compute arguments</h3>
-<p>Tied in with support for lenses and multiple incoming arcs is fluid.cell&rsquo;s support for <em>static arguments</em> to compute arcs.
+<p>Tied in with support for lenses and multiple incoming arcs is <code>fluid.cell</code>&rsquo;s support for <em>static arguments</em> to compute arcs.
 This is a significant departure from commodity signals, which pride themselves on automatic discovery of dependencies
 as code executes in the compute arc. In a substrate forming an <a href="../../term/integration-domain">integration domain</a> this is unidiomatic
 since base language code should ideally have no power of reference to surrounding scopes, in accordance with the principle of
@@ -281,17 +284,18 @@ producing a visible diagnostic in the substrate[coming soon].</p>
 chain of updated nodes leading back to the initial changed node triggered by the user or environment. This is vital in
 a substrate which positions reactivity as a wholesale replacement for execution, and therefore needs to replace the
 invaluable explanatory power of the stack with a correspondingly thorough explanation stretching across the substrate. This
-is done via the <a href="#fluid-findcause">fluid.findCause</a> API which returns this path of updated nodes.</p>
+is done with the <a href="#fluid-findcause">fluid.findCause</a> API which returns this path of updated nodes.</p>
 <h3 id="asynchronous-compute-arcs">Asynchronous compute arcs</h3>
-<p>Finally, fluid.cell supports compute arcs which produce their results asynchronously [coming soon]. Whilst this is uncommon in
+<p>Finally, <code>fluid.cell</code> supports compute arcs which produce their results asynchronously. Whilst this is uncommon in
 reactive libraries, there is precedent for this in Ryan Carniato&rsquo;s <a href="https://github.com/solidjs/signals">Solid signals</a> supporting
 the upcoming 2.0 release of Solid, and Mike Bostock&rsquo;s <a href="https://github.com/observablehq/runtime/blob/main/src/runtime.js">Runtime</a>
-which powers <a href="https://observablehq.com/framework/">Observable</a>.</p>
+which powers <a href="https://observablehq.com/framework/">Observable</a>. <code>fluid.cell</code> passes all the <a href="https://github.com/solidjs/signals/blob/main/tests/createAsync.test.ts">test cases</a>
+currently issued for Solid signals&rsquo; <code>createAsync</code>.</p>
 <h2 id="construction">Construction</h2>
 <h3 id="fluidcellinitialvalue-props">fluid.cell(initialValue, props)</h3>
 <ul>
 <li><code>{Any} [initialValue]</code> - The initial value to store in the cell</li>
-<li><code>{Object} [props]</code> - Additional properties to contextualise the cell</li>
+<li><code>{Object} [props]</code> - Optional additional properties to contextualise the cell</li>
 <li>Returns: <code>{Cell}</code> - The freshly constructed cell</li>
 </ul>
 <p>A fresh reactive cell is constructed, with an optional initial value and optional additional properties.</p>
@@ -316,39 +320,64 @@ is called for a cell which depends on them.</p>
 <p>A &ldquo;blind read&rdquo; of the current value of the cell, regardless of how stale it is, can be made by looking at the <code>_value</code>
 property. This isn&rsquo;t recommended except in specialised cases, usually of framework-building.</p>
 <h2 id="relations-and-effects">Relations and effects</h2>
-<h3 id="cellcomputedfn-staticsources">Cell.computed(fn, staticSources)</h3>
+<h3 id="cellcomputedfn-staticsources-props">Cell.computed(fn, staticSources, props)</h3>
 <ul>
-<li><code>{Function | null} fn</code> - The function which will reactively evaluate this cell&rsquo;s value, or null if an existing relation is to be torn down</li>
-<li><code>{Cell[]} [staticSources]</code> - Any statically known cell dependencies whose reactively evaluated arguments will be supplied to fn when it is called</li>
+<li><code>{Function | null} fn</code> - The function which will reactively evaluate this cell&rsquo;s value, or <code>null</code> if an existing relation is to be torn down</li>
+<li><code>{Cell[]} [staticSources]</code> - Any statically known cell dependencies whose reactively evaluated arguments will be supplied to <code>fn</code> when it is called</li>
+<li><code>{ComputedProps} [props]</code> - Optional additional properties to contextualise the computation</li>
 <li>Returns: <code>{Cell}</code> - This cell</li>
 </ul>
 <p><code>computed</code> is available as a function in the prototype of cells created via <code>fluid.cell</code>.</p>
 <p><code>Cell.computed</code> constructs or tears down a computed relationship between a target cell (<code>this</code> one) and one or more source cells
-computed by the supplied function <code>fn</code>.
+accepted by the supplied function <code>fn</code>.
 It&rsquo;s preferred that the source cells are specified in the <code>staticSources</code> arguments &mdash; when they update, their values
 will be dereferenced and supplied as plain values as arguments to the function. However, any other cells that the
 function manages to reference in its surrounding scopes as it executes will also be tracked and schedule a reinvocation
-of the function by the standard semantics of commodity signals implementations.</p>
+of the function, following the standard tracking semantics of commodity signals implementations.</p>
 <p>The first <code>staticSource</code> cell, if there is one, will have a special status of establishing the <em>key</em> of the relationship
 which will be unique in the context of the target cell. If there is no such cell, a <code>null</code> value will serve as the key.
 If an existing relation is present on the target cell with the same key, it will be replaced by the supplied one.</p>
 <p>If <code>null</code> is supplied in place of the <code>fn</code> argument, any existing relation with the same key will be torn down.</p>
+<p>The additional <code>ComputedProps</code> argument can contain the following fields:</p>
+<p><code>{Object} ComputedProps</code>:</p>
+<ul>
+<li><code>{Boolean} isAsync</code> - Indicates if the computation is asynchronous.</li>
+<li><code>{Boolean} isFree</code> - Indicates if this is a &ldquo;free&rdquo; computation that will deliver unavailable values.</li>
+</ul>
+<h3 id="cellasynccomputedfn-staticsources-props">Cell.asyncComputed(fn, staticSources, props)</h3>
+<ul>
+<li><code>{Function | null} fn</code> - The function which will reactively evaluate this cell&rsquo;s value, or <code>null</code> if an existing relation is to be torn down</li>
+<li><code>{Cell[]} [staticSources]</code> - Any statically known cell dependencies whose reactively evaluated arguments will be supplied to <code>fn</code> when it is called</li>
+<li><code>{ComputedProps} [props]</code> - Optional additional properties to contextualise the computation</li>
+<li>Returns: <code>{Cell}</code> - This cell</li>
+</ul>
+<p>Sets up an asynchronous computed relationship between one or more cells. This is equivalent to a call to <code>Cell.computed()</code>
+with the <code>props</code> in the 3rd argument set with <code>isAsync: true</code>.</p>
+<p>In this case, the function argument <code>fn</code> rather than returning a plain value should be an <code>async</code> or <code>async*</code> function
+which returns either:</p>
+<ul>
+<li>A <code>Promise</code> representing a deferred value or error</li>
+<li>An <code>AsyncIterator</code> produced by the <code>yield</code> function indicating that this function is a
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function*">async generator</a> of a
+bounded or unbounded sequence of deferred values.</li>
+</ul>
 <h3 id="fluidcelleffectfn-staticsources-props">fluid.cell.effect(fn, staticSources, props)</h3>
 <ul>
 <li><code>{Function} fn</code> - The function to execute reactively when any of the staticSources change</li>
 <li><code>{Cell[]} staticSources</code> - The array of source cells whose values are dependencies for the effect</li>
 <li><code>{Object} [props]</code> - Optional properties to configure the effect</li>
 <li><code>{Function} [props.onDispose]</code> - Optional cleanup function to run when the effect is disposed</li>
-<li><code>{Boolean} [props.free]</code> - If true, the effect will run even if some sources are unavailable</li>
+<li><code>{Boolean} [props.isFree]</code> - If true, the effect will run even if some sources are unavailable, delivering unavailable
+values in their place.</li>
 <li>Returns: <code>{Effect}</code></li>
 </ul>
 <p><code>fluid.cell.effect</code> accepts a function and arguments to run when one or more reactive values change. The signature
 is similar to <code>Cell.compute</code> only the evaluation is not lazy &mdash; an effect runs immediately upon registration
 and again when any values change. Another difference is that effects do not correspond to a value &mdash; values returned
 from <code>fn</code> are ignored. In order to deactivate the effect it needs to be explicitly disposed by calling the
-<code>Effect.dispose()</code> method on the returned Effect.</p>
+<code>Effect.dispose()</code> method on the returned <code>Effect</code>.</p>
 <p>Another difference is in handling of unavailable arguments &mdash; if any cells referenced in <code>staticSources</code> or
-in dynamically tracked reactive values resolve to an unavailable value, notification of the function is skipped.</p>
+in dynamically tracked reactive values resolve to an <a href="#unavailable-values">unavailable value</a>, notification of the function is skipped.</p>
 <p>An effect represents a resource in the world outside the reactive graph and as such may require special actions
 when it is torn down. The optional <code>props</code> argument accepts a callback <code>onDispose</code> which is called when the effect
 is disposed via <code>Effect.dispose()</code>.</p>
@@ -365,11 +394,12 @@ triggered the reaction. The triggering cell appears first in the array.</p>
 <h2 id="unavailable-values">Unavailable values</h2>
 <p>Some background on unavailable values is available on their <a href="../../term/unavailable-value">own page</a>.</p>
 <p>An unavailable value is created using the <code>fluid.unavailable</code> API, which in the simplest usage simply accepts a
-string holding a message explaining why the value is unavailable.</p>
+string holding a message explaining why the value is unavailable. These values are normally created by frameworks
+rather than users.</p>
 <h3 id="fluidunavailablecause---variety--error">fluid.unavailable(cause = {}, variety = &ldquo;error&rdquo;)</h3>
 <ul>
 <li><code>{String|Object|Array} [cause={}]</code> - A list of dependencies or reasons for unavailability.</li>
-<li><code>@param {String} [variety=&quot;error&quot;]</code> - The variety of unavailable value:</li>
+<li><code>{String} [variety=&quot;error&quot;]</code> - The variety of unavailable value:</li>
 <li>
 <ul>
 <li><code>&quot;error&quot;</code> indicates a syntax issue that needs design intervention.</li>
@@ -387,6 +417,30 @@ string holding a message explaining why the value is unavailable.</p>
 </li>
 <li>Returns: <code>{Unavailable}</code> An unavailable value marker.</li>
 </ul>
+<p>A special variety of unavailable value represents a value which is temporarily stale as a result of I/O pending
+to update it. This is created by <code>fluid.pending</code> which is just a wrapper for <code>fluid.unavailable</code>:</p>
+<h3 id="fluidpendingstalevalue-site">fluid.pending(staleValue, site)</h3>
+<ul>
+<li><code>{Any} staleValue</code> - The most recently seen value before it became unavailable due to pending I/O.</li>
+<li><code>{String} site</code> - The site or resource (e.g. URL) responsible for the pending I/O.</li>
+<li>Returns: <code>{Unavailable}</code> An object representing the unavailable state due to pending I/O.</li>
+</ul>
+<h2 id="utilities">Utilities</h2>
+<h3 id="fluidcellsignaltopromisevalsignal">fluid.cell.signalToPromise(valSignal)</h3>
+<ul>
+<li><code>{Cell&lt;Any&gt;} valSignal</code> - The signal to monitor.</li>
+<li>Returns: <code>Promise&lt;Any&gt;</code> - A Promise that resolves with the signal&rsquo;s first available value.</li>
+</ul>
+<p>Gear from the world of signals into a Promise that can be <code>await</code>ed.</p>
+<h3 id="cellrefreshstaticsources">Cell.refresh(staticSources)</h3>
+<ul>
+<li><code>{Cell[]} [staticSources]</code> - An optional array of static source cells to identify the computation edge to be refreshed</li>
+<li><code>this: {Cell}</code> The cell for which an incoming edge is to be refreshed</li>
+</ul>
+<p>A method available on any <code>Cell</code>: Refreshes the value of the cell by re-evaluating its computation for the specified static sources.
+Finds the incoming edge corresponding to the given static sources and triggers an update for this cell along that edge. Particularly
+useful when the value is computed via an asynchronous activity in the world &mdash; if the edge is async, the cell&rsquo;s value
+will be set to stale and the asynchronous activity will be restarted.</p>
 
 
         
@@ -485,7 +539,7 @@ string holding a message explaining why the value is unavailable.</p>
             
           
           &nbsp;&copy;
-          2025
+          2026
 
         </p>
         

@@ -15,7 +15,7 @@
       <link>https://ponder.org.uk/wip/2025-12-15-understanding-reactivity/</link>
       <pubDate>Mon, 15 Dec 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
       <guid>https://ponder.org.uk/wip/2025-12-15-understanding-reactivity/</guid>
-      <description>Since late 2023 when I found myself fatefully staring at the test case in preact-signals that I describe in my Archaeology of Glitches posting, along with my lightbulb moment that there was this guarantee of data consistency that a reactive system could provide, I also realised that it could be possible for Infusion to be turned into a fully reactive system, rather than the somewhat opportunistic system I&amp;rsquo;d been building through the 2010s.</description>
+      <description>In late 2023, staring at the &amp;ldquo;flag&amp;rdquo; test case in preact-signals that I describe in my Archaeology of Glitches posting, I realised something decisive: reactive systems can provide a strong, structural guarantee of data consistency. Given that, it became clear that Infusion could be reworked as a fully reactive system, rather than the opportunistic hybrid I had been building through the 2010s.&#xA;This post will notice that the apparent diversity of reactive systems masks a simple unifying principle, related to a principle I had already been following in Infusion&amp;rsquo;s development.</description>
     </item>
     <item>
       <title>Infinite Apps, Asynchrony and Tree Unshaking</title>
