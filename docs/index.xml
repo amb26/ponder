@@ -8,8 +8,15 @@
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <lastBuildDate>Mon, 15 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 20 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ponder.org.uk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>fluid.cell: A reactive implementation supporting malleable substrates</title>
+      <link>https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/</link>
+      <pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/</guid>
+      <description>Submission to the Substrates 2026 Workshop, co-located with &amp;lt;Programming 2026&amp;gt;.&#xA;Over the last few years of developing Infusion, a substrate supporting open authorship, it became increasingly clear that the key to many of its successful behaviours would be a grounding in better reactive primitives. The same values of open authorship &amp;mdash; allowing systems to be specified in separate pieces contributed by multiple authors &amp;mdash; need to be extended right down to the bedrock of reactivity that the system is built on.</description>
+    </item>
     <item>
       <title>Understanding Reactivity</title>
       <link>https://ponder.org.uk/wip/2025-12-15-understanding-reactivity/</link>

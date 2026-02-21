@@ -3,7 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ponder.org.uk/</loc>
-    <lastmod>2025-12-15T00:00:00+00:00</lastmod>
+    <lastmod>2026-02-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/</loc>
+    <lastmod>2026-02-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ponder.org.uk/post/</loc>
+    <lastmod>2026-02-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ponder.org.uk/wip/2025-12-15-understanding-reactivity/</loc>
     <lastmod>2025-12-15T00:00:00+00:00</lastmod>
@@ -27,9 +33,6 @@
     <lastmod>2025-09-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ponder.org.uk/post/2025-07-01-archaeology-of-glitches/</loc>
-    <lastmod>2025-07-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://ponder.org.uk/post/</loc>
     <lastmod>2025-07-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ponder.org.uk/post/2025-06-03-substrates-vision/</loc>
