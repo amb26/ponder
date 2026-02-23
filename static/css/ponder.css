@@ -7,6 +7,10 @@ ul > li > ul > li {
     list-style: "";
 }
 
+code {
+    color: #222;
+    background-color: white;
+}
 /** Anchor hover links **/
 /** Liberated from octicons.css and infusion-docs.css **/
 

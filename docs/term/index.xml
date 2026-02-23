@@ -84,7 +84,7 @@
       <link>https://ponder.org.uk/term/unavailable-value/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
       <guid>https://ponder.org.uk/term/unavailable-value/</guid>
-      <description>An unavailable value is a special payload to a reactive system unifying handling of errors and asynchrony under a common mechanism responding to &amp;ldquo;design incompletion for any reason&amp;rdquo;. I named a special reactive payload as an &amp;ldquo;unavailable value&amp;rdquo; indicating that the design was incomplete either as a result of depending on pending I/O or else on a design/syntax error in the system.&#xA;My first 2024 simplistic version of this simply repurposed the JavaScript undefined value as a special reactive payload that would short-circuit behaviour of any computed and cull the action of any effect that was geared through it.</description>
+      <description>An unavailable value is a special payload to a reactive system unifying handling of errors and asynchrony under a common mechanism responding to &amp;ldquo;design incompletion for any reason&amp;rdquo;. I named a special reactive payload as an &amp;ldquo;unavailable value&amp;rdquo; indicating that the design was incomplete either as a result of depending on pending I/O or else on a design/syntax error in the system.&#xA;More docs on unavailable values in the modern fluid.</description>
     </item>
   </channel>
 </rss>

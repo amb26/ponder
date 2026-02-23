@@ -9,7 +9,7 @@
       <title>Unavailable Value - Antranig Basman</title>
 
   <meta name="description" content="An unavailable value is a special payload to a reactive system unifying handling of errors and asynchrony under a common mechanism responding to &ldquo;design incompletion for any reason&rdquo;. I named a special reactive payload as an &ldquo;unavailable value&rdquo; indicating that the design was incomplete either as a result of depending on pending I/O or else on a design/syntax error in the system.
-My first 2024 simplistic version of this simply repurposed the JavaScript undefined value as a special reactive payload that would short-circuit behaviour of any computed and cull the action of any effect that was geared through it.">
+More docs on unavailable values in the modern fluid.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -58,9 +58,9 @@ My first 2024 simplistic version of this simply repurposed the JavaScript undefi
     "name" : "Antranig Basman"
   },
   "headline": "Unavailable Value",
-  "description" : "An unavailable value is a special payload to a reactive system unifying handling of errors and asynchrony under a common mechanism responding to \u0026ldquo;design incompletion for any reason\u0026rdquo;. I named a special reactive payload as an \u0026ldquo;unavailable value\u0026rdquo; indicating that the design was incomplete either as a result of depending on pending I\/O or else on a design\/syntax error in the system.\nMy first 2024 simplistic version of this simply repurposed the JavaScript undefined value as a special reactive payload that would short-circuit behaviour of any computed and cull the action of any effect that was geared through it.",
+  "description" : "An unavailable value is a special payload to a reactive system unifying handling of errors and asynchrony under a common mechanism responding to \u0026ldquo;design incompletion for any reason\u0026rdquo;. I named a special reactive payload as an \u0026ldquo;unavailable value\u0026rdquo; indicating that the design was incomplete either as a result of depending on pending I\/O or else on a design\/syntax error in the system.\nMore docs on unavailable values in the modern fluid.",
   "inLanguage" : "en",
-  "wordCount":  1519 ,
+  "wordCount":  1547 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -82,7 +82,7 @@ My first 2024 simplistic version of this simply repurposed the JavaScript undefi
 
 <meta property="og:title" content="Unavailable Value" />
 <meta property="og:description" content="An unavailable value is a special payload to a reactive system unifying handling of errors and asynchrony under a common mechanism responding to &ldquo;design incompletion for any reason&rdquo;. I named a special reactive payload as an &ldquo;unavailable value&rdquo; indicating that the design was incomplete either as a result of depending on pending I/O or else on a design/syntax error in the system.
-My first 2024 simplistic version of this simply repurposed the JavaScript undefined value as a special reactive payload that would short-circuit behaviour of any computed and cull the action of any effect that was geared through it.">
+More docs on unavailable values in the modern fluid.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/term/unavailable-value/" />
 <meta property="og:type" content="website" />
@@ -224,6 +224,8 @@ My first 2024 simplistic version of this simply repurposed the JavaScript undefi
 a common mechanism responding to &ldquo;design incompletion for any reason&rdquo;. I named a special reactive payload as an &ldquo;unavailable
 value&rdquo; indicating that the design was incomplete either as a result of depending on pending I/O or else on a design/syntax
 error in the system.</p>
+<p>More docs on unavailable values in the modern <code>fluid.cell</code> system need to be written here, but there is some information
+in the <a href="../../docs/fluid-signals">API docs</a> for <code>fluid.cell.computed</code> and <code>fluid.cell.effect</code>.</p>
 <p>My first 2024 simplistic version of this simply
 repurposed the JavaScript <code>undefined</code> value as a special reactive payload that would short-circuit behaviour of any <code>computed</code>
 and cull the action of any <code>effect</code> that was geared through it. An advantage of this scheme is that it can be layered

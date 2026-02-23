@@ -8,6 +8,10 @@ a common mechanism responding to "design incompletion for any reason". I named a
 value" indicating that the design was incomplete either as a result of depending on pending I/O or else on a design/syntax
 error in the system.
 
+More docs on unavailable values in the modern `fluid.cell` system need to be written here, but there is some information
+in the [API docs](/docs/fluid-signals) for `fluid.cell.computed` and `fluid.cell.effect`.
+
+
 My first 2024 simplistic version of this simply
 repurposed the JavaScript `undefined` value as a special reactive payload that would short-circuit behaviour of any `computed`
 and cull the action of any `effect` that was geared through it. An advantage of this scheme is that it can be layered

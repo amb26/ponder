@@ -9,7 +9,7 @@
       <title>fluid.cell: A reactive implementation supporting malleable substrates - Antranig Basman</title>
 
   <meta name="description" content="Submission to the March Substrates 2026 Workshop, co-located with &lt;Programming 2026&gt;.
-Abstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivate fluid.cell, a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain. I explain the core reactive competencies of glitch freedom and early cutoff, and explain how fluid.">
+Abstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates fluid.cell, a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain. I explain the core reactive competencies of glitch freedom and early cutoff, and how fluid.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -58,9 +58,9 @@ Abstract This post explains why reactivity is a key requirement for openly autho
     "name" : "Antranig Basman"
   },
   "headline": "fluid.cell: A reactive implementation supporting malleable substrates",
-  "description" : "Submission to the March Substrates 2026 Workshop, co-located with \u0026lt;Programming 2026\u0026gt;.\nAbstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivate fluid.cell, a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain. I explain the core reactive competencies of glitch freedom and early cutoff, and explain how fluid.",
+  "description" : "Submission to the March Substrates 2026 Workshop, co-located with \u0026lt;Programming 2026\u0026gt;.\nAbstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates fluid.cell, a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain. I explain the core reactive competencies of glitch freedom and early cutoff, and how fluid.",
   "inLanguage" : "en",
-  "wordCount":  2857 ,
+  "wordCount":  3410 ,
   "datePublished" : "2026-02-20T00:00:00\u002b00:00",
   "dateModified" : "2026-02-20T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -82,7 +82,7 @@ Abstract This post explains why reactivity is a key requirement for openly autho
 
 <meta property="og:title" content="fluid.cell: A reactive implementation supporting malleable substrates" />
 <meta property="og:description" content="Submission to the March Substrates 2026 Workshop, co-located with &lt;Programming 2026&gt;.
-Abstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivate fluid.cell, a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain. I explain the core reactive competencies of glitch freedom and early cutoff, and explain how fluid.">
+Abstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates fluid.cell, a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain. I explain the core reactive competencies of glitch freedom and early cutoff, and how fluid.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/" />
 <meta property="og:type" content="website" />
@@ -270,28 +270,27 @@ Abstract This post explains why reactivity is a key requirement for openly autho
 <p>Submission to the March <a href="https://2026.programming-conference.org/home/substrates-2026">Substrates 2026</a> Workshop, co-located with
 <a href="https://2026.programming-conference.org/">&lt;Programming 2026&gt;</a>.</p>
 <h3 id="abstract">Abstract</h3>
-<p>This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivate <a href="../../docs/fluid-signals"><code>fluid.cell</code></a>,
+<p><em>This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates <a href="../../docs/fluid-signals"><code>fluid.cell</code></a>,
 a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst
-expanding their domain. I explain the core reactive competencies of <em>glitch freedom</em> and <em>early cutoff</em>, and explain
+expanding their domain. I explain the core reactive competencies of <em>glitch freedom</em> and <em>early cutoff</em>, and
 how <code>fluid.cell</code> delivers these competencies whilst supporting reactive graphs with bidirectional arcs, asynchronous
 propagation of reactive updates and allows the cause of these updates to be tracked to their source, and why these
-expanded capabilites are vital to support successful substrates. The post finishes with a live demo of the reactive
-library.</p>
+expanded capabilites are vital to support successful substrates. The post finishes with a interactive visual demo of the reactive
+library on a simple test fixture.</em></p>
 <h2 id="why-reactivity">Why reactivity?</h2>
 <p>Why do we need reactivity in a substrate? In my vision of an openly authored, malleable <a href="../../term/substrate">substrate</a>, its interface and capabilities
 need to adjust dynamically to the gestures of the authors. As well as reflecting its change of function as it is built
-and maintained, the substrate also needs to reflect the different needs of different audiences, sometimes simultaneously.</p>
+and maintained, the substrate also needs to reflect the needs of different audiences, sometimes simultaneously.</p>
 <p>Recently I have been working with a &ldquo;commodity&rdquo; reactive system, <a href="https://preactjs.com/guide/v10/signals/">preact-signals</a>, and part of my journey
-with that system has been described in the December 2025&rsquo;s <a href="../../wip/2025-12-15-understanding-reactivity">Understanding Reactivity</a>
+with that system was described in December 2025&rsquo;s <a href="../../wip/2025-12-15-understanding-reactivity">Understanding Reactivity</a>
 posting. I learned a lot from these commodity systems about what valuable regularities and guarantees a reactive system
 needs to support, and also about the limitations of these commodity systems, some of which are fundamental, and some incidental. This learning fed into
-the development of the <a href="../../docs/fluid-signals"><code>fluid.cell</code></a> which is motivated on this page, a reactive library designed
-to support the needs of a malleable substrate, which preserves the good properties of commodity reactive systems whilst
+the development of <a href="../../docs/fluid-signals"><code>fluid.cell</code></a>, a reactive library designed
+to support the needs of a malleable substrate; it preserves the good properties of commodity reactive systems whilst
 expanding their domain.</p>
 <p>Much of the discussion here is anticipated by my 2025 <a href="../../post/2025-06-03-substrates-vision">Substrates Vision Statement</a> which
-calls for many of the properties of the reactive system which has now been built. Documentation for the <a href="../../docs/fluid-signals"><code>fluid.cell</code></a>
-system which I motivate here is available on <a href="../../docs/fluid-signals">this site</a>, and a live demonstration of the system can
-be seen at the <a href="#live-demo">bottom of the page</a>.</p>
+calls for many of the properties of the reactive system which has now been built. Documentation for <a href="../../docs/fluid-signals"><code>fluid.cell</code></a>
+is available on <a href="../../docs/fluid-signals">this site</a>, and a live demonstration can be seen at the <a href="#live-demo">bottom of the page</a>.</p>
 <h3 id="reactivity-for-disclosure">Reactivity for disclosure</h3>
 <p>Bridging the gap between use and change &mdash; following Lennart Lövstrand&rsquo;s notion in his 1990 <a href="https://dl.acm.org/doi/10.1145/97243.97271">Pressing the issues
 with buttons</a> that &ldquo;it should be as easy to change the environment as it is to use it&rdquo; &mdash;
@@ -304,12 +303,15 @@ simply <em>use</em> an artefact shouldn&rsquo;t be bothered by the fact that it 
 such as Boxer and the Lively Kernel are hampered by their lack of graceful support for disclosability. A Boxer interface
 always exposes all of its authoring capabilities, and a Lively interface, whilst it can be &ldquo;locked down&rdquo; still exposes
 this potential in a visually and technologically distracting way.</p>
+<p><a href="https://hyperclay.com/">Hyperclay</a> is an interesting recent HTML-based system with a clean approach to disclosure &mdash;
+it features a &ldquo;Save-Strip-Restore&rdquo; cycle that injects and removes interface elements related to malleability. However it
+is not a reactive or generically adaptable system.</p>
 <h3 id="reactivity-for-liveness">Reactivity for liveness</h3>
-<p>However, apart from the disclosure process, it&rsquo;s highly desirable that reactivity is available throughout the lifecycle
+<p>Apart from the disclosure process, it&rsquo;s highly desirable that reactivity is available throughout the lifecycle
 of a substrate.
 Closely aligned with the disciplines of substrate-oriented and malleable programming is the discipline of live programming.
 To maintain the impression that <a href="http://davidungar.net/Live2013/Live_2013.html">The thing on the screen is supposed to be the actual thing</a> (David Ungar, 2013),
-the system should adapt gracefully and immediately to whatever gestures the author has made to modify it. This contributes
+the system should adapt smoothly and immediately to whatever gestures the author has made to modify it. This contributes
 to the impression that the substrate represents a material under the author&rsquo;s direction rather than having a hidden realm
 &ldquo;offstage&rdquo; where important things happen. Josh Horowitz in his 2024 <a href="https://joshuahhh.com/dims-of-feedback/dims-of-feedback-live-2024.pdf">Technical Dimensions of Feedback</a>
 has surveyed many of these dimensions, including &ldquo;reactivity&rdquo; in the everyday sense as experienced by
@@ -321,7 +323,7 @@ has been that the extremely popular <a href="https://legacy.reactjs.org/docs/des
 Subsequently, the distinction between &ldquo;fine-grained&rdquo; and &ldquo;coarse-grained&rdquo; reactivity emerged, in order to account
 for the failure of some frameworks to support graphs built of autonomously reactive values. A further axis of confusion
 is between &ldquo;push-based&rdquo; and &ldquo;pull-based&rdquo; reactive systems. The former are sometimes called &ldquo;stream-based&rdquo; systems and
-since they also inherently suffer from glitches as I&rsquo;ll describe later, they lie outside our interest.</p>
+since they also inherently suffer from glitches, which I describe later, they lie outside our interest.</p>
 <h3 id="substrate-nature-must-coexist-with-imperative-and-functional-backgrounds">Substrate nature must coexist with imperative and functional backgrounds</h3>
 <p>It is possible to take the purity of a substrate&rsquo;s design too far. A successful substrate needs to coexist not only
 against the background of what imperatively or functionally constructed software there already is, but also with
@@ -353,15 +355,15 @@ Whilst it will be used to replace preact-signals as the underpinning of Infusion
 clearly explainable guarantees and capabilities which could support the development of other malleable systems too.</p>
 <p>Firstly I&rsquo;ll describe the two main properties constituting reactive competence
 which I have distilled from these commodity systems, and then I will explain how <code>fluid.cell</code> greatly extends the domain over which
-it provides these guarantees compared to commodity systems, to meet the needs of substrates. Some of this journey is described in
-my work in progress posting <a href="../../wip/2025-12-15-understanding-reactivity">understanding reactivity</a>.</p>
+it provides these guarantees compared to commodity systems, to meet the needs of substrates. Some of the journey towards
+this implementation is described in my work in progress posting <a href="../../wip/2025-12-15-understanding-reactivity">understanding reactivity</a>.</p>
 <h2 id="two-pillars-of-reactive-competence">Two pillars of reactive competence</h2>
 <h3 id="glitch-freedom">Glitch freedom</h3>
 <p>Glitch freedom is a consistency property which has gone by various names as it was independently rediscovered by many workers over the last decades. The
 property is about dataflows which diverge and then reconverge &mdash; it is essential that only one update is received by
 a node at the top of a &ldquo;diamond&rdquo; of dataflow convergence, reflecting data which has been drawn from a consistent data
 horizon, rather than a mixture of stale and fresh data. The diagram below shows the simplest possible graph which might glitch, with
-a core of 3 nodes, with a short path directly between X and B, and a longer path from X to B via A. It&rsquo;s essential that when
+a core of 3 nodes, with a short path directly from X down to B, and a longer path from X to B via A. It&rsquo;s essential that when
 X updates, we don&rsquo;t happen to activate the arc X-&gt;B first, but make sure that we provide a consistent horizon of data to
 B by updating A from X first.</p>
 
@@ -380,26 +382,26 @@ B by updating A from X first.</p>
 
 <p>An early and thorough treatment was in
 Kenny Tilton&rsquo;s <a href="https://smuglispweeny.blogspot.com/2008/02/cells-manifesto.html">Cells</a> system for CLOS, which in 2001,
-5 years before the coining of the terms &ldquo;<a href="../../term/glitch">glitch</a>&rdquo; and &ldquo;reactive programming&rdquo;, had already solved all the problems of
+5 years before the coining of the terms &ldquo;<a href="../../term/glitch">glitch</a>&rdquo; and &ldquo;reactive programming&rdquo;, had already solved the problems of
 reactivity embedded in imperative programming languages. Kenny named this property &ldquo;data integrity&rdquo; which I quite like and
 think it is a shame it didn&rsquo;t stick. Jonathan Edwards named
 a closely related property as <a href="https://www.subtext-lang.org/Onward09.pdf">Coherence</a> in 2009.</p>
 <p>The naming of the property which has taken hold came in Cooper &amp; Krishnamurthi&rsquo;s 2006
 <a href="http://static.cs.brown.edu/~sk/Publications/Papers/Published/ck-frtime/paper.pdf">FrTime paper</a> which I cover in my
-<a href="../../post/2025-07-01-archaeology-of-glitchyes">archaeology of glitches</a> posting.</p>
+<a href="../../post/2025-07-01-archaeology-of-glitches">archaeology of glitches</a> posting.</p>
 <h3 id="early-cutoff">Early cutoff</h3>
 <p>The other pillar of reactive competence is an efficiency guarantee, rather than a consistency property. It&rsquo;s essential
 that the reactive system does not do a certain kind of &ldquo;obviously unnecessary&rdquo; work &mdash; if a reactive update leaves
-the value of a node unchanged, that node&rsquo;s &ldquo;update&rdquo; should not be used to schedule further updates of nodes which might depende on it.</p>
+the value of a node unchanged, that node&rsquo;s &ldquo;update&rdquo; should not be used to schedule further updates of nodes which might depend on it.</p>
 <p>This property is less hard-edged than glitch freedom since in practice there is a huge sliding scale of kinds of
 &ldquo;unnecessary work&rdquo; which a sufficiently clever reactive system could avoid. You can consult treatments like Robert Lord&rsquo;s
 <a href="https://lord.io/spreadsheets/">How to Recalculate a Spreadsheet</a> and Jane Street&rsquo;s <a href="https://blog.janestreet.com/seven-implementations-of-incremental/">Seven Implementations of Incremental</a>
 for some of the fruity possibilities, but basic early cutoff support represents a straightforward everyday level of
 competence that every reactive system should aspire to.</p>
-<p>The diagram below shows the canonical situation, taken from Mokhov, Mitchell and Peyton Jones&rsquo; 2018
+<p>The diagram below shows a canonical situation, taken from Mokhov, Mitchell and Peyton Jones&rsquo; 2018
 <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2018/03/build-systems.pdf">Build Systems à la Carte</a> which is
 not ostensibly about reactive systems but build systems, but in practice the domains (as the paper argues, gearing through the
-canonical reactive system, Excel) are much the same. A user has changed a source file, <code>main.c</code>, in a way which
+primordial reactive system, Excel) are much the same. A user has changed a source file, <code>main.c</code>, in a way which
 leads to no change in the produced object file <code>main.o</code>, perhaps by editing a comment. A competent reactive build system
 should spot this, and, via early cutoff, not then go on to rebuild the executable <code>main.exe</code> once it sees that
 <code>main.o</code> is unchanged.</p>
@@ -408,16 +410,16 @@ should spot this, and, via early cutoff, not then go on to rebuild the executabl
 <div class="box" style="max-width:436px">
   <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
     <div class="img">
-      <img itemprop="thumbnail" src="../../img/early-cutoff.png" alt="The simplest possible graph that might glitch, made of 3 nodes"/>
+      <img itemprop="thumbnail" src="../../img/early-cutoff.png" alt="Early cutoff in a simple graph of C language artefacts"/>
     </div>
     <a href="../../img/early-cutoff.png" itemprop="contentUrl"></a>
       <figcaption>
-          <p>The simplest possible graph that might glitch, made of 3 nodes</p>
+          <p>Early cutoff in a simple graph of C language artefacts</p>
       </figcaption>
   </figure>
 </div>
 
-<p>This might seem to be a quite basic variety of competence but in fact several reactive systems, such as knockout
+<p>This might seem to be a quite basic variety of competence but in fact several popular reactive systems, such as <a href="https://knockoutjs.com/documentation/introduction.html">knockout</a>
 and Adapton, were created without it.</p>
 <h2 id="supporting-open-substrates">Supporting open substrates</h2>
 <p>Whilst maintaining the two pillars of reactive competence, glitch freedom and early cutoff,
@@ -479,11 +481,141 @@ for explaining the state of the system, as we got from other paradigms. Reactivi
 imperative and functional systems with far more malleable and democratic alternatives, but without providing
 the equivalent reassurances that users got from the coordinates of program counters and stack frames to explain
 the system&rsquo;s trajectory, we will again have serious ergonomic problems. <code>fluid.cell</code> provides a dedicated primitive
-<a href="docs/fluid-signals/#fluidfindcausecell"><code>findCause</code></a> which is available whenever a reactive update is in progress, which
+<a href="../../docs/fluid-signals/#fluidfindcausecell"><code>findCause</code></a> which is available whenever a reactive update is in progress, which
 will trace back through the graph to the original cause of the update. This can then be available to the substrate&rsquo;s
 own self-tooling which visually exports this information to the user &mdash; in the demo below, this path of nodes is highlighted
 in red during a reactive update.</p>
-<h3 id="live-demo">Live demo</h3>
+<h3 id="short-circuit-behaviour-on-errors-and-incompletion">Short-circuit behaviour on errors and incompletion</h3>
+<p><code>fluid.cell</code>&rsquo;s mechanism for supporting asynchronous computations, based around a specially marked payload named an
+<a href="../../term/unavailable-value">unavailable value</a> generalises to some other substrate requirements.</p>
+<p>The short-circuit behaviour of unavailable values in the reactive graph is as follows:</p>
+<ul>
+<li>A reactive computation any of whose dependencies is unavailable is short-circuited, and produces a further unavailable value,
+possibly accumulating an extra annotation holding the address of the computation</li>
+<li>A reactive effect any of whose dependencies is unavailable does not activate.</li>
+</ul>
+<p>The lifecycle of a malleable substrate is quite different to that of a conventional reactive system. A commodity reactive system
+expects the dependence structure of its graph handed to it as a <em>fait accompli</em> &mdash; its structure is already
+<em>implied</em> by the dependence structure of the body of code which has started to execute, and dependencies merely need
+to be <em>discovered</em>. However, a malleable substrate needs to supervise its own construction, which implies that
+considerable time is spent traversing reactive material on startup whose dependencies have not yet been loaded or
+constructed. The short-circuit behaviour of unavailable values provides a natural semantic to allow the substrate to
+make progress on constructing parts of the graph which are available without attempting to activate computations with missing values,
+a typical problem with commodity reactive libraries.</p>
+<p>Analogously to accounting for the cause of updates, a substrate also needs to account for the causes of errors, and
+route the user&rsquo;s attention through its surface to the cause that a value is unavailable, either through outstanding
+I/O, design incompletion or a structural/syntacic error. Unavailable values also handle this case within the
+substrate, accumulating all the addresses of substrate cells on the paths between visible error sites and their causes.
+<code>fluid.cell</code> is agnostic about the substrate structure which it supports and so does little to interpret these
+aspects of the payloads to unavailable values which are intended to be processed in a substrate-specific way.</p>
+<h3 id="dynamic-dependency-discovery">Dynamic dependency discovery</h3>
+<p>This is a standard feature to all commodity reactive frameworks, but in the context of substrate work this appears as
+somewhat of a surplus feature. In an imperative/functional environement which privileges the world of executing code,
+it is an idiomatic and powerful feature to subscribe a reactive computation to dependencies as they are discovered
+through the course of executing a conventional function encoding a reactive computation. However, in an openly
+authored substrate constituting an <a href="../../term/integration-domain">integation domain</a>, the principle of <em>interface hiding</em><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>
+implies that executing code should properly have no power of reference to other than its immediate arguments. However,
+<code>fluid.cell</code> retains this feature to support interoperability with imperative codebases.</p>
+<h2 id="feature-comparison">Feature comparison</h2>
+<p>Here is table showing a feature comparison of <code>fluid.cell</code> against a number of historical reactive implementations &mdash;
+&ldquo;Discovery&rdquo; indicates dynamic dependency discovery and &ldquo;Bx ⟺&rdquo; indicates support for bidirectional reactive edges.</p>
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>System</th>
+<th>Discovery</th>
+<th>Glitch-Freedom</th>
+<th>Early Cutoff</th>
+<th>Async</th>
+<th>Bx ⟺</th>
+<th>Causes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2001</td>
+<td>cells</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2006</td>
+<td>FrTime</td>
+<td>✓</td>
+<td>✓</td>
+<td>?</td>
+<td></td>
+<td>✓~</td>
+<td></td>
+</tr>
+<tr>
+<td>2010</td>
+<td>knockout</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2012</td>
+<td>S.js</td>
+<td>✓</td>
+<td></td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2014</td>
+<td>mobX</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2020</td>
+<td>Observable</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Solid</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2026</td>
+<td>fluid.cell</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<h2 id="live-demo">Live demo</h2>
 <p>You can see it working here. Understanding how control flow works in detail when embedding reactive primitives within
 an imperative backdrop can be a puzzle, so the legendary &ldquo;flag&rdquo; test case from preact-signals is here animated in a timeline alternating between
 imperative <span class="statement-color">statement steps</span> (S) in blue, and reactive <span class="computed-color">computation steps</span> (C) in purple.</p>
@@ -525,6 +657,9 @@ reactivity &mdash; he observes that a touchstone of why Svelte is not reactive i
 incarnation of his signals system, solid-signals, shows <a href="https://github.com/solidjs/signals/blob/main/tests/createMemo.test.ts">just the same behaviour</a>.
 I actually agree with him that Svelte is not reactive, but not with this exact reasoning of why not, and yet at the same
 time I also support the behaviour of his latest test cases.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Described in Stephen Kell&rsquo;s <a href="https://www.cl.cam.ac.uk/research/srg/netos/papers/2009-kell2009mythical.pdf">The Mythical Matched Modules</a> (2009).&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
