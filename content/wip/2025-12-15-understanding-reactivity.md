@@ -126,11 +126,10 @@ caption="The Power of Three">}}
 
 Someone with more foresight than me wouldn't have been surprised by this, but if you stare at the `C` node in the
 centre of the diagram you will realise that it requires a fundamental break from the conventional reactive representation of 
-"a node" as "a computed node" since it has *two incoming arcs*. This apparent cycle looks alarming, but it does not imply instability or inconsistency,
-since
-we still have [Dan Ingalls](/wip/2025-09-26-this-weeks-reactive-chats/#dan-ingalls-fabrik)
-in our back pocket reassuring us that we are just seeking "alternate paths of control flow",
-but still something quite fundamental needs to be done to the representation and it needs to be returned to a 
+"a node" as "a computed node" since it has *two incoming arcs*. We needn't panic about this immoral cyclicity since we still have
+[Dan Ingalls](/wip/2025-09-26-this-weeks-reactive-chats/#dan-ingalls-fabrik)
+in our back pocket reassuring us that we are just seeking "alternate paths of control flow".
+However, something quite fundamental needs to be done to the representation and it needs to be returned to a 
 more conventional graph representation with separate structures representing nodes and edges.
 
 
@@ -139,7 +138,7 @@ more conventional graph representation with separate structures representing nod
 After continuing to stare at Milo's diagram some more, and after having fairly rapidly become unblocked and implemented
 most of the [fluid.cell reactive system](/docs/fluid-signals) as a result, it struck me that actually the core
 principle underlying all effective reactive systems was remarkably simple and one that I'd actually been familiar with
-for a while. I'd summarise this with the slogan <span style="color:blue; font-weight: bold">DO LEAST ADVANCED WORK FIRST</span>
+for a while during Infusion development. I'd summarise this with the slogan <span style="color:blue; font-weight: bold">DO LEAST ADVANCED WORK FIRST</span>
 which could also be seen as a variety of the **Principle of Least Commitment**.
 
 Phil Agre in his 1997 [Computation and Human Experience](https://archive.org/details/computationhuman0000agre) gives a fair
@@ -150,13 +149,13 @@ summary of the principle:
 > logically necessary conclusions of each new item of information, thus keeping its options open to the greatest
 > possible extent.
 
-A few things to observe here --- firstly the point about "other things being equal": clearly the principle is only
+A key thing to observe here is the point about "other things being equal": clearly the principle is only
 relevant when a system has multiple options at its disposal, which could never happen in an either an imperative system,
 or in a reactive system whose dataflow has a strict tree structure. And it becomes far more relevant in reactive systems
 with cyclic or apparently cyclic relationships, since the number of available dataflow paths in these cases explodes
 rapidly.
 
-An important practical example is a component whose layer hierarchy depends on one of its computed values --- the situation
+An important practical example is an Infusion component whose layer hierarchy depends on one of its computed values --- the situation
 that appeared in my [previous post](/wip/2025-12-12-infinite-apps-and-unshaking/#signals-from-selectors). Faced with a
 computational output (a new layer name) which could potentially change the meaning of most of the component, it seems clear that one will
 make strong efforts to contextualise the output as strongly as possible by evaluating all possible "cheaper" values
@@ -166,7 +165,7 @@ So it is comforting to realise that I have actually been building a reactive sys
 having really understood what reactivity is.
 
 In [September's update](/wip/2025-09-26-this-weeks-reactive-chats/#hierarchy-of-good-functions) I noted a "hierarchy
-of good functions" which are increasingly information-destroying. The notion is that given a choice of relations to 
+of good functions" which are increasingly information-preserving. The notion is that given a choice of relations to 
 update, "other things being equal" one would prefer to choose those that lie at the top of the hierarchy. I was 
 really pleased to realise that the same principle which guides self-reflective reactive systems in general is 
 also the one which assures glitch-freedom. And this makes sense in literal terms too --- the relation at the top of

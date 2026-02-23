@@ -15,7 +15,7 @@
       <link>https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/</link>
       <pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
       <guid>https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/</guid>
-      <description>Submission to the Substrates 2026 Workshop, co-located with &amp;lt;Programming 2026&amp;gt;.&#xA;Over the last few years of developing Infusion, a substrate supporting open authorship, it became increasingly clear that the key to many of its successful behaviours would be a grounding in better reactive primitives. The same values of open authorship &amp;mdash; allowing systems to be specified in separate pieces contributed by multiple authors &amp;mdash; need to be extended right down to the bedrock of reactivity that the system is built on.</description>
+      <description>Submission to the March Substrates 2026 Workshop, co-located with &amp;lt;Programming 2026&amp;gt;.&#xA;Abstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivate fluid.cell, a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain. I explain the core reactive competencies of glitch freedom and early cutoff, and explain how fluid.</description>
     </item>
     <item>
       <title>Archaeology of Glitches</title>

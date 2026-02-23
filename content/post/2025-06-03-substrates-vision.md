@@ -57,8 +57,8 @@ antiquated”, and that by the end that they hated it. I argue a big contributor
 virtues, Boxer has no model for [disclosure](/term/disclosable-computing/) of its capacity for
 computation – the controls for executing and modifying boxes are always visible.
 
-We can’t build substantial communities for substrates unless we can use them to build interfaces which are seen as *
-wholly satisfactory* by communities. This implies that, if deployed as web pages, they use standard layout technologies,
+We can’t build substantial communities for substrates unless we can use them to build interfaces which are seen as 
+*wholly satisfactory* by communities. This implies that, if deployed as web pages, they use standard layout technologies,
 can render statically and don’t incur appreciable costs on startup. This unpacks the 6th property of a substrate –
 whilst it does not “form a stack”, it should be able to coexist naturally amongst the levels of stacks that exist. This
 brings in an important strand in the literature, Stephen Kell’s notion of

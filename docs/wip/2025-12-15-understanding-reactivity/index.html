@@ -60,7 +60,7 @@ This post will notice that the apparent diversity of reactive systems masks a si
   "headline": "Understanding Reactivity",
   "description" : "In late 2023, staring at the \u0026ldquo;flag\u0026rdquo; test case in preact-signals that I describe in my Archaeology of Glitches posting, I realised something decisive: reactive systems can provide a strong, structural guarantee of data consistency. Given that, it became clear that Infusion could be reworked as a fully reactive system, rather than the opportunistic hybrid I had been building through the 2010s.\nThis post will notice that the apparent diversity of reactive systems masks a simple unifying principle, related to a principle I had already been following in Infusion\u0026rsquo;s development.",
   "inLanguage" : "en",
-  "wordCount":  2146 ,
+  "wordCount":  2142 ,
   "datePublished" : "2025-12-15T00:00:00\u002b00:00",
   "dateModified" : "2025-12-15T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -340,17 +340,16 @@ of commodity and malleable reactivity than I imagined:</p>
 
 <p>Someone with more foresight than me wouldn&rsquo;t have been surprised by this, but if you stare at the <code>C</code> node in the
 centre of the diagram you will realise that it requires a fundamental break from the conventional reactive representation of
-&ldquo;a node&rdquo; as &ldquo;a computed node&rdquo; since it has <em>two incoming arcs</em>. This apparent cycle looks alarming, but it does not imply instability or inconsistency,
-since
-we still have <a href="../../wip/2025-09-26-this-weeks-reactive-chats/#dan-ingalls-fabrik">Dan Ingalls</a>
-in our back pocket reassuring us that we are just seeking &ldquo;alternate paths of control flow&rdquo;,
-but still something quite fundamental needs to be done to the representation and it needs to be returned to a
+&ldquo;a node&rdquo; as &ldquo;a computed node&rdquo; since it has <em>two incoming arcs</em>. We needn&rsquo;t panic about this immoral cyclicity since we still have
+<a href="../../wip/2025-09-26-this-weeks-reactive-chats/#dan-ingalls-fabrik">Dan Ingalls</a>
+in our back pocket reassuring us that we are just seeking &ldquo;alternate paths of control flow&rdquo;.
+However, something quite fundamental needs to be done to the representation and it needs to be returned to a
 more conventional graph representation with separate structures representing nodes and edges.</p>
 <h3 id="essential-unity-of-reactivity">Essential unity of reactivity</h3>
 <p>After continuing to stare at Milo&rsquo;s diagram some more, and after having fairly rapidly become unblocked and implemented
 most of the <a href="../../docs/fluid-signals">fluid.cell reactive system</a> as a result, it struck me that actually the core
 principle underlying all effective reactive systems was remarkably simple and one that I&rsquo;d actually been familiar with
-for a while. I&rsquo;d summarise this with the slogan <span style="color:blue; font-weight: bold">DO LEAST ADVANCED WORK FIRST</span>
+for a while during Infusion development. I&rsquo;d summarise this with the slogan <span style="color:blue; font-weight: bold">DO LEAST ADVANCED WORK FIRST</span>
 which could also be seen as a variety of the <strong>Principle of Least Commitment</strong>.</p>
 <p>Phil Agre in his 1997 <a href="https://archive.org/details/computationhuman0000agre">Computation and Human Experience</a> gives a fair
 summary of the principle:</p>
@@ -360,12 +359,12 @@ summary of the principle:</p>
 logically necessary conclusions of each new item of information, thus keeping its options open to the greatest
 possible extent.</p>
 </blockquote>
-<p>A few things to observe here &mdash; firstly the point about &ldquo;other things being equal&rdquo;: clearly the principle is only
+<p>A key thing to observe here is the point about &ldquo;other things being equal&rdquo;: clearly the principle is only
 relevant when a system has multiple options at its disposal, which could never happen in an either an imperative system,
 or in a reactive system whose dataflow has a strict tree structure. And it becomes far more relevant in reactive systems
 with cyclic or apparently cyclic relationships, since the number of available dataflow paths in these cases explodes
 rapidly.</p>
-<p>An important practical example is a component whose layer hierarchy depends on one of its computed values &mdash; the situation
+<p>An important practical example is an Infusion component whose layer hierarchy depends on one of its computed values &mdash; the situation
 that appeared in my <a href="../../wip/2025-12-12-infinite-apps-and-unshaking/#signals-from-selectors">previous post</a>. Faced with a
 computational output (a new layer name) which could potentially change the meaning of most of the component, it seems clear that one will
 make strong efforts to contextualise the output as strongly as possible by evaluating all possible &ldquo;cheaper&rdquo; values
@@ -374,7 +373,7 @@ work was done repeatedly until all that was left on the table was a higher categ
 So it is comforting to realise that I have actually been building a reactive system all this time, in advance of
 having really understood what reactivity is.</p>
 <p>In <a href="../../wip/2025-09-26-this-weeks-reactive-chats/#hierarchy-of-good-functions">September&rsquo;s update</a> I noted a &ldquo;hierarchy
-of good functions&rdquo; which are increasingly information-destroying. The notion is that given a choice of relations to
+of good functions&rdquo; which are increasingly information-preserving. The notion is that given a choice of relations to
 update, &ldquo;other things being equal&rdquo; one would prefer to choose those that lie at the top of the hierarchy. I was
 really pleased to realise that the same principle which guides self-reflective reactive systems in general is
 also the one which assures glitch-freedom. And this makes sense in literal terms too &mdash; the relation at the top of

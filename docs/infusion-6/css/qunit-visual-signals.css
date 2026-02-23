@@ -1,0 +1,249 @@
+/* Timeline Container */
+.timeline-container {
+    margin: 20px 0;
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.timeline-header h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Controls */
+.timeline-controls {
+    margin: 10px 0;
+}
+
+.timeline-btn {
+    padding: 8px 16px;
+    margin-right: 10px;
+    border: 1px solid #4a90e2;
+    background: white;
+    color: #4a90e2;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.timeline-btn:hover {
+    background: #4a90e2;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.timeline-btn:active {
+    transform: translateY(0);
+}
+
+/* Sequence Points */
+.timeline-sequence {
+    position: relative;
+    margin-top: 20px;
+}
+
+.sequence-points {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.sequence-point {
+    width: 35px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.3;
+    transition: opacity 0.2s, transform 0.2s;
+    position: relative;
+}
+
+.sequence-point .point-label {
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.sequence-point .point-index {
+    font-size: 9px;
+    opacity: 0.8;
+}
+
+.sequence-point.executed {
+    opacity: 1;
+}
+
+.sequence-point.active {
+    border: 3px solid #333;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    transform: scale(1.1);
+}
+
+.sequence-arrow {
+    position: absolute;
+    bottom: -30px;
+    font-size: 24px;
+    color: #333;
+    transition: left 0.3s ease;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Statement Display */
+.timeline-statement {
+    margin-top: 40px;
+    padding: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.statement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.status-badge.executed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-badge.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.current-statement pre {
+    margin: 5px 0 0 0;
+    padding: 12px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.5;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.compute-info {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f0f8ff;
+    border-left: 3px solid #4a90e2;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.timeline-body {
+    display: flex;
+}
+
+.signal-viz {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    min-height: 500px;
+    width: 60%;
+}
+
+.signal-code-holder {
+    width: 40%;
+}
+
+.statement-highlight {
+    background-color: #cce4ff;//#ccccff; // #fedada;
+}
+
+.node-label {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -2px;
+    /** Special override since bootstrap contains a bizarre definition targetting .label */
+    font-weight: 400;
+}
+
+.node-name {
+    font-size: 24px;
+    margin-bottom: 4px;
+    /** Special override since bootstrap contains a bizarre definition targetting .label */
+    color: black;
+}
+
+.node-value {
+    font-size: 16px;
+    color: #555;
+}
+
+.node-cause {
+    filter: drop-shadow(0 0 5px #e11);
+}
+
+
+.label .node-label {
+    color: black;
+}
+
+.vizreactive-source {
+    display: none;
+}
+
+.vizreactive-testname {
+    display: none;
+}
+
+.CodeMirror {
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+    font-size: 12px;
+    height: 100%;
+    max-height: 600px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .timeline-container {
+        padding: 10px;
+    }
+
+    .timeline-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+    }
+
+    .sequence-point {
+        width: 30px;
+        height: 45px;
+    }
+
+    .sequence-point .point-label {
+        font-size: 12px;
+    }
+}
