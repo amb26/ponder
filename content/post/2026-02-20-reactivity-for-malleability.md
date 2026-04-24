@@ -6,16 +6,24 @@ date: 2026-02-20
 <!-- copied from snippets/reactive-viz.html -->
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/dagre-d3@0.6.4/dist/dagre-d3.min.js"></script>
+<script src="/infusion-6/js/jshint.js"></script>
 <script src="/infusion-6/js/codemirror.js"></script>
 <script src="/infusion-6/js/javascript.js"></script>
+<script src="/infusion-6/js/function-lint.js"></script>
+<script src="/infusion-6/js/javascript-lint.js"></script>
 <link rel="stylesheet" href="/infusion-6/css/codemirror.css" />
+<link rel="stylesheet" href="/infusion-6/css/lint.css" />
 <script src="/infusion-6/js/lezer-javascript-browser.js"></script>
 <script src="/infusion-6/js/FluidCore.js"></script>
 <script src="/infusion-6/js/FluidSignals.js"></script>
 <script src="/infusion-6/js/FluidDebugging.js"></script>
 <script src="/infusion-6/js/lezer-transform.js"></script>
-<script src="/infusion-6/js/qunit-visual-signals-2.js"></script>
+<script src="/infusion-6/js/qunit-stub.js"></script>
+<script src="/infusion-6/js/qunit-visual-signals.js"></script>
 <link rel="stylesheet" href="/infusion-6/css/qunit-visual-signals.css" />
+<script src="/infusion-6/js/visual-signals-test-gallery.js"></script>
+<script src="/infusion-6/js/FluidSignalsTests-annotations.js"></script>
+
 <style>
 .statement-color {
   color: #4a90e2
@@ -46,6 +54,8 @@ date: 2026-02-20
 Submission to the March [Substrates 2026](https://2026.programming-conference.org/home/substrates-2026) Workshop, co-located with
 [<Programming 2026>](https://2026.programming-conference.org/).
 
+Updated 21st April 2026.
+
 ### Abstract
 
 _This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates [`fluid.cell`](/docs/fluid-signals), 
@@ -53,8 +63,17 @@ a reactive library designed to support the needs of these substrates. It preserv
 expanding their domain. I explain the core reactive competencies of _glitch freedom_ and _early cutoff_, and 
 how `fluid.cell` delivers these competencies whilst supporting reactive graphs with bidirectional arcs, asynchronous
 propagation of reactive updates and allows the cause of these updates to be tracked to their source, and why these
-expanded capabilites are vital to support successful substrates. The post finishes with a interactive visual demo of the reactive
-library on a simple test fixture._
+expanded capabilites are vital to support successful substrates. The post includes a interactive visual demo of the reactive
+library on some simple test fixtures._
+
+<div id="live-demo" class="vizreactive-target">
+</div>
+
+<script>
+    fluid.vizReactive.bootVizReactiveUI(".vizreactive-target");
+</script>
+
+<div style="font-size: smaller; margin-top: -16px;">For explanation of colour coding and some notes, see the <a href="#demo-key">demo key</a> below.</div>
 
 ## Why reactivity?
 
@@ -72,7 +91,7 @@ expanding their domain.
 
 Much of the discussion here is anticipated by my 2025 [Substrates Vision Statement](/post/2025-06-03-substrates-vision) which
 calls for many of the properties of the reactive system which has now been built. Documentation for [`fluid.cell`](/docs/fluid-signals)
-is available on [this site](/docs/fluid-signals), and a live demonstration can be seen at the [bottom of the page](#live-demo).
+is available on [this site](/docs/fluid-signals), and a live demonstration can be seen above.
 
 ### Reactivity for disclosure
 
@@ -84,7 +103,7 @@ capabilities need to lie latent within an ordinary-looking artefact, cheaply and
 when required. This is one of the key loci at which a substrate needs to deploy reactivity. I've referred to this site
 of adaptation under the heading of [disclosable computing](/term/disclosable-computing) --- those users who want to
 simply *use* an artefact shouldn't be bothered by the fact that it is malleable. Otherwise highly successful substrates
-such as Boxer and the Lively Kernel are hampered by their lack of graceful support for disclosability. A Boxer interface
+such as [Boxer](https://boxer-project.github.io/) and the [Lively Kernel](https://github.com/LivelyKernel/lively4-core) are hampered by their lack of graceful support for disclosability. A Boxer interface
 always exposes all of its authoring capabilities, and a Lively interface, whilst it can be "locked down" still exposes
 this potential in a visually and technologically distracting way.
 
@@ -222,7 +241,7 @@ This diagram shows a reactive graph with three nodes connected by two bidirectio
 in a commodity reactive system. In this context it represents a toy domain of a temperature conversion app holding
 temperatures in three scales, of the kind described in [Harmonious Authorship from Different Representations](https://www.ppig.org/files/2015-PPIG-26th-Basman.pdf) 
 (Basman et al, 2015). Whilst niche, this is already a simple kind of domain that should be natural to represent
-rather than require peculiar contortions or asymmetries (such as, for example, use of Vue signal's notion of a
+rather than require peculiar contortions or asymmetries (such as, for example, use of Vue-signals' notion of a
 [writeable computed](https://vuejs.org/guide/essentials/computed.html#writable-computed)).
 
 There are plenty of examples in the user domain of why it might be idiomatic to support such structures --- for example
@@ -303,13 +322,160 @@ aspects of the payloads to unavailable values which are intended to be processed
 
 ### Dynamic dependency discovery
 
-This is a standard feature to all commodity reactive frameworks, but in the context of substrate work this appears as
+This is a standard feature of all commodity reactive frameworks, but in the context of substrate work this appears as
 somewhat of a surplus feature. In an imperative/functional environement which privileges the world of executing code,
 it is an idiomatic and powerful feature to subscribe a reactive computation to dependencies as they are discovered
 through the course of executing a conventional function encoding a reactive computation. However, in an openly
 authored substrate constituting an [integation domain](/term/integration-domain), the principle of *interface hiding*[^3]
 implies that executing code should properly have no power of reference to other than its immediate arguments. However,
 `fluid.cell` retains this feature to support interoperability with imperative codebases.
+
+## Motivation and roadmap
+
+In this section I respond to some comments from reviewers by motivating the need for bidirectionality in real applications
+and situating the `fluid.cell` implementation within the roadmap of implementing a malleable substrate.
+
+### Consequences of bidirectionality
+
+Support for bidirectional dataflow is required naturally in non-authoritarian app designs. The image below shows a snapshot
+of the UI of the self-editable Todo list application which you can run live from the [Infusion demos](/https://fluid-project.github.io/infusion-6/demo/todo-list-sfc/).
+The application naturally exposes two representations of the same resource --- the application interface itself,
+on the left, which has been put into self-editing mode using the "magic wand" icon, and the source code representation
+on the right. The orange arrow shows the path of bidirectional dataflow, which respects the fact that the application
+should be equally editable from either representation, and has us further bear in mind that additional linked representations
+may appear and disappear dynamically.
+
+{{< figure src="/img/todo-edit-arrow.png" width="800px"
+caption="Bidirectional dataflow entailed by a non-authoritarian design">}}
+
+When updates "go against the flow" in an application built on authoritarian unidirectional dataflows, the developer is
+snarled up in peculiar stateful makeshifts to deal with the book-keeping, or else non-standard primitives exposed by
+the reactive system such as Vue's [writeable computed](https://vuejs.org/guide/essentials/computed.html#writable-computed).
+These are awkward enough for professional developers let alone something which we expect to be exploitable by end-user
+developers. Here's the code contrivance required in the older version of Infusion's own demo for this feature, which was
+built on the unidirectional preact-signals reactive library and CodeMirror 5:
+
+One one side, here's the "readEffect" in the CodeMirror component, which can't be a proper citizen
+of the reactive graph (a computed) since it is paired up with an update acting in the opposite direction. Note the stovepipe
+guarding against cyclic dataflows using an ad-hoc flag `inReadUpdate`: 
+
+```javascript
+    readEffect: {
+        $effect: {
+            func: (text, instance) => {
+                instance.inReadUpdate = true;
+                fluid.codemirror.updateText(instance, text);
+                instance.inReadUpdate = false;
+                fluid.invokeLater(() => instance.refresh());
+            },
+            args: ["{self}.text", "{self}.instance"]
+        }
+    }
+```
+
+The writes in the other direction consume these flags like so:
+
+```javascript
+    instance.writeEffect = fluid.effect(validText => {
+        if (instance.firstValid && holder.writeText && !instance.inReadUpdate) {
+            holder.writeText(validText);
+        }
+        instance.firstValid = true;
+    }, [validText]);
+```
+
+Developers take this kind of paradigm-breaking hack for granted as part of the costs of building real-world
+apps and seldom try to take account of them by feeding back the need for them to library developers. Under
+the dominant construction paradigm this kind of library usage is considered unidiomatic and will face ridicule.
+
+### Roadmap to malleability
+
+`fluid.cell` aims to be agnostic as to how it is used to implement the primitives of 
+a malleable substrate layered, but I have a particular roadmap for how this is to be achieved in Infusion. The
+design layer above reactive cells aggregates these cells into ***layers*** which
+are the unit of design reuse, as well as the unit of structural malleability. The contents of one or
+more layers can be composited by dictionary merging into ***components*** which capture reusable units of reactive dataflow.
+
+The demos at the top of this page, whilst they represent an important class of use cases
+for interfacing with bodies of standard imperative code, don't represent the pattern envisioned in a
+substrate. They have been implemented here to establish parity with features in standard reactive
+libraries, as well as being a teaching aid in order to demonstrate how such features work in traditional contexts.
+
+Whilst it would be possible, and supported, to manipulate the reactive graph from inside the body of the
+imperative code snippets implementing `computed` and `effect` arcs, this is not considered idiomatic under
+the model of an [integation domain](/term/integration-domain). In an integration domain, code is not expected to
+refer to arbitrary parts of a design using traditional programming language scopes, but instead as far as possible
+is expected to only refer to its immediate arguments.
+
+Other primitives than the following ones could be supported by the overlying substrate, but here I briefly describe
+the ones used by Infusion, which seem to constitute a small, self-sufficient set. Fuller
+documentation for these will appear in future postings.
+
+Infusion's strategy ***lifts*** the contents of reactive datacells up into the structure of the substrate
+through two main mechanisms, structural lensing and indirection.
+
+#### Structural lensing through `$if` and `$for` 
+
+A reactive cell holding a boolean value can be lensed into the existence or non-existence of a component by referring
+to it in the `$if` member of a component's layer, e.g. in a textual, JSON form:
+
+```javascript
+    assignee: {
+        $component: {
+            $layers: "fluid.templateViewComponent",
+            $if: "{somethingInScope}.enabled",
+            template: `<div class="assignee"></div>`
+        }
+    }
+```
+
+The component will exist at times when `{somethingInScope}.enabled` resolves to `true` and will not exist when
+it resolves to `false`.
+
+A reactive cell holding an array value can be lensed into the existence of a corresponding array of components by
+referring to it in the `$for` member of a component's layer, e.g. 
+
+```javascript
+    todoItems: {
+    $component: {
+        $layers: "fluid.tests.todoItem",
+            $for: {
+            source: "{todoList}.todos",
+                value: "todo",
+                key: "itemIndex"
+        },
+        text: "{todo}.text",
+            completed: "{todo}.completed"
+    }
+},
+```
+
+
+These constructs are named after similar conditional and looping primitives seen in imperative programming, but
+rather than being control flow constructs, they instead set up reactive correspondences which are navigable through
+the kinds of bidirectional relationships described above.  
+
+#### Polymorphism via indirection `$layer$`
+
+To achieve dynamic polymorphism in the substrate, the names of layers
+held in layer definitions can be looked up through reference into cell contents. Through this correspondence,
+reactive updates to the data cells become naturally lifted into structural updates of the dataflow graph itself.
+In a traditional programming paradigm this would be considered an exercise of [metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming).
+
+For example, in the malleable IDE usable in the demo above, the flavour of editor constructed
+to edit a particular component is geared through this reference to `{self}.layerRec.editorModeLayer` in the `$layers`
+member of the component --- this holds a string which, under the standard reactive evaluation semantics, will be
+looked up to a layer name and then composited onto the component instantiated at this path:
+
+```javascript
+    editorHolders: {
+        $component: {
+            $layers: ["fluid.editor", "{self}.layerRec.editorModeLayer"]
+```
+
+Full explanations of Infusion layer and component primitives are out of scope for this discussion and will appear
+in future postings --- this discussion here is just intended to prime intuition about how coarse and fine-scaled malleability
+of the substrate as a whole is intended to arise from ordinary reactive updates to dataflow cells.
 
 ## Feature comparison
 
@@ -327,9 +493,9 @@ Here is table showing a feature comparison of `fluid.cell` against a number of h
 | 2023 | Solid | ✓         | ✓ | ✓ | ✓ | | |
 | 2026 | fluid.cell | ✓         | ✓ | ✓ | ✓ | ✓ | ✓ |
 
-## Live demo
+## Demo key
 
-You can see it working here. Understanding how control flow works in detail when embedding reactive primitives within
+You can see it working [above](#abstract). Understanding how control flow works in detail when embedding reactive primitives within
 an imperative backdrop can be a puzzle, so the legendary "flag" test case from preact-signals is here animated in a timeline alternating between
 imperative <span class="statement-color">statement steps</span> (S) in blue, and reactive <span class="computed-color">computation steps</span> (C) in purple. 
 
@@ -351,18 +517,6 @@ a good part of the `fluid.cell` implementation has been adapted.
 Note that without support for asychronous propagation of reactive values, this demo could not have been implemented,
 since behind the scenes the original synchronous test fixture is rewritten to an asynchronous one which then suspends
 waiting for user interaction.
-
-<div class="vizreactive-target">
-<span class="vizreactive-testname">preact-signals: Should drop A->B->A updates</span>
-<pre class="vizreactive-source" src="/testjs/a-b-a-updates.js">
-</pre>
-</div>
-
-<script>
-    fluid.vizReactive.bootVizReactiveUI();
-</script>
-
-
 
 
 [^1]: Section 4.4.4 of [Software and How it Lives On](https://www.ppig.org/files/2016-PPIG-27th-Basman1.pdf),

@@ -79,7 +79,7 @@ A hugely important ergonomic improvement is being able to report the *cause* of 
 chain of updated nodes leading back to the initial changed node triggered by the user or environment. This is vital in
 a substrate which positions reactivity as a wholesale replacement for execution, and therefore needs to replace the
 invaluable explanatory power of the stack with a correspondingly thorough explanation stretching across the substrate. This
-is done with the [fluid.findCause](#fluid-findcause) API which returns this path of updated nodes.
+is done with the [fluid.findCause](#fluidfindcausecell) API which returns this path of updated nodes.
 
 ### Asynchronous compute arcs
 

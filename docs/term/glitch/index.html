@@ -10,7 +10,7 @@
 
   <meta name="description" content="The term glitch in the sense of a reactive miscomputation first entered the literature in Cooper &amp; Krishnamurthi&rsquo;s 2006 FrTime paper, &ldquo;Embedding Dynamic Dataflow in a Call-by-Value Language&rdquo;. They define it as
 where a signal is recomputed before all of its subordinate signals are up-to-date
-This definition appears helpful and clearcut, but the more one thinks about how to operationalise this definition in a particular concrete context, and verify that a system is rigorously glitch-free, the less clear it seems.">
+This definition appears helpful and clearcut, but the more one thinks about how to operationalise this definition in a particular context, and verify that a system is rigorously glitch-free, the less clear it seems.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -59,9 +59,9 @@ This definition appears helpful and clearcut, but the more one thinks about how 
     "name" : "Antranig Basman"
   },
   "headline": "Glitch",
-  "description" : "The term glitch in the sense of a reactive miscomputation first entered the literature in Cooper \u0026amp; Krishnamurthi\u0026rsquo;s 2006 FrTime paper, \u0026ldquo;Embedding Dynamic Dataflow in a Call-by-Value Language\u0026rdquo;. They define it as\nwhere a signal is recomputed before all of its subordinate signals are up-to-date\nThis definition appears helpful and clearcut, but the more one thinks about how to operationalise this definition in a particular concrete context, and verify that a system is rigorously glitch-free, the less clear it seems.",
+  "description" : "The term glitch in the sense of a reactive miscomputation first entered the literature in Cooper \u0026amp; Krishnamurthi\u0026rsquo;s 2006 FrTime paper, \u0026ldquo;Embedding Dynamic Dataflow in a Call-by-Value Language\u0026rdquo;. They define it as\nwhere a signal is recomputed before all of its subordinate signals are up-to-date\nThis definition appears helpful and clearcut, but the more one thinks about how to operationalise this definition in a particular context, and verify that a system is rigorously glitch-free, the less clear it seems.",
   "inLanguage" : "en",
-  "wordCount":  747 ,
+  "wordCount":  743 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -84,7 +84,7 @@ This definition appears helpful and clearcut, but the more one thinks about how 
 <meta property="og:title" content="Glitch" />
 <meta property="og:description" content="The term glitch in the sense of a reactive miscomputation first entered the literature in Cooper &amp; Krishnamurthi&rsquo;s 2006 FrTime paper, &ldquo;Embedding Dynamic Dataflow in a Call-by-Value Language&rdquo;. They define it as
 where a signal is recomputed before all of its subordinate signals are up-to-date
-This definition appears helpful and clearcut, but the more one thinks about how to operationalise this definition in a particular concrete context, and verify that a system is rigorously glitch-free, the less clear it seems.">
+This definition appears helpful and clearcut, but the more one thinks about how to operationalise this definition in a particular context, and verify that a system is rigorously glitch-free, the less clear it seems.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/term/glitch/" />
 <meta property="og:type" content="website" />
@@ -229,7 +229,7 @@ This definition appears helpful and clearcut, but the more one thinks about how 
 <p>where a signal is recomputed before all of its subordinate signals are up-to-date</p>
 </blockquote>
 <p>This definition appears helpful and clearcut, but the more one thinks about how to operationalise this definition in a particular
-concrete context, and verify that a system is rigorously glitch-free, the less clear it seems. I go into some of the
+context, and verify that a system is rigorously glitch-free, the less clear it seems. I go into some of the
 complexities and murky history of this definition in <a href="../../post/2025-07-01-archaeology-of-glitches">Archaeology of Glitches</a>, which
 also delineates the dominant &ldquo;commodity signals&rdquo; implementations in JS (preact-signals, solid signals, alien
 signals, TC39 signals, etc.) which implement essentially the same algorithm as each other and which are all demonstrably (though not
@@ -242,12 +242,12 @@ this needs some unpacking:</p>
 <blockquote>
 <p>Such behavior is unacceptable as it results in redundant computation and, much worse, causes signals to violate invariants.</p>
 </blockquote>
-<p>There are two main heads of this violation risk cause by glitching glitching, internal, and external.</p>
-<p>We&rsquo;ll use the <code>signal</code>/<code>computed</code>/<code>effect</code> ontology from <a href="https://preactjs.com/guide/v10/signals/#api">preact-signals</a></p>
+<p>This violation of invariants causes two kinds of risks raised by glitching.</p>
+<p>We&rsquo;ll use the <code>signal</code>/<code>computed</code>/<code>effect</code> ontology from <a href="https://preactjs.com/guide/v10/signals/#api">preact-signals</a>:</p>
 <ul>
 <li>A glitching system runs the <em>internal</em> risk, in a <code>computed</code>, that it will present the function on the arc
 with inconsistent values, potentially which lie outside its range. For example <code>computed( () =&gt; a.value / b.value)</code> may
-present with b as 0 or missing, which, especially in a less dynamic language than JS, may trigger a runtime failure.</li>
+be presented with b as 0 or missing, which, especially in a less dynamic language than JS, may trigger a runtime failure.</li>
 <li>A glitching system runs the <em>external</em> risk, in an <code>effect</code>, that it will present the outside environment with
 an inconsistent system state. For example a system which writes successive system states to a database or issues
 queries based on them will produce faulty behaviour.</li>
@@ -270,7 +270,8 @@ embedded in their environment in quite the same way that analogue circuits are. 
 external systems via a mechanism like <code>effect</code>, the consequences of a miscomputation may be arbitrarily bad. Given I&rsquo;m
 positioning reactive primitives in <a href="../../infusion">Infusion</a> as a wholly satisfactory substitute for execution,
 it is essential that they are as reliable as execution, and I&rsquo;d prefer a name drawn from a closer discipline.</p>
-<p>Before the term &ldquo;glitch&rdquo; became widespread, other researchers had characterised this phenomenon and given different names to it.</p>
+<p>Before the term &ldquo;glitch&rdquo; became widespread, other researchers had characterised this phenomenon and given different
+names to it:</p>
 <p>Jonathan Edwards&rsquo; 2009 <a href="http://dspace.mit.edu/bitstream/handle/1721.1/45563/MIT-CSAIL-TR-2009-024.pdf">Coherent Reaction</a> system
 gives the name &ldquo;coherence&rdquo; to a closely related property.</p>
 <p>Ken Tilton&rsquo;s 2001 <a href="https://smuglispweeny.blogspot.com/2008/02/cells-manifesto.html">Cells</a> reactive system,

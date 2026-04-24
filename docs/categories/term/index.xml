@@ -49,7 +49,7 @@
       <link>https://ponder.org.uk/term/glitch/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
       <guid>https://ponder.org.uk/term/glitch/</guid>
-      <description>The term glitch in the sense of a reactive miscomputation first entered the literature in Cooper &amp;amp; Krishnamurthi&amp;rsquo;s 2006 FrTime paper, &amp;ldquo;Embedding Dynamic Dataflow in a Call-by-Value Language&amp;rdquo;. They define it as&#xA;where a signal is recomputed before all of its subordinate signals are up-to-date&#xA;This definition appears helpful and clearcut, but the more one thinks about how to operationalise this definition in a particular concrete context, and verify that a system is rigorously glitch-free, the less clear it seems.</description>
+      <description>The term glitch in the sense of a reactive miscomputation first entered the literature in Cooper &amp;amp; Krishnamurthi&amp;rsquo;s 2006 FrTime paper, &amp;ldquo;Embedding Dynamic Dataflow in a Call-by-Value Language&amp;rdquo;. They define it as&#xA;where a signal is recomputed before all of its subordinate signals are up-to-date&#xA;This definition appears helpful and clearcut, but the more one thinks about how to operationalise this definition in a particular context, and verify that a system is rigorously glitch-free, the less clear it seems.</description>
     </item>
     <item>
       <title>Habitable</title>
