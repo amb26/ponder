@@ -61,7 +61,7 @@ Abstract This post explains why reactivity is a key requirement for openly autho
   "headline": "fluid.cell: A reactive implementation supporting malleable substrates",
   "description" : "Submission to the March Substrates 2026 Workshop, co-located with \u0026lt;Programming 2026\u0026gt;.\nUpdated 21st April 2026.\nAbstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates fluid.cell, a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain. I explain the core reactive competencies of glitch freedom and early cutoff, and how fluid.",
   "inLanguage" : "en",
-  "wordCount":  4458 ,
+  "wordCount":  4442 ,
   "datePublished" : "2026-02-20T00:00:00\u002b00:00",
   "dateModified" : "2026-02-20T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -586,16 +586,15 @@ guarding against cyclic dataflows using an ad-hoc flag <code>inReadUpdate</code>
 </span></span><span class="line"><span class="cl">        <span class="nx">instance</span><span class="p">.</span><span class="nx">firstValid</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="p">[</span><span class="nx">validText</span><span class="p">]);</span>
 </span></span></code></pre></div><p>Developers take this kind of paradigm-breaking hack for granted as part of the costs of building real-world
-apps and seldom try to take account of them by feeding back the need for them to library developers. Under
-the dominant construction paradigm this kind of library usage is considered unidiomatic and will face ridicule.</p>
+apps and seldom try to take account of them by feeding back the need for them to library developers.</p>
 <h3 id="roadmap-to-malleability">Roadmap to malleability</h3>
 <p><code>fluid.cell</code> aims to be agnostic as to how it is used to implement the primitives of
 a malleable substrate layered, but I have a particular roadmap for how this is to be achieved in Infusion. The
-design layer above reactive cells aggregates these cells into <em><strong>layers</strong></em> which
+design layer above the reactive cells aggregates these cells into <em><strong>layers</strong></em> which
 are the unit of design reuse, as well as the unit of structural malleability. The contents of one or
 more layers can be composited by dictionary merging into <em><strong>components</strong></em> which capture reusable units of reactive dataflow.</p>
 <p>The demos at the top of this page, whilst they represent an important class of use cases
-for interfacing with bodies of standard imperative code, don&rsquo;t represent the pattern envisioned in a
+for interfacing with bodies of standard imperative code, don&rsquo;t represent the dominant pattern envisioned in a
 substrate. They have been implemented here to establish parity with features in standard reactive
 libraries, as well as being a teaching aid in order to demonstrate how such features work in traditional contexts.</p>
 <p>Whilst it would be possible, and supported, to manipulate the reactive graph from inside the body of the
@@ -607,7 +606,7 @@ is expected to only refer to its immediate arguments.</p>
 the ones used by Infusion, which seem to constitute a small, self-sufficient set. Fuller
 documentation for these will appear in future postings.</p>
 <p>Infusion&rsquo;s strategy <em><strong>lifts</strong></em> the contents of reactive datacells up into the structure of the substrate
-through two main mechanisms, structural lensing and indirection.</p>
+through two main mechanisms, structural lensing and indirection:</p>
 <h4 id="structural-lensing-through-if-and-for">Structural lensing through <code>$if</code> and <code>$for</code></h4>
 <p>A reactive cell holding a boolean value can be lensed into the existence or non-existence of a component by referring
 to it in the <code>$if</code> member of a component&rsquo;s layer, e.g. in a textual, JSON form:</p>
@@ -615,7 +614,7 @@ to it in the <code>$if</code> member of a component&rsquo;s layer, e.g. in a tex
 </span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.templateViewComponent&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">$if</span><span class="o">:</span> <span class="s2">&#34;{somethingInScope}.enabled&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">template</span><span class="o">:</span> <span class="sb">`&lt;div class=&#34;assignee&#34;&gt;&lt;/div&gt;`</span>
+</span></span><span class="line"><span class="cl">            <span class="p">...</span>    
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span></code></pre></div><p>The component will exist at times when <code>{somethingInScope}.enabled</code> resolves to <code>true</code> and will not exist when
@@ -630,8 +629,7 @@ referring to it in the <code>$for</code> member of a component&rsquo;s layer, e.
 </span></span><span class="line"><span class="cl">                <span class="nx">value</span><span class="o">:</span> <span class="s2">&#34;todo&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">                <span class="nx">key</span><span class="o">:</span> <span class="s2">&#34;itemIndex&#34;</span>
 </span></span><span class="line"><span class="cl">        <span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">text</span><span class="o">:</span> <span class="s2">&#34;{todo}.text&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">completed</span><span class="o">:</span> <span class="s2">&#34;{todo}.completed&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">...</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">},</span>
 </span></span></code></pre></div><p>These constructs are named after similar conditional and looping primitives seen in imperative programming, but
@@ -753,7 +751,7 @@ of the substrate as a whole is intended to arise from ordinary reactive updates 
 </table>
 <h2 id="demo-key">Demo key</h2>
 <p>You can see it working <a href="#abstract">above</a>. Understanding how control flow works in detail when embedding reactive primitives within
-an imperative backdrop can be a puzzle, so the legendary &ldquo;flag&rdquo; test case from preact-signals is here animated in a timeline alternating between
+an imperative backdrop can be a puzzle, so the legendary &ldquo;flag&rdquo; test case from preact-signals, together with some others, is here animated in a timeline alternating between
 imperative <span class="statement-color">statement steps</span> (S) in blue, and reactive <span class="computed-color">computation steps</span> (C) in purple.</p>
 <p>In addition, the <span class="cause-color">cause</span> of any current reactive computation, that is, the path to the node
 whose update originally scheduled it, is highlighted in red.</p>

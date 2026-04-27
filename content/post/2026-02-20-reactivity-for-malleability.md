@@ -385,19 +385,18 @@ The writes in the other direction consume these flags like so:
 ```
 
 Developers take this kind of paradigm-breaking hack for granted as part of the costs of building real-world
-apps and seldom try to take account of them by feeding back the need for them to library developers. Under
-the dominant construction paradigm this kind of library usage is considered unidiomatic and will face ridicule.
+apps and seldom try to take account of them by feeding back the need for them to library developers.
 
 ### Roadmap to malleability
 
 `fluid.cell` aims to be agnostic as to how it is used to implement the primitives of 
 a malleable substrate layered, but I have a particular roadmap for how this is to be achieved in Infusion. The
-design layer above reactive cells aggregates these cells into ***layers*** which
+design layer above the reactive cells aggregates these cells into ***layers*** which
 are the unit of design reuse, as well as the unit of structural malleability. The contents of one or
 more layers can be composited by dictionary merging into ***components*** which capture reusable units of reactive dataflow.
 
 The demos at the top of this page, whilst they represent an important class of use cases
-for interfacing with bodies of standard imperative code, don't represent the pattern envisioned in a
+for interfacing with bodies of standard imperative code, don't represent the dominant pattern envisioned in a
 substrate. They have been implemented here to establish parity with features in standard reactive
 libraries, as well as being a teaching aid in order to demonstrate how such features work in traditional contexts.
 
@@ -412,7 +411,7 @@ the ones used by Infusion, which seem to constitute a small, self-sufficient set
 documentation for these will appear in future postings.
 
 Infusion's strategy ***lifts*** the contents of reactive datacells up into the structure of the substrate
-through two main mechanisms, structural lensing and indirection.
+through two main mechanisms, structural lensing and indirection:
 
 #### Structural lensing through `$if` and `$for` 
 
@@ -424,7 +423,7 @@ to it in the `$if` member of a component's layer, e.g. in a textual, JSON form:
         $component: {
             $layers: "fluid.templateViewComponent",
             $if: "{somethingInScope}.enabled",
-            template: `<div class="assignee"></div>`
+            ...    
         }
     }
 ```
@@ -444,8 +443,7 @@ referring to it in the `$for` member of a component's layer, e.g.
                 value: "todo",
                 key: "itemIndex"
         },
-        text: "{todo}.text",
-            completed: "{todo}.completed"
+        ...
     }
 },
 ```
@@ -496,7 +494,7 @@ Here is table showing a feature comparison of `fluid.cell` against a number of h
 ## Demo key
 
 You can see it working [above](#abstract). Understanding how control flow works in detail when embedding reactive primitives within
-an imperative backdrop can be a puzzle, so the legendary "flag" test case from preact-signals is here animated in a timeline alternating between
+an imperative backdrop can be a puzzle, so the legendary "flag" test case from preact-signals, together with some others, is here animated in a timeline alternating between
 imperative <span class="statement-color">statement steps</span> (S) in blue, and reactive <span class="computed-color">computation steps</span> (C) in purple. 
 
 In addition, the <span class="cause-color">cause</span> of any current reactive computation, that is, the path to the node
