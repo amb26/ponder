@@ -49,6 +49,11 @@ date: 2026-02-20
   padding: 2px;
   outline: 1px solid #333;
 }
+@media (prefers-color-scheme: dark) {
+  .clean-color, .check-color, .dirty-color {
+    color: black;
+  }
+}
 </style>
 
 Submission to the March [Substrates 2026](https://2026.programming-conference.org/home/substrates-2026) Workshop, co-located with

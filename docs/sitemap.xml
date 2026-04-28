@@ -2,13 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://ponder.org.uk/</loc>
-    <lastmod>2026-02-20T00:00:00+00:00</lastmod>
+    <loc>https://ponder.org.uk/post/2026-03-27-ai-cries-out-for-better-notations/</loc>
+    <lastmod>2026-03-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/</loc>
-    <lastmod>2026-02-20T00:00:00+00:00</lastmod>
+    <loc>https://ponder.org.uk/</loc>
+    <lastmod>2026-03-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ponder.org.uk/post/</loc>
+    <lastmod>2026-03-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/</loc>
     <lastmod>2026-02-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ponder.org.uk/wip/2025-12-15-understanding-reactivity/</loc>

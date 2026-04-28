@@ -8,8 +8,15 @@
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <lastBuildDate>Fri, 20 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 27 Mar 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ponder.org.uk/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI cries out for better notations</title>
+      <link>https://ponder.org.uk/post/2026-03-27-ai-cries-out-for-better-notations/</link>
+      <pubDate>Fri, 27 Mar 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2026-03-27-ai-cries-out-for-better-notations/</guid>
+      <description>The themes of today&amp;rsquo;s posting have been seen before. As with the dismal exercise in On UI as Code I find myself once again trying to make an apparently trivial modification to a user interface - in this case, getting a Hextra Hugo theme menu to support nested menus. As is typical, this turns out to be impossible without some large-scale cut, paste and hack exercise of the kind we so regularly tell each other is unvirtuous.</description>
+    </item>
     <item>
       <title>fluid.cell: A reactive implementation supporting malleable substrates</title>
       <link>https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/</link>
