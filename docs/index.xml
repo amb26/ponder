@@ -22,7 +22,7 @@
       <link>https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/</link>
       <pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
       <guid>https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/</guid>
-      <description>Submission to the March Substrates 2026 Workshop, co-located with &amp;lt;Programming 2026&amp;gt;.&#xA;Updated 21st April 2026.&#xA;Abstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates fluid.cell, a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain. I explain the core reactive competencies of glitch freedom and early cutoff, and how fluid.</description>
+      <description>Submission to the March Substrates 2026 Workshop, co-located with &amp;lt;Programming 2026&amp;gt;.&#xA;Updated 5th May 2026.&#xA;Abstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates fluid.cell, a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain. I explain the core reactive competencies of glitch freedom and early cutoff, and how fluid.</description>
     </item>
     <item>
       <title>Understanding Reactivity</title>

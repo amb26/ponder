@@ -198,6 +198,7 @@ const $fluidSignalsScope = function (fluid) {
         cell._fit = null;
 
         cell._state = CacheClean;
+        cell._prePendingState = null;
         cell._trackingRecord = null;
 
         return cell;
@@ -220,9 +221,11 @@ const $fluidSignalsScope = function (fluid) {
         const fit = {
             targetsConsumed: [],
             pendingEffects: [],
+            sources: [],
             isActive: true,
             fitId: fluid.cell.fitId++
         };
+        console.log("***STARTFIT for fitId ", fit.fitId);
         fluid.CurrentFits.push(fit);
         return fit;
     };
@@ -230,11 +233,17 @@ const $fluidSignalsScope = function (fluid) {
     /** End the current "fit" (transaction) which is updating the reactive graph by resetting all the arcs which
      * have been marked as consumed by one leg of bidirectional update arcs.
      * @param {Fit} fit - The fit to end
+     * @param {Boolean} [coalesce] - If this fit is being coalesced into another
      */
-    fluid.cell.endFit = function (fit) {
+    fluid.cell.endFit = function (fit, coalesce) {
         if (fit.isActive) {
             console.log("***ENDFIT for fitId ", fit.fitId, " targetsConsumed ", fit.targetsConsumed);
-            fit.targetsConsumed.forEach(target => target._consumedSources.length = 0);
+            fit.targetsConsumed.forEach(target => {
+                target._consumedSources.length = 0;
+                if (!coalesce) {
+                    target._prePendingState = null;
+                }
+            });
             fit.targetsConsumed.length = 0;
             fit.isActive = false;
             fluid.removeArrayElement(fluid.CurrentFits, fit);
@@ -307,7 +316,8 @@ const $fluidSignalsScope = function (fluid) {
 
                 Array.prototype.push.apply(fit.targetsConsumed, extraFit.targetsConsumed);
                 Array.prototype.push.apply(fit.pendingEffects, extraFit.pendingEffects);
-                fluid.cell.endFit(extraFit);
+                Array.prototype.push.apply(fit.sources, extraFit.sources);
+                fluid.cell.endFit(extraFit, true);
                 console.log("***FIT ID ", extraFit.fitId, "coalesced into fit ", fit.fitId);
             }
         }
@@ -328,228 +338,7 @@ const $fluidSignalsScope = function (fluid) {
 
     fluid.cell.equals = fluid.defaultEquality;
 
-    /**
-     * Reactively evaluate the current cell, ensuring its value is up to date with respect to all computed dependents,
-     * within the current reactive context
-     *
-     * @return {any} The evaluated cell value
-     * @this {Cell}
-     */
-    fluid.cell.prototype.get = function () {
-        // Track this get in the current reaction context
-        if ($t.CurrentReaction) {
-            if (
-                !$t.CurrentGets &&
-                $t.CurrentReaction.sources &&
-                $t.CurrentReaction.sources[$t.CurrentGetsIndex] === this
-            ) {
-                // No divergence with previous _sources and none is requested - simply step along the array of _sources
-                $t.CurrentGetsIndex++;
-            } else {
-                // Divergence needs to begin - allocate a fresh array and record this source as demanded
-                if (!$t.CurrentGets) {
-                    $t.CurrentGets = [this];
-                }
-                else {
-                    // Divergence in progress, record this source as demanded
-                    $t.CurrentGets.push(this);
-                }
-            }
-        }
-
-        // Update if we have in edges and might be stale
-        if (this._inEdges) {
-            fluid.cell.updateIfNecessary(this);
-        }
-
-        return this._value;
-    };
-
-    /**
-     * Update the value of this writeable cell.
-     *
-     * @param {any} value - The new cell value
-     * @param {Object} options - Optional options to contextualise the update
-     * @param {String|String[]} [props.source] - Optional cleanup function to run when the effect is disposed.
-     * @this {Cell}
-     */
-    fluid.cell.prototype.set = function (value, options) {
-
-        if (!fluid.cell.equals(this._value, value)) {
-            this._value = value;
-            this._state = CacheClean;
-            if (!this._fit || !this._fit.isActive) {
-                this._fit = fluid.cell.startFit();
-            }
-
-            // Mark observers as dirty
-            if (this._observers) {
-                const markedSources = [this];
-                const consumedSources = this._consumedSources;
-                for (let i = 0; i < this._observers.length; i++) {
-                    const observer = this._observers[i];
-                    if (!consumedSources?.includes(observer)) {
-                        fluid.cell.markStale(observer, CacheDirty, markedSources, this);
-                    }
-                }
-            }
-
-            if (!fluid.isUnavailable(value)) {
-                // Why did we stabilize in this branch and not in updateComplete? (now we do)
-                fluid.cell.stabilize();
-            }
-        }
-    };
-
-    /**
-     * Establish a computed relation which will lazily and reactively compute this cell's value given the values of a number
-     * of other cells with which the relationship is made, or tear down such relation. These relations are keyed by the first
-     * member of any `staticSources` supplied as arguments of the relation, or `null` if there are no such sources.
-     *
-     * @param {Function|null} fn - The function which will reactively evaluate this cell's value, or null if an existing relation
-     * is to be torn down.
-     * @param {Cell[]} [staticSources] - Any statically known cell dependencies whose reactively evaluated arguments will be supplied
-     * to `fn` when it is called.
-     * @param {ComputedProps} [props] - Any additional properties to configure the relation
-     * @return {Cell} This cell
-     * @this {Cell}
-     */
-    fluid.cell.prototype.computed = function (fn, staticSources, props) {
-        // The edge's key is either its first source or null
-        const key = staticSources && staticSources[0] || null;
-        if (!this._inEdges) {
-            this._inEdges = [];
-        }
-        const inEdgeIndex = this._inEdges.findIndex(edge => edge.key === key);
-        let inEdge = inEdgeIndex === -1 ? null : this._inEdges[inEdgeIndex];
-
-        if (!fn) {
-            // Remove computation - part of middle block of Milo's .set
-            if (inEdge) {
-                fluid.cell.removeParentObservers(this, inEdge, 0);
-                fluid.removeAtIndex(this._inEdges, inEdgeIndex);
-            }
-            return this;
-        } else {
-            const oldFn = inEdge?._fn;
-            if (!inEdge) {
-                inEdge = Object.create(null);
-                inEdge.key = key;
-            }
-
-            inEdge.fn = fn;
-            inEdge.staticSources = staticSources ? [...staticSources] : null;
-            inEdge.sources = staticSources ? [...staticSources] : null;
-            inEdge.target = this;
-            inEdge.isAsync = props?.isAsync;
-            inEdge.isFree = props?.isFree;
-            this._inEdges.push(inEdge);
-
-            // Set up observer links from static sources to this cell immediately - this is from new signature
-            if (staticSources) {
-                for (let i = 0; i < staticSources.length; i++) {
-                    const source = staticSources[i];
-                    if (!source._observers) {
-                        source._observers = [this];
-                    } else {
-                        source._observers.push(this);
-                    }
-                }
-            }
-
-            if (fn === oldFn) {
-                // No change, don't disturb anything
-            } else if (oldFn) {
-                // Case (a): replacing a live edge's fn.
-                // Run the new edge directly; updateComplete's equals check handles
-                // whether downstream propagation is needed.
-                fluid.cell.update(this, inEdge);
-            } else if (fluid.isUnavailable(this._value)) {
-                // Case (b): first wiring on an unsettled cell. Mark stale so
-                // updateIfNecessary will run this edge when the cell is next pulled.
-                fluid.cell.markStale(this, CacheDirty, []);
-            } else {
-                // First wiring on a settled cell: trust the user's assertion of consistency.
-                // No markStale. The cycle (if any) stays quiescent.
-            }
-            fluid.cell.stabilize();
-
-            return this;
-        }
-    };
-
-    /**
-     * Establish an asynchronous computed relation which will lazily and reactively compute this cell's value given the values of a number
-     * of other cells with which the relationship is made, or tear down such relation. These relations are keyed by the first
-     * member of any `staticSources` supplied as arguments of the relation, or `null` if there are no such sources.
-     *
-     * @param {Function|null} fn - The async function which will reactively evaluate this cell's value, or null if an existing relation
-     * is to be torn down. If a function is supplied, this should supply a promise for a value.
-     * @param {Cell[]} [staticSources] - Any statically known cell dependencies whose reactively evaluated arguments will be supplied
-     * to `fn` when it is called.
-     * @param {ComputedProps} [props] - Any additional properties to configure the relation.
-     * @return {Cell} This cell
-     * @this {Cell}
-     */
-    fluid.cell.prototype.asyncComputed = function (fn, staticSources, props) {
-        return this.computed(fn, staticSources, {...props, isAsync: true});
-    };
-
-    /**
-     * Refreshes the value of the cell by re-evaluating its computation for the specified static sources.
-     * Finds the incoming edge corresponding to the given static sources and triggers an update for this cell along that edge.
-     *
-     * @param {Cell[]} [staticSources] - An optional array of static source cells to identify the computation edge to be refreshed
-     * @this {Cell} The cell for which an incoming edge is to be refreshed
-     */
-    fluid.cell.prototype.refresh = function (staticSources) {
-        // The edge's key is either its first source or null
-        if (this._inEdges) {
-            const key = staticSources && staticSources[0] || null;
-            const inEdge = this._inEdges.find(edge => edge.key === key);
-            if (inEdge) {
-                fluid.cell.update(this, inEdge);
-            }
-        }
-    };
-
-    fluid.cell.queueEffect = function (cell) {
-        if (cell._isEffect && !cell._isQueued) {
-            console.log("Pushing effect " + cell.name);
-            cell._isQueued = true;
-            fluid.EffectQueue.push(cell);
-        }
-    };
-
-    /**
-     * Marks a cell and its observers as stale, updating their cache state.
-     *
-     * @param {Cell} cell - The reactive cell to mark as stale.
-     * @param {CacheState} state - The new cache state to assign (e.g., CacheDirty or CacheCheck).
-     * @param {Cell[]} markedSources - Array of sources which have already been marked dirty on this stack
-     * @param {Cell} [dirtyFrom] - A cell joined by an edge responsible for dirtiness
-     */
-    fluid.cell.markStale = function (cell, state, markedSources, dirtyFrom) {
-        console.log("markStale for " + cell.name, " state ", state);
-        fluid.cell.queueEffect(cell);
-
-        // If we were previously clean, then we know that we may need to update to get the new value
-        if (cell._state < state) {
-            cell._state = state;
-            cell._dirtyFrom = dirtyFrom;
-            markedSources.push(cell);
-            if (cell._observers) {
-                const consumedSources = cell._consumedSources;
-                for (let i = 0; i < cell._observers.length; i++) {
-                    const observer = cell._observers[i];
-                    if (!consumedSources?.includes(observer) && !markedSources.includes(observer)) {
-                        fluid.cell.markStale(observer, CacheCheck, markedSources, cell);
-                    }
-
-                }
-            }
-        }
-    };
+    // Dynamic dependency tracking logic
 
     /**
      * Begins the update process for a reactive cell by saving the current update context.
@@ -645,17 +434,267 @@ const $fluidSignalsScope = function (fluid) {
         }
     };
 
-    fluid.cell.observableChange = function (oldValue, newValue) {
+    /**
+     * Reactively evaluate the current cell, ensuring its value is up to date with respect to all computed dependents,
+     * within the current reactive context
+     *
+     * @return {any} The evaluated cell value
+     * @this {Cell}
+     */
+    fluid.cell.prototype.get = function () {
+        // Track this get in the current reaction context
+        if ($t.CurrentReaction) {
+            if (
+                !$t.CurrentGets &&
+                $t.CurrentReaction.sources &&
+                $t.CurrentReaction.sources[$t.CurrentGetsIndex] === this
+            ) {
+                // No divergence with previous _sources and none is requested - simply step along the array of _sources
+                $t.CurrentGetsIndex++;
+            } else {
+                // Divergence needs to begin - allocate a fresh array and record this source as demanded
+                if (!$t.CurrentGets) {
+                    $t.CurrentGets = [this];
+                }
+                else {
+                    // Divergence in progress, record this source as demanded
+                    $t.CurrentGets.push(this);
+                }
+            }
+        }
+
+        // Update if we have in edges and might be stale
+        if (this._inEdges) {
+            fluid.cell.updateIfNecessary(this);
+        }
+
+        return this._value;
+    };
+
+    /**
+     * Establish a computed relation which will lazily and reactively compute this cell's value given the values of a number
+     * of other cells with which the relationship is made, or tear down such relation. These relations are keyed by the first
+     * member of any `staticSources` supplied as arguments of the relation, or `null` if there are no such sources.
+     *
+     * @param {Function|null} fn - The function which will reactively evaluate this cell's value, or null if an existing relation
+     * is to be torn down.
+     * @param {Cell[]} [staticSources] - Any statically known cell dependencies whose reactively evaluated arguments will be supplied
+     * to `fn` when it is called.
+     * @param {ComputedProps} [props] - Any additional properties to configure the relation
+     * @return {Cell} This cell
+     * @this {Cell}
+     */
+    fluid.cell.prototype.computed = function (fn, staticSources, props) {
+        // The edge's key is either its first source or null
+        const key = staticSources && staticSources[0] || null;
+        if (!this._inEdges) {
+            this._inEdges = [];
+        }
+        const inEdgeIndex = this._inEdges.findIndex(edge => edge.key === key);
+        let inEdge = inEdgeIndex === -1 ? null : this._inEdges[inEdgeIndex];
+
+        if (!fn) {
+            // Remove computation - part of middle block of Milo's .set
+            if (inEdge) {
+                fluid.cell.removeParentObservers(this, inEdge, 0);
+                fluid.removeAtIndex(this._inEdges, inEdgeIndex);
+            }
+            return this;
+        } else {
+            const oldFn = inEdge?._fn;
+            if (!inEdge) {
+                inEdge = Object.create(null);
+                inEdge.key = key;
+            }
+
+            inEdge.fn = fn;
+            inEdge.staticSources = staticSources ? [...staticSources] : null;
+            inEdge.sources = staticSources ? [...staticSources] : null;
+            inEdge.target = this;
+            inEdge.isAsync = props?.isAsync;
+            inEdge.isFree = props?.isFree;
+            inEdge.excludeSource = props?.excludeSource;
+            this._inEdges.push(inEdge);
+
+            // Set up observer links from static sources to this cell immediately - this is from new signature
+            if (staticSources) {
+                for (let i = 0; i < staticSources.length; i++) {
+                    const source = staticSources[i];
+                    if (!source._observers) {
+                        source._observers = [this];
+                    } else {
+                        source._observers.push(this);
+                    }
+                }
+            }
+
+            if (fn === oldFn) {
+                // No change, don't disturb anything
+            } else if (oldFn) {
+                // Case (a): replacing a live edge's fn.
+                // Run the new edge directly; updateComplete's equals check handles
+                // whether downstream propagation is needed.
+                fluid.cell.update(this, inEdge);
+            } else if (fluid.isUnavailable(this._value)) {
+                // Case (b): first wiring on an unsettled cell. Mark stale so
+                // updateIfNecessary will run this edge when the cell is next pulled.
+                fluid.cell.markStale(this, CacheDirty, []);
+            } else {
+                // First wiring on a settled cell: trust the user's assertion of consistency.
+                // No markStale. The cycle (if any) stays quiescent.
+            }
+            fluid.cell.stabilize();
+
+            return this;
+        }
+    };
+
+    /**
+     * Establish an asynchronous computed relation which will lazily and reactively compute this cell's value given the values of a number
+     * of other cells with which the relationship is made, or tear down such relation. These relations are keyed by the first
+     * member of any `staticSources` supplied as arguments of the relation, or `null` if there are no such sources.
+     *
+     * @param {Function|null} fn - The async function which will reactively evaluate this cell's value, or null if an existing relation
+     * is to be torn down. If a function is supplied, this should supply a promise for a value.
+     * @param {Cell[]} [staticSources] - Any statically known cell dependencies whose reactively evaluated arguments will be supplied
+     * to `fn` when it is called.
+     * @param {ComputedProps} [props] - Any additional properties to configure the relation.
+     * @return {Cell} This cell
+     * @this {Cell}
+     */
+    fluid.cell.prototype.asyncComputed = function (fn, staticSources, props) {
+        return this.computed(fn, staticSources, {...props, isAsync: true});
+    };
+
+    /**
+     * Refreshes the value of the cell by re-evaluating its computation for the specified static sources.
+     * Finds the incoming edge corresponding to the given static sources and triggers an update for this cell along that edge.
+     *
+     * @param {Cell[]} [staticSources] - An optional array of static source cells to identify the computation edge to be refreshed
+     * @this {Cell} The cell for which an incoming edge is to be refreshed
+     */
+    fluid.cell.prototype.refresh = function (staticSources) {
+        // The edge's key is either its first source or null
+        if (this._inEdges) {
+            const key = staticSources && staticSources[0] || null;
+            const inEdge = this._inEdges.find(edge => edge.key === key);
+            if (inEdge) {
+                fluid.cell.update(this, inEdge);
+            }
+        }
+    };
+
+    fluid.cell.queueEffect = function (cell) {
+        if (cell._isEffect && !cell._isQueued) {
+            console.log("Pushing effect " + cell.name);
+            cell._isQueued = true;
+            fluid.EffectQueue.push(cell);
+        }
+    };
+
+    /**
+     * Marks a cell and its observers as stale, updating their cache state, as well as queueing any effects found
+     * downstream
+     *
+     * @param {Cell} cell - The reactive cell to mark as stale.
+     * @param {CacheState} state - The new cache state to assign (e.g., CacheDirty or CacheCheck).
+     * @param {Cell[]} markedSources - Array of sources which have already been marked dirty on this stack
+     * @param {Cell} [dirtyFrom] - A cell joined by an edge responsible for dirtiness
+     * @param {Boolean} toPending - Was caused by a transition to a pending value
+     * @param {Boolean} fromPending - Was caused by a transition away from pending value
+     * @param {Boolean} earlyCutoff - We are cleaning the graph in order to operate early cutoff for an unchanged pending value
+     */
+    fluid.cell.markStale = function (cell, state, markedSources, dirtyFrom, toPending, fromPending, earlyCutoff) {
+        console.log("markStale for " + cell.name, " state ", state, " earlyCutoff ", earlyCutoff);
+        fluid.cell.queueEffect(cell);
+
+        // If we were previously clean, then we know that we may need to update to get the new value
+        // In early cutoff case we need to eagerly walk up the graph and trigger any effects on the unchanged values
+        if (cell._state < state || earlyCutoff) {
+            if (!earlyCutoff) {
+                if (toPending) {
+                    console.log("Cell ", cell.name, " stashed pre-pending state of ", cell._state);
+                    cell._prePendingState = cell._state;
+                }
+                if (fromPending) {
+                    console.log("FROMPENDING Cell ", cell.name, " stashed pre-pending state of ", cell._state);
+                    cell._prePendingState = state;
+                }
+                cell._state = state;
+                cell._dirtyFrom = dirtyFrom;
+            } else {
+                cell._value = cell._value.staleValue;
+                if (cell._isEffect) {
+                    cell._state = CacheDirty;
+                }
+            }
+            markedSources.push(cell);
+            if (cell._observers) {
+                const consumedSources = cell._consumedSources;
+                for (let i = 0; i < cell._observers.length; i++) {
+                    const observer = cell._observers[i];
+                    if (!consumedSources?.includes(observer) && !markedSources.includes(observer)) {
+                        fluid.cell.markStale(observer, CacheCheck, markedSources, cell, toPending, false, earlyCutoff);
+                    }
+
+                }
+            }
+        }
+    };
+
+    fluid.cell.propagateValueChange = function (cell, toPending, fromPending, earlyCutoff) {
+        // Misleading original comment:
+        // handles diamond dependencies if we're the parent of a diamond.
+        if (cell._observers) {
+            const consumedSources = cell._consumedSources;
+            // We've changed value, so mark our children as dirty so they'll reevaluate
+            for (let i = 0; i < cell._observers.length; i++) {
+                const observer = cell._observers[i];
+                if (!consumedSources?.includes(observer)) {
+                    // Milo's implementation for some reason did this directly rather than recursively
+                    fluid.cell.markStale(observer, CacheDirty, [cell], cell, toPending, fromPending, earlyCutoff);
+                }
+            }
+        }
+    };
+
+    fluid.cell.notifiableChange = function (oldValue, newValue, prePendingState) {
+        let equalValues = true;
+        let earlyCutoff = false;
         const oldUnavail = fluid.isUnavailable(oldValue);
         const newUnavail = fluid.isUnavailable(newValue);
+
+        const toPending = newUnavail && newValue.variety === "pending";
+        const fromPending = oldUnavail && oldValue.variety === "pending";
+
         if (oldUnavail !== newUnavail) {
-            return true;  // availability class transition
-        }
-        if (oldUnavail) {
+            equalValues = false;
+            if (oldUnavail && oldValue.variety === "pending" && prePendingState) {
+                earlyCutoff = fluid.cell.equals(oldValue.staleValue, newValue);
+            }
+        } else if (oldUnavail) {
             // Both unavailable: variety change is observable; otherwise treat as same
-            return oldValue.variety !== newValue.variety;
+            equalValues = oldValue.variety === newValue.variety;
+        } else {
+            equalValues = fluid.cell.equals(oldValue, newValue);
         }
-        return !fluid.cell.equals(oldValue, newValue);
+        return {toPending, fromPending, earlyCutoff, equalValues};
+    };
+
+    fluid.cell.commitValue = function (cell, newValue) {
+        const oldValue = cell._value;
+        cell._value = newValue;
+
+        const {equalValues, toPending, fromPending, earlyCutoff} = fluid.cell.notifiableChange(oldValue, newValue, cell._prePendingState);
+
+        if (!equalValues || earlyCutoff) {
+            fluid.cell.propagateValueChange(cell, toPending, fromPending, earlyCutoff);
+        }
+
+        if (!fluid.isConfigUnavailable(newValue)) {
+            fluid.cell.stabilize();
+        }
+
     };
 
     /**
@@ -667,30 +706,37 @@ const $fluidSignalsScope = function (fluid) {
      * @param {Cell} cell - The reactive cell being updated.
      */
     fluid.cell.updateComplete = function (newValue, cell) {
-        const observableChange = fluid.cell.observableChange(cell._value, newValue);
-        cell._value = newValue;
-
         // Don't mark ourselves as clean if value is not available since it may be computable from another relation
-        if (!fluid.isUnavailable(newValue)) {
-            console.log("Update complete for " + (cell._isEffect ? " effect " : "") + cell.name + ", marking clean");
-            cell._state = CacheClean;
+        if (!fluid.isConfigUnavailable(newValue)) {
+            const newState = CacheClean;
+            console.log("Update complete for " + (cell._isEffect ? " effect " : "") + cell.name + ", marking state ", newState, "  with new value ", newValue);
+            cell._state = newState;
         }
 
-        // Misleading original comment:
-        // handles diamond dependencies if we're the parent of a diamond.
-        if (observableChange && cell._observers) {
-            const consumedSources = cell._consumedSources;
-            // We've changed value, so mark our children as dirty so they'll reevaluate
-            for (let i = 0; i < cell._observers.length; i++) {
-                const observer = cell._observers[i];
-                if (!consumedSources?.includes(observer)) {
-                    // Milo's implementation for some reason did this directly rather than recursively
-                    fluid.cell.markStale(observer, CacheDirty, [cell], cell);
-                }
+        fluid.cell.commitValue(cell, newValue);
+    };
+
+    /**
+     * Update the value of this writeable cell.
+     *
+     * @param {any} value - The new cell value
+     * @param {Object} options - Optional options to contextualise the update
+     * @param {String} [options.source] - Optional source to mark the reactive propagation, accessible via effect's excludeSource
+     * @this {Cell}
+     */
+    fluid.cell.prototype.set = function (value, options) {
+        this._state = CacheClean;
+        console.log("SET acted for " + (this._isEffect ? " effect " : "") + this.name + ", marking state ", this._state, " with new value ", value);
+        if (!fluid.cell.equals(this._value, value)) {
+            if (!this._fit || !this._fit.isActive) {
+                this._fit = fluid.cell.startFit();
             }
-        }
-        if (!fluid.isConfigUnavailable(newValue)) {
-            fluid.cell.stabilize();
+            const source = options?.source;
+            if (source && !this._fit.sources.includes(source)) {
+                this._fit.sources.push(source);
+            }
+
+            fluid.cell.commitValue(this, value);
         }
     };
 
@@ -705,7 +751,7 @@ const $fluidSignalsScope = function (fluid) {
                     bindIterable(nextIt);
                 }
             }, e => {
-                cell._error = e;
+                fluid.cell.updateComplete(fluid.unavailable(e), cell);
             });
         };
         const nextIt = iterable.next();
@@ -748,6 +794,13 @@ const $fluidSignalsScope = function (fluid) {
         return {unavailable};
     };
 
+    fluid.cell.doUpdate = function (cell, inEdge) {
+        const args = inEdge.staticSources ? inEdge.staticSources.map(s => s.get()) : [];
+        const {unavailable} = fluid.cell.mapSignalArgs(args, cell._value);
+
+        return unavailable && !inEdge.isFree ? unavailable : inEdge.fn.apply(null, args);
+    };
+
     /**
      * Updates the value of a reactive cell by re-evaluating its computation function and updating any changed dynamic dependencies.
      * @param {Cell} cell - The reactive cell to update.
@@ -759,26 +812,28 @@ const $fluidSignalsScope = function (fluid) {
         }
         console.log("Update beginning for cell ", cell.name);
 
-        fluid.cell.beginTracking(cell, inEdge);
-
         let syncUpdate = !inEdge.isAsync;
         let result;
 
+        fluid.cell.beginTracking(cell, inEdge);
+
+        fluid.cell.enlistInFit(cell, inEdge.sources);
+
+        // Skip notification if the fit has an excluded source
+        if (inEdge.excludeSource) {
+            if (cell._fit.sources.includes(inEdge.excludeSource)) {
+                return;
+            }
+        }
+
+        if (!syncUpdate) {
+            const oldValue = fluid.isUnavailable(cell._value) ? cell._value.staleValue : cell._value;
+            // Mark the cell as unavailable/stale whilst it is updating and push old value into staleValue
+            cell.set(fluid.pending(oldValue, cell.name));
+        }
+
         try {
-            fluid.cell.enlistInFit(cell, inEdge.sources);
-
-            if (!syncUpdate) {
-                const oldValue = fluid.isUnavailable(cell._value) ? cell._value.staleValue : cell._value;
-                // Mark the cell as unavailable/stale whilst it is updating and push old value into staleValue
-                cell.set(fluid.pending(oldValue, cell.name));
-            }
-
-            const args = inEdge.staticSources ? inEdge.staticSources.map(s => s.get()) : [];
-            const {unavailable} = fluid.cell.mapSignalArgs(args, cell._value);
-            if (!unavailable) {
-                console.log("Update launched for cell ", cell.name);
-            }
-            result = unavailable && !inEdge.isFree ? unavailable : inEdge.fn.apply(null, args);
+            result = fluid.cell.doUpdate(cell, inEdge);
         } catch (e) {
             result = fluid.unavailable(e);
             syncUpdate = true;
@@ -788,19 +843,21 @@ const $fluidSignalsScope = function (fluid) {
                     result.then(newValue => {
                         console.log("Async update for value of cell ", cell.name, " yielded value ", newValue);
                         fluid.cell.updateComplete(newValue, cell);
-                    },
-                    e => fluid.cell.updateComplete(fluid.unavailable(e), cell)
+                    }).catch(e => {
+                        console.log("Async error update received ", e);
+                        fluid.cell.updateComplete(fluid.unavailable(e), cell);
+                    }
                     );
                 } else if (result[Symbol.asyncIterator]) {
                     fluid.cell.bindIterable(cell, inEdge, result);
                 } else { // Unexpected plain return from async edge
-                    console.log("Update concluded for cell ", cell.name);
+                    console.log("Update concluded for cell ", cell.name, " new value ", result);
                     syncUpdate = true;
                 }
             }
             if (syncUpdate) {
                 // It was a plain value, update now
-                fluid.cell.updateComplete(result, cell, cell._value);
+                fluid.cell.updateComplete(result, cell);
             }
 
             fluid.cell.updateDynamicDependencies(cell, inEdge);
@@ -868,6 +925,9 @@ const $fluidSignalsScope = function (fluid) {
         if (dirtyEdge) {
             fluid.cell.update(cell, dirtyEdge);
         }
+        const newState = cell._prePendingState === null ? CacheClean : cell._prePendingState;
+        console.log("updateIfNecessary cleaning cell ", cell.name, " with state ", newState);
+        cell._state = CacheClean;
     };
 
     /**
@@ -946,6 +1006,7 @@ const $fluidSignalsScope = function (fluid) {
      * @param {Function} [props.onDispose] - Optional cleanup function to run when the effect is disposed.
      * @param {Boolean}  [props.isFree] - If true, the effect will run even if some sources are unavailable.
      * @param {String}   [props.name] - Optional name for the effect
+     * @param {String}   [props.excludeSource] - Optional source name (as supplied as last argument to cell.set) that will have its notification skipped
      * @return {Cell} The created effect cell.
      */
     fluid.cell.effect = function (fn, staticSources, props) {
@@ -953,7 +1014,8 @@ const $fluidSignalsScope = function (fluid) {
             bind: {fn, staticSources},
             unbind: {fn: props?.onDispose},
             isFree: props?.isFree,
-            name: props?.name
+            name: props?.name,
+            excludeSource: props?.excludeSource
         });
     };
 
