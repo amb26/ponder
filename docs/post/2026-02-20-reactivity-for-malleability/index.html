@@ -9,8 +9,9 @@
       <title>fluid.cell: A reactive implementation supporting malleable substrates - Antranig Basman</title>
 
   <meta name="description" content="Submission to the March Substrates 2026 Workshop, co-located with &lt;Programming 2026&gt;.
-Updated 5th May 2026.
-Abstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates fluid.cell, a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain. I explain the core reactive competencies of glitch freedom and early cutoff, and how fluid.">
+Updated 10th May 2026.
+This is a static version of the posting, with the live version is available at https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability.
+Abstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates fluid.cell, a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -59,9 +60,9 @@ Abstract This post explains why reactivity is a key requirement for openly autho
     "name" : "Antranig Basman"
   },
   "headline": "fluid.cell: A reactive implementation supporting malleable substrates",
-  "description" : "Submission to the March Substrates 2026 Workshop, co-located with \u0026lt;Programming 2026\u0026gt;.\nUpdated 5th May 2026.\nAbstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates fluid.cell, a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain. I explain the core reactive competencies of glitch freedom and early cutoff, and how fluid.",
+  "description" : "Submission to the March Substrates 2026 Workshop, co-located with \u0026lt;Programming 2026\u0026gt;.\nUpdated 10th May 2026.\nThis is a static version of the posting, with the live version is available at https:\/\/ponder.org.uk\/post\/2026-02-20-reactivity-for-malleability.\nAbstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates fluid.cell, a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain.",
   "inLanguage" : "en",
-  "wordCount":  4442 ,
+  "wordCount":  4709 ,
   "datePublished" : "2026-02-20T00:00:00\u002b00:00",
   "dateModified" : "2026-02-20T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -83,8 +84,9 @@ Abstract This post explains why reactivity is a key requirement for openly autho
 
 <meta property="og:title" content="fluid.cell: A reactive implementation supporting malleable substrates" />
 <meta property="og:description" content="Submission to the March Substrates 2026 Workshop, co-located with &lt;Programming 2026&gt;.
-Updated 5th May 2026.
-Abstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates fluid.cell, a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain. I explain the core reactive competencies of glitch freedom and early cutoff, and how fluid.">
+Updated 10th May 2026.
+This is a static version of the posting, with the live version is available at https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability.
+Abstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates fluid.cell, a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/" />
 <meta property="og:type" content="website" />
@@ -92,8 +94,8 @@ Abstract This post explains why reactivity is a key requirement for openly autho
 
   <meta name="twitter:title" content="fluid.cell: A reactive implementation supporting malleable substrates" />
   <meta name="twitter:description" content="Submission to the March Substrates 2026 Workshop, co-located with &lt;Programming 2026&gt;.
-Updated 5th May 2026.
-Abstract This post explains why reactivity is a key requirement for openly authored, …">
+Updated 10th May 2026.
+This is a static version of the posting, with the live version is available at …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
@@ -281,10 +283,19 @@ Abstract This post explains why reactivity is a key requirement for openly autho
     color: black;
   }
 }
+@media print {
+  a::after {
+    content: none !important;
+  }
+}
 </style>
 <p>Submission to the March <a href="https://2026.programming-conference.org/home/substrates-2026">Substrates 2026</a> Workshop, co-located with
 <a href="https://2026.programming-conference.org/">&lt;Programming 2026&gt;</a>.</p>
-<p>Updated 5th May 2026.</p>
+<p>Updated 10th May 2026.</p>
+<div style="font-size:smaller">
+<p>This is a static version of the posting, with the live version is available at
+<a href="https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability">https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability</a>.</p>
+</div>
 <h3 id="abstract">Abstract</h3>
 <p><em>This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates <a href="../../docs/fluid-signals"><code>fluid.cell</code></a>,
 a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst
@@ -480,6 +491,39 @@ outwards.</p>
 which opportunistically fold together a &ldquo;node plus edge&rdquo; structure into a single data structure on the assumption that
 each computed edge uniquely corresponds to a node, and that each node has only one incoming edge. Changes are also needed
 in many parts of the algorithm which traverse and invalidate the graph.</p>
+<p>For example, in a traditional reactive library, e.g. <a href="https://github.com/preactjs/signals/blob/main/packages/core/src/index.ts#L597">preact-signals</a>,
+a <code>Computed</code> signal &ldquo;is-a&rdquo; <code>Signal</code> and directly encodes the <code>_sources</code> nodes that it depends on:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">declare</span> <span class="k">class</span> <span class="n">Signal</span><span class="o">&lt;</span><span class="n">T</span> <span class="o">=</span> <span class="n">any</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">_value</span><span class="p">:</span> <span class="n">unknown</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">declare</span> <span class="k">class</span> <span class="n">Computed</span><span class="o">&lt;</span><span class="n">T</span> <span class="o">=</span> <span class="n">any</span><span class="o">&gt;</span> <span class="k">extends</span> <span class="n">Signal</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">_fn</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">T</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">_sources</span><span class="err">?</span><span class="p">:</span> <span class="ne">Node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span></code></pre></div><p>and it is used as so:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">   <span class="k">const</span> <span class="n">a</span> <span class="o">=</span> <span class="k">signal</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="k">const</span> <span class="n">b</span> <span class="o">=</span> <span class="n">computed</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span></code></pre></div><p>In <code>fluid.cell</code> there are separate node and edge structures, respecting the fact that a computed node may be computable
+along multiple edges:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">@typedef {Object} Cell
+</span></span><span class="line"><span class="cl">@property {any} _value - The current value stored in the cell.
+</span></span><span class="line"><span class="cl">@property {Edge[]|null} _inEdges - Array of incoming edges which could update this node
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">@typedef {Object} Edge
+</span></span><span class="line"><span class="cl">@property {Function} fn - The function to be called to compute the value
+</span></span><span class="line"><span class="cl">@property {Cell[]|null} sources - Sources in reference order
+</span></span></code></pre></div><p>and it is used as so:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">   <span class="k">const</span> <span class="n">A</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">cell</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="k">const</span> <span class="n">B</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">cell</span><span class="p">()</span><span class="o">.</span><span class="n">computed</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">A</span><span class="p">]);</span>
+</span></span></code></pre></div><p>Note that because relations are built up separately from the workflow of building up cells, it is possible to decouple
+the process of loading or defining parts of the substrate from building up relationships amongst those parts. In this
+simplest case, for example, one could have written</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">   <span class="k">const</span> <span class="n">A</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">cell</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="k">const</span> <span class="n">B</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">cell</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">   <span class="n">B</span><span class="o">.</span><span class="n">computed</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">A</span><span class="p">]);</span>
+</span></span></code></pre></div><p>which is essential when dealing with cells whose relationships are cyclic (see the bidirectional samples at the head of
+this page) or not knowable by the same author who defined the cells.</p>
 <h3 id="agnostic-to-asynchrony">Agnostic to asynchrony</h3>
 <p>The issue of whether a value is available right away, or requires an asynchronous I/O operation to fetch it, is one that
 is guaranteed to be absolutely unfathomable to the end user, yet to a typical stack-hugging developer is one of a frightful
@@ -535,7 +579,7 @@ aspects of the payloads to unavailable values which are intended to be processed
 somewhat of a surplus feature. In an imperative/functional environement which privileges the world of executing code,
 it is an idiomatic and powerful feature to subscribe a reactive computation to dependencies as they are discovered
 through the course of executing a conventional function encoding a reactive computation. However, in an openly
-authored substrate constituting an <a href="../../term/integration-domain">integation domain</a>, the principle of <em>interface hiding</em><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>
+authored substrate constituting an <a href="../../term/integration-domain">integration domain</a>, the principle of <em>interface hiding</em><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>
 implies that executing code should properly have no power of reference to other than its immediate arguments. However,
 <code>fluid.cell</code> retains this feature to support interoperability with imperative codebases.</p>
 <h2 id="motivation-and-roadmap">Motivation and roadmap</h2>
@@ -604,7 +648,7 @@ substrate. They have been implemented here to establish parity with features in 
 libraries, as well as being a teaching aid in order to demonstrate how such features work in traditional contexts.</p>
 <p>Whilst it would be possible, and supported, to manipulate the reactive graph from inside the body of the
 imperative code snippets implementing <code>computed</code> and <code>effect</code> arcs, this is not considered idiomatic under
-the model of an <a href="../../term/integration-domain">integation domain</a>. In an integration domain, code is not expected to
+the model of an <a href="../../term/integration-domain">integration domain</a>. In an integration domain, code is not expected to
 refer to arbitrary parts of a design using traditional programming language scopes, but instead as far as possible
 is expected to only refer to its immediate arguments.</p>
 <p>Other primitives than the following ones could be supported by the overlying substrate, but here I briefly describe
@@ -640,7 +684,7 @@ referring to it in the <code>$for</code> member of a component&rsquo;s layer, e.
 </span></span></code></pre></div><p>These constructs are named after similar conditional and looping primitives seen in imperative programming, but
 rather than being control flow constructs, they instead set up reactive correspondences which are navigable through
 the kinds of bidirectional relationships described above.</p>
-<h4 id="polymorphism-via-indirection-layer">Polymorphism via indirection <code>$layer$</code></h4>
+<h4 id="polymorphism-via-indirection-layers">Polymorphism via indirection: <code>$layers$</code></h4>
 <p>To achieve dynamic polymorphism in the substrate, the names of layers
 held in layer definitions can be looked up through reference into cell contents. Through this correspondence,
 reactive updates to the data cells become naturally lifted into structural updates of the dataflow graph itself.

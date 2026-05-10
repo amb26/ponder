@@ -8,8 +8,9 @@
 
       <title>Fluid Signals API - Antranig Basman</title>
 
-  <meta name="description" content="This page documents the reactive library underlying Fluid Infusion 6, based around the primitive fluid.cell. I chose the name &ldquo;cell&rdquo;, rather than &ldquo;signal&rdquo; which is more common in the 2020s JavaScript reactive community, in honour of 3 traditions:
-Spreadsheet cells, which are the public&rsquo;s primeval grounding in reactivity. Kenny Tilton&rsquo;s Cells system for CLOS, which in 2001, 5 years before the coining of the terms &ldquo;glitch&rdquo; and &ldquo;reactive programming&rdquo;, had already solved all the problems of reactivity embedded in imperative programming languages.">
+  <meta name="description" content="This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra capabilities above traditional reactive libraries, and also a more extended essay explaining its goals in the context of a malleable substrate.
+The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.
+Construction fluid.cell(initialValue, props) {Any} [initialValue] - The initial value to store in the cell {Object} [props] - Optional additional properties to contextualise the cell Returns: {Cell} - The freshly constructed cell A fresh reactive cell is constructed, with an optional initial value and optional additional properties.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -58,9 +59,9 @@ Spreadsheet cells, which are the public&rsquo;s primeval grounding in reactivity
     "name" : "Antranig Basman"
   },
   "headline": "Fluid Signals API",
-  "description" : "This page documents the reactive library underlying Fluid Infusion 6, based around the primitive fluid.cell. I chose the name \u0026ldquo;cell\u0026rdquo;, rather than \u0026ldquo;signal\u0026rdquo; which is more common in the 2020s JavaScript reactive community, in honour of 3 traditions:\nSpreadsheet cells, which are the public\u0026rsquo;s primeval grounding in reactivity. Kenny Tilton\u0026rsquo;s Cells system for CLOS, which in 2001, 5 years before the coining of the terms \u0026ldquo;glitch\u0026rdquo; and \u0026ldquo;reactive programming\u0026rdquo;, had already solved all the problems of reactivity embedded in imperative programming languages.",
+  "description" : "This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra capabilities above traditional reactive libraries, and also a more extended essay explaining its goals in the context of a malleable substrate.\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.\nConstruction fluid.cell(initialValue, props) {Any} [initialValue] - The initial value to store in the cell {Object} [props] - Optional additional properties to contextualise the cell Returns: {Cell} - The freshly constructed cell A fresh reactive cell is constructed, with an optional initial value and optional additional properties.",
   "inLanguage" : "en",
-  "wordCount":  2119 ,
+  "wordCount":  1399 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -81,15 +82,16 @@ Spreadsheet cells, which are the public&rsquo;s primeval grounding in reactivity
 
 
 <meta property="og:title" content="Fluid Signals API" />
-<meta property="og:description" content="This page documents the reactive library underlying Fluid Infusion 6, based around the primitive fluid.cell. I chose the name &ldquo;cell&rdquo;, rather than &ldquo;signal&rdquo; which is more common in the 2020s JavaScript reactive community, in honour of 3 traditions:
-Spreadsheet cells, which are the public&rsquo;s primeval grounding in reactivity. Kenny Tilton&rsquo;s Cells system for CLOS, which in 2001, 5 years before the coining of the terms &ldquo;glitch&rdquo; and &ldquo;reactive programming&rdquo;, had already solved all the problems of reactivity embedded in imperative programming languages.">
+<meta property="og:description" content="This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra capabilities above traditional reactive libraries, and also a more extended essay explaining its goals in the context of a malleable substrate.
+The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.
+Construction fluid.cell(initialValue, props) {Any} [initialValue] - The initial value to store in the cell {Object} [props] - Optional additional properties to contextualise the cell Returns: {Cell} - The freshly constructed cell A fresh reactive cell is constructed, with an optional initial value and optional additional properties.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/docs/fluid-signals/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="Fluid Signals API" />
-  <meta name="twitter:description" content="This page documents the reactive library underlying Fluid Infusion 6, based around the primitive fluid.cell. I chose the name &ldquo;cell&rdquo;, rather than &ldquo;signal&rdquo; which is more common …">
+  <meta name="twitter:description" content="This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra capabilities above …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
@@ -220,77 +222,12 @@ Spreadsheet cells, which are the public&rsquo;s primeval grounding in reactivity
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
       <article role="main" class="blog-post">
-        <p>This page documents the reactive library underlying Fluid Infusion 6, based around the primitive <code>fluid.cell</code>.
-I chose the name &ldquo;cell&rdquo;, rather than &ldquo;signal&rdquo; which is more common in the 2020s JavaScript reactive community,
-in honour of 3 traditions:</p>
-<ul>
-<li>Spreadsheet cells, which are the public&rsquo;s primeval grounding in reactivity.</li>
-<li>Kenny Tilton&rsquo;s <a href="https://smuglispweeny.blogspot.com/2008/02/cells-manifesto.html">Cells</a> system for CLOS, which in 2001,
-5 years before the coining of the terms &ldquo;<a href="../../term/glitch">glitch</a>&rdquo; and &ldquo;reactive programming&rdquo;, had already solved all the problems of
-reactivity embedded in imperative programming languages.</li>
-<li>The notion of a <a href="https://en.wikipedia.org/wiki/Reference_(computer_science)#Functional_languages">reference cell</a> in JavaScript
-and and other functional languages, taking the form of an object + key or 1-element array which mocks up the mutable capability of
-a pointer in languages which lack them.</li>
-</ul>
-<p>There is now a consensus notion of the capabilities of a reactive library in JavaScript, amongst such popular implementations
-as <a href="https://github.com/preactjs/signals/blob/main/packages/core/README.md">preact-signals</a>,
-<a href="https://github.com/stackblitz/alien-signals">alien-signals</a>,
-<a href="https://angular.dev/guide/signals">Angular signals</a>,
-<a href="https://docs.solidjs.com/concepts/signals">Solid signal</a>, etc. which has led to the proposal of a
-<a href="https://github.com/tc39/proposal-signals">standardised JS implementation</a> by the TC39 committee. This consensus
-baseline is often called &ldquo;commodity signals&rdquo; in pages on this site.</p>
-<p>Whilst the core implementation of <code>fluid.cell</code> is consistent with this consensus implementation &mdash; in fact, it has been
-adopted directly from Milo Mighdoll&rsquo;s amazing and minimal <a href="https://github.com/milomg/reactively">reactively</a> system &mdash; this implementation
-departs from the consensus in some significant ways. These departures mostly widen the domain
-of validity of the implementation, relaxing restrictions which are incompatible with the demands of a
-<a href="../../term/substrate">substrate</a> supporting malleable programming.</p>
-<p>Whilst its idiom and goals are aligned with support for the Infusion 6 substrate, <code>fluid.cell</code> is a <a href="https://github.com/fluid-project/infusion-6/blob/main/src/framework/core/js/FluidSignals.js">self-contained
-library</a>
-with no dependencies which could be adopted for other purposes.</p>
-<p>You can read its test cases <a href="https://github.com/fluid-project/infusion-6/blob/main/tests/framework-tests/core/js/FluidSignalsTests.js">here</a> and run them
-<a href="https://fluid-project.github.io/infusion-6/tests/framework-tests/core/html/FluidSignalsTests.html">here</a>.</p>
-<p>The best guide to reactive programming in general and fluid.cell&rsquo;s algorithm in particular is Milo&rsquo;s 2022 <a href="https://milomg.dev/2022-12-01/reactivity">Super Charging
-Fine-Grained Reactivity</a> which contrasts a variety of implementations including
-Reactively&rsquo;s, about 2/3 of the way down the page with the red and green squares, which I have adopted.</p>
-<h2 id="extra-capabilities-in-fluidcell">Extra capabilities in fluid.cell</h2>
-<h3 id="bidirectional-relationships">Bidirectional relationships</h3>
-<p>The most significant ergonomic difference in <code>fluid.cell</code> is support for bidirectional relationships between cells,
-which supports democratic constructs such as <a href="https://en.wikipedia.org/wiki/Bidirectional_transformation">lenses</a> without
-recourse to gratuitous asymmetries such as <a href="https://vuejs.org/guide/essentials/computed#writable-computed">writable computed</a>
-relations.</p>
-<h3 id="multiple-inbound-compute-arcs">Multiple inbound compute arcs</h3>
-<p>Support for bidirectional relationships entails support for multiple computed relations
-capable of updating the value of a single cell. This is a capability not found in any popular reactive library.
-In isolation, this capability might lead to the possibility for inconsistent or conflicting updates &mdash; however,
-<code>fluid.cell</code> follows the insight from Dan Ingall&rsquo;s <a href="https://dl.acm.org/doi/pdf/10.1145/62083.62100">Fabrik</a> system which
-recognizes &ldquo;bidirectional dataflow connections as a shorthand for multiple paths of flow&rdquo;. As one leg of a bidirectional
-relationship is activated, the reverse leg is removed from consideration for this reactive update cycle (this kind of cycle is named a &ldquo;fit&rdquo;),
-removing the chance for cyclic updates.</p>
-<h3 id="static-compute-arguments">Static compute arguments</h3>
-<p>Tied in with support for lenses and multiple incoming arcs is <code>fluid.cell</code>&rsquo;s support for <em>static arguments</em> to compute arcs.
-This is a significant departure from commodity signals, which pride themselves on automatic discovery of dependencies
-as code executes in the compute arc. In a substrate forming an <a href="../../term/integration-domain">integration domain</a> this is unidiomatic
-since base language code should ideally have no power of reference to surrounding scopes, in accordance with the principle of
-<em>interface hiding</em>. However, the use of static arguments isn&rsquo;t mandatory, standard dynamic tracked dependencies are
-available to be used either instead of or along with them, to aid experts in interoperating with established
-codebases.</p>
-<h3 id="cycle-diagnostics">Cycle diagnostics</h3>
-<p>Another difference is the treatment of cycles. Rather than being rejected outright with a base language exception, these
-can be configured to either resolve benignly through having the cycle broken by deferring a potentially cyclic update
-to a further task, or else to resolve to an unavailable value which accumulates the addresses of the nodes involved,
-producing a visible diagnostic in the substrate[coming soon].</p>
-<h3 id="cause-tracking">Cause tracking</h3>
-<p>A hugely important ergonomic improvement is being able to report the <em>cause</em> of any ongoing reaction, that is, the
-chain of updated nodes leading back to the initial changed node triggered by the user or environment. This is vital in
-a substrate which positions reactivity as a wholesale replacement for execution, and therefore needs to replace the
-invaluable explanatory power of the stack with a correspondingly thorough explanation stretching across the substrate. This
-is done with the <a href="#fluidfindcausecell">fluid.findCause</a> API which returns this path of updated nodes.</p>
-<h3 id="asynchronous-compute-arcs">Asynchronous compute arcs</h3>
-<p>Finally, <code>fluid.cell</code> supports compute arcs which produce their results asynchronously. Whilst this is uncommon in
-reactive libraries, there is precedent for this in Ryan Carniato&rsquo;s <a href="https://github.com/solidjs/signals">Solid signals</a> supporting
-the upcoming 2.0 release of Solid, and Mike Bostock&rsquo;s <a href="https://github.com/observablehq/runtime/blob/main/src/runtime.js">Runtime</a>
-which powers <a href="https://observablehq.com/framework/">Observable</a>. <code>fluid.cell</code> passes all the <a href="https://github.com/solidjs/signals/blob/main/tests/createAsync.test.ts">test cases</a>
-currently issued for Solid signals&rsquo; <code>createAsync</code>.</p>
+        <p>This page documents the API of <code>fluid.cell</code>, the primitive of the reactive library underlying Fluid Infusion 6.
+You can read <a href="../../docs/fluid-signals-background">background information</a> on how <code>fluid.cell</code> offers extra capabilities
+above traditional reactive libraries, and also a more
+<a href="../../post/2026-02-20-reactivity-for-malleability">extended essay</a> explaining its goals in the context of a malleable substrate.</p>
+<p>The raw markdown underlying these docs is available on <a href="https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/fluid-signals.md">GitHub</a>,
+suitable for direct ingestion by your friendly local neighbourhood intelligence.</p>
 <h2 id="construction">Construction</h2>
 <h3 id="fluidcellinitialvalue-props">fluid.cell(initialValue, props)</h3>
 <ul>
@@ -506,6 +443,10 @@ will be set to stale and the asynchronous activity will be restarted.</p>
 
       
         <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="../../docs/fluid-signals-background/" data-toggle="tooltip" data-placement="top" title="Fluid Signals background">&larr; Previous Post</a>
+            </li>
           
           
         </ul>

@@ -7,9 +7,14 @@ ul > li > ul > li {
     list-style: "";
 }
 
+ul {
+    list-style-type: none;
+    padding-inline-start: 30px;
+}
+
 code {
-    color: #222;
-    background-color: white;
+    color: inherit;
+    background-color: inherit;
 }
 /** Anchor hover links **/
 /** Liberated from octicons.css and infusion-docs.css **/

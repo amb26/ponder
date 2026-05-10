@@ -14,7 +14,14 @@
       <link>https://ponder.org.uk/docs/fluid-signals/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
       <guid>https://ponder.org.uk/docs/fluid-signals/</guid>
-      <description>This page documents the reactive library underlying Fluid Infusion 6, based around the primitive fluid.cell. I chose the name &amp;ldquo;cell&amp;rdquo;, rather than &amp;ldquo;signal&amp;rdquo; which is more common in the 2020s JavaScript reactive community, in honour of 3 traditions:&#xA;Spreadsheet cells, which are the public&amp;rsquo;s primeval grounding in reactivity. Kenny Tilton&amp;rsquo;s Cells system for CLOS, which in 2001, 5 years before the coining of the terms &amp;ldquo;glitch&amp;rdquo; and &amp;ldquo;reactive programming&amp;rdquo;, had already solved all the problems of reactivity embedded in imperative programming languages.</description>
+      <description>This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra capabilities above traditional reactive libraries, and also a more extended essay explaining its goals in the context of a malleable substrate.&#xA;The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.&#xA;Construction fluid.cell(initialValue, props) {Any} [initialValue] - The initial value to store in the cell {Object} [props] - Optional additional properties to contextualise the cell Returns: {Cell} - The freshly constructed cell A fresh reactive cell is constructed, with an optional initial value and optional additional properties.</description>
+    </item>
+    <item>
+      <title>Fluid Signals background</title>
+      <link>https://ponder.org.uk/docs/fluid-signals-background/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/fluid-signals-background/</guid>
+      <description>This page contains background information motivating the design of fluid.cell, the reactive primitive built to support Infusion 6, explaining how it differs from traditional reactive libraries. There are also API docs for fluid.cell and also a more extended essay explaining its goals in the context of a malleable substrate.&#xA;I chose the name &amp;ldquo;cell&amp;rdquo;, rather than &amp;ldquo;signal&amp;rdquo; which is more common in the 2020s JavaScript reactive community, in honour of 3 traditions:</description>
     </item>
   </channel>
 </rss>

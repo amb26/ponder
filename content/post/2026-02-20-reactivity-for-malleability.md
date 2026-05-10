@@ -54,12 +54,24 @@ date: 2026-02-20
     color: black;
   }
 }
+@media print {
+  a::after {
+    content: none !important;
+  }
+}
 </style>
 
 Submission to the March [Substrates 2026](https://2026.programming-conference.org/home/substrates-2026) Workshop, co-located with
 [<Programming 2026>](https://2026.programming-conference.org/).
 
-Updated 5th May 2026.
+Updated 10th May 2026.
+
+<div style="font-size:smaller">
+
+This is a static version of the posting, with the live version available at
+[https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability](https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability).
+
+</div>
 
 ### Abstract
 
@@ -68,7 +80,7 @@ a reactive library designed to support the needs of these substrates. It preserv
 expanding their domain. I explain the core reactive competencies of _glitch freedom_ and _early cutoff_, and 
 how `fluid.cell` delivers these competencies whilst supporting reactive graphs with bidirectional arcs, asynchronous
 propagation of reactive updates and allows the cause of these updates to be tracked to their source, and why these
-expanded capabilites are vital to support successful substrates. The post includes a interactive visual demo of the reactive
+expanded capabilities are vital to support successful substrates. The post includes a interactive visual demo of the reactive
 library on some simple test fixtures._
 
 <div id="live-demo" class="vizreactive-target">
@@ -264,6 +276,60 @@ which opportunistically fold together a "node plus edge" structure into a single
 each computed edge uniquely corresponds to a node, and that each node has only one incoming edge. Changes are also needed
 in many parts of the algorithm which traverse and invalidate the graph.
 
+For example, in a traditional reactive library, e.g. [preact-signals](https://github.com/preactjs/signals/blob/main/packages/core/src/index.ts#L597),
+a `Computed` signal "is-a" `Signal` and directly encodes the `_sources` nodes that it depends on:
+
+```
+declare class Signal<T = any> {
+	_value: unknown;
+...
+
+declare class Computed<T = any> extends Signal<T> {
+	_fn: () => T;
+	_sources?: Node;
+...
+```
+
+and it is used as so:
+
+```
+   const a = signal(1);
+   const b = computed(() => a.value + 1);
+```
+
+In `fluid.cell` there are separate node and edge structures, respecting the fact that a computed node may be computable
+along multiple edges:
+
+```text
+@typedef {Object} Cell
+@property {any} _value - The current value stored in the cell.
+@property {Edge[]|null} _inEdges - Array of incoming edges which could update this node
+
+@typedef {Object} Edge
+@property {Function} fn - The function to be called to compute the value
+@property {Cell[]|null} sources - Sources in reference order
+```
+
+and it is used as so:
+
+```
+   const A = fluid.cell(1);
+   const B = fluid.cell().computed(a => a + 1, [A]);
+```
+
+Note that because relations are built up separately from the workflow of building up cells, it is possible to decouple
+the process of loading or defining parts of the substrate from building up relationships amongst those parts. In this
+simplest case, for example, one could have written
+
+```
+   const A = fluid.cell(1);
+   const B = fluid.cell();
+   B.computed(a => a + 1, [A]);
+```
+
+which is essential when dealing with cells whose relationships are cyclic (see the bidirectional samples at the head of
+this page) or not knowable by the same author who defined the cells.
+
 ### Agnostic to asynchrony
 
 The issue of whether a value is available right away, or requires an asynchronous I/O operation to fetch it, is one that
@@ -331,7 +397,7 @@ This is a standard feature of all commodity reactive frameworks, but in the cont
 somewhat of a surplus feature. In an imperative/functional environement which privileges the world of executing code,
 it is an idiomatic and powerful feature to subscribe a reactive computation to dependencies as they are discovered
 through the course of executing a conventional function encoding a reactive computation. However, in an openly
-authored substrate constituting an [integation domain](/term/integration-domain), the principle of *interface hiding*[^3]
+authored substrate constituting an [integration domain](/term/integration-domain), the principle of *interface hiding*[^3]
 implies that executing code should properly have no power of reference to other than its immediate arguments. However,
 `fluid.cell` retains this feature to support interoperability with imperative codebases.
 
@@ -407,7 +473,7 @@ libraries, as well as being a teaching aid in order to demonstrate how such feat
 
 Whilst it would be possible, and supported, to manipulate the reactive graph from inside the body of the
 imperative code snippets implementing `computed` and `effect` arcs, this is not considered idiomatic under
-the model of an [integation domain](/term/integration-domain). In an integration domain, code is not expected to
+the model of an [integration domain](/term/integration-domain). In an integration domain, code is not expected to
 refer to arbitrary parts of a design using traditional programming language scopes, but instead as far as possible
 is expected to only refer to its immediate arguments.
 
@@ -458,7 +524,7 @@ These constructs are named after similar conditional and looping primitives seen
 rather than being control flow constructs, they instead set up reactive correspondences which are navigable through
 the kinds of bidirectional relationships described above.  
 
-#### Polymorphism via indirection `$layer$`
+#### Polymorphism via indirection: `$layers$`
 
 To achieve dynamic polymorphism in the substrate, the names of layers
 held in layer definitions can be looked up through reference into cell contents. Through this correspondence,
