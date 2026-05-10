@@ -66,13 +66,6 @@ Submission to the March [Substrates 2026](https://2026.programming-conference.or
 
 Updated 10th May 2026.
 
-<div style="font-size:smaller">
-
-This is a static version of the posting, with the live version available at
-[https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability](https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability).
-
-</div>
-
 ### Abstract
 
 _This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates [`fluid.cell`](/docs/fluid-signals), 
