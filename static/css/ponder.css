@@ -15,6 +15,7 @@ ul {
 code {
     color: inherit;
     background-color: inherit;
+    padding: 0 4px;
 }
 /** Anchor hover links **/
 /** Liberated from octicons.css and infusion-docs.css **/

@@ -402,7 +402,7 @@ and situating the `fluid.cell` implementation within the roadmap of implementing
 ### Consequences of bidirectionality
 
 Support for bidirectional dataflow is required naturally in non-authoritarian app designs. The image below shows a snapshot
-of the UI of the self-editable Todo list application which you can run live from the [Infusion demos](/https://fluid-project.github.io/infusion-6/demo/todo-list-sfc/).
+of the UI of the self-editable Todo list application which you can run live from the [Infusion demos](https://fluid-project.github.io/infusion-6/demo/todo-list-sfc/).
 The application naturally exposes two representations of the same resource --- the application interface itself,
 on the left, which has been put into self-editing mode using the "magic wand" icon, and the source code representation
 on the right. The orange arrow shows the path of bidirectional dataflow, which respects the fact that the application

@@ -10,7 +10,7 @@
 
   <meta name="description" content="This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra capabilities above traditional reactive libraries, and also a more extended essay explaining its goals in the context of a malleable substrate.
 The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.
-Construction fluid.cell(initialValue, props) {Any} [initialValue] - The initial value to store in the cell {Object} [props] - Optional additional properties to contextualise the cell Returns: {Cell} - The freshly constructed cell A fresh reactive cell is constructed, with an optional initial value and optional additional properties.">
+Construction fluid.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -59,9 +59,9 @@ Construction fluid.cell(initialValue, props) {Any} [initialValue] - The initial 
     "name" : "Antranig Basman"
   },
   "headline": "Fluid Signals API",
-  "description" : "This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra capabilities above traditional reactive libraries, and also a more extended essay explaining its goals in the context of a malleable substrate.\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.\nConstruction fluid.cell(initialValue, props) {Any} [initialValue] - The initial value to store in the cell {Object} [props] - Optional additional properties to contextualise the cell Returns: {Cell} - The freshly constructed cell A fresh reactive cell is constructed, with an optional initial value and optional additional properties.",
+  "description" : "This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra capabilities above traditional reactive libraries, and also a more extended essay explaining its goals in the context of a malleable substrate.\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.\nConstruction fluid.",
   "inLanguage" : "en",
-  "wordCount":  1399 ,
+  "wordCount":  1988 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -84,7 +84,7 @@ Construction fluid.cell(initialValue, props) {Any} [initialValue] - The initial 
 <meta property="og:title" content="Fluid Signals API" />
 <meta property="og:description" content="This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra capabilities above traditional reactive libraries, and also a more extended essay explaining its goals in the context of a malleable substrate.
 The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.
-Construction fluid.cell(initialValue, props) {Any} [initialValue] - The initial value to store in the cell {Object} [props] - Optional additional properties to contextualise the cell Returns: {Cell} - The freshly constructed cell A fresh reactive cell is constructed, with an optional initial value and optional additional properties.">
+Construction fluid.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/docs/fluid-signals/" />
 <meta property="og:type" content="website" />
@@ -222,7 +222,10 @@ Construction fluid.cell(initialValue, props) {Any} [initialValue] - The initial 
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
       <article role="main" class="blog-post">
-        <p>This page documents the API of <code>fluid.cell</code>, the primitive of the reactive library underlying Fluid Infusion 6.
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="../../js/fluid-code-box.js"></script>
+<link rel="stylesheet" href="../../css/fluid-code-box.css" />
+<p>This page documents the API of <code>fluid.cell</code>, the primitive of the reactive library underlying Fluid Infusion 6.
 You can read <a href="../../docs/fluid-signals-background">background information</a> on how <code>fluid.cell</code> offers extra capabilities
 above traditional reactive libraries, and also a more
 <a href="../../post/2026-02-20-reactivity-for-malleability">extended essay</a> explaining its goals in the context of a malleable substrate.</p>
@@ -237,7 +240,7 @@ suitable for direct ingestion by your friendly local neighbourhood intelligence.
 </ul>
 <p>A fresh reactive cell is constructed, with an optional initial value and optional additional properties.</p>
 <p>If the initial value is <code>undefined</code>, this will be upgraded to an <a href="#unavailable-values">unavailable</a> value marking
-the signal&rsquo;s value as initially unavailable.</p>
+the signal&rsquo;s value as uninitialised.</p>
 <p>The only currently supported property in <code>props</code> is</p>
 <ul>
 <li><code>{String} name</code> - Supplies a name or address for this cell</li>
@@ -248,11 +251,16 @@ the signal&rsquo;s value as initially unavailable.</p>
 behind the cell to bring its value up to date. A call to <code>Cell.get</code> within the reactive context of a <code>computed</code>
 function will set up an automatic subscription to updates of the cell, rerunning the function whenever the value
 changes.</p>
-<h3 id="cellset">Cell.set()</h3>
+<h3 id="cellsetnewvalue-source">Cell.set(newValue, [source])</h3>
+<ul>
+<li><code>{any} newValue</code> The new value to which the cell is to be updated</li>
+<li><code>{String} [source]</code> An optional source tag name to be applied to this update as is propagates.</li>
+</ul>
 <p>The reactive cell&rsquo;s value can be updated by calling <code>Cell.set</code>. This will trigger a cascade of updates through the
 reactive tree. Any computed values that are depended on by effects will be updated immediately. Computed values
 that are not depended on by effects will only updated if an effect is created which later reads them, or <code>Cell.get</code>
 is called for a cell which depends on them.</p>
+<p>Optionally, at the time of calling</p>
 <h3 id="cell_value">Cell._value</h3>
 <p>A &ldquo;blind read&rdquo; of the current value of the cell, regardless of how stale it is, can be made by looking at the <code>_value</code>
 property. This isn&rsquo;t recommended except in specialised cases, usually of framework-building.</p>
@@ -281,7 +289,20 @@ If an existing relation is present on the target cell with the same key, it will
 <li><code>{Boolean} isAsync</code> - Indicates if the computation is asynchronous.</li>
 <li><code>{Boolean} isFree</code> - Indicates if this is a &ldquo;free&rdquo; computation that will deliver unavailable values.</li>
 </ul>
-<h3 id="cellasynccomputedfn-staticsources-props">Cell.asyncComputed(fn, staticSources, props)</h3>
+<p>Here is a basic example setting up two cells connected by a simple computation:</p>
+<textarea class="fluid-code-box">
+import fluid from "https://unpkg.com/infusion-6@6.0.0/dist/FluidCell.mjs"
+
+const A = fluid.cell(1);
+
+const B = fluid.cell().computed(a => a + 1, [A]);
+
+console.log("B's value computed to ", B.get()); // Outputs 2
+</textarea>
+<p>For a more advanced example setting up and tearing down bidirectional relationships, you can see the
+visual test sample for <a href="https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/?selectedTest=bidirectional_tests_-_temperature_conversion_with_two_nodes">Bidirectional temperature conversion</a>
+in the extended essay.</p>
+<h3 id="cellasynccomputedfn-staticsources-props">Cell.asyncComputed(fn, [staticSources], [props])</h3>
 <ul>
 <li><code>{Function | null} fn</code> - The function which will reactively evaluate this cell&rsquo;s value, or <code>null</code> if an existing relation is to be torn down</li>
 <li><code>{Cell[]} [staticSources]</code> - Any statically known cell dependencies whose reactively evaluated arguments will be supplied to <code>fn</code> when it is called</li>
@@ -298,13 +319,30 @@ which returns either:</p>
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function*">async generator</a> of a
 bounded or unbounded sequence of deferred values.</li>
 </ul>
-<h3 id="fluidcelleffectfn-staticsources-props">fluid.cell.effect(fn, staticSources, props)</h3>
+<p>Here&rsquo;s an example receiving a result through an asynchronous computation. Rather than manually waiting for event turns
+as here, asynchronous results are more conveniently received through <a href="#fluidcellsignaltopromisevalsignal">fluid.cell.signalToPromise</a>, see below.</p>
+<textarea class="fluid-code-box" rows="13">
+import fluid from "https://unpkg.com/infusion-6@6.0.0/dist/FluidCell.mjs"
+
+const A = fluid.cell(1);
+
+const B = fluid.cell().asyncComputed(a =>
+    new Promise(resolve => setTimeout(() => resolve(a + 1), 0)), [A]);
+
+B.get(); // Trigger fetch of B
+
+await new Promise(resolve => setTimeout(() => resolve(), 0)); // Wait for async propagation
+
+console.log("B's value computed to ", B.get()); // Outputs 2
+</textarea>
+<h3 id="fluidcelleffectfn-staticsources-props">fluid.cell.effect(fn, [staticSources], [props])</h3>
 <ul>
 <li><code>{Function} fn</code> - The function to execute reactively when any of the staticSources change</li>
 <li><code>{Cell[]} staticSources</code> - The array of source cells whose values are dependencies for the effect</li>
-<li><code>{Object} [props]</code> - Optional properties to configure the effect</li>
+<li><code>{Object}   [props]</code> - Optional properties to configure the effect</li>
 <li><code>{Function} [props.onDispose]</code> - Optional cleanup function to run when the effect is disposed</li>
-<li><code>{Boolean} [props.isFree]</code> - If true, the effect will run even if some sources are unavailable, delivering unavailable
+<li><code>{Boolean}  [props.isFree]</code> - If true, the effect will run even if some sources are unavailable, delivering unavailable</li>
+<li><code>{String}   [props.excludeSource]</code> - Optional source name (as supplied as last argument to cell.set) that will have its notification skipped
 values in their place.</li>
 <li>Returns: <code>{Effect}</code></li>
 </ul>
@@ -314,12 +352,48 @@ and again when any values change. Another difference is that effects do not corr
 from <code>fn</code> are ignored. In order to deactivate the effect it needs to be explicitly disposed by calling the
 <code>Effect.dispose()</code> method on the returned <code>Effect</code>.</p>
 <p>Another difference is in handling of unavailable arguments &mdash; if any cells referenced in <code>staticSources</code> or
-in dynamically tracked reactive values resolve to an <a href="#unavailable-values">unavailable value</a>, notification of the function is skipped.</p>
+in dynamically tracked reactive values resolve to an <a href="#unavailable-values">unavailable value</a>, and the effect is not
+marked as <code>isFree</code>, notification of the function is skipped.</p>
 <p>An effect represents a resource in the world outside the reactive graph and as such may require special actions
 when it is torn down. The optional <code>props</code> argument accepts a callback <code>onDispose</code> which is called when the effect
 is disposed via <code>Effect.dispose()</code>.</p>
+<p>This simple example follows the pattern of previous examples, but actively pulls updates to B using an effect
+rather than manually pulling them via <code>get()</code>:</p>
+<textarea class="fluid-code-box">
+import fluid from "https://unpkg.com/infusion-6@6.0.0/dist/FluidCell.mjs"
+
+const A = fluid.cell(1);
+
+const B = fluid.cell().computed(a => a + 1, [A]);
+
+const Blogger = fluid.cell.effect(b =>
+    console.log("B's value computed to ", b), [B]); // Outputs 2 immediately
+
+A.set(2); // Outputs 3
+
+Blogger.dispose();
+</textarea>
+<p>This example shows <code>fluid.cell</code>&rsquo;s <em><strong>source tracking</strong></em> facility. If a source of changes is tagged by using the
+<code>source</code> argument to <code>fluid.set</code>, changes due to this source can skip notifying an effect with a matching
+<code>excludeSource</code> argument. This can be helpful when interfacing with external systems which should not be
+notified of changes that they themselves have caused:</p>
+<textarea class="fluid-code-box">
+import fluid from "https://unpkg.com/infusion-6@6.0.0/dist/FluidCell.mjs"
+
+const A = fluid.cell();
+const B = fluid.cell().computed(a => a + 1, [A]);
+const Blog = [];
+
+const Beff = fluid.cell.effect(b =>
+    console.log("B's value computed to ", b), [B],
+    {excludeSource: "scrollbar"});
+
+A.set(2); // B's value computed to 3
+
+A.set(3, {source: "scrollbar"}); // No notification: B excludes scrollbar source
+</textarea>
 <h2 id="comprehension">Comprehension</h2>
-<h3 id="fluidfindcausecell">fluid.findCause([cell])</h3>
+<h3 id="fluidcellfindcausecell">fluid.cell.findCause([cell])</h3>
 <ul>
 <li><code>{Cell} cell</code> If supplied, the cell whose update cause should be reported. If absent, any current
 reaction will be used instead.</li>
@@ -328,8 +402,56 @@ reaction will be used instead.</li>
 <p>Reports the cause of any reaction which has updated a given cell, or else the one that is currently
 in progress, in the form of an array of nodes reaching back from the supplied cell to the one whose modification
 triggered the reaction. The triggering cell appears first in the array.</p>
+<textarea class="fluid-code-box">
+import fluid from "https://unpkg.com/infusion-6@6.0.0/dist/FluidCell.mjs"
+
+const A = fluid.cell(1, {name: "A"});
+
+const B = fluid.cell(undefined, {name: "B"}).computed(a => a + 1, [A]);
+
+const Blogger = fluid.cell.effect(b => {
+    const cause = fluid.cell.findCause();
+    console.log("Causes of this update were ",
+        cause.map(cause => cause.name).join(", "));
+}, [B], {name: "Blogger"}); // Outputs "Blogger" immediately
+
+A.set(2); // Outputs "Blogger, B, A"
+
+Blogger.dispose();
+</textarea>
+<h2 id="utilities">Utilities</h2>
+<h3 id="fluidcellsignaltopromisevalsignal">fluid.cell.signalToPromise(valSignal)</h3>
+<ul>
+<li><code>{Cell&lt;any&gt;} valSignal</code> - The signal to monitor.</li>
+<li>Returns: <code>Promise&lt;any&gt;</code> - A Promise that resolves with the signal&rsquo;s first available value.</li>
+</ul>
+<p>Gear from the world of signals into a Promise that can be <code>await</code>ed.</p>
+<p>The <a href="#cellasynccomputedfn-staticsources-props"><code>asyncComputed</code></a> example from above is more conveniently written:</p>
+<textarea class="fluid-code-box">
+import fluid from "https://unpkg.com/infusion-6@6.0.0/dist/FluidCell.mjs"
+
+const A = fluid.cell(1);
+
+const B = fluid.cell().asyncComputed(a =>
+    new Promise(resolve => setTimeout(() => resolve(a + 1), 0)), [A]);
+
+console.log("B's value computed to ",
+    await (fluid.cell.signalToPromise(B))); // Outputs 2
+</textarea>
+<h3 id="cellrefreshstaticsources">Cell.refresh(staticSources)</h3>
+<ul>
+<li><code>{Cell[]} [staticSources]</code> - An optional array of static source cells to identify the computation edge to be refreshed</li>
+<li><code>this: {Cell}</code> The cell for which an incoming edge is to be refreshed</li>
+</ul>
+<p>A method available on any <code>Cell</code>: Refreshes the value of the cell by re-evaluating its computation for the specified static sources.
+Finds the incoming edge corresponding to the given static sources and triggers an update for this cell along that edge. Particularly
+useful when the value is computed via an asynchronous activity in the world &mdash; if the edge is async, the cell&rsquo;s value
+will be set to stale and the asynchronous activity will be restarted.</p>
 <h2 id="unavailable-values">Unavailable values</h2>
-<p>Some background on unavailable values is available on their <a href="../../term/unavailable-value">own page</a>.</p>
+<p>Some background on unavailable values is available on their <a href="../../term/unavailable-value">own page</a>. An unavailable
+value held at a cell represents a value which is either uninitialised, pending due to outstanding I/O, or an error.</p>
+<p>Unavailable values can be received by <a href="#fluidcelleffectfn-staticsources-props"><code>effect</code></a>s by marking them with the <code>isFree</code> property &mdash; otherwise, they
+only receive fully settled, concrete values.</p>
 <p>An unavailable value is created using the <code>fluid.unavailable</code> API, which in the simplest usage simply accepts a
 string holding a message explaining why the value is unavailable. These values are normally created by frameworks
 rather than users.</p>
@@ -362,22 +484,14 @@ to update it. This is created by <code>fluid.pending</code> which is just a wrap
 <li><code>{String} site</code> - The site or resource (e.g. URL) responsible for the pending I/O.</li>
 <li>Returns: <code>{Unavailable}</code> An object representing the unavailable state due to pending I/O.</li>
 </ul>
-<h2 id="utilities">Utilities</h2>
-<h3 id="fluidcellsignaltopromisevalsignal">fluid.cell.signalToPromise(valSignal)</h3>
+<h3 id="fluidisunavailabletotest">fluid.isUnavailable(totest)</h3>
 <ul>
-<li><code>{Cell&lt;Any&gt;} valSignal</code> - The signal to monitor.</li>
-<li>Returns: <code>Promise&lt;Any&gt;</code> - A Promise that resolves with the signal&rsquo;s first available value.</li>
+<li><code>{any} totest</code> - The value to be tested for being an unavailable value</li>
+<li>Returns <code>{Boolean}</code> <code>true</code> if the supplied value was an unavailable, <code>false</code> if it is a plain value.</li>
 </ul>
-<p>Gear from the world of signals into a Promise that can be <code>await</code>ed.</p>
-<h3 id="cellrefreshstaticsources">Cell.refresh(staticSources)</h3>
-<ul>
-<li><code>{Cell[]} [staticSources]</code> - An optional array of static source cells to identify the computation edge to be refreshed</li>
-<li><code>this: {Cell}</code> The cell for which an incoming edge is to be refreshed</li>
-</ul>
-<p>A method available on any <code>Cell</code>: Refreshes the value of the cell by re-evaluating its computation for the specified static sources.
-Finds the incoming edge corresponding to the given static sources and triggers an update for this cell along that edge. Particularly
-useful when the value is computed via an asynchronous activity in the world &mdash; if the edge is async, the cell&rsquo;s value
-will be set to stale and the asynchronous activity will be restarted.</p>
+<p>For more complex examples of propagating and receiving unavailable states, please consult the test cases
+in <a href="https://github.com/fluid-project/infusion-6/blob/main/tests/framework-tests/core/js/FluidSignalsAsyncTests.js">GitHub</a>,
+and in this context, &ldquo;Error propagation across async graph&rdquo;, &ldquo;Error propagation across async surfacing as promise rejection&rdquo;.</p>
 
 
         

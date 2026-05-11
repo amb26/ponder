@@ -33,7 +33,7 @@ p {
   margin: 6px 0;
 }
 p + p {
-    margin: 24px 0 6px 0;
+    margin: 16px 0 6px 0;
 }
 
 h1,h2,h3,h4,h5,h6 {
