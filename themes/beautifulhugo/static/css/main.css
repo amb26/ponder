@@ -15,6 +15,15 @@ body {
     background: black;
     color: white;
   }
+  textarea {
+    background: black;
+    color: white;
+  }
+
+  button {
+    background: #505050;
+  }
+
 }
 .container[role=main] {
   margin-bottom:50px;

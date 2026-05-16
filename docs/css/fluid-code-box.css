@@ -72,6 +72,15 @@
     font-weight: bold;
 }
 
+@media (prefers-color-scheme: dark) {
+    .fluid-code-box-results-header {
+        background: #505050;
+    }
+    .fluid-code-box-results {
+        background: #222;
+    }
+}
+
 .fluid-code-box-results-panel {
     padding: 0.5em 0.6em;
     min-height: 4em;
