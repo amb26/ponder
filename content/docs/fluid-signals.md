@@ -147,9 +147,10 @@ console.log("B's value computed to ", B.get()); // Outputs 2
 * `{Cell[]} staticSources` - The array of source cells whose values are dependencies for the effect
 * `{Object}   [props]` - Optional properties to configure the effect
 * `{Function} [props.onDispose]` - Optional cleanup function to run when the effect is disposed
-* `{Boolean}  [props.isFree]` - If true, the effect will run even if some sources are unavailable, delivering unavailable
-* `{String}   [props.excludeSource]` - Optional source name (as supplied as last argument to cell.set) that will have its notification skipped
-values in their place.
+* `{Boolean}  [props.isFree]` - If true, the effect will run even if some sources are unavailable, delivering unavailable values in their place.
+* `{String}   [props.excludeSource]` - If this optional field is populated, a change triggered by `Cell.set` whose source name (supplied as 
+ the `source` argument there) matches this value will skip notifying this effect.
+
 * Returns: `{Effect}`
 
 `fluid.cell.effect` accepts a function and arguments to run when one or more reactive values change. The signature
