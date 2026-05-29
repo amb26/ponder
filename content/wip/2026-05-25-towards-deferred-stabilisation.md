@@ -142,7 +142,7 @@ leading to updates of component instances, this kind of unwelcome entanglement i
 
 During the year or so I was working with preact-signals there had been plenty of "bumps in the night" like this, where a
 seemingly innocuous change to work order would lead to the insufferably opaque ``Cycle detected``, which without
-any clear means for itemising which signal depends on which and why they had become tracked, led to a kind of "cod reactivity" where
+ready means for itemising which signal depends on which and why they had become tracked, led to a kind of "cod reactivity" where
 as far as possible material was tracked in isolated signals lashed together by effects rather than proper computed relations.
 
 And in retrospect, the reason for the situation complained of in [Why was I notified?](/wip/2025-12-15-understanding-reactivity/#why-was-i-notified)
@@ -193,7 +193,7 @@ commentary:
 > you can be in a re-entrant state during effect *registration*, not just during signal writes. The general principle:
 > any call into the reactive system can re-enter your code.
 
-To me, this heightens the stakes of trying to construct programming primitives in which re-entrancy is *a priori* impossible,
+To me, this heightens the stakes for trying to construct programming primitives in which re-entrancy is *a priori* impossible,
 which is part of the overall discipline of using shorter stacks, reducing divergence and supplying other schemes
 for transparency of intention. This fundamental critique of the "call/return" model of programming appears to be the
 motivation of Hewitt et al's original 1973 [Actors](https://dl.acm.org/doi/10.5555/1624775.1624804) paper which later led
@@ -211,7 +211,7 @@ and it seems hard to avoid the observation that the most widely adopted reactive
 bigger frameworks and not easily disentangleable from them, e.g. [Observable](https://github.com/observablehq/runtime/blob/main/src/runtime.js),
 Solid and Vue. All of these frameworks were created in the context of a wider view framework rendering a UI
 to the DOM and as the TC39 committee observes, inevitably end up entangling their notion of workflow wich their
-parent framework's lifecycle and idiom for achieving this.
+parent framework's lifecycle and idiom for achieving this. 
 
 Whilst a big part of Infusion's responsibilities will also involve rendering to the DOM, its scope is wider than this
 and it makes sense that its own reactive implementation is inevitably going to get end up coupled with its workflow

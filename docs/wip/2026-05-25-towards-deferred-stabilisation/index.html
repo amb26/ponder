@@ -60,7 +60,7 @@ This posting is a story that can be told from two ends, the theoretical and the 
   "headline": "Towards Deferred Stabilisation",
   "description" : "aka \u0026ldquo;A Farewell to preact-signals\u0026rdquo;\nThis posting is a story that can be told from two ends, the theoretical and the practical. To jump ahead to one of the punchlines, it turns out that Milo\u0026rsquo;s reactively system, hailed in Understanding Reactivity and other posts, harbours yet more riches than had been explored so far. When looking through Milo\u0026rsquo;s Reactivity Benchmark with Chee last year, I was greatly taken with the staggering simplicity of the benchmark\u0026rsquo;s adaptor for update batching, which looks like this:",
   "inLanguage" : "en",
-  "wordCount":  2284 ,
+  "wordCount":  2283 ,
   "datePublished" : "2026-05-25T00:00:00\u002b00:00",
   "dateModified" : "2026-05-25T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -332,7 +332,7 @@ since we are building a malleable programming system where the existence of effe
 leading to updates of component instances, this kind of unwelcome entanglement is inevitable.</p>
 <p>During the year or so I was working with preact-signals there had been plenty of &ldquo;bumps in the night&rdquo; like this, where a
 seemingly innocuous change to work order would lead to the insufferably opaque <code>Cycle detected</code>, which without
-any clear means for itemising which signal depends on which and why they had become tracked, led to a kind of &ldquo;cod reactivity&rdquo; where
+ready means for itemising which signal depends on which and why they had become tracked, led to a kind of &ldquo;cod reactivity&rdquo; where
 as far as possible material was tracked in isolated signals lashed together by effects rather than proper computed relations.</p>
 <p>And in retrospect, the reason for the situation complained of in <a href="../../wip/2025-12-15-understanding-reactivity/#why-was-i-notified">Why was I notified?</a>
 of constantly finding oneself staring at <code>endBatch</code> becomes clearer. Given there are no batches in user code, the only
@@ -375,7 +375,7 @@ writing to another signal (it shouldn&rsquo;t, but in practice computeds sometim
 you can be in a re-entrant state during effect <em>registration</em>, not just during signal writes. The general principle:
 any call into the reactive system can re-enter your code.</p>
 </blockquote>
-<p>To me, this heightens the stakes of trying to construct programming primitives in which re-entrancy is <em>a priori</em> impossible,
+<p>To me, this heightens the stakes for trying to construct programming primitives in which re-entrancy is <em>a priori</em> impossible,
 which is part of the overall discipline of using shorter stacks, reducing divergence and supplying other schemes
 for transparency of intention. This fundamental critique of the &ldquo;call/return&rdquo; model of programming appears to be the
 motivation of Hewitt et al&rsquo;s original 1973 <a href="https://dl.acm.org/doi/10.5555/1624775.1624804">Actors</a> paper which later led
