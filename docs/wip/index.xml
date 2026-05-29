@@ -8,8 +8,15 @@
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <lastBuildDate>Mon, 15 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 May 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ponder.org.uk/wip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Towards Deferred Stabilisation</title>
+      <link>https://ponder.org.uk/wip/2026-05-25-towards-deferred-stabilisation/</link>
+      <pubDate>Mon, 25 May 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2026-05-25-towards-deferred-stabilisation/</guid>
+      <description>aka &amp;ldquo;A Farewell to preact-signals&amp;rdquo;&#xA;This posting is a story that can be told from two ends, the theoretical and the practical. To jump ahead to one of the punchlines, it turns out that Milo&amp;rsquo;s reactively system, hailed in Understanding Reactivity and other posts, harbours yet more riches than had been explored so far. When looking through Milo&amp;rsquo;s Reactivity Benchmark with Chee last year, I was greatly taken with the staggering simplicity of the benchmark&amp;rsquo;s adaptor for update batching, which looks like this:</description>
+    </item>
     <item>
       <title>Understanding Reactivity</title>
       <link>https://ponder.org.uk/wip/2025-12-15-understanding-reactivity/</link>

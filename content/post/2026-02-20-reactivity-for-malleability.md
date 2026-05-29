@@ -573,8 +573,8 @@ being altered. Each node can be in one of three reactive states ---
 * <span class="check-color">Check</span> --- The cell may be dirty, since a distant upstream dependency has recently updated
 
 These states and their colours are taken from Milo Mighdoll's admirable [Super Charging
-Fine-Grained Reactivity](https://milomg.dev/2022-12-01/reactivity) illustration of his own Reactively system, from which
-a good part of the `fluid.cell` implementation has been adapted.
+Fine-Grained Reactivity](https://milomg.dev/2022-12-01/reactivity) illustration of his own [reactively](https://github.com/milomg/reactively)
+system, from which a good part of the `fluid.cell` implementation has been adapted.
 
 Note that without support for asychronous propagation of reactive values, this demo could not have been implemented,
 since behind the scenes the original synchronous test fixture is rewritten to an asynchronous one which then suspends

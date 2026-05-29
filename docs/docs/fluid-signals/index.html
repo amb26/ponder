@@ -61,7 +61,7 @@ Construction fluid.">
   "headline": "Fluid Signals API",
   "description" : "This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra capabilities above traditional reactive libraries, and also a more extended essay explaining its goals in the context of a malleable substrate.\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.\nConstruction fluid.",
   "inLanguage" : "en",
-  "wordCount":  1988 ,
+  "wordCount":  2000 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -337,14 +337,28 @@ console.log("B's value computed to ", B.get()); // Outputs 2
 </textarea>
 <h3 id="fluidcelleffectfn-staticsources-props">fluid.cell.effect(fn, [staticSources], [props])</h3>
 <ul>
-<li><code>{Function} fn</code> - The function to execute reactively when any of the staticSources change</li>
-<li><code>{Cell[]} staticSources</code> - The array of source cells whose values are dependencies for the effect</li>
-<li><code>{Object}   [props]</code> - Optional properties to configure the effect</li>
-<li><code>{Function} [props.onDispose]</code> - Optional cleanup function to run when the effect is disposed</li>
-<li><code>{Boolean}  [props.isFree]</code> - If true, the effect will run even if some sources are unavailable, delivering unavailable</li>
-<li><code>{String}   [props.excludeSource]</code> - Optional source name (as supplied as last argument to cell.set) that will have its notification skipped
-values in their place.</li>
-<li>Returns: <code>{Effect}</code></li>
+<li>
+<p><code>{Function} fn</code> - The function to execute reactively when any of the staticSources change</p>
+</li>
+<li>
+<p><code>{Cell[]} staticSources</code> - The array of source cells whose values are dependencies for the effect</p>
+</li>
+<li>
+<p><code>{Object}   [props]</code> - Optional properties to configure the effect</p>
+</li>
+<li>
+<p><code>{Function} [props.onDispose]</code> - Optional cleanup function to run when the effect is disposed</p>
+</li>
+<li>
+<p><code>{Boolean}  [props.isFree]</code> - If true, the effect will run even if some sources are unavailable, delivering unavailable values in their place.</p>
+</li>
+<li>
+<p><code>{String}   [props.excludeSource]</code> - If this optional field is populated, a change triggered by <code>Cell.set</code> whose source name (supplied as
+the <code>source</code> argument there) matches this value will skip notifying this effect.</p>
+</li>
+<li>
+<p>Returns: <code>{Effect}</code></p>
+</li>
 </ul>
 <p><code>fluid.cell.effect</code> accepts a function and arguments to run when one or more reactive values change. The signature
 is similar to <code>Cell.compute</code> only the evaluation is not lazy &mdash; an effect runs immediately upon registration
