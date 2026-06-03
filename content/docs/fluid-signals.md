@@ -71,11 +71,16 @@ property. This isn't recommended except in specialised cases, usually of framewo
 `computed` is available as a function in the prototype of cells created via `fluid.cell`.
 
 `Cell.computed` constructs or tears down a computed relationship between a target cell (`this` one) and one or more source cells
-accepted by the supplied function `fn`.
-It's preferred that the source cells are specified in the `staticSources` arguments --- when they update, their values
-will be dereferenced and supplied as plain values as arguments to the function. However, any other cells that the
+accepted by the supplied function `fn`. The function will be invoked when the pull of a reactive value via `Cell.get`
+or an effect demands the value of the target cell and the values of one or more of the source cells have changed. The
+function will be invoked with arguments formed by evaluating the values of the source cells supplied in `staticSources`.
+
+As well as the source cells supplied in `staticSources`, any other cells that the
 function manages to reference in its surrounding scopes as it executes will also be tracked and schedule a reinvocation
 of the function, following the standard tracking semantics of commodity signals implementations.
+
+If any of the source cells evaluates to an [unavailable value](#unavailable-values), invocation of `fn` will be
+short-circuited and upstream cells will receive a corresponding, perhaps wrapped, unavailable value directly.
 
 The first `staticSource` cell, if there is one, will have a special status of establishing the *key* of the relationship
 which will be unique in the context of the target cell. If there is no such cell, a `null` value will serve as the key.
@@ -92,7 +97,7 @@ The additional `ComputedProps` argument can contain the following fields:
 Here is a basic example setting up two cells connected by a simple computation:
 
 <textarea class="fluid-code-box">
-import fluid from "https://unpkg.com/infusion-6@6.0.0/dist/FluidCell.mjs"
+import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
 
 const A = fluid.cell(1);
 
@@ -127,7 +132,7 @@ Here's an example receiving a result through an asynchronous computation. Rather
 as here, asynchronous results are more conveniently received through [fluid.cell.signalToPromise](#fluidcellsignaltopromisevalsignal), see below.
 
 <textarea class="fluid-code-box" rows="13">
-import fluid from "https://unpkg.com/infusion-6@6.0.0/dist/FluidCell.mjs"
+import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
 
 const A = fluid.cell(1);
 
@@ -138,7 +143,7 @@ B.get(); // Trigger fetch of B
 
 await new Promise(resolve => setTimeout(() => resolve(), 0)); // Wait for async propagation
 
-console.log("B's value computed to ", B.get()); // Outputs 2
+console.log("B's value computed to ", B.get()); // Outputs B's value computed to 2
 </textarea>
 
 ### fluid.cell.effect(fn, [staticSources], [props])
@@ -154,16 +159,20 @@ console.log("B's value computed to ", B.get()); // Outputs 2
 * Returns: `{Effect}`
 
 `fluid.cell.effect` accepts a function and arguments to run when one or more reactive values change. The signature
-is similar to `Cell.compute` only the evaluation is not lazy --- an effect runs immediately upon registration
-and again when any values change. Another difference is that effects do not correspond to a value --- values returned
-from `fn` are ignored. In order to deactivate the effect it needs to be explicitly disposed by calling the
-`Effect.dispose()` method on the returned `Effect`. 
+is similar to `Cell.compute` only an effect's `fn` is expected to have some side-effect upon the world,
+such as printing a value or writing to a database, rather than computing a value internal to the reactive graph.
+Values returned from `fn` are ignored.
 
-Another difference is in handling of unavailable arguments --- if any cells referenced in `staticSources` or
+Effects do not activate automatically. Every effect cell is specially marked to be activated by `fluid.cell.stabilize`
+which will then pull reactive values through the graph and activate their `fn` if any of their reactive arguments have changed
+as a result. 
+
+Similarly to `Cell.compute`, if any cells referenced in `staticSources` or
 in dynamically tracked reactive values resolve to an [unavailable value](#unavailable-values), and the effect is not
 marked as `isFree`, notification of the function is skipped.
 
-An effect represents a resource in the world outside the reactive graph and as such may require special actions
+In order to deactivate the effect it needs to be explicitly disposed by calling the
+`Effect.dispose()` method on the returned `Effect`. An effect represents a resource in the world outside the reactive graph and as such may require special actions
 when it is torn down. The optional `props` argument accepts a callback `onDispose` which is called when the effect
 is disposed via `Effect.dispose()`.
 
@@ -171,27 +180,31 @@ This simple example follows the pattern of previous examples, but actively pulls
 rather than manually pulling them via `get()`:
 
 <textarea class="fluid-code-box">
-import fluid from "https://unpkg.com/infusion-6@6.0.0/dist/FluidCell.mjs"
+import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
 
 const A = fluid.cell(1);
 
 const B = fluid.cell().computed(a => a + 1, [A]);
 
 const Blogger = fluid.cell.effect(b =>
-    console.log("B's value computed to ", b), [B]); // Outputs 2 immediately
+    console.log("B's value computed to ", b), [B]);
 
-A.set(2); // Outputs 3
+fluid.cell.stabilize(); // Outputs B's value computed to 2
+
+A.set(2);
+
+fluid.cell.stabilize() // Outputs B's value computed to 2
 
 Blogger.dispose();
 </textarea>
 
 This example shows `fluid.cell`'s ___source tracking___ facility. If a source of changes is tagged by using the 
-`source` argument to `fluid.set`, changes due to this source can skip notifying an effect with a matching
+`source` argument to [`Cell.set`](#cellsetnewvalue-source), changes due to this source can skip notifying an effect with a matching
 `excludeSource` argument. This can be helpful when interfacing with external systems which should not be
 notified of changes that they themselves have caused:
 
 <textarea class="fluid-code-box">
-import fluid from "https://unpkg.com/infusion-6@6.0.0/dist/FluidCell.mjs"
+import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
 
 const A = fluid.cell();
 const B = fluid.cell().computed(a => a + 1, [A]);
@@ -201,10 +214,28 @@ const Beff = fluid.cell.effect(b =>
     console.log("B's value computed to ", b), [B],
     {excludeSource: "scrollbar"});
 
-A.set(2); // B's value computed to 3
+A.set(2);
 
-A.set(3, {source: "scrollbar"}); // No notification: B excludes scrollbar source
+fluid.cell.stabilize(); // Outputs B's value computed to 2
+
+A.set(3, {source: "scrollbar"});
+
+fluid.cell.stabilize(); // No notification: B excludes scrollbar source
 </textarea>
+
+### fluid.cell.stabilize()
+
+`fluid.cell.stabilize` will run all effects whose reactive arguments have changed, after pulling updates through the reactive graph.
+Example code is in the section on [`effects`](#fluidcelleffectfn-staticsources-props).
+
+Unlike in many reactive frameworks, effects do not run eagerly or synchronously --- this choice is motivated in
+the [deferred stabilization](/wip/2026-05-25-towards-deferred-stabilisation/) posting.
+
+### fluid.cell.stabilizeAsync()
+
+A helpful utility layered on top of `fluid.cell.stabilize` which as well as scheduling any effects, will also return
+a promise which may be `await`ed, to be notified when any asynchronous computations launched by the stabilization
+operation have successfully notified the effects which depend on them.
 
 ## Comprehension
 
@@ -219,7 +250,7 @@ in progress, in the form of an array of nodes reaching back from the supplied ce
 triggered the reaction. The triggering cell appears first in the array.
 
 <textarea class="fluid-code-box">
-import fluid from "https://unpkg.com/infusion-6@6.0.0/dist/FluidCell.mjs"
+import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
 
 const A = fluid.cell(1, {name: "A"});
 
@@ -229,9 +260,13 @@ const Blogger = fluid.cell.effect(b => {
     const cause = fluid.cell.findCause();
     console.log("Causes of this update were ",
         cause.map(cause => cause.name).join(", "));
-}, [B], {name: "Blogger"}); // Outputs "Blogger" immediately
+}, [B], {name: "Blogger"});
 
-A.set(2); // Outputs "Blogger, B, A"
+fluid.cell.stabilize(); // Outputs "Blogger"
+
+A.set(2);
+
+fluid.cell.stabilize(); // Outputs "Blogger, B, A"
 
 Blogger.dispose();
 </textarea>
@@ -247,7 +282,7 @@ Gear from the world of signals into a Promise that can be `await`ed.
 The [`asyncComputed`](#cellasynccomputedfn-staticsources-props) example from above is more conveniently written:
 
 <textarea class="fluid-code-box">
-import fluid from "https://unpkg.com/infusion-6@6.0.0/dist/FluidCell.mjs"
+import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
 
 const A = fluid.cell(1);
 
@@ -255,7 +290,7 @@ const B = fluid.cell().asyncComputed(a =>
     new Promise(resolve => setTimeout(() => resolve(a + 1), 0)), [A]);
 
 console.log("B's value computed to ",
-    await (fluid.cell.signalToPromise(B))); // Outputs 2
+    await (fluid.cell.signalToPromise(B))); // Outputs B's value computed to 2
 </textarea>
 
 ### Cell.refresh(staticSources)

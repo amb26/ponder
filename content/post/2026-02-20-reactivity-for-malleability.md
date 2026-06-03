@@ -129,7 +129,7 @@ Closely aligned with the disciplines of substrate-oriented and malleable program
 To maintain the impression that [The thing on the screen is supposed to be the actual thing](http://davidungar.net/Live2013/Live_2013.html) (David Ungar, 2013),
 the system should adapt smoothly and immediately to whatever gestures the author has made to modify it. This contributes
 to the impression that the substrate represents a material under the author's direction rather than having a hidden realm
-"offstage" where important things happen. Josh Horowitz in his 2024 [Technical Dimensions of Feedback](https://joshuahhh.com/dims-of-feedback/dims-of-feedback-live-2024.pdf)
+"offstage" where important things happen. Josh Horowitz in his 2024/2026 [Technical Dimensions of Feedback](https://joshuahhh.com/dims-of-feedback/dims-of-feedback.pdf)
 has surveyed many of these dimensions, including "reactivity" in the everyday sense as experienced by 
 users rather than a specific technical phenomenon.
 

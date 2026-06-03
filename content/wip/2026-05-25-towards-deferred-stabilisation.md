@@ -8,7 +8,7 @@ aka "A Farewell to preact-signals"
 
 This posting is a story that can be told from two ends, the theoretical and the practical. To jump ahead to one of
 the punchlines, it turns out that Milo's [reactively](https://github.com/milomg/reactively) system, hailed in 
-[Understanding Reactivity](/post/2025-12-15-understanding-reactivity) and other posts, harbours yet more riches than
+[Understanding Reactivity](/wip/2025-12-15-understanding-reactivity) and other posts, harbours yet more riches than
 had been explored so far. When looking through Milo's [Reactivity Benchmark](https://github.com/milomg/js-reactivity-benchmark)
 with Chee last year, I was greatly taken with the staggering simplicity of the benchmark's 
 [adaptor](https://github.com/milomg/js-reactivity-benchmark/blob/main/packages/core/src/frameworks/reactively.ts#L20-L23) for update batching,
