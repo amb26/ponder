@@ -38,9 +38,10 @@ The only currently supported property in `props` is
 ### Cell.get()
 
 The value of a reactive cell can be read by calling `Cell.get`. This forces the reactive tree of computations
-behind the cell to bring its value up to date. A call to `Cell.get` within the reactive context of a `computed`
-function will set up an automatic subscription to updates of the cell, rerunning the function whenever the value
-changes.
+behind the cell to bring its value up to date. A call to `Cell.get` of some cell within the reactive context of a `computed`
+function (that is, further up its call stack) will set up an automatic subscription of the function to updates of that cell, rerunning the function whenever the value
+changes. If a further invocation of the `computed` does not execute `Cell.get` for that cell, the dynamic subscription
+will be torn down.
 
 ### Cell.set(newValue, [source])
 
@@ -48,11 +49,15 @@ changes.
 * `{String} [source]` An optional source tag name to be applied to this update as is propagates.
 
 The reactive cell's value can be updated by calling `Cell.set`. This will trigger a cascade of updates through the
-reactive tree. Any computed values that are depended on by effects will be updated immediately. Computed values
-that are not depended on by effects will only updated if an effect is created which later reads them, or `Cell.get`
-is called for a cell which depends on them.
+reactive tree. Any computed values that are depended on by effects will be marked to execute when 
+[`fluid.cell.stabilize`](#fluidcellstabilize) is next called. Computed values that are not depended on by effects will
+only be updated if `Cell.get` is called for a cell which depends on them.
 
-Optionally, at the time of calling 
+Optionally, at the time of calling `Cell.set`, the reactive update can be marked with a `source`, which is a string
+encoding the identity of the source in the world triggering the change. An effect marked with a matching string
+in its `excludeSource` will skip notification. This scheme allows the reactive graph to avoid cyclically propagating changes
+back to the same source which triggered them. The second example after [`fluid.effect`](#fluidcelleffectfn-staticsources-props) shows
+this source tracking facility in action.
 
 ### Cell._value
 
@@ -76,7 +81,7 @@ or an effect demands the value of the target cell and the values of one or more 
 function will be invoked with arguments formed by evaluating the values of the source cells supplied in `staticSources`.
 
 As well as the source cells supplied in `staticSources`, any other cells that the
-function manages to reference in its surrounding scopes as it executes will also be tracked and schedule a reinvocation
+function references as it executes will also be tracked and schedule a reinvocation
 of the function, following the standard tracking semantics of commodity signals implementations.
 
 If any of the source cells evaluates to an [unavailable value](#unavailable-values), invocation of `fn` will be
@@ -139,7 +144,7 @@ const A = fluid.cell(1);
 const B = fluid.cell().asyncComputed(a =>
     new Promise(resolve => setTimeout(() => resolve(a + 1), 0)), [A]);
 
-B.get(); // Trigger fetch of B
+B.get(); // Trigger fetch of B - returns unavailable value
 
 await new Promise(resolve => setTimeout(() => resolve(), 0)); // Wait for async propagation
 
@@ -193,7 +198,7 @@ fluid.cell.stabilize(); // Outputs B's value computed to 2
 
 A.set(2);
 
-fluid.cell.stabilize() // Outputs B's value computed to 2
+fluid.cell.stabilize() // Outputs B's value computed to 3
 
 Blogger.dispose();
 </textarea>
@@ -216,7 +221,7 @@ const Beff = fluid.cell.effect(b =>
 
 A.set(2);
 
-fluid.cell.stabilize(); // Outputs B's value computed to 2
+fluid.cell.stabilize(); // Outputs B's value computed to 3
 
 A.set(3, {source: "scrollbar"});
 
@@ -282,7 +287,7 @@ Gear from the world of signals into a Promise that can be `await`ed.
 The [`asyncComputed`](#cellasynccomputedfn-staticsources-props) example from above is more conveniently written:
 
 <textarea class="fluid-code-box">
-import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
+import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs";
 
 const A = fluid.cell(1);
 

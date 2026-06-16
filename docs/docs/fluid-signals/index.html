@@ -61,7 +61,7 @@ Construction fluid.">
   "headline": "Fluid Signals API",
   "description" : "This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra capabilities above traditional reactive libraries, and also a more extended essay explaining its goals in the context of a malleable substrate.\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.\nConstruction fluid.",
   "inLanguage" : "en",
-  "wordCount":  2213 ,
+  "wordCount":  2309 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -248,19 +248,24 @@ the signal&rsquo;s value as uninitialised.</p>
 <h2 id="reading-and-writing">Reading and writing</h2>
 <h3 id="cellget">Cell.get()</h3>
 <p>The value of a reactive cell can be read by calling <code>Cell.get</code>. This forces the reactive tree of computations
-behind the cell to bring its value up to date. A call to <code>Cell.get</code> within the reactive context of a <code>computed</code>
-function will set up an automatic subscription to updates of the cell, rerunning the function whenever the value
-changes.</p>
+behind the cell to bring its value up to date. A call to <code>Cell.get</code> of some cell within the reactive context of a <code>computed</code>
+function (that is, further up its call stack) will set up an automatic subscription of the function to updates of that cell, rerunning the function whenever the value
+changes. If a further invocation of the <code>computed</code> does not execute <code>Cell.get</code> for that cell, the dynamic subscription
+will be torn down.</p>
 <h3 id="cellsetnewvalue-source">Cell.set(newValue, [source])</h3>
 <ul>
 <li><code>{any} newValue</code> The new value to which the cell is to be updated</li>
 <li><code>{String} [source]</code> An optional source tag name to be applied to this update as is propagates.</li>
 </ul>
 <p>The reactive cell&rsquo;s value can be updated by calling <code>Cell.set</code>. This will trigger a cascade of updates through the
-reactive tree. Any computed values that are depended on by effects will be updated immediately. Computed values
-that are not depended on by effects will only updated if an effect is created which later reads them, or <code>Cell.get</code>
-is called for a cell which depends on them.</p>
-<p>Optionally, at the time of calling</p>
+reactive tree. Any computed values that are depended on by effects will be marked to execute when
+<a href="#fluidcellstabilize"><code>fluid.cell.stabilize</code></a> is next called. Computed values that are not depended on by effects will
+only be updated if <code>Cell.get</code> is called for a cell which depends on them.</p>
+<p>Optionally, at the time of calling <code>Cell.set</code>, the reactive update can be marked with a <code>source</code>, which is a string
+encoding the identity of the source in the world triggering the change. An effect marked with a matching string
+in its <code>excludeSource</code> will skip notification. This scheme allows the reactive graph to avoid cyclically propagating changes
+back to the same source which triggered them. The second example after <a href="#fluidcelleffectfn-staticsources-props"><code>fluid.effect</code></a> shows
+this source tracking facility in action.</p>
 <h3 id="cell_value">Cell._value</h3>
 <p>A &ldquo;blind read&rdquo; of the current value of the cell, regardless of how stale it is, can be made by looking at the <code>_value</code>
 property. This isn&rsquo;t recommended except in specialised cases, usually of framework-building.</p>
@@ -278,7 +283,7 @@ accepted by the supplied function <code>fn</code>. The function will be invoked 
 or an effect demands the value of the target cell and the values of one or more of the source cells have changed. The
 function will be invoked with arguments formed by evaluating the values of the source cells supplied in <code>staticSources</code>.</p>
 <p>As well as the source cells supplied in <code>staticSources</code>, any other cells that the
-function manages to reference in its surrounding scopes as it executes will also be tracked and schedule a reinvocation
+function references as it executes will also be tracked and schedule a reinvocation
 of the function, following the standard tracking semantics of commodity signals implementations.</p>
 <p>If any of the source cells evaluates to an <a href="#unavailable-values">unavailable value</a>, invocation of <code>fn</code> will be
 short-circuited and upstream cells will receive a corresponding, perhaps wrapped, unavailable value directly.</p>
@@ -393,7 +398,7 @@ fluid.cell.stabilize(); // Outputs B's value computed to 2
 
 A.set(2);
 
-fluid.cell.stabilize() // Outputs B's value computed to 2
+fluid.cell.stabilize() // Outputs B's value computed to 3
 
 Blogger.dispose();
 </textarea>
@@ -414,7 +419,7 @@ const Beff = fluid.cell.effect(b =>
 
 A.set(2);
 
-fluid.cell.stabilize(); // Outputs B's value computed to 2
+fluid.cell.stabilize(); // Outputs B's value computed to 3
 
 A.set(3, {source: "scrollbar"});
 
@@ -469,7 +474,7 @@ Blogger.dispose();
 <p>Gear from the world of signals into a Promise that can be <code>await</code>ed.</p>
 <p>The <a href="#cellasynccomputedfn-staticsources-props"><code>asyncComputed</code></a> example from above is more conveniently written:</p>
 <textarea class="fluid-code-box">
-import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
+import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs";
 
 const A = fluid.cell(1);
 
