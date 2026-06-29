@@ -3,7 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ponder.org.uk/</loc>
-    <lastmod>2026-05-25T00:00:00+00:00</lastmod>
+    <lastmod>2026-06-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ponder.org.uk/post/2026-06-28-fully-deferred-stabilization/</loc>
+    <lastmod>2026-06-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ponder.org.uk/post/</loc>
+    <lastmod>2026-06-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ponder.org.uk/wip/2026-05-25-towards-deferred-stabilisation/</loc>
     <lastmod>2026-05-25T00:00:00+00:00</lastmod>
@@ -12,9 +18,6 @@
     <lastmod>2026-05-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ponder.org.uk/post/2026-03-27-ai-cries-out-for-better-notations/</loc>
-    <lastmod>2026-03-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://ponder.org.uk/post/</loc>
     <lastmod>2026-03-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/</loc>

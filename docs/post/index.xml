@@ -8,8 +8,15 @@
     <language>en</language>
     <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
     <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
-    <lastBuildDate>Fri, 27 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jun 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ponder.org.uk/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bridging the gap between static and dynamic analysis through fully deferred stabilization</title>
+      <link>https://ponder.org.uk/post/2026-06-28-fully-deferred-stabilization/</link>
+      <pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2026-06-28-fully-deferred-stabilization/</guid>
+      <description>It is now ten years since some of us wrote 2016&amp;rsquo;s Software and How it Lives On (SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded communities of authors.&#xA;In the time since then, progress in reactive software, particularly in the JavaScript community, has now made it possible to tighten up some of the details of how this vision can be brought about.</description>
+    </item>
     <item>
       <title>AI cries out for better notations</title>
       <link>https://ponder.org.uk/post/2026-03-27-ai-cries-out-for-better-notations/</link>

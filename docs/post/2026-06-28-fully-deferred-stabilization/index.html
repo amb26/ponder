@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+      <title>Bridging the gap between static and dynamic analysis through fully deferred stabilization - Antranig Basman</title>
+
+  <meta name="description" content="It is now ten years since some of us wrote 2016&rsquo;s Software and How it Lives On (SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded communities of authors.
+In the time since then, progress in reactive software, particularly in the JavaScript community, has now made it possible to tighten up some of the details of how this vision can be brought about.">
+  <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Antranig Basman",
+    
+    "url": "https:\/\/ponder.org.uk"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/ponder.org.uk"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk\/post\/2026-06-28-fully-deferred-stabilization\/",
+          "name": "Bridging the gap between static and dynamic analysis through fully deferred stabilization"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Antranig Basman"
+  },
+  "headline": "Bridging the gap between static and dynamic analysis through fully deferred stabilization",
+  "description" : "It is now ten years since some of us wrote 2016\u0026rsquo;s Software and How it Lives On (SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded communities of authors.\nIn the time since then, progress in reactive software, particularly in the JavaScript community, has now made it possible to tighten up some of the details of how this vision can be brought about.",
+  "inLanguage" : "en",
+  "wordCount":  1706 ,
+  "datePublished" : "2026-06-28T00:00:00\u002b00:00",
+  "dateModified" : "2026-06-28T00:00:00\u002b00:00",
+  "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+  "keywords" : [ "" ],
+  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/post\/2026-06-28-fully-deferred-stabilization\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/ponder.org.uk",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="Bridging the gap between static and dynamic analysis through fully deferred stabilization" />
+<meta property="og:description" content="It is now ten years since some of us wrote 2016&rsquo;s Software and How it Lives On (SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded communities of authors.
+In the time since then, progress in reactive software, particularly in the JavaScript community, has now made it possible to tighten up some of the details of how this vision can be brought about.">
+<meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
+<meta property="og:url" content="https://ponder.org.uk/post/2026-06-28-fully-deferred-stabilization/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Antranig Basman" />
+
+  <meta name="twitter:title" content="Bridging the gap between static and dynamic analysis through fully …" />
+  <meta name="twitter:description" content="It is now ten years since some of us wrote 2016&rsquo;s Software and How it Lives On (SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded …">
+  <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@amb26ponder" />
+  <meta name="twitter:creator" content="@amb26ponder" />
+  <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.121.0">
+  <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
+  <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
+<script type="text/javascript" src="../../js/ponder.js" ></script>
+
+  </head>
+  <body class="post" >
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-ponder">
+      <a class="navbar-ponder-brand" href="../../">Antranig Basman</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <svg width="36" height="36" viewBox="0 0 24 24" stroke="#888" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 7L4 7" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 12L4 12" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 17L4 17" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="nav navbar-nav navbar-right">
+          
+          
+          <li>
+            <a title="Posts" href="../../post">Posts</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="WiP" href="../../wip">WiP</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="About" href="../../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Docs" href="../../docs">Docs</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Communities" href="../../communities">Communities</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Projects" href="../../projects">Projects</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Terms" href="../../term">Terms</a>
+          </li>
+          
+          
+
+          
+
+          
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="header-row">
+          
+
+            <div class="post-heading">
+              
+                <h1>Bridging the gap between static and dynamic analysis through fully deferred stabilization  
+                  <span class="post-meta">
+  
+    
+     – June 28, 2026
+  
+  
+</span>
+
+                  </h1>
+              
+              
+              
+
+            </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <article role="main" class="blog-post">
+        <p>It is now ten years since some of us wrote 2016&rsquo;s <a href="https://www.ppig.org/files/2016-PPIG-27th-Basman1.pdf">Software and How it Lives On</a>
+(SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded communities of authors.</p>
+<p>In the time since then, progress in reactive software, particularly in the JavaScript community, has now made it possible to tighten
+up some of the details of how this vision can be brought about. In that paper&rsquo;s sections 4.4.6, and 4.4.7, entitled
+&ldquo;Homeostasis rather than Execution&rdquo; and &ldquo;Mocks and a Taxonomy of Effects&rdquo; it is announced somewhat diffusely,
+that we should seek an alternative to the dominant execution paradigm for organising our software, and that we should
+organise these designs around a clear schema identifying where side-effects may occur in a design.</p>
+<p>Some elements of this research programe can now be read from contemporary reactive signals systems which split their ontology
+between &ldquo;computed&rdquo; signals which are pure (memo-ised) functions of their dependencies, and &ldquo;effects&rdquo; which issue changes
+in the external world which cannot be called back. In this post I will argue that there are developments in the most
+modern reactive systems which point towards more fine-grained, contextually responsive scheduling of reactive updates,
+which bring us closer to designing the homeostatic, openly contextualised systems that the paper calls for, as well
+as bridging an important gap between currently widely separated fields of computer science.</p>
+<h2 id="split-between-systems-and-languages">Split between systems and languages</h2>
+<p>In his 2012 <a href="https://dreamsongs.com/Files/Incommensurability.pdf">Structure of a Programming Language Revolution</a>, Richard
+Gabriel identifies that after 1990, a fundamental schism occurred between communities working on programming <em>systems</em>
+and programming <em>languages</em>. An incarnation of this split can be read from the highly vigorous discipline of
+<em>static analysis</em>, which tries to read as many constraints and regularities as possible from the source text of a
+programming system before it begins to execute. This analysis provides helpful syntax assistance and behavioural assurances
+to engineers working on the source text, but its insights are greatly limited by ignorance of the context
+in which the system is to be deployed. In addition, this disciplinary split entrenches a corresponding split between
+the communities of those who design programs, benefitting from the elite tooling and insights available around its
+source text, and those who merely use them, from whose view all of these benefits are permanently effaced by the
+information-destroying, unidirectional tool chains which produce running programs.</p>
+<p>I will argue that this split can be healed, by refounding our notion of the &ldquo;execution&rdquo; of running program.
+We need to perform this refounding along two axes, firstly through reconceiving the driving force of execution as homeostasis,
+which exhibits as little eagerness as possible,
+and secondly by ensuring that updates can be pushed through the reactive graph backwards as easily as forwards.</p>
+<p>Under homeostasis of a reactive system, rather than executing a predetermined set of steps deterministically, it is instead
+constantly seeking to minimise the discrepancy between upstream reactive nodes constituting the design and data underlying the system,
+and the downstream nodes representing the effects of the program in the world dependent on these. This discrepancy,
+in reactive systems, is known as &ldquo;staleness&rdquo; &mdash; a reactive system is constantly working to bring the state of
+the reactive graph up to date, by recomputing the contents of nodes which are stale with respect to their dependents.
+Some communities call this work the &ldquo;stabilization&rdquo; of the reactive graph.</p>
+<h2 id="traditional-homeostasis-synchronous-depth-first">Traditional homeostasis: Synchronous, depth-first</h2>
+<p>As it turns out, there are a lot of subtleties as to how this stabilization should be scheduled. Most older reactive
+systems stabilize the reactive graph in an eager, synchronous way which is qualitatively very similar to the
+synchronous, deterministic strategy implied by imperative code written against the execution paradigm. Specifically,
+in traditional eager reactive systems such as preact-signals, <a href="https://preactjs.com/guide/v10/signals/#effectfn">effects</a>
+will synchronously notify effects to the outside world from the same stack frame on which changes are notified.</p>
+<p>In the last few years, an interesting vanguard of reactive systems, particularly Ryan Carniato&rsquo;s upcoming
+<a href="https://github.com/solidjs/solid/tree/next/packages/solid-signals">Solid signals</a> supporting
+the 2.0 release of the Solid web framework, is starting to support <em>deferred stabilization</em>, under which the
+reactive graph doesn&rsquo;t update until explicitly prompted. I wrote about this strategy in last month&rsquo;s
+work in progress, <a href="../../wip/2026-05-25-towards-deferred-stabilisation">Towards Deferred Stabilization</a>, and traced its
+lineage back to Jane Street&rsquo;s 2015 <a href="https://www.janestreet.com/tech-talks/seven-implementations-of-incremental/">Incremental</a>
+computation system, and the intermediate 2025 Reactively system from Milo Mighdoll.</p>
+<p>Milo&rsquo;s system exhibits this stabilization point very clearly in a nutshell:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="cm">/** run all non-clean effect nodes */</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">stabilize</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">EffectQueue</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">EffectQueue</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">get</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">EffectQueue</span><span class="p">.</span><span class="nx">length</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>To those consuming the reactive system as coders, the need to call <code>stabilize</code> can appear annoyingly bureaucratic. On the one hand, it
+represents an increase in the clarity of design of the reactive system &mdash; what used to be scattered across multiple
+control flow points (for example, updating the value of a cell, constructing a new effect, or modifying the graph
+topology) that might be capable of triggering updates in the external world, is now focused in a single named
+entry point. But on the other hand, it seems that all of this complexity, of determining the control
+flow points where updates could be triggered, has now been exported into the user&rsquo;s own design, creating what looks like
+a good deal of noise scattered across their own design.</p>
+<p>In fact, as I argue in <a href="../../wip/2026-05-25-towards-deferred-stabilisation">Towards Deferred Stabilization</a>, this
+represents a big win in coherence, and can be taken even further to deliver even greater benefits.</p>
+<p>You will observe from the code above that the trigger <code>EffectQueue[i].get()</code>, whilst it is triggered at a time point of
+the user&rsquo;s choosing, still proceeds to traverse the entire depth of the graph, bringing one whole effect&rsquo;s worth of
+nodes up to date synchronously and then proceeding to synchronously enact the effect. This has several adverse consequences:</p>
+<ol>
+<li>The system chews up an unpredictable amount of program stack, which is a performance risk, as well a risk to deterministic resource
+consumption</li>
+<li>The system becomes <code>divergent</code> &mdash; under the terms of SaHiLO, this represents an invisible execution coordinate
+causing the system&rsquo;s visible state to diverge from its authored state</li>
+<li>The system violates the Principle of Least Commitment (PoLC)which should require that any effects issued against the
+world should be maximally contextualised.</li>
+</ol>
+<p>The PoLC is well treated by Phil Agre in his 1997 <a href="https://archive.org/details/computationhuman0000agre">Computation and Human Experience</a>
+and I write about this in last year&rsquo;s <a href="../wip/2025-12-15-understanding-reactivity/#essential-unity-of-reactivity">Understanding Reactivity</a>.</p>
+<h2 id="fully-deferred-stabilization">Fully deferred stabilization</h2>
+<p>Some of the most performant reactive systems, for example, 2024&rsquo;s <a href="https://github.com/stackblitz/alien-signals">alien-signals</a>
+are responding to the performance point 1. by turning function call recursion into iteration over a stack structure,
+for a significant performance boost. But I argue that within this choice of an externalised data structure (rather than
+the program stack) representing the trajectory of reactive homeostasis, lies a crucial locus of policy. Instead of
+unwrapping reactive propagation to a stack, corresponding to traditional depth-first scheduling, one could instead
+unwrap it to a queue, producing a breadth-first order which can respond simultaneously to the demands of multiple effects,
+but still further, to a priority queue, reflecting in a more refined way the contextual demands of homeostasis in a
+malleable, open system. Use of a queue or priority queue here enables what could be called <em>fully deferred stabilization</em>
+in which <em>all</em> of the dependents of nodes issuing effects in the world can be brought to date first, in a smoothly
+graded and easily interruptible process.</p>
+<p>Following the PoLC, the homeostatic process of scheduling reactive updates should be as little eager
+as possible &mdash; following a breadth-first search, but in addition allowing nodes whose updates can be <em>a priori</em>
+expected to have disproportionate influence on the graph contents and topology to jump the queue and be scheduled first.
+I write about this in the last section of
+<a href="wip/2026-05-25-towards-deferred-stabilisation/#deferred-stabilization-has-always-been-planned">Understanding Reactivity</a>,
+and this issue also connects to the <a href="../../wip/2025-09-26-this-weeks-reactive-chats/#hierarchy-of-good-functions">Hierarchy of Good Function</a>
+I wrote about last year (relations which destroy information should be scheduled last).</p>
+<h3 id="contextually-informed-analysis">Contextually informed analysis</h3>
+<p>But one of the greatest riches that can be released by <em>fully deferred stabilization</em> is our headline
+point, the facility that under the execution paradigm used to be called &ldquo;static analysis&rdquo;. We could call this
+&ldquo;contextually informed analysis&rdquo; (CIF). Under fully deferred stabilization,
+a workflow point now exists in which the system can be paused, where the signal graph has been made maximally consistent
+with underlying updates to data sources, and responded fully to the authorial gestures of a broad community of authors,
+but has so far exhibited no visible changes in the world. It is now in the ideal state for analysis and design
+interpretation, since it can be clearly read off from the system what effects in the world it is about to issue, and also
+what is the full provenance chain stretching back through the reactive graph that leads to those effects. Unlike static analysis,
+this inference is fully contextually informed and precise with respect to the system&rsquo;s deployment context and can also
+be helpfully parameterised with respect to it.</p>
+<p>At this point, one could intervene and determine that a fundamental design invariant had been broken &mdash; for example, that
+an effect about to be issued in the world no longer had an adequate provenance chain connecting it with the source data
+it should depend on. At this point the design can be rejected as faulty, the broken chain highlighted in a visible form,
+and the problem corrected before any harmful consequences had been issued. At the same time as assuring this safety,
+the design&rsquo;s authorship network could be massively more permissive to malleable influence than would be possible
+under the execution paradigm.</p>
+<p>CIF is particularly timely in a world where large portions of system design undertaken
+by AI puts accountability greatly at risk. Development teams are now deluged by code review tasks which the execution
+paradigm renders Sisyphean &mdash; because it is so intrinsically hard to reason about the effects of code in its deployed state
+from its source expression, and because this task itself could never be delegated effectively to AI without surrendering the
+very accountability that the review process is designed to assure, this fundamental reform to the transparency properties
+connecting the behaviour of executing systems to their designs and source data seems essential.</p>
+
+
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        
+        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;Bridging&#43;the&#43;gap&#43;between&#43;static&#43;and&#43;dynamic&#43;analysis&#43;through&#43;fully&#43;deferred&#43;stabilization&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fpost%2F2026-06-28-fully-deferred-stabilization%2F" target="_blank" title="Share on BlueSky">
+          <i class="fab fa-fw fa-bluesky"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fpost%2f2026-06-28-fully-deferred-stabilization%2f&amp;text=Bridging%20the%20gap%20between%20static%20and%20dynamic%20analysis%20through%20fully%20deferred%20stabilization&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fpost%2f2026-06-28-fully-deferred-stabilization%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fpost%2f2026-06-28-fully-deferred-stabilization%2f&amp;title=Bridging%20the%20gap%20between%20static%20and%20dynamic%20analysis%20through%20fully%20deferred%20stabilization" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fpost%2f2026-06-28-fully-deferred-stabilization%2f&amp;title=Bridging%20the%20gap%20between%20static%20and%20dynamic%20analysis%20through%20fully%20deferred%20stabilization" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="../../post/2026-03-27-ai-cries-out-for-better-notations/" data-toggle="tooltip" data-placement="top" title="AI cries out for better notations">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      <script src="https://giscus.app/client.js"
+                data-repo="amb26/ponder"
+                data-repo-id="R_kgDOOKllGA"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOOKllGM4CvhAS"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="0"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script></div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="../../">Antranig Basman</a>
+            
+          
+          &nbsp;&copy;
+          2026
+
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.121.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="../../js/katex.min.js"></script>
+<script defer src="../../js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script src="../../js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+
+
+
+
+
+    
+  </body>
+</html>

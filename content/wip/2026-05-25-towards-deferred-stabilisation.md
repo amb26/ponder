@@ -250,7 +250,7 @@ name out of the substrate's material into a `$layer` value for a
 ["polymorphic lift"](/post/2026-02-20-reactivity-for-malleability/#polymorphism-via-indirection-layers) represents work that
 `a priori` is going to be categorically more context-forming than others, even in the absence of a directly visible data
 dependency. This kind of scheduling work previous versions of Infusion did in an *ad hoc* way in the absence of
-a unifying reactive frameowrk.
+a unifying reactive framework.
 
 Stabilization may be one of those areas in which it is better to do nothing rather than something --- but on the other hand,
 if everyone did nothing, then noone would learn anything.

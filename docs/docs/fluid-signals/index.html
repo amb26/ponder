@@ -61,7 +61,7 @@ Construction fluid.">
   "headline": "Fluid Signals API",
   "description" : "This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra capabilities above traditional reactive libraries, and also a more extended essay explaining its goals in the context of a malleable substrate.\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.\nConstruction fluid.",
   "inLanguage" : "en",
-  "wordCount":  2309 ,
+  "wordCount":  2313 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -337,7 +337,7 @@ const A = fluid.cell(1);
 const B = fluid.cell().asyncComputed(a =>
     new Promise(resolve => setTimeout(() => resolve(a + 1), 0)), [A]);
 
-B.get(); // Trigger fetch of B
+B.get(); // Trigger fetch of B - returns unavailable value
 
 await new Promise(resolve => setTimeout(() => resolve(), 0)); // Wait for async propagation
 
