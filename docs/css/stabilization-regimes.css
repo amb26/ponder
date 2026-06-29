@@ -1,0 +1,108 @@
+/* Everything is scoped under .stabilization — no rule applies at top level,
+   and the custom properties live on the container so they inherit downward. */
+.stabilization{
+    --bg:#0d111b;
+    --panel:#131b2a;
+    --panel-2:#0f1622;
+    --rail:#24324a;
+    --grid:rgba(120,160,210,0.045);
+
+    /* Milo Mighdoll's colouring: dirty = red, check = green, clean = uncoloured */
+    --clean:#4a5970;        --clean-stroke:#6c7e98;
+    --check:#3fb950;        --check-stroke:#5ad36a;   /* CacheCheck  */
+    --dirty:#ff5c6a;        --dirty-stroke:#ff8a93;   /* CacheDirty  */
+
+    --ink:#d3dded;
+    --dim:#7e8ea6;
+    --accent:#e8b04b;       /* triggers + source outline */
+    --edge:#33425e;
+    --edge-hot:#7d8eaa;
+
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:ui-sans-serif,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+
+    color:var(--ink);
+    font-family:var(--sans);
+    background:var(--bg);
+    background-image:radial-gradient(var(--grid) 1px,transparent 1px);
+    background-size:22px 22px;
+    padding:28px 22px 40px;
+    border-radius:14px;
+
+    width: 98vw;
+    margin-left: calc(50% - 49vw);
+    margin-top: 10px;
+}
+
+.stabilization, .stabilization *{box-sizing:border-box;}
+
+.stabilization .masthead{max-width:1180px;margin:0 auto 18px;}
+.stabilization .eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--dim);margin:0 0 8px;
+}
+.stabilization h1{
+    font-size:clamp(22px,3vw,30px);line-height:1.05;margin:0 0 10px;font-weight:620;
+    letter-spacing:-.01em;color:var(--ink);
+}
+.stabilization .lede{max-width:760px;color:var(--dim);font-size:14.5px;line-height:1.55;margin:0;}
+.stabilization .lede b{color:var(--ink);font-weight:600;}
+
+.stabilization .legend{
+    max-width:1180px;margin:18px auto 22px;display:flex;flex-wrap:wrap;gap:18px 26px;
+    align-items:center;padding:12px 16px;border:1px solid var(--rail);border-radius:10px;
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    font-family:var(--mono);font-size:12px;color:var(--dim);
+}
+.stabilization .legend .grp{display:flex;align-items:center;gap:9px;}
+.stabilization .legend .sw{width:15px;height:15px;border-radius:50%;border:1.5px solid;}
+.stabilization .legend .glyph{width:18px;height:18px;display:inline-block;}
+.stabilization .legend b{color:var(--ink);font-weight:600;}
+.stabilization .legend .sep{width:1px;height:18px;background:var(--rail);}
+
+.stabilization .stage{
+    max-width:1180px;margin:0 auto;display:flex;gap:18px;flex-wrap:wrap;
+    align-items:stretch;justify-content:center;
+}
+.stabilization .panel{
+    flex:1 1 340px;max-width:380px;min-width:300px;
+    border:1px solid var(--rail);border-radius:14px;overflow:hidden;
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    display:flex;flex-direction:column;
+    transition:box-shadow .18s ease, border-color .18s ease;
+}
+.stabilization .panel.trigger{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 0 26px -6px rgba(232,176,75,.5);}
+.stabilization .panel.analysis{border-color:var(--check-stroke);box-shadow:0 0 0 1px var(--check-stroke),0 0 30px -6px rgba(63,185,80,.55);}
+
+.stabilization .phead{padding:14px 16px 10px;border-bottom:1px solid var(--rail);}
+.stabilization .pnum{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;}
+.stabilization .ptitle{font-size:16px;font-weight:620;margin:3px 0 4px;letter-spacing:-.01em;}
+.stabilization .pdesc{font-size:12.5px;color:var(--dim);line-height:1.45;min-height:34px;}
+
+.stabilization .hud{padding:11px 16px 6px;display:flex;flex-direction:column;gap:2px;}
+.stabilization .phase{font-family:var(--mono);font-size:14px;font-weight:600;color:var(--ink);min-height:18px;}
+.stabilization .phase.is-trigger{color:var(--accent);}
+.stabilization .phase.is-analysis{color:var(--check-stroke);}
+.stabilization .sub{font-family:var(--mono);font-size:11.5px;color:var(--dim);min-height:16px;}
+
+.stabilization .meters{display:flex;gap:18px;padding:8px 16px 4px;font-family:var(--mono);font-size:11px;color:var(--dim);}
+.stabilization .meter b{color:var(--ink);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;}
+.stabilization .meter .lbl{display:block;letter-spacing:.08em;text-transform:uppercase;font-size:9.5px;margin-top:1px;}
+
+.stabilization svg.scope{display:block;width:100%;height:auto;}
+.stabilization .edge{stroke:var(--edge);stroke-width:1.4;transition:stroke .12s linear;}
+.stabilization .edge.hot{stroke:var(--edge-hot);}
+.stabilization .node-shape{transition:fill .1s linear, stroke .1s linear;}
+.stabilization .node-label{font-family:var(--mono);font-size:8px;fill:#0b0f18;font-weight:700;pointer-events:none;}
+.stabilization .ring{fill:none;stroke:var(--clean-stroke);stroke-width:1.4;}
+.stabilization .scope-frame{fill:none;stroke:var(--rail);}
+
+.stabilization footer{
+    max-width:1180px;margin:24px auto 0;font-family:var(--mono);font-size:11px;
+    color:var(--dim);line-height:1.6;border-top:1px solid var(--rail);padding-top:14px;
+}
+.stabilization footer a{color:var(--clean-stroke);}
+
+@media (prefers-reduced-motion: reduce){
+    .stabilization .panel{transition:none;}
+}

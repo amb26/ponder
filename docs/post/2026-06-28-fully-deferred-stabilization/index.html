@@ -60,7 +60,7 @@ In the time since then, progress in reactive software, particularly in the JavaS
   "headline": "Bridging the gap between static and dynamic analysis through fully deferred stabilization",
   "description" : "It is now ten years since some of us wrote 2016\u0026rsquo;s Software and How it Lives On (SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded communities of authors.\nIn the time since then, progress in reactive software, particularly in the JavaScript community, has now made it possible to tighten up some of the details of how this vision can be brought about.",
   "inLanguage" : "en",
-  "wordCount":  1706 ,
+  "wordCount":  1919 ,
   "datePublished" : "2026-06-28T00:00:00\u002b00:00",
   "dateModified" : "2026-06-28T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -345,6 +345,43 @@ paradigm renders Sisyphean &mdash; because it is so intrinsically hard to reason
 from its source expression, and because this task itself could never be delegated effectively to AI without surrendering the
 very accountability that the review process is designed to assure, this fundamental reform to the transparency properties
 connecting the behaviour of executing systems to their designs and source data seems essential.</p>
+<h3 id="illustration">Illustration</h3>
+<p>The following 3 panels illustrate these progressive stabilization strategies.</p>
+<p>Note that in a realistic malleable application, the reactive graph will modify itself substantially during
+propagation of updates from the root, implying that the priority of cells being notified through the priority
+queue will not increase monotonically. Indeed, on application startup, the entire graph will instantiate itself
+from raw persistence during the notification process.</p>
+<div class="stabilization">
+    <link rel="stylesheet" href="../../css/stabilization-regimes.css" />
+    <header class="masthead">
+        <p class="eyebrow">Staleness propagation &middot; clean / check / dirty</p>
+        <h1>Three regimes of stabilization</h1>
+        <p class="lede">
+            The same fifteen&#8209;node reactive graph in each scope: three <b>sources</b> (diamonds) at the base,
+            three <b>effects</b> (squares) at the fringe. Source values are incremented; the panels show only how
+            <b>staleness</b> spreads and resolves &mdash; not data. What differs between them is purely <b>when</b> the
+            recompute is scheduled, and whether a moment exists in which the graph is current but no effect has
+            yet touched the world.
+        </p>
+    </header>
+    <div class="legend">
+        <div class="grp"><span class="sw" style="background:var(--clean);border-color:var(--clean-stroke)"></span><span>CacheClean&nbsp;<b>(uncoloured / current)</b></span></div>
+        <div class="grp"><span class="sw" style="background:var(--check);border-color:var(--check-stroke)"></span><span>CacheCheck&nbsp;<b>(green &mdash; maybe stale)</b></span></div>
+        <div class="grp"><span class="sw" style="background:var(--dirty);border-color:var(--dirty-stroke)"></span><span>CacheDirty&nbsp;<b>(red &mdash; recompute)</b></span></div>
+        <span class="sep"></span>
+        <div class="grp"><svg class="glyph" viewBox="0 0 20 20"><path d="M10 3 L17 10 L10 17 L3 10 Z" fill="none" style="stroke:var(--accent)" stroke-width="1.6"/></svg><span><b>source</b></span></div>
+        <div class="grp"><svg class="glyph" viewBox="0 0 20 20"><rect x="4" y="4" width="12" height="12" rx="2" fill="none" style="stroke:var(--clean-stroke)" stroke-width="1.6"/><rect x="1.5" y="1.5" width="17" height="17" rx="3.5" fill="none" style="stroke:var(--dirty)" stroke-width="1"/></svg><span><b>effect</b> &middot; red pulse = issued</span></div>
+    </div>
+    <div class="stage"></div>
+    <footer>
+        Colouring follows Milo Mighdoll, <a href="https://milomg.dev/2022-12-01/reactivity">Super&#8209;Charging Fine&#8209;Grained Reactive Performance</a>:
+        a changed node is marked <span style="color:var(--dirty-stroke)">dirty (red)</span>, its descendants
+        <span style="color:var(--check-stroke)">check (green)</span>, and the pull phase walks up to resolve them &mdash; note that green here means
+        &ldquo;possibly stale,&rdquo; not &ldquo;ok.&rdquo; The animation loops on a shared clock; longer holds precede each
+        simulated user action (<span style="color:var(--accent)">update()</span>, <span style="color:var(--accent)">stabilize()</span>).
+    </footer>
+    <script src="../../js/stabilization-regimes.js"></script>
+</div>
 
 
         

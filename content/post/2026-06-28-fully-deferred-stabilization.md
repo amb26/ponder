@@ -144,3 +144,14 @@ paradigm renders Sisyphean --- because it is so intrinsically hard to reason abo
 from its source expression, and because this task itself could never be delegated effectively to AI without surrendering the
 very accountability that the review process is designed to assure, this fundamental reform to the transparency properties
 connecting the behaviour of executing systems to their designs and source data seems essential.
+
+### Illustration
+
+The following 3 panels illustrate these progressive stabilization strategies. 
+
+Note that in a realistic malleable application, the reactive graph will modify itself substantially during
+propagation of updates from the root, implying that the priority of cells being notified through the priority
+queue will not increase monotonically. Indeed, on application startup, the entire graph will instantiate itself
+from raw persistence during the notification process.
+
+{{< stabilization >}}
