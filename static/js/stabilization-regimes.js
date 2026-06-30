@@ -329,19 +329,22 @@
         #pulseGroup;
         #pos = {};
         #refs = {};
+        #slider;
+        #scrub;
 
         frames = [];
         starts = [];
         total = 0;
         lastIdx = -1;
         active = [];
+        manual = false;
         el;
 
         /**
          * @param {Object} graph - The graph instance backing this panel.
          * @param {Object} meta - {num, title, desc} descriptors.
          */
-        constructor(graph, meta){
+        constructor(graph, meta) {
             const panel = document.createElement("section");
             panel.className = "panel";
 
@@ -355,8 +358,10 @@
 
             const hud = document.createElement("div");
             hud.className = "hud";
-            const phaseEl = document.createElement("div"); phaseEl.className = "phase";
-            const subEl = document.createElement("div"); subEl.className = "sub";
+            const phaseEl = document.createElement("div");
+            phaseEl.className = "phase";
+            const subEl = document.createElement("div");
+            subEl.className = "sub";
             hud.append(phaseEl, subEl);
             panel.appendChild(hud);
 
@@ -369,55 +374,93 @@
             panel.appendChild(meters);
             */
 
-            const scope = svgEl("svg", { class:"scope", viewBox:"0 0 320 440", role:"img" });
+            const scope = svgEl("svg", {class: "scope", viewBox: "0 0 320 440", role: "img"});
             const gEdges = svgEl("g");
             const gPulse = svgEl("g");
             const gNodes = svgEl("g");
             scope.append(
-                svgEl("rect", { class:"scope-frame", x:6, y:6, width:308, height:428, rx:10, "stroke-width":1 }),
+                svgEl("rect", {class: "scope-frame", x: 6, y: 6, width: 308, height: 428, rx: 10, "stroke-width": 1}),
                 gEdges, gPulse, gNodes
             );
             panel.appendChild(scope);
 
-            for (const c of graph.order){
-                for (const depId of c.deps){
+            for (const c of graph.order) {
+                for (const depId of c.deps) {
                     const d = graph.byId[depId];
-                    const line = svgEl("line", { class:"edge", x1:d.x, y1:d.y, x2:c.x, y2:c.y });
+                    const line = svgEl("line", {class: "edge", x1: d.x, y1: d.y, x2: c.x, y2: c.y});
                     gEdges.appendChild(line);
-                    this.#edgeEls.push({ el:line, from:d.id, to:c.id });
+                    this.#edgeEls.push({el: line, from: d.id, to: c.id});
                 }
             }
 
-            for (const n of graph.order){
-                this.#pos[n.id] = { x:n.x, y:n.y };
+            for (const n of graph.order) {
+                this.#pos[n.id] = {x: n.x, y: n.y};
                 let shape;
-                if (n.kind === "source"){
+                if (n.kind === "source") {
                     const r = 12;
                     shape = svgEl("path", {
-                        class:"node-shape", "stroke-width":1.6,
-                        d:`M ${n.x} ${n.y - r} L ${n.x + r} ${n.y} L ${n.x} ${n.y + r} L ${n.x - r} ${n.y} Z`
+                        class: "node-shape", "stroke-width": 1.6,
+                        d: `M ${n.x} ${n.y - r} L ${n.x + r} ${n.y} L ${n.x} ${n.y + r} L ${n.x - r} ${n.y} Z`
                     });
                     gNodes.appendChild(shape);
-                } else if (n.kind === "effect"){
-                    gNodes.appendChild(svgEl("rect", { class:"ring", x:n.x - 15, y:n.y - 15, width:30, height:30, rx:6 }));
-                    shape = svgEl("rect", { class:"node-shape", x:n.x - 11, y:n.y - 11, width:22, height:22, rx:4, "stroke-width":1.6 });
+                } else if (n.kind === "effect") {
+                    gNodes.appendChild(svgEl("rect", {
+                        class: "ring",
+                        x: n.x - 15,
+                        y: n.y - 15,
+                        width: 30,
+                        height: 30,
+                        rx: 6
+                    }));
+                    shape = svgEl("rect", {
+                        class: "node-shape",
+                        x: n.x - 11,
+                        y: n.y - 11,
+                        width: 22,
+                        height: 22,
+                        rx: 4,
+                        "stroke-width": 1.6
+                    });
                     gNodes.appendChild(shape);
                 } else {
-                    shape = svgEl("circle", { class:"node-shape", cx:n.x, cy:n.y, r:11, "stroke-width":1.6 });
+                    shape = svgEl("circle", {class: "node-shape", cx: n.x, cy: n.y, r: 11, "stroke-width": 1.6});
                     gNodes.appendChild(shape);
                 }
-                const label = svgEl("text", { class:"node-label", x:n.x, y:n.y + 3, "text-anchor":"middle" });
+                const label = svgEl("text", {class: "node-label", x: n.x, y: n.y + 3, "text-anchor": "middle"});
                 label.textContent = n.id;
                 gNodes.appendChild(label);
                 this.#nodeEls[n.id] = shape;
             }
 
             this.#pulseGroup = gPulse;
+
+            const scrub = document.createElement("div");
+            scrub.className = "scrub";
+            const slider = document.createElement("input");
+            Object.assign(slider, {type: "range", min: 0, max: 1, step: 1, value: 0});
+            const mode = document.createElement("div");
+            mode.className = "scrub-mode";
+            mode.innerHTML = `<span data-mode>auto</span><span data-step>step 1</span>`;
+            scrub.append(slider, mode);
+            slider.addEventListener("input", () => {
+                this.manual = true;
+                this.#onScrub();
+            });
+            slider.addEventListener("dblclick", () => {
+                this.manual = false;
+                this.syncSlider(this.sliderIndex());
+            });
+            panel.appendChild(scrub);
+            this.#slider = slider;
+            this.#scrub = scrub;
+
             this.#refs = {
                 phase: phaseEl,
                 sub: subEl,
                 //rc: meters.querySelector("[data-rc]"),
-                //fr: meters.querySelector("[data-fr]")
+                //fr: meters.querySelector("[data-fr]"),
+                mode: mode.querySelector("[data-mode]"),
+                step: mode.querySelector("[data-step]")
             };
             this.el = panel;
         }
@@ -426,18 +469,18 @@
          * Paint a frame: node fills, edge heat, HUD text, panel highlight.
          * @param {Object} frame - The frame to render.
          */
-        render(frame){
-            for (const [id, state] of Object.entries(frame.fills)){
-                const { fill, stroke } = colourFor(state);
+        render(frame) {
+            for (const [id, state] of Object.entries(frame.fills)) {
+                const {fill, stroke} = colourFor(state);
                 const node = this.#nodeEls[id];
                 node.style.fill = fill;
                 node.style.stroke = id.startsWith("s") ? "var(--accent)" : stroke;
             }
-            for (const ed of this.#edgeEls){
+            for (const ed of this.#edgeEls) {
                 const hot = frame.fills[ed.from] === DIRTY || frame.fills[ed.to] === DIRTY;
                 ed.el.classList.toggle("hot", hot);
             }
-            const { phase, sub, rc, fr } = this.#refs;
+            const {phase, sub, rc, fr} = this.#refs;
             phase.textContent = frame.label;
             sub.textContent = frame.sub;
             phase.classList.toggle("is-trigger", frame.trigger);
@@ -453,14 +496,14 @@
          * @param {String} id - Effect node id.
          * @param {Number} now - Current timestamp.
          */
-        addPulse(id, now){
+        addPulse(id, now) {
             const at = this.#pos[id];
-            for (let ring = 0; ring < 2; ring++){
+            for (let ring = 0; ring < 2; ring++) {
                 const circle = svgEl("circle", {
-                    cx:at.x, cy:at.y, r:13, fill:"none", style:"stroke:var(--dirty)", "stroke-width":2, opacity:0
+                    cx: at.x, cy: at.y, r: 13, fill: "none", style: "stroke:var(--dirty)", "stroke-width": 2, opacity: 0
                 });
                 this.#pulseGroup.appendChild(circle);
-                this.active.push({ el:circle, born:now + ring * 140 });
+                this.active.push({el: circle, born: now + ring * 140});
             }
         }
 
@@ -468,14 +511,14 @@
          * Advance and prune active pulse rings.
          * @param {Number} now - Current timestamp.
          */
-        updatePulses(now){
+        updatePulses(now) {
             const keep = [];
-            for (const ring of this.active){
+            for (const ring of this.active) {
                 const age = now - ring.born;
-                if (age < 0){
+                if (age < 0) {
                     ring.el.setAttribute("opacity", "0");
                     keep.push(ring);
-                } else if (age <= 820){
+                } else if (age <= 820) {
                     ring.el.setAttribute("r", (13 + age * 0.055).toFixed(1));
                     ring.el.setAttribute("opacity", ((1 - age / 820) * 0.6).toFixed(3));
                     keep.push(ring);
@@ -484,6 +527,42 @@
                 }
             }
             this.active = keep;
+        }
+
+
+        /**
+         * Size the scrub range to this panel's frame count.
+         * @param {Number} n - Number of frames.
+         */
+        setFrameCount(n) {
+            this.#slider.max = n - 1;
+        }
+
+        /**
+         * Current scrub position as a frame index.
+         * @return {Number} - Frame index taken from the slider.
+         */
+        sliderIndex() {
+            return Number(this.#slider.value);
+        }
+
+        /**
+         * Move the thumb to follow auto progress (only used while not under manual control).
+         * @param {Number} idx - Frame index now showing.
+         */
+        syncSlider(idx) {
+            this.#slider.value = idx;
+            this.#scrub.classList.remove("is-manual");
+            this.#refs.mode.textContent = "auto";
+            this.#refs.step.textContent = `step ${idx + 1}`;
+        }
+
+        /** Reflect a user scrub in the caption; the frame itself is drawn by the loop. */
+        #onScrub() {
+            const idx = Number(this.#slider.value);
+            this.#scrub.classList.add("is-manual");
+            this.#refs.mode.textContent = "manual";
+            this.#refs.step.textContent = `step ${idx + 1}`;
         }
     }
 
@@ -515,6 +594,7 @@
         for (const f of frames){ panel.starts.push(acc); acc += f.hold; }
         panel.frames = frames;
         panel.total = acc;
+        panel.setFrameCount(frames.length);
         stage.appendChild(panel.el);
         panel.render(frames[0]);
         panel.lastIdx = 0;
@@ -547,13 +627,14 @@
         t0 ??= now;
         const t = (now - t0) % CYCLE;
         for (const panel of panels){
-            const idx = frameIndexAt(panel.starts, t);
+            const idx = panel.manual ? panel.sliderIndex() : frameIndexAt(panel.starts, t);
             if (idx !== panel.lastIdx){
                 const frame = panel.frames[idx];
                 panel.render(frame);
                 if (idx > panel.lastIdx && frame.pulses.length > 0 && !REDUCE){
                     for (const pid of frame.pulses){ panel.addPulse(pid, now); }
                 }
+                if (!panel.manual){ panel.syncSlider(idx); }
                 panel.lastIdx = idx;
             }
             panel.updatePulses(now);

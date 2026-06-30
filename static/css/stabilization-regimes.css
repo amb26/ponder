@@ -97,6 +97,17 @@
 .stabilization .ring{fill:none;stroke:var(--clean-stroke);stroke-width:1.4;}
 .stabilization .scope-frame{fill:none;stroke:var(--rail);}
 
+.stabilization .scrub{padding:2px 16px 14px;display:flex;flex-direction:column;gap:6px;}
+.stabilization .scrub input[type=range]{
+    width:100%;margin:0;cursor:grab;accent-color:var(--accent);background:transparent;height:18px;
+}
+.stabilization .scrub input[type=range]:active{cursor:grabbing;}
+.stabilization .scrub-mode{
+    display:flex;justify-content:space-between;font-family:var(--mono);
+    font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);
+}
+.stabilization .scrub.is-manual .scrub-mode{color:var(--accent);}
+
 .stabilization footer{
     max-width:1180px;margin:24px auto 0;font-family:var(--mono);font-size:11px;
     color:var(--dim);line-height:1.6;border-top:1px solid var(--rail);padding-top:14px;
