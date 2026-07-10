@@ -67,7 +67,7 @@ Jonathan Edwards' 2009 [Coherent Reaction](http://dspace.mit.edu/bitstream/handl
 gives the name "coherence" to a closely related property.
 
 Ken Tilton's 2001 [Cells](https://smuglispweeny.blogspot.com/2008/02/cells-manifesto.html) reactive system,
-which seems mostly isomorphic to contemporary commodity signals systema and anticipated them by roughly 20 years, 
+which seems mostly isomorphic to contemporary commodity signals systems and anticipated them by roughly 20 years, 
 refers to this property as "data integrity".
 
 #### Glitching is widespread and underappreciated
