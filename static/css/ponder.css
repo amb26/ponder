@@ -8,7 +8,6 @@ ul > li > ul > li {
 }
 
 ul {
-    list-style-type: none;
     padding-inline-start: 30px;
 }
 
@@ -86,6 +85,10 @@ h4:focus .octicon-link {
 
 .infusion-docs h2 {
     margin-left: -0.5rem;
+}
+
+.infusion-docs ul {
+    list-style-type: none;
 }
 
 .post-single h3 {

@@ -18,6 +18,6 @@ adapt to the user's gestures. This kind of liveness helps the system to form wha
 calls a "steady frame".
 
 Our substrate should support functions which are not "good" &ndash; that is, which are expressed in arbitary
-conventional progamming language code in the base language &ndash; but these should have a visible, lower status
+conventional programming language code in the base language &ndash; but these should have a visible, lower status
 in the authoring system which marks them out, and this will reduce the portability profile of the application. We would
 expect that a substrate which makes use only of good functions would be readily portable to JavaScript, Lua or even to C.
