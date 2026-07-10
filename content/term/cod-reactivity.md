@@ -74,7 +74,7 @@ how Milo Mighdoll's Reactively framework unusually has this flexibility.
 
 A much more significant kind of cod reactivity can be seen in the current \[July 2026] Infusion 6 mechanism
 for lensing a boolean signal into the conditional presence or absence of a component. Since this has what are arguably side-effects on 
-structure of the reactive graph, this is necessarily implemented as an effect, which looks like this:
+the structure of the reactive graph, this is necessarily implemented as an effect, which looks like this:
 
 ```
 shadow.frameworkEffects["conditionalComponent-" + segs.join(".")] = fluid.cell.effect( () => {
@@ -90,7 +90,20 @@ There's no way out of a conundrum like this without fundamentally reforming the 
 and effects. This needs to become a more refined ontology which is able to distinguish between different categories of
 priority in reactive computations ---
 shading the spectrum of reactive primitives between computeds and effects rather than making
-a categorical separation between them. This work is described in the recent article on 
-[fully deferred stabilization](/post/2026-06-28-fully-deferred-stabilization/).
+a categorical separation between them. This work is described in my recent article on 
+[fully deferred stabilization](/post/2026-06-28-fully-deferred-stabilization/) which views a reactive engine
+as being parameterised by the data structure forming its work list: This needs to move from being a stack (whether
+the program stack, or an explicit stack) to being a priority queue.
+
+All the same, cod reactivity could take one quite far. Ken Tilton, primordial reactive guru,
+[himself noted](https://github.com/kennytilton/matrix/wiki/introduction#glitches)
+when speaking of glitches in his reactive systems Matrix/Cells that
+
+> Matrix itself delivered complex enterprise software while still vulnerable to glitches, but eventually
+> they broke an application and had to be resolved.
+
+and modern Infusion's "give every reactive cell an intelligible global name" goes a long way to making cod designs
+fairly intelligible. But a mature reactive system delivering strong consistency and provenance guarantees will in
+the end have to become cod-free.
 
 [^1]: E.g. "Ovum crackus, totale knackus"
