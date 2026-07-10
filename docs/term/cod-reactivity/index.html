@@ -60,7 +60,7 @@ Typical of cod reactivity is the use of &ldquo;broken graphs&rdquo; &mdash; rath
   "headline": "Cod reactivity",
   "description" : "Cod reactivity (by analogy with Cod Latin)1 is a kind of semi-literate adoption of reactivity, reflecting either deficiencies in the underlying reactive implementation or the user\u0026rsquo;s understanding of it.\nTypical of cod reactivity is the use of \u0026ldquo;broken graphs\u0026rdquo; \u0026mdash; rather than being joined up into a coherent and connected overall application graph, the reactive graph is broken up into several formally isolated reactive islands. These are either self-standing little patches of reactivity, cranked manually by imperative updates to source signals, or else orchestrated by means of effects which bridge updates from one island to the other.",
   "inLanguage" : "en",
-  "wordCount":  727 ,
+  "wordCount":  728 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -227,13 +227,13 @@ understanding of it.</p>
 overall application graph, the reactive graph is broken up into several formally isolated reactive islands. These are
 either self-standing little patches of reactivity, cranked manually by imperative updates to source signals, or else
 orchestrated by means of effects which bridge updates from one island to the other.</p>
-<p>The need for cod reactivity can often motivated by deficiencies in a reactive API which presents itself in an
+<p>The need for cod reactivity is often motivated by deficiencies in a reactive API which presents itself in an
 insufficiently malleable way, forcing undesirable foresight into the architecture&rsquo;s wiring of the reactive graph.</p>
 <p>The ill consequences of applying cod reactivity, as well as loss of reasoning power about the layout of application
-dependencies, most seriously include the loss of <a href="../../term/glitch/">glitch avoidance</a>, since the reactive system no longer has global
+dependencies, most seriously include the risk of <a href="../../term/glitch/">glitching</a>, since the reactive system no longer has global
 oversight of the structure of the reactive graph.</p>
 <p>Here is a relatively harmless though crass example of cod reactivity in imerss-bioinfo&rsquo;s data filtering framework (this is written
-in Infusion 4&rsquo;s interim reactive system layered on top of preact-signals):</p>
+in Infusion 4&rsquo;s old interim reactive system layered on top of preact-signals):</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">fluid</span><span class="o">.</span><span class="n">defaults</span><span class="p">(</span><span class="s2">&#34;hortis.filters&#34;</span><span class="p">,</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">components</span><span class="p">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">filterRoot</span><span class="p">:</span> <span class="s2">&#34;{that}&#34;</span>
@@ -274,7 +274,7 @@ in Infusion 4&rsquo;s interim reactive system layered on top of preact-signals):
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></div><p>The problem here is that <code>hortis.evaluateFilter</code> which should be a <code>computed</code> in fact breaks the reactive graph
 by being implemented as an <code>effect</code>. This is primarily a failure of malleability &mdash; <code>hortis.filters</code> is meant
-to be a reactive graph element which connects signal <code>allInput</code> to <code>allOutput</code>, but we can&rsquo;t write the definition
+to be a reactive graph element which connects signal <code>allInput</code> to signal <code>allOutput</code>, but we can&rsquo;t write the definition
 of <code>allOutput</code> as a <code>computed</code> until we have seen the full set of filters around the application which need to be
 wired into the filter bank. Traditional reactive systems such as preact-signals don&rsquo;t allow signals to change
 category between stateful and computed signals or let the computation of a computed signal be rebound, although

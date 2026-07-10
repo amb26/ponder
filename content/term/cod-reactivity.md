@@ -12,15 +12,15 @@ overall application graph, the reactive graph is broken up into several formally
 either self-standing little patches of reactivity, cranked manually by imperative updates to source signals, or else
 orchestrated by means of effects which bridge updates from one island to the other.
 
-The need for cod reactivity can often motivated by deficiencies in a reactive API which presents itself in an
+The need for cod reactivity is often motivated by deficiencies in a reactive API which presents itself in an
 insufficiently malleable way, forcing undesirable foresight into the architecture's wiring of the reactive graph.
 
 The ill consequences of applying cod reactivity, as well as loss of reasoning power about the layout of application
-dependencies, most seriously include the loss of [glitch avoidance](/term/glitch/), since the reactive system no longer has global
+dependencies, most seriously include the risk of [glitching](/term/glitch/), since the reactive system no longer has global
 oversight of the structure of the reactive graph.
 
 Here is a relatively harmless though crass example of cod reactivity in imerss-bioinfo's data filtering framework (this is written
-in Infusion 4's interim reactive system layered on top of preact-signals): 
+in Infusion 4's old interim reactive system layered on top of preact-signals): 
 
 ```
 fluid.defaults("hortis.filters", {
@@ -65,7 +65,7 @@ hortis.evaluateFilter = function (that, combinedFilterInput) {
 
 The problem here is that `hortis.evaluateFilter` which should be a `computed` in fact breaks the reactive graph
 by being implemented as an `effect`. This is primarily a failure of malleability --- `hortis.filters` is meant
-to be a reactive graph element which connects signal `allInput` to `allOutput`, but we can't write the definition
+to be a reactive graph element which connects signal `allInput` to signal `allOutput`, but we can't write the definition
 of `allOutput` as a `computed` until we have seen the full set of filters around the application which need to be
 wired into the filter bank. Traditional reactive systems such as preact-signals don't allow signals to change
 category between stateful and computed signals or let the computation of a computed signal be rebound, although
