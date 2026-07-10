@@ -17,6 +17,13 @@
       <description>A good function is:&#xA;A pure function, one without side-effects whose return value depends only on its arguments Available at a stable public name in a global namespace Performs work only linearly proportional to the size of its arguments (considered as structures) This notion was first described the Fluid wiki on this 2005 page which goes into some somewhat crusty historical detail for justification. The main upshot is that such a definition aids transparency &amp;mdash; the ability to reason from effects to causes, and liveness &amp;mdash; for the system to responsively adapt to the user&amp;rsquo;s gestures.</description>
     </item>
     <item>
+      <title>Cod reactivity</title>
+      <link>https://ponder.org.uk/term/cod-reactivity/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/cod-reactivity/</guid>
+      <description>Cod reactivity (by analogy with Cod Latin)1 is a kind of semi-literate adoption of reactivity, reflecting either deficiencies in the underlying reactive implementation or the user&amp;rsquo;s understanding of it.&#xA;Typical of cod reactivity is the use of &amp;ldquo;broken graphs&amp;rdquo; &amp;mdash; rather than being joined up into a coherent and connected overall application graph, the reactive graph is broken up into several formally isolated reactive islands. These are either self-standing little patches of reactivity, cranked manually by imperative updates to source signals, or else orchestrated by means of effects which bridge updates from one island to the other.</description>
+    </item>
+    <item>
       <title>Disclosable Computing</title>
       <link>https://ponder.org.uk/term/disclosable-computing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>

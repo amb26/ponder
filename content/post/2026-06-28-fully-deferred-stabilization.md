@@ -95,7 +95,7 @@ causing the system's visible state to diverge from its authored state
 world should be maximally contextualised.
 
 The PoLC is well treated by Phil Agre in his 1997 [Computation and Human Experience](https://archive.org/details/computationhuman0000agre)
-and I write about this in last year's [Understanding Reactivity](../wip/2025-12-15-understanding-reactivity/#essential-unity-of-reactivity).
+and I write about this in last year's [Understanding Reactivity](/wip/2025-12-15-understanding-reactivity/#essential-unity-of-reactivity).
 
 ## Fully deferred stabilization
 
@@ -114,8 +114,8 @@ Following the PoLC, the homeostatic process of scheduling reactive updates shoul
 as possible --- following a breadth-first search, but in addition allowing nodes whose updates can be *a priori* 
 expected to have disproportionate influence on the graph contents and topology to jump the queue and be scheduled first.
 I write about this in the last section of
-[Understanding Reactivity](wip/2026-05-25-towards-deferred-stabilisation/#deferred-stabilization-has-always-been-planned),
-and this issue also connects to the [Hierarchy of Good Function](/wip/2025-09-26-this-weeks-reactive-chats/#hierarchy-of-good-functions)
+[Understanding Reactivity](/wip/2026-05-25-towards-deferred-stabilisation/#deferred-stabilization-has-always-been-planned),
+and this issue also connects to the [Hierarchy of Good Functions](/wip/2025-09-26-this-weeks-reactive-chats/#hierarchy-of-good-functions)
 I wrote about last year (relations which destroy information should be scheduled last).
 
 ### Contextually informed analysis
