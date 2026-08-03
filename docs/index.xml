@@ -18,6 +18,13 @@
       <description>It is now ten years since some of us wrote 2016&amp;rsquo;s Software and How it Lives On (SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded communities of authors.&#xA;In the time since then, progress in reactive software, particularly in the JavaScript community, has now made it possible to tighten up some of the details of how this vision can be brought about.</description>
     </item>
     <item>
+      <title>Researching in-browser AI</title>
+      <link>https://ponder.org.uk/wip/2026-07-31-researching-in-browser-ai/</link>
+      <pubDate>Mon, 25 May 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2026-07-31-researching-in-browser-ai/</guid>
+      <description>After beholding Clayton&amp;rsquo;s Antigravity-fuelled conversion of his 1987 NoPumpG spreadsheet-inspired visual programming system, I started to wonder what it would take to get in-browser AI assistance and explanation of the interface. Below is reproduced a Gemini Q&amp;amp;A session where I started from the assumption that some kind of MCP-like construct, mapping the materialised interface contents onto a structured query API, would be relevant.&#xA;The conversation revealed that whilst an MCP-like mapping could be a helpful intermediate, this is secondary compared to the central difficulty of getting the AI mustered into the browser environment itself, at a price/availability that made sense for a non-technical user.</description>
+    </item>
+    <item>
       <title>Towards Deferred Stabilisation</title>
       <link>https://ponder.org.uk/wip/2026-05-25-towards-deferred-stabilisation/</link>
       <pubDate>Mon, 25 May 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>

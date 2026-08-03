@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+      <title>Researching in-browser AI - Antranig Basman</title>
+
+  <meta name="description" content="After beholding Clayton&rsquo;s Antigravity-fuelled conversion of his 1987 NoPumpG spreadsheet-inspired visual programming system, I started to wonder what it would take to get in-browser AI assistance and explanation of the interface. Below is reproduced a Gemini Q&amp;A session where I started from the assumption that some kind of MCP-like construct, mapping the materialised interface contents onto a structured query API, would be relevant.
+The conversation revealed that whilst an MCP-like mapping could be a helpful intermediate, this is secondary compared to the central difficulty of getting the AI mustered into the browser environment itself, at a price/availability that made sense for a non-technical user.">
+  <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Antranig Basman",
+    
+    "url": "https:\/\/ponder.org.uk"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/ponder.org.uk"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk\/wip\/2026-07-31-researching-in-browser-ai\/",
+          "name": "Researching in browser ai"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Antranig Basman"
+  },
+  "headline": "Researching in-browser AI",
+  "description" : "After beholding Clayton\u0026rsquo;s Antigravity-fuelled conversion of his 1987 NoPumpG spreadsheet-inspired visual programming system, I started to wonder what it would take to get in-browser AI assistance and explanation of the interface. Below is reproduced a Gemini Q\u0026amp;A session where I started from the assumption that some kind of MCP-like construct, mapping the materialised interface contents onto a structured query API, would be relevant.\nThe conversation revealed that whilst an MCP-like mapping could be a helpful intermediate, this is secondary compared to the central difficulty of getting the AI mustered into the browser environment itself, at a price\/availability that made sense for a non-technical user.",
+  "inLanguage" : "en",
+  "wordCount":  5350 ,
+  "datePublished" : "2026-05-25T00:00:00\u002b00:00",
+  "dateModified" : "2026-05-25T00:00:00\u002b00:00",
+  "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+  "keywords" : [ "" ],
+  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/wip\/2026-07-31-researching-in-browser-ai\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/ponder.org.uk",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="Researching in-browser AI" />
+<meta property="og:description" content="After beholding Clayton&rsquo;s Antigravity-fuelled conversion of his 1987 NoPumpG spreadsheet-inspired visual programming system, I started to wonder what it would take to get in-browser AI assistance and explanation of the interface. Below is reproduced a Gemini Q&amp;A session where I started from the assumption that some kind of MCP-like construct, mapping the materialised interface contents onto a structured query API, would be relevant.
+The conversation revealed that whilst an MCP-like mapping could be a helpful intermediate, this is secondary compared to the central difficulty of getting the AI mustered into the browser environment itself, at a price/availability that made sense for a non-technical user.">
+<meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
+<meta property="og:url" content="https://ponder.org.uk/wip/2026-07-31-researching-in-browser-ai/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Antranig Basman" />
+
+  <meta name="twitter:title" content="Researching in-browser AI" />
+  <meta name="twitter:description" content="After beholding Clayton&rsquo;s Antigravity-fuelled conversion of his 1987 NoPumpG spreadsheet-inspired visual programming system, I started to wonder what it would take to get in-browser AI …">
+  <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@amb26ponder" />
+  <meta name="twitter:creator" content="@amb26ponder" />
+  <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.121.0">
+  <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
+  <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
+<script type="text/javascript" src="../../js/ponder.js" ></script>
+
+  </head>
+  <body class="wip" >
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-ponder">
+      <a class="navbar-ponder-brand" href="../../">Antranig Basman</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <svg width="36" height="36" viewBox="0 0 24 24" stroke="#888" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 7L4 7" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 12L4 12" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 17L4 17" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="nav navbar-nav navbar-right">
+          
+          
+          <li>
+            <a title="Posts" href="../../post">Posts</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="WiP" href="../../wip">WiP</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="About" href="../../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Docs" href="../../docs">Docs</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Communities" href="../../communities">Communities</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Projects" href="../../projects">Projects</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Terms" href="../../term">Terms</a>
+          </li>
+          
+          
+
+          
+
+          
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="header-row">
+          
+
+            <div class="wip-heading">
+              
+                <h1>Researching in-browser AI  </h1>
+              
+              
+                <hr class="small">
+              
+              
+
+            </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <article role="main" class="blog-post">
+        <style>
+@media (min-width: 992px) {
+h1 {
+margin-left: -25px;
+}
+}
+</style>
+<p>After beholding Clayton&rsquo;s Antigravity-fuelled <a href="https://fluid-project.github.io/NoPumpG/">conversion</a> of his
+1987 <a href="https://github.com/fluid-project/NoPumpG/blob/main/CU-CS-372-87">NoPumpG</a> spreadsheet-inspired visual
+programming system, I started to wonder what it would take to get in-browser AI assistance and explanation
+of the interface. Below is reproduced a Gemini Q&amp;A session where I started from the assumption that some kind of
+MCP-like construct, mapping the materialised interface contents onto a structured query API, would be relevant.</p>
+<p>The conversation revealed that whilst an MCP-like mapping could be a helpful intermediate, this is secondary compared
+to the central difficulty of getting the AI mustered into the browser environment itself, at a price/availability
+that made sense for a non-technical user.</p>
+<p>Unsurprisingly it seems that an interesting process of &ldquo;enclosure&rdquo; has taken place in the AI industry after the halcyon
+period of 2024 &mdash; it isn&rsquo;t economic for the major cloud providers to supply arbitrary programmatic access to their
+frontier products at the commodity $20/month-ish level which as are we know massively loss-making.</p>
+<p>Looking aside to some other projects, there is Tom Larkworthy&rsquo;s <a href="https://talk.observablehq.com/t/robocoop-3-agentic-runtime-function/10583">Robocoop</a>
+agent-in-the-browser system, which it turns out is mediated by his own proxy to GPT 5-mini which as far as I can tell
+he is funding out of his own pocket (brave man!).</p>
+<p>Along the same lines, Colin suggested that DeepSeek Flash could be another good candidate for opportunistic, temporary
+hosting - he reports having most of a $20 credit still available after months, and using only 38 cents on a day of
+intense activity.</p>
+<p>Other than that, the most proximate route is through Google&rsquo;s <a href="https://developer.chrome.com/docs/ai/prompt-api">Prompt API</a>
+which has daringly and quietly rolled out a 4GB nano model to most users of recent Chrome. To see if your Chrome has it,
+you can try out the <a href="https://developer.chrome.com/docs/ai/prompt-api/playground/">Prompt API Playground</a>. I was
+pretty amazed by this - the context window is unbelievably tiny, at 10K, but I think it could be possible to shoe-horn
+quite a lot of substrate-directed authorial expertise into this. And after the AI apocalypse is over, such things
+will only become more powerful.</p>
+<p>The final option, also suggested by Colin, would be to roll out one&rsquo;s own model via <a href="https://webllm.mlc.ai/">WebLLM</a> which has
+the upside that it could be tweaked efficiently to the substrate&rsquo;s grammar, but the downside of requiring a further
+~4GB download for the user.</p>
+<p>So, the <a href="https://chat.webllm.ai/#/chat">WebLLM chat</a> interface is pretty impressive, and shows that I&rsquo;m able to successfully
+execute several out of a choice of some dozens of local models on my creaky old GPU (10 year old GTX1080i with 8GB VRAM).
+Having Gigabit broadband probably makes my experience of this significantly smoother than the typical user but it&rsquo;s
+pretty amazing that this is even slightly usable.</p>
+<p>Here is the Gemini transcript of my queries about brokering access to cloud models:</p>
+<h1 id="q1-is-there-a-chrome-extension-that-logs-into-ai-and-allows-mcp-from-in-page-js">Q1: Is there a Chrome extension that logs into AI and allows MCP from in-page js?</h1>
+<p>Google’s official <a href="https://chromewebstore.google.com/detail/webmcp-extension/jigokfbbpcdckjmhbgapmikncfihboec"><strong>WebMCP Extension</strong></a>
+(paired with the emerging WebMCP web standard) exactly matches your requirements. It links to the browser&rsquo;s local or logged-in AI capabilities
+and exposes an <strong>Imperative API</strong> that allows in-page JavaScript to declare and execute tools over the Model Context Protocol (MCP).</p>
+<h2 id="core-architecture"><strong>Core Architecture</strong></h2>
+<p>Instead of relying on heavy server deployments or external terminal commands, the system runs locally inside the browser tab.</p>
+<ol>
+<li><strong>The Extension</strong>: Injects and handles the protocol bridge, leveraging your active browser sessions.</li>
+<li><strong>In-Page JavaScript</strong>: Uses the experimental navigator.modelContext (or document.modelContext) API to expose structural tools directly to the AI agent.</li>
+</ol>
+<hr>
+<p><strong>How to Implement It (In-Page JS)</strong></p>
+<p>With WebMCP, you do not need screen-scraping or visual models. You explicitly write JavaScript on your page to register tools that the AI agent can discover and invoke.</p>
+<h2 id="1-registering-the-tool"><strong>1. Registering the Tool</strong></h2>
+<p>Use the <strong>Imperative API</strong> in your web app&rsquo;s frontend code to register a function as an MCP tool:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// Check if the WebMCP browser API is available
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">modelContext</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">navigator</span><span class="p">.</span><span class="nx">modelContext</span><span class="p">.</span><span class="nx">registerTool</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;fetch_user_data&#34;</span><span class="p">,</span>  
+</span></span><span class="line"><span class="cl">    <span class="nx">description</span><span class="o">:</span> <span class="s2">&#34;Retrieves specific user account metrics from the page state.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">inputSchema</span><span class="o">:</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">      <span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;object&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">properties</span><span class="o">:</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="nx">userId</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;string&#34;</span><span class="p">,</span> <span class="nx">description</span><span class="o">:</span> <span class="s2">&#34;The unique ID of the user.&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">required</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;userId&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>  
+</span></span><span class="line"><span class="cl">    <span class="c1">// The actual JS function execution context`  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">execute</span><span class="o">:</span> <span class="kr">async</span> <span class="p">({</span> <span class="nx">userId</span> <span class="p">})</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">      <span class="k">try</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="kr">await</span> <span class="nb">window</span><span class="p">.</span><span class="nx">getInternalAppState</span><span class="p">(</span><span class="nx">userId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">          <span class="nx">content</span><span class="o">:</span> <span class="p">[{</span> <span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;text&#34;</span><span class="p">,</span> <span class="nx">text</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">}]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>  
+</span></span><span class="line"><span class="cl">      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">          <span class="nx">isError</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>  
+</span></span><span class="line"><span class="cl">          <span class="nx">content</span><span class="o">:</span> <span class="p">[{</span> <span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;text&#34;</span><span class="p">,</span> <span class="nx">text</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">}]</span>  
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>  
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="2-declarative-fallback-html-form"><strong>2. Declarative Fallback (HTML Form)</strong></h2>
+<p>If you prefer not to use JavaScript for simple actions, WebMCP also supports a <strong>Declarative API</strong> using standard HTML forms.
+Annotating elements lets the AI know how to handle the page:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">form</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;book_flight&#34;</span> <span class="na">data-mcp-tool</span><span class="o">=</span><span class="s">&#34;BookFlight&#34;</span> <span class="na">description</span><span class="o">=</span><span class="s">&#34;Books a flight resource&#34;</span><span class="p">&gt;</span>  
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;destination&#34;</span> <span class="na">required</span> <span class="p">/&gt;</span>  
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span><span class="p">&gt;</span>Submit<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>  
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></span></code></pre></div><hr>
+<p><strong>Alternative Browser-MCP Extensions</strong></p>
+<p>If you need an AI agent sitting in an external IDE (like Cursor, Claude Desktop, or Windsurf) to reach <em>into</em> your live browser tab to execute JavaScript and utilize cookies, use these alternatives:</p>
+<ul>
+<li><a href="https://chromewebstore.google.com/detail/browser-bridge-mcp/ddcpicbjicfmpkeaohnpjdldjnlollec"><strong>Browser Bridge MCP</strong></a>: A Chrome extension and local WebSocket setup that allows an AI client to call execute scripts to run any arbitrary JS within the page context.</li>
+<li><a href="https://chromewebstore.google.com/detail/kapture-mcp-browser-autom/ejfnegenodbdcodemkibocefmajjjjbn"><strong>Kapture MCP</strong></a>: Connects a chosen browser tab to local AI clients via a toggle switch, allowing JavaScript execution, DOM tracking, and form automation.</li>
+<li><a href="https://browsermcp.io/"><strong>Browser MCP</strong></a>: Specifically built to preserve your logged-in profiles and cookies so that external AI agents can seamlessly navigate sites without hitting bot-detection blocks.</li>
+</ul>
+<p>Are you building a <strong>custom web application</strong> that wants to offer tools to an AI assistant, or are you trying to configure an IDE like <strong>Cursor / Claude Desktop</strong> to automate tasks inside your personal browser windows? Let me know so I can provide the exact configuration blocks or API snippets!</p>
+<h1 id="q2-neither-i-want-locally-running-js-to-be-able-to-manually-synthesize-the-contents-of-the-context-window-and-invoke-ai-to-retrieve-its-response">Q2: Neither, I want locally running JS to be able to manually synthesize the contents of the context window and invoke AI to retrieve its response</h1>
+<p>To completely bypass pre-packaged AI extensions or external tools, you can use <strong>Chrome&rsquo;s native, built-in Prompt API (LanguageModel)</strong>.
+This allows standard, locally running in-page JavaScript to read the page context, manually assemble the prompt/context window, and execute local AI inference directly via <strong>Gemini Nano</strong> without an internet connection or external servers.</p>
+<p>Alternatively, if you want your in-page JS to invoke a heavy local LLM (like Llama 3 or Mistral via Ollama), you can use an open standard injection extension like
+<a href="https://chromewebstore.google.com/detail/window-ai/cbhbgmdpcoelfdoihppookkijpmgahag"><strong>Window AI</strong></a>.</p>
+<hr>
+<p><strong>Method 1: Using Chrome&rsquo;s Native On-Device AI (Zero Extensions)</strong></p>
+<p>This uses the experimental Web API natively embedded in Google Chrome.</p>
+<h2 id="1-setup-flags"><strong>1. Setup Flags</strong></h2>
+<p>Before testing your local code, you must enable on-device AI in your browser:</p>
+<ol>
+<li>Navigate to chrome://flags/#prompt-api-for-gemini-nano and set it to <strong>Enabled</strong>.</li>
+<li>Navigate to chrome://flags/#optimization-guide-on-device-model and set it to <strong>Enabled BypassPerfRequirement</strong>.</li>
+<li>Restart Chrome and visit chrome://components to ensure the <strong>Optimization Guide On Device Model</strong> has finished downloading.</li>
+</ol>
+<h2 id="2-the-in-page-javascript-implementation"><strong>2. The In-Page JavaScript Implementation</strong></h2>
+<p>This code manually scrapes the text content of your webpage, structures it into an AI context window block, and feeds it into the local model:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">invokeLocalAIWithPageContext</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 1. Verify if Chrome&#39;s built-in Language Model API is available  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">availability</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">ai</span><span class="p">.</span><span class="nx">languageModel</span><span class="p">.</span><span class="nx">capabilities</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">availability</span><span class="p">.</span><span class="nx">available</span> <span class="o">===</span> <span class="s2">&#34;no&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&#34;Local Gemini Nano is not available or hasn&#39;t downloaded yet.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. Manually synthesize the contents of the page context window  
+</span></span></span><span class="line"><span class="cl"><span class="c1">// You can customize this selector to only grab relevant text, articles, or state data.  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">pageContent</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">||</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">textContent</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Format the full system prompt and content map manually  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">systemPrompt</span> <span class="o">=</span> <span class="s2">&#34;You are an analytical assistant reading a webpage context window. Answer the user prompt based strictly on this text data.&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">userRequest</span> <span class="o">=</span> <span class="s2">&#34;Summarize the key action items and entities mentioned on this page.&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Synthesize the final payload context block  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">fullSynthesizedPrompt</span> <span class="o">=</span> <span class="sb">`
+</span></span></span><span class="line"><span class="cl"><span class="sb">Context Window Data:  
+</span></span></span><span class="line"><span class="cl"><span class="sb">---  
+</span></span></span><span class="line"><span class="cl"><span class="sb"></span><span class="si">${</span><span class="nx">pageContent</span><span class="si">}</span><span class="sb">  
+</span></span></span><span class="line"><span class="cl"><span class="sb">---
+</span></span></span><span class="line"><span class="cl"><span class="sb">
+</span></span></span><span class="line"><span class="cl"><span class="sb">Instructions: </span><span class="si">${</span><span class="nx">userRequest</span><span class="si">}</span><span class="sb">  
+</span></span></span><span class="line"><span class="cl"><span class="sb">`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 3. Instantiate the local inference session  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kr">const</span> <span class="nx">session</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">ai</span><span class="p">.</span><span class="nx">languageModel</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">systemPrompt</span><span class="o">:</span> <span class="nx">systemPrompt</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Analyzing local context window...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 4. Invoke the local AI and stream the response  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kr">const</span> <span class="nx">stream</span> <span class="o">=</span> <span class="nx">session</span><span class="p">.</span><span class="nx">promptStreaming</span><span class="p">(</span><span class="nx">fullSynthesizedPrompt</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="kr">await</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">chunk</span> <span class="k">of</span> <span class="nx">stream</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Clear console or write directly to a UI container element on the page  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">console</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Always destroy the session manually to free up local VRAM/RAM allocation  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">session</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&#34;Inference run failed:&#34;</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">*</span><span class="c1">// Execute on demand*  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">invokeLocalAIWithPageContext</span><span class="p">();</span>
+</span></span></code></pre></div><hr>
+<p><strong>Method 2: Using the &ldquo;Window AI&rdquo; Extension (For Custom Local Models)</strong></p>
+<p>If Gemini Nano&rsquo;s small context window or token limits are too restrictive for your page data, install the <strong>Window AI Extension</strong>.
+This extension injects a standard <code>window.ai</code> object into every page context. You can configure the extension&rsquo;s settings to route requests to a local instance of <strong>Ollama</strong> or <strong>LM Studio</strong> running a 7B or 8B model over localhost.</p>
+<h2 id="the-window-ai-implementation"><strong>The Window AI Implementation:</strong></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">invokeWindowAIExtension</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nb">window</span><span class="p">.</span><span class="nx">ai</span> <span class="o">===</span> <span class="s1">&#39;undefined&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">alert</span><span class="p">(</span><span class="s2">&#34;Please install the Window AI Chrome Extension first.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Manually grab your page layout state  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">tableData</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&#34;#dashboard-table&#34;</span><span class="p">)</span><span class="o">?</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">||</span> <span class="s2">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">metaDescription</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&#34;meta[name=&#39;description&#39;]&#34;</span><span class="p">)</span><span class="o">?</span><span class="p">.</span><span class="nx">content</span> <span class="o">||</span> <span class="s2">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Manually synthesize your targeted context window structure  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">dynamicContext</span> <span class="o">=</span> <span class="sb">`
+</span></span></span><span class="line"><span class="cl"><span class="sb">        [Meta Description]: </span><span class="si">${</span><span class="nx">metaDescription</span><span class="si">}</span><span class="sb">
+</span></span></span><span class="line"><span class="cl"><span class="sb">        [Dashboard View]: </span><span class="si">${</span><span class="nx">tableData</span><span class="si">}</span><span class="sb">
+</span></span></span><span class="line"><span class="cl"><span class="sb">    `</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Invoke the extension model mapping  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="kr">await</span> <span class="nb">window</span><span class="p">.</span><span class="nx">ai</span><span class="p">.</span><span class="nx">getCompletion</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">prompt</span><span class="o">:</span> <span class="sb">`Analyze this UI snapshot and report any anomalies:\n</span><span class="si">${</span><span class="nx">dynamicContext</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Optional streaming handler  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">onStreamResult</span><span class="o">:</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Streaming response token:&#34;</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">text</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Final Synthesized Output:&#34;</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&#34;Extension communication failed:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Would you like help writing specific DOM filtering filters to <strong>strip out HTML boilerplate and script tags</strong> so your synthesized context window doesn&rsquo;t overflow local token limits? Let me know!</p>
+<h1 id="q3-what-if-i-want-to-interact-with-a-cloud-model-such-as-claude-via-this-route">Q3: What if I want to interact with a cloud model such as Claude via this route?</h1>
+<p>To interact with a cloud model like <strong>Claude (Anthropic)</strong> while keeping the logic strictly within locally running in-page JavaScript, you can choose from three main implementation routes. Each method manages the synthesized context window locally before passing it to the cloud.</p>
+<hr>
+<p><strong>Method 1: The &ldquo;Window AI&rdquo; Extension API (Recommended &amp; Secure)</strong></p>
+<p>Using the <a href="https://chromewebstore.google.com/detail/window-ai/cbhbgmdpcoelfdoihppookkijpmgahag"><strong>Window AI Chrome Extension</strong></a> is the cleanest approach. You paste your Anthropic API key directly into the extension&rsquo;s secure configuration dashboard instead of hardcoding it into the web page.
+The extension then exposes a clean, unified window.ai object to your local JS.</p>
+<h2 id="in-page-js-code"><strong>In-Page JS Code:</strong></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">sendSynthesizedContextToClaude</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nb">window</span><span class="p">.</span><span class="nx">ai</span> <span class="o">===</span> <span class="s1">&#39;undefined&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">alert</span><span class="p">(</span><span class="s2">&#34;Please install and configure the Window AI extension.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 1. Manually synthesize your context window locally  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">dynamicDOMData</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&#34;#app-root&#34;</span><span class="p">)</span><span class="o">?</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">||</span> <span class="s2">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">pageMetadata</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="nx">url</span><span class="o">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">,</span> <span class="nx">title</span><span class="o">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">customContextWindow</span> <span class="o">=</span> <span class="sb">`
+</span></span></span><span class="line"><span class="cl"><span class="sb">        [METADATA]: </span><span class="si">${</span><span class="nx">pageMetadata</span><span class="si">}</span><span class="sb">
+</span></span></span><span class="line"><span class="cl"><span class="sb">        [PAGE TEXT CONTENT]:
+</span></span></span><span class="line"><span class="cl"><span class="sb">    </span><span class="si">${</span><span class="nx">dynamicDOMData</span><span class="si">}</span><span class="sb">
+</span></span></span><span class="line"><span class="cl"><span class="sb">    ;`</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Streaming synthesized context directly to Claude...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 2. Call window.ai explicitly targetting Anthropic models  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="kr">await</span> <span class="nb">window</span><span class="p">.</span><span class="nx">ai</span><span class="p">.</span><span class="nx">getCompletion</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">prompt</span><span class="o">:</span> <span class="sb">`Analyze the following webpage context window data and extract all high-priority action items:\n</span><span class="si">${</span><span class="nx">customContextWindow</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Direct options mapping  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">model</span><span class="o">:</span> <span class="s2">&#34;anthropic/claude-3-5-sonnet&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">onStreamResult</span><span class="o">:</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// Handle stream chunking straight to your page&#39;s UI  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Chunk:&#34;</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">text</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Analysis Completed: &#34;</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&#34;Cloud inference routing failed:&#34;</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<p><strong>Method 2: Direct fetch to Anthropic&rsquo;s Messages API (Bypasses Extensions)</strong></p>
+<p>If you don&rsquo;t want your users or app to rely on <em>any</em> third-party extensions, you can use vanilla JavaScript fetch() to call the <strong>Anthropic Claude API</strong> directly.</p>
+<p>⚠️ <strong>Security Warning</strong>: Only use this for locally hosted HTML/JS files (localhost or file://) or internal tools. If you deploy this to a public web server, malicious users can extract your Anthropic API Key from the client-side source code.</p>
+<h2 id="in-page-js-code-1"><strong>In-Page JS Code:</strong></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">callClaudeDirectly</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">API_KEY</span> <span class="o">=</span> <span class="s2">&#34;YOUR_ANTHROPIC_API_KEY_HERE&#34;</span><span class="p">;</span> <span class="c1">// Ensure this stays locked to local environments
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 1. Synthesize your page data  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">mainContent</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;content-wrapper&#34;</span><span class="p">)</span><span class="o">?</span><span class="p">.</span><span class="nx">innerText</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. Send the synthesized context window to the cloud via standard fetch  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">&#34;https://anthropic.com&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">method</span><span class="o">:</span> <span class="s2">&#34;POST&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;x-api-key&#34;</span><span class="o">:</span> <span class="nx">API_KEY</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;anthropic-version&#34;</span><span class="o">:</span> <span class="s2">&#34;2023-06-01&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;content-type&#34;</span><span class="o">:</span> <span class="s2">&#34;application/json&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;dangerously-allow-the-browser&#34;</span><span class="o">:</span> <span class="s2">&#34;true&#34;</span> <span class="c1">// Required by Anthropic to permit client-side calls  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">body</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">model</span><span class="o">:</span> <span class="s2">&#34;claude-3-5-sonnet-20241022&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">max_tokens</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">system</span><span class="o">:</span> <span class="s2">&#34;You are an AI processing a manually synthesized DOM context window pipeline.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">messages</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">role</span><span class="o">:</span> <span class="s2">&#34;user&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">content</span><span class="o">:</span> <span class="sb">`Review this raw page data and format it into a clean JSON array:\n\n</span><span class="si">${</span><span class="nx">mainContent</span><span class="si">}</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="p">})</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Claude Cloud Response:&#34;</span><span class="p">,</span> <span class="nx">data</span><span class="p">.</span><span class="nx">content</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">text</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&#34;Direct API request failed:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<p><strong>Method 3: Local Proxy Relay (Secure Cloud Routing)</strong></p>
+<p>If you are building an actual web app and want to use Claude safely without client-side API key exposure, use your in-page JS to hit a thin local proxy or your own backend server. The backend simply passes the payload along to Anthropic.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">sendToSecureProxy</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Synthesize locally  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">layoutState</span> <span class="o">=</span> <span class="nx">extractCleanDOMState</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Push to local or remote proxy  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">&#34;/api/analyze-context&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">method</span><span class="o">:</span> <span class="s2">&#34;POST&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&#34;Content-Type&#34;</span><span class="o">:</span> <span class="s2">&#34;application/json&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">body</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">contextWindow</span><span class="o">:</span> <span class="nx">layoutState</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">userInstruction</span><span class="o">:</span> <span class="s2">&#34;Identify any UI elements that look broken.&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">claudeResponse</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">extractCleanDOMState</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Quick helper to strip heavy script and style tags before cloud upload  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">clone</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">clone</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&#34;script, style, svg, noscript&#34;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">el</span> <span class="p">=&gt;</span> <span class="nx">el</span><span class="p">.</span><span class="nx">remove</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">clone</span><span class="p">.</span><span class="nx">innerText</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\s+/g</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">).</span><span class="nx">trim</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Do you need a snippet for a <strong>Node.js/Next.js proxy backend</strong> to securely handle your Anthropic cloud routing, or would you like to see how to handle <strong>Server-Sent Events (SSE) streaming</strong> with the direct fetch method? Let me know!</p>
+<h1 id="q4-alex-atallah-seemed-to-cease-to-maintain-windowio-about-3-years-ago-see-if-you-can-find-out-why-andor-whether-this-work-was-of-interest-to-others-or-why-not-picked-up">Q4: Alex Atallah seemed to cease to maintain window.io about 3 years ago, see if you can find out why and/or whether this work was of interest to others or why not picked up</h1>
+<p><a href="https://www.google.com/search?q=alex+atallah&amp;kgmid=/g/11pv27s2hq#sv=CBwSyAQKjwQSjAQKzANBSmlUNHRMakxENVNMbXl5T2xRTkxQT2FVcC1ZXzZ6VE40b3BqZGhMTXIwckNKXzBpN2NaZlEyYkRucE01TEVxMDQ0emFVdmhxbGhMQXJpaG1lcEFSNV95aS1xWEk5aHZQMnUtVER3Yk52ZW1pNW5yenZKSy01Rk93aEZmWjlFMGJ4cWxsaklRM3FGeEduWlE0d2FEUVRlTGxtZmdDbWItb3licTk0QmtGbjMxYl9zUnV4RDd5QzVEUG5sYTZ6XzRZUVZ4SnFMS3V6dEZzbFk0N003V0x3RGEyVTEyRFpFclJ1V3VUTmVfVVZxSlNpNHd2bFgzekJkQkQwR0lBZXEtYkRybnpfOWJDVlRxeGxEeGNCUEpGR3dTMHIzYnBzeUhTck5HT1F2UTNSU3pzNW1lWnVET0huREFKNTI3a0VPWGdPcmxhUjlKMFVxdFBHZjRiMGp1OUh4TEJOa2RKTGJwZWdheHRwZTQwb2ZpVTlkbmJLd1RmV2hiVnZQNlVsWER4a1JQOVJQRXpRYnhkOVZrNE1rckNoeXZFMUt4dzhEc2ZoS2cxSjVDMXYweTFWOHN3RHE0S2hDQ1o2VTVaWF9Pa0ZWclFTSXZ5RTdWEhdrUnR1YXZUOUtfUFBoYklQLXVPcXNBSRoiQURzcjlmUWxTUDdsR0V3X0pwdm9hWm4ya2w4ZUJwTGRIURIENzg1NBoBMyIRCgFxEgxhbGV4IGF0YWxsYWgiFgoFa2dtaWQSDS9nLzExcHYyN3MyaHEoABhFILamgboD"><strong>Alex Atallah</strong></a> ceased maintaining the <a href="https://github.com/alexanderatallah/window.ai"><strong>Window AI</strong></a> browser extension around 2023 because it successfully served its architectural purpose as a <strong>prototype, which directly birthed <a href="https://openrouter.ai/">OpenRouter</a></strong>.
+Rather than the project failing or being ignored, its core philosophy was fundamentally integrated into a multi-billion dollar platform.</p>
+<p>The story of why Window AI was left behind and how the industry reacted breaks down into distinct phases:</p>
+<h2 id="1-why-alex-atallah-stopped-maintaining-it"><strong>1. Why Alex Atallah Stopped Maintaining It</strong></h2>
+<p>In early 2023, after stepping down as the CTO of OpenSea, Atallah wanted to investigate a core hypothesis: <em>Would the AI inference market become a winner-take-all monopoly dominated entirely by OpenAI, or would a massive, multi-model ecosystem emerge?</em></p>
+<p>To test this, he built <strong>Window AI</strong> as an experimental prototype. Its goal was to decouple the application layer from the model layer, allowing developers to build web apps where users brought their own model (whether via an OpenAI API key or a local Ollama instance).</p>
+<p>The experiment provided crucial marketplace clues:</p>
+<ul>
+<li><strong>The Problem:</strong> Asking everyday users to install a developer-focused browser extension, manage their own local models, and paste raw API keys into their browser created far too much friction.</li>
+<li><strong>The Pivot:</strong> Atallah realized that the true &ldquo;missing market&rdquo; wasn&rsquo;t a browser extension, but a unified, server-side infrastructure layer. He transitioned the core architecture of Window AI—a single, universal API that routes requests across diverse, competing models—and launched <strong>OpenRouter</strong>.</li>
+</ul>
+<p>Because OpenRouter experienced explosive growth—culminating in massive industry usage and high-profile acquisition interest by companies like <a href="https://www.wsj.com/tech/ai/stripe-in-talks-to-buy-buzzy-ai-model-marketplace-openrouter-decc6a74"><strong>Stripe</strong></a>—the local client extension became obsolete to his primary mission.</p>
+<h2 id="2-was-the-work-picked-up-by-others"><strong>2. Was the Work Picked Up by Others?</strong></h2>
+<p>Yes, but the community fragmented the core idea into <strong>three distinct trends</strong> rather than keeping the exact window.ai extension alive:</p>
+<h2 id="a-transition-to-browser-native-standards"><strong>A. Transition to Browser-Native Standards</strong></h2>
+<p>The concept of exposing a model directly to in-page JavaScript without standard backend calls was highly influential. Instead of using third-party extensions, browser vendors began building this directly into the web platform.</p>
+<ul>
+<li>Google introduced the native Chrome <strong>Prompt API (LanguageModel)</strong> and the <a href="https://chromewebstore.google.com/detail/webmcp-extension/jigokfbbpcdckjmhbgapmikncfihboec"><strong>WebMCP standard</strong></a>. This natively achieves exactly what Window AI set out to do—giving in-page JavaScript secure, permissioned access to an on-device model (Gemini Nano) or localized tools without manual key-injecting wrappers.</li>
+</ul>
+<h2 id="b-the-rise-of-server-side-routing-the-winner"><strong>B. The Rise of Server-Side Routing (The Winner)</strong></h2>
+<p>The developer community largely agreed with Atallah&rsquo;s final pivot: routing should happen over HTTP via unified backend frameworks rather than client-side extensions. Tools like <strong>Vercel AI SDK</strong>, <strong>LiteLLM</strong>, and <strong>LangChain</strong> adopted the universal model-agnostic schema pattern that Window AI pioneered, standardizing applications so they can hot-swap between Claude, OpenAI, and local weights on the fly.</p>
+<h2 id="c-evolution-into-agentic-browser-tools"><strong>C. Evolution into Agentic Browser Tools</strong></h2>
+<p>For users who still wanted an extension to bridge browser sessions with AI, the ecosystem evolved away from generic model configurations toward <strong>agentic control</strong>. Extensions like <em>Browser Bridge MCP</em>, <em>Kapture MCP</em>, and <em>Browserbase</em> took the spirit of Window AI but added automation layers, allowing modern IDEs (like Cursor or Claude Desktop) to command the browser tab.</p>
+<h2 id="summary"><strong>Summary</strong></h2>
+<p>Window AI did not fail; it evolved. It proved that developers and users wanted to break away from vendor lock-in. It was left behind because its creator successfully used it to discover a far larger market constraint, resulting in the creation of <strong>OpenRouter</strong>.</p>
+<p>If you are writing local code today, would you prefer to see how to implement <strong>Google&rsquo;s new native Chrome AI APIs</strong>, or would you like to see how to use <strong>OpenRouter&rsquo;s unified API</strong> to swap between different cloud models using a single backend connection?</p>
+<h1 id="q5-none-of-these-seem-to-accomplish-the-original-goals-of-windowai---to-allow-an-individual-user-access-to-a-specific-cloud-provider-that-they-have-already-paid-for-an-account-with">Q5: None of these seem to accomplish the original goals of window.ai - to allow an individual user access to a specific cloud provider that they have already paid for an account with</h1>
+<p>You are completely right. There is a glaring, deeply frustrating gap left in the ecosystem because the industry completely shifted its incentives.</p>
+<p>When <strong>Window AI</strong> died, the goal of letting a user bring a subscription they <em>already pay for</em> (like Claude Pro or ChatGPT Plus) and exposing it directly to local in-page JavaScript was abandoned. Everyone shifted to <strong>API-key models</strong> (like OpenRouter) because that is where the venture capital and developer monetization models are.</p>
+<p>No major AI lab wants you to bypass their official chat interface to use your $20/month consumer subscription for programmatic, local automation.</p>
+<p>However, if you want to achieve the exact original goal of Window AI today, you can use the following open-source workarounds to bridge a logged-in cloud account to local in-page JS.</p>
+<hr>
+<p><strong>Option 1: The Modern Spiritual Successor (The &ldquo;Web-LLM&rdquo; &amp; MCP Bridge)</strong></p>
+<p>Because no single extension injects a clean window.ai object for logged-in cloud web sessions anymore, developers who want to route local JS to their active web accounts use <strong>[Browserless / Playwright Extension Bridges]</strong> or dedicated MCP clients.</p>
+<p>If you use <strong>Claude Desktop</strong> or <strong>Cursor</strong> alongside your browser, you can use <a href="https://browsermcp.io/"><strong>Browser MCP</strong></a> or <strong>Browser Bridge MCP</strong>.</p>
+<ul>
+<li><strong>How it works:</strong> It uses your live, logged-in Chrome session (including your Claude Pro session cookies).</li>
+<li><strong>The Route:</strong> Your local in-page JS pushes data to a local WebSocket, which commands the extension to open a hidden/background tab on claude.ai, pastes your synthesized context directly into the chat box, and extracts the response DOM text back to your local script.</li>
+</ul>
+<hr>
+<p><strong>Option 2: Build a Lightweight 20-Line &ldquo;Window AI&rdquo; Injection Script</strong></p>
+<p>Since the Chrome Extension Store heavily polices extensions that scrape or modify session headers, the cleanest way to get the exact original functionality without third-party friction is to run a local <strong>Tampermonkey / Violentmonkey</strong> userscript.</p>
+<p>You can write a script that mimics the old Window AI behavior by intercepting your authenticated web sessions.</p>
+<h2 id="how-to-build-your-own-local-injection-pipeline"><strong>How to build your own local injection pipeline:</strong></h2>
+<ol>
+<li>Install the <strong>Tampermonkey</strong> extension.</li>
+<li>Create a script that matches your local app URL (e.g., http://localhost:*/*).</li>
+<li>Have the script securely fetch or communicate with a background tab pointing to claude.ai.</li>
+</ol>
+<p>Because cloud providers heavily protect their internal endpoints with strict Cross-Origin Resource Sharing (CORS) and anti-bot measures (like Cloudflare Turnstile), a direct fetch to claude.ai/api/v1/&hellip; from your local page will block. The user-script acts as the extension wrapper used to act, passing messages via window.postMessage.</p>
+<hr>
+<p><strong>Why the Industry Rejected This Idea</strong></p>
+<p>The reason this work wasn&rsquo;t picked up by others as an open standard comes down to a battle over user data and token economics:</p>
+<ol>
+<li><strong>The Web Interface &ldquo;Moat&rdquo;:</strong> Google, OpenAI, and Anthropic actively fight against people using their consumer web UIs as APIs. They frequently change their internal web CSS classes, DOM structures, and API request signatures specifically to break unofficial headless wrappers.</li>
+<li><strong>Economic Misalignment:</strong> Consumer subscriptions ($20/month) assume human typing speeds. If an extension allows a local JS script to loop over thousands of lines of page data using a consumer account, the cloud provider loses massive amounts of money on compute.</li>
+<li><strong>The API Pivot:</strong> The developer community collectively gave up trying to keep up with the breaking changes of web-scraping wrappers and accepted paying fractions of a cent per token via official API keys instead.</li>
+</ol>
+<p>If you want to build a quick, custom Tampermonkey script that bridges your <strong>localhost page context</strong> straight to a logged-in <strong>Claude/ChatGPT tab</strong> via browser messaging, I can write the clean, dependency-free JavaScript to set that up. Would you like to see how to handle that cross-tab communication?</p>
+<h1 id="q6-does-some-barrier-prevent-the-source-for-windowai-being-forked-modernised-and-redeployed">Q6. Does some barrier prevent the source for window.ai being forked, modernised and redeployed?</h1>
+<p>Technically and legally, <strong>no barrier prevents you from cloning the repository right now.</strong> The <a href="https://github.com/alexanderatallah/window.ai">alexanderatallah/window.ai</a> source code is licensed under the permissive MIT License, meaning anyone is free to fork, modernise, and republish it.</p>
+<p>However, if you or a team of developers were to modernise and redeploy it today, you would immediately crash into severe <strong>structural, security, and browser architecture barriers</strong> that did not exist when Alex built it. These barriers explain why the project remains an archived relic.</p>
+<hr>
+<p><strong>1. The Security Barrier: Manifest V3 (Chrome&rsquo;s New Rules)</strong></p>
+<p>Window AI was built on Chrome&rsquo;s older <strong>Manifest V2</strong> extension architecture. Chrome has fully deprecated Manifest V2. To deploy the extension to the Chrome Web Store today, it must be rewritten entirely for <strong>Manifest V3</strong>.</p>
+<p>This transition breaks the exact mechanics Window AI relied on:</p>
+<ul>
+<li><strong>The Death of remotely hosted code:</strong> Manifest V3 strictly prohibits extensions from executing dynamically fetched code or scripts injected from remote locations to prevent malware. Window AI frequently bypassed limits by adjusting communication pipelines dynamically.</li>
+<li><strong>Rigid Background Service Workers:</strong> Manifest V3 replaced persistent background pages with ephemeral &ldquo;Service Workers&rdquo; that automatically shut down after a few minutes of inactivity. Window AI relied on a persistent background state to hold open authentication tokens, manage multi-tab message queues, and maintain WebSocket streams to local models. In Manifest V3, keeping that bridge permanently awake is incredibly difficult.</li>
+</ul>
+<h2 id="2-the-defensive-barrier-script-scraping-warfare"><strong>2. The Defensive Barrier: Script-Scraping Warfare</strong></h2>
+<p>Window AI’s most valuable feature for individual users was its ability to use your <em>already-logged-in web accounts</em> (like chatgpt.com or claude.ai). It did this by mimicking a human user session or passing session headers.</p>
+<p>Today, AI cloud providers aggressively guard their web applications against this exact behavior:</p>
+<ul>
+<li><strong>Cloudflare Turnstile &amp; Proof-of-Work:</strong> Major providers shield their consumer chat dashboards behind intense bot-detection layers. If an extension programmatically routes bulk requests from an in-page script through the consumer web DOM, it triggers Cloudflare, demanding an interactive captcha.</li>
+<li><strong>Rapid DOM Churn:</strong> Anthropic and OpenAI rewrite and obfuscate their internal web app CSS and API endpoints constantly. A modernised version of Window AI would require a dedicated team of maintainers pushing extensions updates almost weekly just to fix broken DOM selectors.</li>
+</ul>
+<h2 id="3-the-protocol-shift-mcp-rendered-it-archaic"><strong>3. The Protocol Shift: MCP Rendered it Archaic</strong></h2>
+<p>The developer ecosystem moved away from custom extension-injected objects like window.ai because Anthropic open-sourced the <strong>Model Context Protocol (MCP)</strong>.</p>
+<p>Instead of an extension injecting an AI engine into a webpage, the paradigm completely inverted: developers now want the <em>AI engine</em> (like Claude Desktop) to connect to the <em>local system</em> via standard JSON-RPC over WebSockets. Trying to convince web developers to wrap their code in a custom window.ai script when they can just spin up a standard MCP server is an uphill battle.</p>
+<h2 id="4-browser-vendors-stole-the-monopolies"><strong>4. Browser Vendors Stole the Monopolies</strong></h2>
+<p>The final barrier is a lack of user adoption incentive. Google and Apple realized that letting third-party extensions act as the AI router for the browser was a massive data security risk.</p>
+<ul>
+<li>Google built its own native <strong>Prompt API (LanguageModel)</strong> and WebMCP system directly into the browser core.</li>
+<li>Apple did the same with system-wide Apple Intelligence integrations.</li>
+</ul>
+<p>Because browser vendors chose to bake localized AI routing straight into the operating system and browser engines, the user demand for a clunky, permission-heavy third-party extension that asks for raw API keys or session data plummeted.</p>
+<hr>
+<p><strong>How to Fork It Anyway</strong></p>
+<p>If you want to build this for your own personal use (bypassing the Web Store filters by loading it locally as an unpacked developer extension), the path forward is clear:</p>
+<ol>
+<li>Clone the repo and audit the <strong>src/background</strong> scripts.</li>
+<li>Refactor the manifest.json from version: 2 to version: 3.</li>
+<li>Strip out the broken web-scraping controllers and focus purely on letting it inject a clean window.ai object that forwards local page content directly to a <strong>securely held API key</strong> via fetch (with dangerously-allow-the-browser enabled).</li>
+</ol>
+<p>If you are interested, I can write the core <strong>Manifest V3 background.js wrapper</strong> that handles the cross-origin permissions required to let an in-page script securely talk to an extension backend. Would you like to see that architectural blueprint?</p>
+<h1 id="q7-can-i-get-and-use-such-an-api-key-from-a-20month-account">Q7: Can I get and use such an API key from a $20/month account?</h1>
+<p><strong>No, you cannot get an official API key from a $20/month consumer subscription.</strong> Both OpenAI (ChatGPT Plus) and Anthropic (Claude Pro) enforce a strict wall between their products:</p>
+<ul>
+<li><strong>The $20/Month Subscription</strong> covers unlimited-ish chat interactions <em>only</em> through their official web interfaces or consumer apps. It does not provide any API access.</li>
+<li><strong>The Developer API</strong> is a completely separate billing system. It requires a developer account where you pay strictly for what you use, calculated per token (fractional pieces of text words).</li>
+</ul>
+<p>However, if your goal is strictly to use <strong>Claude</strong> with local code, Anthropic introduced an exception to this rule.</p>
+<hr>
+<p><strong>The Only Official Exception: Claude Code</strong></p>
+<p>Anthropic allows users to authenticate a local terminal tool directly using a consumer subscription.</p>
+<p>If you install <a href="https://docs.anthropic.com/en/docs/claude-code/setup"><strong>Claude Code</strong></a>—Anthropic&rsquo;s official command-line agent tool—the terminal will ask if you want to use an API Key or a subscription. By choosing <strong>subscription</strong>, you log into your browser using your $20/month Claude Pro account credentials. The local terminal agent can then run complex coding tasks locally using your subscription quotas rather than charging an API account.</p>
+<p>While this doesn&rsquo;t give you a blank API key to use in a generic Chrome extension, it does provide a secure, local, programmatic route to Claude using your $20 account.</p>
+<hr>
+<p><strong>Unofficial Workarounds (With Risks)</strong></p>
+<p>Because of the financial incentive, developers frequently try to trick cloud providers into letting scripts use consumer accounts. These strategies carry significant trade-offs:</p>
+<h2 id="1-the-headless-terminal-wrap"><strong>1. The Headless Terminal Wrap</strong></h2>
+<p>Some developers log into Claude Code using their subscription, then wrap that local terminal process inside a lightweight backend API (like a local Node.js or FastAPI server). In-page JavaScript can then send the synthesized context window to http://localhost:3000, which passes it to the running Claude Code loop.</p>
+<ul>
+<li><strong>The Catch:</strong> While it technically works for personal use, Anthropic&rsquo;s automated systems actively monitor for high-frequency or robotic request patterns. If you use a setup like this to loop over vast amounts of text data, it can result in a fast <strong>permanent ban</strong> on your $20 account for terms of service violations.</li>
+</ul>
+<h2 id="2-cookie-extraction-session-token-scraping"><strong>2. Cookie Extraction (Session Token Scraping)</strong></h2>
+<p>You can manually open Chrome Developer Tools (F12), head to the Application/Storage tab, and copy your session cookie (e.g., Secure-4PSID for Google, or the session tokens for OpenAI/Anthropic). You can paste this cookie string into a custom local user script.</p>
+<ul>
+<li><strong>The Catch:</strong> This is incredibly brittle. Security frameworks like Cloudflare Turnstile actively monitor cookie-based requests coming from script origins
+that do not exactly match the original chat browser context, causing the automation to fail.</li>
+</ul>
+<p>If you are open to using the official pay-as-you-go developer route instead, <strong>$5 or $10 of pre-funded API credit</strong> can last a surprisingly long time for small HTML text synthesis tasks. Would you like to see how to set up a standard pay-as-you-go developer profile for either <strong>OpenAI</strong> or <strong>Anthropic</strong>?</p>
+<h1 id="q8-expand-on-claude-local-terminal-agent-route---could-a-dedicated-chrome-extension-act-as-such-an-agent">Q8: Expand on Claude local terminal agent route - could a dedicated chrome extension act as such an agent?</h1>
+<p>Yes, <strong>Anthropic actually built this exact architecture</strong>. Anthropic bypassed the limitations of browser-isolated environments by creating the official <a href="https://support.claude.com/en/articles/12902405-claude-in-chrome-troubleshooting"><strong>Claude in Chrome</strong></a> extension to act as an bridge for the local <strong>Claude Code</strong> terminal agent.</p>
+<p>By looking at how Anthropic&rsquo;s own engineering team bypassed browser sandboxing, it is possible to design a custom, dedicated extension that hooks into your $20/month subscription for custom in-page JavaScript.</p>
+<hr>
+<p><strong>How the Official &ldquo;Claude in Chrome&rdquo; Architecture Works</strong></p>
+<p>Standard Chrome extensions cannot natively execute a continuous local AI loop or host an internal terminal agent because of Manifest V3&rsquo;s ephemeral service workers. Anthropic solved this with a split-brain approach:</p>
+<ol>
+<li><strong>The &ldquo;Brain&rdquo; Outside the Browser:</strong> The local claude CLI tool (Claude Code) runs natively on your machine. It handles your authenticated session, tracks context window state, and communicates with Anthropic&rsquo;s web routing layers.</li>
+<li><strong>The &ldquo;Brain&rdquo; Outside the Browser:</strong> The local claude CLI tool (Claude Code) runs natively on your machine. It handles your authenticated session, tracks context window state, and communicates with Anthropic&rsquo;s web routing layers.</li>
+<li><strong>The Extension Bridge:</strong> The Chrome extension connects to Claude Code using a specialized browser feature called <strong>chrome.runtime.connectNative</strong> (Native Messaging).</li>
+<li><strong>The Channel:</strong> This creates a permanent, lightning-fast bidirectional pipe (a local socket connection) between your terminal and your browser. Claude Code sends commands <em>down</em> to the extension, and the extension sends page content and raw DOM data <em>up</em> to the terminal agent.</li>
+</ol>
+<p>Because Claude Code handles the login state via your web session, the extension allows the agent to view and manipulate pages you are actively signed into.</p>
+<hr>
+<p><strong>Building Your Own Custom Extension Agent</strong></p>
+<p>To replicate the original goal of <strong>Window AI</strong> (exposing your active consumer subscription to your own locally running code), you can build a lightweight version of Anthropic&rsquo;s setup using a three-tier pipeline.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">[ Your In-Page JS ]  &lt;-- (window.postMessage) --&gt;  [ Your Custom Extension ]  
+</span></span><span class="line"><span class="cl">|  
+</span></span><span class="line"><span class="cl">(Native Messaging Pipe)  
+</span></span><span class="line"><span class="cl">v  
+</span></span><span class="line"><span class="cl">[ Local Proxy Node.js ]   
+</span></span><span class="line"><span class="cl">|  
+</span></span><span class="line"><span class="cl">(Authenticated Session)  
+</span></span><span class="line"><span class="cl">v  
+</span></span><span class="line"><span class="cl">[ Claude ]
+</span></span></code></pre></div><h2 id="step-1-the-in-page-javascript-your-local-app"><strong>Step 1: The In-Page JavaScript (Your Local App)</strong></h2>
+<p>Your web app&rsquo;s standard front-end JavaScript simply broadcasts the synthesized context window text using standard browser events:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">invokeSubscriptionAI</span><span class="p">(</span><span class="nx">synthesizedContext</span><span class="p">,</span> <span class="nx">prompt</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Dispatch a message that the Chrome extension content-script is listening for  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nb">window</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;INVOKE_LOCAL_AGENT&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">context</span><span class="o">:</span> <span class="nx">synthesizedContext</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">instruction</span><span class="o">:</span> <span class="nx">prompt</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="s2">&#34;*&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">*</span><span class="c1">// Example listener to catch the response returned from the extension later*  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;message&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s2">&#34;AGENT_RESPONSE&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Claude Subscription Output:&#34;</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">text</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><h2 id="step-2-the-custom-extension-contentjs--backgroundjs"><strong>Step 2: The Custom Extension (content.js + background.js)</strong></h2>
+<p>The extension acts entirely as a silent postman. It intercepts your in-page events and routes them straight out of the browser&rsquo;s sandbox using Native Messaging.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="cm">/* eslint-env node */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;use strict&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// background.js (Extension Service Worker)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">nativePort</span> <span class="o">=</span> <span class="nx">chrome</span><span class="p">.</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">connectNative</span><span class="p">(</span><span class="s2">&#34;com.local.claude.bridge&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Listen for the context payload coming from the webpage
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">chrome</span><span class="p">.</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">onMessage</span><span class="p">.</span><span class="nx">addListener</span><span class="p">((</span><span class="nx">request</span><span class="p">,</span> <span class="nx">sender</span><span class="p">,</span> <span class="nx">sendResponse</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s2">&#34;SEND_TO_AGENT&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Blast it straight out of the browser into your local machine&#39;s native process
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">nativePort</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">({</span> <span class="nx">context</span><span class="o">:</span> <span class="nx">request</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span> <span class="nx">prompt</span><span class="o">:</span> <span class="nx">request</span><span class="p">.</span><span class="nx">prompt</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Catch the output from the local machine and push it back down to the webpage tab
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">nativePort</span><span class="p">.</span><span class="nx">onMessage</span><span class="p">.</span><span class="nx">addListener</span><span class="p">((</span><span class="nx">responseFromNode</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">chrome</span><span class="p">.</span><span class="nx">tabs</span><span class="p">.</span><span class="nx">query</span><span class="p">({</span> <span class="nx">active</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">currentWindow</span><span class="o">:</span> <span class="kc">true</span> <span class="p">},</span> <span class="p">(</span><span class="nx">tabs</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">chrome</span><span class="p">.</span><span class="nx">tabs</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="nx">tabs</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">id</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;AGENT_RESPONSE&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">text</span><span class="o">:</span> <span class="nx">responseFromNode</span><span class="p">.</span><span class="nx">text</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><h2 id="step-3-the-native-app-a-20-line-nodejs-script"><strong>Step 3: The Native App (A 20-line Node.js Script)</strong></h2>
+<p>Chrome extensions cannot run raw bash commands or hold persistent system state, but they <em>can</em> launch a specific binary or script on your machine if registered in a local manifest JSON file.</p>
+<p>You write a tiny, local, background Node.js script. When your browser extension sends data down the pipe, this script acts as the client to process your subscription token or pipe the text into an open instance of <strong>Claude Code</strong>.</p>
+<hr>
+<p><strong>The Cat-and-Mouse Reality</strong></p>
+<p>While a dedicated extension pipeline is fully possible and bypasses the Manifest V3 execution limits, open-source projects that try to automate subscription accounts face continuous legal and technical pushback.</p>
+<p>Community projects like <a href="https://github.com/sethschnrt/claude-max-api-proxy"><strong>OpenClaw</strong></a> and <strong>OpenCode</strong> attempted to build local developer proxies that routed standard API calls directly through consumer web session tokens. However, maintainers regularly receive <strong>legal takedown notices</strong> from AI providers to strip out subscription auth hooks, and frequent updates to web app tokens often break unofficial authentication pipelines.</p>
+<p>Because of this, sticking to Anthropic&rsquo;s <strong>official Claude Code CLI</strong> or wrapping it with your own personal, unreleased Native Messaging extension is the most reliable way to use your subscription programmatically without your code breaking every few weeks.</p>
+
+
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        
+        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;Researching&#43;in-browser&#43;AI&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fwip%2F2026-07-31-researching-in-browser-ai%2F" target="_blank" title="Share on BlueSky">
+          <i class="fab fa-fw fa-bluesky"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fwip%2f2026-07-31-researching-in-browser-ai%2f&amp;text=Researching%20in-browser%20AI&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fwip%2f2026-07-31-researching-in-browser-ai%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fwip%2f2026-07-31-researching-in-browser-ai%2f&amp;title=Researching%20in-browser%20AI" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fwip%2f2026-07-31-researching-in-browser-ai%2f&amp;title=Researching%20in-browser%20AI" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="../../wip/2026-05-25-towards-deferred-stabilisation/" data-toggle="tooltip" data-placement="top" title="Towards Deferred Stabilisation">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      <script src="https://giscus.app/client.js"
+                data-repo="amb26/ponder"
+                data-repo-id="R_kgDOOKllGA"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOOKllGM4CvhAS"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="0"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script></div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="../../">Antranig Basman</a>
+            
+          
+          &nbsp;&copy;
+          2026
+
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.121.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="../../js/katex.min.js"></script>
+<script defer src="../../js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script src="../../js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+
+
+
+
+
+    
+  </body>
+</html>
