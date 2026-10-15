@@ -12,5 +12,5 @@ An  **integration domain** is defined in Stephen Kell's 2009 paper
 In addition through Stephen's principle of _interface hiding_, dependencies do not explicitly manifest themselves in
 the domain except through the contextualised values which the domain puts into relation.
 
-A core goal of the rewrite to version 6 of framework I have been working on, Infusion, is for it to host a
+A core goal of the rewrite to version 6 of framework I have been working on, [Infusion](/docs/fluid-integration-language), is for it to host a
 software substrate representing an integration domain.

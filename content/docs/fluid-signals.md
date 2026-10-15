@@ -324,8 +324,8 @@ rather than users.
 * `{String|Object|Array} [cause={}]` - A list of dependencies or reasons for unavailability.
 * `{String} [variety="error"]` - The variety of unavailable value:
 * * `"error"` indicates a syntax issue that needs design intervention.
-* * `"config"` indicates configuration designed to short-circuit evaluation which is not required.
-* * `"I/O"` indicates pending I/O
+* * `"config"` indicates that an expected value has been configured away or is missing - the value may appear through regular user action
+* * `"pending"` indicates the value depends on pending I/O which is expected to imminently resolve
 * Returns: `{Unavailable}` An unavailable value marker.
 
 A special variety of unavailable value represents a value which is temporarily stale as a result of I/O pending

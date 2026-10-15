@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+      <title>Fluid Integration Language - Antranig Basman</title>
+
+  <meta name="description" content="This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6 components are defined, composed and wired together as an integration domain. It is implemented in FluidIL.js on top of the reactive primitive fluid.cell, whose semantics (signals, effects, unavailable values, deferred stabilization) it inherits throughout.
+The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.">
+  <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Antranig Basman",
+    
+    "url": "https:\/\/ponder.org.uk"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/ponder.org.uk"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk\/docs\/fluid-integration-language\/",
+          "name": "Fluid integration language"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Antranig Basman"
+  },
+  "headline": "Fluid Integration Language",
+  "description" : "This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6 components are defined, composed and wired together as an integration domain. It is implemented in FluidIL.js on top of the reactive primitive fluid.cell, whose semantics (signals, effects, unavailable values, deferred stabilization) it inherits throughout.\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.",
+  "inLanguage" : "en",
+  "wordCount":  2843 ,
+  "datePublished" : "0001-01-01T00:00:00\u002b00:00",
+  "dateModified" : "0001-01-01T00:00:00\u002b00:00",
+  "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+  "keywords" : [ "" ],
+  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/docs\/fluid-integration-language\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/ponder.org.uk",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="Fluid Integration Language" />
+<meta property="og:description" content="This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6 components are defined, composed and wired together as an integration domain. It is implemented in FluidIL.js on top of the reactive primitive fluid.cell, whose semantics (signals, effects, unavailable values, deferred stabilization) it inherits throughout.
+The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.">
+<meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
+<meta property="og:url" content="https://ponder.org.uk/docs/fluid-integration-language/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Antranig Basman" />
+
+  <meta name="twitter:title" content="Fluid Integration Language" />
+  <meta name="twitter:description" content="This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6 components are defined, composed and wired together as an integration domain. It is …">
+  <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@amb26ponder" />
+  <meta name="twitter:creator" content="@amb26ponder" />
+  <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.121.0">
+  <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
+  <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
+<script type="text/javascript" src="../../js/ponder.js" ></script>
+
+  </head>
+  <body class="infusion-docs" >
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-ponder">
+      <a class="navbar-ponder-brand" href="../../">Antranig Basman</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <svg width="36" height="36" viewBox="0 0 24 24" stroke="#888" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 7L4 7" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 12L4 12" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 17L4 17" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="nav navbar-nav navbar-right">
+          
+          
+          <li>
+            <a title="Posts" href="../../post">Posts</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="WiP" href="../../wip">WiP</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="About" href="../../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Docs" href="../../docs">Docs</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Communities" href="../../communities">Communities</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Projects" href="../../projects">Projects</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Terms" href="../../term">Terms</a>
+          </li>
+          
+          
+
+          
+
+          
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="header-row">
+          
+
+            <div class="infusion-docs-heading">
+              
+                <h1>Fluid Integration Language  </h1>
+              
+              
+                <hr class="small">
+              
+              
+
+            </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <article role="main" class="blog-post">
+        <p>This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6
+components are defined, composed and wired together as an <a href="../../term/integration-domain">integration domain</a>.
+It is implemented in <a href="https://github.com/fluid-project/infusion-6/blob/main/src/framework/core/js/FluidIL.js"><code>FluidIL.js</code></a>
+on top of the reactive primitive
+<a href="../../docs/fluid-signals"><code>fluid.cell</code></a>, whose semantics (signals, effects, <a href="../../docs/fluid-signals#unavailable-values">unavailable values</a>,
+deferred stabilization) it inherits throughout.</p>
+<p>The raw markdown underlying these docs is available on <a href="https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/fluid-integration-language.md">GitHub</a>,
+suitable for direct ingestion by your friendly local neighbourhood intelligence.</p>
+<h2 id="model">Model</h2>
+<p>A program in the IL is derived from a set of named <strong>layers</strong>: plain JSON-like records registered in a global, reactive layer store
+via <a href="#fluiddeflayername-layer"><code>fluid.def</code></a>. A <strong>component</strong> is a live instance whose contents are derived from the merge of an
+ordered set of layers. Within a layer, any value may written as be a plain value, a <strong>reference</strong> to a value elsewhere in the
+component tree, or a <strong>signal record</strong> (<a href="#compute"><code>$compute</code></a>, <a href="#method"><code>$method</code></a>, <a href="#effect"><code>$effect</code></a>,
+<a href="#component"><code>$component</code></a>, &hellip;) describing how the live value is produced.</p>
+<p>Key properties:</p>
+<ul>
+<li><strong>Everything is addressable by name.</strong> Layers are referred to by global name, components and values by
+<a href="#references">context references</a> resolved through the component tree. Functions are referred to by global name or
+by reference. Configuration is expected to be completely serialisable and should not hold direct JavaScript references.</li>
+<li><strong>Everything is reactive.</strong> A component is a computed signal over its layers. Redefining a layer, writing to a
+component, or a component appearing or disappearing in the tree propagates to every dependent value, effect and
+subcomponent on the next <code>fluid.cell.stabilize()</code>. Signal products whose defining record is unchanged are transferred
+intact to the next component state.</li>
+<li><strong>Any party may contribute.</strong> Layers from independent authors combine by merging, linkages, dynamic layer names and
+live writes without editing each other&rsquo;s source. The precedence of every contribution is well-defined.</li>
+<li><strong>Incompleteness is a value.</strong> A missing layer, an unresolvable reference or pending I/O yields an
+<a href="../../docs/fluid-signals#unavailable-values">unavailable value</a> that propagates rather than throws. A component with
+unavailable layers is itself unavailable and allocates no effects until it becomes complete.</li>
+</ul>
+<h2 id="reading-and-writing-layers">Reading and writing layers</h2>
+<h3 id="fluiddeflayername-layer">fluid.def(layerName, [layer])</h3>
+<ul>
+<li><code>{String} layerName</code> - Global name of the layer, conventionally a dotted path, e.g. <code>&quot;my.app.counter&quot;</code></li>
+<li><code>{Object} [layer]</code> - The layer definition to store</li>
+<li>Returns: <code>{Object|undefined}</code> - If <code>layer</code> is omitted, the raw (unmerged) definition currently stored for <code>layerName</code></li>
+</ul>
+<p>With two arguments, writes or replaces the definition of <code>layerName</code> in the layer store. Every live component whose
+layers include <code>layerName</code>, directly or by inheritance, re-merges reactively. A global <strong>creator function</strong> is also
+registered at the path <code>layerName</code>, which constructs a free-standing component:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.app.counter&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">count</span><span class="o">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">counter</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">counter</span><span class="p">({</span><span class="nx">count</span><span class="o">:</span> <span class="mi">5</span><span class="p">});</span> <span class="c1">// Creator function - argument is a &#34;user&#34; layer
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">counter</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span> <span class="c1">// 5
+</span></span></span></code></pre></div><p>With one argument, reads back the stored definition. A layer whose definition is not yet written reads as unavailable,
+and any component depending on it waits for it with its own unavailable status.</p>
+<h2 id="component-lifecycle">Component lifecycle</h2>
+<h3 id="creator-functions-layernameuserlayer">Creator functions: layerName([userLayer])</h3>
+<ul>
+<li><code>{Object} [userLayer]</code> - Optional layer merged at <code>user</code> precedence. Its own <code>$layers</code> are appended to the component&rsquo;s layers</li>
+<li>Returns: <code>{Component}</code> - A proxy to a fresh component instantiated at the root of the tree</li>
+</ul>
+<p>The returned <strong>component proxy</strong> (from regular client JavaScript code) has these semantics:</p>
+<ul>
+<li><strong>Reads</strong> resolve signals transparently: <code>that.count</code> returns the current concrete value, <code>that.child</code> returns a
+proxy to a subcomponent, <code>that.method(...)</code> invokes a <code>$method</code>.</li>
+<li><strong>Writes</strong> (<code>that.count = 6</code>, or mutating array methods such as <code>that.items.push(x)</code>) are recorded in the
+component&rsquo;s <strong>live layer</strong>, the highest-precedence layer, and propagate reactively. A write beneath a
+<a href="#reactiveroot"><code>$reactiveRoot</code></a> is applied immutably to the root&rsquo;s value.</li>
+<li>Access after destruction throws.</li>
+</ul>
+<h3 id="componentdestroy">Component.destroy()</h3>
+<p>Every component (via the base layer <code>fluid.component</code>) has a <code>destroy</code> method. Destruction disposes all of the
+component&rsquo;s effects, bindables and subcomponents. Equivalent to <code>fluid.destroyComponent(that)</code>.</p>
+<h3 id="unavailable-components">Unavailable components</h3>
+<p>A component is <strong>unavailable</strong> while any of its layers is undefined, loading, or circular. References to it, and to
+values within it<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, yield unavailable values; no effects are allocated within it. When the missing layers arrive, the
+component completes and its effects start. <code>fluid.unavailableComponents</code> is a global cell holding <code>true</code> once no
+component in the tree is unavailable, and an unavailable value otherwise.</p>
+<h2 id="layers">Layers</h2>
+<p>Infusion&rsquo;s behaviour is controlled by the contents of <em>layers</em>, which are declarative,
+serialisable blocks of configuration equivalent to their JSON representation. Layers may contain a variety of directives,
+whose names begin with the dollar character $. Some commonly used directives are <code>$layers</code>, <code>$compute</code>, <code>$effect</code>
+and <code>$method</code>; others are described below.</p>
+<p>The values in components instantiated from layers are related by context-scoped <em>references</em> which are strings beginning with the <code>{</code>
+curly brace and typically take the form <code>{context}.path.into.value</code>.</p>
+<p>The characters <code>{</code>, <code>$</code> and <code>\</code> occurring naturally at the start of strings in configuration should be escaped as <code>\{</code>, <code>\$</code> and
+<code>\\</code>.</p>
+<h3 id="layers-1">$layers</h3>
+<p><code>{String|String[]}</code> - The parent layers of this layer. A component&rsquo;s full layer list is linearised from the layer
+hierarchy by C3 (as for Python&rsquo;s method resolution order): a layer beats the layers it inherits from, and a parent
+listed earlier in <code>$layers</code> beats one listed later. The resolved list is readable at <code>that.$layers</code>. To be instantiable
+as a component, its layer hierarchy must somewhere include <code>fluid.component</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.shape&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span> <span class="nx">sides</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">colour</span><span class="o">:</span> <span class="s2">&#34;black&#34;</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.red&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span> <span class="nx">colour</span><span class="o">:</span> <span class="s2">&#34;red&#34;</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.triangle&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.shape&#34;</span><span class="p">,</span> <span class="nx">sides</span><span class="o">:</span> <span class="mi">3</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.redTriangle&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;my.red&#34;</span><span class="p">,</span> <span class="s2">&#34;my.triangle&#34;</span><span class="p">]});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">redTriangle</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">t</span><span class="p">.</span><span class="nx">sides</span><span class="p">;</span>   <span class="c1">// 3 - my.triangle beats my.shape
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">t</span><span class="p">.</span><span class="nx">colour</span><span class="p">;</span>  <span class="c1">// &#34;red&#34; - my.red is listed before my.triangle and so beats my.shape
+</span></span></span></code></pre></div><p>An entry in <code>$layers</code> which is itself a <a href="#references">reference</a> is a <strong>dynamic layer name</strong>, resolved reactively from the
+component&rsquo;s context. The referenced value may be a layer name or array of names:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.panel&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span> <span class="s2">&#34;{self}.flavour&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">flavour</span><span class="o">:</span> <span class="s2">&#34;my.compactPanel&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>Dynamic layers merge above all static layers and literal configuration (see <a href="#merging-and-precedence">precedence</a>).</p>
+<p>A cycle in the hierarchy, or a layer which is not defined, makes the component unavailable.</p>
+<h4 id="merging-and-precedence">Merging and precedence</h4>
+<p>A component&rsquo;s contents are a deep merge of layer records, applied weakest first:</p>
+<table>
+<thead>
+<tr>
+<th>Precedence (weakest first)</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>def</code></td>
+<td>Static layers named in <code>$layers</code>, linearised; more derived beats less derived</td>
+</tr>
+<tr>
+<td><code>subcomponent</code></td>
+<td>The body of the <a href="#component"><code>$component</code></a> record which created this component</td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>The argument to a creator function</td>
+</tr>
+<tr>
+<td><code>dynamicLayers</code></td>
+<td>Layers named via references in <code>$layers</code></td>
+</tr>
+<tr>
+<td><code>variables</code></td>
+<td>Iteration variables bound by <a href="#for"><code>$for</code></a></td>
+</tr>
+<tr>
+<td><code>live</code></td>
+<td>Writes made through the component proxy</td>
+</tr>
+</tbody>
+</table>
+<p>Merge rules:</p>
+<ul>
+<li>Plain objects contributed by more than one layer merge recursively, key by key.</li>
+<li>Any other value (primitive, array, function, signal record) from a stronger layer <strong>replaces</strong> that from a weaker
+one wholesale. Arrays are not concatenated.</li>
+<li>A key holding a signal record is replaced as a unit by a stronger layer&rsquo;s value at that key; the record is not merged
+into.</li>
+</ul>
+<p>Merging is reactive: changing any contributing layer re-merges the component. Signal products (computed values,
+effects, subcomponents) whose defining record is identical before and after are retained rather than rebuilt.</p>
+<h2 id="references">References</h2>
+<p>An (IL) <strong>reference</strong> is a string of the form</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{context}.path.into.value
+</span></span><span class="line"><span class="cl">{context selector}.path
+</span></span></code></pre></div><p>appearing as a configuration value, an argument, a signal designator or a <code>$layers</code> entry. It is resolved
+reactively from the point of view of the component in which it appears: if the context or the value at the path
+changes, so does the reference. A reference which can&rsquo;t be resolved yields an unavailable value.
+A path which runs off the end of plain data yields <code>undefined</code>; a path naming a missing member of a component yields
+an unavailable value.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.greeter&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;World&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">shout</span><span class="o">:</span> <span class="s2">&#34;{self}.name&#34;</span>           <span class="c1">// tracks name
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">});</span>
+</span></span></code></pre></div><p>A reference to a path holding mutable configuration is <strong>sited</strong>: writing through it writes to the original site.</p>
+<h3 id="context-names">Context names</h3>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Resolves to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>self</code></td>
+<td>The component in which the reference appears</td>
+</tr>
+<tr>
+<td>A member name, e.g. <code>{panel}</code></td>
+<td>A component of that member name, in scope</td>
+</tr>
+<tr>
+<td>A layer name or its nickname (last segment), e.g. <code>{my.app.panel}</code> or <code>{panel}</code></td>
+<td>A component bearing that layer, in scope</td>
+</tr>
+<tr>
+<td><code>/path.to.component</code></td>
+<td>The component at that absolute path in the tree</td>
+</tr>
+<tr>
+<td><code>global</code></td>
+<td>The JavaScript global object</td>
+</tr>
+<tr>
+<td><code>0</code>, <code>1</code>, &hellip;</td>
+<td>The positional arguments of a <a href="#method"><code>$method</code></a> call</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Scope.</strong> A context name is resolved by searching outwards from the referring component: its own names, then its
+direct children&rsquo;s, then its parent&rsquo;s, then its siblings&rsquo;, and so on up through each ancestor and that ancestor&rsquo;s
+direct children.
+The names of a component are its member name and each of its non-framework layer names and their nicknames. A member
+name beats a layer name at the same level. Components bearing <code>fluid.resolveRoot</code> are visible from everywhere.
+Scope is reactive: a reference re-resolves when a matching component appears or disappears.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.app&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">theme</span><span class="o">:</span> <span class="s2">&#34;dark&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">toolbar</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.toolbar&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">theme</span><span class="o">:</span> <span class="s2">&#34;{app}.theme&#34;</span>     <span class="c1">// nickname of my.app
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><h3 id="selectors">Selectors</h3>
+<p>A reference whose context is followed by a space and a selector, <code>{context selector}</code>, resolves to the live array
+of components below <code>context</code> which match the selector, as for
+<a href="#fluidlivequeryilselectorroot-selector-flat"><code>fluid.liveQueryILSelector</code></a>. With a path, it yields the array of
+values at that path in each match.</p>
+<p>Selector syntax follows CSS: whitespace-separated steps match descendants, <code>&gt;</code> matches direct children, and each step
+is a context name (layer name, nickname or member name) or <code>&amp;name</code>, or <code>#id</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.dashboard&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">allTitles</span><span class="o">:</span> <span class="s2">&#34;{self my.widget}.title&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">topLevel</span><span class="o">:</span> <span class="s2">&#34;{self &gt; my.widget}&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><h2 id="signal-directives">Signal directives</h2>
+<p>A signal record is an object with a single key starting with <code>$</code>, or equivalently a <strong>compact string</strong>
+<code>&quot;$type:body&quot;</code>. Function-bearing records share the <strong>function record</strong> syntax:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="p">{</span><span class="nx">func</span><span class="o">:</span> <span class="s2">&#34;my.global.fn&#34;</span><span class="p">,</span> <span class="nx">args</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;{self}.a&#34;</span><span class="p">,</span> <span class="mi">3</span><span class="p">]}</span>   <span class="c1">// full form
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;$compute:my.global.fn({self}.a, 3)&#34;</span>            <span class="c1">// compact form
+</span></span></span></code></pre></div><ul>
+<li><code>func</code> - A global function name, a <a href="#references">reference</a> to a function (e.g. <code>&quot;{self}.helper&quot;</code>), or a function value.</li>
+<li><code>args</code> - Array (or single value) of argument material. References anywhere within it, including inside nested
+objects and arrays, are resolved.</li>
+<li>In compact form, arguments are split on commas and coerced: <code>3</code> → number, <code>true</code> → boolean, otherwise a string or
+reference. Use the full form for arguments containing commas, parentheses or structure.</li>
+</ul>
+<h3 id="compute">$compute</h3>
+<p>A value computed by a pure function from its resolved arguments. Recomputed lazily whenever any argument changes.
+If any argument is unavailable the function is not called and the value is unavailable.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.rect&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">width</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">height</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">area</span><span class="o">:</span> <span class="s2">&#34;$compute:my.multiply({self}.width, {self}.height)&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">my</span><span class="p">.</span><span class="nx">multiply</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">a</span> <span class="o">*</span> <span class="nx">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">r</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">rect</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">r</span><span class="p">.</span><span class="nx">area</span><span class="p">;</span>          <span class="c1">// 12
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">r</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">r</span><span class="p">.</span><span class="nx">area</span><span class="p">;</span>          <span class="c1">// 20
+</span></span></span></code></pre></div><p>The function may be async (returning a <code>Promise</code> or async iterator, as for
+<a href="../../docs/fluid-signals#cellasynccomputedfn-staticsources-props"><code>asyncComputed</code></a>); the value is pending until it settles.</p>
+<h3 id="effect">$effect</h3>
+<p>A side effect upon the world outside the component tree, run whenever its resolved arguments change, during
+<code>fluid.cell.stabilize()</code>. Effects are allocated only once the component is fully available, are not run while any
+argument is unavailable, and are disposed when the component is destroyed or the record is withdrawn from its layers.</p>
+<ul>
+<li><code>includeSource</code>, <code>excludeSource</code> (full form only) - restrict notification by update source, as for
+<a href="../../docs/fluid-signals#fluidcelleffectfn-staticsources-props"><code>fluid.cell.effect</code></a>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.logger&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">count</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">log</span><span class="o">:</span> <span class="s2">&#34;$effect:my.log({self}.count)&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">my</span><span class="p">.</span><span class="nx">log</span> <span class="o">=</span> <span class="nx">count</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Count is &#34;</span> <span class="o">+</span> <span class="nx">count</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">logger</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">.</span><span class="nx">stabilize</span><span class="p">();</span>   <span class="c1">// Count is 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">l</span><span class="p">.</span><span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">.</span><span class="nx">stabilize</span><span class="p">();</span>   <span class="c1">// Count is 2
+</span></span></span></code></pre></div><h3 id="method">$method</h3>
+<p>A function member invocable on the component. Arguments are resolved at call time. <code>$method</code> does not produce a signal
+(other than to the extent that every Infusion value is a signal) like <code>$compute</code> and <code>$effect</code> but has a similar syntax,
+including a short form variant.</p>
+<ul>
+<li><strong>Without <code>args</code></strong>: the function is called with the component followed by the caller&rsquo;s arguments: <code>func(that, ...args)</code>.</li>
+<li><strong>With <code>args</code></strong>: the call&rsquo;s positional arguments are available as contexts <code>{0}</code>, <code>{1}</code>, &hellip; An optional <code>:label</code>
+suffix on a reference documents it and is otherwise ignored. A positional argument not supplied is <code>undefined</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.taxa&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">entries</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;Vicia hirsuta&#34;</span><span class="p">,</span> <span class="s2">&#34;Stellaria graminea&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">lookup</span><span class="o">:</span> <span class="s2">&#34;$method:my.lookup({self}.entries, {0}:query, {1}:max)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">describe</span><span class="o">:</span> <span class="s2">&#34;$method:my.describe&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">my</span><span class="p">.</span><span class="nx">lookup</span> <span class="o">=</span> <span class="p">(</span><span class="nx">entries</span><span class="p">,</span> <span class="nx">query</span><span class="p">,</span> <span class="nx">max</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">entries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">e</span> <span class="p">=&gt;</span> <span class="nx">e</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">query</span><span class="p">)).</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">my</span><span class="p">.</span><span class="nx">describe</span> <span class="o">=</span> <span class="p">(</span><span class="nx">that</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">prefix</span> <span class="o">+</span> <span class="nx">that</span><span class="p">.</span><span class="nx">entries</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">my</span><span class="p">.</span><span class="nx">taxa</span><span class="p">().</span><span class="nx">lookup</span><span class="p">(</span><span class="s2">&#34;Vicia&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>   <span class="c1">// [&#34;Vicia hirsuta&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">my</span><span class="p">.</span><span class="nx">taxa</span><span class="p">().</span><span class="nx">describe</span><span class="p">(</span><span class="s2">&#34;Count: &#34;</span><span class="p">);</span>  <span class="c1">// &#34;Count: 2&#34;
+</span></span></span></code></pre></div><h2 id="other-directives">Other directives</h2>
+<h3 id="component">$component</h3>
+<p>Declares a subcomponent at this member. The record body is a layer merged at <code>subcomponent</code> precedence and must
+name <code>$layers</code>. The subcomponent lives as long as the record is present in its parent&rsquo;s merged layers: removing or
+changing the record destroys or reconfigures it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.app&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">title</span><span class="o">:</span> <span class="s2">&#34;Inbox&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">header</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.header&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">text</span><span class="o">:</span> <span class="s2">&#34;{app}.title&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">my</span><span class="p">.</span><span class="nx">app</span><span class="p">().</span><span class="nx">header</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>   <span class="c1">// &#34;Inbox&#34;
+</span></span></span></code></pre></div><h3 id="for">$for</h3>
+<p>Within a <code>$component</code> record, instantiates one subcomponent per element of a collection, kept in step with it. The
+member then holds a <code>fluid.componentList</code> whose <code>list</code> holds the instances.</p>
+<ul>
+<li><code>source</code> - Reference to an array or object</li>
+<li><code>valueAs</code> - Name under which each collection element is visible in its corresponding subcomponent (via <code>{self}.&lt;valueAs&gt;</code>). When the
+source is sited, this is a live reference to the element and can be written through.</li>
+<li><code>keyAs</code> - Name under which the collection element&rsquo;s index or key is visible in its subcomponent</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.editorHolder&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">names</span><span class="o">:</span> <span class="p">{</span><span class="nx">$reactiveRoot</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;alpha&#34;</span><span class="p">]},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">editors</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.editor&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$for</span><span class="o">:</span> <span class="p">{</span><span class="nx">source</span><span class="o">:</span> <span class="s2">&#34;{editorHolder}.names&#34;</span><span class="p">,</span> <span class="nx">valueAs</span><span class="o">:</span> <span class="s2">&#34;name&#34;</span><span class="p">,</span> <span class="nx">keyAs</span><span class="o">:</span> <span class="s2">&#34;index&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">label</span><span class="o">:</span> <span class="s2">&#34;$compute:my.label({self}.index, {self}.name)&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">h</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">editorHolder</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">h</span><span class="p">.</span><span class="nx">names</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&#34;beta&#34;</span><span class="p">);</span>      <span class="c1">// Second editor is created on stabilize
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">h</span><span class="p">.</span><span class="nx">editors</span><span class="p">.</span><span class="nx">list</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>     <span class="c1">// 2
+</span></span></span></code></pre></div><h3 id="if">$if</h3>
+<p>Within a <code>$component</code> record, a reference whose truthiness controls whether the subcomponent exists.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.task&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">assigned</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">assignee</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.assignee&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$if</span><span class="o">:</span> <span class="s2">&#34;{task}.assigned&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><h3 id="reactiveroot">$reactiveRoot</h3>
+<p>Marks a value as an independently writable unit of reactive data, typically structured data which will be
+mutated. Writes at or beneath the root through the component proxy produce a fresh immutable value of the whole root,
+notifying dependents of the root and of any path within it. The value is either literal data, or a string
+reference, in which case the root is bound to the referenced site. Must be the only key in its record.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.todoList&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">todos</span><span class="o">:</span> <span class="p">{</span><span class="nx">$reactiveRoot</span><span class="o">:</span> <span class="p">[{</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&#34;Write docs&#34;</span><span class="p">,</span> <span class="nx">done</span><span class="o">:</span> <span class="kc">false</span><span class="p">}]},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">remaining</span><span class="o">:</span> <span class="s2">&#34;$compute:my.countRemaining({self}.todos)&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">my</span><span class="p">.</span><span class="nx">countRemaining</span> <span class="o">=</span> <span class="nx">todos</span> <span class="p">=&gt;</span> <span class="nx">todos</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">t</span> <span class="p">=&gt;</span> <span class="o">!</span><span class="nx">t</span><span class="p">.</span><span class="nx">done</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">todoList</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">t</span><span class="p">.</span><span class="nx">todos</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">done</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>   <span class="c1">// Immutable update of todos
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">t</span><span class="p">.</span><span class="nx">remaining</span><span class="p">;</span>              <span class="c1">// 0
+</span></span></span></code></pre></div><h3 id="importmap">$importMap</h3>
+<p><code>{Object&lt;String, String&gt;}</code> - Maps layer names to module paths (<code>.js</code>, or <code>.vue</code> single-file components) from which
+their definitions are loaded on demand. This demand occurs when a component derived from the layer name begins to
+instantiate. While loading, dependent components are unavailable with pending status.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.app&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$importMap</span><span class="o">:</span> <span class="p">{</span><span class="s2">&#34;my.app.chart&#34;</span><span class="o">:</span> <span class="s2">&#34;%my-app/src/chart.vue&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><h3 id="linkage">$linkage</h3>
+<p>Registers a rule, for as long as the containing component exists, that any component bearing all layer names of <code>inputLayers</code>
+also acquires <code>outputLayers</code>. Allows a layer to be adapted to a context its author did not anticipate. Accepts a
+single linkage or an array.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.plugin&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">darkTables</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$linkage</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">inputLayers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;my.table&#34;</span><span class="p">,</span> <span class="s2">&#34;my.darkTheme&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">outputLayers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;my.darkTable&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>The linkage rule&rsquo;s effect lasts as long as the component holding it. Linkages are sometimes called
+<a href="https://hal.science/hal-01854418/file/AnAnatomyOfInteraction_authorversion.pdf">co-occurrences</a>.</p>
+<h3 id="bindable">$bindable</h3>
+<blockquote>
+<p><strong>Experimental and unstable.</strong> The syntax and semantics of <code>$bindable</code> are likely to change.</p>
+</blockquote>
+<p>A value produced by binding to a resource in the world, eagerly as soon as the arguments to <code>bind</code> are available,
+and released by <code>unbind</code> when any argument becomes unavailable or the record is disposed. Unlike <code>$compute</code>, a
+change in available arguments does not rebind.</p>
+<ul>
+<li><code>bind</code> - A function record (or compact <code>&quot;func(args)&quot;</code> string) producing the bound value</li>
+<li><code>unbind</code> - Optional function record, receiving the bound value (by default, or via <code>{boundValue}</code> in its <code>args</code>)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.socketHolder&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">url</span><span class="o">:</span> <span class="s2">&#34;wss://example.org/feed&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">socket</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$bindable</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">bind</span><span class="o">:</span> <span class="s2">&#34;my.openSocket({self}.url)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">unbind</span><span class="o">:</span> <span class="s2">&#34;my.closeSocket({boundValue})&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><h3 id="variety">$variety</h3>
+<p>Used to categorise layers. Currently seen values are <code>&quot;framework&quot;</code> which marks a layer as part of the Infusion framework,
+and <code>&quot;frameworkAux&quot;</code> which marks it as part of the Infusion layer editing UI. Framework
+layers are not entered into <a href="#context-names">scope</a> by name.</p>
+<h2 id="additional-javascript-api">Additional JavaScript API</h2>
+<p>A few public-facing methods are exposed as utilities to help with reading and writing to the component tree but their
+use is expected to be rare:</p>
+<h3 id="fluidlivequeryilselectorroot-selector-flat">fluid.liveQueryILSelector(root, selector, [flat])</h3>
+<ul>
+<li><code>{Component} root</code> - The component below which to search</li>
+<li><code>{String} selector</code> - An <a href="#selectors">IL selector</a>, matched downwards from <code>root</code> (which is not itself a candidate)</li>
+<li><code>{Boolean} [flat=false]</code> - If <code>true</code>, consider only direct children of <code>root</code></li>
+<li>Returns: <code>{Cell&lt;Component[]|Unavailable&gt;}</code> - A cell holding all matching components in tree order</li>
+</ul>
+<p>Returns a live, cached cell which is recomputed whenever components below <code>root</code> are created, destroyed or change
+layers. If any traversed component is unavailable, the cell holds the merged unavailable value instead.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.app.editor&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">editors</span> <span class="o">=</span> <span class="nx">fluid</span><span class="p">.</span><span class="nx">liveQueryILSelector</span><span class="p">(</span><span class="nx">app</span><span class="p">,</span> <span class="s2">&#34;my.app.editor&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">.</span><span class="nx">effect</span><span class="p">(</span><span class="nx">list</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">length</span> <span class="o">+</span> <span class="s2">&#34; editors&#34;</span><span class="p">),</span> <span class="p">[</span><span class="nx">editors</span><span class="p">]);</span>
+</span></span></code></pre></div><p>In most cases, the same result should be achieved declaratively via a <a href="#selectors">selector reference</a> <code>&quot;{self my.app.editor}&quot;</code>,
+subject to current framework limitations.</p>
+<h3 id="fluidqueryilselectorroot-selector-flat">fluid.queryILSelector(root, selector, [flat])</h3>
+<p>As <code>fluid.liveQueryILSelector</code>, but returns a one-off array.</p>
+<h3 id="fluidcontextreftopromisecontextref-root">fluid.contextRefToPromise(contextRef, root)</h3>
+<ul>
+<li><code>{String} contextRef</code> - A <a href="#references">context reference</a>, e.g. <code>&quot;{self}.results&quot;</code></li>
+<li><code>{Component} root</code> - The component from whose point of view the reference is resolved</li>
+<li>Returns: <code>{Promise&lt;Any&gt;}</code> - Resolves with the first available value of the reference</li>
+</ul>
+<h3 id="utilities">Utilities</h3>
+<ul>
+<li><code>fluid.isComponent(value)</code> - <code>true</code> if <code>value</code> is a component instance</li>
+<li><code>fluid.isDestroyed(that, [strict])</code> - <code>true</code> if destruction of <code>that</code> has begun (or with <code>strict</code>, completed)</li>
+<li><code>fluid.unwrapProxy(value)</code> - The plain value underlying a component or mat proxy</li>
+<li><code>fluid.hasLayer(that, layerName)</code> - <code>true</code> if <code>layerName</code> is in the component&rsquo;s resolved <code>$layers</code></li>
+</ul>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>From components designated by ordinary user configuration - under the covers, components with unavailable
+constituents actually continue to evaluate and elaborate as normal, routing around the individual unavailable
+values until they resolve. Inspector tools can use the Infusion JavaScript API to expose this process.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        
+        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;Fluid&#43;Integration&#43;Language&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-integration-language%2F" target="_blank" title="Share on BlueSky">
+          <i class="fab fa-fw fa-bluesky"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fdocs%2ffluid-integration-language%2f&amp;text=Fluid%20Integration%20Language&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fdocs%2ffluid-integration-language%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fdocs%2ffluid-integration-language%2f&amp;title=Fluid%20Integration%20Language" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fdocs%2ffluid-integration-language%2f&amp;title=Fluid%20Integration%20Language" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="../../docs/fluid-signals/" data-toggle="tooltip" data-placement="top" title="Fluid Signals API">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      <script src="https://giscus.app/client.js"
+                data-repo="amb26/ponder"
+                data-repo-id="R_kgDOOKllGA"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOOKllGM4CvhAS"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="0"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script></div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="../../">Antranig Basman</a>
+            
+          
+          &nbsp;&copy;
+          2026
+
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.121.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="../../js/katex.min.js"></script>
+<script defer src="../../js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script src="../../js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+
+
+
+
+
+    
+  </body>
+</html>

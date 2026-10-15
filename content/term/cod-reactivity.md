@@ -91,7 +91,7 @@ and effects. This needs to become a more refined ontology which is able to disti
 priority in reactive computations ---
 shading the spectrum of reactive primitives between computeds and effects rather than making
 a categorical separation between them. This work is described in my recent article on 
-[fully deferred stabilization](/post/2026-06-28-fully-deferred-stabilization/) which views a reactive engine
+[fully deferred stabilization](/post/2026-06-28-fully-deferred-stabilization/) (FDS) which views a reactive engine
 as being parameterised by the data structure forming its work list: This needs to move from being a stack (whether
 the program stack, or an explicit stack) to being a priority queue.
 
@@ -105,5 +105,15 @@ when speaking of glitches in his reactive systems Matrix/Cells that
 and modern Infusion's "give every reactive cell an intelligible global name" goes a long way to making cod designs
 fairly intelligible. But a mature reactive system delivering strong consistency and provenance guarantees will in
 the end have to become cod-free.
+
+## Further thoughts \[October 2026]
+
+Practical experience with rebasing Infusion onto the now functioning fluid.cell,
+and reflections on FDS repositions this thinking
+rather. Whilst cod is in itself undesirable - at the least at the user level of design - it seems essentially unavoidable
+at some levels of framework design. Some reactive relations, e.g. scopes, are impractical to represent using standard
+"node and edge" graph representations, and FDS implies the possibility of blessing some cod constructions and letting them
+become glitch-free. There's even the possibility of tracking provenance across cod relationships by constructions
+fluid.cell such as fits and source tracking.
 
 [^1]: E.g. "Ovum crackus, totale knackus"

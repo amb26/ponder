@@ -60,7 +60,7 @@ Typical of cod reactivity is the use of &ldquo;broken graphs&rdquo; &mdash; rath
   "headline": "Cod reactivity",
   "description" : "Cod reactivity (by analogy with Cod Latin)1 is a kind of semi-literate adoption of reactivity, reflecting either deficiencies in the underlying reactive implementation or the user\u0026rsquo;s understanding of it.\nTypical of cod reactivity is the use of \u0026ldquo;broken graphs\u0026rdquo; \u0026mdash; rather than being joined up into a coherent and connected overall application graph, the reactive graph is broken up into several formally isolated reactive islands. These are either self-standing little patches of reactivity, cranked manually by imperative updates to source signals, or else orchestrated by means of effects which bridge updates from one island to the other.",
   "inLanguage" : "en",
-  "wordCount":  728 ,
+  "wordCount":  828 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -295,7 +295,7 @@ and effects. This needs to become a more refined ontology which is able to disti
 priority in reactive computations &mdash;
 shading the spectrum of reactive primitives between computeds and effects rather than making
 a categorical separation between them. This work is described in my recent article on
-<a href="../../post/2026-06-28-fully-deferred-stabilization/">fully deferred stabilization</a> which views a reactive engine
+<a href="../../post/2026-06-28-fully-deferred-stabilization/">fully deferred stabilization</a> (FDS) which views a reactive engine
 as being parameterised by the data structure forming its work list: This needs to move from being a stack (whether
 the program stack, or an explicit stack) to being a priority queue.</p>
 <p>All the same, cod reactivity could take one quite far. Ken Tilton, primordial reactive guru,
@@ -308,6 +308,14 @@ they broke an application and had to be resolved.</p>
 <p>and modern Infusion&rsquo;s &ldquo;give every reactive cell an intelligible global name&rdquo; goes a long way to making cod designs
 fairly intelligible. But a mature reactive system delivering strong consistency and provenance guarantees will in
 the end have to become cod-free.</p>
+<h2 id="further-thoughts-october-2026">Further thoughts [October 2026]</h2>
+<p>Practical experience with rebasing Infusion onto the now functioning fluid.cell,
+and reflections on FDS repositions this thinking
+rather. Whilst cod is in itself undesirable - at the least at the user level of design - it seems essentially unavoidable
+at some levels of framework design. Some reactive relations, e.g. scopes, are impractical to represent using standard
+&ldquo;node and edge&rdquo; graph representations, and FDS implies the possibility of blessing some cod constructions and letting them
+become glitch-free. There&rsquo;s even the possibility of tracking provenance across cod relationships by constructions
+fluid.cell such as fits and source tracking.</p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>

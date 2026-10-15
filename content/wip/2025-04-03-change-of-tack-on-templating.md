@@ -7,7 +7,7 @@ I get to staring at the [markup templates](https://github.com/IMERSS/imerss-bioi
 that were already implemented for the 
 [Galiano 2023 Bioblitz](https://imerss.github.io/galiano-bioblitz-2023/Galiano-BioBlitz-2023-Reknitted.html)
 and thinking how to adapt/reuse them for the upcoming 
-[Diatoms of the Salish Sea](https://imerss.org/2020/10/04/diatoms-of-the-salish-sea-2/)
+[Diatoms of the Salish Sea](https://imerss.org/projects/diatoms/)
 viz forces me to put some things in focus about how templating is going to have to work for these communities. I'd 
 vaguely hoped that the details of how Infusion templating was going to interact with Hugo templating would
 somehow just "come out in the wash" but naturally this isn't going to happen without some kind of focused plan!
