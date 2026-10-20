@@ -30,5 +30,19 @@
       <guid>https://ponder.org.uk/docs/fluid-signals-background/</guid>
       <description>This page contains background information motivating the design of fluid.cell, the reactive primitive built to support Infusion 6, explaining how it differs from traditional reactive libraries. There are also API docs for fluid.cell and also a more extended essay explaining its goals in the context of a malleable substrate.&#xA;I chose the name &amp;ldquo;cell&amp;rdquo;, rather than &amp;ldquo;signal&amp;rdquo; which is more common in the 2020s JavaScript reactive community, in honour of 3 traditions:</description>
     </item>
+    <item>
+      <title>Fluid View</title>
+      <link>https://ponder.org.uk/docs/fluid-view/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/fluid-view/</guid>
+      <description>This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, and the machinery of views. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).&#xA;The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.&#xA;A first component A Single File Component is a .</description>
+    </item>
+    <item>
+      <title>Potentia Transmission Format</title>
+      <link>https://ponder.org.uk/docs/fluid-ptf/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/fluid-ptf/</guid>
+      <description>This page documents the Potentia Transmission Format (PTF), a plain-text document format which captures everything required to reconstruct a live Fluid Infusion 6 component somewhere else: in another page, another application or another user&amp;rsquo;s session. It is implemented in FluidPTF.js. It transmits a component&amp;rsquo;s layers, its potentia and the contents of its live layer.&#xA;The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.</description>
+    </item>
   </channel>
 </rss>

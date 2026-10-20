@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+      <title>Fluid View - Antranig Basman</title>
+
+  <meta name="description" content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, and the machinery of views. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).
+The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.
+A first component A Single File Component is a .">
+  <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Antranig Basman",
+    
+    "url": "https:\/\/ponder.org.uk"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/ponder.org.uk"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk\/docs\/fluid-view\/",
+          "name": "Fluid view"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Antranig Basman"
+  },
+  "headline": "Fluid View",
+  "description" : "This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, and the machinery of views. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.\nA first component A Single File Component is a .",
+  "inLanguage" : "en",
+  "wordCount":  2534 ,
+  "datePublished" : "0001-01-01T00:00:00\u002b00:00",
+  "dateModified" : "0001-01-01T00:00:00\u002b00:00",
+  "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+  "keywords" : [ "" ],
+  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/docs\/fluid-view\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/ponder.org.uk",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="Fluid View" />
+<meta property="og:description" content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, and the machinery of views. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).
+The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.
+A first component A Single File Component is a .">
+<meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
+<meta property="og:url" content="https://ponder.org.uk/docs/fluid-view/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Antranig Basman" />
+
+  <meta name="twitter:title" content="Fluid View" />
+  <meta name="twitter:description" content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, and the machinery of views. It builds on the Fluid Integration …">
+  <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@amb26ponder" />
+  <meta name="twitter:creator" content="@amb26ponder" />
+  <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.121.0">
+  <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
+  <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
+<script type="text/javascript" src="../../js/ponder.js" ></script>
+
+  </head>
+  <body class="infusion-docs" >
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-ponder">
+      <a class="navbar-ponder-brand" href="../../">Antranig Basman</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <svg width="36" height="36" viewBox="0 0 24 24" stroke="#888" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 7L4 7" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 12L4 12" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 17L4 17" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="nav navbar-nav navbar-right">
+          
+          
+          <li>
+            <a title="Posts" href="../../post">Posts</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="WiP" href="../../wip">WiP</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="About" href="../../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Docs" href="../../docs">Docs</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Communities" href="../../communities">Communities</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Projects" href="../../projects">Projects</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Terms" href="../../term">Terms</a>
+          </li>
+          
+          
+
+          
+
+          
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="header-row">
+          
+
+            <div class="infusion-docs-heading">
+              
+                <h1>Fluid View  </h1>
+              
+              
+                <hr class="small">
+              
+              
+
+            </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <article role="main" class="blog-post">
+        <p>This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the
+Single File Component (SFC) format, and the machinery of views. It builds on the
+<a href="../../docs/fluid-integration-language">Fluid Integration Language</a> (layers, references, <code>$compute</code>, <code>$method</code>, <code>$effect</code>,
+<code>$component</code>) and on <a href="../../docs/fluid-signals"><code>fluid.cell</code></a> (signals, effects, source tracking).</p>
+<p>The raw markdown underlying these docs is available on <a href="https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/fluid-view.md">GitHub</a>,
+suitable for direct ingestion by your friendly local neighbourhood intelligence.</p>
+<h2 id="a-first-component">A first component</h2>
+<p>A Single File Component is a <code>.vue</code> file holding a <code>&lt;script&gt;</code> defining one layer, a <code>&lt;template&gt;</code> holding its markup,
+and optionally <code>&lt;style&gt;</code>. Here is a complete counter, in a file named <code>my-counter.vue</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.counter&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">count</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">increment</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$method</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">func</span><span class="o">:</span> <span class="nx">self</span> <span class="p">=&gt;</span> <span class="nx">self</span><span class="p">.</span><span class="nx">count</span><span class="o">++</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">args</span><span class="o">:</span> <span class="s2">&#34;{self}&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;counter&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Clicked @{count} times<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">onclick</span><span class="o">=</span><span class="s">&#34;{self}.increment()&#34;</span><span class="p">&gt;</span>+1<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">counter</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">gap</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span></code></pre></div><ul>
+<li><code>@{count}</code> in text or an attribute value binds live to the component&rsquo;s <code>count</code> member.</li>
+<li><code>@onclick=&quot;{self}.increment()&quot;</code> invokes the component&rsquo;s <code>increment</code> method when the button is clicked.</li>
+<li><code>self.count++</code> writes through the component proxy into its live layer. The text node updates, and nothing else
+in the DOM is touched.</li>
+</ul>
+<p>To use it, declare the module and import the SFC in a host page, and mark an element with the layers to instantiate
+on it:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">fluid-module</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;infusion-6&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;../../&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">fluid-module</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- Infusion core script tags here --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">fluid-module</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;myApp&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;./&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">fluid-module</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">fluid-import</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;%myApp/sfc/my-counter.vue&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">fluid-import</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">fluid-layers</span><span class="o">=</span><span class="s">&#34;my.counter&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span></code></pre></div><ul>
+<li><code>&lt;fluid-module id src&gt;</code> registers a module root, referred to in paths as <code>%id</code>.</li>
+<li><code>&lt;fluid-import src [layer]&gt;</code> loads an SFC on demand. The layer name defaults to the file name with <code>-</code> replaced by
+<code>.</code>, so <code>my-counter.vue</code> must define <code>my.counter</code>.</li>
+<li><code>fluid-layers=&quot;layerA layerB&quot;</code> on any element instantiates a component with those layers, rendering into that
+element. The element is watched live: elements added to the document later are booted too.</li>
+</ul>
+<p>A component can equally be created from JavaScript with <code>my.counter({container: element})</code>, which renders into
+<code>element</code>.</p>
+<h3 id="what-the-sfc-loader-does">What the SFC loader does</h3>
+<p>When the SFC is loaded, its script is patched before execution:</p>
+<ul>
+<li><code>$layers</code> defaults to <code>[&quot;fluid.component&quot;, &quot;fluid.sfcLayer&quot;]</code>.</li>
+<li>A <code>view</code> subcomponent is added, with layer <code>fluid.sfcTemplateViewComponent</code>, whose template is the SFC&rsquo;s
+<code>&lt;template&gt;</code> block (see <a href="#views">Views</a>).</li>
+<li>Each <code>&lt;style&gt;</code> and further <code>&lt;script&gt;</code> block is injected into the document. <code>&lt;script src=&quot;...&quot; data-fl-scope=&quot;global&quot;&gt;</code>
+loads a classic global script. <code>src</code> paths may use <code>%module</code> prefixes.</li>
+</ul>
+<p>Editing the file and reloading it, for example through the Fluid editor, updates every live instance in place.</p>
+<h2 id="template-binding-syntax">Template binding syntax</h2>
+<p>Templates are plain HTML, with bindings introduced by <code>@</code>. References are resolved in the context of the component
+that owns the view, exactly as in configuration.</p>
+<h3 id="text-and-attribute-interpolation-">Text and attribute interpolation: <code>@{...}</code></h3>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@{count}</code></td>
+<td>Shorthand for <code>{self}.count</code></td>
+</tr>
+<tr>
+<td><code>@{todo.text}</code></td>
+<td>Shorthand for <code>{self}.todo.text</code></td>
+</tr>
+<tr>
+<td><code>@{{todoList}.todos.length}</code></td>
+<td>A full <a href="../../docs/fluid-integration-language#references">context reference</a></td>
+</tr>
+</tbody>
+</table>
+<p>Interpolations can be mixed with literal text, as in <code>title=&quot;Busy: @{busy}&quot;</code>, which is rendered as a string. Every
+binding is a fine-grained effect bound to its own text node or attribute. A change updates exactly that node, with no
+re-rendering of the surrounding tree.</p>
+<p>If a referenced value is unavailable, for example still loading or an error, a text binding renders the error in
+place, and an attribute binding removes the attribute.</p>
+<h3 id="attribute-and-property-binding">Attribute and property binding</h3>
+<p>An attribute whose whole value is a single <code>@{...}</code> binds the <strong>raw value</strong>, not its string form. This allows
+booleans and live DOM state to be bound directly:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">disabled</span><span class="o">=</span><span class="s">&#34;@{busy}&#34;</span> <span class="na">aria-pressed</span><span class="o">=</span><span class="s">&#34;@{busy}&#34;</span><span class="p">&gt;</span>Go<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;@{state.prompt}&#34;</span><span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;checkbox&#34;</span> <span class="na">checked</span><span class="o">=</span><span class="s">&#34;@{done}&#34;</span><span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">textarea</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;@{notes}&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">textarea</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">select</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;@{choice}&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;a&#34;</span><span class="p">&gt;</span>A<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;b&#34;</span><span class="p">&gt;</span>B<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>How a bound value is applied:</p>
+<table>
+<thead>
+<tr>
+<th>Bound value</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>false</code>, <code>null</code>, <code>undefined</code>, unavailable</td>
+<td>Attribute removed. Exception: <code>aria-*</code> attributes render <code>false</code> as <code>&quot;false&quot;</code></td>
+</tr>
+<tr>
+<td><code>true</code> on a boolean attribute</td>
+<td>Attribute present with empty value, e.g. <code>disabled=&quot;&quot;</code></td>
+</tr>
+<tr>
+<td><code>&quot;false&quot;</code> on a boolean attribute</td>
+<td>Treated as <code>false</code></td>
+</tr>
+<tr>
+<td>Anything else</td>
+<td>Attribute set to <code>String(value)</code></td>
+</tr>
+</tbody>
+</table>
+<p>The boolean attributes are <code>disabled</code>, <code>checked</code>, <code>selected</code>, <code>readonly</code>, <code>required</code>, <code>hidden</code>, <code>multiple</code>, <code>open</code>,
+<code>inert</code>, <code>autofocus</code>, <code>novalidate</code> and <code>indeterminate</code>.</p>
+<p><strong>Live state.</strong> Some attributes only hold a default, while the element&rsquo;s real state is held in a DOM property that the
+user can change. For these attributes the binding writes <strong>both</strong> the attribute and the property, and listens for the
+user&rsquo;s changes:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Property</th>
+<th>Event listened to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td><code>value</code></td>
+<td><code>input</code></td>
+</tr>
+<tr>
+<td><code>checked</code></td>
+<td><code>checked</code></td>
+<td><code>change</code></td>
+</tr>
+<tr>
+<td><code>selected</code></td>
+<td><code>selected</code></td>
+<td><code>change</code></td>
+</tr>
+<tr>
+<td><code>open</code></td>
+<td><code>open</code></td>
+<td><code>toggle</code></td>
+</tr>
+<tr>
+<td><code>indeterminate</code></td>
+<td><code>indeterminate</code></td>
+<td><code>change</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Write-back.</strong> When the user changes the element, the new value is written back to the bound model site, so
+<code>&lt;input value=&quot;@{text}&quot;/&gt;</code> is a two-way binding with no handler code. Writing into a
+<a href="../../docs/fluid-integration-language#reactiveroot"><code>$reactiveRoot</code></a> path such as <code>@{state.prompt}</code> updates that root
+immutably.</li>
+<li><strong>Read-only sources.</strong> If the site holds a computed value (<code>$compute</code>), it is not written. The attribute is
+re-materialised from the element&rsquo;s state, so the page still serialises faithfully.</li>
+<li><strong>Special elements.</strong> <code>&lt;textarea value=&quot;@{...}&quot;&gt;</code> is materialised as the textarea&rsquo;s content. <code>&lt;select value=&quot;@{...}&quot;&gt;</code>
+is materialised as <code>selected</code> on the matching <code>&lt;option&gt;</code>.</li>
+<li><strong>No redundant writes.</strong> A property is written only if it differs, so binding <code>value</code> doesn&rsquo;t disturb the caret in a
+focused input.</li>
+</ul>
+<p>Because both the attribute and the property are kept in step, the live DOM always serialises to markup that reflects
+what the user sees.</p>
+<h3 id="conditional-classes-class">Conditional classes: <code>@class</code></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;todo&#34;</span> <span class="err">@</span><span class="na">class</span><span class="o">=</span><span class="s">&#34;completed:@{todo.completed}, is-info:!@{todo.completed}&#34;</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p><code>@class</code> takes a comma-separated list of <code>className:@{reference}</code> pairs. Each class is present while its reference is
+truthy and available. A <code>!</code> before the reference negates it in place: <code>is-info:!@{todo.completed}</code> applies <code>is-info</code>
+while the item is <em>not</em> completed. Classes in a static <code>class</code> attribute are kept.</p>
+<h3 id="events-onevent">Events: <code>@on&lt;event&gt;</code></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">onclick</span><span class="o">=</span><span class="s">&#34;{self}.increment()&#34;</span><span class="p">&gt;</span>+1<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">input</span> <span class="err">@</span><span class="na">onkeyup</span><span class="o">=</span><span class="s">&#34;my.app.keyUp({0}, {todoList}.todos)&#34;</span><span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">onclick</span><span class="err">.</span><span class="na">stop</span><span class="o">=</span><span class="s">&#34;{self}.remove()&#34;</span><span class="p">&gt;</span>x<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">onclick</span><span class="o">=</span><span class="s">&#34;{self}.open = !{self}.open&#34;</span><span class="p">&gt;</span>Toggle<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">onclick</span><span class="o">=</span><span class="s">&#34;{self}.mode = edit&#34;</span><span class="p">&gt;</span>Edit<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Invocation.</strong> The value is a compact function call in the syntax of
+<a href="../../docs/fluid-integration-language#method"><code>$method</code></a>. The function is either a method reference such as
+<code>{self}.increment()</code> or a global function name. Within the arguments, <code>{0}</code> is the DOM event.</li>
+<li><strong>Assignment.</strong> <code>target = source</code> writes to a component site. <code>source</code> is a reference, read at the time of the
+event, or a literal (<code>edit</code>, <code>3</code>, <code>true</code>). A <code>!</code> before the source negates it in place, so
+<code>{self}.open = !{self}.open</code> is a toggle.</li>
+<li><strong>Modifiers.</strong> These are dot suffixes on the event name, following Vue:
+<ul>
+<li><code>.stop</code> and <code>.prevent</code> call <code>stopPropagation()</code> and <code>preventDefault()</code>.</li>
+<li><code>.self</code> only fires when the event&rsquo;s target is the element itself.</li>
+<li><code>.ctrl</code>, <code>.shift</code>, <code>.alt</code> and <code>.meta</code> require that key to be held. <code>.exact</code> additionally forbids any other.</li>
+<li><code>.left</code>, <code>.middle</code> and <code>.right</code> filter mouse buttons. <code>click.right</code> listens to <code>contextmenu</code>.</li>
+<li>For keyboard events, any other modifier names a key, e.g. <code>@onkeyup.enter</code>.</li>
+</ul>
+</li>
+<li><strong>After the handler.</strong> Every handler is run with update source <code>&quot;dom&quot;</code> (see <a href="#source-tracking-and-the-dom">Source tracking</a>),
+and is followed by <code>fluid.cell.stabilize()</code>.</li>
+</ul>
+<h3 id="subcomponents-id">Subcomponents: <code>@id</code></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="err">@</span><span class="na">id</span><span class="o">=</span><span class="s">&#34;todoItems&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;section&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p><code>@id=&quot;member&quot;</code> marks the element as the container for the subcomponent at <code>member</code> of the owning component. Its
+contents are taken as the subcomponent&rsquo;s template unless the subcomponent supplies its own. If <code>member</code> holds a
+component list (a <a href="../../docs/fluid-integration-language#for"><code>$component</code> with <code>$for</code></a>), each list member is rendered in
+sequence inside the element.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.todoList&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">todos</span><span class="o">:</span> <span class="p">{</span><span class="nx">$reactiveRoot</span><span class="o">:</span> <span class="p">[]},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">todoItems</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.todoItem&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$for</span><span class="o">:</span> <span class="p">{</span><span class="nx">source</span><span class="o">:</span> <span class="s2">&#34;{todoList}.todos&#34;</span><span class="p">,</span> <span class="nx">valueAs</span><span class="o">:</span> <span class="s2">&#34;todo&#34;</span><span class="p">,</span> <span class="nx">keyAs</span><span class="o">:</span> <span class="s2">&#34;index&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>Each <code>my.todoItem</code> then renders its own SFC template, in which <code>@{todo.text}</code> refers to its element of the list.
+Adding to or removing from <code>todos</code> creates or destroys exactly the corresponding item views.</p>
+<p>A subcomponent with <a href="../../docs/fluid-integration-language#if"><code>$if</code></a> renders into its <code>@id</code> element only while its
+condition is true.</p>
+<h2 id="views">Views</h2>
+<p>A component <em>has</em> a view rather than <em>being</em> one. Everything to do with rendering (container, template, virtual tree
+and the effects that patch the DOM) lives in a subcomponent at the member <code>view</code>. The component itself holds only model
+state and behaviour, and bears no view layers in its own <code>$layers</code>. An SFC adds the view automatically, but it can
+also be written out:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.greeting&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;World&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">view</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.templateViewComponent&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">template</span><span class="o">:</span> <span class="s2">&#34;&lt;p&gt;Hello, @{name}!&lt;/p&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">my</span><span class="p">.</span><span class="nx">greeting</span><span class="p">({</span><span class="nx">container</span><span class="o">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;greeting&#34;</span><span class="p">)});</span>
+</span></span></code></pre></div><p>The two components refer to each other across this boundary:</p>
+<ul>
+<li><strong>From the template.</strong> References in a view&rsquo;s template resolve against the view&rsquo;s parent, the owning component, so
+<code>@{name}</code> means the component&rsquo;s <code>name</code>, not the view&rsquo;s.</li>
+<li><strong>From the view&rsquo;s configuration.</strong> Configuration <em>on</em> the view, such as a <code>$compute</code> producing its <code>templateTree</code>,
+reaches the owning component as <code>{$parent}</code>.</li>
+<li><strong>From the component.</strong> The component reaches its view as <code>{self}.view</code>, e.g. <code>{self}.view.renderedContainer</code> for
+the rendered element. From JavaScript this is <code>that.view.container</code>.</li>
+</ul>
+<p>All view configuration therefore goes under <code>view.$component</code>, including settings such as <code>elideParent</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.footer&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">view</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">elideParent</span><span class="o">:</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>In an SFC this record needs no <code>$layers</code>, since the loader supplies them. A view inherited from another layer
+accumulates the configuration, by the usual <a href="../../docs/fluid-integration-language#merging-and-precedence">merging rules</a>.</p>
+<p>Because the view is a subcomponent, the same component can be rendered differently by giving its <code>view</code> other layers,
+and it can exist with no view at all, or share the view of another component by having it injected across:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.shared.component&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">view</span><span class="o">:</span> <span class="s2">&#34;{other.component}.view&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><h3 id="view-layers">View layers</h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Template source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fluid.viewComponent</code></td>
+<td>Base layer. Supplies <code>vTree</code>, a virtual DOM tree, directly or computed from <code>templateTree</code></td>
+</tr>
+<tr>
+<td><code>fluid.templateViewComponent</code></td>
+<td><code>template</code>, an HTML string</td>
+</tr>
+<tr>
+<td><code>fluid.sfcTemplateViewComponent</code></td>
+<td>The <code>&lt;template&gt;</code> block of the SFC named by <code>templateLayer</code> (added by the loader)</td>
+</tr>
+<tr>
+<td><code>fluid.selfTemplateViewComponent</code></td>
+<td>The markup its parent placed inside its <code>@id</code> element</td>
+</tr>
+<tr>
+<td><code>fluid.partialViewComponent</code></td>
+<td>Composites partial templates into a parent template at <code>relativeContainer</code>, e.g. <code>&quot;after:.footer&quot;</code></td>
+</tr>
+</tbody>
+</table>
+<p>Members of <code>fluid.viewComponent</code>:</p>
+<ul>
+<li><code>container</code> - The DOM element rendered into. A <code>container</code> passed to a creator function is forwarded here.</li>
+<li><code>templateTree</code> - The parsed template.</li>
+<li><code>vTree</code> - The activated virtual tree, with all bindings resolved.</li>
+<li><code>elideParent</code> - Defaults to <code>true</code>, meaning the template&rsquo;s root element is merged with the container rather than
+nested inside it. Set it to <code>false</code> to render the root element inside the container.</li>
+<li><code>renderedContainer</code> - A signal holding the element once it has been rendered.</li>
+<li><code>renderView</code> - The effect that patches <code>vTree</code> into <code>container</code>.</li>
+</ul>
+<p>Rendering is a reconciliation of the virtual tree against the existing DOM. Elements are reused wherever they match, so
+DOM state such as focus, selection and scroll position survives updates and template edits.</p>
+<h2 id="advanced-features">Advanced features</h2>
+<h3 id="generating-a-vtree-by-hand">Generating a vTree by hand</h3>
+<p>A view can compute its own <code>templateTree</code> rather than parsing a template. This is useful where the structure depends
+on data in ways the template syntax can&rsquo;t express. A vTree node is <code>{tag, attrs, children}</code> or <code>{text}</code>. Its
+attributes may use all of the binding syntax above, and are processed exactly as if they came from a template.</p>
+<p><code>fluid.UISelect</code>, from the todo list demo, renders a <code>&lt;select&gt;</code> from parallel arrays of values and names:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;fluid.UISelect&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">optionValues</span><span class="o">:</span> <span class="p">{</span><span class="nx">$reactiveRoot</span><span class="o">:</span> <span class="p">[]},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">optionNames</span><span class="o">:</span> <span class="p">{</span><span class="nx">$reactiveRoot</span><span class="o">:</span> <span class="p">[]},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">updateSelection</span><span class="o">:</span> <span class="s2">&#34;$method:fluid.UISelect.update({self}, {0}:event)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">view</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.UISelectView&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">UISelect</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">self</span><span class="p">.</span><span class="nx">selection</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;fluid.UISelectView&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.viewComponent&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">elideParent</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">templateTree</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$compute</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">func</span><span class="o">:</span> <span class="p">(</span><span class="nx">selection</span><span class="p">,</span> <span class="nx">optionValues</span><span class="p">,</span> <span class="nx">optionNames</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">({</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">tag</span><span class="o">:</span> <span class="s2">&#34;select&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">attrs</span><span class="o">:</span> <span class="p">{</span><span class="s2">&#34;@onchange&#34;</span><span class="o">:</span> <span class="s2">&#34;{self}.updateSelection({0})&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">children</span><span class="o">:</span> <span class="nx">optionValues</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">value</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">({</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">tag</span><span class="o">:</span> <span class="s2">&#34;option&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">attrs</span><span class="o">:</span> <span class="p">{</span><span class="nx">value</span><span class="p">,</span> <span class="p">...(</span><span class="nx">selection</span> <span class="o">===</span> <span class="nx">value</span> <span class="o">&amp;&amp;</span> <span class="p">{</span><span class="nx">selected</span><span class="o">:</span> <span class="s2">&#34;selected&#34;</span><span class="p">})},</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">children</span><span class="o">:</span> <span class="p">[{</span><span class="nx">text</span><span class="o">:</span> <span class="nx">optionNames</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">??</span> <span class="nx">value</span><span class="p">}]</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">args</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;{$parent}.selection&#34;</span><span class="p">,</span> <span class="s2">&#34;{$parent}.optionValues&#34;</span><span class="p">,</span> <span class="s2">&#34;{$parent}.optionNames&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>The <code>$compute</code> reruns whenever the selection or options change, and reconciliation updates only the nodes that
+differ. With <a href="#attribute-and-property-binding">live-state binding</a>, the same widget can now also be written as a
+template that binds <code>&lt;select value=&quot;@{selection}&quot;&gt;</code> and needs no change handler.</p>
+<p>A heavier variant computes the template as an <strong>HTML string</strong>. The editor&rsquo;s <code>fluid.substrateTree</code> (in
+<code>src/framework/edit/js/substrateTree.js</code>) renders a large recursive tree this way:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">view</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.templateViewComponent&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">template</span><span class="o">:</span> <span class="s2">&#34;$compute:fluid.substrateTree.renderTemplate({$parent}, {$parent}.rootEntries, {$parent}.idToState)&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Here <code>renderTemplate</code> builds the markup imperatively, including <code>@on...</code> attributes on its root element so that events
+are delegated to a few handlers. The string is reparsed on every change, but reconciliation still keeps the DOM
+updates minimal. Choose this approach when building the markup recursively is simpler than composing subcomponents.</p>
+<h3 id="wrapping-an-external-widget-with-bindable">Wrapping an external widget with <code>$bindable</code></h3>
+<blockquote>
+<p><code>$bindable</code> is <strong>experimental and unstable</strong>. See <a href="../../docs/fluid-integration-language#bindable">its definition</a>.</p>
+</blockquote>
+<p>Some widgets, such as code editors, maps or charts, own a complex DOM and have their own lifecycle: they must be
+constructed once, on a real element, and kept alive while the component&rsquo;s configuration varies. <code>$bindable</code>
+constructs such an object as soon as its arguments are available, and doesn&rsquo;t rebuild it when they change.</p>
+<p><code>fluid.codemirror</code> (<code>src/framework/edit/sfc/fluid-codemirror.vue</code>) binds a CodeMirror editor to the textarea that
+its own view renders:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;fluid.codemirror&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">text</span><span class="o">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">view</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">elideParent</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">template</span><span class="o">:</span> <span class="s2">&#34;&lt;textarea&gt;@{text}&lt;/textarea&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">instance</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$bindable</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">bind</span><span class="o">:</span> <span class="s2">&#34;fluid.codemirror.construct({self}, {self}.view.renderedContainer, {global}.CodeMirror)&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">readEffect</span><span class="o">:</span> <span class="s2">&#34;$effect:fluid.codemirror.updateText({self}.instance, {self}.text)&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">codemirror</span><span class="p">.</span><span class="nx">construct</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">container</span><span class="p">,</span> <span class="nx">CodeMirror</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">instance</span> <span class="o">=</span> <span class="nx">CodeMirror</span><span class="p">.</span><span class="nx">fromTextArea</span><span class="p">(</span><span class="nx">container</span><span class="p">.</span><span class="nx">firstElementChild</span><span class="p">,</span> <span class="p">{</span><span class="nx">lineNumbers</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">instance</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;change&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">self</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">instance</span><span class="p">.</span><span class="nx">getValue</span><span class="p">());</span>   <span class="c1">// Widget -&gt; model
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">fluid</span><span class="p">.</span><span class="nx">disableRendering</span><span class="p">(</span><span class="nx">self</span><span class="p">);</span>   <span class="c1">// CodeMirror now owns this markup
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="nx">instance</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>The pattern:</p>
+<ol>
+<li>The view renders a plain placeholder, here a <code>&lt;textarea&gt;</code>.</li>
+<li><code>bind</code> waits on <code>{self}.view.renderedContainer</code>, so it runs only once the markup exists in the DOM, and also
+waits for the global <code>CodeMirror</code> script to load.</li>
+<li>The constructor calls <code>fluid.disableRendering(self)</code>, so that later model changes don&rsquo;t reconcile away the
+widget&rsquo;s DOM.</li>
+<li>An <code>$effect</code> pushes model changes into the widget (model to widget), and a listener on the widget writes its
+changes back to the model (widget to model).</li>
+<li>An optional <code>unbind</code> record, e.g. <code>unbind: &quot;my.destroy({boundValue})&quot;</code>, tears the widget down when an argument
+becomes unavailable or the component is destroyed.</li>
+</ol>
+<p>Step 4 creates a cycle: the widget writes to the model, which runs the effect, which writes the same text back into
+the widget. This can reset its cursor or undo history. The next section explains how to break it.</p>
+<h3 id="source-tracking-and-the-dom">Source tracking and the DOM</h3>
+<p>Every update to a cell can carry a <strong>source</strong>, a string naming the agent in the world that caused it. The source
+travels with the update through every computed value that depends on it. An edge marked <code>excludeSource: &quot;s&quot;</code> skips
+notification for updates from source <code>s</code>, and one marked <code>includeSource: &quot;s&quot;</code> is notified only of them (see
+<a href="../../docs/fluid-signals#fluidcelleffectfn-staticsources-props"><code>fluid.cell.effect</code></a>).</p>
+<p>The view layer tags all user activity with the source <code>&quot;dom&quot;</code>:</p>
+<ul>
+<li>every <code>@on...</code> event handler, and</li>
+<li>every live-state write-back from <code>value</code>, <code>checked</code> and the like,</li>
+</ul>
+<p>run inside <code>fluid.cell.withAmbientSource(&quot;dom&quot;, ...)</code>, so any cell they set is updated with source <code>&quot;dom&quot;</code>.</p>
+<p>This allows a binding that writes <em>to</em> the DOM to ignore changes that came <em>from</em> the DOM. Without it, a value typed
+into an external widget would flow to the model and straight back into the widget. Annotate the edge that writes into
+the widget with <code>excludeSource: &quot;dom&quot;</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">readEffect</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$effect</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">func</span><span class="o">:</span> <span class="s2">&#34;fluid.codemirror.updateText&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">args</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;{self}.instance&#34;</span><span class="p">,</span> <span class="s2">&#34;{self}.text&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">excludeSource</span><span class="o">:</span> <span class="s2">&#34;dom&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The widget-to-model listener must then run with the same source, so that its writes are recognised:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">instance</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;change&#34;</span><span class="p">,</span> <span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">.</span><span class="nx">withAmbientSource</span><span class="p">(</span><span class="s2">&#34;dom&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">self</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">instance</span><span class="p">.</span><span class="nx">getValue</span><span class="p">()));</span>
+</span></span></code></pre></div><p>Now typing in the editor updates <code>text</code>, which still notifies everything else (other views, computed values, the
+saved document), but not the effect that would write back into the editor. A change to <code>text</code> from any other source,
+such as loading a file or undoing in another pane, still reaches the editor.</p>
+<p>At the level of raw cells the same annotation applies to a computed edge:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">toWidget</span> <span class="o">=</span> <span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">().</span><span class="nx">computed</span><span class="p">(</span><span class="nx">text</span> <span class="p">=&gt;</span> <span class="nx">text</span><span class="p">,</span> <span class="p">[</span><span class="nx">model</span><span class="p">],</span> <span class="p">{</span><span class="nx">excludeSource</span><span class="o">:</span> <span class="s2">&#34;dom&#34;</span><span class="p">});</span>
+</span></span></code></pre></div><blockquote>
+<p>In the Integration Language, <code>excludeSource</code> and <code>includeSource</code> are currently honoured on <code>$effect</code> records only.
+A <code>$compute</code> record does not yet forward them, so use an <code>$effect</code> (as above) for edges into external widgets.</p>
+</blockquote>
+<p>Template bindings don&rsquo;t need the annotation. A binding such as <code>value=&quot;@{text}&quot;</code> writes back to the model, and when
+the model change returns, the binding compares the property with the new value and doesn&rsquo;t write it again. Source
+tracking is needed where a widget can&rsquo;t make that comparison cheaply or without side effects.</p>
+
+
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        
+        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;Fluid&#43;View&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-view%2F" target="_blank" title="Share on BlueSky">
+          <i class="fab fa-fw fa-bluesky"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fdocs%2ffluid-view%2f&amp;text=Fluid%20View&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fdocs%2ffluid-view%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fdocs%2ffluid-view%2f&amp;title=Fluid%20View" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fdocs%2ffluid-view%2f&amp;title=Fluid%20View" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="../../docs/fluid-ptf/" data-toggle="tooltip" data-placement="top" title="Potentia Transmission Format">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="../../docs/fluid-signals-background/" data-toggle="tooltip" data-placement="top" title="Fluid Signals background">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      <script src="https://giscus.app/client.js"
+                data-repo="amb26/ponder"
+                data-repo-id="R_kgDOOKllGA"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOOKllGM4CvhAS"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="0"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script></div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="../../">Antranig Basman</a>
+            
+          
+          &nbsp;&copy;
+          2026
+
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.121.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="../../js/katex.min.js"></script>
+<script defer src="../../js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script src="../../js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+
+
+
+
+
+    
+  </body>
+</html>
