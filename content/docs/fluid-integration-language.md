@@ -29,8 +29,9 @@ Key properties:
   by reference. Configuration is expected to be completely serialisable and should not hold direct JavaScript references.
 * **Everything is reactive.** A component is a computed signal over its layers. Redefining a layer, writing to a
   component, or a component appearing or disappearing in the tree propagates to every dependent value, effect and
-  subcomponent on the next `fluid.cell.stabilize()`. Signal products whose defining record is unchanged are transferred
-  intact to the next component state.
+  subcomponent on the next stabilization. This runs automatically at the end of the current task, or at once on a
+  call to `fluid.cell.stabilize()`. Signal products whose defining record is unchanged are transferred intact to the
+  next component state.
 * **Any party may contribute.** Layers from independent authors combine by merging, linkages, dynamic layer names and
   live writes without editing each other's source. The precedence of every contribution is well-defined.
 * **Incompleteness is a value.** A missing layer, an unresolvable reference or pending I/O yields an
@@ -82,6 +83,10 @@ The returned **component proxy** (from regular client JavaScript code) has these
 
 Every component (via the base layer `fluid.component`) has a `destroy` method. Destruction disposes all of the
 component's effects, bindables and subcomponents. Equivalent to `fluid.destroyComponent(that)`.
+
+A member of a [`$for`](#for) list whose source is sited is lensed from an element of that source, and is not
+destroyed in place. Instead its element is deleted from the original source data, and the list then destroys the
+component in turn. A todo item can therefore delete itself with `{self}.destroy()`, without asking its list to do it.
 
 ### Unavailable components
 
@@ -154,7 +159,8 @@ Merge rules:
 * Any other value (primitive, array, function, signal record) from a stronger layer **replaces** that from a weaker
   one wholesale. Arrays are not concatenated.
 * A key holding a signal record is replaced as a unit by a stronger layer's value at that key; the record is not merged
-  into.
+  into. The exception is a [`$reactiveRoot`](#reactiveroot), whose individual members a stronger layer may override with
+  literal values or references.
 
 Merging is reactive: changing any contributing layer re-merges the component. Signal products (computed values,
 effects, subcomponents) whose defining record is identical before and after are retained rather than rebuilt.
@@ -184,13 +190,20 @@ fluid.def("my.greeter", {
 
 A reference to a path holding mutable configuration is **sited**: writing through it writes to the original site.
 
+A reference which designates its own value, or a value which includes or is included by it, yields an unavailable
+value rather than a cycle - e.g. `bounds: "{self}.bounds"`. Within a `$component` record this is easily written by
+mistake for a reference to the enclosing component, which should instead be named by its context, e.g.
+`bounds: "{workspace}.bounds"`.
+
 ### Context names
 
 | Context | Resolves to |
 |---|---|
-| `self` | The component in which the reference appears |
+| `self` | The component in which the reference appears - within a [`$component`](#component) record, this is the subcomponent being defined, not the component holding the record |
+| `$parent` | The parent of the component in which the reference appears |
 | A member name, e.g. `{panel}` | A component of that member name, in scope |
 | A layer name or its nickname (last segment), e.g. `{my.app.panel}` or `{panel}` | A component bearing that layer, in scope |
+| `/` | The root of the component tree |
 | `/path.to.component` | The component at that absolute path in the tree |
 | `global` | The JavaScript global object |
 | `0`, `1`, ... | The positional arguments of a [`$method`](#method) call |
@@ -274,8 +287,8 @@ The function may be async (returning a `Promise` or async iterator, as for
 
 ### $effect
 
-A side effect upon the world outside the component tree, run whenever its resolved arguments change, during
-`fluid.cell.stabilize()`. Effects are allocated only once the component is fully available, are not run while any
+A side effect upon the world outside the component tree, run during stabilization whenever its resolved arguments
+change. Effects are allocated only once the component is fully available, are not run while any
 argument is unavailable, and are disposed when the component is destroyed or the record is withdrawn from its layers.
 
 * `includeSource`, `excludeSource` (full form only) - restrict notification by update source, as for
@@ -343,6 +356,44 @@ fluid.def("my.app", {
 my.app().header.text;   // "Inbox"
 ```
 
+#### Injecting an existing component
+
+A top-level member may instead hold a [reference](#references) to a component which exists elsewhere in the tree. While
+the reference resolves to a component, that component is **injected** at the member. It can be reached through the
+member, and its siblings see it in scope under the names it would have had if it had been created there: the
+injecting member name, plus its layer names and their nicknames. Its member name at its original site is not
+carried over. It is not moved or copied, and keeps its original path and lifetime. The injection is withdrawn if the
+reference stops resolving to a component, if a stronger layer overrides the reference, or if the component is
+destroyed.
+
+```js
+fluid.def("my.workspace", {
+    $layers: "fluid.component",
+    library: {
+        $component: {
+            $layers: "my.library",
+            items: {
+                $component: {
+                    $layers: "my.catalogue"
+                }
+            }
+        }
+    },
+    current: "{library}.items",   // Inject the library's catalogue at "current"
+    searchBox: {
+        $component: {
+            $layers: "my.searchBox",
+            entries: "{current}.entries"
+        }
+    }
+});
+```
+
+`workspace.current` is the same component as `workspace.library.items`. Within `searchBox` it resolves as `{current}`,
+`{catalogue}` or `{my.catalogue}`, but not as `{items}`. A stronger layer may override a `$component` record with a
+reference at the same member, or the other way round. A reference to the component itself (`{self}`) is never
+injected, and a reference which turns out to designate plain data rather than a component simply yields that value.
+Injecting another component's [view](/docs/fluid-view#views) lets one component render through another's view.
 ### $for
 
 Within a `$component` record, instantiates one subcomponent per element of a collection, kept in step with it. The
@@ -371,9 +422,46 @@ h.names.push("beta");      // Second editor is created on stabilize
 h.editors.list.length;     // 2
 ```
 
+**Writing through iteration variables.** When the source is sited, each `valueAs` variable keeps track of where its
+data came from, so the subcomponent can change its own element without involving the component that owns the
+list:
+
+* A write beneath the variable, e.g. `self.todo.completed = true`, is applied to the original element of the source.
+* `delete self.todo` removes the element from the source, as does [`destroy()`](#componentdestroy) on the subcomponent.
+* Writing to the variable itself, e.g. `self.todo = {...}`, rebinds it locally in the subcomponent's live layer and
+  doesn't touch the source.
+
+This holds across intermediate projections. Elements selected by a non-mutating array method such as `filter()`
+remain linked to their original source:
+
+```js
+fluid.def("my.todoItem", {
+    $layers: "fluid.component",
+    toggle: {
+        $method: {
+            func: self => self.todo.completed = !self.todo.completed,   // Writes into {todoList}.todos
+            args: "{self}"
+        }
+    }
+});
+
+fluid.def("my.todoList", {
+    $layers: "fluid.component",
+    todos: {$reactiveRoot: []},
+    openTodos: "$compute:my.openTodos({self}.todos)",
+    openItems: {
+        $component: {
+            $layers: "my.todoItem",
+            $for: {source: "{todoList}.openTodos", valueAs: "todo"}
+        }
+    }
+});
+my.openTodos = todos => todos.filter(todo => !todo.completed);
+```
 ### $if
 
-Within a `$component` record, a reference whose truthiness controls whether the subcomponent exists.
+Within a `$component` record, a condition whose truthiness controls whether the subcomponent exists. In its short
+form this is a reference:
 
 ```js
 fluid.def("my.task", {
@@ -388,12 +476,41 @@ fluid.def("my.task", {
 });
 ```
 
+In its long form it is a [function record](#signal-directives), as for `$compute`, and the truthiness of the computed
+value is tested. This avoids a separate boolean member for conditions where a value such as `0` or `""` should still
+count:
+
+```js
+distanceLabel: {
+    $component: {
+        $layers: "my.distanceLabel",
+        $if: {
+            func: distance => distance !== null,
+            args: "{closestNoteFinder}.distance"
+        }
+    }
+}
+```
+
 ### $reactiveRoot
 
 Marks a value as an independently writable unit of reactive data, typically structured data which will be
 mutated. Writes at or beneath the root through the component proxy produce a fresh immutable value of the whole root,
 notifying dependents of the root and of any path within it. The value is either literal data, or a string
-reference, in which case the root is bound to the referenced site. Must be the only key in its record.
+reference, in which case the root is bound to the referenced site.
+
+Alongside the root, in the same layer or merged from a stronger one, the record may hold individual members of the
+root's value:
+
+* A **literal** value replaces the value of that member in the root's initial value.
+* A **reference** links that member to the referenced value: whenever the referenced value changes, it is written into
+  the member, as an immutable update of the root which is not recorded in the history. The member may still be written
+  through the component proxy as before, until the referenced value next changes.
+
+A member supplied by a stronger layer, whether alongside or within its own `$reactiveRoot` record, displaces any
+literal or reference from a weaker layer at that member, leaving the others in place. A signal record such as
+`$compute` at the path of the root replaces it as a whole, but a member may not hold one - this fails, since only
+literal values and references may be merged alongside a root.
 
 ```js
 fluid.def("my.todoList", {
@@ -406,6 +523,28 @@ my.countRemaining = todos => todos.filter(t => !t.done).length;
 const t = my.todoList();
 t.todos[0].done = true;   // Immutable update of todos
 t.remaining;              // 0
+```
+
+A layer deriving from another may wire a single member of its reactive state to a value elsewhere, leaving the rest of
+the root as it was:
+
+```js
+fluid.def("my.searchPanel", {
+    $layers: "fluid.component",
+    state: {$reactiveRoot: {query: "", results: []}}
+});
+
+fluid.def("my.linkedSearchPanel", {
+    $layers: "my.searchPanel",
+    finder: {
+        $component: {
+            $layers: "my.textFinder"
+        }
+    },
+    state: {
+        query: "{finder}.foundText"   // Tracks foundText; results is retained from my.searchPanel
+    }
+});
 ```
 
 ### $importMap
@@ -446,12 +585,22 @@ The linkage rule's effect lasts as long as the component holding it. Linkages ar
 
 > **Experimental and unstable.** The syntax and semantics of `$bindable` are likely to change.
 
-A value produced by binding to a resource in the world, eagerly as soon as the arguments to `bind` are available,
-and released by `unbind` when any argument becomes unavailable or the record is disposed. Unlike `$compute`, a
-change in available arguments does not rebind.
+A value produced by binding to a resource in the world, eagerly as soon as the arguments to `bind` are available.
+The value is released by `unbind` when any argument becomes unavailable, when it is rebound, or when the record is
+disposed, for example by destroying its component.
 
-* `bind` - A function record (or compact `"func(args)"` string) producing the bound value
-* `unbind` - Optional function record, receiving the bound value (by default, or via `{boundValue}` in its `args`)
+By default, as for `$compute` and `$effect`, a change in any argument **rebinds** the value: it is unbound, and `bind`
+is called again with the new arguments. A component passed as an argument doesn't count as changed just because it
+is re-merged. Anything `bind` reads other than its arguments is not tracked.
+
+* `bind` - A function record, compact `"func(args)"` string or bare function, producing the bound value. A binder
+  may return a signal to stream updates over the lifetime of a binding, and readers of the bindable see through it.
+* `unbind` - Optional, in any of the same forms, receiving the bound value (by default, or via `{boundValue}` in its
+  `args`)
+* `onceOnly` - If `true`, the value is bound exactly once for the lifetime of the record. Later changes in its
+  arguments, even a brief period when they are unavailable, don't rebind it. Use this for heavyweight widgets which
+  can't be reconfigured without being rebuilt, and which would lose their state if they were (see
+  [Wrapping an external widget](/docs/fluid-view#wrapping-an-external-widget-with-bindable)).
 
 ```js
 fluid.def("my.socketHolder", {
@@ -506,6 +655,23 @@ As `fluid.liveQueryILSelector`, but returns a one-off array.
 * `{String} contextRef` - A [context reference](#references), e.g. `"{self}.results"`
 * `{Component} root` - The component from whose point of view the reference is resolved
 * Returns: `{Promise<Any>}` - Resolves with the first available value of the reference
+
+### fluid.avatar(layerName)
+
+* `{String} layerName` - The layer to inspect
+* Returns: `{Component}` - A proxy to the layer's **avatar**
+
+Inspecting a layer's definition with `fluid.def` misses anything it gains from its parent layers or from
+[linkages](#linkage). An avatar is a trial instance of a component bearing just that layer, held in an `avatars` area
+at the root of the tree, which shows everything the layer brings to a component. Avatars are **inert**: they allocate
+no effects or linkages, bind no bindables, render nothing, don't hold up `fluid.unavailableComponents` and aren't
+found by selectors or scope searches from outside. Members which depend on context the layer only finds where it is
+genuinely deployed are unavailable, but all others, including computed ones, can be read as for any component. An
+avatar follows any redefinition of its layers and is destroyed when its layer is deleted.
+
+`fluid.avatarMerged(layerName)` returns the avatar's raw merged layer structure, including the fully resolved
+`$layers`. This is available even when the avatar itself is unavailable. A host uses avatars, for example, to
+discover a widget's `preferredSize` or whether it bears `fluid.topLevelWidget`.
 
 ### Utilities
 

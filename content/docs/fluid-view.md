@@ -79,8 +79,10 @@ A component can equally be created from JavaScript with `my.counter({container: 
 When the SFC is loaded, its script is patched before execution:
 
 * `$layers` defaults to `["fluid.component", "fluid.sfcLayer"]`.
-* A `view` subcomponent is added, with layer `fluid.sfcTemplateViewComponent`, whose template is the SFC's
-  `<template>` block (see [Views](#views)).
+* A `view` subcomponent is added, with layer `fluid.sfcTemplateViewComponent`, whose `template` refers to the SFC's
+  `<template>` block as `{sfcLayer: "my.counter"}` (see [Views](#views)). Since this is an ordinary member of the view,
+  a layer derived from the SFC's layer may replace the template by supplying its own, e.g.
+  `view: {$component: {template: "<div>...</div>"}}`, whilst keeping the rest of the SFC's definition.
 * Each `<style>` and further `<script>` block is injected into the document. `<script src="..." data-fl-scope="global">`
   loads a classic global script. `src` paths may use `%module` prefixes.
 
@@ -279,13 +281,18 @@ fluid.def("my.shared.component", {
 });
 ```
 
+A component sharing another's view renders nothing of its own: its template is not rendered, so the views of any of
+its subcomponents which would have rendered into that template have no container and render nothing either. All of
+its other members continue to be computed as usual. This is a way of mixing in the behaviour of a component which has
+a view, without its display.
+
 ### View layers
 
 | Layer | Template source |
 |---|---|
 | `fluid.viewComponent` | Base layer. Supplies `vTree`, a virtual DOM tree, directly or computed from `templateTree` |
-| `fluid.templateViewComponent` | `template`, an HTML string |
-| `fluid.sfcTemplateViewComponent` | The `<template>` block of the SFC named by `templateLayer` (added by the loader) |
+| `fluid.templateViewComponent` | `template` - an HTML string, or `{sfcLayer: layerName}` for the `<template>` block of that SFC |
+| `fluid.sfcTemplateViewComponent` | Tag layer which the loader adds to the view of an SFC with a `<template>` block, when it sets the view's `template` as above |
 | `fluid.selfTemplateViewComponent` | The markup its parent placed inside its `@id` element |
 | `fluid.partialViewComponent` | Composites partial templates into a parent template at `relativeContainer`, e.g. `"after:.footer"` |
 
@@ -373,7 +380,8 @@ updates minimal. Choose this approach when building the markup recursively is si
 
 Some widgets, such as code editors, maps or charts, own a complex DOM and have their own lifecycle: they must be
 constructed once, on a real element, and kept alive while the component's configuration varies. `$bindable`
-constructs such an object as soon as its arguments are available, and doesn't rebuild it when they change.
+constructs such an object as soon as its arguments are available. By default it rebuilds the object whenever an
+argument changes, but with `onceOnly: true` it constructs it exactly once for the lifetime of the record.
 
 `fluid.codemirror` (`src/framework/edit/sfc/fluid-codemirror.vue`) binds a CodeMirror editor to the textarea that
 its own view renders:
@@ -389,7 +397,10 @@ fluid.def("fluid.codemirror", {
     },
     instance: {
         $bindable: {
-            bind: "fluid.codemirror.construct({self}, {self}.view.renderedContainer, {global}.CodeMirror)"
+            bind: "fluid.codemirror.construct({self}, {self}.view.renderedContainer, {global}.CodeMirror)",
+            unbind: "fluid.codemirror.destroy({boundValue})",
+            // Rebuilding the editor would lose its undo history, selection and scroll position
+            onceOnly: true
         }
     },
     readEffect: "$effect:fluid.codemirror.updateText({self}.instance, {self}.text)"
@@ -408,14 +419,16 @@ The pattern:
 1. The view renders a plain placeholder, here a `<textarea>`.
 2. `bind` waits on `{self}.view.renderedContainer`, so it runs only once the markup exists in the DOM, and also
    waits for the global `CodeMirror` script to load.
-3. The constructor calls `fluid.disableRendering(self)`, so that later model changes don't reconcile away the
+3. `onceOnly: true` keeps the widget alive however its arguments change. Without it, any change in an argument
+   would unbind the widget and build a new one.
+4. The constructor calls `fluid.disableRendering(self)`, so that later model changes don't reconcile away the
    widget's DOM.
-4. An `$effect` pushes model changes into the widget (model to widget), and a listener on the widget writes its
+5. An `$effect` pushes model changes into the widget (model to widget), and a listener on the widget writes its
    changes back to the model (widget to model).
-5. An optional `unbind` record, e.g. `unbind: "my.destroy({boundValue})"`, tears the widget down when an argument
-   becomes unavailable or the component is destroyed.
+6. The `unbind` record tears the widget down when the record is disposed, for example when the component is
+   destroyed. Without `onceOnly`, it is also called before each rebind, and whenever an argument becomes unavailable.
 
-Step 4 creates a cycle: the widget writes to the model, which runs the effect, which writes the same text back into
+Step 5 creates a cycle: the widget writes to the model, which runs the effect, which writes the same text back into
 the widget. This can reset its cursor or undo history. The next section explains how to break it.
 
 ### Source tracking and the DOM

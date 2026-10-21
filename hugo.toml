@@ -107,8 +107,39 @@ pygmentsCodefencesGuessSyntax = true
 
 [[menu.main]]
     name = "Docs"
+    identifier = "docs"
     url = "docs"
     weight = 3
+
+[[menu.main]]
+    name = "Fluid Signals"
+    parent = "docs"
+    url = "docs/fluid-signals"
+    weight = 1
+
+[[menu.main]]
+    name = "Fluid Integration Language"
+    parent = "docs"
+    url = "docs/fluid-integration-language"
+    weight = 2
+
+[[menu.main]]
+    name = "Fluid View"
+    parent = "docs"
+    url = "docs/fluid-view"
+    weight = 3
+
+[[menu.main]]
+    name = "Fluid PTF"
+    parent = "docs"
+    url = "docs/fluid-ptf"
+    weight = 4
+
+[[menu.main]]
+    name = "Fluid tldraw integration"
+    parent = "docs"
+    url = "docs/fluid-tldraw"
+    weight = 5
 
 [[menu.main]]
     name = "About"

@@ -215,7 +215,21 @@ Details:
 
 ## Reconstruction
 
-`fluid.ptf.instantiate(text, options)` rebuilds the component.
+`fluid.ptf.instantiate(text, options)` rebuilds the component in three steps:
+
+1. **Register layers.** Each `layer` part is registered. An SFC goes through `fluid.loadSFCText`, a JavaScript part
+   is evaluated (running its `fluid.def(...)` call), and a JSON part is passed to `fluid.def`. A layer the receiver
+   already defines is left alone unless `overrideLayers` is set.
+2. **Construct the root.** A free component is created from the root's `potentia` part, with `options.potentia`
+   merged over it, using the creator function of the first entry in its `$layers`. A document with no root
+   `potentia` part is rejected.
+3. **Apply the rest.** Once the root becomes available, the `potentia` parts of subcomponents are pushed at their
+   paths. Then each subcomponent's `live` part is written into its live layer once that subcomponent becomes
+   available. Parts whose path matches no component are returned as `unresolved`.
+
+A host which must take responsibility for the component before it becomes available, such as a canvas which may
+destroy the shape hosting it while it is still loading, can split the steps: `fluid.ptf.constructParts` performs the first two and returns the component at once, and
+`fluid.ptf.applyParts` then performs the third.
 
 ### Trust
 
@@ -274,4 +288,10 @@ also carry `headers`, all of their headers with lower-cased names.
     * `options.potentia` - Extra potentia merged over the root's, e.g. `{container}`.
     * `options.overrideLayers` - If `true`, transmitted layers replace existing definitions.
 * `fluid.ptf.instantiateParts(parts, [options])` does the same as `instantiate`, for parts that have already been decoded.
+* `fluid.ptf.constructParts(parts, [options])` returns `{Component}`. It registers the layers and constructs the root
+  component without waiting for it to become available, and applies none of the further parts. It throws if there
+  is no root `potentia` part.
+* `fluid.ptf.applyParts(that, parts)` returns `{Promise<String[]>}`. It applies the subcomponent `potentia` and `live`
+  parts to an existing component, and resolves with the filenames of any it could not place.
+* `fluid.ptf.registerLayerParts(parts, [overrideLayers])` registers just the layer parts.
 * `fluid.loadSFCText(layerName, text)` registers an SFC from text rather than a URL. Reconstruction uses it for SFC parts.

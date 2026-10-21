@@ -61,7 +61,7 @@ A first component A Single File Component is a .">
   "headline": "Fluid View",
   "description" : "This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, and the machinery of views. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.\nA first component A Single File Component is a .",
   "inLanguage" : "en",
-  "wordCount":  2534 ,
+  "wordCount":  2738 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -142,8 +142,23 @@ A first component A Single File Component is a .">
           
           
           
-          <li>
-            <a title="Docs" href="../../docs">Docs</a>
+          <li class="navlinks-container">
+            
+            <a class="navlinks-parent" href="../../docs">Docs</a>
+            
+            <div class="navlinks-children">
+              
+              <a href="../../docs/fluid-signals">Fluid Signals</a>
+              
+              <a href="../../docs/fluid-integration-language">Fluid Integration Language</a>
+              
+              <a href="../../docs/fluid-view">Fluid View</a>
+              
+              <a href="../../docs/fluid-ptf">Fluid PTF</a>
+              
+              <a href="../../docs/fluid-tldraw">Fluid tldraw integration</a>
+              
+            </div>
           </li>
           
           
@@ -286,8 +301,10 @@ element. The element is watched live: elements added to the document later are b
 <p>When the SFC is loaded, its script is patched before execution:</p>
 <ul>
 <li><code>$layers</code> defaults to <code>[&quot;fluid.component&quot;, &quot;fluid.sfcLayer&quot;]</code>.</li>
-<li>A <code>view</code> subcomponent is added, with layer <code>fluid.sfcTemplateViewComponent</code>, whose template is the SFC&rsquo;s
-<code>&lt;template&gt;</code> block (see <a href="#views">Views</a>).</li>
+<li>A <code>view</code> subcomponent is added, with layer <code>fluid.sfcTemplateViewComponent</code>, whose <code>template</code> refers to the SFC&rsquo;s
+<code>&lt;template&gt;</code> block as <code>{sfcLayer: &quot;my.counter&quot;}</code> (see <a href="#views">Views</a>). Since this is an ordinary member of the view,
+a layer derived from the SFC&rsquo;s layer may replace the template by supplying its own, e.g.
+<code>view: {$component: {template: &quot;&lt;div&gt;...&lt;/div&gt;&quot;}}</code>, whilst keeping the rest of the SFC&rsquo;s definition.</li>
 <li>Each <code>&lt;style&gt;</code> and further <code>&lt;script&gt;</code> block is injected into the document. <code>&lt;script src=&quot;...&quot; data-fl-scope=&quot;global&quot;&gt;</code>
 loads a classic global script. <code>src</code> paths may use <code>%module</code> prefixes.</li>
 </ul>
@@ -506,7 +523,11 @@ and it can exist with no view at all, or share the view of another component by 
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.shared.component&#34;</span><span class="p">,</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">view</span><span class="o">:</span> <span class="s2">&#34;{other.component}.view&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span></code></pre></div><h3 id="view-layers">View layers</h3>
+</span></span></code></pre></div><p>A component sharing another&rsquo;s view renders nothing of its own: its template is not rendered, so the views of any of
+its subcomponents which would have rendered into that template have no container and render nothing either. All of
+its other members continue to be computed as usual. This is a way of mixing in the behaviour of a component which has
+a view, without its display.</p>
+<h3 id="view-layers">View layers</h3>
 <table>
 <thead>
 <tr>
@@ -521,11 +542,11 @@ and it can exist with no view at all, or share the view of another component by 
 </tr>
 <tr>
 <td><code>fluid.templateViewComponent</code></td>
-<td><code>template</code>, an HTML string</td>
+<td><code>template</code> - an HTML string, or <code>{sfcLayer: layerName}</code> for the <code>&lt;template&gt;</code> block of that SFC</td>
 </tr>
 <tr>
 <td><code>fluid.sfcTemplateViewComponent</code></td>
-<td>The <code>&lt;template&gt;</code> block of the SFC named by <code>templateLayer</code> (added by the loader)</td>
+<td>Tag layer which the loader adds to the view of an SFC with a <code>&lt;template&gt;</code> block, when it sets the view&rsquo;s <code>template</code> as above</td>
 </tr>
 <tr>
 <td><code>fluid.selfTemplateViewComponent</code></td>
@@ -607,7 +628,8 @@ updates minimal. Choose this approach when building the markup recursively is si
 </blockquote>
 <p>Some widgets, such as code editors, maps or charts, own a complex DOM and have their own lifecycle: they must be
 constructed once, on a real element, and kept alive while the component&rsquo;s configuration varies. <code>$bindable</code>
-constructs such an object as soon as its arguments are available, and doesn&rsquo;t rebuild it when they change.</p>
+constructs such an object as soon as its arguments are available. By default it rebuilds the object whenever an
+argument changes, but with <code>onceOnly: true</code> it constructs it exactly once for the lifetime of the record.</p>
 <p><code>fluid.codemirror</code> (<code>src/framework/edit/sfc/fluid-codemirror.vue</code>) binds a CodeMirror editor to the textarea that
 its own view renders:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;fluid.codemirror&#34;</span><span class="p">,</span> <span class="p">{</span>
@@ -620,7 +642,10 @@ its own view renders:</p>
 </span></span><span class="line"><span class="cl">    <span class="p">},</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">instance</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">$bindable</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">bind</span><span class="o">:</span> <span class="s2">&#34;fluid.codemirror.construct({self}, {self}.view.renderedContainer, {global}.CodeMirror)&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">bind</span><span class="o">:</span> <span class="s2">&#34;fluid.codemirror.construct({self}, {self}.view.renderedContainer, {global}.CodeMirror)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">unbind</span><span class="o">:</span> <span class="s2">&#34;fluid.codemirror.destroy({boundValue})&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Rebuilding the editor would lose its undo history, selection and scroll position
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">onceOnly</span><span class="o">:</span> <span class="kc">true</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">},</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">readEffect</span><span class="o">:</span> <span class="s2">&#34;$effect:fluid.codemirror.updateText({self}.instance, {self}.text)&#34;</span>
@@ -637,14 +662,16 @@ its own view renders:</p>
 <li>The view renders a plain placeholder, here a <code>&lt;textarea&gt;</code>.</li>
 <li><code>bind</code> waits on <code>{self}.view.renderedContainer</code>, so it runs only once the markup exists in the DOM, and also
 waits for the global <code>CodeMirror</code> script to load.</li>
+<li><code>onceOnly: true</code> keeps the widget alive however its arguments change. Without it, any change in an argument
+would unbind the widget and build a new one.</li>
 <li>The constructor calls <code>fluid.disableRendering(self)</code>, so that later model changes don&rsquo;t reconcile away the
 widget&rsquo;s DOM.</li>
 <li>An <code>$effect</code> pushes model changes into the widget (model to widget), and a listener on the widget writes its
 changes back to the model (widget to model).</li>
-<li>An optional <code>unbind</code> record, e.g. <code>unbind: &quot;my.destroy({boundValue})&quot;</code>, tears the widget down when an argument
-becomes unavailable or the component is destroyed.</li>
+<li>The <code>unbind</code> record tears the widget down when the record is disposed, for example when the component is
+destroyed. Without <code>onceOnly</code>, it is also called before each rebind, and whenever an argument becomes unavailable.</li>
 </ol>
-<p>Step 4 creates a cycle: the widget writes to the model, which runs the effect, which writes the same text back into
+<p>Step 5 creates a cycle: the widget writes to the model, which runs the effect, which writes the same text back into
 the widget. This can reset its cursor or undo history. The next section explains how to break it.</p>
 <h3 id="source-tracking-and-the-dom">Source tracking and the DOM</h3>
 <p>Every update to a cell can carry a <strong>source</strong>, a string naming the agent in the world that caused it. The source
@@ -753,7 +780,7 @@ tracking is needed where a widget can&rsquo;t make that comparison cheaply or wi
           
           
             <li class="next">
-              <a href="../../docs/fluid-signals-background/" data-toggle="tooltip" data-placement="top" title="Fluid Signals background">Next Post &rarr;</a>
+              <a href="../../docs/fluid-tldraw/" data-toggle="tooltip" data-placement="top" title="Fluid tldraw integration">Next Post &rarr;</a>
             </li>
           
         </ul>

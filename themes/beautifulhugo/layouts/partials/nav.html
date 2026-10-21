@@ -17,9 +17,13 @@
           {{ range .Site.Menus.main.ByWeight }}
           {{ if .HasChildren }}
           <li class="navlinks-container">
+            {{ if .URL }}
+            <a class="navlinks-parent" href="{{ .URL | relLangURL }}">{{ .Name }}</a>
+            {{ else }}
             <a class="navlinks-parent" role="button" tabindex="0">{{ .Name }}</a>
+            {{ end }}
             <div class="navlinks-children">
-              {{ range .Children }}
+              {{ range .Children.ByWeight }}
               <a href="{{ .URL | relLangURL }}">{{ .Name }}</a>
               {{ end }}
             </div>

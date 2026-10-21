@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+      <title>Fluid tldraw integration - Antranig Basman</title>
+
+  <meta name="description" content="This page documents how Fluid Infusion 6 components are hosted as widgets on a tldraw canvas: how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how widgets are nested and composed. It builds on Fluid View (views, and sharing them between components) and on the Fluid Integration Language (layers, references, $linkage, $bindable).
+The layers marking and receiving hosting, fluid.topLevelWidget and fluid.">
+  <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Antranig Basman",
+    
+    "url": "https:\/\/ponder.org.uk"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/ponder.org.uk"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk\/docs\/fluid-tldraw\/",
+          "name": "Fluid tldraw integration"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Antranig Basman"
+  },
+  "headline": "Fluid tldraw integration",
+  "description" : "This page documents how Fluid Infusion 6 components are hosted as widgets on a tldraw canvas: how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how widgets are nested and composed. It builds on Fluid View (views, and sharing them between components) and on the Fluid Integration Language (layers, references, $linkage, $bindable).\nThe layers marking and receiving hosting, fluid.topLevelWidget and fluid.",
+  "inLanguage" : "en",
+  "wordCount":  870 ,
+  "datePublished" : "0001-01-01T00:00:00\u002b00:00",
+  "dateModified" : "0001-01-01T00:00:00\u002b00:00",
+  "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+  "keywords" : [ "" ],
+  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/docs\/fluid-tldraw\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/ponder.org.uk",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="Fluid tldraw integration" />
+<meta property="og:description" content="This page documents how Fluid Infusion 6 components are hosted as widgets on a tldraw canvas: how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how widgets are nested and composed. It builds on Fluid View (views, and sharing them between components) and on the Fluid Integration Language (layers, references, $linkage, $bindable).
+The layers marking and receiving hosting, fluid.topLevelWidget and fluid.">
+<meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
+<meta property="og:url" content="https://ponder.org.uk/docs/fluid-tldraw/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Antranig Basman" />
+
+  <meta name="twitter:title" content="Fluid tldraw integration" />
+  <meta name="twitter:description" content="This page documents how Fluid Infusion 6 components are hosted as widgets on a tldraw canvas: how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how …">
+  <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@amb26ponder" />
+  <meta name="twitter:creator" content="@amb26ponder" />
+  <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.121.0">
+  <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
+  <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
+<script type="text/javascript" src="../../js/ponder.js" ></script>
+
+  </head>
+  <body class="infusion-docs" >
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-ponder">
+      <a class="navbar-ponder-brand" href="../../">Antranig Basman</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <svg width="36" height="36" viewBox="0 0 24 24" stroke="#888" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 7L4 7" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 12L4 12" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 17L4 17" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="nav navbar-nav navbar-right">
+          
+          
+          <li>
+            <a title="Posts" href="../../post">Posts</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="WiP" href="../../wip">WiP</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="About" href="../../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li class="navlinks-container">
+            
+            <a class="navlinks-parent" href="../../docs">Docs</a>
+            
+            <div class="navlinks-children">
+              
+              <a href="../../docs/fluid-signals">Fluid Signals</a>
+              
+              <a href="../../docs/fluid-integration-language">Fluid Integration Language</a>
+              
+              <a href="../../docs/fluid-view">Fluid View</a>
+              
+              <a href="../../docs/fluid-ptf">Fluid PTF</a>
+              
+              <a href="../../docs/fluid-tldraw">Fluid tldraw integration</a>
+              
+            </div>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Communities" href="../../communities">Communities</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Projects" href="../../projects">Projects</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Terms" href="../../term">Terms</a>
+          </li>
+          
+          
+
+          
+
+          
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="header-row">
+          
+
+            <div class="infusion-docs-heading">
+              
+                <h1>Fluid tldraw integration  </h1>
+              
+              
+                <hr class="small">
+              
+              
+
+            </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <article role="main" class="blog-post">
+        <p>This page documents how Fluid Infusion 6 components are hosted as widgets on a <a href="https://tldraw.dev">tldraw</a> canvas:
+how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how widgets are
+nested and composed. It builds on <a href="../../docs/fluid-view">Fluid View</a> (views, and sharing them between components) and on
+the <a href="../../docs/fluid-integration-language">Fluid Integration Language</a> (layers, references, <code>$linkage</code>, <code>$bindable</code>).</p>
+<p>The layers marking and receiving hosting, <code>fluid.topLevelWidget</code> and <code>fluid.topLevelWidgetView</code>, are part of the
+framework, in <code>FluidView.js</code>, and say nothing about tldraw. The tldraw host itself is in the
+<a href="https://github.com/fluid-project/infusion-6/tree/main/demo/tldraw">tldraw demo</a>, mostly in
+<code>demo/tldraw/js/tldraw-driver.js</code>.</p>
+<p>The raw markdown underlying these docs is available on <a href="https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/fluid-tldraw.md">GitHub</a>,
+suitable for direct ingestion by your friendly local neighbourhood intelligence.</p>
+<h2 id="top-level-widgets">Top-level widgets</h2>
+<p>Nothing in a layer&rsquo;s own definition otherwise says whether it makes sense as a free-standing widget, so a layer which
+does declares so by including <code>fluid.topLevelWidget</code> amongst its layers, directly or through a parent layer. The
+canvas offers exactly these layers in its &ldquo;New shape&rdquo; menu.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.counter&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.topLevelWidget&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">preferredSize</span><span class="o">:</span> <span class="p">{</span><span class="nx">w</span><span class="o">:</span> <span class="mi">260</span><span class="p">,</span> <span class="nx">h</span><span class="o">:</span> <span class="mi">80</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">count</span><span class="o">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p><code>fluid.topLevelWidget</code> brings these members:</p>
+<ul>
+<li><code>preferredSize</code> - <code>{w, h}</code>, the size at which the widget would like to be created, or <code>null</code> (the default) for no
+preference. The host reads this from the layer&rsquo;s <a href="../../docs/fluid-integration-language#fluidavatarlayername">avatar</a> before the
+widget exists, so a size inherited from a parent layer, or computed, is honoured.</li>
+<li><code>hostBounds</code> - <code>{x, y, w, h}</code>, the bounds at which the widget is currently hosted, in page coordinates, or <code>null</code> if
+it is not hosted anywhere. This updates as the widget&rsquo;s shape is moved or resized. See
+<a href="#nested-widgets">Nested widgets</a> for a widget which is not hosted in a shape of its own.</li>
+<li>A <code>view</code> bearing <code>fluid.topLevelWidgetView</code>, the attachment point for whatever a host supplies. Its own <code>hostBounds</code>
+is what the host reports for this widget&rsquo;s shape, and is <code>null</code> until a host reports something.</li>
+</ul>
+<h2 id="hosting-on-the-canvas">Hosting on the canvas</h2>
+<p>The host is a single component, <code>fluid.demos.tldrawHost</code>, which bears <code>fluid.resolveRoot</code> so that any component can
+reach it as <code>{tldrawHost}</code>:</p>
+<ul>
+<li><code>editor</code> - The tldraw editor, the Infusion counterpart of React&rsquo;s <code>useEditor()</code>.</li>
+<li><code>notes</code> - The sticky notes on the current page, as <code>[{id, x, y, text}]</code>. This is bridged once, for all widgets which
+need it, and updates only when a note changes, not when any other shape does.</li>
+<li>A <a href="../../docs/fluid-integration-language#linkage"><code>$linkage</code></a> which broadcasts <code>fluid.tldrawViewComponent</code> onto every
+component bearing <code>fluid.topLevelWidgetView</code> - that is, onto the view of every top-level widget, wherever and
+whenever it is created, for as long as the host exists.</li>
+</ul>
+<p>Each tldraw shape of type <code>infusion</code> hosts one widget. When the shape mounts, the widget is constructed from its layer
+and given two things for its view: a <code>container</code>, the element inside the shape, and the <code>shapeId</code> of the shape.
+<code>fluid.tldrawViewComponent</code> binds the view&rsquo;s <code>hostBounds</code> to that shape&rsquo;s page bounds through tldraw&rsquo;s own signals, so
+that it updates only when that shape, or an ancestor of it, moves or is resized.</p>
+<p>If the widget&rsquo;s view is <a href="../../docs/fluid-view#views">shared</a> from one of its subcomponents, e.g. by
+<code>view: &quot;{first}.view&quot;</code>, the widget has no view of its own, so the container and shape id are directed at the view of
+that subcomponent instead.</p>
+<p>A widget therefore needs nothing beyond <code>fluid.topLevelWidget</code> to know where it is. For example, a widget showing the
+text of the sticky note nearest to it:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;fluid.demos.closestNoteFinder&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.topLevelWidget&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">preferredSize</span><span class="o">:</span> <span class="p">{</span><span class="nx">w</span><span class="o">:</span> <span class="mi">260</span><span class="p">,</span> <span class="nx">h</span><span class="o">:</span> <span class="mi">200</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">closest</span><span class="o">:</span> <span class="s2">&#34;$compute:fluid.demos.closestNoteFinder.findClosest({tldrawHost}.notes, {self}.hostBounds)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">noteText</span><span class="o">:</span> <span class="s2">&#34;{self}.closest.text&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">distance</span><span class="o">:</span> <span class="s2">&#34;{self}.closest.distance&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p><code>closest</code> is recomputed only when this widget&rsquo;s shape moves or some note changes.</p>
+<h2 id="nested-widgets">Nested widgets</h2>
+<p>A widget may hold another widget as a subcomponent, for example an umbrella composing two widgets. The nested widget
+bears <code>fluid.topLevelWidget</code> too, but it isn&rsquo;t hosted in a shape of its own, so its host reports no bounds for it. Its
+<code>hostBounds</code> are then those of the nearest enclosing top-level widget, however deeply it is nested. Nothing needs to be
+wired for this, and <code>tldrawHost</code> is in scope everywhere, so a nested widget works exactly as it does on its own.</p>
+<p>This holds whether the nested widget is visible or hidden.</p>
+<ul>
+<li>
+<p><strong>Visible.</strong> An umbrella with a template of its own may render each widget into an <code>@id</code> element:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.umbrella&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.topLevelWidget&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">finder</span><span class="o">:</span> <span class="p">{</span><span class="nx">$component</span><span class="o">:</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.demos.closestNoteFinder&#34;</span><span class="p">}},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">generator</span><span class="o">:</span> <span class="p">{</span><span class="nx">$component</span><span class="o">:</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.demos.imageGenerator&#34;</span><span class="p">}},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">view</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.templateViewComponent&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">template</span><span class="o">:</span> <span class="sb">`&lt;div&gt;&lt;div @id=&#34;finder&#34;&gt;&lt;/div&gt;&lt;div @id=&#34;generator&#34;&gt;&lt;/div&gt;&lt;/div&gt;`</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Hidden.</strong> A widget may mix in the behaviour of another without its display, by giving it the outer widget&rsquo;s own
+view, so that it <a href="../../docs/fluid-view#views">renders nothing</a> whilst all of its computation continues. Here the image
+generator <em>is</em> the widget, and the note finder only supplies its prompt:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;fluid.demos.ai.closestNoteImageGenerator&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;fluid.demos.imageGenerator&#34;</span><span class="p">,</span> <span class="s2">&#34;fluid.topLevelWidget&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">noteFinder</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.demos.closestNoteFinder&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">view</span><span class="o">:</span> <span class="s2">&#34;{closestNoteImageGenerator}.view&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">state</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">prompt</span><span class="o">:</span> <span class="s2">&#34;{noteFinder}.noteText&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>The finder still measures its distance from the notes using the bounds of the outer widget&rsquo;s shape. The reference
+at <code>state.prompt</code> overrides a single member of the image generator&rsquo;s
+<a href="../../docs/fluid-integration-language#reactiveroot">reactive state</a>.</p>
+</li>
+</ul>
+<p>Don&rsquo;t forward <code>hostBounds</code> to a nested widget yourself. Within its <code>$component</code> record, <code>{self}</code> is the nested widget,
+not the one holding it, so <code>hostBounds: &quot;{self}.hostBounds&quot;</code> refers to its own value, and is
+<a href="../../docs/fluid-integration-language#references">unavailable</a>.</p>
+<h2 id="transmitting-widgets">Transmitting widgets</h2>
+<p>Widgets travel between canvases, and to and from text, as <a href="../../docs/fluid-ptf">PTF documents</a>. The canvas&rsquo;s clipboard
+carries them as described in <a href="../../docs/fluid-ptf#embedding-ptf-the-tldraw-clipboard">Embedding PTF</a>.</p>
+
+
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        
+        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;Fluid&#43;tldraw&#43;integration&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-tldraw%2F" target="_blank" title="Share on BlueSky">
+          <i class="fab fa-fw fa-bluesky"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fdocs%2ffluid-tldraw%2f&amp;text=Fluid%20tldraw%20integration&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fdocs%2ffluid-tldraw%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fdocs%2ffluid-tldraw%2f&amp;title=Fluid%20tldraw%20integration" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fdocs%2ffluid-tldraw%2f&amp;title=Fluid%20tldraw%20integration" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="../../docs/fluid-view/" data-toggle="tooltip" data-placement="top" title="Fluid View">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="../../docs/fluid-signals-background/" data-toggle="tooltip" data-placement="top" title="Fluid Signals background">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      <script src="https://giscus.app/client.js"
+                data-repo="amb26/ponder"
+                data-repo-id="R_kgDOOKllGA"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOOKllGM4CvhAS"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="0"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script></div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="../../">Antranig Basman</a>
+            
+          
+          &nbsp;&copy;
+          2026
+
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.121.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="../../js/katex.min.js"></script>
+<script defer src="../../js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script src="../../js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+
+
+
+
+
+    
+  </body>
+</html>

@@ -86,8 +86,23 @@
           
           
           
-          <li>
-            <a title="Docs" href="../docs">Docs</a>
+          <li class="navlinks-container">
+            
+            <a class="navlinks-parent" href="../docs">Docs</a>
+            
+            <div class="navlinks-children">
+              
+              <a href="../docs/fluid-signals">Fluid Signals</a>
+              
+              <a href="../docs/fluid-integration-language">Fluid Integration Language</a>
+              
+              <a href="../docs/fluid-view">Fluid View</a>
+              
+              <a href="../docs/fluid-ptf">Fluid PTF</a>
+              
+              <a href="../docs/fluid-tldraw">Fluid tldraw integration</a>
+              
+            </div>
           </li>
           
           
@@ -247,6 +262,35 @@ Construction fluid.
         This page contains background information motivating the design of fluid.cell, the reactive primitive built to support Infusion 6, explaining how it differs from traditional reactive libraries. There are also API docs for fluid.cell and also a more extended essay explaining its goals in the context of a malleable substrate.
 I chose the name &ldquo;cell&rdquo;, rather than &ldquo;signal&rdquo; which is more common in the 2020s JavaScript reactive community, in honour of 3 traditions:
         <a href="../docs/fluid-signals-background/" class="post-read-more">[Read More]</a>
+        
+    </div>
+
+    
+
+</article>
+
+          
+            <article class="post-preview">
+    <div class="post-preview-header">
+        <a href="../docs/fluid-tldraw/">
+            <h2 class="post-title">Fluid tldraw integration</h2>
+            
+            
+        </a>
+
+        <p class="post-meta">
+            <span class="post-meta">
+  
+  
+</span>
+
+        </p>
+    </div>
+    <div class="post-entry">
+        
+        This page documents how Fluid Infusion 6 components are hosted as widgets on a tldraw canvas: how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how widgets are nested and composed. It builds on Fluid View (views, and sharing them between components) and on the Fluid Integration Language (layers, references, $linkage, $bindable).
+The layers marking and receiving hosting, fluid.topLevelWidget and fluid.
+        <a href="../docs/fluid-tldraw/" class="post-read-more">[Read More]</a>
         
     </div>
 

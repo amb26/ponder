@@ -60,7 +60,7 @@ The raw markdown underlying these docs is available on GitHub, suitable for dire
   "headline": "Potentia Transmission Format",
   "description" : "This page documents the Potentia Transmission Format (PTF), a plain-text document format which captures everything required to reconstruct a live Fluid Infusion 6 component somewhere else: in another page, another application or another user\u0026rsquo;s session. It is implemented in FluidPTF.js. It transmits a component\u0026rsquo;s layers, its potentia and the contents of its live layer.\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.",
   "inLanguage" : "en",
-  "wordCount":  1886 ,
+  "wordCount":  2133 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -140,8 +140,23 @@ The raw markdown underlying these docs is available on GitHub, suitable for dire
           
           
           
-          <li>
-            <a title="Docs" href="../../docs">Docs</a>
+          <li class="navlinks-container">
+            
+            <a class="navlinks-parent" href="../../docs">Docs</a>
+            
+            <div class="navlinks-children">
+              
+              <a href="../../docs/fluid-signals">Fluid Signals</a>
+              
+              <a href="../../docs/fluid-integration-language">Fluid Integration Language</a>
+              
+              <a href="../../docs/fluid-view">Fluid View</a>
+              
+              <a href="../../docs/fluid-ptf">Fluid PTF</a>
+              
+              <a href="../../docs/fluid-tldraw">Fluid tldraw integration</a>
+              
+            </div>
           </li>
           
           
@@ -453,7 +468,21 @@ left empty by dropping them, e.g. a <code>view</code> record holding only a cont
 needs no <code>potentia</code> part, because its layer recreates it, but its live state is still transmitted.</li>
 </ul>
 <h2 id="reconstruction">Reconstruction</h2>
-<p><code>fluid.ptf.instantiate(text, options)</code> rebuilds the component.</p>
+<p><code>fluid.ptf.instantiate(text, options)</code> rebuilds the component in three steps:</p>
+<ol>
+<li><strong>Register layers.</strong> Each <code>layer</code> part is registered. An SFC goes through <code>fluid.loadSFCText</code>, a JavaScript part
+is evaluated (running its <code>fluid.def(...)</code> call), and a JSON part is passed to <code>fluid.def</code>. A layer the receiver
+already defines is left alone unless <code>overrideLayers</code> is set.</li>
+<li><strong>Construct the root.</strong> A free component is created from the root&rsquo;s <code>potentia</code> part, with <code>options.potentia</code>
+merged over it, using the creator function of the first entry in its <code>$layers</code>. A document with no root
+<code>potentia</code> part is rejected.</li>
+<li><strong>Apply the rest.</strong> Once the root becomes available, the <code>potentia</code> parts of subcomponents are pushed at their
+paths. Then each subcomponent&rsquo;s <code>live</code> part is written into its live layer once that subcomponent becomes
+available. Parts whose path matches no component are returned as <code>unresolved</code>.</li>
+</ol>
+<p>A host which must take responsibility for the component before it becomes available, such as a canvas which may
+destroy the shape hosting it while it is still loading, can split the steps: <code>fluid.ptf.constructParts</code> performs the first two and returns the component at once, and
+<code>fluid.ptf.applyParts</code> then performs the third.</p>
 <h3 id="trust">Trust</h3>
 <p>Instantiating a PTF document runs the code in its layers. Its JavaScript parts are evaluated, and its SFCs&rsquo; scripts
 are executed. Accepting a PTF document therefore requires the same trust as loading an SFC or script from its source.
@@ -522,6 +551,12 @@ returns an unavailable value if <code>text</code> is not a PTF document.</li>
 </ul>
 </li>
 <li><code>fluid.ptf.instantiateParts(parts, [options])</code> does the same as <code>instantiate</code>, for parts that have already been decoded.</li>
+<li><code>fluid.ptf.constructParts(parts, [options])</code> returns <code>{Component}</code>. It registers the layers and constructs the root
+component without waiting for it to become available, and applies none of the further parts. It throws if there
+is no root <code>potentia</code> part.</li>
+<li><code>fluid.ptf.applyParts(that, parts)</code> returns <code>{Promise&lt;String[]&gt;}</code>. It applies the subcomponent <code>potentia</code> and <code>live</code>
+parts to an existing component, and resolves with the filenames of any it could not place.</li>
+<li><code>fluid.ptf.registerLayerParts(parts, [overrideLayers])</code> registers just the layer parts.</li>
 <li><code>fluid.loadSFCText(layerName, text)</code> registers an SFC from text rather than a URL. Reconstruction uses it for SFC parts.</li>
 </ul>
 
