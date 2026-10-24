@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>post on Antranig Basman</title>
+    <link>https://ponder.org.uk/post/</link>
+    <description>Recent content in post on Antranig Basman</description>
+    <generator>Infusion 6</generator>
+    <language>en</language>
+    <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
+    <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
+    <lastBuildDate>Sun, 28 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://ponder.org.uk/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bridging the gap between static and dynamic analysis through fully deferred stabilization</title>
+      <link>https://ponder.org.uk/post/2026-06-28-fully-deferred-stabilization/</link>
+      <pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2026-06-28-fully-deferred-stabilization/</guid>
+      <description>It is now ten years since some of us wrote 2016’s Software and How it Lives On (SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded communities of authors. In the time since then, progress in reactive software, particularly in the JavaScript community, has now made it possible to tighten up some of the details of how this vision can be brought about.</description>
+    </item>
+    <item>
+      <title>AI cries out for better notations</title>
+      <link>https://ponder.org.uk/post/2026-03-27-ai-cries-out-for-better-notations/</link>
+      <pubDate>Fri, 27 Mar 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2026-03-27-ai-cries-out-for-better-notations/</guid>
+      <description>The themes of today’s posting have been seen before. As with the dismal exercise in On UI as Code I find myself once again trying to make an apparently trivial modification to a user interface - in this case, getting a Hextra Hugo theme menu to support nested menus. As is typical, this turns out to be impossible without some large-scale cut, paste and hack exercise of the kind we so regularly tell each other is unvirtuous.</description>
+    </item>
+    <item>
+      <title>fluid.cell: A reactive implementation supporting malleable substrates</title>
+      <link>https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/</link>
+      <pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/</guid>
+      <description>Submission to the March Substrates 2026 Workshop, co-located with &amp;lt;Programming 2026&amp;gt; . Updated 10th May 2026. Abstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates fluid.cell , a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain. I explain the core reactive competencies of glitch freedom and early cutoff , and how fluid.cell delivers these competencies whilst supporting reactive graphs with bidirectional arcs, asynchronous propagation of reactive updates and allows the cause of these updates to be tracked to their source, and why these expanded capabilities are vital to support successful substrates.</description>
+    </item>
+    <item>
+      <title>Archaeology of Glitches</title>
+      <link>https://ponder.org.uk/post/2025-07-01-archaeology-of-glitches/</link>
+      <pubDate>Tue, 01 Jul 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-07-01-archaeology-of-glitches/</guid>
+      <description>In 2024 I was working on a small project that I wanted to be able to be handed over, and wondered what was the most congenial way out there of rendering apps that wouldn’t bring in too heavy a dependency. My eye was caught by the following passage in preact-signals’ test cases: it(&amp;quot;should drop A-&amp;gt;B-&amp;gt;A updates&amp;quot;, async () =&amp;gt; { // A // / | // B | &amp;lt;- Looks like a flag doesn't it?</description>
+    </item>
+    <item>
+      <title>Substrates Vision Statement</title>
+      <link>https://ponder.org.uk/post/2025-06-03-substrates-vision/</link>
+      <pubDate>Tue, 03 Jun 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-06-03-substrates-vision/</guid>
+      <description>This is my vision statement submitted to the Substrates-25 workshop held in Prague in June 2025, co-located with &amp;lt;Programming 2025&amp;gt; . To disclosable computing through concrete abstractions What is a substrate? Jonathan Edwards defines a substrate as embodying the following properties: A complete and self-sufficient programming system, with a persistent code &amp;amp; data store, providing a direct-manipulation UI on that state. Supports live programming. Programming &amp;amp; using are on a spectrum, not distinct.</description>
+    </item>
+    <item>
+      <title>An era for new notations</title>
+      <link>https://ponder.org.uk/post/2025-04-19-new-notation-era/</link>
+      <pubDate>Sat, 19 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-04-19-new-notation-era/</guid>
+      <description>I argue that there has never been a more promising time for developing fruitful new notations. Some, considering the enormous success of modern LLMs in solving increasingly complex “problems” – in terms of translating a verbal or pictorial design specification into code – means programming is now a “solved” problem. They imagine a future where humans no longer need to understand or write code. I believe this is wrong on several accounts.</description>
+    </item>
+    <item>
+      <title>Coming Out of the Shadows</title>
+      <link>https://ponder.org.uk/post/2025-04-13-coming-out-of-the-shadows/</link>
+      <pubDate>Sun, 13 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-04-13-coming-out-of-the-shadows/</guid>
+      <description>Or – “Evading Gilad’s Comparison”. A 2014 posting of Gilad Bracha’s, A DOMain of shadows , has prompted a lot of thought over the years. I refer to it in passing in last month’s On UI as Code but this week a line of argument became a bit clearer on how the comparison in the posting might be dodged. Gilad’s note is about the design tension constantly pushing complexity into any purportedly “simple” user-facing language, that we might call a DSL.</description>
+    </item>
+    <item>
+      <title>On UI as code</title>
+      <link>https://ponder.org.uk/post/2025-03-20-ui-as-code/</link>
+      <pubDate>Thu, 20 Mar 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-03-20-ui-as-code/</guid>
+      <description>UI as Code as a named slogan originated in the context of Dart’s Flutter UI toolkit created by Google. It is centrally described by Bob Nystrom in this thoughtful posting Marking Dart a Better Language for UI . I see it as part of a wider trend in many environments to express designs in general-purpose programming language code rather than configuration languages with less expressive power. For example, ESLint’s flat config system introduced in 2022 moves its previous JSON-based linting configuration into JavaScript code.</description>
+    </item>
+    <item>
+      <title>On Development Speed</title>
+      <link>https://ponder.org.uk/post/2025-03-14-development-speed/</link>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-03-14-development-speed/</guid>
+      <description>A recent posting Why the Latest JavaScript Frameworks Are a Waste of Time sparks a short train of thought. As well as the characteristically disrespectful tone of discussion that technical people often adopt, and the suggestion, contrary to my speculations looking at DOM reconciliation , that people really do use low-level benchmarks when choosing frameworks, is the notion of frameworks contributing to development speed. One commentor invites us to watch him against the clock to implement a front end in Svelte rather than React.</description>
+    </item>
+    <item>
+      <title>Benchmarking DOM reconciliation algorithms</title>
+      <link>https://ponder.org.uk/post/2025-02-07-benchmarking-dom-reconciliation/</link>
+      <pubDate>Fri, 07 Feb 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-02-07-benchmarking-dom-reconciliation/</guid>
+      <description>Since the Infusion 6 renderer is close to being a reality, it is time to understand the characteristics of some of the various DOM reconciliation algorithms out there. Could we do without a virtual DOM entirely? To start with is the question of whether we even really want one at all — the classic Svelte Virtual DOM is pure overhead post has been though its various hype cycles but 7 years later the majority of frameworks out there still have one so the consequences are clearly not as clear-cut as the argument would have it.</description>
+    </item>
+  </channel>
+</rss>

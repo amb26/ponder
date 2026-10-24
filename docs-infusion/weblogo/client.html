@@ -1,0 +1,139 @@
+<!DOCTYPE html      PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+    <title>Math On A Sphere</title>
+    
+    <script type="text/javascript" src="lib/js/jquery.js"></script>
+    <script type="text/javascript" src="lib/js/ui/jquery.ui.core.js"></script>
+    <script type="text/javascript" src="lib/js/ui/jquery.ui.position.js"></script>
+    <script type="text/javascript" src="lib/js/ui/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="lib/js/ui/jquery.ui.selectmenu.js"></script>
+    
+    <script type="text/javascript" src="lib/js/fluidLite.js"></script>
+    <script type="text/javascript" src="lib/js/jquery.terminal-0.3.6.js"></script>
+    <script type="text/javascript" src="lib/js/gl-matrix.js"></script>
+    <script type="text/javascript" src="lib/js/codemirror.js"></script>
+
+    <script type="text/javascript" src="js/codemirror-weblogo.js"></script>
+        
+    <script type="text/javascript" src="js/geometry.js"></script>
+
+    <script type="text/javascript" src="js/turtle.js"></script>
+    <script type="text/javascript" src="js/commands.js"></script>
+    <script type="text/javascript" src="js/executor.js"></script>
+    <script type="text/javascript" src="js/webgl-utils.js"></script>
+    <script type="text/javascript" src="js/complex.js"></script>
+    <script type="text/javascript" src="js/preview.js"></script>
+    <script type="text/javascript" src="js/client.js"></script>
+    <script type="text/javascript" src="js/handlers.js"></script>
+    <script type="text/javascript" src="js/preload.js"></script>
+    
+    <script type="text/javascript" src="js/geometry2.js"></script>
+
+    <script type="text/javascript" src="jison/grammar.js"></script>
+
+    <link rel="stylesheet" href="lib/css/jquery.terminal.css" />
+    <link rel="stylesheet" href="lib/css/codemirror.css">
+    
+    <link rel="stylesheet" href="lib/css/themes/base/jquery.ui.core.css" />
+    <link rel="stylesheet" href="lib/css/themes/base/jquery.ui.selectmenu.css" />
+    <link rel="stylesheet" href="lib/css/themes/ui-darkness/jquery-ui.css" />
+
+    <link rel="stylesheet" href="css/client.css" />
+    <link rel="stylesheet" href="css/codemirror-weblogo.css" />
+
+    </head>
+
+      <body>  
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <form>
+                  Editor Window:
+                  <select id="preload-commands">
+                    <option value="noselection" selected="selected">--sample-designs--</option>
+                    <option value="blank">blank</option>
+                    <option value="my_design">my design</option>
+                    <option value="triple_right_triangle">repeat example</option>
+                    <option value="dragon_curve">dragon curve</option>
+                    <option value="triangle_size">triangle size</option>
+                    <option value="circles">circle size</option>
+                    <option value="icosahedron">icosahedron</option>
+                    <option value="fast_soccer">soccer ball</option>
+                    <option value="dodeca_pursuit">dodecahedral pursuit</option>
+                    <option value="starburst">starburst</option>
+                    <option value="pumekin">pumpkin</option>
+                    <option value="mask">mask</option>
+                    <option value="CATT">catt</option>
+                    <option value="dragon_fly">dragonfly</option>
+                    <option value="rand_circles">random circles</option>
+                    <option value="flower">flower</option>
+                  </select>
+              </form></td>
+              <td>Sphere Window:</td>
+            </tr>
+            <tr>
+              <td>Type commands below and click 'run commands'.</td>
+              <td>Click and drag to spin the sphere.</td>
+            </tr>
+            <tr>
+              <td style="vertical-align:top">
+                <form><textarea id="code" class="code" name="code" style: "width: 600px"">
+                </textarea></form>
+                <button id="compile-button">run commands</button>
+                <br/>
+                <br/>
+                Command Line Window:
+                <a href="docs/command_list.txt">List of Commands</a>
+                <div class="flc-math-commands"></div>
+              </td>
+              <td style="vertical-align:top">
+                <!-- preview sphere canvas -->
+                <canvas id="webgl-canvas" class="sphere-canvas unselectable" width="420" height="420"></canvas>
+                <br/>
+                <input type="checkbox" id="lighting" checked /><label for="lighting">Use lighting</label>
+                <button id="reset-position-button">reset position</button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <!-- preview image canvas -->
+                <div id="hiddenCanvas" style="display: none" >
+                  <canvas width="1024" height="512" class="flc-canvas unselectable"></canvas>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input type="button" value="Stop Command" class="flc-math-stop"/>
+                <!-- GL image canvas -->
+                <canvas width="1024" height="512" style="display:none" class="flc-aux-canvas unselectable"></canvas>
+
+                Frame number: <span class="flc-math-frameNumber">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;
+                Frame rate: <span class="flc-math-frameRate">&nbsp;&nbsp;&nbsp;</span> fps&nbsp;&nbsp;&nbsp;
+                Frame size: <span class="flc-math-frameSize">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;
+                Data rate: <span class="flc-math-dataRate">&nbsp;&nbsp;&nbsp;</span>KB/s
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button id="show2d-button">show/hide 2d canvas</button>
+                <br/>
+                Server status: <span class="flc-math-serverStatus">&nbsp;&nbsp;&nbsp;</span>
+                <br/>
+                Connect to server at: <input class="flc-math-serverUrl" type="text" value="server/postreceive"/>
+                <input type="button" value="Connect" class="flc-math-connect" />
+                <input type="button" value="Disconnect" class="flc-math-disconnect" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      <script>
+        org.weblogo.init();
+      </script>
+        
+  </body>
+</html>  

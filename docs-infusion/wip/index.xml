@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>wip on Antranig Basman</title>
+    <link>https://ponder.org.uk/wip/</link>
+    <description>Recent content in wip on Antranig Basman</description>
+    <generator>Infusion 6</generator>
+    <language>en</language>
+    <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
+    <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
+    <lastBuildDate>Mon, 25 May 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://ponder.org.uk/wip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Towards Deferred Stabilisation</title>
+      <link>https://ponder.org.uk/wip/2026-05-25-towards-deferred-stabilisation/</link>
+      <pubDate>Mon, 25 May 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2026-05-25-towards-deferred-stabilisation/</guid>
+      <description>aka “A Farewell to preact-signals” This posting is a story that can be told from two ends, the theoretical and the practical. To jump ahead to one of the punchlines, it turns out that Milo’s reactively system, hailed in Understanding Reactivity and other posts, harbours yet more riches than had been explored so far. When looking through Milo’s Reactivity Benchmark with Chee last year, I was greatly taken with the staggering simplicity of the benchmark’s adaptor for update batching, which looks like this: withBatch: (fn) =&amp;gt; { fn(); stabilize(); }, Where actually is the batching?</description>
+    </item>
+    <item>
+      <title>Researching in-browser AI</title>
+      <link>https://ponder.org.uk/wip/2026-07-31-researching-in-browser-ai/</link>
+      <pubDate>Mon, 25 May 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2026-07-31-researching-in-browser-ai/</guid>
+      <description>After beholding Clayton’s Antigravity-fuelled conversion of his 1987 NoPumpG spreadsheet-inspired visual programming system, I started to wonder what it would take to get in-browser AI assistance and explanation of the interface. Below is reproduced a Gemini Q&amp;amp;A session where I started from the assumption that some kind of MCP-like construct, mapping the materialised interface contents onto a structured query API, would be relevant. The conversation revealed that whilst an MCP-like mapping could be a helpful intermediate, this is secondary compared to the central difficulty of getting the AI mustered into the browser environment itself, at a price/availability that made sense for a non-technical user.</description>
+    </item>
+    <item>
+      <title>Understanding Reactivity</title>
+      <link>https://ponder.org.uk/wip/2025-12-15-understanding-reactivity/</link>
+      <pubDate>Mon, 15 Dec 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-12-15-understanding-reactivity/</guid>
+      <description>In late 2023, staring at the “flag” test case in preact-signals that I describe in my Archaeology of Glitches posting, I realised something decisive: reactive systems can provide a strong, structural guarantee of data consistency. Given that, it became clear that Infusion could be reworked as a fully reactive system, rather than the opportunistic hybrid I had been building through the 2010s. This post will notice that the apparent diversity of reactive systems masks a simple unifying principle, related to a principle I had already been following in Infusion’s development.</description>
+    </item>
+    <item>
+      <title>Infinite Apps, Asynchrony and Tree Unshaking</title>
+      <link>https://ponder.org.uk/wip/2025-12-12-infinite-apps-and-unshaking/</link>
+      <pubDate>Fri, 12 Dec 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-12-12-infinite-apps-and-unshaking/</guid>
+      <description>This has been a period of consolidation since pushing on demos of Infusion 6 for the Substrates 2025 workshop and my 2025 Live incurred a good amount of technical debt. Lots of demo features were hacked on by banging on framework internals rather than by proper userland constructs, and the tidyup has proved more meaty than I imagined, with several test cases still failing for fairly fundamental reasons. However this has been a great opportunity to deliver more soundly on some of Infusion’s goals and work out more of the implications of its model for software’s material.</description>
+    </item>
+    <item>
+      <title>Josh Horowitz Review</title>
+      <link>https://ponder.org.uk/wip/2025-10-07-josh-horowitz-review/</link>
+      <pubDate>Tue, 07 Oct 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-10-07-josh-horowitz-review/</guid>
+      <description>Last month I received some great feedback and searching questions from Josh Horowitz about my 2025 Live submission. Whilst it was rejected this time round, the submission achieved its aim of engaging with the most thoughtful minds in the field, and starting the long process of sharpening up these ideas so that they can be widely intelligible and adopted. There’s been no substantial writing on Infusion’s goals since the 2018 Open Authorial Principle and since then both the ideas and implementation have evolved significantly.</description>
+    </item>
+    <item>
+      <title>The Module System Once More</title>
+      <link>https://ponder.org.uk/wip/2025-09-30-module-system-once-more/</link>
+      <pubDate>Tue, 30 Sep 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-09-30-module-system-once-more/</guid>
+      <description>It finally seems to be time to do something decisive about this issue which seems to have been pending for longer than I’ve been alive, the Infusion Module System. There are Notes on the Infusion Module Loader and Notes on Modularisation of Infusion as well as ancient tickets going back as far as 2014 which read as if before the era of the printing press. The landscape has changed profoundly since then - There are numerous other package managers than npm for node, and even npm changed its module layout pretty significantly There are several alternatives to node itself for JS on the server Various monorepo orchestrators solve many of the problems described here The already highly confused state of JS module loading, which had 5 major competing variants then, has been totally shredded by the “nuclear option” of ES6 modules with their impermissive “viral” footprint - only an ES6 module can load another ES6 module.</description>
+    </item>
+    <item>
+      <title>This week's reactive chats</title>
+      <link>https://ponder.org.uk/wip/2025-09-26-this-weeks-reactive-chats/</link>
+      <pubDate>Fri, 26 Sep 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-09-26-this-weeks-reactive-chats/</guid>
+      <description>Some good chats this week on reactive matters. Firstly on Tuesday with Patrick Dubroy , a fellow substratist . Patrick is a splendid chap who amongst many other works is the maintainer of a powerful, user-friendly parsing toolkit Ohm . Patrick pinged me last week explaining that he was contemplating a collaboration with Camille and Yann who were building a document publishing pipeline sourced from, amongst other formats, AsciiDoc (for related details see Camille’s recent PhD thesis ).</description>
+    </item>
+    <item>
+      <title>More iNaturalist Shenanigans</title>
+      <link>https://ponder.org.uk/wip/2025-09-25-more-inaturalist-shenanigans/</link>
+      <pubDate>Thu, 25 Sep 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-09-25-more-inaturalist-shenanigans/</guid>
+      <description>This story has a familiar beginning. As with UI as Code , an innocuous UI request from Dana has unexpectedly deep consequences. Dana noticed that the Douglas fir image on the Xetthecum Forest community pane was no longer showing up… here is what we see: The cause in itself is indeed fairly innocuous. We are sourcing these images from iNaturalist’s CDN which has been for many years in the slow process of migrating from URLs like https://static.inaturalist.org/photos/641410/medium.jpg to URLs like https://inaturalist-open-data.s3.amazonaws.com/photos/641410/medium.jpg .</description>
+    </item>
+    <item>
+      <title>Learning from Codestrates</title>
+      <link>https://ponder.org.uk/wip/2025-04-24-learning-from-codestrates/</link>
+      <pubDate>Thu, 24 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-04-24-learning-from-codestrates/</guid>
+      <description>For the last few days I’ve been looking at the amazing Codestrates project, a development from Webstrates that has been under development by Clemens Klokmose and his team at CAVI since 2015. This has always been a close sibling project since the days of our 2016 paper and the development into Codestrates with its powerful in-browser IDE makes the convergence even more interesting. Reuse and abstractions in Substrates There has always been a fundamental difference in philosophy between Webstrates and Infusion, in that the substrate underlying Webstrates is simply the DOM itself.</description>
+    </item>
+    <item>
+      <title>Co-occurrences are here again</title>
+      <link>https://ponder.org.uk/wip/2025-04-21-co-occurrences-are-here-again/</link>
+      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-04-21-co-occurrences-are-here-again/</guid>
+      <description>Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter features at the expense of what might have been “speculative nonsense” in its earlier history. However, implementing something pretty basic – the ability to render lists of components – brought me right back to an old conversation. Here’s the situation – one author wrote a todoItem which is a templateViewComponent : fluid.def(&amp;quot;fluid.tests.todoItem&amp;quot;, { $layers: &amp;quot;fluid.templateViewComponent&amp;quot;, template: '&amp;lt;span class=&amp;quot;todo tag is-large&amp;quot;&amp;gt;@text&amp;lt;button class=&amp;quot;delete is-small&amp;quot;&amp;gt;&amp;lt;/button&amp;gt;&amp;lt;/span&amp;gt;' }); Another author now wants to iterate over a list of these items: $component: { $layers: &amp;quot;fluid.tests.todoItem&amp;quot;, $for: { source: &amp;quot;{forTodo}.todos&amp;quot;, value: &amp;quot;todo&amp;quot;, key: &amp;quot;todoIndex&amp;quot; }, text: &amp;quot;{todo}.text&amp;quot; } What kind of component ends up this path?</description>
+    </item>
+    <item>
+      <title>Templates and weird attributes together</title>
+      <link>https://ponder.org.uk/wip/2025-04-07-templates-and-weird-attributes-together/</link>
+      <pubDate>Mon, 07 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-04-07-templates-and-weird-attributes-together/</guid>
+      <description>Trying to put into practice thoughts from the previous two postings on template thinking and weird attributes for event binding revealed some interesting problems. Firing up ${ } -based templates revealed an awkward problem. This prevents us using backtick template literals in code since these automatically interpret ${} syntax and so will break as soon as they are evaluated. At the same time, use of @click style event binding revealed a really interesting limitation.</description>
+    </item>
+    <item>
+      <title>Staring at the wand</title>
+      <link>https://ponder.org.uk/wip/2025-04-04-staring-at-the-wand/</link>
+      <pubDate>Fri, 04 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-04-04-staring-at-the-wand/</guid>
+      <description>OK, so we have now imported a visually reasonable and properly lithified version of Pell into a tiny static page which is itself lithified from the rendered output of the substrates page, which will be where the most basic editing demo gets scaffolded. I mused about making the disclosing tool into a pencil of the kind we see in the Lively Kernel UI but the “magic wand” was hard to resist and fits in with some rhetoric about this gesture.</description>
+    </item>
+    <item>
+      <title>Change of Tack on Templating</title>
+      <link>https://ponder.org.uk/wip/2025-04-03-change-of-tack-on-templating/</link>
+      <pubDate>Thu, 03 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-04-03-change-of-tack-on-templating/</guid>
+      <description>I get to staring at the markup templates that were already implemented for the Galiano 2023 Bioblitz and thinking how to adapt/reuse them for the upcoming Diatoms of the Salish Sea viz forces me to put some things in focus about how templating is going to have to work for these communities. I’d vaguely hoped that the details of how Infusion templating was going to interact with Hugo templating would somehow just “come out in the wash” but naturally this isn’t going to happen without some kind of focused plan!</description>
+    </item>
+    <item>
+      <title>Hunting rich editors</title>
+      <link>https://ponder.org.uk/wip/2025-03-28-hunting-rich-editors/</link>
+      <pubDate>Fri, 28 Mar 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-03-28-hunting-rich-editors/</guid>
+      <description>The substrate’s transition to editability will need to present a “mostly rendered” view of itself – managed by some form of rich text editor. A huge “grab-bag list” is at JefMari’s curated list of Awesome Wysiwyg Editors which can rapidly be whittled down to a shortlist. CKEditor 5 and TinyMCE are familiar from decades ago. But the gold standard is clearly Marijn’s ProseMirror – basic example here and really nice markdown editing example here.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,335 @@
+<!DOCTYPE html><html lang="en" id="fl-id-site-11.documents.34" itemtype="http://schema.org/WebPage" itemscope><head id="fl-id-site-11.documents.34.head"><meta charset="utf-8"><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"><title>Potentia Transmission Format - Antranig Basman</title><meta content="This page documents the Potentia Transmission Format (PTF), a plain-text document format which captures everything required to reconstruct a live Fluid Infusion 6 component somewh…" name="description"><meta content="Antranig Basman" name="author"><meta content="Potentia Transmission Format" property="og:title"><meta content="This page documents the Potentia Transmission Format (PTF), a plain-text document format which captures everything required to reconstruct a live Fluid Infusion 6 component somewh…" property="og:description"><meta content="https://ponder.org.uk/img/pond.jpg" property="og:image"><meta content="https://ponder.org.uk/docs/fluid-ptf/" property="og:url"><meta content="website" property="og:type"><meta content="Antranig Basman" property="og:site_name"><link href="https://ponder.org.uk/img/favicon.ico" type="image/x-icon" rel="icon"><meta content="Infusion 6" name="generator"><link title="Antranig Basman" href="https://ponder.org.uk/index.xml" type="application/rss+xml" rel="alternate"><link href="../../css/katex.min.css" id="fl-id-site-11.documents.34.head.stylesheetTags.katex" rel="stylesheet"><link href="../../fontawesome/css/all.min.css" id="fl-id-site-11.documents.34.head.stylesheetTags.fontawesome" rel="stylesheet"><link href="../../css/bootstrap.min.css" id="fl-id-site-11.documents.34.head.stylesheetTags.bootstrap" rel="stylesheet"><link href="../../css/main.css" id="fl-id-site-11.documents.34.head.stylesheetTags.main" rel="stylesheet"><link href="../../css/highlight.min.css" id="fl-id-site-11.documents.34.head.stylesheetTags.syntax" rel="stylesheet"><link href="../../css/codeblock.css" id="fl-id-site-11.documents.34.head.stylesheetTags.codeblock" rel="stylesheet"><link href="../../css/ponder.css" id="fl-id-site-11.documents.34.head.stylesheetTags.ponder" rel="stylesheet"><script src="../../js/ponder.js" id="fl-id-site-11.documents.34.head.scriptTags.ponder"></script></head><body class="infusion-docs"><nav class="navbar navbar-default navbar-fixed-top navbar-custom" id="fl-id-site-11.documents.34.navbar"><div class="container-fluid"><div class="navbar-ponder"><a href="../../" class="navbar-ponder-brand">Antranig Basman</a><button data-target="#main-navbar" data-toggle="collapse" class="navbar-toggle" type="button"><span class="sr-only">Toggle navigation</span><svg xmlns="http://www.w3.org/2000/svg" stroke="#888" viewBox="0 0 24 24" height="36" width="36"><path stroke-linecap="round" stroke-width="1.5" d="M20 7L4 7" /><path stroke-linecap="round" stroke-width="1.5" d="M20 12L4 12" /><path stroke-linecap="round" stroke-width="1.5" d="M20 17L4 17" /></svg></button><div id="main-navbar" class="collapse navbar-collapse"><ul id="fl-id-site-11.documents.34.navbar.items" class="nav navbar-nav navbar-right"><li id="fl-id-site-11.documents.34.navbar.items.0"><a href="../../post" title="Posts">Posts</a></li><li id="fl-id-site-11.documents.34.navbar.items.1"><a href="../../wip" title="WiP">WiP</a></li><li id="fl-id-site-11.documents.34.navbar.items.2"><a href="../../page/about/" title="About">About</a></li><li id="fl-id-site-11.documents.34.navbar.items.3" class="navlinks-container"><a href="../../docs" class="navlinks-parent">Docs</a><div id="fl-id-site-11.documents.34.navbar.items.3.children" class="navlinks-children"><a href="../../docs/fluid-signals">Fluid Signals</a><a href="../../docs/fluid-integration-language">Fluid Integration Language</a><a href="../../docs/fluid-view">Fluid View</a><a href="../../docs/fluid-ptf">Fluid PTF</a><a href="../../docs/fluid-tldraw">Fluid tldraw integration</a></div></li><li id="fl-id-site-11.documents.34.navbar.items.4"><a href="../../communities" title="Communities">Communities</a></li><li id="fl-id-site-11.documents.34.navbar.items.5"><a href="../../projects" title="Projects">Projects</a></li><li id="fl-id-site-11.documents.34.navbar.items.6"><a href="../../term" title="Terms">Terms</a></li></ul></div></div></div></nav><header id="fl-id-site-11.documents.34.header" class="header-section"><div class="intro-header no-img"><div class="container"><div class="header-row"><div class="infusion-docs-heading ponder-heading"><h1 class="ponder-title">Potentia Transmission Format</h1><hr class="small"></div></div></div></div></header><div role="main" id="fl-id-site-11.documents.34.main"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article class="blog-post" role="main"><div id="fl-id-site-11.documents.34.main.content"><p>This page documents the Potentia Transmission Format (PTF), a plain-text document format which captures everything
+required to reconstruct a live Fluid Infusion 6 component somewhere else: in another page, another application or
+another user’s session. It is implemented in <code>FluidPTF.js</code>. It transmits a component’s
+<a href="../../docs/fluid-integration-language#layers">layers</a>, its <a href="#what-is-transmitted">potentia</a> and the contents of its
+<a href="../../docs/fluid-integration-language#creator-functions-layernameuserlayer">live layer</a>.</p>
+<p>The raw markdown underlying these docs is available on <a href="https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/fluid-ptf.md">GitHub</a>,
+suitable for direct ingestion by your friendly local neighbourhood intelligence.</p>
+<h2 id="intention">Intention</h2>
+<p>A user should be able to point at any visible instance, choose “Copy”, and paste a working replica elsewhere, together
+with the state it had accumulated.</p>
+<p>The format is designed to be:</p>
+<ul>
+<li><strong>Intelligible and hackable.</strong> A PTF document is ordinary text that can be read, diffed, edited in any text editor,
+pasted into a chat or an email, or written by hand.</li>
+<li><strong>Built on an existing standard.</strong> The container is MIME multipart (RFC 1341, RFC 2046), the format of email
+attachments. Each part carries a <code>Content-Type</code> and a filename, so that layers travel in their native
+representation: an SFC as <code>.vue</code> source, a JavaScript layer as JavaScript, live state as JSON.</li>
+<li><strong>Complete but minimal.</strong> It carries exactly the layers that are not part of the framework, and only the state that
+the user actually supplied or changed.</li>
+</ul>
+<h2 id="an-example">An example</h2>
+<p>Take the counter from <a href="../../docs/fluid-view#a-first-component">Fluid View</a>, loaded from <code>my-counter.vue</code>, rendered and
+clicked three times:</p>
+<pre><code class="language-js">const that = my.counter({container});
+// ... the user clicks +1 three times
+fluid.ptf.componentToPTF(that);
+</code></pre>
+<p>This is the complete document produced:</p>
+<pre><code>MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="ptf-boundary-buednuutq8"
+
+This is a Potentia Transmission Format (PTF) document holding the layers and potentia of an Infusion component.
+--ptf-boundary-buednuutq8
+Content-Type: text/x-vue; charset=utf-8
+Content-Disposition: attachment; filename="my.counter"
+Content-Description: layer
+
+&lt;script&gt;
+fluid.def("my.counter", {
+    count: 0,
+    increment: {
+        $method: {
+            func: self =&gt; self.count++,
+            args: "{self}"
+        }
+    }
+});
+&lt;/script&gt;
+
+&lt;template&gt;
+    &lt;div class="counter"&gt;
+        &lt;span&gt;Clicked @{count} times&lt;/span&gt;
+        &lt;button @onclick="{self}.increment()"&gt;+1&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;style&gt;
+.counter {
+    display: flex;
+    gap: 12px;
+}
+&lt;/style&gt;
+
+--ptf-boundary-buednuutq8
+Content-Type: application/json; charset=utf-8
+Content-Disposition: attachment; filename="/"
+Content-Description: potentia
+
+{
+    "$layers": [
+        "my.counter"
+    ]
+}
+--ptf-boundary-buednuutq8
+Content-Type: application/json; charset=utf-8
+Content-Disposition: attachment; filename="/"
+Content-Description: live
+
+{
+    "count": 3
+}
+--ptf-boundary-buednuutq8--
+</code></pre>
+<p>Reading it from the top:</p>
+<ol>
+<li>The MIME header declares a multipart document and its boundary string. The boundary is chosen at random so that it
+doesn’t occur in any part.</li>
+<li>The preamble line is ignored by decoders, but tells a human reader what they are looking at.</li>
+<li>The <code>layer</code> part is the SFC exactly as its author wrote it.</li>
+<li>The <code>potentia</code> part for <code>/</code> says the component was made from <code>my.counter</code>. Its <code>container</code> argument has been
+dropped, because it was a DOM node.</li>
+<li>The <code>live</code> part for <code>/</code> records that <code>count</code> was changed to 3.</li>
+</ol>
+<p>Pasting this into another page and calling <code>fluid.ptf.instantiate(text, {potentia: {container}})</code> renders
+“Clicked 3 times”, and the copy then counts on from 3 independently of the original.</p>
+<h3 id="with-a-javascript-layer-and-a-subcomponent">With a JavaScript layer and a subcomponent</h3>
+<p>If the counter is embedded in a panel defined in plain JavaScript:</p>
+<pre><code class="language-js">fluid.def("my.counterPanel", {
+    $layers: "fluid.component",
+    title: "Clicks",
+    counter: {
+        $component: {
+            $layers: "my.counter"
+        }
+    }
+});
+
+const panel = my.counterPanel({title: "Visitor clicks"});
+panel.counter.increment();
+panel.counter.increment();
+</code></pre>
+<p>then the document holds these parts:</p>
+<table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Filename</th>
+<th>Content type</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>layer</code></td>
+<td><code>my.counterPanel</code></td>
+<td><code>text/javascript</code></td>
+<td>The <code>fluid.def("my.counterPanel", {...});</code> call, regenerated from the stored definition</td>
+</tr>
+<tr>
+<td><code>layer</code></td>
+<td><code>my.counter</code></td>
+<td><code>text/x-vue</code></td>
+<td>The SFC source, as above</td>
+</tr>
+<tr>
+<td><code>potentia</code></td>
+<td><code>/</code></td>
+<td><code>application/json</code></td>
+<td><code>{"$layers": ["my.counterPanel"], "title": "Visitor clicks"}</code></td>
+</tr>
+<tr>
+<td><code>live</code></td>
+<td><code>/counter</code></td>
+<td><code>application/json</code></td>
+<td><code>{"count": 2}</code></td>
+</tr>
+</tbody>
+</table>
+<p>There is no <code>potentia</code> part for <code>/counter</code>, because the panel’s layer creates the counter itself. Its live state is
+still sent, keyed by its path.</p>
+<h2 id="transmitting-components-not-data">Transmitting components, not data</h2>
+<p>Conventional copy and paste moves <strong>data in an application-specific format</strong>: text, an image, a spreadsheet range, or a
+serialised blob. Sender and receiver must agree in advance on what that data means, and the receiver must already
+contain the code that gives it behaviour. A rich clipboard flavour only works between applications that share an
+understanding of it, and what moves is always the application’s <em>output</em>, never a piece of the application itself.</p>
+<p>PTF is a single, general format, which a receiver needs to understand only once. What it carries is a <strong>component of
+the application itself</strong>: the definitions that produce it, not data shaped for a particular consumer. Because an
+Infusion component is fully determined by its layers plus a small record of how it was configured and changed, sending
+those is enough to rebuild it, with its behaviour intact. The receiver doesn’t need to have seen the component, or
+any application like it, before.</p>
+<h2 id="preserving-authorship">Preserving authorship</h2>
+<p>A component is not built from one block of code but from a stack of layers, often written by different people at
+different times. A base layer from a library, a derived layer from an application author, a <a href="../../docs/fluid-integration-language#linkage"><code>$linkage</code></a>
+contributed by a plugin, the user’s own configuration and the edits made during use are each a separate contribution,
+merged by the framework with <a href="../../docs/fluid-integration-language#merging-and-precedence">well-defined precedence</a>.</p>
+<p>PTF keeps that structure. Each layer travels as its own part, under its own name, in the source format its author
+wrote it in: an SFC as the <code>.vue</code> file it was loaded from, verbatim, not regenerated. The user’s configuration and the
+live changes made during use travel separately again. A PTF document is never compiled, bundled or flattened into one
+tangled block of source code in which nobody can tell which lines came from whom.</p>
+<p>This has consequences for the receiver:</p>
+<ul>
+<li><strong>Provenance is legible.</strong> Anyone reading the document can see which author contributed what, and in what order
+the contributions apply.</li>
+<li><strong>Contributions stay separable.</strong> A receiver can keep its own, perhaps newer, version of a library layer, and
+accept only the application author’s layer and the user’s state. It can also edit a single layer without disturbing
+the others.</li>
+<li><strong>The copy remains malleable.</strong> The rebuilt component has the same layered structure as the original, so it can be
+adapted, re-linked and transmitted onward in the same terms. Its history of authorship grows rather than being
+erased at each hop.</li>
+</ul>
+<h2 id="what-is-transmitted">What is transmitted</h2>
+<p>A component’s merged contents come from three kinds of source, and each is transmitted as a separate kind of part,
+named in its <code>Content-Description</code> header:</p>
+<table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>What it holds</th>
+<th>Filename</th>
+<th>Content type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>layer</code></td>
+<td>The definition of each user layer resolved into the <code>$layers</code> of the component or any of its subcomponents</td>
+<td>The layer name</td>
+<td><code>text/x-vue</code>, <code>text/javascript</code> or <code>application/json</code></td>
+</tr>
+<tr>
+<td><code>potentia</code></td>
+<td>The <strong>user potentia</strong>: the arguments supplied when the component was created (to its creator function or <code>fluid.pushPotentia</code>)</td>
+<td>The component’s path, e.g. <code>/</code> or <code>/counter</code></td>
+<td><code>application/json</code></td>
+</tr>
+<tr>
+<td><code>live</code></td>
+<td>The contents of the component’s <strong>live layer</strong>: every value written to it during its lifetime</td>
+<td>The component’s path</td>
+<td><code>application/json</code></td>
+</tr>
+</tbody>
+</table>
+<p>The first kind is sometimes called “Potentia I” (the reusable definitions) and the other two “Potentia II” (what
+distinguishes this particular instance).</p>
+<p>Details:</p>
+<ul>
+<li><strong>Which layers.</strong> Framework layers (those with <code>$variety: "framework"</code> or <code>"frameworkAux"</code>) are omitted, since the
+receiver is expected to have its own copy of the framework. So are layers whose definitions can’t be found.</li>
+<li><strong>Layer representation.</strong> A layer loaded from a Single File Component is sent as its SFC source text, byte for byte,
+including its <code>&lt;template&gt;</code> and <code>&lt;style&gt;</code>. Any other layer is rendered as a <code>fluid.def(...)</code> call in JavaScript, with
+functions included by their source text. Live layers, whose names are rendered sites beginning with <code>{</code>, are JSON.
+<code>fluid.layerMimeType(layerName)</code> reports which representation a layer will use. SFC layers are recognised by the tag
+layer <code>fluid.sfcLayer</code>, which the SFC loader adds to every layer it loads.</li>
+<li><strong>Paths.</strong> Filenames for <code>potentia</code> and <code>live</code> parts are paths relative to the transmitted component, which is <code>/</code>.
+A subcomponent at member <code>counter</code> is <code>/counter</code>, and segments are URI-encoded.</li>
+<li><strong>Potentia of the root.</strong> The root’s <code>potentia</code> part always holds <code>$layers</code>, the full list of layers the component
+was created with. Its first entry is the layer whose creator function will rebuild it.</li>
+<li><strong>Live layer.</strong> This is flattened to a map from path to value, e.g. <code>{"count": 3, "state.prompt": "Hi"}</code>.</li>
+<li><strong>Values that can’t travel.</strong> Potentia and live values are reduced to what JSON can represent faithfully. Values
+supplied by the host environment, such as a <code>container</code> DOM node or a function, are dropped, and so is any object
+left empty by dropping them, e.g. a <code>view</code> record holding only a container. The receiver supplies its own.</li>
+<li><strong>Subcomponents.</strong> Subcomponents are visited recursively. A subcomponent created by a <code>$component</code> record in a layer
+needs no <code>potentia</code> part, because its layer recreates it, but its live state is still transmitted.</li>
+</ul>
+<h2 id="reconstruction">Reconstruction</h2>
+<p><code>fluid.ptf.instantiate(text, options)</code> rebuilds the component in three steps:</p>
+<ol>
+<li><strong>Register layers.</strong> Each <code>layer</code> part is registered. An SFC goes through <code>fluid.loadSFCText</code>, a JavaScript part
+is evaluated (running its <code>fluid.def(...)</code> call), and a JSON part is passed to <code>fluid.def</code>. A layer the receiver
+already defines is left alone unless <code>overrideLayers</code> is set.</li>
+<li><strong>Construct the root.</strong> A free component is created from the root’s <code>potentia</code> part, with <code>options.potentia</code>
+merged over it, using the creator function of the first entry in its <code>$layers</code>. A document with no root
+<code>potentia</code> part is rejected.</li>
+<li><strong>Apply the rest.</strong> Once the root becomes available, the <code>potentia</code> parts of subcomponents are pushed at their
+paths. Then each subcomponent’s <code>live</code> part is written into its live layer once that subcomponent becomes
+available. Parts whose path matches no component are returned as <code>unresolved</code>.</li>
+</ol>
+<p>A host which must take responsibility for the component before it becomes available, such as a canvas which may
+destroy the shape hosting it while it is still loading, can split the steps: <code>fluid.ptf.constructParts</code> performs the first two and returns the component at once, and
+<code>fluid.ptf.applyParts</code> then performs the third.</p>
+<h3 id="trust">Trust</h3>
+<p>Instantiating a PTF document runs the code in its layers. Its JavaScript parts are evaluated, and its SFCs’ scripts
+are executed. Accepting a PTF document therefore requires the same trust as loading an SFC or script from its source.
+Unless <code>overrideLayers</code> is set, a document can’t replace a layer the receiver already has, but it can define new ones.</p>
+<h2 id="embedding-ptf-the-tldraw-clipboard">Embedding PTF: the tldraw clipboard</h2>
+<p>PTF documents nest, and other kinds of part can travel alongside them. The tldraw integration
+(<code>demo/tldraw/js/tldraw-clipboard.js</code>) replaces tldraw’s own clipboard format, which is opaque and compressed, with a
+plain-text PTF document:</p>
+<table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Filename</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tldraw</code></td>
+<td><code>tldraw-content</code></td>
+<td>tldraw’s own JSON for all copied shapes, native ones included, with their ids and positions</td>
+</tr>
+<tr>
+<td><code>component</code></td>
+<td>A shape id</td>
+<td>A nested <code>multipart/mixed</code> entity holding that shape’s component parts</td>
+</tr>
+</tbody>
+</table>
+<p>On paste, the clipboard text is checked with <code>fluid.ptf.isPTF</code>:</p>
+<ul>
+<li><strong>Plain text.</strong> If it isn’t a PTF document, tldraw handles the paste as normal.</li>
+<li><strong>Copied shapes.</strong> A document with a <code>tldraw</code> part is pasted through tldraw, so that ids are remapped and positions
+resolved as for a native paste. Each recreated Infusion shape is then rebuilt from its nested component parts.</li>
+<li><strong>A bare component.</strong> A document as produced by <code>fluid.ptf.componentToPTF</code>, for example one copied out of a text
+editor, becomes a single fresh shape.</li>
+</ul>
+<p>Cut and undo use the same mechanism: before a shape is deleted, its component’s parts are captured, so that undoing
+the cut restores the component with the state it had.</p>
+<p>Because the clipboard holds readable text, a copied component can be pasted into a text editor, modified there (for
+example by changing its template or its count) and pasted back onto the canvas as a modified component.</p>
+<h2 id="javascript-api">JavaScript API</h2>
+<h3 id="producing-documents">Producing documents</h3>
+<ul>
+<li><code>fluid.ptf.componentToPTF(component)</code> returns <code>{String}</code>, the complete PTF document for <code>component</code> and its
+subcomponents.</li>
+<li><code>fluid.ptf.componentToParts(component)</code> returns <code>{PTFPart[]}</code>, the parts without encoding them. This is useful for
+embedding a component’s parts in a larger document.</li>
+<li><code>fluid.ptf.encode(parts, [preamble])</code> returns <code>{String}</code>, encoding any parts as a PTF document. A part with <code>parts</code>
+in place of <code>body</code> is encoded as a nested multipart entity.</li>
+<li><code>fluid.layerMimeType(layerName)</code> returns <code>{String}</code>, the MIME type a layer will be transmitted in.</li>
+</ul>
+<p>A <code>PTFPart</code> is <code>{kind, contentType, filename, body}</code>, or <code>{kind, filename, parts}</code> for a nested document. Decoded parts
+also carry <code>headers</code>, all of their headers with lower-cased names.</p>
+<h3 id="reading-documents">Reading documents</h3>
+<ul>
+<li><code>fluid.ptf.isPTF(text)</code> returns <code>{Boolean}</code>: <code>true</code> if <code>text</code> begins with <code>MIME-Version:</code> and declares a multipart
+boundary. It is cheap enough to sniff every paste.</li>
+<li><code>fluid.ptf.decode(text)</code> returns <code>{PTFPart[]|Unavailable}</code>. It decodes nested multipart parts recursively, and
+returns an unavailable value if <code>text</code> is not a PTF document.</li>
+<li><code>fluid.ptf.instantiate(text, [options])</code> returns <code>{Promise&lt;{that, unresolved}&gt;}</code> and runs
+<a href="#reconstruction">reconstruction</a>. Its options are:
+<ul>
+<li><code>options.potentia</code> - Extra potentia merged over the root’s, e.g. <code>{container}</code>.</li>
+<li><code>options.overrideLayers</code> - If <code>true</code>, transmitted layers replace existing definitions.</li>
+</ul>
+</li>
+<li><code>fluid.ptf.instantiateParts(parts, [options])</code> does the same as <code>instantiate</code>, for parts that have already been decoded.</li>
+<li><code>fluid.ptf.constructParts(parts, [options])</code> returns <code>{Component}</code>. It registers the layers and constructs the root
+component without waiting for it to become available, and applies none of the further parts. It throws if there
+is no root <code>potentia</code> part.</li>
+<li><code>fluid.ptf.applyParts(that, parts)</code> returns <code>{Promise&lt;String[]&gt;}</code>. It applies the subcomponent <code>potentia</code> and <code>live</code>
+parts to an existing component, and resolves with the filenames of any it could not place.</li>
+<li><code>fluid.ptf.registerLayerParts(parts, [overrideLayers])</code> registers just the layer parts.</li>
+<li><code>fluid.loadSFCText(layerName, text)</code> registers an SFC from text rather than a URL. Reconstruction uses it for SFC parts.</li>
+</ul>
+</div><div id="fl-id-site-11.documents.34.main.share"><hr><section id="social-share"><div class="list-inline footer-links"><div aria-hidden="true" class="share-box"><ul class="share"><li><a href="https://bsky.app/intent/compose?text=Just%20reading%20a%20post%20called%20Potentia%20Transmission%20Format%20on%20Antranig%20Basman's%20blog%3A%20https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-ptf%2F" title="Share on BlueSky" target="_blank"><i class="fab fa-fw fa-bluesky"></i></a></li><li><a href="https://twitter.com/share?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-ptf%2F&text=Potentia%20Transmission%20Format&via=amb26ponder" title="Share on Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-ptf%2F" title="Share on Facebook" target="_blank"><i class="fab fa-facebook"></i></a></li><li><a href="https://reddit.com/submit?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-ptf%2F&title=Potentia%20Transmission%20Format" title="Share on Reddit" target="_blank"><i class="fab fa-reddit"></i></a></li><li><a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-ptf%2F&title=Potentia%20Transmission%20Format" title="Share on LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a></li></ul></div></div></section></div></article><ul id="fl-id-site-11.documents.34.main.pager" class="pager blog-pager"><li class="previous"><a title="Fluid Signals background" href="../../docs/fluid-signals-background/" data-placement="top" data-toggle="tooltip">← Previous Post</a></li><li class="next"><a title="Fluid Integration Language" href="../../docs/fluid-integration-language/" data-placement="top" data-toggle="tooltip">Next Post →</a></li></ul><script data-lang="en" data-category-id="DIC_kwDOOKllGM4CvhAS" data-category="Announcements" data-repo-id="R_kgDOOKllGA" data-repo="amb26/ponder" id="fl-id-site-11.documents.34.main.comments" async crossorigin="anonymous" data-theme="light" data-input-position="bottom" data-emit-metadata="0" data-reactions-enabled="0" data-strict="0" data-mapping="pathname" src="https://giscus.app/client.js"></script></div></div></div><footer id="fl-id-site-11.documents.34.footer"><div class="container"><div class="row ponder-credits-row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p class="credits copyright text-muted"><a href="../../">Antranig Basman</a>
+                        &#160;©
+                        2026
+                    </p><p class="credits theme-by text-muted"><a href="https://github.com/fluid-project/infusion-6">Infusion 6</a> powered &#160;•&#160;
+                        Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from
+                        <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &#160;•&#160;
+                        further <a href="../../term/lithification">lithified</a> by Boz
+                    </p></div></div></div></footer><script defer src="../../js/katex.min.js" id="fl-id-site-11.documents.34.footerScriptTags.katex"></script><script onload="renderMathInElement(document.body);" defer src="../../js/auto-render.min.js" id="fl-id-site-11.documents.34.footerScriptTags.katexAutoRender"></script><script src="../../js/highlight.min.js" id="fl-id-site-11.documents.34.footerScriptTags.hljs"></script><script id="fl-id-site-11.documents.34.footerScriptTags.hljsInit">hljs.initHighlightingOnLoad();</script></body></html>

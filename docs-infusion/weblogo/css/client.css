@@ -1,0 +1,49 @@
+*.unselectable {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.sphere-canvas {
+    cursor: hand; cursor: pointer;
+    border: none;
+}
+
+.ui-selectmenu *, .ui-selectmenu-menu * {
+    font-size: 11px;
+}
+
+canvas { 
+    border: 1px solid black; 
+    background: black;
+}
+  
+.flc-math-errors { color: red; font-weight: bold; } 
+
+.flc-math-commands { overflow-y: auto; }
+
+#compile-button {
+    margin-top: 3px
+}
+
+.code {
+   border: none;
+   background: black;
+}
+
+.CodeMirror {
+   background: black;
+   color: #ddd;
+}
+   
+.CodeMirror-gutter {
+   background-color: #070707;
+}
+
+.CodeMirror-cursor {
+  z-index: 10;
+  position: absolute;
+  visibility: hidden;
+  border-left: 1px solid white !important;
+}

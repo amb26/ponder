@@ -1,0 +1,162 @@
+<!DOCTYPE html><html lang="en" id="fl-id-site-11.documents.17" itemtype="http://schema.org/WebPage" itemscope><head id="fl-id-site-11.documents.17.head"><meta charset="utf-8"><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"><title>This week's reactive chats - Antranig Basman</title><meta content="Some good chats this week on reactive matters. Firstly on Tuesday with Patrick Dubroy , a fellow substratist . Patrick is a splendid chap who amongst many other works is the maint…" name="description"><meta content="Antranig Basman" name="author"><meta content="This week's reactive chats" property="og:title"><meta content="Some good chats this week on reactive matters. Firstly on Tuesday with Patrick Dubroy , a fellow substratist . Patrick is a splendid chap who amongst many other works is the maint…" property="og:description"><meta content="https://ponder.org.uk/img/pond.jpg" property="og:image"><meta content="https://ponder.org.uk/wip/2025-09-26-this-weeks-reactive-chats/" property="og:url"><meta content="website" property="og:type"><meta content="Antranig Basman" property="og:site_name"><link href="https://ponder.org.uk/img/favicon.ico" type="image/x-icon" rel="icon"><meta content="Infusion 6" name="generator"><link title="Antranig Basman" href="https://ponder.org.uk/index.xml" type="application/rss+xml" rel="alternate"><link href="../../css/katex.min.css" id="fl-id-site-11.documents.17.head.stylesheetTags.katex" rel="stylesheet"><link href="../../fontawesome/css/all.min.css" id="fl-id-site-11.documents.17.head.stylesheetTags.fontawesome" rel="stylesheet"><link href="../../css/bootstrap.min.css" id="fl-id-site-11.documents.17.head.stylesheetTags.bootstrap" rel="stylesheet"><link href="../../css/main.css" id="fl-id-site-11.documents.17.head.stylesheetTags.main" rel="stylesheet"><link href="../../css/highlight.min.css" id="fl-id-site-11.documents.17.head.stylesheetTags.syntax" rel="stylesheet"><link href="../../css/codeblock.css" id="fl-id-site-11.documents.17.head.stylesheetTags.codeblock" rel="stylesheet"><link href="../../css/ponder.css" id="fl-id-site-11.documents.17.head.stylesheetTags.ponder" rel="stylesheet"><script src="../../js/ponder.js" id="fl-id-site-11.documents.17.head.scriptTags.ponder"></script></head><body class="wip"><nav class="navbar navbar-default navbar-fixed-top navbar-custom" id="fl-id-site-11.documents.17.navbar"><div class="container-fluid"><div class="navbar-ponder"><a href="../../" class="navbar-ponder-brand">Antranig Basman</a><button data-target="#main-navbar" data-toggle="collapse" class="navbar-toggle" type="button"><span class="sr-only">Toggle navigation</span><svg xmlns="http://www.w3.org/2000/svg" stroke="#888" viewBox="0 0 24 24" height="36" width="36"><path stroke-linecap="round" stroke-width="1.5" d="M20 7L4 7" /><path stroke-linecap="round" stroke-width="1.5" d="M20 12L4 12" /><path stroke-linecap="round" stroke-width="1.5" d="M20 17L4 17" /></svg></button><div id="main-navbar" class="collapse navbar-collapse"><ul id="fl-id-site-11.documents.17.navbar.items" class="nav navbar-nav navbar-right"><li id="fl-id-site-11.documents.17.navbar.items.0"><a href="../../post" title="Posts">Posts</a></li><li id="fl-id-site-11.documents.17.navbar.items.1"><a href="../../wip" title="WiP">WiP</a></li><li id="fl-id-site-11.documents.17.navbar.items.2"><a href="../../page/about/" title="About">About</a></li><li id="fl-id-site-11.documents.17.navbar.items.3" class="navlinks-container"><a href="../../docs" class="navlinks-parent">Docs</a><div id="fl-id-site-11.documents.17.navbar.items.3.children" class="navlinks-children"><a href="../../docs/fluid-signals">Fluid Signals</a><a href="../../docs/fluid-integration-language">Fluid Integration Language</a><a href="../../docs/fluid-view">Fluid View</a><a href="../../docs/fluid-ptf">Fluid PTF</a><a href="../../docs/fluid-tldraw">Fluid tldraw integration</a></div></li><li id="fl-id-site-11.documents.17.navbar.items.4"><a href="../../communities" title="Communities">Communities</a></li><li id="fl-id-site-11.documents.17.navbar.items.5"><a href="../../projects" title="Projects">Projects</a></li><li id="fl-id-site-11.documents.17.navbar.items.6"><a href="../../term" title="Terms">Terms</a></li></ul></div></div></div></nav><header id="fl-id-site-11.documents.17.header" class="header-section"><div class="intro-header no-img"><div class="container"><div class="header-row"><div class="wip-heading ponder-heading"><h1 class="ponder-title">This week's reactive chats</h1><hr class="small"></div></div></div></div></header><div role="main" id="fl-id-site-11.documents.17.main"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article class="blog-post" role="main"><div id="fl-id-site-11.documents.17.main.content"><p>Some good chats this week on reactive matters. Firstly on Tuesday with <a href="https://dubroy.com/blog/">Patrick Dubroy</a>,
+a fellow <a href="https://2025.programming-conference.org/home/substrates-2025">substratist</a>. Patrick is a splendid chap who amongst
+many other works is the maintainer of a powerful, user-friendly parsing toolkit <a href="https://ohmjs.org/">Ohm</a>.</p>
+<p>Patrick pinged me last week
+explaining that he was contemplating a collaboration with <a href="https://www.lri.fr/~gobert/">Camille</a> and
+<a href="https://www.yanntrividic.fr/?lang=en">Yann</a> who were building a document publishing pipeline sourced from, amongst other
+formats, <a href="https://asciidoc.org/">AsciiDoc</a>
+(for related details see Camille’s recent <a href="https://theses.hal.science/tel-04551620v1/file/125450_GOBERT_2024_diffusion.pdf">PhD thesis</a>).
+This is an exciting potential cross-link between the work of members of the nascent substrates community.</p>
+<p>Patrick said that the team had already written an Ohm grammar for AsciiDoc and were interested in making the
+pipeline implementation more incremental, and avoid recomputing too many intermediate results in large pipelines
+publishing 300-pages books and the like.
+To prime intuition, Patrick sent along an interactive Ohm grammar for
+<a href="https://ohmjs.org/editor/#30325d346a6e803cc35344ca218d8636">arithmetic expressions</a>.</p>
+<p><a href="https://ohmjs.org/editor/#30325d346a6e803cc35344ca218d8636"><img alt="Ohm arithmetic grammar" src="../../img/ohm-grammar.png"></a></p>
+<h4 id="alien-signals-and-adapton">Alien signals and Adapton</h4>
+<p>In turn I pinged with a link to Jackson Chu’s very interesting work on <a href="https://github.com/stackblitz/alien-signals?tab=readme-ov-file#background">alien-signals</a>
+which is being used in <a href="https://github.com/vuejs/language-tools/blob/a40c6d8c0ba7b2ae5fcf774098eda11242a49995/packages/language-core/lib/virtualFile/computedVueSfc.ts#L18">language tooling contexts</a>
+in upcoming versions of Vue.js.</p>
+<p>As well as <a href="https://github.com/transitive-bullshit/js-reactivity-benchmark">performing very well</a> Jackson has demonstrated
+the great flexibility of the core/personality split implementation style in producing a <a href="https://github.com/proposal-signals/signal-polyfill/pull/44">polyfill</a>
+for the upcoming <a href="https://github.com/tc39/proposal-signals">TC39 signals standard proposal</a>. This is pretty helpful
+stuff and in particular unpacks the great flexibility needed around the implementation of “effects” which whilst in many
+signals implementations are a baked-in primitive, in practice need some unbundling around the details of a framework’s
+rendering pipeline. However IMO much more flexibility is required – more on this later.</p>
+<p>Patrick said that a core requirement for his work is the ability to write relatively arbitrary computations that depend
+on Ohm’s internal mechanisms and can apply incremental parsing –
+you have some computation that transitively depends on some part of the input – one part can be marked dirty and
+just that portion of the output is recomputed. He has been surveying the space a bit to see what approaches make
+sense – he saw that in JS frontend frameworks signals have become a big thing.
+He was familiar with Adapton/<a href="https://arxiv.org/pdf/1609.05337">miniAdapton</a> – what’s unclear is how different is it to these.</p>
+<p>This turns out to have been a strong interest of mine in recent months. When I pinged Geoffrey Litt earlier in the
+year about reactivity he pointed me to miniAdapton and his own <a href="https://github.com/geoffreylitt/mini-adapton/blob/main/index.ts">TS implementation</a> of it.
+After pottering with the algorithm a bit I was likewise fretful about how different it was to “commodity signals” and
+what guarantees it really supported. For the past couple of years I have been building Infusion 6 around an (<a href="https://github.com/fluid-project/infusion-6/blob/main/src/lib/preact-signals/preact-signals-core.js">increasingly
+hacked</a>) distribution
+of preact-signals because I was attracted to its unusually comprehensive suite of test cases.</p>
+<h4 id="reactivity-and-glitches">Reactivity and glitches</h4>
+<p>I recapped to Patrick the <a href="../../post/2025-07-01-archaeology-of-glitches">archaeology of glitches</a> I had done in 2024, now
+written up in their own page. He had also been intrigued whether Adapton implemented the same algorithm as commodity
+signals and had come to pretty much the same conclusion. He also bemoaned the fact that such work had long been going
+on in separate silos with essentially no cross-citation or cross-pollination. One isolated exception was the Rust incremental
+computation framework <a href="https://github.com/salsa-rs/salsa">salsa</a> which is influenced both by Adapton and the JS
+incremental view framework <a href="https://github.com/glimmerjs/glimmer-vm">glimmer</a>.</p>
+<h4 id="dan-ingalls-fabrik">Dan Ingalls’ Fabrik</h4>
+<p>Patrick helpfully pointed me to Dan Ingalls’ super-interesting 1988 system, <a href="https://dl.acm.org/doi/10.1145/62083.62100">Fabrik</a>, which long predates the Lively
+Kernel work and also had bidirectional dataflow dependencies built-in. I had started talking about the old
+chestnut of the temperature conversion sample that I’d started with in my tiny <a href="https://www.ppig.org/files/2015-PPIG-26th-Basman.pdf">2015 PPIG paper</a>, and he remembered that
+Fabrik includes just such a sample:</p>
+<p><a href="https://dl.acm.org/doi/10.1145/62083.62100"><img alt="Fabrik temperature conversion sample" src="../../img/fabrik-bidi.png"></a></p>
+<p>The <a href="https://dl.acm.org/doi/10.1145/62083.62100">Fabrik paper</a> includes a really useful distinction:</p>
+<blockquote>
+<p>The key observation about most uses of bidirectionality is that they are simply a shorthand for
+multiple paths of dataflow.</p>
+</blockquote>
+<h4 id="bidirectionality-in-dataflow">Bidirectionality in dataflow</h4>
+<p>This is just the kind of bidirectionality that I’ve meant to introduce into Infusion’s reactive system. I’ve talked
+rather airily of supporting “cyclic dataflow graphs” but Patrick reminded me that genuine cycles which are not
+degenerate require dedicated means of solving the dataflow state (iterative ones such as fixed-point or gradient descent
+of the kind seen in <a href="https://worrydream.com/refs/Borning_1981_-_The_Programming_Language_Aspects_of_ThingLab.pdf">ThingLab</a> or
+<a href="https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-574.pdf">SketchPad</a>)
+which I’ve not meant to put into scope. Fabrik’s distinction is just the one required and the paper helpfully writes out
+a “compilation” of the possibilities of the resulting alternating dataflow. So such a system is clearly implementable,
+even if it weren’t for the precedent that we already have of Jonathan’s 2009 <a href="http://dspace.mit.edu/bitstream/handle/1721.1/45563/MIT-CSAIL-TR-2009-024.pdf">Coherence</a> system which was already cited
+in the <a href="https://soft.vub.ac.be/Publications/2012/vub-soft-tr-12-13.pdf">2012 Bainomugisha review</a> as being the only reactive system supporting both glitch freedom and bidirectional
+relations. Cooper &amp; Krishnamurthi’s
+2006 <a href="http://static.cs.brown.edu/~sk/Publications/Papers/Published/ck-frtime/paper.pdf">FrTime paper</a> is likely another
+example, since the review is probably in error as just this capability is advertised in section 3.5 on Cycles.</p>
+<p>I don’t find either of those systems’ support for bidirectional relations fully satisfactory. I’d prefer a Fabrik-type
+system which computes just the portion of dataflow relevant for a particular update and which pushes the description of
+computations out of the system.</p>
+<p>Patrick isn’t too interested in bidirectional arcs since compilers and their tool chains tend to work on tree-structured
+data. However what he is interested in is managing lifetimes of objects in the computation for good memory management.
+From-scratch consistency properties could be helpful here since any “purely derived” computed could be cleared out of
+memory when things got tight. Tom Larkworthy <a href="https://x.com/tomlarkworthy/status/1939751973433254186">had observed</a>
+he considered Haskell’s reactivity a failure due to lack of memory management.</p>
+<h4 id="ergonomic-problems-with-preact-signals">Ergonomic problems with preact-signals</h4>
+<p>I mentioned to Patrick I’d found serious ergonomic problems with preact. One of them is peculiar to it – despite
+being <a href="https://github.com/preactjs/signals/issues/593#issuecomment-2349672856">openly welcoming</a> of framework building on top of preact’s internals
+this has to be done with respect to its name mangling which renames all non-API members to single character names
+through this <a href="https://github.com/preactjs/signals/blob/main/mangle.json#L30-L68">registry</a>. This reflects the really
+perverse incentives which JS library builders and particularly preact seem to feel themselves under – competing to shave
+a couple of bytes off the bundle size is seen as a much bigger win than community ergonomics. Unfortunately this likely
+reflects a real influence on developers’ decision-making as they shop around for frameworks. This decision has received
+a good amount of <a href="https://github.com/preactjs/preact/issues/2233">pushback</a> from preact’s community but is too long
+entrenched to overturn.</p>
+<blockquote>
+<p>We don’t want to encourage folks to use Preact without our property mangling, since that effectively creates a fork of
+Preact with a different API, and plugins don’t account for that being the case</p>
+</blockquote>
+<p>I noted Stephen Kell’s observation that JS framework authors’ obsessive shaving of bytes was quite dissonant with
+the public’s experience of the web where almost every page was slow and bloated with rudundant junk and unoptimised ads. Patrick
+remarked that a page which included a single image would wipe out any gains from such byte golfing behaviour – it
+really reflects an aesthetic/polemic than something that benefits a community’s values.</p>
+<p>The second ergonomic difficulty is its poor debuggability/observability. This is naturally exacerbated by the
+name mangling choice but even once I adopted a hand-rolled
+<a href="https://github.com/fluid-project/infusion-6/blob/main/src/lib/preact-signals/preact-signals-core.js">unmangled build</a>
+I still find it extremely hard to get good insight into why a computed/effect has actually notified in a non-trivial case.
+Since the recursion has been unrolled into preact-signals’ <code>batch()</code> the information might not even readily be available.
+There are plenty of <a href="https://github.com/preactjs/signals/discussions/515">complaints</a> about this but the core team are
+naturally more responsive to incentives for byte-shaving and nanosecond-sparing.</p>
+<p>It’s absolutely essential in any user-facing reactive system that there should be absolutely clear access to the information
+“which signal’s update is responsible for this notification”. Tom Larkworthy has started to build tooling around this
+as part of <a href="https://tomlarkworthy.github.io/lopecode/">Lopecode</a> and at the 2025 Substrates workshop demonstrated a
+“flame graph” tracking a notebook’s reactive values and allowing visual diagnosis of why they are updating.</p>
+<h4 id="glitches-are-just-the-tip">Glitches are just the tip</h4>
+<p>Given the extremely murky history of community understanding of glitches, one is sobered in the face of many other
+epiphenomena that a real reactive system needs to deal with, specially under the headings of</p>
+<ul>
+<li>Reactions, or notionally “pure” arcs which kick off further modifications of the graph’s content or structure</li>
+<li>Asynchronous activities in the dataflow where requests are made to external systems for updates</li>
+<li>Error handling</li>
+</ul>
+<p>FrTime has unusually good handling of the first point, Observable of the second, and Coherence of the third. We need
+a system with stable and excellent behaviour in all three headings.</p>
+<p>Note that these directions are somewhat orthogonal to glitches – the difficulty and value of being glitch-free increases
+with our increasing competence in these directions.</p>
+<h4 id="unavailable-values">Unavailable values</h4>
+<p>I sketched to Patrick my proposed solution to the 2nd and 3rd points, unifying handling of errors and asynchrony under
+a common mechanism responding to “design incompletion for any reason”. I named a special reactive payload as an “unavailable
+value” indicating that the design was incomplete either as a result of depending on pending I/O or else of a design/syntax
+error in the system. This is described on its own page at <a href="../../term/unavailable-value">unavailable value</a>.</p>
+<h4 id="helpful-pointers">Helpful pointers</h4>
+<p>Patrick finished with a few helpful pointers to related frameworks. Firstly an RPC framework from Cloudflare/Kenton Varda
+named <a href="https://blog.cloudflare.com/capnweb-javascript-rpc-library/">Cap’n Web</a> that was a kind of dual to GraphQL in its
+ability to remotely express sequential actions captured locally, Mark Miller and Tom van Cutsem’s work on
+<a href="https://www.researchgate.net/publication/220828927_Proxies_Design_Principles_for_Robust_Object-oriented_Intercession_APIs">JS Proxies</a>
+(2010) stemming from Mark’s earlier work on the Java distributed capabilities language <a href="http://erights.org/">E</a>. And
+finally to <a href="https://bsky.app/profile/jonkuperman.com">Jon Kuperman</a>, a TC39 committee member based in London.</p>
+<h3 id="on-to-clemens">On to Clemens</h3>
+<p>Later in the week after relaying a lot of this chat to <a href="https://cs.au.dk/~clemens/">Clemens</a> we got to brass tacks
+seeing just how it is that commodity signals prevents bidirectional influence. We built a little
+<a href="https://demo.webstrates.net/good-rattlesnake-4/">Webstrate</a> to test this out in, but it is clearly impossible
+by construction. You have to start with a signal and after that you are sunk since symmetry/glitch freedom are impossible.
+I floated an idea of “malleable signals” that could start out being agnostic as to whether they were signal/computed and could float up and down in purity
+as arcs were added/removed from them. The biggest draw of the signal/computed split is being easily able to inspect
+which parts of a design need to be marshalled when it is transported from place to place and which can be recomputed
+through from-scratch consistency. We need to retain a dynamic version of this after axing the static distinction from the
+type system. Note that Infusion designs are already “opportunistically writeable” since the user is permitted to layer
+arbitrary “yellow” data layers wherever they like – this represents a similar dynamic “user-driven change of
+provenance/transportability”.</p>
+<h4 id="hierarchy-of-good-functions">Hierarchy of good functions</h4>
+<p>Finally the idea of the “hierarchy of goodness” that could be enjoyed by functions along the arcs:</p>
+<ul>
+<li>The identity – which in imperative memory ontologies appears as “aliasing”. “The same content knowably in more than one place”,
+which could be honoured by genuine aliasing in the underlying memory model, but at the very least should be trivially
+write-through, that is, “The same content knowably writeable at more than one address”.</li>
+<li>Linear functions – genuine linear functions such as <code>C = 5 * (F - 32) / 9</code>, boolean NOT, etc. which can be
+“invertible on sight” when seen by the parser without the user needing to do anything about it.</li>
+<li>Manually inverted functions – the user manually supplies an inverse and is assumed to know what they are doing.</li>
+<li><a href="../../term/a-good-function">Good functions</a> proper – A closed algebra of blessed functions not doing excessive computation and
+likely not invertible at all</li>
+<li>Anything else</li>
+</ul>
+</div><div id="fl-id-site-11.documents.17.main.share"><hr><section id="social-share"><div class="list-inline footer-links"><div aria-hidden="true" class="share-box"><ul class="share"><li><a href="https://bsky.app/intent/compose?text=Just%20reading%20a%20post%20called%20This%20week's%20reactive%20chats%20on%20Antranig%20Basman's%20blog%3A%20https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-09-26-this-weeks-reactive-chats%2F" title="Share on BlueSky" target="_blank"><i class="fab fa-fw fa-bluesky"></i></a></li><li><a href="https://twitter.com/share?url=https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-09-26-this-weeks-reactive-chats%2F&text=This%20week's%20reactive%20chats&via=amb26ponder" title="Share on Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-09-26-this-weeks-reactive-chats%2F" title="Share on Facebook" target="_blank"><i class="fab fa-facebook"></i></a></li><li><a href="https://reddit.com/submit?url=https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-09-26-this-weeks-reactive-chats%2F&title=This%20week's%20reactive%20chats" title="Share on Reddit" target="_blank"><i class="fab fa-reddit"></i></a></li><li><a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-09-26-this-weeks-reactive-chats%2F&title=This%20week's%20reactive%20chats" title="Share on LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a></li></ul></div></div></section></div></article><ul id="fl-id-site-11.documents.17.main.pager" class="pager blog-pager"><li class="previous"><a title="More iNaturalist Shenanigans" href="../../wip/2025-09-25-more-inaturalist-shenanigans/" data-placement="top" data-toggle="tooltip">← Previous Post</a></li><li class="next"><a title="The Module System Once More" href="../../wip/2025-09-30-module-system-once-more/" data-placement="top" data-toggle="tooltip">Next Post →</a></li></ul><script data-lang="en" data-category-id="DIC_kwDOOKllGM4CvhAS" data-category="Announcements" data-repo-id="R_kgDOOKllGA" data-repo="amb26/ponder" id="fl-id-site-11.documents.17.main.comments" async crossorigin="anonymous" data-theme="light" data-input-position="bottom" data-emit-metadata="0" data-reactions-enabled="0" data-strict="0" data-mapping="pathname" src="https://giscus.app/client.js"></script></div></div></div><footer id="fl-id-site-11.documents.17.footer"><div class="container"><div class="row ponder-credits-row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p class="credits copyright text-muted"><a href="../../">Antranig Basman</a>
+                        &#160;©
+                        2026
+                    </p><p class="credits theme-by text-muted"><a href="https://github.com/fluid-project/infusion-6">Infusion 6</a> powered &#160;•&#160;
+                        Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from
+                        <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &#160;•&#160;
+                        further <a href="../../term/lithification">lithified</a> by Boz
+                    </p></div></div></div></footer><script defer src="../../js/katex.min.js" id="fl-id-site-11.documents.17.footerScriptTags.katex"></script><script onload="renderMathInElement(document.body);" defer src="../../js/auto-render.min.js" id="fl-id-site-11.documents.17.footerScriptTags.katexAutoRender"></script><script src="../../js/highlight.min.js" id="fl-id-site-11.documents.17.footerScriptTags.hljs"></script><script id="fl-id-site-11.documents.17.footerScriptTags.hljsInit">hljs.initHighlightingOnLoad();</script></body></html>

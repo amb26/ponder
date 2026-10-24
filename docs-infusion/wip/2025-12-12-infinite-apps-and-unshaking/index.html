@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="en" id="fl-id-site-11.documents.14" itemtype="http://schema.org/WebPage" itemscope><head id="fl-id-site-11.documents.14.head"><meta charset="utf-8"><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"><title>Infinite Apps, Asynchrony and Tree Unshaking - Antranig Basman</title><meta content="This has been a period of consolidation since pushing on demos of Infusion 6 for the Substrates 2025 workshop and my 2025 Live incurred a good amount of technical debt. Lots of de…" name="description"><meta content="Antranig Basman" name="author"><meta content="Infinite Apps, Asynchrony and Tree Unshaking" property="og:title"><meta content="This has been a period of consolidation since pushing on demos of Infusion 6 for the Substrates 2025 workshop and my 2025 Live incurred a good amount of technical debt. Lots of de…" property="og:description"><meta content="https://ponder.org.uk/img/pond.jpg" property="og:image"><meta content="https://ponder.org.uk/wip/2025-12-12-infinite-apps-and-unshaking/" property="og:url"><meta content="website" property="og:type"><meta content="Antranig Basman" property="og:site_name"><link href="https://ponder.org.uk/img/favicon.ico" type="image/x-icon" rel="icon"><meta content="Infusion 6" name="generator"><link title="Antranig Basman" href="https://ponder.org.uk/index.xml" type="application/rss+xml" rel="alternate"><link href="../../css/katex.min.css" id="fl-id-site-11.documents.14.head.stylesheetTags.katex" rel="stylesheet"><link href="../../fontawesome/css/all.min.css" id="fl-id-site-11.documents.14.head.stylesheetTags.fontawesome" rel="stylesheet"><link href="../../css/bootstrap.min.css" id="fl-id-site-11.documents.14.head.stylesheetTags.bootstrap" rel="stylesheet"><link href="../../css/main.css" id="fl-id-site-11.documents.14.head.stylesheetTags.main" rel="stylesheet"><link href="../../css/highlight.min.css" id="fl-id-site-11.documents.14.head.stylesheetTags.syntax" rel="stylesheet"><link href="../../css/codeblock.css" id="fl-id-site-11.documents.14.head.stylesheetTags.codeblock" rel="stylesheet"><link href="../../css/ponder.css" id="fl-id-site-11.documents.14.head.stylesheetTags.ponder" rel="stylesheet"><script src="../../js/ponder.js" id="fl-id-site-11.documents.14.head.scriptTags.ponder"></script></head><body class="wip"><nav class="navbar navbar-default navbar-fixed-top navbar-custom" id="fl-id-site-11.documents.14.navbar"><div class="container-fluid"><div class="navbar-ponder"><a href="../../" class="navbar-ponder-brand">Antranig Basman</a><button data-target="#main-navbar" data-toggle="collapse" class="navbar-toggle" type="button"><span class="sr-only">Toggle navigation</span><svg xmlns="http://www.w3.org/2000/svg" stroke="#888" viewBox="0 0 24 24" height="36" width="36"><path stroke-linecap="round" stroke-width="1.5" d="M20 7L4 7" /><path stroke-linecap="round" stroke-width="1.5" d="M20 12L4 12" /><path stroke-linecap="round" stroke-width="1.5" d="M20 17L4 17" /></svg></button><div id="main-navbar" class="collapse navbar-collapse"><ul id="fl-id-site-11.documents.14.navbar.items" class="nav navbar-nav navbar-right"><li id="fl-id-site-11.documents.14.navbar.items.0"><a href="../../post" title="Posts">Posts</a></li><li id="fl-id-site-11.documents.14.navbar.items.1"><a href="../../wip" title="WiP">WiP</a></li><li id="fl-id-site-11.documents.14.navbar.items.2"><a href="../../page/about/" title="About">About</a></li><li id="fl-id-site-11.documents.14.navbar.items.3" class="navlinks-container"><a href="../../docs" class="navlinks-parent">Docs</a><div id="fl-id-site-11.documents.14.navbar.items.3.children" class="navlinks-children"><a href="../../docs/fluid-signals">Fluid Signals</a><a href="../../docs/fluid-integration-language">Fluid Integration Language</a><a href="../../docs/fluid-view">Fluid View</a><a href="../../docs/fluid-ptf">Fluid PTF</a><a href="../../docs/fluid-tldraw">Fluid tldraw integration</a></div></li><li id="fl-id-site-11.documents.14.navbar.items.4"><a href="../../communities" title="Communities">Communities</a></li><li id="fl-id-site-11.documents.14.navbar.items.5"><a href="../../projects" title="Projects">Projects</a></li><li id="fl-id-site-11.documents.14.navbar.items.6"><a href="../../term" title="Terms">Terms</a></li></ul></div></div></div></nav><header id="fl-id-site-11.documents.14.header" class="header-section"><div class="intro-header no-img"><div class="container"><div class="header-row"><div class="wip-heading ponder-heading"><h1 class="ponder-title">Infinite Apps, Asynchrony and Tree Unshaking</h1><hr class="small"></div></div></div></div></header><div role="main" id="fl-id-site-11.documents.14.main"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article class="blog-post" role="main"><div id="fl-id-site-11.documents.14.main.content"><p>This has been a period of consolidation since pushing on demos of Infusion 6 for the
+<a href="https://2025.programming-conference.org/home/substrates-2025">Substrates 2025</a> workshop and my
+<a href="https://www.youtube.com/watch?v=ai2fbWi3kUU">2025 Live</a> incurred a good amount of technical debt.
+Lots of demo features were hacked on by banging on framework internals rather than by proper userland constructs, and the
+tidyup has proved more meaty than I imagined, with several test cases still failing for fairly fundamental reasons.</p>
+<p>However this has been a great opportunity to deliver more soundly on some of Infusion’s goals and work out more
+of the implications of its model for software’s material.</p>
+<h3 id="infinite-software">Infinite software</h3>
+<p>In the summer I had a really interesting chat with
+<a href="https://www.komoroske.com/">Alex Komoroske</a> who was in the grip of the notion of <a href="https://abovethelaw.com/2025/07/how-one-1990s-browser-decision-created-big-techs-data-monopolies-and-how-we-might-finally-fix-it/">infinite software</a>,
+contrasted with “infinite apps” which are billed as the “endless custom tools tailored to every conceivable need” that our
+supercharged vehicle of LLMs is rolling out to us. He noted in his rolling <a href="https://groups.google.com/g/komoroske-updates/c/lU04FFJsFuU">Bits and bobs</a>
+journal that “Instead with infinite software, the software will melt away. It will feel like your data coming alive.”
+But how could this work, in practice?</p>
+<p>To me, the notion of “infinite apps” suggests something a little different. Rather than an endless <em>profusion</em> of
+isolated, siloed apps<sup class="footnote-ref"><a id="fnref1" href="#fn1">[1]</a></sup>, I imagine apps which are instead <em>infinite in extent</em>, that is, uniting their users and putting them
+into communication via a continuous, catholic<sup class="footnote-ref"><a id="fnref2" href="#fn2">[2]</a></sup> substance.</p>
+<p>Now an app which is infinite in extent clearly can’t be expected to load all of its code at once. This brings into
+relief a sharp preoccupation of today’s endlessly frenetic build systems, that of <a href="https://en.wikipedia.org/wiki/Tree_shaking">tree shaking</a>.
+A great virtue of the ES6 modules system is that it hugely eases the static analysis required to eliminate the delivery
+of code that designers of an app’s build have determined that the user is not going to need, and today’s build systems are expected to take
+advantage of this capability aggressively.</p>
+<p>Readers of this blog with an enthusiasm for malleable software will already be wondering — this is all very well, but
+whose job is it to undo this process when a change in the user’s needs requires some of this dead code to come back again?
+It’s naturally impossible without running the build chain from the start, since the fact that the tree shaken code ever even existed
+has been ruthlessly scrubbed from the system. This pattern of “erasure as virtue” is something of course that we are well
+familiar with, even down to the execution paradigm itself where a function’s arguments on the stack are erased and replaced
+with its return value — it is a central technocratic virtue that a system keeps absolutely the minimum records it needs
+to do its job<sup class="footnote-ref"><a id="fnref3" href="#fn3">[3]</a></sup>, and one that is at the heart of user disempowerment.</p>
+<h3 id="tree-unshaking">Tree unshaking</h3>
+<p>When the user desires the system to adapt, it needs to gracefully and in-place go through a process of <em>tree unshaking</em> —
+locating and loading code that a previous analysis considered “dead”, or perhaps which the original designer never considered
+relevant at all, and perhaps in the middle of a user gesture (event handler) which invokes the adaptation — or more sharply,
+the system may only discover the need for adaptation partway through the process of constructing a component.</p>
+<p>This was a topic of the <a href="https://chee.party/2025/w30/">memorable conversation</a> I had with the lovely <a href="https://chee.party/">Rabbits</a> as we stood at the
+corner of the Old Street roundabout until midnight …</p>
+<p>Things brings into scope a great mesh of issues related to how execution and construction needs to be structured
+in a malleable system. In my 2025 <a href="../../post/2025-06-03-substrates-vision#errors-and-asynchrony">substrates vision</a> I refer
+to Bob Nystrom’s insightful <a href="https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/">What Color is Your Function</a>
+story of how asynchrony, in our current paradigm, is a viral and disruptive issue in a way that is inconsistent with malleable
+software values. The user should not be troubled by the issue of whether a piece of data or implementation is available
+in the current app’s image via a synchronous function call or needs to be unshaken or loaded from somewhere.</p>
+<p>These days JavaScript’s <code>async/await</code> construct closes up a lot of the syntactic gap between synchronous and asynchronous
+availability, but as Bob points out, imperfectly. And the ergonomics are not in our favour — whilst the stack is a
+<a href="../../term/divergence">divergent</a> construct, it’s usually our main source of explanation as developers as to why the
+system is in a particular state, which an asynchronous activity largely erases.</p>
+<h3 id="asynchronous-and-partial-construction">Asynchronous and partial construction</h3>
+<p>Our dominant paradigms (functional, object-oriented,
+procedural, what-have-you) do not permit construction to be interrupted by an asynchronous activity. In a
+<a href="https://fluidproject.atlassian.net/wiki/spaces/fluid/pages/11607547/On+The+End+of+TIME+and+BEING#OnTheEndofTIMEandBEING-TheObject-OrientedTheorist'sHiddenAxiomofAtomicDelivery:">ranty 2014 wiki posting</a>
+which I’m otherwise embarrassed by, I try to uncover this hidden axiom underlying the workflow through which subobjects or subcomponents are expected to be
+instantiated and delivered to their parents. All of their prerequisites are expected to be met before construction
+begins, and they are expected to be delivered to their parents fully constructed when the function returns. Neither
+of these expectations are compatible with the goals of malleable software.</p>
+<p>I think that reactive programming paradigms, which are becoming increasingly popular, offer an attractive way
+out of these problems, but only if they are improved substantially by increasing the forgivingness of their
+constructs, and increasing their explanatory power about their workflow, at the same time as we start to work
+with increasingly short call stacks and increasing agnosticism about whether operations are asynchronous.</p>
+<h3 id="signals-from-selectors">Signals from selectors</h3>
+<p>So what have I managed to do about this?</p>
+<p>A significant painpoint in the implementation of my <a href="https://codestrates.projects.cavi.au.dk/">Codestrates</a>-like in-browser IDE related to the moment of construction
+of the editor pane for a particular layer. The requirements of this editor (in Infusion, the layers it needs to load for its own implementation)
+can’t be known in advance since they are content and context-dependent, yet the user expects it to appear directly and become focused in response to a mouse click.
+This was one of the sites where my summer demo banged horribly on framework internals and also was not even
+prepared for the discipline of asynchronous layer discovery and loading. Now, this site looks like this:</p>
+<pre><code>    editorHolderForLayer: {
+        $method: {
+            func: async (editorsPane, layerName) =&gt; {
+                const children = fluid.liveQueryILSelector(editorsPane, "fluid.editor");
+
+                await(fluid.signalToPromise(children));
+
+                return children.value.find(child =&gt; child.layerRec.layerName === layerName);
+            },
+            args: ["{editorsPane}", "{0}:layerName"]
+        }
+    },
+</code></pre>
+<p>You can go through the interaction which passes through this site by opening up the <a href="https://fluid-project.github.io/infusion-6/demo/todo-list-sfc/">simple SFC Todo List demo</a>,
+pressing the Edit button at the top right, and then double clicking on, say, the pale blue <code>fluid.demos.todoApp</code> layer at the top.</p>
+<p>The code knows that it expects some kind of <code>fluid.editor</code> to be instantiated below a node (<code>editorsPane</code>) in the substrate tree,
+but it can’t know exactly when or what its type or address is going to be. However, it knows that when it does construct, it
+is going to be the one whose <code>layerName</code> matches the one that was clicked on. The new construct <code>fluid.liveQueryILSelector</code> is
+strongly analogous with live selector queries that we are familiar with in jQuery-era DOM manipulation, only in this
+case it returns a signal for a component, which will produce an <em>available value</em> when the reactive graph that it addresses has settled.
+We can then directly gear this into an <code>await</code>able <code>Promise</code> by passing it through <code>fluid.signalToPromise</code>.</p>
+<p>I’m pretty pleased with the improvement here and it also seems to have resolved a nasty race condition which would
+sometimes observe when loading the IDE. Whilst in plain JavaScript it is somewhat clunky, I find it fairly readable and
+feel it could plausibly be “sugared away” into a future <a href="../../term/integration-domain">integration language</a>.</p>
+<h3 id="anticipatory-construction">Anticipatory construction</h3>
+<p>Another improvement I’ve made in this period is to relax a central dogma that I’d subscribed to after bad experiences in “old Infusion”, that
+one should refuse to even start to instatiate a component until all of its layers are defined. In old Infusion, there
+were some bad ergonomics related to a layer whose definition was completely missing being treated as equivalent
+to an empty layer, meaning that typos in layer names were hard to diagnose. But since Infusion 6 is a fully
+reactive system with a notion of <a href="../../term/unavailable-value">unavailable values</a>,
+we can now distinguish between a value which is permanently missing as a result of misconfiguration, and one which is
+temporarily missing because it depends on I/O which has not completed yet.</p>
+<p>In several situations, for example when implementing SSR, it became necessary to know what DOM node, and hence
+which document, a component was bound to, before knowing anything
+about it at all other than that it was a view component. It became clear that the system needed to be able to make
+progress on the layer merging algorithm as soon as any information was available, whilst at the same time marking the overall
+component value as unavailable until all of its layers were loaded.</p>
+<h3 id="mapping-the-infinite-world">Mapping the infinite world</h3>
+<p>Another crucial improvement during this period is allowing layers which have already loaded to map the space of
+other layers which might potentially load if their names are demanded, using an  <code>$importMap</code> construct, inspired
+by the similarly named highly useful ES6 feature<sup class="footnote-ref"><a id="fnref4" href="#fn4">[4]</a></sup>. This definition of an import map attached to a layer definition</p>
+<pre><code>fluid.def("fluid.edit", {
+    $layers: "fluid.viewComponent",
+    $importMap: {
+        "fluid.fullPageEditor": "%fluid-edit/sfc/fluid-fullPageEditor.vue"
+    },
+    ```
+</code></pre>
+<p>will ensure that when a component with the <code>fluid.edit</code> layer enters the substrate, the definition of layer <code>fluid.fullPageEditor</code>
+will become resolvable for a further component with that layer which starts to instantiate<sup class="footnote-ref"><a id="fnref5" href="#fn5">[5]</a></sup>.</p>
+<p>This definition collaborates with a <em>module definition</em> for <code>fluid-edit</code> which establishes a related family of
+strategies for resolving layer definitions, perhaps via HTTP, local storage or AutoMerge, etc. which definition would typically
+be made by a different substrate author. In this case, the definition is placed directly in the DOM substrate by the
+head integrator with a DOM node</p>
+<pre><code>    &lt;fluid-module id="fluid-edit" src="../../src/framework/edit"&gt;&lt;/fluid-module&gt;
+</code></pre>
+<p>I’m excited that this dreamed-of alternative workflow for construction,
+anticipation of construction, and mapping the space of on-demand adaptation is already real. In another posting I will explain the complementary work I’ve done in
+making the underlying reactive primitives more explainable (being able to trace notifications back to their causes) and
+more forgiving (being able to deal with bidirectional and cyclic graphs) in the cause of infinite, or at least indefinite,
+software.</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li class="footnote-item" id="fn1"><p>How I see these “infinite apps” is as a swarm of trillions of small, isolated tough steel spheres, malevolently
+fuelled by the planet-busting emissions which produced them, reminiscent of the iconic Dr. Who villain
+<a href="https://tardis.fandom.com/wiki/Toclafane">the Toclafane</a> which is apparently a possible fate of the human race. <a class="footnote-backref" href="#fnref1">↩︎</a></p>
+</li>
+<li class="footnote-item" id="fn2"><p>OED sense 2: Universally prevalent: said e.g. of substances, actions, laws, principles, customs, conditions, etc. <a class="footnote-backref" href="#fnref2">↩︎</a></p>
+</li>
+<li class="footnote-item" id="fn3"><p>A classic member of this genre is the <a href="https://dl.acm.org/doi/pdf/10.1145/99370.99385">spineless, tagless, G-machine</a>
+which executes programs written in functional languages more efficiently through having erased any type information (“tags”)
+that might make the running program state externally intelligible, and operates through repeated graph reduction
+in which the causes of execution are steadily erased. <a class="footnote-backref" href="#fnref3">↩︎</a></p>
+</li>
+<li class="footnote-item" id="fn4"><p>Note that an important aspect of Infusion import maps is that they are fully reactive, unlike ES6 import maps which <a href="https://tomashubelbauer.github.io/esm-import-map/">may not be modified</a>
+after the moment any module begins to load. <a class="footnote-backref" href="#fnref4">↩︎</a></p>
+</li>
+<li class="footnote-item" id="fn5"><p>A mature design would put these definitions elsewhere, perhaps mediated by their own reactive datasource, but this
+is fine as an illustration. <a class="footnote-backref" href="#fnref5">↩︎</a></p>
+</li>
+</ol>
+</section>
+</div><div id="fl-id-site-11.documents.14.main.share"><hr><section id="social-share"><div class="list-inline footer-links"><div aria-hidden="true" class="share-box"><ul class="share"><li><a href="https://bsky.app/intent/compose?text=Just%20reading%20a%20post%20called%20Infinite%20Apps%2C%20Asynchrony%20and%20Tree%20Unshaking%20on%20Antranig%20Basman's%20blog%3A%20https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-12-12-infinite-apps-and-unshaking%2F" title="Share on BlueSky" target="_blank"><i class="fab fa-fw fa-bluesky"></i></a></li><li><a href="https://twitter.com/share?url=https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-12-12-infinite-apps-and-unshaking%2F&text=Infinite%20Apps%2C%20Asynchrony%20and%20Tree%20Unshaking&via=amb26ponder" title="Share on Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-12-12-infinite-apps-and-unshaking%2F" title="Share on Facebook" target="_blank"><i class="fab fa-facebook"></i></a></li><li><a href="https://reddit.com/submit?url=https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-12-12-infinite-apps-and-unshaking%2F&title=Infinite%20Apps%2C%20Asynchrony%20and%20Tree%20Unshaking" title="Share on Reddit" target="_blank"><i class="fab fa-reddit"></i></a></li><li><a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-12-12-infinite-apps-and-unshaking%2F&title=Infinite%20Apps%2C%20Asynchrony%20and%20Tree%20Unshaking" title="Share on LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a></li></ul></div></div></section></div></article><ul id="fl-id-site-11.documents.14.main.pager" class="pager blog-pager"><li class="previous"><a title="Josh Horowitz Review" href="../../wip/2025-10-07-josh-horowitz-review/" data-placement="top" data-toggle="tooltip">← Previous Post</a></li><li class="next"><a title="Understanding Reactivity" href="../../wip/2025-12-15-understanding-reactivity/" data-placement="top" data-toggle="tooltip">Next Post →</a></li></ul><script data-lang="en" data-category-id="DIC_kwDOOKllGM4CvhAS" data-category="Announcements" data-repo-id="R_kgDOOKllGA" data-repo="amb26/ponder" id="fl-id-site-11.documents.14.main.comments" async crossorigin="anonymous" data-theme="light" data-input-position="bottom" data-emit-metadata="0" data-reactions-enabled="0" data-strict="0" data-mapping="pathname" src="https://giscus.app/client.js"></script></div></div></div><footer id="fl-id-site-11.documents.14.footer"><div class="container"><div class="row ponder-credits-row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p class="credits copyright text-muted"><a href="../../">Antranig Basman</a>
+                        &#160;©
+                        2026
+                    </p><p class="credits theme-by text-muted"><a href="https://github.com/fluid-project/infusion-6">Infusion 6</a> powered &#160;•&#160;
+                        Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from
+                        <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &#160;•&#160;
+                        further <a href="../../term/lithification">lithified</a> by Boz
+                    </p></div></div></div></footer><script defer src="../../js/katex.min.js" id="fl-id-site-11.documents.14.footerScriptTags.katex"></script><script onload="renderMathInElement(document.body);" defer src="../../js/auto-render.min.js" id="fl-id-site-11.documents.14.footerScriptTags.katexAutoRender"></script><script src="../../js/highlight.min.js" id="fl-id-site-11.documents.14.footerScriptTags.hljs"></script><script id="fl-id-site-11.documents.14.footerScriptTags.hljsInit">hljs.initHighlightingOnLoad();</script></body></html>

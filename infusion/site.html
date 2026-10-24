@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- Host document for infusion/js/buildSite.js: declares Infusion and this site's SFCs, and renders nothing itself.
+         The rendered pages are separate documents, one per ponder.document - see REQUIREMENTS.md R1.
+         Assumes a checkout of Infusion 6 alongside this repository. -->
+    <fluid-module id="infusion-6" src="../../fluid-infusion-6/"></fluid-module>
+
+    <script src="../../fluid-infusion-6/src/framework/core/js/FluidCore.js" fluid-hydrated="%infusion-6"></script>
+    <script src="../../fluid-infusion-6/src/framework/core/js/FluidSignals.js" fluid-hydrated="%infusion-6"></script>
+    <script src="../../fluid-infusion-6/src/framework/core/js/Fluid.js" fluid-hydrated="%infusion-6"></script>
+    <script src="../../fluid-infusion-6/src/framework/core/js/FluidModules.js" fluid-hydrated="%infusion-6"></script>
+    <script src="../../fluid-infusion-6/src/framework/core/js/FluidIL.js" fluid-hydrated="%infusion-6"></script>
+    <script src="../../fluid-infusion-6/src/framework/core/js/FluidView.js" fluid-hydrated="%infusion-6"></script>
+    <script src="../../fluid-infusion-6/src/framework/core/js/template-parser.js" fluid-hydrated="%infusion-6"></script>
+    <script src="../../fluid-infusion-6/src/framework/core/js/sfc-parser.js" fluid-hydrated="%infusion-6"></script>
+
+    <fluid-module id="ponderSite" src="./"></fluid-module>
+
+    <!-- PROPOSED (REQUIREMENTS.md R15): a directory import, or an $importMap on ponder.site, in place of this list -->
+    <fluid-import src="%ponderSite/adapt/disclaimer/ponder-feature-disclaimer.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/disclaimer/ponder-footer-disclaimer.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/gcse/ponder-document-gcse.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/gcse/ponder-feature-gcse.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/gcse/ponder-navbar-gcse.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/gcse/ponder-navItem-gcseSearch.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/hljs/ponder-document-hljs.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/hljs/ponder-feature-hljs.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/multilingual/ponder-feature-multilingual.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/multilingual/ponder-navbar-multilingual.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/multilingual/ponder-navItem-languages.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/multilingual/ponder-postMeta-translations.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/piwik/ponder-document-piwik.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/piwik/ponder-feature-piwik.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/selfHosted/ponder-document-selfHosted.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/selfHosted/ponder-feature-selfHosted.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/staticman/ponder-document-staticman.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/staticman/ponder-feature-staticman.vue"></fluid-import>
+    <fluid-import src="%ponderSite/adapt/staticman/ponder-postMeta-staticman.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/i18n/ponder-i18n-en.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/i18n/ponder-i18n.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/kinds/ponder-kind-404.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/kinds/ponder-kind-home.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/kinds/ponder-kind-page.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/kinds/ponder-kind-section.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/kinds/ponder-kind-taxonomy.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/kinds/ponder-kind-term.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/kinds/ponder-type-page.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/kinds/ponder-type-post.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-comments-giscus.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-alias.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-content.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-document.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-footer.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-header-bigimg.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-header-home.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-header-page.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-header-post.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-header.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-head.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-listPager.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-main-home.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-main-list.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-main-notFound.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-main-single.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-main-terms.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-main.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-mediaIcons.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-navbar.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-navItem-leaf.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-navItem-parent.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-navItem.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-pageMeta.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-pager.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-postMeta.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-postPreview.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-relatedPosts.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-scriptTag.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-shareLinks.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-site.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-stylesheetTag.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-tags.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/ponder-termPanel.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/shortcodes/ponder-shortcode-figure.vue"></fluid-import>
+    <fluid-import src="%ponderSite/sfc/shortcodes/ponder-shortcode-stabilization.vue"></fluid-import>
+    <title>ponder.org.uk - Infusion site host</title>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="en" id="fl-id-site-11.documents.35" itemtype="http://schema.org/WebPage" itemscope><head id="fl-id-site-11.documents.35.head"><meta charset="utf-8"><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"><title>Fluid Signals background - Antranig Basman</title><meta content="This page contains background information motivating the design of fluid.cell , the reactive primitive built to support Infusion 6, explaining how it differs from traditional reac…" name="description"><meta content="Antranig Basman" name="author"><meta content="Fluid Signals background" property="og:title"><meta content="This page contains background information motivating the design of fluid.cell , the reactive primitive built to support Infusion 6, explaining how it differs from traditional reac…" property="og:description"><meta content="https://ponder.org.uk/img/pond.jpg" property="og:image"><meta content="https://ponder.org.uk/docs/fluid-signals-background/" property="og:url"><meta content="website" property="og:type"><meta content="Antranig Basman" property="og:site_name"><link href="https://ponder.org.uk/img/favicon.ico" type="image/x-icon" rel="icon"><meta content="Infusion 6" name="generator"><link title="Antranig Basman" href="https://ponder.org.uk/index.xml" type="application/rss+xml" rel="alternate"><link href="../../css/katex.min.css" id="fl-id-site-11.documents.35.head.stylesheetTags.katex" rel="stylesheet"><link href="../../fontawesome/css/all.min.css" id="fl-id-site-11.documents.35.head.stylesheetTags.fontawesome" rel="stylesheet"><link href="../../css/bootstrap.min.css" id="fl-id-site-11.documents.35.head.stylesheetTags.bootstrap" rel="stylesheet"><link href="../../css/main.css" id="fl-id-site-11.documents.35.head.stylesheetTags.main" rel="stylesheet"><link href="../../css/highlight.min.css" id="fl-id-site-11.documents.35.head.stylesheetTags.syntax" rel="stylesheet"><link href="../../css/codeblock.css" id="fl-id-site-11.documents.35.head.stylesheetTags.codeblock" rel="stylesheet"><link href="../../css/ponder.css" id="fl-id-site-11.documents.35.head.stylesheetTags.ponder" rel="stylesheet"><script src="../../js/ponder.js" id="fl-id-site-11.documents.35.head.scriptTags.ponder"></script></head><body class="infusion-docs"><nav class="navbar navbar-default navbar-fixed-top navbar-custom" id="fl-id-site-11.documents.35.navbar"><div class="container-fluid"><div class="navbar-ponder"><a href="../../" class="navbar-ponder-brand">Antranig Basman</a><button data-target="#main-navbar" data-toggle="collapse" class="navbar-toggle" type="button"><span class="sr-only">Toggle navigation</span><svg xmlns="http://www.w3.org/2000/svg" stroke="#888" viewBox="0 0 24 24" height="36" width="36"><path stroke-linecap="round" stroke-width="1.5" d="M20 7L4 7" /><path stroke-linecap="round" stroke-width="1.5" d="M20 12L4 12" /><path stroke-linecap="round" stroke-width="1.5" d="M20 17L4 17" /></svg></button><div id="main-navbar" class="collapse navbar-collapse"><ul id="fl-id-site-11.documents.35.navbar.items" class="nav navbar-nav navbar-right"><li id="fl-id-site-11.documents.35.navbar.items.0"><a href="../../post" title="Posts">Posts</a></li><li id="fl-id-site-11.documents.35.navbar.items.1"><a href="../../wip" title="WiP">WiP</a></li><li id="fl-id-site-11.documents.35.navbar.items.2"><a href="../../page/about/" title="About">About</a></li><li id="fl-id-site-11.documents.35.navbar.items.3" class="navlinks-container"><a href="../../docs" class="navlinks-parent">Docs</a><div id="fl-id-site-11.documents.35.navbar.items.3.children" class="navlinks-children"><a href="../../docs/fluid-signals">Fluid Signals</a><a href="../../docs/fluid-integration-language">Fluid Integration Language</a><a href="../../docs/fluid-view">Fluid View</a><a href="../../docs/fluid-ptf">Fluid PTF</a><a href="../../docs/fluid-tldraw">Fluid tldraw integration</a></div></li><li id="fl-id-site-11.documents.35.navbar.items.4"><a href="../../communities" title="Communities">Communities</a></li><li id="fl-id-site-11.documents.35.navbar.items.5"><a href="../../projects" title="Projects">Projects</a></li><li id="fl-id-site-11.documents.35.navbar.items.6"><a href="../../term" title="Terms">Terms</a></li></ul></div></div></div></nav><header id="fl-id-site-11.documents.35.header" class="header-section"><div class="intro-header no-img"><div class="container"><div class="header-row"><div class="infusion-docs-heading ponder-heading"><h1 class="ponder-title">Fluid Signals background</h1><hr class="small"></div></div></div></div></header><div role="main" id="fl-id-site-11.documents.35.main"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article class="blog-post" role="main"><div id="fl-id-site-11.documents.35.main.content"><p>This page contains background information motivating the design of <code>fluid.cell</code>, the reactive primitive built to support
+Infusion 6, explaining how it differs from traditional reactive libraries. There are also <a href="../../docs/fluid-signals">API docs</a> for <code>fluid.cell</code> and also a more
+<a href="../../post/2026-02-20-reactivity-for-malleability">extended essay</a> explaining its goals in the context of a malleable substrate.</p>
+<p>I chose the name “cell”, rather than “signal” which is more common in the 2020s JavaScript reactive community,
+in honour of 3 traditions:</p>
+<ul>
+<li>Spreadsheet cells, which are the public’s primeval grounding in reactivity.</li>
+<li>Kenny Tilton’s <a href="https://smuglispweeny.blogspot.com/2008/02/cells-manifesto.html">Cells</a> system for CLOS, which in 2001,
+5 years before the coining of the terms “<a href="../../term/glitch">glitch</a>” and “reactive programming”, had already solved all the problems of
+reactivity embedded in imperative programming languages.</li>
+<li>The notion of a <a href="https://en.wikipedia.org/wiki/Reference_(computer_science)#Functional_languages">reference cell</a> in JavaScript
+and and other functional languages, taking the form of an object + key or 1-element array which mocks up the mutable capability of
+a pointer in languages which lack them.</li>
+</ul>
+<p>There is now a consensus notion of the capabilities of a reactive library in JavaScript, amongst such popular implementations
+as <a href="https://github.com/preactjs/signals/blob/main/packages/core/README.md">preact-signals</a>,
+<a href="https://github.com/stackblitz/alien-signals">alien-signals</a>,
+<a href="https://angular.dev/guide/signals">Angular signals</a>,
+<a href="https://docs.solidjs.com/concepts/signals">Solid signal</a>, etc. which has led to the proposal of a
+<a href="https://github.com/tc39/proposal-signals">standardised JS implementation</a> by the TC39 committee. This consensus
+baseline is often called “commodity signals” in pages on this site.</p>
+<p>Whilst the core implementation of <code>fluid.cell</code> is consistent with this consensus implementation — in fact, it has been
+adopted directly from Milo Mighdoll’s amazing and minimal <a href="https://github.com/milomg/reactively">reactively</a> system — this implementation
+departs from the consensus in some significant ways. These departures mostly widen the domain
+of validity of the implementation, relaxing restrictions which are incompatible with the demands of a
+<a href="../../term/substrate">substrate</a> supporting malleable programming.</p>
+<p>Whilst its idiom and goals are aligned with support for the Infusion 6 substrate, <code>fluid.cell</code> is a <a href="https://github.com/fluid-project/infusion-6/blob/main/src/framework/core/js/FluidSignals.js">self-contained
+library</a>
+with no dependencies which could be adopted for other purposes.</p>
+<p>You can read its test cases <a href="https://github.com/fluid-project/infusion-6/blob/main/tests/framework-tests/core/js/FluidSignalsTests.js">here</a> and run them
+<a href="https://fluid-project.github.io/infusion-6/tests/framework-tests/core/html/FluidSignalsTests.html">here</a>.</p>
+<p>The best guide to reactive programming in general and fluid.cell’s algorithm in particular is Milo’s 2022 <a href="https://milomg.dev/2022-12-01/reactivity">Super Charging
+Fine-Grained Reactivity</a> which contrasts a variety of implementations including
+Reactively’s, about 2/3 of the way down the page with the red and green squares, which I have adopted.</p>
+<h2 id="extra-capabilities-in-fluidcell">Extra capabilities in fluid.cell</h2>
+<h3 id="bidirectional-relationships">Bidirectional relationships</h3>
+<p>The most significant ergonomic difference in <code>fluid.cell</code> is support for bidirectional relationships between cells,
+which supports democratic constructs such as <a href="https://en.wikipedia.org/wiki/Bidirectional_transformation">lenses</a> without
+recourse to gratuitous asymmetries such as <a href="https://vuejs.org/guide/essentials/computed#writable-computed">writable computed</a>
+relations.</p>
+<h3 id="multiple-inbound-compute-arcs">Multiple inbound compute arcs</h3>
+<p>Support for bidirectional relationships entails support for multiple computed relations
+capable of updating the value of a single cell. This is a capability not found in any popular reactive library.
+In isolation, this capability might lead to the possibility for inconsistent or conflicting updates — however,
+<code>fluid.cell</code> follows the insight from Dan Ingall’s <a href="https://dl.acm.org/doi/pdf/10.1145/62083.62100">Fabrik</a> system which
+recognizes “bidirectional dataflow connections as a shorthand for multiple paths of flow”. As one leg of a bidirectional
+relationship is activated, the reverse leg is removed from consideration for this reactive update cycle (this kind of cycle is named a “fit”),
+removing the chance for cyclic updates.</p>
+<h3 id="static-compute-arguments">Static compute arguments</h3>
+<p>Tied in with support for lenses and multiple incoming arcs is <code>fluid.cell</code>’s support for <em>static arguments</em> to compute arcs.
+This is a significant departure from commodity signals, which pride themselves on automatic discovery of dependencies
+as code executes in the compute arc. In a substrate forming an <a href="../../term/integration-domain">integration domain</a> this is unidiomatic
+since base language code should ideally have no power of reference to surrounding scopes, in accordance with the principle of
+<em>interface hiding</em>. However, the use of static arguments isn’t mandatory, standard dynamic tracked dependencies are
+available to be used either instead of or along with them, to aid experts in interoperating with established
+codebases.</p>
+<h3 id="cycle-diagnostics">Cycle diagnostics</h3>
+<p>Another difference is the treatment of cycles. Rather than being rejected outright with a base language exception, these
+can be configured to either resolve benignly through having the cycle broken by deferring a potentially cyclic update
+to a further task, or else to resolve to an unavailable value which accumulates the addresses of the nodes involved,
+producing a visible diagnostic in the substrate[coming soon].</p>
+<h3 id="cause-tracking">Cause tracking</h3>
+<p>A hugely important ergonomic improvement is being able to report the <em>cause</em> of any ongoing reaction, that is, the
+chain of updated nodes leading back to the initial changed node triggered by the user or environment. This is vital in
+a substrate which positions reactivity as a wholesale replacement for execution, and therefore needs to replace the
+invaluable explanatory power of the stack with a correspondingly thorough explanation stretching across the substrate. This
+is done with the <a href="#fluidfindcausecell">fluid.findCause</a> API which returns this path of updated nodes.</p>
+<h3 id="asynchronous-compute-arcs">Asynchronous compute arcs</h3>
+<p>Finally, <code>fluid.cell</code> supports compute arcs which produce their results asynchronously. Whilst this is uncommon in
+reactive libraries, there is precedent for this in Ryan Carniato’s <a href="https://github.com/solidjs/solid/tree/next/packages/solid-signals">Solid signals</a> supporting
+the upcoming 2.0 release of Solid, and Mike Bostock’s <a href="https://github.com/observablehq/runtime/blob/main/src/runtime.js">Runtime</a>
+which powers <a href="https://observablehq.com/framework/">Observable</a>. <code>fluid.cell</code> passes the
+<a href="https://github.com/solidjs/solid/blob/311548aea535ac803c748ee73dcd576fab5a260a/packages/solid-signals/tests/createAsync.test.ts">test cases</a>
+(as of Nov 2025) issued for Solid signals’ <code>createAsync</code>.</p>
+</div><div id="fl-id-site-11.documents.35.main.share"><hr><section id="social-share"><div class="list-inline footer-links"><div aria-hidden="true" class="share-box"><ul class="share"><li><a href="https://bsky.app/intent/compose?text=Just%20reading%20a%20post%20called%20Fluid%20Signals%20background%20on%20Antranig%20Basman's%20blog%3A%20https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-signals-background%2F" title="Share on BlueSky" target="_blank"><i class="fab fa-fw fa-bluesky"></i></a></li><li><a href="https://twitter.com/share?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-signals-background%2F&text=Fluid%20Signals%20background&via=amb26ponder" title="Share on Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-signals-background%2F" title="Share on Facebook" target="_blank"><i class="fab fa-facebook"></i></a></li><li><a href="https://reddit.com/submit?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-signals-background%2F&title=Fluid%20Signals%20background" title="Share on Reddit" target="_blank"><i class="fab fa-reddit"></i></a></li><li><a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-signals-background%2F&title=Fluid%20Signals%20background" title="Share on LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a></li></ul></div></div></section></div></article><ul id="fl-id-site-11.documents.35.main.pager" class="pager blog-pager"><li class="previous"><a title="Fluid Signals API" href="../../docs/fluid-signals/" data-placement="top" data-toggle="tooltip">← Previous Post</a></li><li class="next"><a title="Potentia Transmission Format" href="../../docs/fluid-ptf/" data-placement="top" data-toggle="tooltip">Next Post →</a></li></ul><script data-lang="en" data-category-id="DIC_kwDOOKllGM4CvhAS" data-category="Announcements" data-repo-id="R_kgDOOKllGA" data-repo="amb26/ponder" id="fl-id-site-11.documents.35.main.comments" async crossorigin="anonymous" data-theme="light" data-input-position="bottom" data-emit-metadata="0" data-reactions-enabled="0" data-strict="0" data-mapping="pathname" src="https://giscus.app/client.js"></script></div></div></div><footer id="fl-id-site-11.documents.35.footer"><div class="container"><div class="row ponder-credits-row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p class="credits copyright text-muted"><a href="../../">Antranig Basman</a>
+                        &#160;©
+                        2026
+                    </p><p class="credits theme-by text-muted"><a href="https://github.com/fluid-project/infusion-6">Infusion 6</a> powered &#160;•&#160;
+                        Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from
+                        <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &#160;•&#160;
+                        further <a href="../../term/lithification">lithified</a> by Boz
+                    </p></div></div></div></footer><script defer src="../../js/katex.min.js" id="fl-id-site-11.documents.35.footerScriptTags.katex"></script><script onload="renderMathInElement(document.body);" defer src="../../js/auto-render.min.js" id="fl-id-site-11.documents.35.footerScriptTags.katexAutoRender"></script><script src="../../js/highlight.min.js" id="fl-id-site-11.documents.35.footerScriptTags.hljs"></script><script id="fl-id-site-11.documents.35.footerScriptTags.hljsInit">hljs.initHighlightingOnLoad();</script></body></html>

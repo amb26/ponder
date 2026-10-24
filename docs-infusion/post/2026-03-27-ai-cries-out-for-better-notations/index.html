@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="en" id="fl-id-site-11.documents.11" itemtype="http://schema.org/WebPage" itemscope><head id="fl-id-site-11.documents.11.head"><meta charset="utf-8"><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"><title>AI cries out for better notations - Antranig Basman</title><meta content="The themes of today’s posting have been seen before. As with the dismal exercise in On UI as Code I find myself once again trying to make an apparently trivial modification to a u…" name="description"><meta content="Antranig Basman" name="author"><meta content="AI cries out for better notations" property="og:title"><meta content="The themes of today’s posting have been seen before. As with the dismal exercise in On UI as Code I find myself once again trying to make an apparently trivial modification to a u…" property="og:description"><meta content="https://ponder.org.uk/img/pond.jpg" property="og:image"><meta content="https://ponder.org.uk/post/2026-03-27-ai-cries-out-for-better-notations/" property="og:url"><meta content="website" property="og:type"><meta content="Antranig Basman" property="og:site_name"><link href="https://ponder.org.uk/img/favicon.ico" type="image/x-icon" rel="icon"><meta content="Infusion 6" name="generator"><link title="Antranig Basman" href="https://ponder.org.uk/index.xml" type="application/rss+xml" rel="alternate"><link href="../../css/katex.min.css" id="fl-id-site-11.documents.11.head.stylesheetTags.katex" rel="stylesheet"><link href="../../fontawesome/css/all.min.css" id="fl-id-site-11.documents.11.head.stylesheetTags.fontawesome" rel="stylesheet"><link href="../../css/bootstrap.min.css" id="fl-id-site-11.documents.11.head.stylesheetTags.bootstrap" rel="stylesheet"><link href="../../css/main.css" id="fl-id-site-11.documents.11.head.stylesheetTags.main" rel="stylesheet"><link href="../../css/highlight.min.css" id="fl-id-site-11.documents.11.head.stylesheetTags.syntax" rel="stylesheet"><link href="../../css/codeblock.css" id="fl-id-site-11.documents.11.head.stylesheetTags.codeblock" rel="stylesheet"><link href="../../css/ponder.css" id="fl-id-site-11.documents.11.head.stylesheetTags.ponder" rel="stylesheet"><script src="../../js/ponder.js" id="fl-id-site-11.documents.11.head.scriptTags.ponder"></script></head><body class="post"><nav class="navbar navbar-default navbar-fixed-top navbar-custom" id="fl-id-site-11.documents.11.navbar"><div class="container-fluid"><div class="navbar-ponder"><a href="../../" class="navbar-ponder-brand">Antranig Basman</a><button data-target="#main-navbar" data-toggle="collapse" class="navbar-toggle" type="button"><span class="sr-only">Toggle navigation</span><svg xmlns="http://www.w3.org/2000/svg" stroke="#888" viewBox="0 0 24 24" height="36" width="36"><path stroke-linecap="round" stroke-width="1.5" d="M20 7L4 7" /><path stroke-linecap="round" stroke-width="1.5" d="M20 12L4 12" /><path stroke-linecap="round" stroke-width="1.5" d="M20 17L4 17" /></svg></button><div id="main-navbar" class="collapse navbar-collapse"><ul id="fl-id-site-11.documents.11.navbar.items" class="nav navbar-nav navbar-right"><li id="fl-id-site-11.documents.11.navbar.items.0"><a href="../../post" title="Posts">Posts</a></li><li id="fl-id-site-11.documents.11.navbar.items.1"><a href="../../wip" title="WiP">WiP</a></li><li id="fl-id-site-11.documents.11.navbar.items.2"><a href="../../page/about/" title="About">About</a></li><li id="fl-id-site-11.documents.11.navbar.items.3" class="navlinks-container"><a href="../../docs" class="navlinks-parent">Docs</a><div id="fl-id-site-11.documents.11.navbar.items.3.children" class="navlinks-children"><a href="../../docs/fluid-signals">Fluid Signals</a><a href="../../docs/fluid-integration-language">Fluid Integration Language</a><a href="../../docs/fluid-view">Fluid View</a><a href="../../docs/fluid-ptf">Fluid PTF</a><a href="../../docs/fluid-tldraw">Fluid tldraw integration</a></div></li><li id="fl-id-site-11.documents.11.navbar.items.4"><a href="../../communities" title="Communities">Communities</a></li><li id="fl-id-site-11.documents.11.navbar.items.5"><a href="../../projects" title="Projects">Projects</a></li><li id="fl-id-site-11.documents.11.navbar.items.6"><a href="../../term" title="Terms">Terms</a></li></ul></div></div></div></nav><header id="fl-id-site-11.documents.11.header" class="header-section"><div class="intro-header no-img"><div class="container"><div class="header-row"><div class="post-heading ponder-heading"><h1 class="ponder-title">AI cries out for better notations<span class="post-meta" id="fl-id-site-11.documents.11.header.postMeta"><span class="ponder-date"> – March 27, 2026</span></span></h1></div></div></div></div></header><div role="main" id="fl-id-site-11.documents.11.main"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article class="blog-post" role="main"><div id="fl-id-site-11.documents.11.main.content"><p>The themes of today’s posting have been seen before. As with the dismal exercise in
+<a href="../../post/2025-03-20-ui-as-code">On UI as Code</a> I find myself once again trying to make an apparently trivial modification
+to a user interface - in this case, getting a <a href="https://imfing.github.io/hextra/">Hextra</a> Hugo theme menu to support
+nested menus. As is typical, this turns out to be impossible without some large-scale cut, paste and hack exercise
+of the kind we so regularly tell each other is unvirtuous. The difference since last time is that I now have my
+clanker buddy Claude online [Sonnet 4.6] whom I can get to reflect on the meaning of this exercise. Until the next AI winter bites,
+you will be able to see the conversation in its context <a href="https://claude.ai/share/43038859-0c49-45ee-ab52-123707ac90b5">here</a>, but
+the central interaction is pasted out here:</p>
+<style>
+@font-face {
+    font-family: "Anthropic Serif";
+    src: url(https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c66fc489e-C-BHYa_K.woff2) format("woff2");
+    font-weight: 300 800;
+    font-style: normal;
+    font-display: swap
+}
+
+.claude-interaction {
+  background-color: rgb(248, 248, 246);
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  font-family: "Anthropic Serif", Georgia, "Arial Hebrew", "Noto Sans Hebrew", "Times New Roman", Times, "Hiragino Sans", "Yu Gothic", Meiryo, "Noto Sans CJK JP", "PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans CJK KR", serif;
+  font-size: 16px;
+  margin: 2rem 0;
+}
+
+.claude-interaction p+p {
+  margin: 10px 0;
+}
+
+.human-question {
+   background-color: rgb(239, 238, 235);
+   padding: 1rem 1.5rem;
+   border-radius: 1rem;
+   align-self: flex-end;
+   max-width: 85%;
+   margin: 2rem 0;
+}
+
+</style>
+<div class="claude-interaction">
+...
+<p>Yes. Here is the updated block in full:</p>
+<pre><code class="language-hugo">&lt;ul class="hx-flex hx-flex-col hx-gap-1 md:hx-hidden"&gt;
+  {{- range site.Menus.main -}}
+    {{- if .Parent -}}{{- continue -}}{{- end -}}
+    {{- $active := eq $pageURL .URL -}}
+    &lt;li class="{{ if $active }}open{{ end }}"&gt;
+      {{- template "sidebar-item-link" (dict "context" (dict "RegularPages" .Children "Sections" slice) "active" $active "title" .Name "link" .URL) -}}
+      {{- if .Children -}}
+        &lt;div class="ltr:hx-pr-0 hx-overflow-hidden"&gt;
+          &lt;ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'&gt;
+            {{- range .Children -}}
+              {{- $childActive := eq $pageURL .URL -}}
+              &lt;li class="hx-flex hx-flex-col {{ if $childActive }}open{{ end }}"&gt;
+                {{- template "sidebar-item-link" (dict "context" (dict "RegularPages" slice "Sections" slice) "active" $childActive "title" .Name "link" .URL) -}}
+              &lt;/li&gt;
+            {{- end -}}
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      {{- end -}}
+    &lt;/li&gt;
+  {{- end -}}
+&lt;/ul&gt;
+</code></pre>
+<p>The only change from before is that every <code>sidebar-item-link</code> call now
+passes <code>(dict "RegularPages" .Children "Sections" slice)</code> as <code>context</code> instead of the raw <code>MenuEntry</code>, which satisfies
+the collapsible button check without ever calling <code>.RegularPages</code> on the entry itself.</p>
+<div class="human-question">
+Why do you imagine the software industry never takes stock of absolutely massive and routine reuse failures of this kind?
+</div>
+<p>Because the incentives never align to fix it.</p>
+<p>The people who feel the pain most acutely — developers doing exactly what you’re doing, trying to compose or override a
+small piece of someone else’s template — have no leverage over the design decisions made upstream. The theme author
+ships something that works for their use case, the override/reuse story is an afterthought, and by the time the API is “stable” it’s too expensive to break.</p>
+<p>Hugo’s <code>define</code> blocks are a good example of the deeper pattern: the mechanism was designed for template inheritance
+in the simple case, not for surgical overrides in a large theme. The same failure recurs in React component libraries,
+CSS frameworks, CMS theming systems, plugin architectures — anywhere a large coherent thing is built first and composability is bolted on later or not at all.</p>
+<p>The stock-taking does happen occasionally — usually as a clean rewrite that then repeats the cycle.
+But the industry has no real feedback loop between the people who design these APIs and the people who spend hours
+untangling them two years later. The cost is diffuse, invisible, and borne entirely by downstream users.
+Nobody files a P0 bug for “reuse is harder than it should be.”</p>
+<p>The honest answer is probably that composability is genuinely hard to design upfront, and most people building
+these systems are optimising for the demo, not the long-term integration surface.</p>
+<div class="human-question">
+Could one consider that there is evidence that the primitives that are commonly available to build software from
+inherently defeat composability rather than this representing an upfront design failure by individual framework designers?
+</div>
+<p>Yes, and that’s a much more honest framing.</p>
+<p>The evidence is pretty strong. The same failure pattern appears across decades, languages, paradigms, and teams of
+wildly varying skill. Object inheritance, CSS cascades, Hugo <code>define</code> blocks, React context, plugin hooks — they all
+start with a plausible composability story and reliably produce the same tangle. At some point the most parsimonious
+explanation stops being “framework designers keep making the same mistake” and starts being “the underlying primitives
+have a structural property that defeats composition.”</p>
+<p>The core problem seems to be that most primitives are built around <strong>substitution</strong> — you replace one thing with
+another. But real reuse almost always requires <strong>wrapping</strong> or <strong>interception</strong> — you want to sit beside something,
+augment it, redirect one piece of it. Substitution forces you to take ownership of the whole thing to change any
+part of it, which is exactly what you hit with <code>sidebar.html</code>.</p>
+<p>There’s a deeper issue too. Composability requires that a system’s pieces have <strong>stable, narrow contracts</strong> — they
+promise little and expose little. But useful software tends toward the opposite: pieces that do a lot, know a lot
+about their context, and are therefore coupled to it. <code>sidebar-item-link</code> knowing about <code>.RegularPages</code> is not a
+design error, it’s just a function that grew to meet real needs. Composition and capability pull in opposite
+directions and most primitives don’t give you a way to manage that tension, they just let it accumulate.</p>
+<p>Some traditions have taken this seriously — concatenative languages, capability-based systems, certain Lisp and
+Smalltalk lineages. They tend to remain niche, which is itself further evidence: the mainstream primitives that
+win adoption are not selected for composability.</p>
+<div class="human-question">
+All things being equal, could the widespread use of AI for code generation be expected to exacerbate or alleviate this problem?
+</div>
+<p>Exacerbate it, almost certainly.</p>
+<p>AI code generation optimises for the same thing the demo optimises for — something that works for the case in front of
+it. It’s trained on the corpus of existing code, which already embeds all the composability failures you’re describing.
+It reproduces those patterns fluently and confidently because they are statistically dominant.</p>
+<p>More specifically, AI generation tends to:</p>
+<p><strong>Produce whole things rather than narrow contracts.</strong> When you ask for a sidebar or a navbar it gives you a
+complete artifact. This is locally satisfying but globally it means the stock of large, monolithic, hard-to-partially-override things grows faster.</p>
+<p><strong>Obscure the cost of coupling.</strong> A human developer who spends two hours untangling <code>sidebar.html</code> accumulates
+some intuition about what caused the problem. That feedback is lost when the same two hours is saved upfront by
+generation — the coupling is still there but nobody paid the price that would have taught them to avoid it.</p>
+<p><strong>Accelerate the accumulation of code that nobody fully understands.</strong> Composability failures are most acute
+at the boundaries between pieces written by different people at different times with different assumptions.
+AI generation dramatically increases the volume of such pieces entering codebases.</p>
+<p>The alleviating argument would be that AI could in principle generate narrow, well-contracted primitives if
+asked to, or could help untangle existing coupling. That’s true but it requires the person asking to already
+understand the problem — which is precisely the understanding that gets bypassed when generation is used
+to avoid engaging with the code in the first place.</p>
+<p>So the net effect is probably: faster accumulation of the same structural problems, with less human
+understanding distributed across the industry to diagnose or push back on them.</p>
+<div class="human-question">
+Given we agreed that it was not plausible to assign the blame for ill-contracted design elements onto those
+at the point of design, but instead more convincingly on the underlying primitives, is
+this not evidence that AI-generated code would benefit disproportionately from any
+improvement in the underlying primitives than code generated by humans?
+</div>
+<p>That’s a sharp observation and I think it’s right.</p>
+<p>If the failure is primarily in the primitives rather than in the judgment of the person using them, then the quality ceiling for any code generator — human or AI — is set by the primitives
+available. A human brings compensating intuitions: they feel the pain of bad composition, they develop heuristics,
+they sometimes push back against the grain of the tools. Those compensations are imperfect and inconsistent but they exist.</p>
+<p>An AI generator has no such friction. It reproduces whatever the primitives make easy, at scale and without
+hesitation. This means it hits the ceiling faster and harder than a human would — but it also means that
+if the ceiling is raised by better primitives, the AI benefits more completely. A human might still reach
+for a familiar bad pattern out of habit or because the old primitives are still available. An AI
+trained on a corpus where better primitives are dominant would simply use them.</p>
+<p>There’s a further implication. One reason better primitives have historically struggled to achieve
+adoption is the activation energy required — humans have to learn them, unlearn existing habits, and
+tolerate a period of lower productivity. AI generation could in principle collapse that activation
+energy almost to zero. If a sufficiently better primitive exists and is well represented in training data,
+the switching cost for an AI consumer is negligible compared to a human one.</p>
+<p>So the argument runs: AI generation is currently a multiplier on whatever the primitives reward.
+That’s bad when the primitives are bad. But it also means the leverage runs both ways — improvements
+in primitives could propagate through AI-generated code faster and more completely than they ever could through human practice.</p>
+</div>
+<p>The central message, that AI could be expected to benefit disproportionately from, and also greatly assist in the development of
+new notations, is familiar from my <a href="../../post/2025-04-19-new-notation-era">New Notations Era</a> posting but feels rather more pointed
+in a concrete context as well as coming from the horse’s mouth. Not that, of course, one could expect it to have any more
+accurate introspection than any other kind of intelligence.</p>
+</div><div id="fl-id-site-11.documents.11.main.share"><hr><section id="social-share"><div class="list-inline footer-links"><div aria-hidden="true" class="share-box"><ul class="share"><li><a href="https://bsky.app/intent/compose?text=Just%20reading%20a%20post%20called%20AI%20cries%20out%20for%20better%20notations%20on%20Antranig%20Basman's%20blog%3A%20https%3A%2F%2Fponder.org.uk%2Fpost%2F2026-03-27-ai-cries-out-for-better-notations%2F" title="Share on BlueSky" target="_blank"><i class="fab fa-fw fa-bluesky"></i></a></li><li><a href="https://twitter.com/share?url=https%3A%2F%2Fponder.org.uk%2Fpost%2F2026-03-27-ai-cries-out-for-better-notations%2F&text=AI%20cries%20out%20for%20better%20notations&via=amb26ponder" title="Share on Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fponder.org.uk%2Fpost%2F2026-03-27-ai-cries-out-for-better-notations%2F" title="Share on Facebook" target="_blank"><i class="fab fa-facebook"></i></a></li><li><a href="https://reddit.com/submit?url=https%3A%2F%2Fponder.org.uk%2Fpost%2F2026-03-27-ai-cries-out-for-better-notations%2F&title=AI%20cries%20out%20for%20better%20notations" title="Share on Reddit" target="_blank"><i class="fab fa-reddit"></i></a></li><li><a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fponder.org.uk%2Fpost%2F2026-03-27-ai-cries-out-for-better-notations%2F&title=AI%20cries%20out%20for%20better%20notations" title="Share on LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a></li></ul></div></div></section></div></article><ul id="fl-id-site-11.documents.11.main.pager" class="pager blog-pager"><li class="previous"><a title="fluid.cell: A reactive implementation supporting malleable substrates" href="../../post/2026-02-20-reactivity-for-malleability/" data-placement="top" data-toggle="tooltip">← Previous Post</a></li><li class="next"><a title="Bridging the gap between static and dynamic analysis through fully deferred stabilization" href="../../post/2026-06-28-fully-deferred-stabilization/" data-placement="top" data-toggle="tooltip">Next Post →</a></li></ul><script data-lang="en" data-category-id="DIC_kwDOOKllGM4CvhAS" data-category="Announcements" data-repo-id="R_kgDOOKllGA" data-repo="amb26/ponder" id="fl-id-site-11.documents.11.main.comments" async crossorigin="anonymous" data-theme="light" data-input-position="bottom" data-emit-metadata="0" data-reactions-enabled="0" data-strict="0" data-mapping="pathname" src="https://giscus.app/client.js"></script></div></div></div><footer id="fl-id-site-11.documents.11.footer"><div class="container"><div class="row ponder-credits-row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p class="credits copyright text-muted"><a href="../../">Antranig Basman</a>
+                        &#160;©
+                        2026
+                    </p><p class="credits theme-by text-muted"><a href="https://github.com/fluid-project/infusion-6">Infusion 6</a> powered &#160;•&#160;
+                        Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from
+                        <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &#160;•&#160;
+                        further <a href="../../term/lithification">lithified</a> by Boz
+                    </p></div></div></div></footer><script defer src="../../js/katex.min.js" id="fl-id-site-11.documents.11.footerScriptTags.katex"></script><script onload="renderMathInElement(document.body);" defer src="../../js/auto-render.min.js" id="fl-id-site-11.documents.11.footerScriptTags.katexAutoRender"></script><script src="../../js/highlight.min.js" id="fl-id-site-11.documents.11.footerScriptTags.hljs"></script><script id="fl-id-site-11.documents.11.footerScriptTags.hljsInit">hljs.initHighlightingOnLoad();</script></body></html>

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Antranig Basman</title>
+    <link>https://ponder.org.uk/</link>
+    <description>Recent content on Antranig Basman</description>
+    <generator>Infusion 6</generator>
+    <language>en</language>
+    <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
+    <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
+    <lastBuildDate>Sun, 28 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://ponder.org.uk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bridging the gap between static and dynamic analysis through fully deferred stabilization</title>
+      <link>https://ponder.org.uk/post/2026-06-28-fully-deferred-stabilization/</link>
+      <pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2026-06-28-fully-deferred-stabilization/</guid>
+      <description>It is now ten years since some of us wrote 2016’s Software and How it Lives On (SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded communities of authors. In the time since then, progress in reactive software, particularly in the JavaScript community, has now made it possible to tighten up some of the details of how this vision can be brought about.</description>
+    </item>
+    <item>
+      <title>Towards Deferred Stabilisation</title>
+      <link>https://ponder.org.uk/wip/2026-05-25-towards-deferred-stabilisation/</link>
+      <pubDate>Mon, 25 May 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2026-05-25-towards-deferred-stabilisation/</guid>
+      <description>aka “A Farewell to preact-signals” This posting is a story that can be told from two ends, the theoretical and the practical. To jump ahead to one of the punchlines, it turns out that Milo’s reactively system, hailed in Understanding Reactivity and other posts, harbours yet more riches than had been explored so far. When looking through Milo’s Reactivity Benchmark with Chee last year, I was greatly taken with the staggering simplicity of the benchmark’s adaptor for update batching, which looks like this: withBatch: (fn) =&amp;gt; { fn(); stabilize(); }, Where actually is the batching?</description>
+    </item>
+    <item>
+      <title>Researching in-browser AI</title>
+      <link>https://ponder.org.uk/wip/2026-07-31-researching-in-browser-ai/</link>
+      <pubDate>Mon, 25 May 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2026-07-31-researching-in-browser-ai/</guid>
+      <description>After beholding Clayton’s Antigravity-fuelled conversion of his 1987 NoPumpG spreadsheet-inspired visual programming system, I started to wonder what it would take to get in-browser AI assistance and explanation of the interface. Below is reproduced a Gemini Q&amp;amp;A session where I started from the assumption that some kind of MCP-like construct, mapping the materialised interface contents onto a structured query API, would be relevant. The conversation revealed that whilst an MCP-like mapping could be a helpful intermediate, this is secondary compared to the central difficulty of getting the AI mustered into the browser environment itself, at a price/availability that made sense for a non-technical user.</description>
+    </item>
+    <item>
+      <title>AI cries out for better notations</title>
+      <link>https://ponder.org.uk/post/2026-03-27-ai-cries-out-for-better-notations/</link>
+      <pubDate>Fri, 27 Mar 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2026-03-27-ai-cries-out-for-better-notations/</guid>
+      <description>The themes of today’s posting have been seen before. As with the dismal exercise in On UI as Code I find myself once again trying to make an apparently trivial modification to a user interface - in this case, getting a Hextra Hugo theme menu to support nested menus. As is typical, this turns out to be impossible without some large-scale cut, paste and hack exercise of the kind we so regularly tell each other is unvirtuous.</description>
+    </item>
+    <item>
+      <title>fluid.cell: A reactive implementation supporting malleable substrates</title>
+      <link>https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/</link>
+      <pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/</guid>
+      <description>Submission to the March Substrates 2026 Workshop, co-located with &amp;lt;Programming 2026&amp;gt; . Updated 10th May 2026. Abstract This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates fluid.cell , a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst expanding their domain. I explain the core reactive competencies of glitch freedom and early cutoff , and how fluid.cell delivers these competencies whilst supporting reactive graphs with bidirectional arcs, asynchronous propagation of reactive updates and allows the cause of these updates to be tracked to their source, and why these expanded capabilities are vital to support successful substrates.</description>
+    </item>
+    <item>
+      <title>Understanding Reactivity</title>
+      <link>https://ponder.org.uk/wip/2025-12-15-understanding-reactivity/</link>
+      <pubDate>Mon, 15 Dec 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-12-15-understanding-reactivity/</guid>
+      <description>In late 2023, staring at the “flag” test case in preact-signals that I describe in my Archaeology of Glitches posting, I realised something decisive: reactive systems can provide a strong, structural guarantee of data consistency. Given that, it became clear that Infusion could be reworked as a fully reactive system, rather than the opportunistic hybrid I had been building through the 2010s. This post will notice that the apparent diversity of reactive systems masks a simple unifying principle, related to a principle I had already been following in Infusion’s development.</description>
+    </item>
+    <item>
+      <title>Infinite Apps, Asynchrony and Tree Unshaking</title>
+      <link>https://ponder.org.uk/wip/2025-12-12-infinite-apps-and-unshaking/</link>
+      <pubDate>Fri, 12 Dec 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-12-12-infinite-apps-and-unshaking/</guid>
+      <description>This has been a period of consolidation since pushing on demos of Infusion 6 for the Substrates 2025 workshop and my 2025 Live incurred a good amount of technical debt. Lots of demo features were hacked on by banging on framework internals rather than by proper userland constructs, and the tidyup has proved more meaty than I imagined, with several test cases still failing for fairly fundamental reasons. However this has been a great opportunity to deliver more soundly on some of Infusion’s goals and work out more of the implications of its model for software’s material.</description>
+    </item>
+    <item>
+      <title>Josh Horowitz Review</title>
+      <link>https://ponder.org.uk/wip/2025-10-07-josh-horowitz-review/</link>
+      <pubDate>Tue, 07 Oct 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-10-07-josh-horowitz-review/</guid>
+      <description>Last month I received some great feedback and searching questions from Josh Horowitz about my 2025 Live submission. Whilst it was rejected this time round, the submission achieved its aim of engaging with the most thoughtful minds in the field, and starting the long process of sharpening up these ideas so that they can be widely intelligible and adopted. There’s been no substantial writing on Infusion’s goals since the 2018 Open Authorial Principle and since then both the ideas and implementation have evolved significantly.</description>
+    </item>
+    <item>
+      <title>The Module System Once More</title>
+      <link>https://ponder.org.uk/wip/2025-09-30-module-system-once-more/</link>
+      <pubDate>Tue, 30 Sep 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-09-30-module-system-once-more/</guid>
+      <description>It finally seems to be time to do something decisive about this issue which seems to have been pending for longer than I’ve been alive, the Infusion Module System. There are Notes on the Infusion Module Loader and Notes on Modularisation of Infusion as well as ancient tickets going back as far as 2014 which read as if before the era of the printing press. The landscape has changed profoundly since then - There are numerous other package managers than npm for node, and even npm changed its module layout pretty significantly There are several alternatives to node itself for JS on the server Various monorepo orchestrators solve many of the problems described here The already highly confused state of JS module loading, which had 5 major competing variants then, has been totally shredded by the “nuclear option” of ES6 modules with their impermissive “viral” footprint - only an ES6 module can load another ES6 module.</description>
+    </item>
+    <item>
+      <title>This week's reactive chats</title>
+      <link>https://ponder.org.uk/wip/2025-09-26-this-weeks-reactive-chats/</link>
+      <pubDate>Fri, 26 Sep 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-09-26-this-weeks-reactive-chats/</guid>
+      <description>Some good chats this week on reactive matters. Firstly on Tuesday with Patrick Dubroy , a fellow substratist . Patrick is a splendid chap who amongst many other works is the maintainer of a powerful, user-friendly parsing toolkit Ohm . Patrick pinged me last week explaining that he was contemplating a collaboration with Camille and Yann who were building a document publishing pipeline sourced from, amongst other formats, AsciiDoc (for related details see Camille’s recent PhD thesis ).</description>
+    </item>
+    <item>
+      <title>More iNaturalist Shenanigans</title>
+      <link>https://ponder.org.uk/wip/2025-09-25-more-inaturalist-shenanigans/</link>
+      <pubDate>Thu, 25 Sep 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-09-25-more-inaturalist-shenanigans/</guid>
+      <description>This story has a familiar beginning. As with UI as Code , an innocuous UI request from Dana has unexpectedly deep consequences. Dana noticed that the Douglas fir image on the Xetthecum Forest community pane was no longer showing up… here is what we see: The cause in itself is indeed fairly innocuous. We are sourcing these images from iNaturalist’s CDN which has been for many years in the slow process of migrating from URLs like https://static.inaturalist.org/photos/641410/medium.jpg to URLs like https://inaturalist-open-data.s3.amazonaws.com/photos/641410/medium.jpg .</description>
+    </item>
+    <item>
+      <title>Archaeology of Glitches</title>
+      <link>https://ponder.org.uk/post/2025-07-01-archaeology-of-glitches/</link>
+      <pubDate>Tue, 01 Jul 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-07-01-archaeology-of-glitches/</guid>
+      <description>In 2024 I was working on a small project that I wanted to be able to be handed over, and wondered what was the most congenial way out there of rendering apps that wouldn’t bring in too heavy a dependency. My eye was caught by the following passage in preact-signals’ test cases: it(&amp;quot;should drop A-&amp;gt;B-&amp;gt;A updates&amp;quot;, async () =&amp;gt; { // A // / | // B | &amp;lt;- Looks like a flag doesn't it?</description>
+    </item>
+    <item>
+      <title>Substrates Vision Statement</title>
+      <link>https://ponder.org.uk/post/2025-06-03-substrates-vision/</link>
+      <pubDate>Tue, 03 Jun 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-06-03-substrates-vision/</guid>
+      <description>This is my vision statement submitted to the Substrates-25 workshop held in Prague in June 2025, co-located with &amp;lt;Programming 2025&amp;gt; . To disclosable computing through concrete abstractions What is a substrate? Jonathan Edwards defines a substrate as embodying the following properties: A complete and self-sufficient programming system, with a persistent code &amp;amp; data store, providing a direct-manipulation UI on that state. Supports live programming. Programming &amp;amp; using are on a spectrum, not distinct.</description>
+    </item>
+    <item>
+      <title>Learning from Codestrates</title>
+      <link>https://ponder.org.uk/wip/2025-04-24-learning-from-codestrates/</link>
+      <pubDate>Thu, 24 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-04-24-learning-from-codestrates/</guid>
+      <description>For the last few days I’ve been looking at the amazing Codestrates project, a development from Webstrates that has been under development by Clemens Klokmose and his team at CAVI since 2015. This has always been a close sibling project since the days of our 2016 paper and the development into Codestrates with its powerful in-browser IDE makes the convergence even more interesting. Reuse and abstractions in Substrates There has always been a fundamental difference in philosophy between Webstrates and Infusion, in that the substrate underlying Webstrates is simply the DOM itself.</description>
+    </item>
+    <item>
+      <title>Co-occurrences are here again</title>
+      <link>https://ponder.org.uk/wip/2025-04-21-co-occurrences-are-here-again/</link>
+      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-04-21-co-occurrences-are-here-again/</guid>
+      <description>Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter features at the expense of what might have been “speculative nonsense” in its earlier history. However, implementing something pretty basic – the ability to render lists of components – brought me right back to an old conversation. Here’s the situation – one author wrote a todoItem which is a templateViewComponent : fluid.def(&amp;quot;fluid.tests.todoItem&amp;quot;, { $layers: &amp;quot;fluid.templateViewComponent&amp;quot;, template: '&amp;lt;span class=&amp;quot;todo tag is-large&amp;quot;&amp;gt;@text&amp;lt;button class=&amp;quot;delete is-small&amp;quot;&amp;gt;&amp;lt;/button&amp;gt;&amp;lt;/span&amp;gt;' }); Another author now wants to iterate over a list of these items: $component: { $layers: &amp;quot;fluid.tests.todoItem&amp;quot;, $for: { source: &amp;quot;{forTodo}.todos&amp;quot;, value: &amp;quot;todo&amp;quot;, key: &amp;quot;todoIndex&amp;quot; }, text: &amp;quot;{todo}.text&amp;quot; } What kind of component ends up this path?</description>
+    </item>
+    <item>
+      <title>An era for new notations</title>
+      <link>https://ponder.org.uk/post/2025-04-19-new-notation-era/</link>
+      <pubDate>Sat, 19 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-04-19-new-notation-era/</guid>
+      <description>I argue that there has never been a more promising time for developing fruitful new notations. Some, considering the enormous success of modern LLMs in solving increasingly complex “problems” – in terms of translating a verbal or pictorial design specification into code – means programming is now a “solved” problem. They imagine a future where humans no longer need to understand or write code. I believe this is wrong on several accounts.</description>
+    </item>
+    <item>
+      <title>Coming Out of the Shadows</title>
+      <link>https://ponder.org.uk/post/2025-04-13-coming-out-of-the-shadows/</link>
+      <pubDate>Sun, 13 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-04-13-coming-out-of-the-shadows/</guid>
+      <description>Or – “Evading Gilad’s Comparison”. A 2014 posting of Gilad Bracha’s, A DOMain of shadows , has prompted a lot of thought over the years. I refer to it in passing in last month’s On UI as Code but this week a line of argument became a bit clearer on how the comparison in the posting might be dodged. Gilad’s note is about the design tension constantly pushing complexity into any purportedly “simple” user-facing language, that we might call a DSL.</description>
+    </item>
+    <item>
+      <title>Templates and weird attributes together</title>
+      <link>https://ponder.org.uk/wip/2025-04-07-templates-and-weird-attributes-together/</link>
+      <pubDate>Mon, 07 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-04-07-templates-and-weird-attributes-together/</guid>
+      <description>Trying to put into practice thoughts from the previous two postings on template thinking and weird attributes for event binding revealed some interesting problems. Firing up ${ } -based templates revealed an awkward problem. This prevents us using backtick template literals in code since these automatically interpret ${} syntax and so will break as soon as they are evaluated. At the same time, use of @click style event binding revealed a really interesting limitation.</description>
+    </item>
+    <item>
+      <title>Staring at the wand</title>
+      <link>https://ponder.org.uk/wip/2025-04-04-staring-at-the-wand/</link>
+      <pubDate>Fri, 04 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-04-04-staring-at-the-wand/</guid>
+      <description>OK, so we have now imported a visually reasonable and properly lithified version of Pell into a tiny static page which is itself lithified from the rendered output of the substrates page, which will be where the most basic editing demo gets scaffolded. I mused about making the disclosing tool into a pencil of the kind we see in the Lively Kernel UI but the “magic wand” was hard to resist and fits in with some rhetoric about this gesture.</description>
+    </item>
+    <item>
+      <title>Change of Tack on Templating</title>
+      <link>https://ponder.org.uk/wip/2025-04-03-change-of-tack-on-templating/</link>
+      <pubDate>Thu, 03 Apr 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-04-03-change-of-tack-on-templating/</guid>
+      <description>I get to staring at the markup templates that were already implemented for the Galiano 2023 Bioblitz and thinking how to adapt/reuse them for the upcoming Diatoms of the Salish Sea viz forces me to put some things in focus about how templating is going to have to work for these communities. I’d vaguely hoped that the details of how Infusion templating was going to interact with Hugo templating would somehow just “come out in the wash” but naturally this isn’t going to happen without some kind of focused plan!</description>
+    </item>
+    <item>
+      <title>Hunting rich editors</title>
+      <link>https://ponder.org.uk/wip/2025-03-28-hunting-rich-editors/</link>
+      <pubDate>Fri, 28 Mar 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/wip/2025-03-28-hunting-rich-editors/</guid>
+      <description>The substrate’s transition to editability will need to present a “mostly rendered” view of itself – managed by some form of rich text editor. A huge “grab-bag list” is at JefMari’s curated list of Awesome Wysiwyg Editors which can rapidly be whittled down to a shortlist. CKEditor 5 and TinyMCE are familiar from decades ago. But the gold standard is clearly Marijn’s ProseMirror – basic example here and really nice markdown editing example here.</description>
+    </item>
+    <item>
+      <title>On UI as code</title>
+      <link>https://ponder.org.uk/post/2025-03-20-ui-as-code/</link>
+      <pubDate>Thu, 20 Mar 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-03-20-ui-as-code/</guid>
+      <description>UI as Code as a named slogan originated in the context of Dart’s Flutter UI toolkit created by Google. It is centrally described by Bob Nystrom in this thoughtful posting Marking Dart a Better Language for UI . I see it as part of a wider trend in many environments to express designs in general-purpose programming language code rather than configuration languages with less expressive power. For example, ESLint’s flat config system introduced in 2022 moves its previous JSON-based linting configuration into JavaScript code.</description>
+    </item>
+    <item>
+      <title>On Development Speed</title>
+      <link>https://ponder.org.uk/post/2025-03-14-development-speed/</link>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-03-14-development-speed/</guid>
+      <description>A recent posting Why the Latest JavaScript Frameworks Are a Waste of Time sparks a short train of thought. As well as the characteristically disrespectful tone of discussion that technical people often adopt, and the suggestion, contrary to my speculations looking at DOM reconciliation , that people really do use low-level benchmarks when choosing frameworks, is the notion of frameworks contributing to development speed. One commentor invites us to watch him against the clock to implement a front end in Svelte rather than React.</description>
+    </item>
+    <item>
+      <title>Benchmarking DOM reconciliation algorithms</title>
+      <link>https://ponder.org.uk/post/2025-02-07-benchmarking-dom-reconciliation/</link>
+      <pubDate>Fri, 07 Feb 2025 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/post/2025-02-07-benchmarking-dom-reconciliation/</guid>
+      <description>Since the Infusion 6 renderer is close to being a reality, it is time to understand the characteristics of some of the various DOM reconciliation algorithms out there. Could we do without a virtual DOM entirely? To start with is the question of whether we even really want one at all — the classic Svelte Virtual DOM is pure overhead post has been though its various hype cycles but 7 years later the majority of frameworks out there still have one so the consequences are clearly not as clear-cut as the argument would have it.</description>
+    </item>
+    <item>
+      <title>My Communities</title>
+      <link>https://ponder.org.uk/communities/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/communities/</guid>
+      <description>Since 2017 I have been Biodiversity Informatics lead for IMERSS , the Institute for Multidisciplinary Ecological Research in the Salish Sea. I have been working to help communities with different models for knowledge &amp;mdash; expert naturalists, citizen scientists, and Indigenous individuals and others &amp;mdash; respectfully cooperate to share their knowledge of the natural world and be empowered as stewards of their natural environment. Some visualisations I've produced can be seen on the IMERSS portal .</description>
+    </item>
+    <item>
+      <title>Fluid Integration Language</title>
+      <link>https://ponder.org.uk/docs/fluid-integration-language/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/fluid-integration-language/</guid>
+      <description>This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6 components are defined, composed and wired together as an integration domain . It is implemented in FluidIL.js on top of the reactive primitive fluid.cell , whose semantics (signals, effects, unavailable values , deferred stabilization) it inherits throughout. The raw markdown underlying these docs is available on GitHub , suitable for direct ingestion by your friendly local neighbourhood intelligence.</description>
+    </item>
+    <item>
+      <title>Potentia Transmission Format</title>
+      <link>https://ponder.org.uk/docs/fluid-ptf/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/fluid-ptf/</guid>
+      <description>This page documents the Potentia Transmission Format (PTF), a plain-text document format which captures everything required to reconstruct a live Fluid Infusion 6 component somewhere else: in another page, another application or another user’s session. It is implemented in FluidPTF.js . It transmits a component’s layers , its potentia and the contents of its live layer . The raw markdown underlying these docs is available on GitHub , suitable for direct ingestion by your friendly local neighbourhood intelligence.</description>
+    </item>
+    <item>
+      <title>Fluid Signals background</title>
+      <link>https://ponder.org.uk/docs/fluid-signals-background/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/fluid-signals-background/</guid>
+      <description>This page contains background information motivating the design of fluid.cell , the reactive primitive built to support Infusion 6, explaining how it differs from traditional reactive libraries. There are also API docs for fluid.cell and also a more extended essay explaining its goals in the context of a malleable substrate. I chose the name “cell”, rather than “signal” which is more common in the 2020s JavaScript reactive community, in honour of 3 traditions: Spreadsheet cells, which are the public’s primeval grounding in reactivity.</description>
+    </item>
+    <item>
+      <title>Fluid Signals API</title>
+      <link>https://ponder.org.uk/docs/fluid-signals/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/fluid-signals/</guid>
+      <description>This page documents the API of fluid.cell , the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra capabilities above traditional reactive libraries, and also a more extended essay explaining its goals in the context of a malleable substrate. The raw markdown underlying these docs is available on GitHub , suitable for direct ingestion by your friendly local neighbourhood intelligence.</description>
+    </item>
+    <item>
+      <title>Fluid tldraw integration</title>
+      <link>https://ponder.org.uk/docs/fluid-tldraw/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/fluid-tldraw/</guid>
+      <description>This page documents how Fluid Infusion 6 components are hosted as widgets on a tldraw canvas: how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how widgets are nested and composed. It builds on Fluid View (views, and sharing them between components) and on the Fluid Integration Language (layers, references, $linkage , $bindable ). The layers marking and receiving hosting, fluid.topLevelWidget and fluid.topLevelWidgetView , are part of the framework, in FluidView.js , and say nothing about tldraw.</description>
+    </item>
+    <item>
+      <title>Fluid View</title>
+      <link>https://ponder.org.uk/docs/fluid-view/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/fluid-view/</guid>
+      <description>This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, and the machinery of views. It builds on the Fluid Integration Language (layers, references, $compute , $method , $effect , $component ) and on fluid.cell (signals, effects, source tracking). The raw markdown underlying these docs is available on GitHub , suitable for direct ingestion by your friendly local neighbourhood intelligence.</description>
+    </item>
+    <item>
+      <title>Infusion</title>
+      <link>https://ponder.org.uk/infusion/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/infusion/</guid>
+      <description>Infusion, originally an initiative of the Fluid community since 2008, is a JavaScript library enabling the creation of flexible software. Versions 1 through 4 of Infusion, documented and hosted on the Fluid project’s site, were relatively conventionally structured libraries supporting the development of various UI widgets. Since 2024 a comprehensive rewrite of Infusion has been underway for version 6 based on reactive primitives throughout, structuring it as a software substrate constituting an integration domain .</description>
+    </item>
+    <item>
+      <title>About me</title>
+      <link>https://ponder.org.uk/page/about/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/page/about/</guid>
+      <description>After training in mathematics at Cambridge University, I devolved firstly into a Computer Science Diploma and then branched out into a PhD in Computer Vision at the Engineering Department’s Speech, Vision and Robotics group . After working in various startups in the Cambridge area I spent a while working at CARET , the Centre for Applied Research in Educational Technologies. Following that I spent 5 years as a Visiting Scholar at the University of Colorado at Boulder as a guest of Clayton Lewis .</description>
+    </item>
+    <item>
+      <title>My Projects</title>
+      <link>https://ponder.org.uk/projects/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/projects/</guid>
+      <description>Since 2022 I have worked for the Oregon Bee Atlas to help landowners understand plant-pollinator interactions and guide their land use decisions including evaluation of seed mixes, as well as supporting their volunteers' observation work. I have implemented the Melittoflora tool using a provisional version of the [Infusion](/infusion) framework which filters the project's data on wild bees by geographical, temporal and taxonomic filters and visualises the resulting interactions as a live, attractive bipartite ribbon graph.</description>
+    </item>
+    <item>
+      <title>A good function</title>
+      <link>https://ponder.org.uk/term/a-good-function/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/a-good-function/</guid>
+      <description>A good function is: A pure function, one without side-effects whose return value depends only on its arguments Available at a stable public name in a global namespace Performs work only linearly proportional to the size of its arguments (considered as structures) This notion was first described the Fluid wiki on this 2005 page which goes into some somewhat crusty historical detail for justification. The main upshot is that such a definition aids transparency — the ability to reason from effects to causes, and liveness — for the system to responsively adapt to the user’s gestures.</description>
+    </item>
+    <item>
+      <title>Cod reactivity</title>
+      <link>https://ponder.org.uk/term/cod-reactivity/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/cod-reactivity/</guid>
+      <description>Cod reactivity (by analogy with Cod Latin ) [1] is a kind of semi-literate adoption of reactivity, reflecting either deficiencies in the underlying reactive implementation or the user’s understanding of it. Typical of cod reactivity is the use of “broken graphs” — rather than being joined up into a coherent and connected overall application graph, the reactive graph is broken up into several formally isolated reactive islands. These are either self-standing little patches of reactivity, cranked manually by imperative updates to source signals, or else orchestrated by means of effects which bridge updates from one island to the other.</description>
+    </item>
+    <item>
+      <title>Disclosable Computing</title>
+      <link>https://ponder.org.uk/term/disclosable-computing/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/disclosable-computing/</guid>
+      <description>I argue that what the public really wants is disclosable computing . The first error committed by those trying to make the power of computing accessible to the wider public is to assume that they want or need this power. Backed up by (Rode et al, 2006) [1] I consider that what the public largely would like is some more or less coordinated access to some body of state. Whereas, the designer of a new kind of computational expression usually starts by seeing what form is taken by a recursive chestnut such as the Fibonacci numbers or the factorial function, as if these represented some kind of standard requirement rather than a certain kind of in-joke.</description>
+    </item>
+    <item>
+      <title>Divergence</title>
+      <link>https://ponder.org.uk/term/divergence/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/divergence/</guid>
+      <description>Defined in my 2016 paper , divergence represents any discrepancy between the runtime state of a program, and the state through which it can be authored. Typical sources of divergence include the program’s call stack , uninterpreted addresses within the heap , event listeners and typical sources of object representation such as vtables and the like. In a tradition of materialised programming, divergence should be minimised, in order to reduce the mental burden on those trying to visualise the effects of their edits.</description>
+    </item>
+    <item>
+      <title>End user programming</title>
+      <link>https://ponder.org.uk/term/end-user-programming/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/end-user-programming/</guid>
+      <description>End-user programming is a time-honoured discipline but end-user tools such as spreadsheets are held in contempt by specialised developers. The discipline actively works to raise barriers of abstraction and tooling to ensure that it is only accessible by specialists and what investment is made in end-user tools is done under the assumption, like Gabriel’s, that the gulf between those empowered to build software and those empowered to use it will stay unbridgeable.</description>
+    </item>
+    <item>
+      <title>Externalisability</title>
+      <link>https://ponder.org.uk/term/externalisability/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/externalisability/</guid>
+      <description>Defined in my 2018 paper , externalisability , together with its dual property of addressibility , represents an essential property of a substrate supporting open authorship. An externalisable design is one which is serialisable in a form in which every design element has more or less stable and legible coordinates. An addressible, externalised serialisation of a design could be in terms of a JSON document with human-readable keys, to be contrasted with relatively opaque kinds of serialisation such as Python’s pickling or Java’s object serialization systems, designed to round-trip arbitrary in-memory structures allocated in a general-purpose programming language.</description>
+    </item>
+    <item>
+      <title>Glitch</title>
+      <link>https://ponder.org.uk/term/glitch/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/glitch/</guid>
+      <description>The term glitch in the sense of a reactive miscomputation first entered the literature in Cooper &amp;amp; Krishnamurthi’s 2006 FrTime paper , “Embedding Dynamic Dataflow in a Call-by-Value Language”. They define it as where a signal is recomputed before all of its subordinate signals are up-to-date This definition appears helpful and clearcut, but the more one thinks about how to operationalise this definition in a particular context, and verify that a system is rigorously glitch-free, the less clear it seems.</description>
+    </item>
+    <item>
+      <title>Habitable</title>
+      <link>https://ponder.org.uk/term/habitable/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/habitable/</guid>
+      <description>Habitability as applied to software technology is a term coined by Richard Gabriel in his 1993 article “Habitability and Piecemeal Growth”. You can see part of this article reproduced on Kartik Agaram’s excellent blog , as republished in Gabriel’s book Patterns of Software which I hugely recommend – I consider Gabriel the finest writer on software technology of his generation. Connecting this idea with Christopher Alexander’s idea of organic growth in the context of the architecture of buildings, Gabriel says Habitability is the characteristic of source code that enables programmers, coders, bug-fixers, and people coming to the code later in its life to understand its construction and intentions and to change it comfortably and confidently.</description>
+    </item>
+    <item>
+      <title>Integration Domain</title>
+      <link>https://ponder.org.uk/term/integration-domain/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/integration-domain/</guid>
+      <description>An integration domain is defined in Stephen Kell’s 2009 paper The Mythical Matched Modules as a domain where languages and tools are specialised towards composition of software, and so do not resemble conventional languages relations are expressed between runtime values, predicated on the context in which they occur In addition through Stephen’s principle of interface hiding , dependencies do not explicitly manifest themselves in the domain except through the contextualised values which the domain puts into relation.</description>
+    </item>
+    <item>
+      <title>Lithification</title>
+      <link>https://ponder.org.uk/term/lithification/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/lithification/</guid>
+      <description>The term lithification in software development was coined by r0ml (Robert Lefkowitz) in his incendiary 2017 talk Keeping Linux Great which is written up further in his equally trenchant article Giving up on Open Source Software . It describes a mode of software reuse that appears entirely anti-religious to anyone with a traditional programming education, of simply appropriating the source code for any library or implementation one needs, incorporating it into one’s own codebase and then bashing on it.</description>
+    </item>
+    <item>
+      <title>Substrate</title>
+      <link>https://ponder.org.uk/term/substrate/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/substrate/</guid>
+      <description>A substrate is a kind of self-sufficient model or material for the construction of software. Jonathan Edwards ’ definition is a great starting point comprising the following points: A complete and self-sufficient programming system Persistent code &amp;amp; data store Direct-manipulation UI on that state Live programming Programming &amp;amp; using are on a spectrum, not distinct Conceptually unified — not a “stack” Summarized as a slogan: “A PL, DB, &amp;amp; WYSIWYG document unified together.”</description>
+    </item>
+    <item>
+      <title>Unavailable Value</title>
+      <link>https://ponder.org.uk/term/unavailable-value/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/term/unavailable-value/</guid>
+      <description>An unavailable value is a special payload to a reactive system unifying handling of errors and asynchrony under a common mechanism responding to “design incompletion for any reason”. I named a special reactive payload as an “unavailable value” indicating that the design was incomplete either as a result of depending on pending I/O or else on a design/syntax error in the system. More docs on unavailable values in the modern fluid.cell system need to be written here, but there is some information in the API docs for fluid.cell.computed and fluid.cell.effect .</description>
+    </item>
+  </channel>
+</rss>

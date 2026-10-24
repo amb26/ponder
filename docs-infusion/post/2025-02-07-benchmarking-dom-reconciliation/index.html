@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="en" id="fl-id-site-11.documents.31" itemtype="http://schema.org/WebPage" itemscope><head id="fl-id-site-11.documents.31.head"><meta charset="utf-8"><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"><title>Benchmarking DOM reconciliation algorithms - Antranig Basman</title><meta content="Since the Infusion 6 renderer is close to being a reality, it is time to understand the characteristics of some of the various DOM reconciliation algorithms out there. Could we do…" name="description"><meta content="Antranig Basman" name="author"><meta content="Benchmarking DOM reconciliation algorithms" property="og:title"><meta content="Since the Infusion 6 renderer is close to being a reality, it is time to understand the characteristics of some of the various DOM reconciliation algorithms out there. Could we do…" property="og:description"><meta content="https://ponder.org.uk/img/pond.jpg" property="og:image"><meta content="https://ponder.org.uk/post/2025-02-07-benchmarking-dom-reconciliation/" property="og:url"><meta content="website" property="og:type"><meta content="Antranig Basman" property="og:site_name"><link href="https://ponder.org.uk/img/favicon.ico" type="image/x-icon" rel="icon"><meta content="Infusion 6" name="generator"><link title="Antranig Basman" href="https://ponder.org.uk/index.xml" type="application/rss+xml" rel="alternate"><link href="../../css/katex.min.css" id="fl-id-site-11.documents.31.head.stylesheetTags.katex" rel="stylesheet"><link href="../../fontawesome/css/all.min.css" id="fl-id-site-11.documents.31.head.stylesheetTags.fontawesome" rel="stylesheet"><link href="../../css/bootstrap.min.css" id="fl-id-site-11.documents.31.head.stylesheetTags.bootstrap" rel="stylesheet"><link href="../../css/main.css" id="fl-id-site-11.documents.31.head.stylesheetTags.main" rel="stylesheet"><link href="../../css/highlight.min.css" id="fl-id-site-11.documents.31.head.stylesheetTags.syntax" rel="stylesheet"><link href="../../css/codeblock.css" id="fl-id-site-11.documents.31.head.stylesheetTags.codeblock" rel="stylesheet"><link href="../../css/ponder.css" id="fl-id-site-11.documents.31.head.stylesheetTags.ponder" rel="stylesheet"><script src="../../js/ponder.js" id="fl-id-site-11.documents.31.head.scriptTags.ponder"></script></head><body class="post"><nav class="navbar navbar-default navbar-fixed-top navbar-custom" id="fl-id-site-11.documents.31.navbar"><div class="container-fluid"><div class="navbar-ponder"><a href="../../" class="navbar-ponder-brand">Antranig Basman</a><button data-target="#main-navbar" data-toggle="collapse" class="navbar-toggle" type="button"><span class="sr-only">Toggle navigation</span><svg xmlns="http://www.w3.org/2000/svg" stroke="#888" viewBox="0 0 24 24" height="36" width="36"><path stroke-linecap="round" stroke-width="1.5" d="M20 7L4 7" /><path stroke-linecap="round" stroke-width="1.5" d="M20 12L4 12" /><path stroke-linecap="round" stroke-width="1.5" d="M20 17L4 17" /></svg></button><div id="main-navbar" class="collapse navbar-collapse"><ul id="fl-id-site-11.documents.31.navbar.items" class="nav navbar-nav navbar-right"><li id="fl-id-site-11.documents.31.navbar.items.0"><a href="../../post" title="Posts">Posts</a></li><li id="fl-id-site-11.documents.31.navbar.items.1"><a href="../../wip" title="WiP">WiP</a></li><li id="fl-id-site-11.documents.31.navbar.items.2"><a href="../../page/about/" title="About">About</a></li><li id="fl-id-site-11.documents.31.navbar.items.3" class="navlinks-container"><a href="../../docs" class="navlinks-parent">Docs</a><div id="fl-id-site-11.documents.31.navbar.items.3.children" class="navlinks-children"><a href="../../docs/fluid-signals">Fluid Signals</a><a href="../../docs/fluid-integration-language">Fluid Integration Language</a><a href="../../docs/fluid-view">Fluid View</a><a href="../../docs/fluid-ptf">Fluid PTF</a><a href="../../docs/fluid-tldraw">Fluid tldraw integration</a></div></li><li id="fl-id-site-11.documents.31.navbar.items.4"><a href="../../communities" title="Communities">Communities</a></li><li id="fl-id-site-11.documents.31.navbar.items.5"><a href="../../projects" title="Projects">Projects</a></li><li id="fl-id-site-11.documents.31.navbar.items.6"><a href="../../term" title="Terms">Terms</a></li></ul></div></div></div></nav><header id="fl-id-site-11.documents.31.header" class="header-section"><div class="intro-header no-img"><div class="container"><div class="header-row"><div class="post-heading ponder-heading"><h1 class="ponder-title">Benchmarking DOM reconciliation algorithms<span class="post-meta" id="fl-id-site-11.documents.31.header.postMeta"><span class="ponder-date"> – February 7, 2025</span></span></h1></div></div></div></div></header><div role="main" id="fl-id-site-11.documents.31.main"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article class="blog-post" role="main"><div id="fl-id-site-11.documents.31.main.content"><p>Since the <a href="../../infusion">Infusion 6</a> renderer is close to being a reality, it is time to understand the characteristics
+of some of the various DOM reconciliation algorithms out there.</p>
+<h2 id="could-we-do-without-a-virtual-dom-entirely">Could we do without a virtual DOM entirely?</h2>
+<p>To start with is the question of whether we even really
+want one at all — the classic Svelte <a href="https://svelte.dev/blog/virtual-dom-is-pure-overhead">Virtual DOM is pure overhead</a>
+post has been though its various hype cycles but 7 years later the majority of frameworks out there still have one so the
+consequences are clearly not as clear-cut as the argument would have it.</p>
+<p>On the one hand, after digging in a bit, I consider that Svelte for all its power and efficiency is not a model that
+we want to follow. Svelte’s <a href="https://github.com/sveltejs/svelte/issues/4971">issue 4971</a> reports that it has no model
+for taking control of rendering in a framework-sympathetic way — “render functions” are not implemented and never
+will be. The issue was curtly closed with the note “The concept of render functions is anti-Svelte.” In any case,
+the presence of an obligate compiler in Svelte’s tool chain puts it outside our scope – I’m only interested in infrastructure
+that can be idiomatically delivered in the browser as befits the notion of a <a href="../../term/substrate">substrate</a>.</p>
+<p>Central to my notion of Infusion’s role and that of an <a href="../../term/integration-domain">integration domain</a> in general is that
+its abstractions need to be <em>permeable</em>. This is a system designed to support work on real projects, and as such
+idiomatic access should not be cut off to underlying primitives such as the DOM where these are required
+to address integration concerns, even if this compromises performance in some cases.</p>
+<p>That said, during the <a href="https://github.com/amb26/new-renderer-demo">2021-2022 era explorations</a> on the then “new renderer” it
+became apparent that given sufficient declarative insight into what DOM manipulations were encoded, we could indeed do without
+a virtual DOM. We see vestiges of this kind of approach in preact’s “cut-through” to allow for
+<a href="https://preactjs.com/guide/v10/signals/#rendering-optimizations">rendering optimization</a> when passing a signal as the
+text of a DOM node (and in preact 10.x, on an attribute).</p>
+<p>But this won’t deal with cases where apparently unrelated component templates are used to update a component in-place
+which in practice share a lot of node structure. The important concerns:</p>
+<ul>
+<li>Most important is to avoid losing browser state (e.g. focus, input state) on DOM nodes that are involved in an adaptation</li>
+<li>The performance and garbage impact of unnecessarily tearing down and replacing DOM nodes is significant and should be avoided</li>
+</ul>
+<p>We are <em>moderately</em> concerned with performance but not to the extent seen in the
+<a href="https://github.com/krausest/js-framework-benchmark">Krausest</a> JS benchmarks which test intensive cases involving thousands
+of DOM nodes in a flat table structure which are unrealistic for a typical user interface, let alone that exposed from a
+substrate.</p>
+<h2 id="benchmarks-for-preact-vs-vue-vs-innerhtml">Benchmarks for Preact vs Vue vs InnerHTML</h2>
+<p>A further issue with Svelte’s lack of support for arbitrary render functions is that this makes it hard to test
+the framework’s rendering strategies on a level playing field with that of other frameworks without involving a lot of
+other variables due to implementing a component design.</p>
+<img style="float:left; margin-right:50px" width="250px" src="../../img/bees-all.png">
+<p>The benchmark I chose is drawn from a manipulation of the Oregon Bee Atlas <a href="../../projects#melittoflora">Melittoflora</a> tool
+by selecting the bee records recorded in June and observing the change in the DOM structure of the bee taxonomic
+tree shown at the bottom left of the application, when unfolded to genus level.
+For performance reasons and because current <a href="../../infusion">Infusion</a> is not up to
+doing any better, this is currently rendered through string-bashing and assigning to innerHTML of the checklist pane.</p>
+<p>The benchmark <a href="https://github.com/fluid-project/infusion-6/blob/main/tests/manual-tests/framework/js/render-perf-test.js">repeatedly flips</a>
+between these two panes - this is about 30K of markup, alternating between 541 and 334
+DOM nodes, of which it seem about 249 nodes can be reused between the views.</p>
+<p>The results are pretty interesting. To start with, both Vue and Preact are 5x slower than
+the innerHTML strategy. This is of course not a valid comparison since the innerHTML strategy is unusable as a result
+of destroying the state of every DOM node, but this likely represents a kind of lower bound on the short-run cost of updating
+this amount of DOM. However, as the test runs longer and longer, interesting differences between the systems start
+to build up. We see that Preact’s approach, whilst implemented <a href="https://github.com/preactjs/preact/blob/main/src/diff/children.js">fairly minimally</a>
+seems over time to be generating more garbage than Vue.</p>
+<img width="600px" src="../../img/render-timings.png">
+<p>In fact after 8 iterations Vue has roughly pulled level with the increasing cost of the innerHTML strategy suggesting
+that its throwing the entire set of 541 DOM nodes on the heap on every render is starting to take a toll.</p>
+<p>You can view the raw timings in this <a href="https://docs.google.com/spreadsheets/d/17MDrcxcPgPNvnDX0MQXBEkzQNbkrishsDf3BRR6oCjA/edit?usp=sharing">Google Sheet</a>.</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>The frameworks were a little disappointing in their performance, and it has to be borne in mind that another source
+of inaccuracy in the benchmarks is that we neglect the costs of any component allocation internal to the frameworks
+should we try to use their component strategies for this rendering. Instead we simply read the
+<a href="https://github.com/fluid-project/infusion-6/blob/main/tests/manual-tests/framework/testData/checklist-full.html">DOM markup</a>
+from the
+filesystem and convert this into the frameworks’ respective hyperscript render functions. However it was encouraging
+that Vue’s somewhat “mongrel” strategy did so well in the long run since this suggests that there is no single
+“brilliant idea” to be had in this idea, but simply a patchwork terrain of plausible rendering scenarios to be
+tweaked against.</p>
+<p>I spent a fair while trying to reuse primitives from within Vue’s rendering pipeline for Infusion but found that they
+were too entangled with other aspects of its component system that we don’t want to support. In addition it always
+renders asynchronously once a batch of component updates have fully resolved which is going to be an awkward
+workflow to track.</p>
+<p>In practice I’ve ended up with an extremely simplistic “good enough for now” strategy which doesn’t even bother to keep the old copy of the virtual
+DOM around and simply diffs the current tree against the real DOM. This was based on a misunderstanding of a description of
+<a href="https://mithril.js.org/">Mithril’s</a>
+<a href="https://github.com/MithrilJS/mithril.js/blob/main/render/render.js">diffing algorithm</a>
+when when I look at it closely is actually just like all the others and diffs two virtual DOMs with each other.</p>
+<p>In developing this I cribbed from two very helpful “make your own virtual DOM” articles, firstly YCM Jason’s
+<a href="https://dev.to/ycmjason/building-a-simple-virtual-dom-from-scratch-3d05">Building a Simple Virtual DOM from Scratch</a>
+and secondly Marcelo Lazaroni’s <a href="https://lazamar.github.io/virtual-dom/">A virtual DOM in 200 lines of Javascript</a>.
+Both of these are somewhat puzzlingly
+structured via an intermediate “patch” structure which I can’t imagine could likely be applied a 2nd time and so represents
+undesirable garbage – the “real world” reconciliation algorithms apply mutations as they are found.</p>
+<p>The details are not critical here and I just need something straightforward without utterly terrible
+performance that I can understand at a pinch when it goes wrong. In practice even in this most demanding case
+less than 1% of the compute time of the Melittoflora app is actually burned in manipulating the DOM (most
+of the rest goes in actually filtering and binning the 100k records of bee interactions). It’s a pretty peculiar
+app that has an UI so complex that it spends a substantial amount of time in the 2020s updating its DOM, which makes
+the Krausest benchmarks so idiosyncratic and I think mostly ignored by people making technology choices.</p>
+<h2 id="what-dom-mutations-are-idiomatic">What DOM mutations are idiomatic?</h2>
+<p>There’s something to think over regarding what kinds of DOM mutations are indeed going to be
+idiomatic for some class of apps. In
+this <a href="https://www.reddit.com/r/javascript/comments/ckpdxk/long_live_the_virtual_dom/">Reddit thread</a> there is an interesting tussle
+between the author of a <a href="https://github.com/gactjs/gact/blob/master/docs/long-live-the-virtual-dom.md">peculiar and short-lived rant named GACT</a>
+about Virtual DOM strategies and the Svelte framework author Rich Harris. The GACT author correctly points out that using a pure virtual DOM
+strategy is wasteful in the case of a single leaf update, and that a virtual DOM reconciliation algorithm might be
+expected to be \( O(n^4) \) in the general case. However, the first observation is invalidated by the use of a signals
+library such as Vue or preact-signals to transmit data updates directly to leaves in the DOM. Rich responds to the second objection
+by remarking</p>
+<blockquote>
+<p>You’re describing hypothetical performance improvements for situations that <em>simply don’t obtain in the real world</em>.
+<code>&lt;div&gt;[contents]&lt;/div&gt; &lt;--&gt; [contents]</code> just isn’t a category of virtual DOM change that’s worth prioritising.</p>
+</blockquote>
+<p>What’s interesting however is that this is just the kind of DOM change that the UI gesture converting the
+“user view” of our substrate into its “design view” is likely to trigger. At this point one expects the plain runtime
+version of the UI to get hoisted into an editable one which might well involve a lot of nodes being hoisted deeper
+into the tree – and then being pushed back again once the edit is done.
+We shouldn’t get too invested in a model of reconciliation which puts this out of scope.</p>
+<p>A final observation about what DOM updates are worth optimising for is suggested by a look at the
+<a href="https://github.com/MithrilJS/mithril.js/blob/main/render/render.js#L172-L819">core of Mithril’s diff algorithm</a> – this is
+bulky and includes a 120-line function implementing an <a href="https://en.wikipedia.org/wiki/Longest_common_subsequence">LCS</a>
+algorithm which in turn has been lifted from the <a href="https://github.com/localvoid/ivi">ivi</a> “declarative Web UI library”.
+I view this as founded on a kind of “pun” – because this algorithm is named “diff” it seems attractive to
+base it on the classic algorithm underlying the UNIX utility of that name designed to patch update to large linear text files.
+My feeling is that this kind of update is pretty unidiomatic in the DOM — a long expanse of nodes sharing a common
+parent in which just a few of them have been edited or rearranged — and it certainly doesn’t match my actual case
+nor the ones I see upcoming. And to put things in perspective, Mithril’s diff implementation in this
+<a href="https://mithril.js.org/">small framework</a> is larger than preact’s entire framework. That said, I find preact’s
+intensive focus on bundle size at the expense of virtually every other consideration is unbalanced – for example, see <a href="https://github.com/preactjs/preact/issues/4065">this thread</a>
+on the disergonomics of preact’s single-character mangled names that everyone debugging or adapting their framework needs
+to tangle with. But on the other hand the amount of effort
+frameworks like Mithril and ivi focus on a probably uncommon case, likely because a popular and well-understood
+algorithm is available for it, also feels unbalanced.</p>
+</div><div id="fl-id-site-11.documents.31.main.share"><hr><section id="social-share"><div class="list-inline footer-links"><div aria-hidden="true" class="share-box"><ul class="share"><li><a href="https://bsky.app/intent/compose?text=Just%20reading%20a%20post%20called%20Benchmarking%20DOM%20reconciliation%20algorithms%20on%20Antranig%20Basman's%20blog%3A%20https%3A%2F%2Fponder.org.uk%2Fpost%2F2025-02-07-benchmarking-dom-reconciliation%2F" title="Share on BlueSky" target="_blank"><i class="fab fa-fw fa-bluesky"></i></a></li><li><a href="https://twitter.com/share?url=https%3A%2F%2Fponder.org.uk%2Fpost%2F2025-02-07-benchmarking-dom-reconciliation%2F&text=Benchmarking%20DOM%20reconciliation%20algorithms&via=amb26ponder" title="Share on Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fponder.org.uk%2Fpost%2F2025-02-07-benchmarking-dom-reconciliation%2F" title="Share on Facebook" target="_blank"><i class="fab fa-facebook"></i></a></li><li><a href="https://reddit.com/submit?url=https%3A%2F%2Fponder.org.uk%2Fpost%2F2025-02-07-benchmarking-dom-reconciliation%2F&title=Benchmarking%20DOM%20reconciliation%20algorithms" title="Share on Reddit" target="_blank"><i class="fab fa-reddit"></i></a></li><li><a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fponder.org.uk%2Fpost%2F2025-02-07-benchmarking-dom-reconciliation%2F&title=Benchmarking%20DOM%20reconciliation%20algorithms" title="Share on LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a></li></ul></div></div></section></div></article><ul id="fl-id-site-11.documents.31.main.pager" class="pager blog-pager"><li class="next"><a title="On Development Speed" href="../../post/2025-03-14-development-speed/" data-placement="top" data-toggle="tooltip">Next Post →</a></li></ul><script data-lang="en" data-category-id="DIC_kwDOOKllGM4CvhAS" data-category="Announcements" data-repo-id="R_kgDOOKllGA" data-repo="amb26/ponder" id="fl-id-site-11.documents.31.main.comments" async crossorigin="anonymous" data-theme="light" data-input-position="bottom" data-emit-metadata="0" data-reactions-enabled="0" data-strict="0" data-mapping="pathname" src="https://giscus.app/client.js"></script></div></div></div><footer id="fl-id-site-11.documents.31.footer"><div class="container"><div class="row ponder-credits-row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p class="credits copyright text-muted"><a href="../../">Antranig Basman</a>
+                        &#160;©
+                        2026
+                    </p><p class="credits theme-by text-muted"><a href="https://github.com/fluid-project/infusion-6">Infusion 6</a> powered &#160;•&#160;
+                        Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from
+                        <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &#160;•&#160;
+                        further <a href="../../term/lithification">lithified</a> by Boz
+                    </p></div></div></div></footer><script defer src="../../js/katex.min.js" id="fl-id-site-11.documents.31.footerScriptTags.katex"></script><script onload="renderMathInElement(document.body);" defer src="../../js/auto-render.min.js" id="fl-id-site-11.documents.31.footerScriptTags.katexAutoRender"></script><script src="../../js/highlight.min.js" id="fl-id-site-11.documents.31.footerScriptTags.hljs"></script><script id="fl-id-site-11.documents.31.footerScriptTags.hljsInit">hljs.initHighlightingOnLoad();</script></body></html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docs on Antranig Basman</title>
+    <link>https://ponder.org.uk/docs/</link>
+    <description>Recent content in docs on Antranig Basman</description>
+    <generator>Infusion 6</generator>
+    <language>en</language>
+    <managingEditor>amb26web@ponder.org.uk (Antranig Basman)</managingEditor>
+    <webMaster>amb26web@ponder.org.uk (Antranig Basman)</webMaster>
+    <atom:link href="https://ponder.org.uk/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fluid Integration Language</title>
+      <link>https://ponder.org.uk/docs/fluid-integration-language/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/fluid-integration-language/</guid>
+      <description>This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6 components are defined, composed and wired together as an integration domain . It is implemented in FluidIL.js on top of the reactive primitive fluid.cell , whose semantics (signals, effects, unavailable values , deferred stabilization) it inherits throughout. The raw markdown underlying these docs is available on GitHub , suitable for direct ingestion by your friendly local neighbourhood intelligence.</description>
+    </item>
+    <item>
+      <title>Potentia Transmission Format</title>
+      <link>https://ponder.org.uk/docs/fluid-ptf/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/fluid-ptf/</guid>
+      <description>This page documents the Potentia Transmission Format (PTF), a plain-text document format which captures everything required to reconstruct a live Fluid Infusion 6 component somewhere else: in another page, another application or another user’s session. It is implemented in FluidPTF.js . It transmits a component’s layers , its potentia and the contents of its live layer . The raw markdown underlying these docs is available on GitHub , suitable for direct ingestion by your friendly local neighbourhood intelligence.</description>
+    </item>
+    <item>
+      <title>Fluid Signals background</title>
+      <link>https://ponder.org.uk/docs/fluid-signals-background/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/fluid-signals-background/</guid>
+      <description>This page contains background information motivating the design of fluid.cell , the reactive primitive built to support Infusion 6, explaining how it differs from traditional reactive libraries. There are also API docs for fluid.cell and also a more extended essay explaining its goals in the context of a malleable substrate. I chose the name “cell”, rather than “signal” which is more common in the 2020s JavaScript reactive community, in honour of 3 traditions: Spreadsheet cells, which are the public’s primeval grounding in reactivity.</description>
+    </item>
+    <item>
+      <title>Fluid Signals API</title>
+      <link>https://ponder.org.uk/docs/fluid-signals/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/fluid-signals/</guid>
+      <description>This page documents the API of fluid.cell , the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra capabilities above traditional reactive libraries, and also a more extended essay explaining its goals in the context of a malleable substrate. The raw markdown underlying these docs is available on GitHub , suitable for direct ingestion by your friendly local neighbourhood intelligence.</description>
+    </item>
+    <item>
+      <title>Fluid tldraw integration</title>
+      <link>https://ponder.org.uk/docs/fluid-tldraw/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/fluid-tldraw/</guid>
+      <description>This page documents how Fluid Infusion 6 components are hosted as widgets on a tldraw canvas: how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how widgets are nested and composed. It builds on Fluid View (views, and sharing them between components) and on the Fluid Integration Language (layers, references, $linkage , $bindable ). The layers marking and receiving hosting, fluid.topLevelWidget and fluid.topLevelWidgetView , are part of the framework, in FluidView.js , and say nothing about tldraw.</description>
+    </item>
+    <item>
+      <title>Fluid View</title>
+      <link>https://ponder.org.uk/docs/fluid-view/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/fluid-view/</guid>
+      <description>This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, and the machinery of views. It builds on the Fluid Integration Language (layers, references, $compute , $method , $effect , $component ) and on fluid.cell (signals, effects, source tracking). The raw markdown underlying these docs is available on GitHub , suitable for direct ingestion by your friendly local neighbourhood intelligence.</description>
+    </item>
+  </channel>
+</rss>

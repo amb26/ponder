@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="en" id="fl-id-site-11.documents.13" itemtype="http://schema.org/WebPage" itemscope><head id="fl-id-site-11.documents.13.head"><meta charset="utf-8"><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"><title>Understanding Reactivity - Antranig Basman</title><meta content="In late 2023, staring at the “flag” test case in preact-signals that I describe in my Archaeology of Glitches posting, I realised something decisive: reactive systems can provide …" name="description"><meta content="Antranig Basman" name="author"><meta content="Understanding Reactivity" property="og:title"><meta content="In late 2023, staring at the “flag” test case in preact-signals that I describe in my Archaeology of Glitches posting, I realised something decisive: reactive systems can provide …" property="og:description"><meta content="https://ponder.org.uk/img/pond.jpg" property="og:image"><meta content="https://ponder.org.uk/wip/2025-12-15-understanding-reactivity/" property="og:url"><meta content="website" property="og:type"><meta content="Antranig Basman" property="og:site_name"><link href="https://ponder.org.uk/img/favicon.ico" type="image/x-icon" rel="icon"><meta content="Infusion 6" name="generator"><link title="Antranig Basman" href="https://ponder.org.uk/index.xml" type="application/rss+xml" rel="alternate"><link href="../../css/katex.min.css" id="fl-id-site-11.documents.13.head.stylesheetTags.katex" rel="stylesheet"><link href="../../fontawesome/css/all.min.css" id="fl-id-site-11.documents.13.head.stylesheetTags.fontawesome" rel="stylesheet"><link href="../../css/bootstrap.min.css" id="fl-id-site-11.documents.13.head.stylesheetTags.bootstrap" rel="stylesheet"><link href="../../css/main.css" id="fl-id-site-11.documents.13.head.stylesheetTags.main" rel="stylesheet"><link href="../../css/highlight.min.css" id="fl-id-site-11.documents.13.head.stylesheetTags.syntax" rel="stylesheet"><link href="../../css/codeblock.css" id="fl-id-site-11.documents.13.head.stylesheetTags.codeblock" rel="stylesheet"><link href="../../css/ponder.css" id="fl-id-site-11.documents.13.head.stylesheetTags.ponder" rel="stylesheet"><script src="../../js/ponder.js" id="fl-id-site-11.documents.13.head.scriptTags.ponder"></script></head><body class="post-single"><nav class="navbar navbar-default navbar-fixed-top navbar-custom" id="fl-id-site-11.documents.13.navbar"><div class="container-fluid"><div class="navbar-ponder"><a href="../../" class="navbar-ponder-brand">Antranig Basman</a><button data-target="#main-navbar" data-toggle="collapse" class="navbar-toggle" type="button"><span class="sr-only">Toggle navigation</span><svg xmlns="http://www.w3.org/2000/svg" stroke="#888" viewBox="0 0 24 24" height="36" width="36"><path stroke-linecap="round" stroke-width="1.5" d="M20 7L4 7" /><path stroke-linecap="round" stroke-width="1.5" d="M20 12L4 12" /><path stroke-linecap="round" stroke-width="1.5" d="M20 17L4 17" /></svg></button><div id="main-navbar" class="collapse navbar-collapse"><ul id="fl-id-site-11.documents.13.navbar.items" class="nav navbar-nav navbar-right"><li id="fl-id-site-11.documents.13.navbar.items.0"><a href="../../post" title="Posts">Posts</a></li><li id="fl-id-site-11.documents.13.navbar.items.1"><a href="../../wip" title="WiP">WiP</a></li><li id="fl-id-site-11.documents.13.navbar.items.2"><a href="../../page/about/" title="About">About</a></li><li id="fl-id-site-11.documents.13.navbar.items.3" class="navlinks-container"><a href="../../docs" class="navlinks-parent">Docs</a><div id="fl-id-site-11.documents.13.navbar.items.3.children" class="navlinks-children"><a href="../../docs/fluid-signals">Fluid Signals</a><a href="../../docs/fluid-integration-language">Fluid Integration Language</a><a href="../../docs/fluid-view">Fluid View</a><a href="../../docs/fluid-ptf">Fluid PTF</a><a href="../../docs/fluid-tldraw">Fluid tldraw integration</a></div></li><li id="fl-id-site-11.documents.13.navbar.items.4"><a href="../../communities" title="Communities">Communities</a></li><li id="fl-id-site-11.documents.13.navbar.items.5"><a href="../../projects" title="Projects">Projects</a></li><li id="fl-id-site-11.documents.13.navbar.items.6"><a href="../../term" title="Terms">Terms</a></li></ul></div></div></div></nav><header id="fl-id-site-11.documents.13.header" class="header-section"><div class="intro-header no-img"><div class="container"><div class="header-row"><div class="post-single-heading ponder-heading"><h1 class="ponder-title">Understanding Reactivity</h1><hr class="small"></div></div></div></div></header><div role="main" id="fl-id-site-11.documents.13.main"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article class="blog-post" role="main"><div id="fl-id-site-11.documents.13.main.content"><p>In late 2023, staring at the “flag” test case in preact-signals that I describe in my
+<a href="../../post/2025-07-01-archaeology-of-glitches">Archaeology of Glitches</a> posting, I realised something decisive:
+reactive systems can provide a strong, structural guarantee of data consistency.
+Given that, it became clear that Infusion could be reworked as a fully reactive system,
+rather than the opportunistic hybrid I had been building through the 2010s.</p>
+<p>This post will notice that the apparent diversity of reactive systems masks a simple unifying principle, related to
+a principle I had already been following in Infusion’s development.</p>
+<h3 id="attractions-of-preact-signals">Attractions of preact-signals</h3>
+<p>preact-signals was an attractive vehicle for several reasons. Firstly there was the really small, dependence-free
+and pretty widely-used codebase that promised that it could be fairly readily understood, but also was the fact that
+it was provably portable and useful in contexts quite different from its home integration with Preact. The development community,
+though somewhat inflexibly-minded, were pretty non-ideological and happy to see integration with minimal
+rendering engines such as <a href="https://github.com/developit/htm">htm templating</a>, and then of course there was the
+very comforting set of test cases with their attractive ASCII art topologies which convinced me that there was
+an important property of consistency here, and preact-signals definitely enjoyed it.</p>
+<p>However, <a href="../../wip/2025-09-26-this-weeks-reactive-chats/#ergonomic-problems-with-preact-signals">several downsides</a>
+to the use of preact-signals did slow my work over the last year, as well as
+producing a persistent anxiety that I was still missing something fundamental about reactivity itself.</p>
+<h3 id="apparent-pluralism-of-reactivity">Apparent pluralism of reactivity</h3>
+<p>Over this period I returned to Milo Mighdoll’s admirable <a href="https://milomg.dev/2022-12-01/reactivity">Super Charging
+Fine-Grained Reactivity</a> illustration in several different waves. I reproduce
+one of his crucial diagrams here to focus our minds:</p>
+<p><img alt="A classic Milo diagram" src="../../img/milo-reactivity.svg"></p>
+<p>Milo’s treatment was admirably clear. What troubled me was not his explanation, but the sheer plurality of algorithms
+it seemed to sit alongside. In this confused space, it seemed likely there were several other aspects of preact-signal’s behaviour that I was likely
+relying on without there being necessarily tests which validated them, that kept me from digging in too much further.</p>
+<p>Over the period I returned to this page from time to time, especially in a big wave this summer when dear <a href="https://chee.party/">Rabbits</a>,
+who has far deeper reading and understanding of reactivity than me, pointed me again to Milo and Ryan Carniato’s writings, as well as
+other related material such as Jane Street’s <a href="https://www.janestreet.com/tech-talks/seven-implementations-of-incremental/">Seven Implementations of Incremental</a>.
+This only raised my unease, since the furious complexity of these systems, combined with the lack of obvious unifying principles,
+made it difficult to see reactivity as a single, well-defined phenomenon rather than a loose collection of techniques.
+I began to wonder how much of this landscape I would actually need to understand in order to make progress.</p>
+<h3 id="why-was-i-notified">Why was I notified?</h3>
+<p>The beginning of unjamming myself cognitively came alongside a <a href="https://claude.ai/share/d67d50cc-5e30-414a-9d8c-d9e91acb6b99">Claude conversation</a>
+where I asked it if it could indeed, given the information available in preact-signals’ runtime, actually implement
+a <a href="../../docs/fluid-signals/#fluidfindcausecell"><code>findCause</code></a> utility that could determine why a particular update has occurred.
+What unsettled me most was not the complexity of preact-signals’ internals, but a recurring uncertainty: although I could
+often see what I had notionally done to trigger an effect, I often could not tell what the connecting reason was.</p>
+<p>Here’s the kind of <code>endBatch</code> stack trace one is very frequently staring at inside an effect. Certainly one knows one has done <em>something</em>
+to provoke the effect by calling <code>set</code> a few levels down but in a non-trivial design the actual relationship can be
+far from clear:</p>
+<div style="max-width:800px" id="fl-id-site-11.documents.13.main.content.island-1" class="box" data-caption="The kind of stack one is often staring at" data-width="800px" data-src="/img/batchstack.png" fluid-layers="ponder.shortcode.figure"><figure itemtype="http://schema.org/ImageObject" itemscope itemprop="associatedMedia"><div class="img"><img alt="The kind of stack one is often staring at" src="../../img/batchstack.png" itemprop="thumbnail"></div><a href="../../img/batchstack.png" itemprop="contentUrl"></a><figcaption><p>The kind of stack one is often staring at</p></figcaption></figure></div>
+<p>Whilst I didn’t trust the actual AI reasoning much further than I could throw it, it was convincing enough to suggest
+to me that the question really might not be answerable. This brought me back to Milo’s explanation and diagram above with a
+vengeance. This led to a clear realisation: commodity signal systems are not designed to explain why an update occurred
+— only to ensure that it propagates correctly.</p>
+<p>The virtue of the extreme simplicity of Milo’s own
+reactivity and explanation suddenly leaped out at me, because it was in his system that the reason the question couldn’t
+be answered was as clear as possible. When an originally updated node has been flipped from
+dirty to clean, that is the end of one’s acquaintance with it, and once one has returned from the stack frame where
+this is done, there isn’t enough information in the system to explain the cause.</p>
+<p>Being cured of the fear that there was something fundamental I didn’t understand about reactive systems because they
+couldn’t answer a question they hadn’t kept records to answer, simultaneously made me understand the essential
+unity of these systems and how this failure of record-keeping was actually a pretty inessential part of their
+algorithm that could be fixed pretty easily.</p>
+<h3 id="milos-golden-malleability">Milo’s golden malleability</h3>
+<p>As I started to adapt Milo’s code, I found it was harbouring a golden capability I’d completely missed when I’d
+looked at it cursorily. Here’s the <code>set</code> function for reactively’s <code>Reactive&lt;T&gt;</code>:</p>
+<pre><code class="language-typescript">set(fnOrValue: T | (() =&gt; T)): void {
+  if (typeof fnOrValue === "function") {
+    const fn = fnOrValue as () =&gt; T;
+    if (fn !== this.fn) {
+        this.stale(CacheDirty);
+    }
+    this.fn = fn;
+} else {
+    if (this.fn) {
+        this.removeParentObservers(0);
+        this.sources = null;
+        this.fn = undefined;
+    }
+...
+</code></pre>
+<p>Several frameworks helpfully unify some grouping of signal, computed, and effects nodes, but no others in my
+experience actually allow runtime malleability from one node type to another. The stuffy world of TypeScript will
+generally frown on such attempts, but Milo’s typing is so admirably loose that it is perfectly possible to downgrade
+a computed arc back down to a plain signal. This is for us a necessary (but not sufficient) capability for
+implementing reactive lenses, because we can’t expect to construct signals and bidirectional relationships in a single
+constructor call — and if we need to wire up the backward leg of a
+transform in a separate operation, by symmetry the forward leg should be wirable separately as well. Here’s the
+<a href="https://github.com/fluid-project/infusion-6/blob/b7e361e6eb5ee62f6306f4393183f9eeb6e56b0f/tests/framework-tests/core/js/FluidSignalsTests.js#L98">kind of test</a> we need to support.
+So I was enormously encouraged to find that not only was this perfectly possible in a modern reactive library,
+but that Milo was thinking along these lines. One does worry that this might be the kind of youthful
+indiscretion that he may not permit himself in later life, since <a href="https://github.com/milomg/reactively/blob/mol/packages/core/src/core.ts">more recent branches</a>
+of reactively seem to be free of this kind of irreligiosity.</p>
+<h3 id="from-two-to-three">From two to three</h3>
+<p>Flushed with success after using my hacked distribution of Milo’s system to implement a simple reactive lens
+implementing the time-honoured chestnut of the <a href="https://www.ppig.org/files/2015-PPIG-26th-Basman.pdf">temperature conversion sample</a>
+relating temperatures in Celsius and Fahrenheit, I then turn my attention to the next natural stage of malleable
+authorship and try to extend the network from two to three nodes in a chain of lenses managing temperatures Kelvin, Celsius
+and Fahrenheit. I then stare in horror at the following diagram and realise that a far deeper pit separates the worlds
+of commodity and malleable reactivity than I imagined:</p>
+<div style="max-width:600px" id="fl-id-site-11.documents.13.main.content.island-2" class="box" data-caption="The Power of Three" data-width="600px" data-src="/img/KCF.jpg" fluid-layers="ponder.shortcode.figure"><figure itemtype="http://schema.org/ImageObject" itemscope itemprop="associatedMedia"><div class="img"><img alt="The Power of Three" src="../../img/KCF.jpg" itemprop="thumbnail"></div><a href="../../img/KCF.jpg" itemprop="contentUrl"></a><figcaption><p>The Power of Three</p></figcaption></figure></div>
+<p>Someone with more foresight than me wouldn’t have been surprised by this, but if you stare at the <code>C</code> node in the
+centre of the diagram you will realise that it requires a fundamental break from the conventional reactive representation of
+“a node” as “a computed node” since it has <em>two incoming arcs</em>. We needn’t panic about this immoral cyclicity since we still have
+<a href="../../wip/2025-09-26-this-weeks-reactive-chats/#dan-ingalls-fabrik">Dan Ingalls</a>
+in our back pocket reassuring us that we are just seeking “alternate paths of control flow”.
+However, something quite fundamental needs to be done to the representation and it needs to be returned to a
+more conventional graph representation with separate structures representing nodes and edges.</p>
+<h3 id="essential-unity-of-reactivity">Essential unity of reactivity</h3>
+<p>After continuing to stare at Milo’s diagram some more, and after having fairly rapidly become unblocked and implemented
+most of the <a href="../../docs/fluid-signals">fluid.cell reactive system</a> as a result, it struck me that actually the core
+principle underlying all effective reactive systems was remarkably simple and one that I’d actually been familiar with
+for a while during Infusion development. I’d summarise this with the slogan <span style="color:blue; font-weight: bold">DO LEAST ADVANCED WORK FIRST</span>
+which could also be seen as a variety of the <strong>Principle of Least Commitment</strong>.</p>
+<p>Phil Agre in his 1997 <a href="https://archive.org/details/computationhuman0000agre">Computation and Human Experience</a> gives a fair
+summary of the principle:</p>
+<blockquote>
+<p>One example of a computational principle is commonly known as <em>least commitment</em>
+(Marr 1982: 106; Stefik 1981). This is the idea that a system should, other things being equal, only derive the
+logically necessary conclusions of each new item of information, thus keeping its options open to the greatest
+possible extent.</p>
+</blockquote>
+<p>A key thing to observe here is the point about “other things being equal”: clearly the principle is only
+relevant when a system has multiple options at its disposal, which could never happen in an either an imperative system,
+or in a reactive system whose dataflow has a strict tree structure. And it becomes far more relevant in reactive systems
+with cyclic or apparently cyclic relationships, since the number of available dataflow paths in these cases explodes
+rapidly.</p>
+<p>An important practical example is an Infusion component whose layer hierarchy depends on one of its computed values — the situation
+that appeared in my <a href="../../wip/2025-12-12-infinite-apps-and-unshaking/#signals-from-selectors">previous post</a>. Faced with a
+computational output (a new layer name) which could potentially change the meaning of most of the component, it seems clear that one will
+make strong efforts to contextualise the output as strongly as possible by evaluating all possible “cheaper” values
+that might influence it. As a result, “old Infusion” accumulated many of these sites where a certain category of
+work was done repeatedly until all that was left on the table was a higher category of less information-preserving work.
+So it is comforting to realise that I have actually been building a reactive system all this time, in advance of
+having really understood what reactivity is.</p>
+<p>In <a href="../../wip/2025-09-26-this-weeks-reactive-chats/#hierarchy-of-good-functions">September’s update</a> I noted a “hierarchy
+of good functions” which are increasingly information-preserving. The notion is that given a choice of relations to
+update, “other things being equal” one would prefer to choose those that lie at the top of the hierarchy. I was
+really pleased to realise that the same principle which guides self-reflective reactive systems in general is
+also the one which assures glitch-freedom. And this makes sense in literal terms too — the relation at the top of
+a diamond is <em>a priori</em> likely to be information-destroying, since two arcs go in and one comes out.</p>
+<p>So in the face of Milo’s demonstration and having this principle in hand, we can be confident that much of the excess complexity
+we run into out there is driven less by necessity than by benchmarking constraints.</p>
+<h3 id="the-mysterious-frontier">The mysterious frontier</h3>
+<p>Some wrinkles still remain. Most significantly, the rather vexing question of what priority should be given to
+parts of the graph which construct as “side effects” of compute arcs themselves. To start with, the community
+mostly doesn’t believe in such side effects and has not devoted attention to testing and
+specifying them. In my naive days I imagined that handling such things was one the things that distinguished
+<a href="../../wip/2025-09-26-this-weeks-reactive-chats/#alien-signals-and-adapton">Adapton</a> from commodity signals implementations
+until Rabbits pointed out to me that Adapton is less rather than more capable than commodity signals since it doesn’t
+even satisfy the <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2018/03/build-systems.pdf">early cutoff</a> property.</p>
+<p>The community would like to pretend that the graph is not modified during reactions<sup class="footnote-ref"><a id="fnref1" href="#fn1">[1]</a></sup>, but this is not realistic,
+especially in a self-reactive malleable environment. In solid-signals, there has for a few years been a helpful test
+<a href="https://github.com/solidjs/signals/blob/af7e8f5bc2fe962eb980857eb021d0c0c1ca5f6a/tests/graph.test.ts#L383-L408"><code>"updates downstream pending computations"</code></a>
+which checks that just such a situation is covered. Porting this test to a few other commodity frameworks
+reassuringly produces the same order of notification <code>"c1c2t1c2_1"</code> but somewhat alarmingly as of November 2025 there
+has been an <a href="https://github.com/solidjs/signals/blob/48fbd676602961e2bd0777c4ecb724317357bfc7/tests/graph.test.ts#L382-L408">update to Solid’s test</a> that flips the order
+to <code>"t1c1c2c2_1"</code>. This comes along with a new propagation mode which expects that previously synchronous computations
+will not propagate across the graph unless they are manually cranked with a call to <code>flush()</code>. To the extent I understand
+the new model, I feel positive towards it — deprivileging authors in the space of code by shortening their stacks,
+in favour of those living in the substrate who expect naive realism with as <a href="../../term/divergence">few hidden coordinates</a> as possible feels like
+a good direction. But I imagine that a generation of coders<sup class="footnote-ref"><a id="fnref2" href="#fn2">[2]</a></sup> who have grown up with the expectation that an effect or
+manual pull of a value will immediately cause it to be brought up to date might find this model to be confounding.</p>
+<p>A clear question is — is this reversal of the order of notification a necessary consequence of moving to a universally
+asynchronous model of notification? Enquiring minds will sift this out.</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li class="footnote-item" id="fn1"><p>Except through changing subscriptions to pre-existing dependencies. <a class="footnote-backref" href="#fnref1">↩︎</a></p>
+</li>
+<li class="footnote-item" id="fn2"><p>3 years counts as a generation amongst JavaScript frameworks, I think. <a class="footnote-backref" href="#fnref2">↩︎</a></p>
+</li>
+</ol>
+</section>
+</div><div id="fl-id-site-11.documents.13.main.share"><hr><section id="social-share"><div class="list-inline footer-links"><div aria-hidden="true" class="share-box"><ul class="share"><li><a href="https://bsky.app/intent/compose?text=Just%20reading%20a%20post%20called%20Understanding%20Reactivity%20on%20Antranig%20Basman's%20blog%3A%20https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-12-15-understanding-reactivity%2F" title="Share on BlueSky" target="_blank"><i class="fab fa-fw fa-bluesky"></i></a></li><li><a href="https://twitter.com/share?url=https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-12-15-understanding-reactivity%2F&text=Understanding%20Reactivity&via=amb26ponder" title="Share on Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-12-15-understanding-reactivity%2F" title="Share on Facebook" target="_blank"><i class="fab fa-facebook"></i></a></li><li><a href="https://reddit.com/submit?url=https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-12-15-understanding-reactivity%2F&title=Understanding%20Reactivity" title="Share on Reddit" target="_blank"><i class="fab fa-reddit"></i></a></li><li><a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-12-15-understanding-reactivity%2F&title=Understanding%20Reactivity" title="Share on LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a></li></ul></div></div></section></div></article><ul id="fl-id-site-11.documents.13.main.pager" class="pager blog-pager"><li class="previous"><a title="Infinite Apps, Asynchrony and Tree Unshaking" href="../../wip/2025-12-12-infinite-apps-and-unshaking/" data-placement="top" data-toggle="tooltip">← Previous Post</a></li><li class="next"><a title="Researching in-browser AI" href="../../wip/2026-07-31-researching-in-browser-ai/" data-placement="top" data-toggle="tooltip">Next Post →</a></li></ul><script data-lang="en" data-category-id="DIC_kwDOOKllGM4CvhAS" data-category="Announcements" data-repo-id="R_kgDOOKllGA" data-repo="amb26/ponder" id="fl-id-site-11.documents.13.main.comments" async crossorigin="anonymous" data-theme="light" data-input-position="bottom" data-emit-metadata="0" data-reactions-enabled="0" data-strict="0" data-mapping="pathname" src="https://giscus.app/client.js"></script></div></div></div><footer id="fl-id-site-11.documents.13.footer"><div class="container"><div class="row ponder-credits-row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p class="credits copyright text-muted"><a href="../../">Antranig Basman</a>
+                        &#160;©
+                        2026
+                    </p><p class="credits theme-by text-muted"><a href="https://github.com/fluid-project/infusion-6">Infusion 6</a> powered &#160;•&#160;
+                        Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from
+                        <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &#160;•&#160;
+                        further <a href="../../term/lithification">lithified</a> by Boz
+                    </p></div></div></div></footer><script defer src="../../js/katex.min.js" id="fl-id-site-11.documents.13.footerScriptTags.katex"></script><script onload="renderMathInElement(document.body);" defer src="../../js/auto-render.min.js" id="fl-id-site-11.documents.13.footerScriptTags.katexAutoRender"></script><script src="../../js/highlight.min.js" id="fl-id-site-11.documents.13.footerScriptTags.hljs"></script><script id="fl-id-site-11.documents.13.footerScriptTags.hljsInit">hljs.initHighlightingOnLoad();</script></body></html>

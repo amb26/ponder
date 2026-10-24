@@ -6,7 +6,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "node checklinks.js"
+    "test": "node checklinks.js",
+    "build-infusion": "node infusion/js/buildSite.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,13 @@
   "homepage": "https://github.com/amb26/ponder#readme",
   "dependencies": {
     "linkedom": "0.18.9",
-    "node-fetch": "3.3.2"
+    "markdown-it": "14.3.2",
+    "markdown-it-attrs": "5.0.1",
+    "markdown-it-deflist": "4.0.0",
+    "markdown-it-footnote": "4.0.0",
+    "node-fetch": "3.3.2",
+    "smol-toml": "1.9.0",
+    "yaml": "2.9.1"
   },
   "devDependencies": {
     "eslint": "8.57.0",
