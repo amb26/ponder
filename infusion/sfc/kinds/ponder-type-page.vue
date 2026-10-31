@@ -5,7 +5,7 @@
 fluid.def("ponder.type.page", {
     header: {
         $component: {
-            $layers: ["ponder.header.page", "ponder.header"]
+            $layers: ["ponder.header", "ponder.header.page"]
         }
     },
     showPageMeta: true,

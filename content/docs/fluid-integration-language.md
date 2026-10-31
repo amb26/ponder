@@ -112,18 +112,20 @@ The characters `{`, `$` and `\` occurring naturally at the start of strings in c
 
 `{String|String[]}` - The parent layers of this layer. A component's full layer list is linearised from the layer
 hierarchy by C3 (as for Python's method resolution order): a layer beats the layers it inherits from, and a parent
-listed earlier in `$layers` beats one listed later. The resolved list is readable at `that.$layers`. To be instantiable
+listed later in `$layers` beats one listed earlier. A parent listed after a layer which already inherits from it is
+ignored, since it cannot beat that layer, and that layer's own hierarchy already places it. The resolved list is
+readable at `that.$layers`, weakest first. To be instantiable
 as a component, its layer hierarchy must somewhere include `fluid.component`.
 
 ```js
 fluid.def("my.shape", {$layers: "fluid.component", sides: 0, colour: "black"});
 fluid.def("my.red", {$layers: "fluid.component", colour: "red"});
 fluid.def("my.triangle", {$layers: "my.shape", sides: 3});
-fluid.def("my.redTriangle", {$layers: ["my.red", "my.triangle"]});
+fluid.def("my.redTriangle", {$layers: ["my.triangle", "my.red"]});
 
 const t = my.redTriangle();
 t.sides;   // 3 - my.triangle beats my.shape
-t.colour;  // "red" - my.red is listed before my.triangle and so beats my.shape
+t.colour;  // "red" - my.red is listed after my.triangle and so beats my.shape
 ```
 
 An entry in `$layers` which is itself a [reference](#references) is a **dynamic layer name**, resolved reactively from the

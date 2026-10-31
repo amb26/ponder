@@ -78,7 +78,8 @@ A component can equally be created from JavaScript with `my.counter({container: 
 
 When the SFC is loaded, its script is patched before execution:
 
-* `$layers` defaults to `["fluid.component", "fluid.sfcLayer"]`.
+* `$layers` defaults to `["fluid.sfcLayer", "fluid.component"]`, and `fluid.sfcLayer` is otherwise placed first, where it
+  is weakest, amongst any `$layers` written.
 * A `view` subcomponent is added, with layer `fluid.sfcTemplateViewComponent`, whose `template` refers to the SFC's
   `<template>` block as `{sfcLayer: "my.counter"}` (see [Views](#views)). Since this is an ordinary member of the view,
   a layer derived from the SFC's layer may replace the template by supplying its own, e.g.

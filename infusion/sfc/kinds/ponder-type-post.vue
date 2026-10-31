@@ -3,7 +3,7 @@
 fluid.def("ponder.type.post", {
     header: {
         $component: {
-            $layers: ["ponder.header.post", "ponder.header"]
+            $layers: ["ponder.header", "ponder.header.post"]
         }
     }
 });

@@ -98,10 +98,10 @@ fluid.def("ponder.document", {
  * candidates, those which are defined are applied - REQUIREMENTS.md R5. A type layer applies only to a single page.
  * @param {String} kind - Hugo's page kind - "home", "section", "page", "taxonomy", "term" or "404"
  * @param {String} type - The page's content type, e.g. "post", "page", "wip", "infusion-docs"
- * @return {String[]} The names of the dynamic layers to apply, most specific first
+ * @return {String[]} The names of the dynamic layers to apply, most specific, and hence strongest, last
  */
 ponder.document.pageLayers = function (kind, type) {
-    return fluid.definedLayers(kind === "page" ? "ponder.type." + type : [], "ponder.kind." + kind);
+    return fluid.definedLayers("ponder.kind." + kind, kind === "page" ? "ponder.type." + type : []);
 };
 
 </script>
