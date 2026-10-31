@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+      <title>Layer Linearisation - Antranig Basman</title>
+
+  <meta name="description" content="This note describes how Infusion 6 orders the layers of a component: how the $layers lists written by authors are linearised into the single list held at that.$layers, and so which layer&rsquo;s contributions win a merge. It records the decisions taken in FLUID-5743, which made a layer listed further right beat those to its left, together with a relaxation of the C3 consistency rule and an assessment of its consequences against the &ldquo;pedalo&rdquo; example of Barrett et al.">
+  <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Antranig Basman",
+    
+    "url": "https:\/\/ponder.org.uk\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/ponder.org.uk\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/ponder.org.uk\/docs\/linearisation-algorithm\/",
+          "name": "Layer linearisation"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Antranig Basman"
+  },
+  "headline": "Layer Linearisation",
+  "description" : "This note describes how Infusion 6 orders the layers of a component: how the $layers lists written by authors are linearised into the single list held at that.$layers, and so which layer\u0026rsquo;s contributions win a merge. It records the decisions taken in FLUID-5743, which made a layer listed further right beat those to its left, together with a relaxation of the C3 consistency rule and an assessment of its consequences against the \u0026ldquo;pedalo\u0026rdquo; example of Barrett et al.",
+  "inLanguage" : "en",
+  "wordCount":  1596 ,
+  "datePublished" : "0001-01-01T00:00:00\u002b00:00",
+  "dateModified" : "0001-01-01T00:00:00\u002b00:00",
+  "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+  "keywords" : [ "" ],
+  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/docs\/linearisation-algorithm\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/ponder.org.uk\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="Layer Linearisation" />
+<meta property="og:description" content="This note describes how Infusion 6 orders the layers of a component: how the $layers lists written by authors are linearised into the single list held at that.$layers, and so which layer&rsquo;s contributions win a merge. It records the decisions taken in FLUID-5743, which made a layer listed further right beat those to its left, together with a relaxation of the C3 consistency rule and an assessment of its consequences against the &ldquo;pedalo&rdquo; example of Barrett et al.">
+<meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
+<meta property="og:url" content="https://ponder.org.uk/docs/linearisation-algorithm/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Antranig Basman" />
+
+  <meta name="twitter:title" content="Layer Linearisation" />
+  <meta name="twitter:description" content="This note describes how Infusion 6 orders the layers of a component: how the $layers lists written by authors are linearised into the single list held at that.$layers, and so which layer&rsquo;s …">
+  <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@amb26ponder" />
+  <meta name="twitter:creator" content="@amb26ponder" />
+  <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.123.7">
+  <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
+  <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
+<script type="text/javascript" src="../../js/ponder.js" ></script>
+
+  </head>
+  <body class="infusion-docs" >
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-ponder">
+      <a class="navbar-ponder-brand" href="../../">Antranig Basman</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <svg width="36" height="36" viewBox="0 0 24 24" stroke="#888" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 7L4 7" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 12L4 12" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 17L4 17" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="nav navbar-nav navbar-right">
+          
+          
+          <li>
+            <a title="Posts" href="../../post">Posts</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="WiP" href="../../wip">WiP</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="About" href="../../page/about/">About</a>
+          </li>
+          
+          
+          
+          <li class="navlinks-container">
+            
+            <a class="navlinks-parent" href="../../docs">Docs</a>
+            
+            <div class="navlinks-children">
+              
+              <a href="../../docs/fluid-signals">Fluid Signals</a>
+              
+              <a href="../../docs/fluid-integration-language">Fluid Integration Language</a>
+              
+              <a href="../../docs/fluid-view">Fluid View</a>
+              
+              <a href="../../docs/fluid-ptf">Fluid PTF</a>
+              
+              <a href="../../docs/fluid-tldraw">Fluid tldraw integration</a>
+              
+              <a href="../../docs/linearisation-algorithm">Layer Linearisation</a>
+              
+            </div>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Communities" href="../../communities">Communities</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Projects" href="../../projects">Projects</a>
+          </li>
+          
+          
+          
+          <li>
+            <a title="Terms" href="../../term">Terms</a>
+          </li>
+          
+          
+
+          
+
+          
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="header-row">
+          
+
+            <div class="infusion-docs-heading">
+              
+                <h1>Layer Linearisation  </h1>
+              
+              
+                <hr class="small">
+              
+              
+
+            </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <article role="main" class="blog-post">
+        <p>This note describes how Infusion 6 orders the layers of a component: how the <code>$layers</code> lists written by authors are
+linearised into the single list held at <code>that.$layers</code>, and so which layer&rsquo;s contributions win a merge. It records the
+decisions taken in <a href="https://issues.fluidproject.org/browse/FLUID-5743">FLUID-5743</a>, which made a layer listed further
+right beat those to its left, together with a relaxation of the C3 consistency rule and an assessment of its
+consequences against the &ldquo;pedalo&rdquo; example of Barrett et al.,
+<a href="https://opendylan.org/_static/c3-linearization.pdf">A Monotonic Superclass Linearization for Dylan</a> (OOPSLA 1996).</p>
+<p>The raw markdown underlying these docs is available on <a href="https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/linearisation-algorithm.md">GitHub</a>,
+suitable for direct ingestion by your friendly local neighbourhood intelligence.</p>
+<p>The implementation is in <a href="https://github.com/fluid-project/infusion-6/blob/main/src/framework/core/js/Fluid.js"><code>Fluid.js</code></a>
+(<code>fluid.C3_merge</code>, <code>fluid.C3_precedence</code>, <code>fluid.C3_precedence_parents</code> and the hierarchy resolver) and
+<a href="https://github.com/fluid-project/infusion-6/blob/main/src/framework/core/js/FluidIL.js"><code>FluidIL.js</code></a> (merge records
+and subcomponent records). Tests are in <code>tests/framework-tests/core/js/FluidJSTests.js</code>, under
+&ldquo;C3 linearisation for FLUID-5800&rdquo;.</p>
+<h2 id="the-rule-as-authors-see-it">The rule as authors see it</h2>
+<ul>
+<li>Every list of layer names is read <strong>weakest first</strong>: a layer listed later in <code>$layers</code> beats one listed earlier.</li>
+<li>A layer always beats the layers it inherits from.</li>
+<li>The resolved list at <code>that.$layers</code> is also weakest first, so it reads in the same direction as it is written.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.shape&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span> <span class="nx">sides</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">colour</span><span class="o">:</span> <span class="s2">&#34;black&#34;</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.red&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span> <span class="nx">colour</span><span class="o">:</span> <span class="s2">&#34;red&#34;</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.triangle&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.shape&#34;</span><span class="p">,</span> <span class="nx">sides</span><span class="o">:</span> <span class="mi">3</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.redTriangle&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;my.triangle&#34;</span><span class="p">,</span> <span class="s2">&#34;my.red&#34;</span><span class="p">]});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">redTriangle</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">t</span><span class="p">.</span><span class="nx">colour</span><span class="p">;</span>    <span class="c1">// &#34;red&#34; - my.red is listed after my.triangle, and so beats it and my.shape
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">t</span><span class="p">.</span><span class="nx">$layers</span><span class="p">;</span>   <span class="c1">// [&#34;fluid.component&#34;, &#34;my.shape&#34;, &#34;my.triangle&#34;, &#34;my.red&#34;, &#34;my.redTriangle&#34;]
+</span></span></span></code></pre></div><p>This reverses the order used by Infusion 2 to 5, in which the leftmost entry won. FLUID-5743 reported that users
+generally expect the opposite, matching the reading order of CSS cascades and of most mixin systems.</p>
+<h2 id="c3-underneath">C3 underneath</h2>
+<p>The linearisation itself is C3, as used by Dylan and by Python&rsquo;s method resolution order. C3 merges</p>
+<ul>
+<li>the linearisations of each of a layer&rsquo;s parents, and</li>
+<li>the layer&rsquo;s own parent list (its <em>local precedence order</em>),</li>
+</ul>
+<p>taking at each step the first head of any list which appears in no other list&rsquo;s tail. If no such head exists, the
+hierarchy is inconsistent. C3 is <strong>monotonic</strong>: a layer&rsquo;s linearisation extends each of its parents&rsquo; linearisations
+without reordering them, and it respects every layer&rsquo;s local precedence order.</p>
+<p>C3 conventionally works strongest first. Infusion therefore reverses each <code>$layers</code> list before supplying it to C3,
+and reverses the result, so that the algorithm is unchanged and only the reading direction of the lists differs.</p>
+<h3 id="two-strengths-of-ordering">Two strengths of ordering</h3>
+<ul>
+<li><strong>Within a def</strong>, a layer&rsquo;s <code>$layers</code> list is a hard constraint, as above. Two parents whose own hierarchies order
+some pair of layers in opposite ways cannot be reconciled, and fail with &ldquo;Inconsistent hierarchy&rdquo;.</li>
+<li><strong>At the top level</strong> of a component, the list made up of its layer, any <code>$layers</code> from a creator function&rsquo;s
+argument, the layers named by its subcomponent records and so on, is a <strong>preference</strong> only.
+<code>fluid.C3_precedence_parents</code> merges just the linearisations of the listed layers, not the list itself, so a
+misordered list here never fails. It gives way wherever the layers&rsquo; own hierarchies require it.</li>
+</ul>
+<h3 id="ignoring-a-restated-ancestor">Ignoring a restated ancestor</h3>
+<p>A list which names a layer to the right of another layer that already inherits from it asks for the ancestor to beat
+its own descendant. For example, <code>fluid.resolveRoot</code> inherits from <code>fluid.component</code>, so in</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">$layers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;fluid.resolveRoot&#34;</span><span class="p">,</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">]</span>
+</span></span></code></pre></div><p><code>fluid.component</code> is asked to beat <code>fluid.resolveRoot</code>, which C3 cannot honour. Such a restatement is now <strong>ignored</strong>
+rather than failing. The descendant&rsquo;s own hierarchy already places the ancestor beneath it, and the author&rsquo;s intent,
+that both layers apply, is clear.</p>
+<p>Concretely, <code>fluid.C3_precedence</code> filters a def&rsquo;s parents before merging them. Working strongest first, a parent is
+dropped if it appears in the linearisation of any parent following it, that is, of any parent listed to its left in
+<code>$layers</code>.</p>
+<p>A restatement on the <strong>weak</strong> side of its descendant is retained, since it carries meaning: it constrains where the
+ancestor falls relative to the def&rsquo;s <em>other</em> parents (see below). Only restatements that cannot be honoured are
+dropped. A rule dropping every restatement, whichever side it fell on, was considered and rejected for this reason.</p>
+<p>Genuine conflicts are still reported. In Python&rsquo;s <code>ex_2</code> hierarchy, where <code>A</code> lists <code>[X, Y]</code> and <code>B</code> lists <code>[Y, X]</code>,
+any layer deriving from both <code>A</code> and <code>B</code> still fails with &ldquo;Inconsistent hierarchy&rdquo;.</p>
+<h2 id="the-pedalo-example">The pedalo example</h2>
+<p>Figure 2 of Barrett et al. gives this hierarchy, written here as Infusion <code>$layers</code>, weakest first:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;boat&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;dayBoat&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;boat&#34;</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;wheelBoat&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;boat&#34;</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;engineless&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;dayBoat&#34;</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;smallMultihull&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;dayBoat&#34;</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;pedalWheelBoat&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;wheelBoat&#34;</span><span class="p">,</span> <span class="s2">&#34;engineless&#34;</span><span class="p">]});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;smallCatamaran&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;smallMultihull&#34;</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;pedalo&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;smallCatamaran&#34;</span><span class="p">,</span> <span class="s2">&#34;pedalWheelBoat&#34;</span><span class="p">]});</span>
+</span></span></code></pre></div><p><code>dayBoat</code> reaches <code>pedalWheelBoat</code> through <code>engineless</code>, its strongest parent, so <code>dayBoat</code> beats <code>wheelBoat</code>. The paper
+uses exactly this to motivate monotonicity: under CLOS&rsquo;s linearisation, <code>pedalo</code> reorders <code>wheelBoat</code> above <code>dayBoat</code>,
+so a method on <code>dayBoat</code> is the most specific for both of <code>pedalo</code>&rsquo;s parents, but a method on <code>wheelBoat</code> is the most
+specific for <code>pedalo</code> itself. C3 forbids this, and so does Infusion.</p>
+<p>Suppose the author of <code>pedalWheelBoat</code> restates <code>dayBoat</code>. Strongest first, for comparison with the paper:</p>
+<table>
+<thead>
+<tr>
+<th><code>pedalWheelBoat</code> <code>$layers</code></th>
+<th>Linearisation, strongest first</th>
+<th>Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[&quot;wheelBoat&quot;, &quot;engineless&quot;]</code></td>
+<td>pedalWheelBoat, engineless, dayBoat, wheelBoat, boat</td>
+<td><code>dayBoat</code> beats <code>wheelBoat</code></td>
+</tr>
+<tr>
+<td><code>[&quot;dayBoat&quot;, &quot;wheelBoat&quot;, &quot;engineless&quot;]</code></td>
+<td>pedalWheelBoat, engineless, wheelBoat, dayBoat, boat</td>
+<td>Restatement kept: <code>wheelBoat</code> beats <code>dayBoat</code></td>
+</tr>
+<tr>
+<td><code>[&quot;wheelBoat&quot;, &quot;engineless&quot;, &quot;dayBoat&quot;]</code></td>
+<td>pedalWheelBoat, engineless, dayBoat, wheelBoat, boat</td>
+<td>Previously an error, now the restatement is ignored</td>
+</tr>
+</tbody>
+</table>
+<p>In each case the linearisation of <code>pedalo</code> extends that of <code>pedalWheelBoat</code>, as C3 requires. With the second variant
+it is pedalo, pedalWheelBoat, engineless, wheelBoat, smallCatamaran, smallMultihull, dayBoat, boat. The three variants
+appear as fixtures in <code>FluidJSTests.js</code>.</p>
+<p>The second row shows why consistent restatements are retained. Under a rule which dropped them as well, it would
+collapse into the first row, silently discarding a statement which is consistent and which changes the result.</p>
+<h3 id="consequences-of-the-relaxation">Consequences of the relaxation</h3>
+<ul>
+<li><strong>Monotonicity is unaffected.</strong> A dropped parent&rsquo;s linearisation is already contained in its descendant&rsquo;s, so the
+merge loses no constraint by dropping it. Every layer&rsquo;s linearisation still extends those of its parents without
+reordering them.</li>
+<li><strong>An author can be silently misunderstood.</strong> In the third row, the author may have meant either &ldquo;<code>dayBoat</code> should
+beat <code>engineless</code>&rdquo;, which is impossible, or &ldquo;<code>dayBoat</code> should beat <code>wheelBoat</code>&rdquo;, which they get. Previously the
+error showed them that their list could not mean what they wrote. Now they learn it only from the values in the
+merged component, which is the kind of dispatch surprise the paper set out to rule out, here arising from discarded
+input rather than from a non-monotonic algorithm.</li>
+<li><strong>Whether a restatement counts depends on distant layers.</strong> If <code>engineless</code> were redefined so that it no longer
+inherited from <code>dayBoat</code>, the ignored mention would come into effect, making <code>dayBoat</code> the strongest parent of
+<code>pedalWheelBoat</code>. With live editing of layers, for example in the tldraw workspace, a change to one layer can
+therefore change precedence in another layer which never mentioned it.</li>
+<li><strong>Only direct restatements are forgiven.</strong> Conflicts arising between the hierarchies of two parents still fail.</li>
+</ul>
+<h2 id="other-places-where-layer-names-are-combined">Other places where layer names are combined</h2>
+<p>Every site which assembles a list of layer names follows the same weakest-first convention:</p>
+<ul>
+<li><strong>Co-occurrences (linkages).</strong> The output layers of a <code>$linkage</code> which matches a component are added at the strong
+end of its layer list. Of two linkages firing in the same round, the one registered later wins.</li>
+<li><strong>Subcomponent records.</strong> When several layers contribute <code>$component</code> records at the same member, their <code>$layers</code> are
+gathered weakest contribution first. Duplicates are removed by <code>fluid.uniqueLayerNames</code>, which keeps each name&rsquo;s
+last, and so strongest, occurrence. Within one record, a layer listed later beats one listed earlier.</li>
+<li><strong>Merge records.</strong> A component&rsquo;s merge records, such as its creator function&rsquo;s argument, its subcomponent record and
+its live layer, contribute layer names weakest record first, after the component&rsquo;s own layer names. A creator
+function&rsquo;s <code>$layers</code> therefore beat the layer of the function itself.</li>
+<li><strong>Dynamic layers.</strong> References in <code>$layers</code> such as <code>&quot;{self}.flavour&quot;</code> are resolved reactively and merged at
+<code>dynamicLayers</code> priority, above all static layers and literal configuration, <em>wherever they appear in the list</em>.
+Amongst themselves they follow the same order: a later reference beats an earlier one, the dynamic layers of a
+derived layer beat those it inherits, and a component&rsquo;s own record-level references beat inherited ones. Writing
+dynamic references at the right of a list, as is conventional, keeps the written order consistent with the
+outcome. A dynamic reference written before a static layer still beats it.</li>
+<li><strong>Single File Components.</strong> The SFC loader&rsquo;s tag layer <code>fluid.sfcLayer</code> is placed first, at the weak end, of an SFC&rsquo;s
+<code>$layers</code>. Appending it would make it an ancestor restated to the right of any SFC deriving from another.</li>
+<li><strong>Choosing dynamic layers.</strong> <code>fluid.definedLayers(...candidates)</code> filters candidates to those which are defined,
+keeping their order, so callers list the most specific, and strongest, candidate last.
+<code>fluid.firstDefinedLayer(...candidates)</code> instead takes candidates in order of preference and returns only the first
+which is defined, so its argument order is unaffected.</li>
+<li><strong>Transmission.</strong> The Portable Transmission Format sorts layer names by derivation rank, which does not depend on
+list order.</li>
+</ul>
+<h2 id="residual-issues">Residual issues</h2>
+<ul>
+<li>Dynamic layers are promoted above all static layers regardless of their position in a list, as described above. A
+rule honouring their written position would be more uniform. It would change the outcome only of lists which write
+a dynamic reference before a static layer, since the conventional idiom
+<code>$layers: [&quot;fluid.component&quot;, &quot;{self}.flavour&quot;]</code> already lists it last.</li>
+<li>Order is a hard constraint only inside a def. At the top level of a component, or within a subcomponent record, it
+is a preference, so a misordered list there raises no error.</li>
+<li>The relaxation trades an error for silence in one class of case, as described under
+<a href="#consequences-of-the-relaxation">Consequences of the relaxation</a>. A diagnostic could be logged when a restatement
+is ignored, should this prove confusing in practice.</li>
+</ul>
+
+
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        
+        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;Layer&#43;Linearisation&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fdocs%2Flinearisation-algorithm%2F" target="_blank" title="Share on BlueSky">
+          <i class="fab fa-fw fa-bluesky"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fdocs%2flinearisation-algorithm%2f&amp;text=Layer%20Linearisation&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fdocs%2flinearisation-algorithm%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fdocs%2flinearisation-algorithm%2f&amp;title=Layer%20Linearisation" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fdocs%2flinearisation-algorithm%2f&amp;title=Layer%20Linearisation" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="../../docs/fluid-ptf/" data-toggle="tooltip" data-placement="top" title="Potentia Transmission Format">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="../../docs/fluid-view/" data-toggle="tooltip" data-placement="top" title="Fluid View">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      <script src="https://giscus.app/client.js"
+                data-repo="amb26/ponder"
+                data-repo-id="R_kgDOOKllGA"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOOKllGM4CvhAS"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="0"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script></div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="../../">Antranig Basman</a>
+            
+          
+          &nbsp;&copy;
+          2026
+
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="../../js/katex.min.js"></script>
+<script defer src="../../js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script src="../../js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+
+
+
+
+
+    
+  </body>
+</html>

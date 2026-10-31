@@ -112,18 +112,21 @@ The characters `{`, `$` and `\` occurring naturally at the start of strings in c
 
 `{String|String[]}` - The parent layers of this layer. A component's full layer list is linearised from the layer
 hierarchy by C3 (as for Python's method resolution order): a layer beats the layers it inherits from, and a parent
-listed earlier in `$layers` beats one listed later. The resolved list is readable at `that.$layers`. To be instantiable
-as a component, its layer hierarchy must somewhere include `fluid.component`.
+listed later in `$layers` beats one listed earlier. A parent listed after a layer which already inherits from it is
+ignored, since it cannot beat that layer, and that layer's own hierarchy already places it. The resolved list is
+readable at `that.$layers`, weakest first. To be instantiable
+as a component, its layer hierarchy must somewhere include `fluid.component`. The algorithm and its rationale are
+described in [Layer Linearisation](/docs/linearisation-algorithm).
 
 ```js
 fluid.def("my.shape", {$layers: "fluid.component", sides: 0, colour: "black"});
 fluid.def("my.red", {$layers: "fluid.component", colour: "red"});
 fluid.def("my.triangle", {$layers: "my.shape", sides: 3});
-fluid.def("my.redTriangle", {$layers: ["my.red", "my.triangle"]});
+fluid.def("my.redTriangle", {$layers: ["my.triangle", "my.red"]});
 
 const t = my.redTriangle();
 t.sides;   // 3 - my.triangle beats my.shape
-t.colour;  // "red" - my.red is listed before my.triangle and so beats my.shape
+t.colour;  // "red" - my.red is listed after my.triangle and so beats my.shape
 ```
 
 An entry in `$layers` which is itself a [reference](#references) is a **dynamic layer name**, resolved reactively from the
@@ -136,7 +139,27 @@ fluid.def("my.panel", {
 });
 ```
 
-Dynamic layers merge above all static layers and literal configuration (see [precedence](#merging-and-precedence)).
+Dynamic layers merge above all static layers and literal configuration, wherever they appear in the list (see
+[precedence](#merging-and-precedence)). Amongst themselves, a later reference beats an earlier one, and the dynamic
+layers of a derived layer beat those it inherits.
+
+A dynamic layer name which names an undefined layer makes the component unavailable until the layer is defined. To
+choose amongst candidate layers only those which exist, compute the name with `fluid.definedLayers` or
+`fluid.firstDefinedLayer` (see [Utilities](#utilities)):
+
+```js
+fluid.def("my.document", {
+    $layers: ["fluid.component", "{self}.typeLayers"],
+    type: "post",
+    candidates: "$compute:my.document.candidates({self}.type)",
+    // my.type.post if it is defined, otherwise my.type.default
+    typeLayers: "$compute:fluid.firstDefinedLayer({self}.candidates)"
+});
+my.document.candidates = type => ["my.type." + type, "my.type.default"];
+```
+
+Since these test whether a layer is defined reactively, the component switches to the preferred layer as soon as it is
+defined, and back again if it is deleted.
 
 A cycle in the hierarchy, or a layer which is not defined, makes the component unavailable.
 
@@ -149,6 +172,7 @@ A component's contents are a deep merge of layer records, applied weakest first:
 | `def` | Static layers named in `$layers`, linearised; more derived beats less derived |
 | `subcomponent` | The body of the [`$component`](#component) record which created this component |
 | `user` | The argument to a creator function |
+| `template` | Material contributed by the template which renders this component, e.g. the markup at its `@id` element, or the layers and `data-` attributes of an [island](/docs/fluid-view#verbatim-markup-and-islands) |
 | `dynamicLayers` | Layers named via references in `$layers` |
 | `variables` | Iteration variables bound by [`$for`](#for) |
 | `live` | Writes made through the component proxy |
@@ -159,8 +183,14 @@ Merge rules:
 * Any other value (primitive, array, function, signal record) from a stronger layer **replaces** that from a weaker
   one wholesale. Arrays are not concatenated.
 * A key holding a signal record is replaced as a unit by a stronger layer's value at that key; the record is not merged
-  into. The exception is a [`$reactiveRoot`](#reactiveroot), whose individual members a stronger layer may override with
-  literal values or references.
+  into. There are two exceptions: a [`$reactiveRoot`](#reactiveroot), whose individual members a stronger layer may
+  override with literal values or references, and an [`$effect`](#composite-effects), whose listener records are merged
+  by namespace.
+* `null` at a member displaces whatever weaker layers supplied there. At a member holding a
+  [`$component`](#removing-a-subcomponent) record, this removes the subcomponent.
+* Where several layers supply `$component` records at the same member, the `$layers` named by each are combined, those
+  of a stronger record beating those of a weaker one. Within one record, as in a layer's own `$layers`, a layer listed
+  later beats one listed earlier.
 
 Merging is reactive: changing any contributing layer re-merges the component. Signal products (computed values,
 effects, subcomponents) whose defining record is identical before and after are retained rather than rebuilt.
@@ -308,6 +338,67 @@ l.count++;
 fluid.cell.stabilize();   // Count is 2
 ```
 
+#### Composite effects
+
+An `$effect` may instead hold an array of **listener records**, each a [function record](#signal-directives) which may
+also bear:
+
+* `namespace` - A name for the record, unique within the effect. A record without one, including that of an effect
+  written in simple form, has the empty namespace.
+* `priority` - Its position relative to the other records: `"before:namespace"`, `"after:namespace"`, `"first"`,
+  `"last"` or a number, higher numbers running first. Records without one run in the order supplied, weakest layer first.
+
+The records run as a chain whenever any of their arguments changes. An argument written `{$payload}` receives the
+value returned by the previous record, or the value it resolves to if it returned a promise. A record returning
+`undefined` passes on the payload it received, and the chain stops at any record returning an unavailable value. The
+effect's member holds the final payload, and is pending while the chain runs, so a downstream `$compute` or `$effect`
+can depend on the chain having completed. If the arguments change again while a record is awaiting a promise, the
+superseded run dispatches no further records.
+
+```js
+fluid.def("my.map", {
+    $layers: "fluid.component",
+    mapUrl: "maps/region.json",
+    ready: {
+        $effect: [{
+            namespace: "load",
+            func: "my.loadMap",            // Async, resolving to the loaded map
+            args: "{self}.mapUrl"
+        }, {
+            namespace: "applyStyle",
+            priority: "after:load",
+            func: "my.applyStyle",
+            args: "{$payload}"
+        }]
+    },
+    report: "$effect:my.reportReady({self}.ready)"   // Runs once the whole chain has completed
+});
+```
+
+Effects supplied by several layers at the same member are **merged by namespace** rather than the stronger replacing
+the weaker. A stronger record displaces a weaker record of the same namespace in place, and a record with a new
+namespace joins the chain at the position given by its `priority`:
+
+```js
+fluid.def("my.patternedMap", {
+    $layers: "my.map",
+    ready: {
+        $effect: [{
+            namespace: "loadPatterns",
+            priority: "before:applyStyle",
+            func: "my.loadPatterns",
+            args: "{$payload}"
+        }]
+    }
+});
+```
+
+A simple effect counts as a single record with the empty namespace, so a stronger simple effect replaces a weaker one
+whole, and composite records accumulate alongside it. If the merge leaves just one record which was written in simple
+form, the effect behaves exactly as a simple effect. These composite effects replace the namespaced listeners and
+transforming promise events (`fireTransformEvent`) of earlier Infusion versions - see
+[FLUID-7028](https://github.com/fluid-project/infusion-6/issues/28).
+
 ### $method
 
 A function member invocable on the component. Arguments are resolved at call time. `$method` does not produce a signal
@@ -394,6 +485,39 @@ fluid.def("my.workspace", {
 reference at the same member, or the other way round. A reference to the component itself (`{self}`) is never
 injected, and a reference which turns out to designate plain data rather than a component simply yields that value.
 Injecting another component's [view](/docs/fluid-view#views) lets one component render through another's view.
+
+#### Removing a subcomponent
+
+A stronger layer may remove a subcomponent which a weaker one declared by writing `null`, or `{$component: null}`, at its
+member. The subcomponent is destroyed, and the records of all weaker layers at the member are discarded, so a still
+stronger layer restoring the member must supply a complete record, including its `$layers`:
+
+```js
+fluid.def("my.page", {
+    $layers: "fluid.component",
+    header: {
+        $component: {
+            $layers: "my.header"
+        }
+    }
+});
+
+fluid.def("my.bareSection", {
+    header: null
+});
+
+fluid.def("my.headedSection", {
+    header: {
+        $component: {
+            $layers: "my.compactHeader"
+        }
+    }
+});
+```
+
+If the subcomponent rendered into an element bearing `@id` in its parent's template, that element is omitted while the
+member is removed - see [Subcomponents](/docs/fluid-view#subcomponents-id).
+
 ### $for
 
 Within a `$component` record, instantiates one subcomponent per element of a collection, kept in step with it. The
@@ -403,6 +527,10 @@ member then holds a `fluid.componentList` whose `list` holds the instances.
 * `valueAs` - Name under which each collection element is visible in its corresponding subcomponent (via `{self}.<valueAs>`). When the
   source is sited, this is a live reference to the element and can be written through.
 * `keyAs` - Name under which the collection element's index or key is visible in its subcomponent
+* `positionAs` - Name under which the subcomponent sees its position in the list, as `{index, first, last}`: its index
+  from 0, and whether it is the first or the last member. Unlike `keyAs`, this is numeric for a keyed collection too, so
+  `@if="!position.first"` can render a separator before every member but the first - see
+  [Separators](/docs/fluid-view#separators-between-list-members)
 
 ```js
 fluid.def("my.editorHolder", {
@@ -420,6 +548,36 @@ fluid.def("my.editorHolder", {
 const h = my.editorHolder();
 h.names.push("beta");      // Second editor is created on stabilize
 h.editors.list.length;     // 2
+```
+
+**Keyed collections.** When the source is an object, one subcomponent is created per entry, in the order of the merged
+object's keys, except that an entry holding a `priority` member is placed by it, as for the listener records of a
+[composite effect](#composite-effects): a number (higher numbers first), `"first"`, `"last"`, or `"before:key"` or
+`"after:key"` naming another entry. An entry whose value is `null` is skipped. Since an object source merges key by key, layers may
+therefore contribute, reorder and remove entries independently:
+
+```js
+fluid.def("my.page", {
+    $layers: "fluid.component",
+    stylesheets: {
+        main: {href: "main.css"},
+        print: {priority: "after:main", href: "print.css"}
+    },
+    links: {
+        $component: {
+            $layers: "my.stylesheetLink",
+            $for: {source: "{page}.stylesheets", valueAs: "sheet", keyAs: "key"}
+        }
+    }
+});
+
+fluid.def("my.mathsPage", {
+    $layers: "my.page",
+    stylesheets: {
+        katex: {priority: "before:main", href: "katex.css"},
+        print: null                    // No print stylesheet for this page
+    }
+});
 ```
 
 **Writing through iteration variables.** When the source is sited, each `valueAs` variable keeps track of where its
@@ -578,6 +736,32 @@ fluid.def("my.plugin", {
 });
 ```
 
+Each entry of a linkage may also bear:
+
+* `$if` - A condition, as for [`$if`](#if) on a subcomponent, applying the linkage only while it holds.
+* `selector` - In place of `inputLayers`, an [IL selector](#selectors) which a component must match, so that a linkage
+  can depend on a component's ancestors as well as its own layers. For example
+  `"my.post > my.header"` matches a component bearing `my.header` whose parent bears `my.post`.
+* `scope` - A reference to a component, e.g. `"{self}"`, confining the linkage to components at or below it.
+
+```js
+fluid.def("my.site", {
+    $layers: "fluid.component",
+    headerLinkage: {
+        $linkage: [{
+            selector: "my.type.post > my.header",
+            outputLayers: "my.header.post",
+            scope: "{self}",
+            $if: "{self}.adaptHeaders"
+        }]
+    }
+});
+```
+
+The linkage reacts to changes in a component's layers and those of its ancestors: a header acquires `my.header.post`
+as soon as its parent acquires `my.type.post`, for example through a dynamic layer, and loses it again when the parent
+loses it.
+
 The linkage rule's effect lasts as long as the component holding it. Linkages are sometimes called
 [co-occurrences](https://hal.science/hal-01854418/file/AnAnatomyOfInteraction_authorversion.pdf).  
 
@@ -679,6 +863,10 @@ discover a widget's `preferredSize` or whether it bears `fluid.topLevelWidget`.
 * `fluid.isDestroyed(that, [strict])` - `true` if destruction of `that` has begun (or with `strict`, completed)
 * `fluid.unwrapProxy(value)` - The plain value underlying a component or mat proxy
 * `fluid.hasLayer(that, layerName)` - `true` if `layerName` is in the component's resolved `$layers`
+* `fluid.definedLayers(...candidates)` - Those of the candidate layer names (strings or arrays of them) which are
+  defined, in the order supplied. Since a later layer is stronger, list the most specific candidate last
+* `fluid.firstDefinedLayer(...candidates)` - An array holding just the first of the candidates which is defined, in
+  order of preference, or an empty array if none is
 
 [^1]: From components designated by ordinary user configuration - under the covers, components with unavailable 
 constituents actually continue to evaluate and elaborate as normal, routing around the individual unavailable

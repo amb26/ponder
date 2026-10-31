@@ -109,7 +109,7 @@ This holds whether the nested widget is visible or hidden.
 
     ```js
     fluid.def("fluid.demos.ai.closestNoteImageGenerator", {
-        $layers: ["fluid.demos.imageGenerator", "fluid.topLevelWidget"],
+        $layers: ["fluid.topLevelWidget", "fluid.demos.imageGenerator"],
         noteFinder: {
             $component: {
                 $layers: "fluid.demos.closestNoteFinder",

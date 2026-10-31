@@ -142,6 +142,12 @@ pygmentsCodefencesGuessSyntax = true
     weight = 5
 
 [[menu.main]]
+    name = "Layer Linearisation"
+    parent = "docs"
+    url = "docs/linearisation-algorithm"
+    weight = 6
+
+[[menu.main]]
     name = "About"
     url = "page/about/"
     weight = 3

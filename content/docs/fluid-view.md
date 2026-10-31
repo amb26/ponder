@@ -5,7 +5,7 @@ type: infusion-docs
 ---
 
 This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the
-Single File Component (SFC) format, and the machinery of views. It builds on the
+Single File Component (SFC) format, the machinery of views, and rendering pages under node. It builds on the
 [Fluid Integration Language](/docs/fluid-integration-language) (layers, references, `$compute`, `$method`, `$effect`,
 `$component`) and on [`fluid.cell`](/docs/fluid-signals) (signals, effects, source tracking).
 
@@ -78,7 +78,8 @@ A component can equally be created from JavaScript with `my.counter({container: 
 
 When the SFC is loaded, its script is patched before execution:
 
-* `$layers` defaults to `["fluid.component", "fluid.sfcLayer"]`.
+* `$layers` defaults to `["fluid.sfcLayer", "fluid.component"]`, and `fluid.sfcLayer` is otherwise placed first, where it
+  is weakest, amongst any `$layers` written.
 * A `view` subcomponent is added, with layer `fluid.sfcTemplateViewComponent`, whose `template` refers to the SFC's
   `<template>` block as `{sfcLayer: "my.counter"}` (see [Views](#views)). Since this is an ordinary member of the view,
   a layer derived from the SFC's layer may replace the template by supplying its own, e.g.
@@ -100,6 +101,14 @@ that owns the view, exactly as in configuration.
 | `@{count}` | Shorthand for `{self}.count` |
 | `@{todo.text}` | Shorthand for `{self}.todo.text` |
 | `@{{todoList}.todos.length}` | A full [context reference](/docs/fluid-integration-language#references) |
+| `@{my.urlize({self}.tag)}` | A call to a global function, whose arguments are references or literals as for a compact [`$compute`](/docs/fluid-integration-language#compute) |
+| `@@{count}` | The literal text `@{count}`, not interpolated |
+
+A function call is recomputed whenever any of its arguments changes, as for a `$compute`:
+
+```html
+<a href="/tags/@{my.urlize({self}.tag)}/">@{tag}</a>
+```
 
 Interpolations can be mixed with literal text, as in `title="Busy: @{busy}"`, which is rendered as a string. Every
 binding is a fine-grained effect bound to its own text node or attribute. A change updates exactly that node, with no
@@ -224,7 +233,84 @@ Each `my.todoItem` then renders its own SFC template, in which `@{todo.text}` re
 Adding to or removing from `todos` creates or destroys exactly the corresponding item views.
 
 A subcomponent with [`$if`](/docs/fluid-integration-language#if) renders into its `@id` element only while its
-condition is true.
+condition is true. A subcomponent [removed](/docs/fluid-integration-language#removing-a-subcomponent) by a stronger
+layer holding `null` at its member renders nothing, and its `@id` element is omitted from the document altogether until
+the member is restored.
+
+The template of a subcomponent with `elideParent: false` may have several top-level nodes. All of them are rendered
+in sequence inside the `@id` element, after those of any preceding list member.
+
+#### Fragment slots: `<fluid-fragment>`
+
+Where the subcomponent's nodes must appear without any wrapping element, for example a list of `<link>` elements
+inside `<head>`, mark its place with a `<fluid-fragment>` element. The slot renders no element of its own, and the
+subcomponent's nodes, or those of each member of its list, are rendered in its place:
+
+```html
+<head>
+    <title>@{title}</title>
+    <fluid-fragment @id="stylesheetLinks"></fluid-fragment>
+</head>
+```
+
+```js
+stylesheetLinks: {
+    $component: {
+        $layers: "fluid.component",
+        $for: {source: "{page}.stylesheets", valueAs: "sheet"},
+        view: {
+            $component: {
+                $layers: "fluid.templateViewComponent",
+                template: `<link rel="stylesheet" href="@{sheet.href}">`
+            }
+        }
+    }
+}
+```
+
+#### Separators between list members
+
+A list member can render a separator before itself using its position, bound by
+[`positionAs`](/docs/fluid-integration-language#for). This works the same way whether the source is an array or a
+keyed collection:
+
+```js
+tagLinks: {   // Rendered into <p @id="tagLinks"></p> as "Alpha, Beta, Gamma"
+    $component: {
+        $layers: "fluid.component",
+        $for: {source: "{post}.tags", valueAs: "tag", positionAs: "position"},
+        view: {
+            $component: {
+                $layers: "fluid.templateViewComponent",
+                elideParent: false,
+                template: `<span @if="!position.first" class="separator">, </span><a href="@{tag.url}">@{tag.name}</a>`
+            }
+        }
+    }
+}
+```
+
+### Conditional elements: `@if` and `@else`
+
+```html
+<h2 @if="subtitle" class="sub">@{subtitle}</h2>
+<p @else class="nosub">No subtitle</p>
+<hr @if="!@{compact}"/>
+```
+
+An element bearing `@if` is rendered only while its condition is truthy. The condition is any expression which
+`@{...}` accepts (a bare path, a context reference or a function call), optionally enclosed in `@{` and `}`, and
+optionally preceded by `!` to negate it. As for [`$if`](/docs/fluid-integration-language#if), an unavailable value
+counts as false. An element bearing `@else` is rendered while the condition of the `@if` element preceding it, separated
+from it by nothing but whitespace, is false. An `@else` without such a predecessor is an error.
+
+References within a conditional element resolve against the component whose template it is, as for the rest of the
+template. While its condition holds, the element is rendered by an anonymous child component, so its bindings and any
+subcomponents designated by `@id` within it exist only while it is shown. The elements around it are undisturbed as it
+comes and goes.
+
+Unlike a subcomponent with `$if`, whose element in the template remains while the subcomponent renders nothing, an
+element bearing `@if` is removed from the document entirely.
 
 ## Views
 
@@ -294,7 +380,8 @@ a view, without its display.
 | `fluid.templateViewComponent` | `template` - an HTML string, or `{sfcLayer: layerName}` for the `<template>` block of that SFC |
 | `fluid.sfcTemplateViewComponent` | Tag layer which the loader adds to the view of an SFC with a `<template>` block, when it sets the view's `template` as above |
 | `fluid.selfTemplateViewComponent` | The markup its parent placed inside its `@id` element |
-| `fluid.partialViewComponent` | Composites partial templates into a parent template at `relativeContainer`, e.g. `"after:.footer"` |
+| `fluid.partialViewComponent` | Composites the [partial templates](#partial-templates) of the component's layers into its template |
+| `fluid.outputDocumentView` | Mixed in alongside a template layer: renders into a whole document of its own at `documentLocation` - see [Output documents](#output-documents-and-server-side-rendering) |
 
 Members of `fluid.viewComponent`:
 
@@ -303,6 +390,7 @@ Members of `fluid.viewComponent`:
 * `vTree` - The activated virtual tree, with all bindings resolved.
 * `elideParent` - Defaults to `true`, meaning the template's root element is merged with the container rather than
   nested inside it. Set it to `false` to render the root element inside the container.
+* `verbatim` - Defaults to `false`. If `true`, a template supplied as markup is rendered [verbatim](#verbatim-markup-and-islands).
 * `renderedContainer` - A signal holding the element once it has been rendered.
 * `renderView` - The effect that patches `vTree` into `container`.
 
@@ -373,6 +461,92 @@ view: {
 Here `renderTemplate` builds the markup imperatively, including `@on...` attributes on its root element so that events
 are delegated to a few handlers. The string is reparsed on every change, but reconciliation still keeps the DOM
 updates minimal. Choose this approach when building the markup recursively is simpler than composing subcomponents.
+
+### Partial templates
+
+A layer may contribute a **partial template**, a fragment of markup composited into the template of any component
+bearing it, without replacing that template. This lets independent layers each add to, or take away from, a shared
+page structure such as a header. The component's view must bear `fluid.partialViewComponent` alongside its template
+layer:
+
+```js
+fluid.def("my.header", {
+    $layers: "fluid.component",
+    view: {
+        $component: {
+            $layers: ["fluid.templateViewComponent", "fluid.partialViewComponent"],
+            template: `<header><h1 class="title">@{title}</h1><nav @id="navbar"></nav><p class="strapline">...</p></header>`
+        }
+    }
+});
+
+fluid.def("my.header.post", {
+    view: {
+        $component: {
+            relativeContainer: "after: h1.title",
+            partialTemplate: `<span class="date">@{date}</span>`
+        }
+    }
+});
+
+fluid.def("my.header.bare", {
+    view: {
+        $component: {
+            relativeContainer: "remove: .strapline"
+        }
+    }
+});
+```
+
+A layer contributes a partial if the view record in its own definition, `view.$component`, holds `relativeContainer`.
+Its markup is `partialTemplate` in the same record or, for a Single File Component, its `<template>` block.
+
+* `relativeContainer` - A **cutpoint** of the form `"disposition: selector"`. The selector must match exactly one node
+  of the template, by tag, `.class`, `#id`, or `@member` for the element bearing `@id="member"`, combined with descendant
+  and `>` combinators. The disposition is one of:
+    * `before` or `after` - The partial's nodes are placed before or after the matched node.
+    * `first` or `last` - They are placed at the start or end of the matched node's children.
+    * `replace` - They replace the matched node.
+    * `remove` - The matched node is removed, and the partial needs no markup.
+* `@relative` - A top-level node of a partial bearing this attribute is placed at its own cutpoint instead of its
+  layer's, e.g. `<div @relative="first: header">`, so one partial can contribute to several places.
+* `partialTemplateLayers` - A member of the merged view through which any layer may redirect the partial of another,
+  e.g. `partialTemplateLayers: {"my.header.post": {relativeContainer: "before: @navbar"}}`.
+
+Partials are composited in order of their layers' precedence, weakest first, and those placed at the same cutpoint
+appear in that order in the document. The selectors of later partials are matched against the template as composited
+so far. A malformed cutpoint, or a selector matching no node or several, makes the view's template unavailable with an
+error naming the layer.
+
+### Verbatim markup and islands
+
+A view with `verbatim: true` renders markup produced elsewhere, such as HTML from a content pipeline, without treating
+it as a template:
+
+```js
+fluid.def("my.article", {
+    $layers: "fluid.component",
+    html: "<p>Rendered from <em>Markdown</em></p><div fluid-layers=\"my.figure\" data-src=\"a.png\"></div>",
+    view: {
+        $component: {
+            $layers: "fluid.templateViewComponent",
+            verbatim: true,
+            template: "{$parent}.html"
+        }
+    }
+});
+```
+
+* The markup is not scanned for bindings, so text such as `@{count}` is rendered as it stands.
+* Whitespace is kept, and the markup may have any number of top-level nodes, all of which are rendered within the
+  container.
+* An element bearing `fluid-layers` is an **island**: it is rendered by a child component bearing those layers. The
+  child's member `dataset` holds the element's `data-` attributes, named as for the DOM's `dataset`, so
+  `data-image-caption` is read as `@{dataset.imageCaption}`. The child is named by the element's `fluid-id` attribute,
+  or otherwise receives a generated name, and the element keeps its attributes.
+
+When the markup changes, it is reconciled with the DOM as for any template. An island whose element changes layers
+is rebuilt with its new layers, and one whose element disappears is destroyed.
 
 ### Wrapping an external widget with `$bindable`
 
@@ -481,3 +655,102 @@ const toWidget = fluid.cell().computed(text => text, [model], {excludeSource: "d
 Template bindings don't need the annotation. A binding such as `value="@{text}"` writes back to the model, and when
 the model change returns, the binding compares the property with the new value and doesn't write it again. Source
 tracking is needed where a widget can't make that comparison cheaply or without side effects.
+
+## Output documents and server-side rendering
+
+The same component tree which renders live in the browser can render static pages under node, for example to build a
+website, and those pages can later be made live again in the browser. Under node, Infusion renders into documents
+implemented by [linkedom](https://github.com/WebReflection/linkedom), and is loaded with `require("infusion-6")`.
+
+### `fluid.outputDocumentView`
+
+A view bearing `fluid.outputDocumentView` alongside its template layer renders into a whole document of its own. The
+root element of its template, normally `<html>`, is rendered onto the document's root element:
+
+```js
+fluid.def("my.page", {
+    $layers: "fluid.component",
+    view: {
+        $component: {
+            $layers: ["fluid.templateViewComponent", "fluid.outputDocumentView"],
+            documentLocation: "$compute:my.outputPath({page}.entry.path)",
+            baseURL: "{site}.baseURL",
+            template: `<html><head><title>@{entry.title}</title></head><body><main @id="content"></main></body></html>`
+        }
+    }
+});
+
+fluid.def("my.site", {
+    $layers: "fluid.component",
+    baseURL: "https://example.org/blog",
+    entries: {$reactiveRoot: []},
+    pages: {
+        $component: {
+            $layers: "my.page",
+            $for: {source: "{site}.entries", valueAs: "entry"}
+        }
+    }
+});
+```
+
+* `documentLocation` - Where the document is written, e.g. `"post/first/index.html"`. A relative location resolves
+  against the working directory.
+* `baseURL` - Optional. The base URL of the site to which the page belongs. The page's root element then records the
+  relative URL of the site's root in its `fluid-site-root` attribute, e.g. `"../../"`, so that in the browser the page
+  recognises its own location wherever the site is served from, even from local files.
+
+Under node, the view creates a fresh **output document** while `documentLocation` is available, and releases it when
+the location becomes unavailable or the view is destroyed. A changed location creates a fresh document. Every output
+document is listed in the cell `fluid.outputDocuments`, as records `{dokkument, location, url}`, in order of creation.
+Nothing executes in an output document. The Single File Components of the layers of the component and its view are
+recorded in it as they would be in a live page: their styles as `<style>` elements, and their scripts as inert
+`<script type="text/x-fluid-layer">` elements, which a browser does not run.
+
+In the browser, which can only see its own document, the same view renders into the current document if
+`documentLocation` designates it, and otherwise has no container and renders nothing. The locations are compared by
+their path relative to the site's root, using `baseURL` and any `fluid-site-root` attribute recorded in the page. So a
+site's whole component tree can be booted in each of its pages, and only the page being viewed renders.
+
+### Writing documents
+
+These functions are defined in `src/framework/server/server-support.js`:
+
+* `fluid.writeOutputDocumentsWhenSettled([filenameFor], [prepare])` - Waits until the reactive graph has settled, and
+  then writes every output document which is ready.
+    * `filenameFor` receives a record of `fluid.outputDocuments` and returns the file to write. By default this is the
+      file at its location.
+    * `prepare` receives each record just before its document is serialised, e.g. to strip material not wanted in a
+      static build.
+    * Returns a promise for `{written, unchanged, unready}`, arrays of the records in each state. A file which already
+      holds exactly the document's markup is not rewritten, so a rebuild after an edit writes only the pages which
+      changed. A document is unready while any injection into it is in progress, any script is loading or any
+      component which may render into it is unavailable. Each unready record bears a `readiness` member giving the
+      reason.
+* `fluid.writeDocumentsWhenSettled(records, [prepare])` - As above, for an explicit list of `{dokkument, filename}`
+  records.
+* `fluid.writeDocumentWhenSettled(dokkument, filename)` - Writes a single document, rejecting with the reason it is
+  unready if it doesn't become ready.
+
+A single host page, whose elements bear `fluid-layers` as in the browser, can be rendered from the command line:
+
+```
+node src/framework/server/hydrate.js page.html [-o out.html]
+```
+
+This boots the page as a browser would, waits for the graph to settle, and writes the rendered page, by default to
+`page-hydrated.html`. If the graph settles with the page still unready, it exits with an error listing the pending
+effects.
+
+### Scripts
+
+A document booted under node evaluates its JavaScript scripts as a browser would, except for Infusion's own scripts,
+which node already has, inert records of injections, and scripts marked as meant for the browser alone.
+`fluid.classifyScriptNode(node)` reports the role of a script element, so that a `prepare` function can
+decide which to keep:
+
+| Role | Script |
+|---|---|
+| `"framework"` | Boots Infusion itself, and bears `fluid-hydrated`, e.g. `fluid-hydrated="%infusion-6"` |
+| `"injection"` | Injected for a Single File Component, or an inert record of one in an output document |
+| `"client"` | Payload for the browser, such as a widget library, bearing `fluid-client`. It is never evaluated under node, whether in a booted document or one rendered from a template |
+| `"page"` | Any other script |
