@@ -203,8 +203,8 @@ while the item is *not* completed. Classes in a static `class` attribute are kep
     * `.ctrl`, `.shift`, `.alt` and `.meta` require that key to be held. `.exact` additionally forbids any other.
     * `.left`, `.middle` and `.right` filter mouse buttons. `click.right` listens to `contextmenu`.
     * For keyboard events, any other modifier names a key, e.g. `@onkeyup.enter`.
-* **After the handler.** Every handler is run with update source `"dom"` (see [Source tracking](#source-tracking-and-the-dom)),
-  and is followed by `fluid.cell.stabilize()`.
+* **After the handler.** Every handler is run with the update sources `"dom"` and `"self"` of its component (see
+  [Source tracking](#source-tracking-and-the-dom)), and is followed by `fluid.cell.stabilize()`.
 
 ### Subcomponents: `@id`
 
@@ -396,6 +396,25 @@ Members of `fluid.viewComponent`:
 
 Rendering is a reconciliation of the virtual tree against the existing DOM. Elements are reused wherever they match, so
 DOM state such as focus, selection and scroll position survives updates and template edits.
+
+* **Keyed nodes.** The markup of each member of a [`$for`](/docs/fluid-integration-language#for) list is keyed by its
+  member, as is an element bearing `@id` by its member and one bearing `@if` by its block. A keyed node is reused only
+  for the same key, and is moved, never rewritten, when the list is reordered or grows. This matters wherever a node's
+  identity is the resource: in `<head>`, a `<link>` whose `href` is rewritten fetches its stylesheet again, and a
+  `<script>` runs only when it is first connected. A list keyed by record, e.g. `{main: {...}, print: {...}}`, keeps its
+  members' nodes however entries are added; a list over an array is keyed by index, so an insertion shifts the keys of
+  the members after it. Other nodes are matched by position.
+* **Nodes the rendering doesn't own are left alone.** A rendering owns the nodes it creates. Any other node, e.g. one
+  added to `<head>` by a widget loader or a browser extension, a node injected for a Single File Component, or a
+  script booting the framework, is neither reused nor removed, and keeps its place. A node created by the rendering is
+  placed immediately after the rendering's node that precedes it, so nodes appended by others stay after the
+  rendering's own. In particular, the `<style>` of an SFC injected into `<head>` follows the document's own stylesheets.
+* **Rendering over existing markup.** On the first rendering into an element which already has children, e.g. a page
+  written by a static build, the children are claimed by position, since they are expected to have been rendered from
+  the same template. Thereafter they are owned, and keyed as above.
+
+The framework writes no ids or other markers into the rendered markup. Which component rendered which node is
+recovered by rendering the same tree again over it.
 
 ## Advanced features
 
@@ -607,46 +626,74 @@ the widget. This can reset its cursor or undo history. The next section explains
 
 ### Source tracking and the DOM
 
-Every update to a cell can carry a **source**, a string naming the agent in the world that caused it. The source
-travels with the update through every computed value that depends on it. An edge marked `excludeSource: "s"` skips
-notification for updates from source `s`, and one marked `includeSource: "s"` is notified only of them (see
+Every update to a cell can carry a **source**, which identifies the agent in the world that caused it. The source
+travels with the update through every computed value that depends on it, and through any effect it causes to write
+further cells. An edge marked `excludeSource: "s"` skips notification for updates from source `s`, and one marked
+`includeSource: "s"` is notified only of them (see
 [`fluid.cell.effect`](/docs/fluid-signals#fluidcelleffectfn-staticsources-props)).
 
-The view layer tags all user activity with the source `"dom"`:
+The view layer tags all user activity, that is
 
 * every `@on...` event handler, and
 * every live-state write-back from `value`, `checked` and the like,
 
-run inside `fluid.cell.withAmbientSource("dom", ...)`, so any cell they set is updated with source `"dom"`.
+with two sources: the string `"dom"`, and the **self source** of the component whose template bound the handler or
+element. Each runs inside `fluid.cell.withAmbientSource(...)`, so any cell they set is updated with both.
 
-This allows a binding that writes *to* the DOM to ignore changes that came *from* the DOM. Without it, a value typed
-into an external widget would flow to the model and straight back into the widget. Annotate the edge that writes into
-the widget with `excludeSource: "dom"`:
+#### Excluding `"self"`: widgets that should not hear their own changes
+
+A component wrapping an external widget has a cycle: the widget reports the user's edit to the model, and the model
+change runs the effect that writes the same text back into the widget. This can reset its cursor or undo history, or,
+if the change takes time to arrive, overwrite text the user has typed since. Annotate the effect that writes into the
+widget with `excludeSource: "self"`:
 
 ```js
 readEffect: {
     $effect: {
-        func: "fluid.codemirror.updateText",
-        args: ["{self}.instance", "{self}.text"],
-        excludeSource: "dom"
+        func: "fluid.codemirror.readText",
+        args: ["{self}.text", "{self}.instance"],
+        excludeSource: "self"
     }
 }
 ```
 
-The widget-to-model listener must then run with the same source, so that its writes are recognised:
+The effect is then not notified of any change originated by its own component, nor of any change which that one causes
+in turn. Every other effect is still notified, including the same effect in another instance of the same widget, for
+example a second editor showing the same text. A change from anywhere else, such as loading a file or undoing in
+another pane, still reaches the editor.
+
+`"self"` names a source which is distinct for each component instance (it is the component's shadow). It can't be
+written as a string in configuration or confused with another component's. The view tags writes made by the
+component's own template with it automatically. A third-party widget's changes, which the view doesn't see, should be
+written back by an effect declaring `source: "self"`. Here the widget's listener only records what the widget reports,
+and the effect writes it back to the model:
 
 ```js
-instance.on("change", fluid.cell.withAmbientSource("dom", () => self.text = instance.getValue()));
+validText: null,              // set by the widget's listener: self.validText = text
+writeEffect: {
+    $effect: {
+        func: "fluid.codemirror.writeText",
+        // The instance is an argument so that nothing is written before the widget is constructed
+        args: ["{self}", "{fluid.editor}", "{self}.validText", "{self}.instance"],
+        source: "self"
+    }
+}
 ```
 
-Now typing in the editor updates `text`, which still notifies everything else (other views, computed values, the
-saved document), but not the effect that would write back into the editor. A change to `text` from any other source,
-such as loading a file or undoing in another pane, still reaches the editor.
-
-At the level of raw cells the same annotation applies to a computed edge:
+Where a write can't be made from an effect, it can be wrapped instead, with the component's self source fetched by
+`fluid.selfSource(self)`:
 
 ```js
-const toWidget = fluid.cell().computed(text => text, [model], {excludeSource: "dom"});
+instance.on("change", fluid.cell.withAmbientSource(fluid.selfSource(self), () => self.text = instance.getValue()));
+```
+
+`excludeSource: "self"` applies to the whole component, so two widgets within one component which show the same value
+would not hear each other's changes. Give each such widget a component of its own.
+
+At the level of raw cells, the same source can be supplied to an edge directly:
+
+```js
+const toWidget = fluid.cell.effect(text => widget.setText(text), [model], {excludeSource: fluid.selfSource(self)});
 ```
 
 > In the Integration Language, `excludeSource` and `includeSource` are currently honoured on `$effect` records only.
@@ -655,6 +702,26 @@ const toWidget = fluid.cell().computed(text => text, [model], {excludeSource: "d
 Template bindings don't need the annotation. A binding such as `value="@{text}"` writes back to the model, and when
 the model change returns, the binding compares the property with the new value and doesn't write it again. Source
 tracking is needed where a widget can't make that comparison cheaply or without side effects.
+
+#### `"dom"`: changes the user made
+
+`"dom"` marks every change made by the user through any view. It is useful with `includeSource`, to act on the user's
+own changes only. For example, an effect that records undo history, sets a dirty flag, or reports analytics:
+
+```js
+markDirty: {
+    $effect: {
+        func: self => self.dirty = true,
+        args: ["{self}", "{self}.document"],
+        includeSource: "dom"
+    }
+}
+```
+
+`excludeSource: "dom"` is almost always a mistake. It ignores changes made through *every* widget, not just one's own, so
+a widget excluding it is not told when the user edits the same value elsewhere. Use `"self"` instead. To react only to
+changes from some other agent, such as a server or a collaborator, have that agent tag its writes (e.g.
+`cell.set(value, "remote")`), and select them with `includeSource`.
 
 ## Output documents and server-side rendering
 

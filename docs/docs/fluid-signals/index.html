@@ -61,7 +61,7 @@ Construction fluid.">
   "headline": "Fluid Signals API",
   "description" : "This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra capabilities above traditional reactive libraries, and also a more extended essay explaining its goals in the context of a malleable substrate.\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.\nConstruction fluid.",
   "inLanguage" : "en",
-  "wordCount":  2334 ,
+  "wordCount":  2827 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -269,6 +269,8 @@ behind the cell to bring its value up to date. A call to <code>Cell.get</code> o
 function (that is, further up its call stack) will set up an automatic subscription of the function to updates of that cell, rerunning the function whenever the value
 changes. If a further invocation of the <code>computed</code> does not execute <code>Cell.get</code> for that cell, the dynamic subscription
 will be torn down.</p>
+<p>To read a cell within a computation without subscribing to it, read it within
+<a href="#fluidcelluntrackedfn"><code>fluid.cell.untracked</code></a>.</p>
 <h3 id="cellsetnewvalue-source">Cell.set(newValue, [source])</h3>
 <ul>
 <li><code>{any} newValue</code> The new value to which the cell is to be updated</li>
@@ -278,11 +280,25 @@ will be torn down.</p>
 reactive tree. Any computed values that are depended on by effects will be marked to execute when
 <a href="#fluidcellstabilize"><code>fluid.cell.stabilize</code></a> is next called. Computed values that are not depended on by effects will
 only be updated if <code>Cell.get</code> is called for a cell which depends on them.</p>
-<p>Optionally, at the time of calling <code>Cell.set</code>, the reactive update can be marked with a <code>source</code>, which is a string
-encoding the identity of the source in the world triggering the change. An effect marked with a matching string
-in its <code>excludeSource</code> will skip notification. This scheme allows the reactive graph to avoid cyclically propagating changes
+<p>Optionally, at the time of calling <code>Cell.set</code>, the reactive update can be marked with a <code>source</code>, which encodes the
+identity of the source in the world triggering the change. A source is usually a string, but may be any value compared
+by identity, e.g. the self source of a component returned by
+<a href="../../docs/fluid-view#excluding-self-widgets-that-should-not-hear-their-own-changes"><code>fluid.selfSource</code></a>. An effect marked
+with a matching source in its <code>excludeSource</code> will skip notification. This scheme allows the reactive graph to avoid cyclically propagating changes
 back to the same source which triggered them. The second example after <a href="#fluidcelleffectfn-staticsources-props"><code>fluid.effect</code></a> shows
 this source tracking facility in action.</p>
+<p>A source travels with the update through every computed value which depends on the cell, and also through effects. Any
+cell which an effect sets whilst it runs is updated with the sources of the change which caused the effect to run, as
+well as any source of its own. A change caused by a source therefore remains marked with it however many effects it
+passes through - see <a href="https://issues.fluidproject.org/browse/FLUID-5498">FLUID-5498</a>. It is also carried across an
+<a href="#asynchronous-computations">asynchronous computation</a>. Its eventual value, once it settles, reaches its dependents
+still marked with the sources of the change which started it. Within an effect, this holds only for cells set
+synchronously by the effect&rsquo;s function, not for any set later, e.g. after an <code>await</code>.</p>
+<p>Each fresh change to a cell from outside the reactive graph carries only its own sources. The sources of an earlier change
+don&rsquo;t linger on the cell, even while an asynchronous effect that the earlier change triggered is still pending.</p>
+<p>Sources can also be applied to every cell set within a function by wrapping it with
+<code>fluid.cell.withAmbientSource(source, fn)</code>, where <code>source</code> is a source or an array of them. This returns a function
+suitable for use as an event listener. Calls may be nested, and a cell set within them carries the sources of each.</p>
 <h3 id="cell_value">Cell._value</h3>
 <p>A &ldquo;blind read&rdquo; of the current value of the cell, regardless of how stale it is, can be made by looking at the <code>_value</code>
 property. This isn&rsquo;t recommended except in specialised cases, usually of framework-building.</p>
@@ -311,7 +327,6 @@ If an existing relation is present on the target cell with the same key, it will
 <p>The additional <code>ComputedProps</code> argument can contain the following fields:</p>
 <p><code>{Object} ComputedProps</code>:</p>
 <ul>
-<li><code>{Boolean} isAsync</code> - Indicates if the computation is asynchronous.</li>
 <li><code>{Boolean} isFree</code> - Indicates if this is a &ldquo;free&rdquo; computation that will deliver unavailable values.</li>
 </ul>
 <p>Here is a basic example setting up two cells connected by a simple computation:</p>
@@ -327,23 +342,22 @@ console.log("B's value computed to ", B.get()); // Outputs 2
 <p>For a more advanced example setting up and tearing down bidirectional relationships, you can see the
 visual test sample for <a href="https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/?selectedTest=bidirectional_tests_-_temperature_conversion_with_two_nodes">Bidirectional temperature conversion</a>
 in the extended essay.</p>
-<h3 id="cellasynccomputedfn-staticsources-props">Cell.asyncComputed(fn, [staticSources], [props])</h3>
+<h3 id="asynchronous-computations">Asynchronous computations</h3>
+<p>A computation set up by <a href="#cellcomputedfn-staticsources-props"><code>Cell.computed</code></a> may be asynchronous. If its function
+returns, rather than a plain value, either:</p>
 <ul>
-<li><code>{Function | null} fn</code> - The function which will reactively evaluate this cell&rsquo;s value, or <code>null</code> if an existing relation is to be torn down</li>
-<li><code>{Cell[]} [staticSources]</code> - Any statically known cell dependencies whose reactively evaluated arguments will be supplied to <code>fn</code> when it is called</li>
-<li><code>{ComputedProps} [props]</code> - Optional additional properties to contextualise the computation</li>
-<li>Returns: <code>{Cell}</code> - This cell</li>
+<li>A <code>Promise</code> representing a deferred value or error, or</li>
+<li>An <code>AsyncIterator</code>, e.g. as returned by an
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function*">async generator</a> function,
+representing a bounded or unbounded sequence of deferred values,</li>
 </ul>
-<p>Sets up an asynchronous computed relationship between one or more cells. This is equivalent to a call to <code>Cell.computed()</code>
-with the <code>props</code> in the 3rd argument set with <code>isAsync: true</code>.</p>
-<p>In this case, the function argument <code>fn</code> rather than returning a plain value should be an <code>async</code> or <code>async*</code> function
-which returns either:</p>
-<ul>
-<li>A <code>Promise</code> representing a deferred value or error</li>
-<li>An <code>AsyncIterator</code> produced by the <code>yield</code> function indicating that this function is a
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function*">async generator</a> of a
-bounded or unbounded sequence of deferred values.</li>
-</ul>
+<p>the cell holds a <a href="#fluidpendingstalevalue-site">pending</a> value until the promise settles, or until the first value is
+yielded, and then the value it resolves to or yields. A promise which rejects leaves the cell holding an
+<a href="#unavailable-values">unavailable value</a> reporting the error. Computations which depend on the cell are not run with the
+promise, but once its value is available.</p>
+<p>Whether a computation is asynchronous is discovered from what its function returns, and so no declaration is needed -
+an <code>async</code> function, and a plain function which returns a promise, are treated alike. Once a computation has returned a
+promise or async iterator, its cell is marked pending from the outset of each later run.</p>
 <p>Here&rsquo;s an example receiving a result through an asynchronous computation. Rather than manually waiting for event turns
 as here, asynchronous results are more conveniently received through <a href="#fluidcellsignaltopromisevalsignal">fluid.cell.signalToPromise</a>, see below.</p>
 <textarea class="fluid-code-box" rows="13">
@@ -351,7 +365,7 @@ import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
 
 const A = fluid.cell(1);
 
-const B = fluid.cell().asyncComputed(a =>
+const B = fluid.cell().computed(a =>
     new Promise(resolve => setTimeout(() => resolve(a + 1), 0)), [A]);
 
 B.get(); // Trigger fetch of B - returns unavailable value
@@ -378,8 +392,12 @@ console.log("B's value computed to ", B.get()); // Outputs B's value computed to
 <p><code>{Boolean}  [props.isFree]</code> - If true, the effect will run even if some sources are unavailable, delivering unavailable values in their place.</p>
 </li>
 <li>
-<p><code>{String}   [props.excludeSource]</code> - If this optional field is populated, a change triggered by <code>Cell.set</code> whose source name (supplied as
+<p><code>{any}      [props.excludeSource]</code> - If this optional field is populated, a change triggered by <code>Cell.set</code> whose source (supplied as
 the <code>source</code> argument there) matches this value will skip notifying this effect.</p>
+</li>
+<li>
+<p><code>{any}      [props.includeSource]</code> - If this optional field is populated, only a change whose source matches this value
+will notify this effect.</p>
 </li>
 <li>
 <p>Returns: <code>{Effect}</code></p>
@@ -489,13 +507,13 @@ Blogger.dispose();
 <li>Returns: <code>Promise&lt;any&gt;</code> - A Promise that resolves with the signal&rsquo;s first available value.</li>
 </ul>
 <p>Gear from the world of signals into a Promise that can be <code>await</code>ed.</p>
-<p>The <a href="#cellasynccomputedfn-staticsources-props"><code>asyncComputed</code></a> example from above is more conveniently written:</p>
+<p>The <a href="#asynchronous-computations">asynchronous computation</a> example from above is more conveniently written:</p>
 <textarea class="fluid-code-box">
 import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs";
 
 const A = fluid.cell(1);
 
-const B = fluid.cell().asyncComputed(a =>
+const B = fluid.cell().computed(a =>
     new Promise(resolve => setTimeout(() => resolve(a + 1), 0)), [A]);
 
 console.log("B's value computed to ",
@@ -510,6 +528,31 @@ console.log("B's value computed to ",
 Finds the incoming edge corresponding to the given static sources and triggers an update for this cell along that edge. Particularly
 useful when the value is computed via an asynchronous activity in the world &mdash; if the edge is async, the cell&rsquo;s value
 will be set to stale and the asynchronous activity will be restarted.</p>
+<h3 id="fluidcelluntrackedfn">fluid.cell.untracked(fn)</h3>
+<ul>
+<li><code>{Function} fn</code> - The function to execute without tracking</li>
+<li>Returns: <code>{any}</code> - The value returned by <code>fn</code></li>
+</ul>
+<p>Executes a function, within a computation or effect, without subscribing the computation to any cell which the function
+reads. This suits a value which is consulted rather than depended upon. For example, an effect which closes a popup on
+a press outside it should read whether the popup is open, but should not rerun when it is opened, since opening it is no
+reason to look again at a press made before it was opened:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">.</span><span class="nx">effect</span><span class="p">(</span><span class="nx">press</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">press</span> <span class="o">&amp;&amp;</span> <span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">.</span><span class="nx">untracked</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="nx">popupOpen</span><span class="p">.</span><span class="nx">get</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">popup</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">press</span><span class="p">.</span><span class="nx">target</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">popupOpen</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span> <span class="p">[</span><span class="nx">lastPress</span><span class="p">]);</span>
+</span></span></code></pre></div><p><code>untracked</code> is needed whenever an effect reads a value which it also writes, for example an effect which appends to a
+history:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">.</span><span class="nx">effect</span><span class="p">(</span><span class="nx">text</span> <span class="p">=&gt;</span> <span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">.</span><span class="nx">untracked</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">history</span><span class="p">.</span><span class="nx">set</span><span class="p">([...</span><span class="nx">history</span><span class="p">.</span><span class="nx">get</span><span class="p">(),</span> <span class="nx">current</span><span class="p">.</span><span class="nx">get</span><span class="p">()]);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">current</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}),</span> <span class="p">[</span><span class="nx">validText</span><span class="p">]);</span>
+</span></span></code></pre></div><p>Without it, the effect depends on <code>history</code>, so each write reruns it, and it would append forever. An effect which keeps
+triggering itself like this is stopped after <code>fluid.cell.maxEffectRuns</code> (100) runs within one stabilization, and is
+reported, naming the effect, through <code>fluid.cell.reportCycle</code>, which logs to <code>console.error</code>. In the Integration Language
+this is rarely needed, since a <a href="../../docs/fluid-integration-language#method"><code>$method</code></a> runs untracked - an effect which
+updates such values by calling a method needs no <code>untracked</code> of its own.</p>
 <h2 id="unavailable-values">Unavailable values</h2>
 <p>Some background on unavailable values is available on their <a href="../../term/unavailable-value">own page</a>. An unavailable
 value held at a cell represents a value which is either uninitialised, pending due to outstanding I/O, or an error.</p>

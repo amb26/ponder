@@ -77,12 +77,21 @@ The returned **component proxy** (from regular client JavaScript code) has these
 * **Writes** (`that.count = 6`, or mutating array methods such as `that.items.push(x)`) are recorded in the
   component's **live layer**, the highest-precedence layer, and propagate reactively. A write beneath a
   [`$reactiveRoot`](#reactiveroot) is applied immutably to the root's value.
-* Access after destruction throws.
+* **Reads within a computation**, i.e. within the function of a [`$compute`](#compute) or [`$effect`](#effect), make
+  the computation depend on the member read, so that it reruns when that member changes, as well as when its arguments
+  do. A member which is only to be consulted, without the computation depending on it, is read within
+  [`fluid.cell.untracked`](/docs/fluid-signals#fluidcelluntrackedfn), e.g. `fluid.cell.untracked(() => self.open)`.
+* Access after destruction throws, other than within a computation, where a destroyed component and each of its members
+  read as [unavailable](#unavailable-components).
 
 ### Component.destroy()
 
 Every component (via the base layer `fluid.component`) has a `destroy` method. Destruction disposes all of the
 component's effects, bindables and subcomponents. Equivalent to `fluid.destroyComponent(that)`.
+
+Once destroyed, the component and each of its members read as an unavailable value reporting the destruction. Any
+computation which read one of its members is notified once, and is then itself unavailable, unless it no longer reads
+the destroyed component when it reruns - e.g. a computation over a [selector](#selectors) whose matches have changed.
 
 A member of a [`$for`](#for) list whose source is sited is lensed from an element of that source, and is not
 destroyed in place. Instead its element is deleted from the original source data, and the list then destroys the
@@ -171,6 +180,7 @@ A component's contents are a deep merge of layer records, applied weakest first:
 |---|---|
 | `def` | Static layers named in `$layers`, linearised; more derived beats less derived |
 | `subcomponent` | The body of the [`$component`](#component) record which created this component |
+| `forLayer` | The collection element merged into this component by [`$for`](#for)'s `layerAs` |
 | `user` | The argument to a creator function |
 | `template` | Material contributed by the template which renders this component, e.g. the markup at its `@id` element, or the layers and `data-` attributes of an [island](/docs/fluid-view#verbatim-markup-and-islands) |
 | `dynamicLayers` | Layers named via references in `$layers` |
@@ -186,6 +196,11 @@ Merge rules:
   into. There are two exceptions: a [`$reactiveRoot`](#reactiveroot), whose individual members a stronger layer may
   override with literal values or references, and an [`$effect`](#composite-effects), whose listener records are merged
   by namespace.
+* A [reference](#references) from a stronger layer which resolves to `undefined` passes over to whatever weaker layers
+  supplied at that key, as if it had not been written. A layer may therefore refer to an optional value, e.g.
+  `maxCount: "{self}.options.maxCount"`, without displacing a default supplied by a weaker layer. This is reactive: once
+  the reference resolves to a value, that value is used. Only `undefined` passes over. A reference which is unavailable,
+  e.g. one to a member which does not exist, remains unavailable.
 * `null` at a member displaces whatever weaker layers supplied there. At a member holding a
   [`$component`](#removing-a-subcomponent) record, this removes the subcomponent.
 * Where several layers supply `$component` records at the same member, the `$layers` named by each are combined, those
@@ -219,6 +234,26 @@ fluid.def("my.greeter", {
 ```
 
 A reference to a path holding mutable configuration is **sited**: writing through it writes to the original site.
+
+### Literal strings beginning with `{` or `$`
+
+Only the first character of a configuration string is interpreted. A string beginning with `{` is a reference, and
+one beginning with `$` is a compact record such as `"$compute:..."`. To write a literal string beginning with either,
+escape its first character with a backslash. A string whose first character is a backslash is taken literally, without
+that backslash. A backslash anywhere else in a string has no special meaning.
+
+```js
+fluid.def("my.prices", {
+    $layers: "fluid.component",
+    json: "\\{\"a\": 1}",       // the literal text {"a": 1}
+    price: "\\$5.00",           // the literal text $5.00
+    share: "\\\\server",         // the literal text \server
+    path: "C:\\temp"            // unchanged: the backslash is not the first character
+});
+```
+
+The escape applies wherever configuration is interpreted, including arguments and nested material. Values written at
+runtime, e.g. `that.text = '{"a": 1}'`, are data, and are never interpreted.
 
 A reference which designates its own value, or a value which includes or is included by it, yields an unavailable
 value rather than a cycle - e.g. `bounds: "{self}.bounds"`. Within a `$component` record this is easily written by
@@ -312,8 +347,14 @@ r.width = 5;
 r.area;          // 20
 ```
 
-The function may be async (returning a `Promise` or async iterator, as for
-[`asyncComputed`](/docs/fluid-signals#cellasynccomputedfn-staticsources-props)); the value is pending until it settles.
+The function may be asynchronous: if it returns a `Promise` or async iterator, e.g. as an `async` or `async*` function
+does, the value is pending until the promise settles or the first value is yielded, and is then the value it resolves
+to or yields. Computations depending on it are not run with the promise itself - see
+[Asynchronous computations](/docs/fluid-signals#asynchronous-computations). No declaration is needed, since this is
+discovered from what the function returns.
+
+Members of components read within the function, as well as its arguments, are its dependencies - see the
+[component proxy](#creator-functions-layernameuserlayer).
 
 ### $effect
 
@@ -322,7 +363,15 @@ change. Effects are allocated only once the component is fully available, are no
 argument is unavailable, and are disposed when the component is destroyed or the record is withdrawn from its layers.
 
 * `includeSource`, `excludeSource` (full form only) - restrict notification by update source, as for
-  [`fluid.cell.effect`](/docs/fluid-signals#fluidcelleffectfn-staticsources-props).
+  [`fluid.cell.effect`](/docs/fluid-signals#fluidcelleffectfn-staticsources-props). Any member which an effect writes
+  is updated with the sources of the change which caused it to run, so that an effect further along can exclude a
+  change however many effects it has passed through - see [`Cell.set`](/docs/fluid-signals#cellsetnewvalue-source).
+  The source `"self"` matches the changes which the effect's own component originates, e.g. from its template's event
+  handlers - see [Source tracking and the DOM](/docs/fluid-view#excluding-self-widgets-that-should-not-hear-their-own-changes).
+* `source` (full form only) - a source with which every member the effect writes is marked, e.g. `"self"` for an
+  effect which writes back the changes a widget wrapped by its component has reported. An effect of the component
+  excluding `"self"` is then not notified of them. As for any writes made by an effect, this holds for members set
+  synchronously by its function, not for any set after an `await`.
 
 ```js
 fluid.def("my.logger", {
@@ -408,6 +457,20 @@ including a short form variant.
 * **Without `args`**: the function is called with the component followed by the caller's arguments: `func(that, ...args)`.
 * **With `args`**: the call's positional arguments are available as contexts `{0}`, `{1}`, ... An optional `:label`
   suffix on a reference documents it and is otherwise ignored. A positional argument not supplied is `undefined`.
+
+A method is an action rather than a computation. Values its function reads are consulted, and never become dependencies
+of a `$compute` or `$effect` which calls it. An effect may therefore call a method which updates the values it reads,
+such as one appending to a history, without rerunning itself:
+
+```js
+commit: "$method:my.commit({self}, {0}:text)",   // reads and writes {self}.history and {self}.text
+commitValid: {
+    $effect: {
+        func: (self, text) => self.commit(text),
+        args: ["{self}", "{self}.validText"]     // reruns only when validText changes
+    }
+}
+```
 
 ```js
 fluid.def("my.taxa", {
@@ -531,6 +594,8 @@ member then holds a `fluid.componentList` whose `list` holds the instances.
   from 0, and whether it is the first or the last member. Unlike `keyAs`, this is numeric for a keyed collection too, so
   `@if="!position.first"` can render a separator before every member but the first - see
   [Separators](/docs/fluid-view#separators-between-list-members)
+* `layerAs` - Name of a layer, holding each collection element, which is merged into its subcomponent as configuration -
+  see [Configuring members from data](#configuring-members-from-data)
 
 ```js
 fluid.def("my.editorHolder", {
@@ -576,6 +641,52 @@ fluid.def("my.mathsPage", {
     stylesheets: {
         katex: {priority: "before:main", href: "katex.css"},
         print: null                    // No print stylesheet for this page
+    }
+});
+```
+
+<a id="configuring-members-from-data"></a>**Configuring members from data.** Material reached through `valueAs` is data.
+It is final, and is never expanded: a reference within it stays a string, and a `$component` record within it stays a
+plain object. When each element instead holds configuration for its member, e.g. records describing panes written into
+a page by a build, name a layer with `layerAs`. Each element is then merged into its member at `forLayer` precedence,
+above the `$component` record and the member's own layers:
+
+* The element is expanded in the member's context, as any layer is. References within it resolve, and `$component`
+  and signal records within it are instantiated.
+* Any `$layers` in the element are added to the member's own.
+* The member keeps any value from its own layers which the element omits, and merges plain objects key by key.
+* When an element changes, its member is re-merged.
+
+Each element must be a plain object.
+
+```js
+fluid.def("my.paneHandler", {
+    $layers: "fluid.component",
+    maxObsCount: 100
+});
+
+fluid.def("my.storyPage", {
+    $layers: "fluid.component",
+    obsRows: [],
+    paneRecords: [{
+        $layers: "my.obsPaneHandler",
+        maxObsCount: 5273,
+        widgets: {
+            speciesPlot: {
+                $component: {
+                    $layers: "my.choroplethSlider",
+                    obsRows: "{storyPage}.obsRows"    // Resolved in the widget's own context
+                }
+            }
+        }
+    }, {
+        title: "Status"                              // Gets maxObsCount 100 from my.paneHandler
+    }],
+    panes: {
+        $component: {
+            $layers: "my.paneHandler",
+            $for: {source: "{storyPage}.paneRecords", layerAs: "paneRecord"}
+        }
     }
 });
 ```

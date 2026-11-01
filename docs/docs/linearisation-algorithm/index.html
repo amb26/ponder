@@ -59,7 +59,7 @@
   "headline": "Layer Linearisation",
   "description" : "This note describes how Infusion 6 orders the layers of a component: how the $layers lists written by authors are linearised into the single list held at that.$layers, and so which layer\u0026rsquo;s contributions win a merge. It records the decisions taken in FLUID-5743, which made a layer listed further right beat those to its left, together with a relaxation of the C3 consistency rule and an assessment of its consequences against the \u0026ldquo;pedalo\u0026rdquo; example of Barrett et al.",
   "inLanguage" : "en",
-  "wordCount":  1596 ,
+  "wordCount":  1574 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -241,8 +241,6 @@ decisions taken in <a href="https://issues.fluidproject.org/browse/FLUID-5743">F
 right beat those to its left, together with a relaxation of the C3 consistency rule and an assessment of its
 consequences against the &ldquo;pedalo&rdquo; example of Barrett et al.,
 <a href="https://opendylan.org/_static/c3-linearization.pdf">A Monotonic Superclass Linearization for Dylan</a> (OOPSLA 1996).</p>
-<p>The raw markdown underlying these docs is available on <a href="https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/linearisation-algorithm.md">GitHub</a>,
-suitable for direct ingestion by your friendly local neighbourhood intelligence.</p>
 <p>The implementation is in <a href="https://github.com/fluid-project/infusion-6/blob/main/src/framework/core/js/Fluid.js"><code>Fluid.js</code></a>
 (<code>fluid.C3_merge</code>, <code>fluid.C3_precedence</code>, <code>fluid.C3_precedence_parents</code> and the hierarchy resolver) and
 <a href="https://github.com/fluid-project/infusion-6/blob/main/src/framework/core/js/FluidIL.js"><code>FluidIL.js</code></a> (merge records
@@ -262,7 +260,7 @@ and subcomponent records). Tests are in <code>tests/framework-tests/core/js/Flui
 </span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">redTriangle</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="nx">t</span><span class="p">.</span><span class="nx">colour</span><span class="p">;</span>    <span class="c1">// &#34;red&#34; - my.red is listed after my.triangle, and so beats it and my.shape
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">t</span><span class="p">.</span><span class="nx">$layers</span><span class="p">;</span>   <span class="c1">// [&#34;fluid.component&#34;, &#34;my.shape&#34;, &#34;my.triangle&#34;, &#34;my.red&#34;, &#34;my.redTriangle&#34;]
-</span></span></span></code></pre></div><p>This reverses the order used by Infusion 2 to 5, in which the leftmost entry won. FLUID-5743 reported that users
+</span></span></span></code></pre></div><p>This reverses the order used by Infusion 1.x, in which the leftmost entry won. FLUID-5743 reported that users
 generally expect the opposite, matching the reading order of CSS cascades and of most mixin systems.</p>
 <h2 id="c3-underneath">C3 underneath</h2>
 <p>The linearisation itself is C3, as used by Dylan and by Python&rsquo;s method resolution order. C3 merges</p>
