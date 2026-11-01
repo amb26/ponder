@@ -18,6 +18,7 @@ fluid.def("ponder.i18n.en", {
         gcseClose: "Close",
         languageSwitcherLabel: "Language",
         translationsLabel: "Other languages: ",
+        translationsSeparator: ", ",
         oneComment: "comment",
         moreComment: "comments"
     }

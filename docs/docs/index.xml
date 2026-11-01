@@ -42,7 +42,14 @@
       <link>https://ponder.org.uk/docs/fluid-view/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
       <guid>https://ponder.org.uk/docs/fluid-view/</guid>
-      <description>This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, and the machinery of views. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).&#xA;The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.&#xA;A first component A Single File Component is a .</description>
+      <description>This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, the machinery of views, and rendering pages under node. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).&#xA;The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.&#xA;A first component A Single File Component is a .</description>
+    </item>
+    <item>
+      <title>Layer Linearisation</title>
+      <link>https://ponder.org.uk/docs/linearisation-algorithm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/linearisation-algorithm/</guid>
+      <description>This note describes how Infusion 6 orders the layers of a component: how the $layers lists written by authors are linearised into the single list held at that.$layers, and so which layer&amp;rsquo;s contributions win a merge. It records the decisions taken in FLUID-5743, which made a layer listed further right beat those to its left, together with a relaxation of the C3 consistency rule and an assessment of its consequences against the &amp;ldquo;pedalo&amp;rdquo; example of Barrett et al.</description>
     </item>
     <item>
       <title>Potentia Transmission Format</title>

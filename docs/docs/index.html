@@ -14,14 +14,14 @@
     "@type": "WebSite",
     "name": "Antranig Basman",
     
-    "url": "https:\/\/ponder.org.uk"
+    "url": "https:\/\/ponder.org.uk\/"
 }
 </script><script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "Organization",
   "name": "",
-  "url": "https:\/\/ponder.org.uk"
+  "url": "https:\/\/ponder.org.uk\/"
   
   
   
@@ -41,7 +41,7 @@
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.121.0">
+  <meta name="generator" content="Hugo 0.123.7">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../css/katex.min.css" />
   <link rel="stylesheet" href="../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../css/bootstrap.min.css" /><link rel="stylesheet" href="../css/main.css" />
@@ -101,6 +101,8 @@
               <a href="../docs/fluid-ptf">Fluid PTF</a>
               
               <a href="../docs/fluid-tldraw">Fluid tldraw integration</a>
+              
+              <a href="../docs/linearisation-algorithm">Layer Linearisation</a>
               
             </div>
           </li>
@@ -317,10 +319,38 @@ The layers marking and receiving hosting, fluid.topLevelWidget and fluid.
     </div>
     <div class="post-entry">
         
-        This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, and the machinery of views. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).
+        This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, the machinery of views, and rendering pages under node. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).
 The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.
 A first component A Single File Component is a .
         <a href="../docs/fluid-view/" class="post-read-more">[Read More]</a>
+        
+    </div>
+
+    
+
+</article>
+
+          
+            <article class="post-preview">
+    <div class="post-preview-header">
+        <a href="../docs/linearisation-algorithm/">
+            <h2 class="post-title">Layer Linearisation</h2>
+            
+            
+        </a>
+
+        <p class="post-meta">
+            <span class="post-meta">
+  
+  
+</span>
+
+        </p>
+    </div>
+    <div class="post-entry">
+        
+        This note describes how Infusion 6 orders the layers of a component: how the $layers lists written by authors are linearised into the single list held at that.$layers, and so which layer&rsquo;s contributions win a merge. It records the decisions taken in FLUID-5743, which made a layer listed further right beat those to its left, together with a relaxation of the C3 consistency rule and an assessment of its consequences against the &ldquo;pedalo&rdquo; example of Barrett et al.
+        <a href="../docs/linearisation-algorithm/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -381,7 +411,7 @@ The raw markdown underlying these docs is available on GitHub, suitable for dire
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.121.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

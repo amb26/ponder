@@ -11,13 +11,16 @@ fluid.def("ponder.postMeta.translations", {
             $layers: "fluid.component",
             $for: {
                 source: "{postMeta}.page.translations",
-                valueAs: "translation"
+                valueAs: "translation",
+                positionAs: "position"
             },
             view: {
                 $component: {
                     $layers: "fluid.templateViewComponent",
                     elideParent: false,
-                    template: "<a href=\"@{translation.permalink}\" lang=\"@{translation.lang}\">@{translation.languageName}</a>"
+                    // Hugo's `delimit` - the separator precedes every member but the first. Position is numeric, in list order,
+                    // whatever the source
+                    template: "<span @if=\"!position.first\">@{{i18n}.strings.translationsSeparator}</span><a href=\"@{translation.permalink}\" lang=\"@{translation.lang}\">@{translation.languageName}</a>"
                 }
             }
         }
@@ -25,8 +28,6 @@ fluid.def("ponder.postMeta.translations", {
 });
 </script>
 
-<!-- Hugo joins the links with the i18n "translationsSeparator" - a separator between list members has no
-     expression in a template -->
 <template>
     <span class="ponder-translations">&nbsp;&bull;&nbsp;@{{i18n}.strings.translationsLabel}<span @id="translationLinks"></span></span>
 </template>

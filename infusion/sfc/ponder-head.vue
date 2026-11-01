@@ -6,6 +6,9 @@ fluid.def("ponder.head", {
     title: "$compute:ponder.head.title({document}.page, {site}.config.params.homeTitle)",
     description: "$compute:ponder.head.description({document}.page)",
     shareImage: "$compute:ponder.head.shareImage({document}.page.params, {site}.config.params.logo, {site}.config.baseURL)",
+    // The URL of a <base> element, if any - ponder.kind.404 supplies the site's root, since the 404 page is served at
+    // whatever URL was missing, against which its relative URLs would not resolve
+    baseHref: false,
     stylesheetTags: {
         $component: {
             $layers: "ponder.stylesheetTag",
@@ -72,6 +75,8 @@ ponder.head.shareImage = function (params, logo, baseURL) {
 <template>
 <head>
     <meta charset="utf-8" />
+    <!-- Hugo emits this after most of the stylesheets, but a <base> rebases only URLs resolved after it is parsed -->
+    <base @if="baseHref" href="@{baseHref}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>@{title}</title>

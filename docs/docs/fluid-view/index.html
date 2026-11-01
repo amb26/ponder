@@ -8,7 +8,7 @@
 
       <title>Fluid View - Antranig Basman</title>
 
-  <meta name="description" content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, and the machinery of views. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).
+  <meta name="description" content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, the machinery of views, and rendering pages under node. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).
 The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.
 A first component A Single File Component is a .">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
@@ -17,14 +17,14 @@ A first component A Single File Component is a .">
     "@type": "WebSite",
     "name": "Antranig Basman",
     
-    "url": "https:\/\/ponder.org.uk"
+    "url": "https:\/\/ponder.org.uk\/"
 }
 </script><script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "Organization",
   "name": "",
-  "url": "https:\/\/ponder.org.uk"
+  "url": "https:\/\/ponder.org.uk\/"
   
   
   
@@ -39,7 +39,7 @@ A first component A Single File Component is a .">
         "@type": "ListItem",
         "position": 1,
         "item": {
-          "@id": "https:\/\/ponder.org.uk",
+          "@id": "https:\/\/ponder.org.uk\/",
           "name": "home"
         }
     },{
@@ -59,9 +59,9 @@ A first component A Single File Component is a .">
     "name" : "Antranig Basman"
   },
   "headline": "Fluid View",
-  "description" : "This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, and the machinery of views. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.\nA first component A Single File Component is a .",
+  "description" : "This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, the machinery of views, and rendering pages under node. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.\nA first component A Single File Component is a .",
   "inLanguage" : "en",
-  "wordCount":  2738 ,
+  "wordCount":  4491 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -69,7 +69,7 @@ A first component A Single File Component is a .">
   "mainEntityOfPage" : "https:\/\/ponder.org.uk\/docs\/fluid-view\/",
   "publisher" : {
     "@type": "Organization",
-    "name" : "https:\/\/ponder.org.uk",
+    "name" : "https:\/\/ponder.org.uk\/",
     "logo" : {
         "@type" : "ImageObject",
         "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -82,7 +82,7 @@ A first component A Single File Component is a .">
 
 
 <meta property="og:title" content="Fluid View" />
-<meta property="og:description" content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, and the machinery of views. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).
+<meta property="og:description" content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, the machinery of views, and rendering pages under node. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).
 The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.
 A first component A Single File Component is a .">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
@@ -91,13 +91,13 @@ A first component A Single File Component is a .">
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="Fluid View" />
-  <meta name="twitter:description" content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, and the machinery of views. It builds on the Fluid Integration …">
+  <meta name="twitter:description" content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, the machinery of views, and rendering pages under node. It …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.121.0">
+  <meta name="generator" content="Hugo 0.123.7">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
@@ -157,6 +157,8 @@ A first component A Single File Component is a .">
               <a href="../../docs/fluid-ptf">Fluid PTF</a>
               
               <a href="../../docs/fluid-tldraw">Fluid tldraw integration</a>
+              
+              <a href="../../docs/linearisation-algorithm">Layer Linearisation</a>
               
             </div>
           </li>
@@ -238,7 +240,7 @@ A first component A Single File Component is a .">
 
       <article role="main" class="blog-post">
         <p>This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the
-Single File Component (SFC) format, and the machinery of views. It builds on the
+Single File Component (SFC) format, the machinery of views, and rendering pages under node. It builds on the
 <a href="../../docs/fluid-integration-language">Fluid Integration Language</a> (layers, references, <code>$compute</code>, <code>$method</code>, <code>$effect</code>,
 <code>$component</code>) and on <a href="../../docs/fluid-signals"><code>fluid.cell</code></a> (signals, effects, source tracking).</p>
 <p>The raw markdown underlying these docs is available on <a href="https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/fluid-view.md">GitHub</a>,
@@ -300,7 +302,8 @@ element. The element is watched live: elements added to the document later are b
 <h3 id="what-the-sfc-loader-does">What the SFC loader does</h3>
 <p>When the SFC is loaded, its script is patched before execution:</p>
 <ul>
-<li><code>$layers</code> defaults to <code>[&quot;fluid.component&quot;, &quot;fluid.sfcLayer&quot;]</code>.</li>
+<li><code>$layers</code> defaults to <code>[&quot;fluid.sfcLayer&quot;, &quot;fluid.component&quot;]</code>, and <code>fluid.sfcLayer</code> is otherwise placed first, where it
+is weakest, amongst any <code>$layers</code> written.</li>
 <li>A <code>view</code> subcomponent is added, with layer <code>fluid.sfcTemplateViewComponent</code>, whose <code>template</code> refers to the SFC&rsquo;s
 <code>&lt;template&gt;</code> block as <code>{sfcLayer: &quot;my.counter&quot;}</code> (see <a href="#views">Views</a>). Since this is an ordinary member of the view,
 a layer derived from the SFC&rsquo;s layer may replace the template by supplying its own, e.g.
@@ -333,9 +336,19 @@ that owns the view, exactly as in configuration.</p>
 <td><code>@{{todoList}.todos.length}</code></td>
 <td>A full <a href="../../docs/fluid-integration-language#references">context reference</a></td>
 </tr>
+<tr>
+<td><code>@{my.urlize({self}.tag)}</code></td>
+<td>A call to a global function, whose arguments are references or literals as for a compact <a href="../../docs/fluid-integration-language#compute"><code>$compute</code></a></td>
+</tr>
+<tr>
+<td><code>@@{count}</code></td>
+<td>The literal text <code>@{count}</code>, not interpolated</td>
+</tr>
 </tbody>
 </table>
-<p>Interpolations can be mixed with literal text, as in <code>title=&quot;Busy: @{busy}&quot;</code>, which is rendered as a string. Every
+<p>A function call is recomputed whenever any of its arguments changes, as for a <code>$compute</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;/tags/@{my.urlize({self}.tag)}/&#34;</span><span class="p">&gt;</span>@{tag}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>Interpolations can be mixed with literal text, as in <code>title=&quot;Busy: @{busy}&quot;</code>, which is rendered as a string. Every
 binding is a fine-grained effect bound to its own text node or attribute. A change updates exactly that node, with no
 re-rendering of the surrounding tree.</p>
 <p>If a referenced value is unavailable, for example still loading or an error, a text binding renders the error in
@@ -481,7 +494,63 @@ sequence inside the element.</p>
 </span></span></code></pre></div><p>Each <code>my.todoItem</code> then renders its own SFC template, in which <code>@{todo.text}</code> refers to its element of the list.
 Adding to or removing from <code>todos</code> creates or destroys exactly the corresponding item views.</p>
 <p>A subcomponent with <a href="../../docs/fluid-integration-language#if"><code>$if</code></a> renders into its <code>@id</code> element only while its
-condition is true.</p>
+condition is true. A subcomponent <a href="../../docs/fluid-integration-language#removing-a-subcomponent">removed</a> by a stronger
+layer holding <code>null</code> at its member renders nothing, and its <code>@id</code> element is omitted from the document altogether until
+the member is restored.</p>
+<p>The template of a subcomponent with <code>elideParent: false</code> may have several top-level nodes. All of them are rendered
+in sequence inside the <code>@id</code> element, after those of any preceding list member.</p>
+<h4 id="fragment-slots-fluid-fragment">Fragment slots: <code>&lt;fluid-fragment&gt;</code></h4>
+<p>Where the subcomponent&rsquo;s nodes must appear without any wrapping element, for example a list of <code>&lt;link&gt;</code> elements
+inside <code>&lt;head&gt;</code>, mark its place with a <code>&lt;fluid-fragment&gt;</code> element. The slot renders no element of its own, and the
+subcomponent&rsquo;s nodes, or those of each member of its list, are rendered in its place:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>@{title}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">fluid-fragment</span> <span class="err">@</span><span class="na">id</span><span class="o">=</span><span class="s">&#34;stylesheetLinks&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">fluid-fragment</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">stylesheetLinks</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$for</span><span class="o">:</span> <span class="p">{</span><span class="nx">source</span><span class="o">:</span> <span class="s2">&#34;{page}.stylesheets&#34;</span><span class="p">,</span> <span class="nx">valueAs</span><span class="o">:</span> <span class="s2">&#34;sheet&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">view</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.templateViewComponent&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">template</span><span class="o">:</span> <span class="sb">`&lt;link rel=&#34;stylesheet&#34; href=&#34;@{sheet.href}&#34;&gt;`</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="separators-between-list-members">Separators between list members</h4>
+<p>A list member can render a separator before itself using its position, bound by
+<a href="../../docs/fluid-integration-language#for"><code>positionAs</code></a>. This works the same way whether the source is an array or a
+keyed collection:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">tagLinks</span><span class="o">:</span> <span class="p">{</span>   <span class="c1">// Rendered into &lt;p @id=&#34;tagLinks&#34;&gt;&lt;/p&gt; as &#34;Alpha, Beta, Gamma&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$for</span><span class="o">:</span> <span class="p">{</span><span class="nx">source</span><span class="o">:</span> <span class="s2">&#34;{post}.tags&#34;</span><span class="p">,</span> <span class="nx">valueAs</span><span class="o">:</span> <span class="s2">&#34;tag&#34;</span><span class="p">,</span> <span class="nx">positionAs</span><span class="o">:</span> <span class="s2">&#34;position&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">view</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.templateViewComponent&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">elideParent</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">template</span><span class="o">:</span> <span class="sb">`&lt;span @if=&#34;!position.first&#34; class=&#34;separator&#34;&gt;, &lt;/span&gt;&lt;a href=&#34;@{tag.url}&#34;&gt;@{tag.name}&lt;/a&gt;`</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="conditional-elements-if-and-else">Conditional elements: <code>@if</code> and <code>@else</code></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">h2</span> <span class="err">@</span><span class="na">if</span><span class="o">=</span><span class="s">&#34;subtitle&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;sub&#34;</span><span class="p">&gt;</span>@{subtitle}<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">p</span> <span class="err">@</span><span class="na">else</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;nosub&#34;</span><span class="p">&gt;</span>No subtitle<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">hr</span> <span class="err">@</span><span class="na">if</span><span class="o">=</span><span class="s">&#34;!@{compact}&#34;</span><span class="p">/&gt;</span>
+</span></span></code></pre></div><p>An element bearing <code>@if</code> is rendered only while its condition is truthy. The condition is any expression which
+<code>@{...}</code> accepts (a bare path, a context reference or a function call), optionally enclosed in <code>@{</code> and <code>}</code>, and
+optionally preceded by <code>!</code> to negate it. As for <a href="../../docs/fluid-integration-language#if"><code>$if</code></a>, an unavailable value
+counts as false. An element bearing <code>@else</code> is rendered while the condition of the <code>@if</code> element preceding it, separated
+from it by nothing but whitespace, is false. An <code>@else</code> without such a predecessor is an error.</p>
+<p>References within a conditional element resolve against the component whose template it is, as for the rest of the
+template. While its condition holds, the element is rendered by an anonymous child component, so its bindings and any
+subcomponents designated by <code>@id</code> within it exist only while it is shown. The elements around it are undisturbed as it
+comes and goes.</p>
+<p>Unlike a subcomponent with <code>$if</code>, whose element in the template remains while the subcomponent renders nothing, an
+element bearing <code>@if</code> is removed from the document entirely.</p>
 <h2 id="views">Views</h2>
 <p>A component <em>has</em> a view rather than <em>being</em> one. Everything to do with rendering (container, template, virtual tree
 and the effects that patch the DOM) lives in a subcomponent at the member <code>view</code>. The component itself holds only model
@@ -554,7 +623,11 @@ a view, without its display.</p>
 </tr>
 <tr>
 <td><code>fluid.partialViewComponent</code></td>
-<td>Composites partial templates into a parent template at <code>relativeContainer</code>, e.g. <code>&quot;after:.footer&quot;</code></td>
+<td>Composites the <a href="#partial-templates">partial templates</a> of the component&rsquo;s layers into its template</td>
+</tr>
+<tr>
+<td><code>fluid.outputDocumentView</code></td>
+<td>Mixed in alongside a template layer: renders into a whole document of its own at <code>documentLocation</code> - see <a href="#output-documents-and-server-side-rendering">Output documents</a></td>
 </tr>
 </tbody>
 </table>
@@ -565,6 +638,7 @@ a view, without its display.</p>
 <li><code>vTree</code> - The activated virtual tree, with all bindings resolved.</li>
 <li><code>elideParent</code> - Defaults to <code>true</code>, meaning the template&rsquo;s root element is merged with the container rather than
 nested inside it. Set it to <code>false</code> to render the root element inside the container.</li>
+<li><code>verbatim</code> - Defaults to <code>false</code>. If <code>true</code>, a template supplied as markup is rendered <a href="#verbatim-markup-and-islands">verbatim</a>.</li>
 <li><code>renderedContainer</code> - A signal holding the element once it has been rendered.</li>
 <li><code>renderView</code> - The effect that patches <code>vTree</code> into <code>container</code>.</li>
 </ul>
@@ -622,6 +696,84 @@ template that binds <code>&lt;select value=&quot;@{selection}&quot;&gt;</code> a
 </span></span></code></pre></div><p>Here <code>renderTemplate</code> builds the markup imperatively, including <code>@on...</code> attributes on its root element so that events
 are delegated to a few handlers. The string is reparsed on every change, but reconciliation still keeps the DOM
 updates minimal. Choose this approach when building the markup recursively is simpler than composing subcomponents.</p>
+<h3 id="partial-templates">Partial templates</h3>
+<p>A layer may contribute a <strong>partial template</strong>, a fragment of markup composited into the template of any component
+bearing it, without replacing that template. This lets independent layers each add to, or take away from, a shared
+page structure such as a header. The component&rsquo;s view must bear <code>fluid.partialViewComponent</code> alongside its template
+layer:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.header&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">view</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;fluid.templateViewComponent&#34;</span><span class="p">,</span> <span class="s2">&#34;fluid.partialViewComponent&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">template</span><span class="o">:</span> <span class="sb">`&lt;header&gt;&lt;h1 class=&#34;title&#34;&gt;@{title}&lt;/h1&gt;&lt;nav @id=&#34;navbar&#34;&gt;&lt;/nav&gt;&lt;p class=&#34;strapline&#34;&gt;...&lt;/p&gt;&lt;/header&gt;`</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.header.post&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">view</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">relativeContainer</span><span class="o">:</span> <span class="s2">&#34;after: h1.title&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">partialTemplate</span><span class="o">:</span> <span class="sb">`&lt;span class=&#34;date&#34;&gt;@{date}&lt;/span&gt;`</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.header.bare&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">view</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">relativeContainer</span><span class="o">:</span> <span class="s2">&#34;remove: .strapline&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>A layer contributes a partial if the view record in its own definition, <code>view.$component</code>, holds <code>relativeContainer</code>.
+Its markup is <code>partialTemplate</code> in the same record or, for a Single File Component, its <code>&lt;template&gt;</code> block.</p>
+<ul>
+<li><code>relativeContainer</code> - A <strong>cutpoint</strong> of the form <code>&quot;disposition: selector&quot;</code>. The selector must match exactly one node
+of the template, by tag, <code>.class</code>, <code>#id</code>, or <code>@member</code> for the element bearing <code>@id=&quot;member&quot;</code>, combined with descendant
+and <code>&gt;</code> combinators. The disposition is one of:
+<ul>
+<li><code>before</code> or <code>after</code> - The partial&rsquo;s nodes are placed before or after the matched node.</li>
+<li><code>first</code> or <code>last</code> - They are placed at the start or end of the matched node&rsquo;s children.</li>
+<li><code>replace</code> - They replace the matched node.</li>
+<li><code>remove</code> - The matched node is removed, and the partial needs no markup.</li>
+</ul>
+</li>
+<li><code>@relative</code> - A top-level node of a partial bearing this attribute is placed at its own cutpoint instead of its
+layer&rsquo;s, e.g. <code>&lt;div @relative=&quot;first: header&quot;&gt;</code>, so one partial can contribute to several places.</li>
+<li><code>partialTemplateLayers</code> - A member of the merged view through which any layer may redirect the partial of another,
+e.g. <code>partialTemplateLayers: {&quot;my.header.post&quot;: {relativeContainer: &quot;before: @navbar&quot;}}</code>.</li>
+</ul>
+<p>Partials are composited in order of their layers&rsquo; precedence, weakest first, and those placed at the same cutpoint
+appear in that order in the document. The selectors of later partials are matched against the template as composited
+so far. A malformed cutpoint, or a selector matching no node or several, makes the view&rsquo;s template unavailable with an
+error naming the layer.</p>
+<h3 id="verbatim-markup-and-islands">Verbatim markup and islands</h3>
+<p>A view with <code>verbatim: true</code> renders markup produced elsewhere, such as HTML from a content pipeline, without treating
+it as a template:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.article&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">html</span><span class="o">:</span> <span class="s2">&#34;&lt;p&gt;Rendered from &lt;em&gt;Markdown&lt;/em&gt;&lt;/p&gt;&lt;div fluid-layers=\&#34;my.figure\&#34; data-src=\&#34;a.png\&#34;&gt;&lt;/div&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">view</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.templateViewComponent&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">verbatim</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">template</span><span class="o">:</span> <span class="s2">&#34;{$parent}.html&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><ul>
+<li>The markup is not scanned for bindings, so text such as <code>@{count}</code> is rendered as it stands.</li>
+<li>Whitespace is kept, and the markup may have any number of top-level nodes, all of which are rendered within the
+container.</li>
+<li>An element bearing <code>fluid-layers</code> is an <strong>island</strong>: it is rendered by a child component bearing those layers. The
+child&rsquo;s member <code>dataset</code> holds the element&rsquo;s <code>data-</code> attributes, named as for the DOM&rsquo;s <code>dataset</code>, so
+<code>data-image-caption</code> is read as <code>@{dataset.imageCaption}</code>. The child is named by the element&rsquo;s <code>fluid-id</code> attribute,
+or otherwise receives a generated name, and the element keeps its attributes.</li>
+</ul>
+<p>When the markup changes, it is reconciled with the DOM as for any template. An island whose element changes layers
+is rebuilt with its new layers, and one whose element disappears is destroyed.</p>
 <h3 id="wrapping-an-external-widget-with-bindable">Wrapping an external widget with <code>$bindable</code></h3>
 <blockquote>
 <p><code>$bindable</code> is <strong>experimental and unstable</strong>. See <a href="../../docs/fluid-integration-language#bindable">its definition</a>.</p>
@@ -708,6 +860,111 @@ A <code>$compute</code> record does not yet forward them, so use an <code>$effec
 <p>Template bindings don&rsquo;t need the annotation. A binding such as <code>value=&quot;@{text}&quot;</code> writes back to the model, and when
 the model change returns, the binding compares the property with the new value and doesn&rsquo;t write it again. Source
 tracking is needed where a widget can&rsquo;t make that comparison cheaply or without side effects.</p>
+<h2 id="output-documents-and-server-side-rendering">Output documents and server-side rendering</h2>
+<p>The same component tree which renders live in the browser can render static pages under node, for example to build a
+website, and those pages can later be made live again in the browser. Under node, Infusion renders into documents
+implemented by <a href="https://github.com/WebReflection/linkedom">linkedom</a>, and is loaded with <code>require(&quot;infusion-6&quot;)</code>.</p>
+<h3 id="fluidoutputdocumentview"><code>fluid.outputDocumentView</code></h3>
+<p>A view bearing <code>fluid.outputDocumentView</code> alongside its template layer renders into a whole document of its own. The
+root element of its template, normally <code>&lt;html&gt;</code>, is rendered onto the document&rsquo;s root element:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.page&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">view</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;fluid.templateViewComponent&#34;</span><span class="p">,</span> <span class="s2">&#34;fluid.outputDocumentView&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">documentLocation</span><span class="o">:</span> <span class="s2">&#34;$compute:my.outputPath({page}.entry.path)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">baseURL</span><span class="o">:</span> <span class="s2">&#34;{site}.baseURL&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">template</span><span class="o">:</span> <span class="sb">`&lt;html&gt;&lt;head&gt;&lt;title&gt;@{entry.title}&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;main @id=&#34;content&#34;&gt;&lt;/main&gt;&lt;/body&gt;&lt;/html&gt;`</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.site&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">baseURL</span><span class="o">:</span> <span class="s2">&#34;https://example.org/blog&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">entries</span><span class="o">:</span> <span class="p">{</span><span class="nx">$reactiveRoot</span><span class="o">:</span> <span class="p">[]},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">pages</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.page&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$for</span><span class="o">:</span> <span class="p">{</span><span class="nx">source</span><span class="o">:</span> <span class="s2">&#34;{site}.entries&#34;</span><span class="p">,</span> <span class="nx">valueAs</span><span class="o">:</span> <span class="s2">&#34;entry&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><ul>
+<li><code>documentLocation</code> - Where the document is written, e.g. <code>&quot;post/first/index.html&quot;</code>. A relative location resolves
+against the working directory.</li>
+<li><code>baseURL</code> - Optional. The base URL of the site to which the page belongs. The page&rsquo;s root element then records the
+relative URL of the site&rsquo;s root in its <code>fluid-site-root</code> attribute, e.g. <code>&quot;../../&quot;</code>, so that in the browser the page
+recognises its own location wherever the site is served from, even from local files.</li>
+</ul>
+<p>Under node, the view creates a fresh <strong>output document</strong> while <code>documentLocation</code> is available, and releases it when
+the location becomes unavailable or the view is destroyed. A changed location creates a fresh document. Every output
+document is listed in the cell <code>fluid.outputDocuments</code>, as records <code>{dokkument, location, url}</code>, in order of creation.
+Nothing executes in an output document. The Single File Components of the layers of the component and its view are
+recorded in it as they would be in a live page: their styles as <code>&lt;style&gt;</code> elements, and their scripts as inert
+<code>&lt;script type=&quot;text/x-fluid-layer&quot;&gt;</code> elements, which a browser does not run.</p>
+<p>In the browser, which can only see its own document, the same view renders into the current document if
+<code>documentLocation</code> designates it, and otherwise has no container and renders nothing. The locations are compared by
+their path relative to the site&rsquo;s root, using <code>baseURL</code> and any <code>fluid-site-root</code> attribute recorded in the page. So a
+site&rsquo;s whole component tree can be booted in each of its pages, and only the page being viewed renders.</p>
+<h3 id="writing-documents">Writing documents</h3>
+<p>These functions are defined in <code>src/framework/server/server-support.js</code>:</p>
+<ul>
+<li><code>fluid.writeOutputDocumentsWhenSettled([filenameFor], [prepare])</code> - Waits until the reactive graph has settled, and
+then writes every output document which is ready.
+<ul>
+<li><code>filenameFor</code> receives a record of <code>fluid.outputDocuments</code> and returns the file to write. By default this is the
+file at its location.</li>
+<li><code>prepare</code> receives each record just before its document is serialised, e.g. to strip material not wanted in a
+static build.</li>
+<li>Returns a promise for <code>{written, unchanged, unready}</code>, arrays of the records in each state. A file which already
+holds exactly the document&rsquo;s markup is not rewritten, so a rebuild after an edit writes only the pages which
+changed. A document is unready while any injection into it is in progress, any script is loading or any
+component which may render into it is unavailable. Each unready record bears a <code>readiness</code> member giving the
+reason.</li>
+</ul>
+</li>
+<li><code>fluid.writeDocumentsWhenSettled(records, [prepare])</code> - As above, for an explicit list of <code>{dokkument, filename}</code>
+records.</li>
+<li><code>fluid.writeDocumentWhenSettled(dokkument, filename)</code> - Writes a single document, rejecting with the reason it is
+unready if it doesn&rsquo;t become ready.</li>
+</ul>
+<p>A single host page, whose elements bear <code>fluid-layers</code> as in the browser, can be rendered from the command line:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">node src/framework/server/hydrate.js page.html [-o out.html]
+</span></span></code></pre></div><p>This boots the page as a browser would, waits for the graph to settle, and writes the rendered page, by default to
+<code>page-hydrated.html</code>. If the graph settles with the page still unready, it exits with an error listing the pending
+effects.</p>
+<h3 id="scripts">Scripts</h3>
+<p>A document booted under node evaluates its JavaScript scripts as a browser would, except for Infusion&rsquo;s own scripts,
+which node already has, inert records of injections, and scripts marked as meant for the browser alone.
+<code>fluid.classifyScriptNode(node)</code> reports the role of a script element, so that a <code>prepare</code> function can
+decide which to keep:</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Script</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&quot;framework&quot;</code></td>
+<td>Boots Infusion itself, and bears <code>fluid-hydrated</code>, e.g. <code>fluid-hydrated=&quot;%infusion-6&quot;</code></td>
+</tr>
+<tr>
+<td><code>&quot;injection&quot;</code></td>
+<td>Injected for a Single File Component, or an inert record of one in an output document</td>
+</tr>
+<tr>
+<td><code>&quot;client&quot;</code></td>
+<td>Payload for the browser, such as a widget library, bearing <code>fluid-client</code>. It is never evaluated under node, whether in a booted document or one rendered from a template</td>
+</tr>
+<tr>
+<td><code>&quot;page&quot;</code></td>
+<td>Any other script</td>
+</tr>
+</tbody>
+</table>
 
 
         
@@ -775,7 +1032,7 @@ tracking is needed where a widget can&rsquo;t make that comparison cheaply or wi
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="../../docs/fluid-ptf/" data-toggle="tooltip" data-placement="top" title="Potentia Transmission Format">&larr; Previous Post</a>
+              <a href="../../docs/linearisation-algorithm/" data-toggle="tooltip" data-placement="top" title="Layer Linearisation">&larr; Previous Post</a>
             </li>
           
           
@@ -819,7 +1076,7 @@ tracking is needed where a widget can&rsquo;t make that comparison cheaply or wi
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.121.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

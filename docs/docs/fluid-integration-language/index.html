@@ -16,14 +16,14 @@ The raw markdown underlying these docs is available on GitHub, suitable for dire
     "@type": "WebSite",
     "name": "Antranig Basman",
     
-    "url": "https:\/\/ponder.org.uk"
+    "url": "https:\/\/ponder.org.uk\/"
 }
 </script><script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "Organization",
   "name": "",
-  "url": "https:\/\/ponder.org.uk"
+  "url": "https:\/\/ponder.org.uk\/"
   
   
   
@@ -38,7 +38,7 @@ The raw markdown underlying these docs is available on GitHub, suitable for dire
         "@type": "ListItem",
         "position": 1,
         "item": {
-          "@id": "https:\/\/ponder.org.uk",
+          "@id": "https:\/\/ponder.org.uk\/",
           "name": "home"
         }
     },{
@@ -60,7 +60,7 @@ The raw markdown underlying these docs is available on GitHub, suitable for dire
   "headline": "Fluid Integration Language",
   "description" : "This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6 components are defined, composed and wired together as an integration domain. It is implemented in FluidIL.js on top of the reactive primitive fluid.cell, whose semantics (signals, effects, unavailable values, deferred stabilization) it inherits throughout.\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.",
   "inLanguage" : "en",
-  "wordCount":  4039 ,
+  "wordCount":  5171 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -68,7 +68,7 @@ The raw markdown underlying these docs is available on GitHub, suitable for dire
   "mainEntityOfPage" : "https:\/\/ponder.org.uk\/docs\/fluid-integration-language\/",
   "publisher" : {
     "@type": "Organization",
-    "name" : "https:\/\/ponder.org.uk",
+    "name" : "https:\/\/ponder.org.uk\/",
     "logo" : {
         "@type" : "ImageObject",
         "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -95,7 +95,7 @@ The raw markdown underlying these docs is available on GitHub, suitable for dire
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.121.0">
+  <meta name="generator" content="Hugo 0.123.7">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
@@ -155,6 +155,8 @@ The raw markdown underlying these docs is available on GitHub, suitable for dire
               <a href="../../docs/fluid-ptf">Fluid PTF</a>
               
               <a href="../../docs/fluid-tldraw">Fluid tldraw integration</a>
+              
+              <a href="../../docs/linearisation-algorithm">Layer Linearisation</a>
               
             </div>
           </li>
@@ -322,23 +324,41 @@ curly brace and typically take the form <code>{context}.path.into.value</code>.<
 <h3 id="layers-1">$layers</h3>
 <p><code>{String|String[]}</code> - The parent layers of this layer. A component&rsquo;s full layer list is linearised from the layer
 hierarchy by C3 (as for Python&rsquo;s method resolution order): a layer beats the layers it inherits from, and a parent
-listed earlier in <code>$layers</code> beats one listed later. The resolved list is readable at <code>that.$layers</code>. To be instantiable
-as a component, its layer hierarchy must somewhere include <code>fluid.component</code>.</p>
+listed later in <code>$layers</code> beats one listed earlier. A parent listed after a layer which already inherits from it is
+ignored, since it cannot beat that layer, and that layer&rsquo;s own hierarchy already places it. The resolved list is
+readable at <code>that.$layers</code>, weakest first. To be instantiable
+as a component, its layer hierarchy must somewhere include <code>fluid.component</code>. The algorithm and its rationale are
+described in <a href="../../docs/linearisation-algorithm">Layer Linearisation</a>.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.shape&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span> <span class="nx">sides</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">colour</span><span class="o">:</span> <span class="s2">&#34;black&#34;</span><span class="p">});</span>
 </span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.red&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span> <span class="nx">colour</span><span class="o">:</span> <span class="s2">&#34;red&#34;</span><span class="p">});</span>
 </span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.triangle&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.shape&#34;</span><span class="p">,</span> <span class="nx">sides</span><span class="o">:</span> <span class="mi">3</span><span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.redTriangle&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;my.red&#34;</span><span class="p">,</span> <span class="s2">&#34;my.triangle&#34;</span><span class="p">]});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.redTriangle&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$layers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;my.triangle&#34;</span><span class="p">,</span> <span class="s2">&#34;my.red&#34;</span><span class="p">]});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">redTriangle</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="nx">t</span><span class="p">.</span><span class="nx">sides</span><span class="p">;</span>   <span class="c1">// 3 - my.triangle beats my.shape
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">t</span><span class="p">.</span><span class="nx">colour</span><span class="p">;</span>  <span class="c1">// &#34;red&#34; - my.red is listed before my.triangle and so beats my.shape
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">t</span><span class="p">.</span><span class="nx">colour</span><span class="p">;</span>  <span class="c1">// &#34;red&#34; - my.red is listed after my.triangle and so beats my.shape
 </span></span></span></code></pre></div><p>An entry in <code>$layers</code> which is itself a <a href="#references">reference</a> is a <strong>dynamic layer name</strong>, resolved reactively from the
 component&rsquo;s context. The referenced value may be a layer name or array of names:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.panel&#34;</span><span class="p">,</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span> <span class="s2">&#34;{self}.flavour&#34;</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">flavour</span><span class="o">:</span> <span class="s2">&#34;my.compactPanel&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span></code></pre></div><p>Dynamic layers merge above all static layers and literal configuration (see <a href="#merging-and-precedence">precedence</a>).</p>
+</span></span></code></pre></div><p>Dynamic layers merge above all static layers and literal configuration, wherever they appear in the list (see
+<a href="#merging-and-precedence">precedence</a>). Amongst themselves, a later reference beats an earlier one, and the dynamic
+layers of a derived layer beat those it inherits.</p>
+<p>A dynamic layer name which names an undefined layer makes the component unavailable until the layer is defined. To
+choose amongst candidate layers only those which exist, compute the name with <code>fluid.definedLayers</code> or
+<code>fluid.firstDefinedLayer</code> (see <a href="#utilities">Utilities</a>):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.document&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span> <span class="s2">&#34;{self}.typeLayers&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;post&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">candidates</span><span class="o">:</span> <span class="s2">&#34;$compute:my.document.candidates({self}.type)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// my.type.post if it is defined, otherwise my.type.default
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">typeLayers</span><span class="o">:</span> <span class="s2">&#34;$compute:fluid.firstDefinedLayer({self}.candidates)&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">my</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">candidates</span> <span class="o">=</span> <span class="nx">type</span> <span class="p">=&gt;</span> <span class="p">[</span><span class="s2">&#34;my.type.&#34;</span> <span class="o">+</span> <span class="nx">type</span><span class="p">,</span> <span class="s2">&#34;my.type.default&#34;</span><span class="p">];</span>
+</span></span></code></pre></div><p>Since these test whether a layer is defined reactively, the component switches to the preferred layer as soon as it is
+defined, and back again if it is deleted.</p>
 <p>A cycle in the hierarchy, or a layer which is not defined, makes the component unavailable.</p>
 <h4 id="merging-and-precedence">Merging and precedence</h4>
 <p>A component&rsquo;s contents are a deep merge of layer records, applied weakest first:</p>
@@ -363,6 +383,10 @@ component&rsquo;s context. The referenced value may be a layer name or array of 
 <td>The argument to a creator function</td>
 </tr>
 <tr>
+<td><code>template</code></td>
+<td>Material contributed by the template which renders this component, e.g. the markup at its <code>@id</code> element, or the layers and <code>data-</code> attributes of an <a href="../../docs/fluid-view#verbatim-markup-and-islands">island</a></td>
+</tr>
+<tr>
 <td><code>dynamicLayers</code></td>
 <td>Layers named via references in <code>$layers</code></td>
 </tr>
@@ -382,8 +406,14 @@ component&rsquo;s context. The referenced value may be a layer name or array of 
 <li>Any other value (primitive, array, function, signal record) from a stronger layer <strong>replaces</strong> that from a weaker
 one wholesale. Arrays are not concatenated.</li>
 <li>A key holding a signal record is replaced as a unit by a stronger layer&rsquo;s value at that key; the record is not merged
-into. The exception is a <a href="#reactiveroot"><code>$reactiveRoot</code></a>, whose individual members a stronger layer may override with
-literal values or references.</li>
+into. There are two exceptions: a <a href="#reactiveroot"><code>$reactiveRoot</code></a>, whose individual members a stronger layer may
+override with literal values or references, and an <a href="#composite-effects"><code>$effect</code></a>, whose listener records are merged
+by namespace.</li>
+<li><code>null</code> at a member displaces whatever weaker layers supplied there. At a member holding a
+<a href="#removing-a-subcomponent"><code>$component</code></a> record, this removes the subcomponent.</li>
+<li>Where several layers supply <code>$component</code> records at the same member, the <code>$layers</code> named by each are combined, those
+of a stronger record beating those of a weaker one. Within one record, as in a layer&rsquo;s own <code>$layers</code>, a layer listed
+later beats one listed earlier.</li>
 </ul>
 <p>Merging is reactive: changing any contributing layer re-merges the component. Signal products (computed values,
 effects, subcomponents) whose defining record is identical before and after are retained rather than rebuilt.</p>
@@ -525,7 +555,58 @@ argument is unavailable, and are disposed when the component is destroyed or the
 </span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">.</span><span class="nx">stabilize</span><span class="p">();</span>   <span class="c1">// Count is 1
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">l</span><span class="p">.</span><span class="nx">count</span><span class="o">++</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">.</span><span class="nx">stabilize</span><span class="p">();</span>   <span class="c1">// Count is 2
-</span></span></span></code></pre></div><h3 id="method">$method</h3>
+</span></span></span></code></pre></div><h4 id="composite-effects">Composite effects</h4>
+<p>An <code>$effect</code> may instead hold an array of <strong>listener records</strong>, each a <a href="#signal-directives">function record</a> which may
+also bear:</p>
+<ul>
+<li><code>namespace</code> - A name for the record, unique within the effect. A record without one, including that of an effect
+written in simple form, has the empty namespace.</li>
+<li><code>priority</code> - Its position relative to the other records: <code>&quot;before:namespace&quot;</code>, <code>&quot;after:namespace&quot;</code>, <code>&quot;first&quot;</code>,
+<code>&quot;last&quot;</code> or a number, higher numbers running first. Records without one run in the order supplied, weakest layer first.</li>
+</ul>
+<p>The records run as a chain whenever any of their arguments changes. An argument written <code>{$payload}</code> receives the
+value returned by the previous record, or the value it resolves to if it returned a promise. A record returning
+<code>undefined</code> passes on the payload it received, and the chain stops at any record returning an unavailable value. The
+effect&rsquo;s member holds the final payload, and is pending while the chain runs, so a downstream <code>$compute</code> or <code>$effect</code>
+can depend on the chain having completed. If the arguments change again while a record is awaiting a promise, the
+superseded run dispatches no further records.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.map&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">mapUrl</span><span class="o">:</span> <span class="s2">&#34;maps/region.json&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">ready</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$effect</span><span class="o">:</span> <span class="p">[{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">namespace</span><span class="o">:</span> <span class="s2">&#34;load&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">func</span><span class="o">:</span> <span class="s2">&#34;my.loadMap&#34;</span><span class="p">,</span>            <span class="c1">// Async, resolving to the loaded map
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">args</span><span class="o">:</span> <span class="s2">&#34;{self}.mapUrl&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">namespace</span><span class="o">:</span> <span class="s2">&#34;applyStyle&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">priority</span><span class="o">:</span> <span class="s2">&#34;after:load&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">func</span><span class="o">:</span> <span class="s2">&#34;my.applyStyle&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">args</span><span class="o">:</span> <span class="s2">&#34;{$payload}&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">report</span><span class="o">:</span> <span class="s2">&#34;$effect:my.reportReady({self}.ready)&#34;</span>   <span class="c1">// Runs once the whole chain has completed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">});</span>
+</span></span></code></pre></div><p>Effects supplied by several layers at the same member are <strong>merged by namespace</strong> rather than the stronger replacing
+the weaker. A stronger record displaces a weaker record of the same namespace in place, and a record with a new
+namespace joins the chain at the position given by its <code>priority</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.patternedMap&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.map&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">ready</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$effect</span><span class="o">:</span> <span class="p">[{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">namespace</span><span class="o">:</span> <span class="s2">&#34;loadPatterns&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">priority</span><span class="o">:</span> <span class="s2">&#34;before:applyStyle&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">func</span><span class="o">:</span> <span class="s2">&#34;my.loadPatterns&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">args</span><span class="o">:</span> <span class="s2">&#34;{$payload}&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>A simple effect counts as a single record with the empty namespace, so a stronger simple effect replaces a weaker one
+whole, and composite records accumulate alongside it. If the merge leaves just one record which was written in simple
+form, the effect behaves exactly as a simple effect. These composite effects replace the namespaced listeners and
+transforming promise events (<code>fireTransformEvent</code>) of earlier Infusion versions - see
+<a href="https://github.com/fluid-project/infusion-6/issues/28">FLUID-7028</a>.</p>
+<h3 id="method">$method</h3>
 <p>A function member invocable on the component. Arguments are resolved at call time. <code>$method</code> does not produce a signal
 (other than to the extent that every Infusion value is a signal) like <code>$compute</code> and <code>$effect</code> but has a similar syntax,
 including a short form variant.</p>
@@ -595,6 +676,32 @@ destroyed.</p>
 reference at the same member, or the other way round. A reference to the component itself (<code>{self}</code>) is never
 injected, and a reference which turns out to designate plain data rather than a component simply yields that value.
 Injecting another component&rsquo;s <a href="../../docs/fluid-view#views">view</a> lets one component render through another&rsquo;s view.</p>
+<h4 id="removing-a-subcomponent">Removing a subcomponent</h4>
+<p>A stronger layer may remove a subcomponent which a weaker one declared by writing <code>null</code>, or <code>{$component: null}</code>, at its
+member. The subcomponent is destroyed, and the records of all weaker layers at the member are discarded, so a still
+stronger layer restoring the member must supply a complete record, including its <code>$layers</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.page&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">header</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.header&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.bareSection&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">header</span><span class="o">:</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.headedSection&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">header</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.compactHeader&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>If the subcomponent rendered into an element bearing <code>@id</code> in its parent&rsquo;s template, that element is omitted while the
+member is removed - see <a href="../../docs/fluid-view#subcomponents-id">Subcomponents</a>.</p>
 <h3 id="for">$for</h3>
 <p>Within a <code>$component</code> record, instantiates one subcomponent per element of a collection, kept in step with it. The
 member then holds a <code>fluid.componentList</code> whose <code>list</code> holds the instances.</p>
@@ -603,6 +710,10 @@ member then holds a <code>fluid.componentList</code> whose <code>list</code> hol
 <li><code>valueAs</code> - Name under which each collection element is visible in its corresponding subcomponent (via <code>{self}.&lt;valueAs&gt;</code>). When the
 source is sited, this is a live reference to the element and can be written through.</li>
 <li><code>keyAs</code> - Name under which the collection element&rsquo;s index or key is visible in its subcomponent</li>
+<li><code>positionAs</code> - Name under which the subcomponent sees its position in the list, as <code>{index, first, last}</code>: its index
+from 0, and whether it is the first or the last member. Unlike <code>keyAs</code>, this is numeric for a keyed collection too, so
+<code>@if=&quot;!position.first&quot;</code> can render a separator before every member but the first - see
+<a href="../../docs/fluid-view#separators-between-list-members">Separators</a></li>
 </ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.editorHolder&#34;</span><span class="p">,</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
@@ -619,7 +730,33 @@ source is sited, this is a live reference to the element and can be written thro
 </span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">h</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">editorHolder</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="nx">h</span><span class="p">.</span><span class="nx">names</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&#34;beta&#34;</span><span class="p">);</span>      <span class="c1">// Second editor is created on stabilize
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">h</span><span class="p">.</span><span class="nx">editors</span><span class="p">.</span><span class="nx">list</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>     <span class="c1">// 2
-</span></span></span></code></pre></div><p><strong>Writing through iteration variables.</strong> When the source is sited, each <code>valueAs</code> variable keeps track of where its
+</span></span></span></code></pre></div><p><strong>Keyed collections.</strong> When the source is an object, one subcomponent is created per entry, in the order of the merged
+object&rsquo;s keys, except that an entry holding a <code>priority</code> member is placed by it, as for the listener records of a
+<a href="#composite-effects">composite effect</a>: a number (higher numbers first), <code>&quot;first&quot;</code>, <code>&quot;last&quot;</code>, or <code>&quot;before:key&quot;</code> or
+<code>&quot;after:key&quot;</code> naming another entry. An entry whose value is <code>null</code> is skipped. Since an object source merges key by key, layers may
+therefore contribute, reorder and remove entries independently:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.page&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">stylesheets</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">main</span><span class="o">:</span> <span class="p">{</span><span class="nx">href</span><span class="o">:</span> <span class="s2">&#34;main.css&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">print</span><span class="o">:</span> <span class="p">{</span><span class="nx">priority</span><span class="o">:</span> <span class="s2">&#34;after:main&#34;</span><span class="p">,</span> <span class="nx">href</span><span class="o">:</span> <span class="s2">&#34;print.css&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">links</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.stylesheetLink&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$for</span><span class="o">:</span> <span class="p">{</span><span class="nx">source</span><span class="o">:</span> <span class="s2">&#34;{page}.stylesheets&#34;</span><span class="p">,</span> <span class="nx">valueAs</span><span class="o">:</span> <span class="s2">&#34;sheet&#34;</span><span class="p">,</span> <span class="nx">keyAs</span><span class="o">:</span> <span class="s2">&#34;key&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.mathsPage&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.page&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">stylesheets</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">katex</span><span class="o">:</span> <span class="p">{</span><span class="nx">priority</span><span class="o">:</span> <span class="s2">&#34;before:main&#34;</span><span class="p">,</span> <span class="nx">href</span><span class="o">:</span> <span class="s2">&#34;katex.css&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">print</span><span class="o">:</span> <span class="kc">null</span>                    <span class="c1">// No print stylesheet for this page
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p><strong>Writing through iteration variables.</strong> When the source is sited, each <code>valueAs</code> variable keeps track of where its
 data came from, so the subcomponent can change its own element without involving the component that owns the
 list:</p>
 <ul>
@@ -743,7 +880,29 @@ single linkage or an array.</p>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span></code></pre></div><p>The linkage rule&rsquo;s effect lasts as long as the component holding it. Linkages are sometimes called
+</span></span></code></pre></div><p>Each entry of a linkage may also bear:</p>
+<ul>
+<li><code>$if</code> - A condition, as for <a href="#if"><code>$if</code></a> on a subcomponent, applying the linkage only while it holds.</li>
+<li><code>selector</code> - In place of <code>inputLayers</code>, an <a href="#selectors">IL selector</a> which a component must match, so that a linkage
+can depend on a component&rsquo;s ancestors as well as its own layers. For example
+<code>&quot;my.post &gt; my.header&quot;</code> matches a component bearing <code>my.header</code> whose parent bears <code>my.post</code>.</li>
+<li><code>scope</code> - A reference to a component, e.g. <code>&quot;{self}&quot;</code>, confining the linkage to components at or below it.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.site&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">headerLinkage</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$linkage</span><span class="o">:</span> <span class="p">[{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">selector</span><span class="o">:</span> <span class="s2">&#34;my.type.post &gt; my.header&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">outputLayers</span><span class="o">:</span> <span class="s2">&#34;my.header.post&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">scope</span><span class="o">:</span> <span class="s2">&#34;{self}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$if</span><span class="o">:</span> <span class="s2">&#34;{self}.adaptHeaders&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>The linkage reacts to changes in a component&rsquo;s layers and those of its ancestors: a header acquires <code>my.header.post</code>
+as soon as its parent acquires <code>my.type.post</code>, for example through a dynamic layer, and loses it again when the parent
+loses it.</p>
+<p>The linkage rule&rsquo;s effect lasts as long as the component holding it. Linkages are sometimes called
 <a href="https://hal.science/hal-01854418/file/AnAnatomyOfInteraction_authorversion.pdf">co-occurrences</a>.</p>
 <h3 id="bindable">$bindable</h3>
 <blockquote>
@@ -826,6 +985,10 @@ discover a widget&rsquo;s <code>preferredSize</code> or whether it bears <code>f
 <li><code>fluid.isDestroyed(that, [strict])</code> - <code>true</code> if destruction of <code>that</code> has begun (or with <code>strict</code>, completed)</li>
 <li><code>fluid.unwrapProxy(value)</code> - The plain value underlying a component or mat proxy</li>
 <li><code>fluid.hasLayer(that, layerName)</code> - <code>true</code> if <code>layerName</code> is in the component&rsquo;s resolved <code>$layers</code></li>
+<li><code>fluid.definedLayers(...candidates)</code> - Those of the candidate layer names (strings or arrays of them) which are
+defined, in the order supplied. Since a later layer is stronger, list the most specific candidate last</li>
+<li><code>fluid.firstDefinedLayer(...candidates)</code> - An array holding just the first of the candidates which is defined, in
+order of preference, or an empty array if none is</li>
 </ul>
 <div class="footnotes" role="doc-endnotes">
 <hr>
@@ -944,7 +1107,7 @@ values until they resolve. Inspector tools can use the Infusion JavaScript API t
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.121.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

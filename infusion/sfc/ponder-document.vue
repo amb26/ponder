@@ -68,15 +68,8 @@ fluid.def("ponder.document", {
             $layers: "ponder.main"
         }
     },
-    pageMeta: {
-        $component: {
-            $layers: "ponder.pageMeta"
-        }
-    },
-    showPageMeta: false,
-    showPager: true,
-    // Hugo's 404.html blanks the header block - ponder.kind.404 turns this off
-    showHeader: true,
+    // Hugo's page_meta.html, for pages of type "page" only - ponder.type.page restores it
+    pageMeta: null,
     footer: {
         $component: {
             $layers: "ponder.footer"
@@ -115,9 +108,9 @@ ponder.document.pageLayers = function (kind, type) {
         <!-- Each @id element bears the same tag as its subcomponent's template root, since on elision the container's
              tag wins and the root's is silently dropped - REQUIREMENTS.md R16 -->
         <nav @id="navbar"></nav>
-        <header @id="header" @if="{document}.showHeader"></header>
+        <header @id="header"></header>
         <div @id="main"></div>
-        <div @id="pageMeta" @if="{document}.showPageMeta"></div>
+        <div @id="pageMeta"></div>
         <footer @id="footer"></footer>
         <!-- A fragment slot renders the list's members alone, with no wrapping element - REQUIREMENTS.md R3 -->
         <fluid-fragment @id="footerScriptTags"></fluid-fragment>

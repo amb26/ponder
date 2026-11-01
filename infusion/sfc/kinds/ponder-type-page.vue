@@ -1,14 +1,22 @@
 <script>
 // The {{ if eq .Type "page" }} branches of Hugo's header.html, footer.html (page_meta.html) and single.html (no pager).
-// The pager is turned off through a knob on the document rather than by restating `main`, since a stronger layer's
-// $component record replaces a weaker one's as a unit - see REQUIREMENTS.md R9.
+// The document's `pageMeta`, removed by default, is restored with a complete record, and the pager is removed from
+// `main` by a contribution which adjusts the record supplied by ponder.kind.page.
 fluid.def("ponder.type.page", {
     header: {
         $component: {
             $layers: ["ponder.header", "ponder.header.page"]
         }
     },
-    showPageMeta: true,
-    showPager: false
+    pageMeta: {
+        $component: {
+            $layers: "ponder.pageMeta"
+        }
+    },
+    main: {
+        $component: {
+            pager: null
+        }
+    }
 });
 </script>

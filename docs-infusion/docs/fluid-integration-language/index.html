@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" id="fl-id-site-11.documents.33" itemtype="http://schema.org/WebPage" itemscope><head id="fl-id-site-11.documents.33.head"><meta charset="utf-8"><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"><title>Fluid Integration Language - Antranig Basman</title><meta content="This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6 components are defined, composed and wired together as an integr…" name="description"><meta content="Antranig Basman" name="author"><meta content="Fluid Integration Language" property="og:title"><meta content="This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6 components are defined, composed and wired together as an integr…" property="og:description"><meta content="https://ponder.org.uk/img/pond.jpg" property="og:image"><meta content="https://ponder.org.uk/docs/fluid-integration-language/" property="og:url"><meta content="website" property="og:type"><meta content="Antranig Basman" property="og:site_name"><link href="https://ponder.org.uk/img/favicon.ico" type="image/x-icon" rel="icon"><meta content="Infusion 6" name="generator"><link title="Antranig Basman" href="https://ponder.org.uk/index.xml" type="application/rss+xml" rel="alternate"><link href="../../css/katex.min.css" id="fl-id-site-11.documents.33.head.stylesheetTags.katex" rel="stylesheet"><link href="../../fontawesome/css/all.min.css" id="fl-id-site-11.documents.33.head.stylesheetTags.fontawesome" rel="stylesheet"><link href="../../css/bootstrap.min.css" id="fl-id-site-11.documents.33.head.stylesheetTags.bootstrap" rel="stylesheet"><link href="../../css/main.css" id="fl-id-site-11.documents.33.head.stylesheetTags.main" rel="stylesheet"><link href="../../css/highlight.min.css" id="fl-id-site-11.documents.33.head.stylesheetTags.syntax" rel="stylesheet"><link href="../../css/codeblock.css" id="fl-id-site-11.documents.33.head.stylesheetTags.codeblock" rel="stylesheet"><link href="../../css/ponder.css" id="fl-id-site-11.documents.33.head.stylesheetTags.ponder" rel="stylesheet"><script src="../../js/ponder.js" id="fl-id-site-11.documents.33.head.scriptTags.ponder"></script></head><body class="infusion-docs"><nav class="navbar navbar-default navbar-fixed-top navbar-custom" id="fl-id-site-11.documents.33.navbar"><div class="container-fluid"><div class="navbar-ponder"><a href="../../" class="navbar-ponder-brand">Antranig Basman</a><button data-target="#main-navbar" data-toggle="collapse" class="navbar-toggle" type="button"><span class="sr-only">Toggle navigation</span><svg xmlns="http://www.w3.org/2000/svg" stroke="#888" viewBox="0 0 24 24" height="36" width="36"><path stroke-linecap="round" stroke-width="1.5" d="M20 7L4 7" /><path stroke-linecap="round" stroke-width="1.5" d="M20 12L4 12" /><path stroke-linecap="round" stroke-width="1.5" d="M20 17L4 17" /></svg></button><div id="main-navbar" class="collapse navbar-collapse"><ul id="fl-id-site-11.documents.33.navbar.items" class="nav navbar-nav navbar-right"><li id="fl-id-site-11.documents.33.navbar.items.0"><a href="../../post" title="Posts">Posts</a></li><li id="fl-id-site-11.documents.33.navbar.items.1"><a href="../../wip" title="WiP">WiP</a></li><li id="fl-id-site-11.documents.33.navbar.items.2"><a href="../../page/about/" title="About">About</a></li><li id="fl-id-site-11.documents.33.navbar.items.3" class="navlinks-container"><a href="../../docs" class="navlinks-parent">Docs</a><div id="fl-id-site-11.documents.33.navbar.items.3.children" class="navlinks-children"><a href="../../docs/fluid-signals">Fluid Signals</a><a href="../../docs/fluid-integration-language">Fluid Integration Language</a><a href="../../docs/fluid-view">Fluid View</a><a href="../../docs/fluid-ptf">Fluid PTF</a><a href="../../docs/fluid-tldraw">Fluid tldraw integration</a></div></li><li id="fl-id-site-11.documents.33.navbar.items.4"><a href="../../communities" title="Communities">Communities</a></li><li id="fl-id-site-11.documents.33.navbar.items.5"><a href="../../projects" title="Projects">Projects</a></li><li id="fl-id-site-11.documents.33.navbar.items.6"><a href="../../term" title="Terms">Terms</a></li></ul></div></div></div></nav><header id="fl-id-site-11.documents.33.header" class="header-section"><div class="intro-header no-img"><div class="container"><div class="header-row"><div class="infusion-docs-heading ponder-heading"><h1 class="ponder-title">Fluid Integration Language</h1><hr class="small"></div></div></div></div></header><div role="main" id="fl-id-site-11.documents.33.main"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article class="blog-post" role="main"><div id="fl-id-site-11.documents.33.main.content"><p>This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6
+<!DOCTYPE html><html lang="en" id="fl-id-site-4.documents.33" itemtype="http://schema.org/WebPage" itemscope><head id="fl-id-site-4.documents.33.head"><meta charset="utf-8"><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"><title>Fluid Integration Language - Antranig Basman</title><meta content="This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6 components are defined, composed and wired together as an integr…" name="description"><meta content="Antranig Basman" name="author"><meta content="Fluid Integration Language" property="og:title"><meta content="This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6 components are defined, composed and wired together as an integr…" property="og:description"><meta content="https://ponder.org.uk/img/pond.jpg" property="og:image"><meta content="https://ponder.org.uk/docs/fluid-integration-language/" property="og:url"><meta content="website" property="og:type"><meta content="Antranig Basman" property="og:site_name"><link href="https://ponder.org.uk/img/favicon.ico" type="image/x-icon" rel="icon"><meta content="Infusion 6" name="generator"><link title="Antranig Basman" href="https://ponder.org.uk/index.xml" type="application/rss+xml" rel="alternate"><link href="../../css/katex.min.css" id="fl-id-site-4.documents.33.head.stylesheetTags.katex" rel="stylesheet"><link href="../../fontawesome/css/all.min.css" id="fl-id-site-4.documents.33.head.stylesheetTags.fontawesome" rel="stylesheet"><link href="../../css/bootstrap.min.css" id="fl-id-site-4.documents.33.head.stylesheetTags.bootstrap" rel="stylesheet"><link href="../../css/main.css" id="fl-id-site-4.documents.33.head.stylesheetTags.main" rel="stylesheet"><link href="../../css/highlight.min.css" id="fl-id-site-4.documents.33.head.stylesheetTags.syntax" rel="stylesheet"><link href="../../css/codeblock.css" id="fl-id-site-4.documents.33.head.stylesheetTags.codeblock" rel="stylesheet"><link href="../../css/ponder.css" id="fl-id-site-4.documents.33.head.stylesheetTags.ponder" rel="stylesheet"><script src="../../js/ponder.js" id="fl-id-site-4.documents.33.head.scriptTags.ponder"></script></head><body class="infusion-docs"><nav class="navbar navbar-default navbar-fixed-top navbar-custom" id="fl-id-site-4.documents.33.navbar"><div class="container-fluid"><div class="navbar-ponder"><a href="../../" class="navbar-ponder-brand">Antranig Basman</a><button data-target="#main-navbar" data-toggle="collapse" class="navbar-toggle" type="button"><span class="sr-only">Toggle navigation</span><svg xmlns="http://www.w3.org/2000/svg" stroke="#888" viewBox="0 0 24 24" height="36" width="36"><path stroke-linecap="round" stroke-width="1.5" d="M20 7L4 7" /><path stroke-linecap="round" stroke-width="1.5" d="M20 12L4 12" /><path stroke-linecap="round" stroke-width="1.5" d="M20 17L4 17" /></svg></button><div id="main-navbar" class="collapse navbar-collapse"><ul id="fl-id-site-4.documents.33.navbar.items" class="nav navbar-nav navbar-right"><li id="fl-id-site-4.documents.33.navbar.items.0"><a href="../../post" title="Posts">Posts</a></li><li id="fl-id-site-4.documents.33.navbar.items.1"><a href="../../wip" title="WiP">WiP</a></li><li id="fl-id-site-4.documents.33.navbar.items.2"><a href="../../page/about/" title="About">About</a></li><li id="fl-id-site-4.documents.33.navbar.items.3" class="navlinks-container"><a href="../../docs" class="navlinks-parent">Docs</a><div id="fl-id-site-4.documents.33.navbar.items.3.children" class="navlinks-children"><a href="../../docs/fluid-signals">Fluid Signals</a><a href="../../docs/fluid-integration-language">Fluid Integration Language</a><a href="../../docs/fluid-view">Fluid View</a><a href="../../docs/fluid-ptf">Fluid PTF</a><a href="../../docs/fluid-tldraw">Fluid tldraw integration</a><a href="../../docs/linearisation-algorithm">Layer Linearisation</a></div></li><li id="fl-id-site-4.documents.33.navbar.items.4"><a href="../../communities" title="Communities">Communities</a></li><li id="fl-id-site-4.documents.33.navbar.items.5"><a href="../../projects" title="Projects">Projects</a></li><li id="fl-id-site-4.documents.33.navbar.items.6"><a href="../../term" title="Terms">Terms</a></li></ul></div></div></div></nav><header class="header-section" id="fl-id-site-4.documents.33.header"><div class="intro-header no-img"><div class="container"><div class="header-row"><div class="infusion-docs-heading ponder-heading"><h1 class="ponder-title">Fluid Integration Language</h1><hr class="small"></div></div></div></div></header><div role="main" id="fl-id-site-4.documents.33.main"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article class="blog-post" role="main"><div id="fl-id-site-4.documents.33.main.content"><p>This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6
 components are defined, composed and wired together as an <a href="../../term/integration-domain">integration domain</a>.
 It is implemented in <a href="https://github.com/fluid-project/infusion-6/blob/main/src/framework/core/js/FluidIL.js"><code>FluidIL.js</code></a>
 on top of the reactive primitive
@@ -86,16 +86,19 @@ curly brace and typically take the form <code>{context}.path.into.value</code>.<
 <h3 id="layers-1">$layers</h3>
 <p><code>{String|String[]}</code> - The parent layers of this layer. A component’s full layer list is linearised from the layer
 hierarchy by C3 (as for Python’s method resolution order): a layer beats the layers it inherits from, and a parent
-listed earlier in <code>$layers</code> beats one listed later. The resolved list is readable at <code>that.$layers</code>. To be instantiable
-as a component, its layer hierarchy must somewhere include <code>fluid.component</code>.</p>
+listed later in <code>$layers</code> beats one listed earlier. A parent listed after a layer which already inherits from it is
+ignored, since it cannot beat that layer, and that layer’s own hierarchy already places it. The resolved list is
+readable at <code>that.$layers</code>, weakest first. To be instantiable
+as a component, its layer hierarchy must somewhere include <code>fluid.component</code>. The algorithm and its rationale are
+described in <a href="../../docs/linearisation-algorithm">Layer Linearisation</a>.</p>
 <pre><code class="language-js">fluid.def("my.shape", {$layers: "fluid.component", sides: 0, colour: "black"});
 fluid.def("my.red", {$layers: "fluid.component", colour: "red"});
 fluid.def("my.triangle", {$layers: "my.shape", sides: 3});
-fluid.def("my.redTriangle", {$layers: ["my.red", "my.triangle"]});
+fluid.def("my.redTriangle", {$layers: ["my.triangle", "my.red"]});
 
 const t = my.redTriangle();
 t.sides;   // 3 - my.triangle beats my.shape
-t.colour;  // "red" - my.red is listed before my.triangle and so beats my.shape
+t.colour;  // "red" - my.red is listed after my.triangle and so beats my.shape
 </code></pre>
 <p>An entry in <code>$layers</code> which is itself a <a href="#references">reference</a> is a <strong>dynamic layer name</strong>, resolved reactively from the
 component’s context. The referenced value may be a layer name or array of names:</p>
@@ -104,7 +107,23 @@ component’s context. The referenced value may be a layer name or array of name
     flavour: "my.compactPanel"
 });
 </code></pre>
-<p>Dynamic layers merge above all static layers and literal configuration (see <a href="#merging-and-precedence">precedence</a>).</p>
+<p>Dynamic layers merge above all static layers and literal configuration, wherever they appear in the list (see
+<a href="#merging-and-precedence">precedence</a>). Amongst themselves, a later reference beats an earlier one, and the dynamic
+layers of a derived layer beat those it inherits.</p>
+<p>A dynamic layer name which names an undefined layer makes the component unavailable until the layer is defined. To
+choose amongst candidate layers only those which exist, compute the name with <code>fluid.definedLayers</code> or
+<code>fluid.firstDefinedLayer</code> (see <a href="#utilities">Utilities</a>):</p>
+<pre><code class="language-js">fluid.def("my.document", {
+    $layers: ["fluid.component", "{self}.typeLayers"],
+    type: "post",
+    candidates: "$compute:my.document.candidates({self}.type)",
+    // my.type.post if it is defined, otherwise my.type.default
+    typeLayers: "$compute:fluid.firstDefinedLayer({self}.candidates)"
+});
+my.document.candidates = type =&gt; ["my.type." + type, "my.type.default"];
+</code></pre>
+<p>Since these test whether a layer is defined reactively, the component switches to the preferred layer as soon as it is
+defined, and back again if it is deleted.</p>
 <p>A cycle in the hierarchy, or a layer which is not defined, makes the component unavailable.</p>
 <h4 id="merging-and-precedence">Merging and precedence</h4>
 <p>A component’s contents are a deep merge of layer records, applied weakest first:</p>
@@ -129,6 +148,10 @@ component’s context. The referenced value may be a layer name or array of name
 <td>The argument to a creator function</td>
 </tr>
 <tr>
+<td><code>template</code></td>
+<td>Material contributed by the template which renders this component, e.g. the markup at its <code>@id</code> element, or the layers and <code>data-</code> attributes of an <a href="../../docs/fluid-view#verbatim-markup-and-islands">island</a></td>
+</tr>
+<tr>
 <td><code>dynamicLayers</code></td>
 <td>Layers named via references in <code>$layers</code></td>
 </tr>
@@ -148,8 +171,14 @@ component’s context. The referenced value may be a layer name or array of name
 <li>Any other value (primitive, array, function, signal record) from a stronger layer <strong>replaces</strong> that from a weaker
 one wholesale. Arrays are not concatenated.</li>
 <li>A key holding a signal record is replaced as a unit by a stronger layer’s value at that key; the record is not merged
-into. The exception is a <a href="#reactiveroot"><code>$reactiveRoot</code></a>, whose individual members a stronger layer may override with
-literal values or references.</li>
+into. There are two exceptions: a <a href="#reactiveroot"><code>$reactiveRoot</code></a>, whose individual members a stronger layer may
+override with literal values or references, and an <a href="#composite-effects"><code>$effect</code></a>, whose listener records are merged
+by namespace.</li>
+<li><code>null</code> at a member displaces whatever weaker layers supplied there. At a member holding a
+<a href="#removing-a-subcomponent"><code>$component</code></a> record, this removes the subcomponent.</li>
+<li>Where several layers supply <code>$component</code> records at the same member, the <code>$layers</code> named by each are combined, those
+of a stronger record beating those of a weaker one. Within one record, as in a layer’s own <code>$layers</code>, a layer listed
+later beats one listed earlier.</li>
 </ul>
 <p>Merging is reactive: changing any contributing layer re-merges the component. Signal products (computed values,
 effects, subcomponents) whose defining record is identical before and after are retained rather than rebuilt.</p>
@@ -298,6 +327,59 @@ fluid.cell.stabilize();   // Count is 1
 l.count++;
 fluid.cell.stabilize();   // Count is 2
 </code></pre>
+<h4 id="composite-effects">Composite effects</h4>
+<p>An <code>$effect</code> may instead hold an array of <strong>listener records</strong>, each a <a href="#signal-directives">function record</a> which may
+also bear:</p>
+<ul>
+<li><code>namespace</code> - A name for the record, unique within the effect. A record without one, including that of an effect
+written in simple form, has the empty namespace.</li>
+<li><code>priority</code> - Its position relative to the other records: <code>"before:namespace"</code>, <code>"after:namespace"</code>, <code>"first"</code>,
+<code>"last"</code> or a number, higher numbers running first. Records without one run in the order supplied, weakest layer first.</li>
+</ul>
+<p>The records run as a chain whenever any of their arguments changes. An argument written <code>{$payload}</code> receives the
+value returned by the previous record, or the value it resolves to if it returned a promise. A record returning
+<code>undefined</code> passes on the payload it received, and the chain stops at any record returning an unavailable value. The
+effect’s member holds the final payload, and is pending while the chain runs, so a downstream <code>$compute</code> or <code>$effect</code>
+can depend on the chain having completed. If the arguments change again while a record is awaiting a promise, the
+superseded run dispatches no further records.</p>
+<pre><code class="language-js">fluid.def("my.map", {
+    $layers: "fluid.component",
+    mapUrl: "maps/region.json",
+    ready: {
+        $effect: [{
+            namespace: "load",
+            func: "my.loadMap",            // Async, resolving to the loaded map
+            args: "{self}.mapUrl"
+        }, {
+            namespace: "applyStyle",
+            priority: "after:load",
+            func: "my.applyStyle",
+            args: "{$payload}"
+        }]
+    },
+    report: "$effect:my.reportReady({self}.ready)"   // Runs once the whole chain has completed
+});
+</code></pre>
+<p>Effects supplied by several layers at the same member are <strong>merged by namespace</strong> rather than the stronger replacing
+the weaker. A stronger record displaces a weaker record of the same namespace in place, and a record with a new
+namespace joins the chain at the position given by its <code>priority</code>:</p>
+<pre><code class="language-js">fluid.def("my.patternedMap", {
+    $layers: "my.map",
+    ready: {
+        $effect: [{
+            namespace: "loadPatterns",
+            priority: "before:applyStyle",
+            func: "my.loadPatterns",
+            args: "{$payload}"
+        }]
+    }
+});
+</code></pre>
+<p>A simple effect counts as a single record with the empty namespace, so a stronger simple effect replaces a weaker one
+whole, and composite records accumulate alongside it. If the merge leaves just one record which was written in simple
+form, the effect behaves exactly as a simple effect. These composite effects replace the namespaced listeners and
+transforming promise events (<code>fireTransformEvent</code>) of earlier Infusion versions - see
+<a href="https://github.com/fluid-project/infusion-6/issues/28">FLUID-7028</a>.</p>
 <h3 id="method">$method</h3>
 <p>A function member invocable on the component. Arguments are resolved at call time. <code>$method</code> does not produce a signal
 (other than to the extent that every Infusion value is a signal) like <code>$compute</code> and <code>$effect</code> but has a similar syntax,
@@ -371,6 +453,33 @@ destroyed.</p>
 reference at the same member, or the other way round. A reference to the component itself (<code>{self}</code>) is never
 injected, and a reference which turns out to designate plain data rather than a component simply yields that value.
 Injecting another component’s <a href="../../docs/fluid-view#views">view</a> lets one component render through another’s view.</p>
+<h4 id="removing-a-subcomponent">Removing a subcomponent</h4>
+<p>A stronger layer may remove a subcomponent which a weaker one declared by writing <code>null</code>, or <code>{$component: null}</code>, at its
+member. The subcomponent is destroyed, and the records of all weaker layers at the member are discarded, so a still
+stronger layer restoring the member must supply a complete record, including its <code>$layers</code>:</p>
+<pre><code class="language-js">fluid.def("my.page", {
+    $layers: "fluid.component",
+    header: {
+        $component: {
+            $layers: "my.header"
+        }
+    }
+});
+
+fluid.def("my.bareSection", {
+    header: null
+});
+
+fluid.def("my.headedSection", {
+    header: {
+        $component: {
+            $layers: "my.compactHeader"
+        }
+    }
+});
+</code></pre>
+<p>If the subcomponent rendered into an element bearing <code>@id</code> in its parent’s template, that element is omitted while the
+member is removed - see <a href="../../docs/fluid-view#subcomponents-id">Subcomponents</a>.</p>
 <h3 id="for">$for</h3>
 <p>Within a <code>$component</code> record, instantiates one subcomponent per element of a collection, kept in step with it. The
 member then holds a <code>fluid.componentList</code> whose <code>list</code> holds the instances.</p>
@@ -379,6 +488,10 @@ member then holds a <code>fluid.componentList</code> whose <code>list</code> hol
 <li><code>valueAs</code> - Name under which each collection element is visible in its corresponding subcomponent (via <code>{self}.&lt;valueAs&gt;</code>). When the
 source is sited, this is a live reference to the element and can be written through.</li>
 <li><code>keyAs</code> - Name under which the collection element’s index or key is visible in its subcomponent</li>
+<li><code>positionAs</code> - Name under which the subcomponent sees its position in the list, as <code>{index, first, last}</code>: its index
+from 0, and whether it is the first or the last member. Unlike <code>keyAs</code>, this is numeric for a keyed collection too, so
+<code>@if="!position.first"</code> can render a separator before every member but the first - see
+<a href="../../docs/fluid-view#separators-between-list-members">Separators</a></li>
 </ul>
 <pre><code class="language-js">fluid.def("my.editorHolder", {
     $layers: "fluid.component",
@@ -395,6 +508,33 @@ source is sited, this is a live reference to the element and can be written thro
 const h = my.editorHolder();
 h.names.push("beta");      // Second editor is created on stabilize
 h.editors.list.length;     // 2
+</code></pre>
+<p><strong>Keyed collections.</strong> When the source is an object, one subcomponent is created per entry, in the order of the merged
+object’s keys, except that an entry holding a <code>priority</code> member is placed by it, as for the listener records of a
+<a href="#composite-effects">composite effect</a>: a number (higher numbers first), <code>"first"</code>, <code>"last"</code>, or <code>"before:key"</code> or
+<code>"after:key"</code> naming another entry. An entry whose value is <code>null</code> is skipped. Since an object source merges key by key, layers may
+therefore contribute, reorder and remove entries independently:</p>
+<pre><code class="language-js">fluid.def("my.page", {
+    $layers: "fluid.component",
+    stylesheets: {
+        main: {href: "main.css"},
+        print: {priority: "after:main", href: "print.css"}
+    },
+    links: {
+        $component: {
+            $layers: "my.stylesheetLink",
+            $for: {source: "{page}.stylesheets", valueAs: "sheet", keyAs: "key"}
+        }
+    }
+});
+
+fluid.def("my.mathsPage", {
+    $layers: "my.page",
+    stylesheets: {
+        katex: {priority: "before:main", href: "katex.css"},
+        print: null                    // No print stylesheet for this page
+    }
+});
 </code></pre>
 <p><strong>Writing through iteration variables.</strong> When the source is sited, each <code>valueAs</code> variable keeps track of where its
 data came from, so the subcomponent can change its own element without involving the component that owns the
@@ -527,6 +667,29 @@ single linkage or an array.</p>
     }
 });
 </code></pre>
+<p>Each entry of a linkage may also bear:</p>
+<ul>
+<li><code>$if</code> - A condition, as for <a href="#if"><code>$if</code></a> on a subcomponent, applying the linkage only while it holds.</li>
+<li><code>selector</code> - In place of <code>inputLayers</code>, an <a href="#selectors">IL selector</a> which a component must match, so that a linkage
+can depend on a component’s ancestors as well as its own layers. For example
+<code>"my.post &gt; my.header"</code> matches a component bearing <code>my.header</code> whose parent bears <code>my.post</code>.</li>
+<li><code>scope</code> - A reference to a component, e.g. <code>"{self}"</code>, confining the linkage to components at or below it.</li>
+</ul>
+<pre><code class="language-js">fluid.def("my.site", {
+    $layers: "fluid.component",
+    headerLinkage: {
+        $linkage: [{
+            selector: "my.type.post &gt; my.header",
+            outputLayers: "my.header.post",
+            scope: "{self}",
+            $if: "{self}.adaptHeaders"
+        }]
+    }
+});
+</code></pre>
+<p>The linkage reacts to changes in a component’s layers and those of its ancestors: a header acquires <code>my.header.post</code>
+as soon as its parent acquires <code>my.type.post</code>, for example through a dynamic layer, and loses it again when the parent
+loses it.</p>
 <p>The linkage rule’s effect lasts as long as the component holding it. Linkages are sometimes called
 <a href="https://hal.science/hal-01854418/file/AnAnatomyOfInteraction_authorversion.pdf">co-occurrences</a>.</p>
 <h3 id="bindable">$bindable</h3>
@@ -612,6 +775,10 @@ discover a widget’s <code>preferredSize</code> or whether it bears <code>fluid
 <li><code>fluid.isDestroyed(that, [strict])</code> - <code>true</code> if destruction of <code>that</code> has begun (or with <code>strict</code>, completed)</li>
 <li><code>fluid.unwrapProxy(value)</code> - The plain value underlying a component or mat proxy</li>
 <li><code>fluid.hasLayer(that, layerName)</code> - <code>true</code> if <code>layerName</code> is in the component’s resolved <code>$layers</code></li>
+<li><code>fluid.definedLayers(...candidates)</code> - Those of the candidate layer names (strings or arrays of them) which are
+defined, in the order supplied. Since a later layer is stronger, list the most specific candidate last</li>
+<li><code>fluid.firstDefinedLayer(...candidates)</code> - An array holding just the first of the candidates which is defined, in
+order of preference, or an empty array if none is</li>
 </ul>
 <hr class="footnotes-sep">
 <section class="footnotes">
@@ -622,11 +789,11 @@ values until they resolve. Inspector tools can use the Infusion JavaScript API t
 </li>
 </ol>
 </section>
-</div><div id="fl-id-site-11.documents.33.main.share"><hr><section id="social-share"><div class="list-inline footer-links"><div aria-hidden="true" class="share-box"><ul class="share"><li><a href="https://bsky.app/intent/compose?text=Just%20reading%20a%20post%20called%20Fluid%20Integration%20Language%20on%20Antranig%20Basman's%20blog%3A%20https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-integration-language%2F" title="Share on BlueSky" target="_blank"><i class="fab fa-fw fa-bluesky"></i></a></li><li><a href="https://twitter.com/share?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-integration-language%2F&text=Fluid%20Integration%20Language&via=amb26ponder" title="Share on Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-integration-language%2F" title="Share on Facebook" target="_blank"><i class="fab fa-facebook"></i></a></li><li><a href="https://reddit.com/submit?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-integration-language%2F&title=Fluid%20Integration%20Language" title="Share on Reddit" target="_blank"><i class="fab fa-reddit"></i></a></li><li><a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-integration-language%2F&title=Fluid%20Integration%20Language" title="Share on LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a></li></ul></div></div></section></div></article><ul id="fl-id-site-11.documents.33.main.pager" class="pager blog-pager"><li class="previous"><a title="Potentia Transmission Format" href="../../docs/fluid-ptf/" data-placement="top" data-toggle="tooltip">← Previous Post</a></li></ul><script data-lang="en" data-category-id="DIC_kwDOOKllGM4CvhAS" data-category="Announcements" data-repo-id="R_kgDOOKllGA" data-repo="amb26/ponder" id="fl-id-site-11.documents.33.main.comments" async crossorigin="anonymous" data-theme="light" data-input-position="bottom" data-emit-metadata="0" data-reactions-enabled="0" data-strict="0" data-mapping="pathname" src="https://giscus.app/client.js"></script></div></div></div><footer id="fl-id-site-11.documents.33.footer"><div class="container"><div class="row ponder-credits-row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p class="credits copyright text-muted"><a href="../../">Antranig Basman</a>
+</div><div id="fl-id-site-4.documents.33.main.share"><hr><section id="social-share"><div class="list-inline footer-links"><div aria-hidden="true" class="share-box"><ul class="share"><li><a href="https://bsky.app/intent/compose?text=Just%20reading%20a%20post%20called%20Fluid%20Integration%20Language%20on%20Antranig%20Basman's%20blog%3A%20https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-integration-language%2F" title="Share on BlueSky" target="_blank"><i class="fab fa-fw fa-bluesky"></i></a></li><li><a href="https://twitter.com/share?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-integration-language%2F&text=Fluid%20Integration%20Language&via=amb26ponder" title="Share on Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-integration-language%2F" title="Share on Facebook" target="_blank"><i class="fab fa-facebook"></i></a></li><li><a href="https://reddit.com/submit?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-integration-language%2F&title=Fluid%20Integration%20Language" title="Share on Reddit" target="_blank"><i class="fab fa-reddit"></i></a></li><li><a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-integration-language%2F&title=Fluid%20Integration%20Language" title="Share on LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a></li></ul></div></div></section></div></article><ul id="fl-id-site-4.documents.33.main.pager" class="pager blog-pager"><li class="previous"><a title="Potentia Transmission Format" href="../../docs/fluid-ptf/" data-placement="top" data-toggle="tooltip">← Previous Post</a></li></ul><script data-lang="en" data-category-id="DIC_kwDOOKllGM4CvhAS" data-category="Announcements" data-repo-id="R_kgDOOKllGA" data-repo="amb26/ponder" id="fl-id-site-4.documents.33.main.comments" async crossorigin="anonymous" data-theme="light" data-input-position="bottom" data-emit-metadata="0" data-reactions-enabled="0" data-strict="0" data-mapping="pathname" src="https://giscus.app/client.js"></script></div></div></div><footer id="fl-id-site-4.documents.33.footer"><div class="container"><div class="row ponder-credits-row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p class="credits copyright text-muted"><a href="../../">Antranig Basman</a>
                         &#160;©
                         2026
                     </p><p class="credits theme-by text-muted"><a href="https://github.com/fluid-project/infusion-6">Infusion 6</a> powered &#160;•&#160;
                         Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from
                         <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &#160;•&#160;
                         further <a href="../../term/lithification">lithified</a> by Boz
-                    </p></div></div></div></footer><script defer src="../../js/katex.min.js" id="fl-id-site-11.documents.33.footerScriptTags.katex"></script><script onload="renderMathInElement(document.body);" defer src="../../js/auto-render.min.js" id="fl-id-site-11.documents.33.footerScriptTags.katexAutoRender"></script><script src="../../js/highlight.min.js" id="fl-id-site-11.documents.33.footerScriptTags.hljs"></script><script id="fl-id-site-11.documents.33.footerScriptTags.hljsInit">hljs.initHighlightingOnLoad();</script></body></html>
+                    </p></div></div></div></footer><script defer src="../../js/katex.min.js" id="fl-id-site-4.documents.33.footerScriptTags.katex"></script><script onload="renderMathInElement(document.body);" defer src="../../js/auto-render.min.js" id="fl-id-site-4.documents.33.footerScriptTags.katexAutoRender"></script><script src="../../js/highlight.min.js" id="fl-id-site-4.documents.33.footerScriptTags.hljs"></script><script id="fl-id-site-4.documents.33.footerScriptTags.hljsInit">hljs.initHighlightingOnLoad();</script></body></html>

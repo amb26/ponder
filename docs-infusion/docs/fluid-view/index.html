@@ -1,5 +1,5 @@
-<!DOCTYPE html><html lang="en" id="fl-id-site-11.documents.38" itemtype="http://schema.org/WebPage" itemscope><head id="fl-id-site-11.documents.38.head"><meta charset="utf-8"><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"><title>Fluid View - Antranig Basman</title><meta content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, and the machinery of views. It builds on th…" name="description"><meta content="Antranig Basman" name="author"><meta content="Fluid View" property="og:title"><meta content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, and the machinery of views. It builds on th…" property="og:description"><meta content="https://ponder.org.uk/img/pond.jpg" property="og:image"><meta content="https://ponder.org.uk/docs/fluid-view/" property="og:url"><meta content="website" property="og:type"><meta content="Antranig Basman" property="og:site_name"><link href="https://ponder.org.uk/img/favicon.ico" type="image/x-icon" rel="icon"><meta content="Infusion 6" name="generator"><link title="Antranig Basman" href="https://ponder.org.uk/index.xml" type="application/rss+xml" rel="alternate"><link href="../../css/katex.min.css" id="fl-id-site-11.documents.38.head.stylesheetTags.katex" rel="stylesheet"><link href="../../fontawesome/css/all.min.css" id="fl-id-site-11.documents.38.head.stylesheetTags.fontawesome" rel="stylesheet"><link href="../../css/bootstrap.min.css" id="fl-id-site-11.documents.38.head.stylesheetTags.bootstrap" rel="stylesheet"><link href="../../css/main.css" id="fl-id-site-11.documents.38.head.stylesheetTags.main" rel="stylesheet"><link href="../../css/highlight.min.css" id="fl-id-site-11.documents.38.head.stylesheetTags.syntax" rel="stylesheet"><link href="../../css/codeblock.css" id="fl-id-site-11.documents.38.head.stylesheetTags.codeblock" rel="stylesheet"><link href="../../css/ponder.css" id="fl-id-site-11.documents.38.head.stylesheetTags.ponder" rel="stylesheet"><script src="../../js/ponder.js" id="fl-id-site-11.documents.38.head.scriptTags.ponder"></script></head><body class="infusion-docs"><nav class="navbar navbar-default navbar-fixed-top navbar-custom" id="fl-id-site-11.documents.38.navbar"><div class="container-fluid"><div class="navbar-ponder"><a href="../../" class="navbar-ponder-brand">Antranig Basman</a><button data-target="#main-navbar" data-toggle="collapse" class="navbar-toggle" type="button"><span class="sr-only">Toggle navigation</span><svg xmlns="http://www.w3.org/2000/svg" stroke="#888" viewBox="0 0 24 24" height="36" width="36"><path stroke-linecap="round" stroke-width="1.5" d="M20 7L4 7" /><path stroke-linecap="round" stroke-width="1.5" d="M20 12L4 12" /><path stroke-linecap="round" stroke-width="1.5" d="M20 17L4 17" /></svg></button><div id="main-navbar" class="collapse navbar-collapse"><ul id="fl-id-site-11.documents.38.navbar.items" class="nav navbar-nav navbar-right"><li id="fl-id-site-11.documents.38.navbar.items.0"><a href="../../post" title="Posts">Posts</a></li><li id="fl-id-site-11.documents.38.navbar.items.1"><a href="../../wip" title="WiP">WiP</a></li><li id="fl-id-site-11.documents.38.navbar.items.2"><a href="../../page/about/" title="About">About</a></li><li id="fl-id-site-11.documents.38.navbar.items.3" class="navlinks-container"><a href="../../docs" class="navlinks-parent">Docs</a><div id="fl-id-site-11.documents.38.navbar.items.3.children" class="navlinks-children"><a href="../../docs/fluid-signals">Fluid Signals</a><a href="../../docs/fluid-integration-language">Fluid Integration Language</a><a href="../../docs/fluid-view">Fluid View</a><a href="../../docs/fluid-ptf">Fluid PTF</a><a href="../../docs/fluid-tldraw">Fluid tldraw integration</a></div></li><li id="fl-id-site-11.documents.38.navbar.items.4"><a href="../../communities" title="Communities">Communities</a></li><li id="fl-id-site-11.documents.38.navbar.items.5"><a href="../../projects" title="Projects">Projects</a></li><li id="fl-id-site-11.documents.38.navbar.items.6"><a href="../../term" title="Terms">Terms</a></li></ul></div></div></div></nav><header id="fl-id-site-11.documents.38.header" class="header-section"><div class="intro-header no-img"><div class="container"><div class="header-row"><div class="infusion-docs-heading ponder-heading"><h1 class="ponder-title">Fluid View</h1><hr class="small"></div></div></div></div></header><div role="main" id="fl-id-site-11.documents.38.main"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article class="blog-post" role="main"><div id="fl-id-site-11.documents.38.main.content"><p>This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the
-Single File Component (SFC) format, and the machinery of views. It builds on the
+<!DOCTYPE html><html lang="en" id="fl-id-site-4.documents.38" itemtype="http://schema.org/WebPage" itemscope><head id="fl-id-site-4.documents.38.head"><meta charset="utf-8"><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"><title>Fluid View - Antranig Basman</title><meta content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, the machinery of views, and rendering pages…" name="description"><meta content="Antranig Basman" name="author"><meta content="Fluid View" property="og:title"><meta content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, the machinery of views, and rendering pages…" property="og:description"><meta content="https://ponder.org.uk/img/pond.jpg" property="og:image"><meta content="https://ponder.org.uk/docs/fluid-view/" property="og:url"><meta content="website" property="og:type"><meta content="Antranig Basman" property="og:site_name"><link href="https://ponder.org.uk/img/favicon.ico" type="image/x-icon" rel="icon"><meta content="Infusion 6" name="generator"><link title="Antranig Basman" href="https://ponder.org.uk/index.xml" type="application/rss+xml" rel="alternate"><link href="../../css/katex.min.css" id="fl-id-site-4.documents.38.head.stylesheetTags.katex" rel="stylesheet"><link href="../../fontawesome/css/all.min.css" id="fl-id-site-4.documents.38.head.stylesheetTags.fontawesome" rel="stylesheet"><link href="../../css/bootstrap.min.css" id="fl-id-site-4.documents.38.head.stylesheetTags.bootstrap" rel="stylesheet"><link href="../../css/main.css" id="fl-id-site-4.documents.38.head.stylesheetTags.main" rel="stylesheet"><link href="../../css/highlight.min.css" id="fl-id-site-4.documents.38.head.stylesheetTags.syntax" rel="stylesheet"><link href="../../css/codeblock.css" id="fl-id-site-4.documents.38.head.stylesheetTags.codeblock" rel="stylesheet"><link href="../../css/ponder.css" id="fl-id-site-4.documents.38.head.stylesheetTags.ponder" rel="stylesheet"><script src="../../js/ponder.js" id="fl-id-site-4.documents.38.head.scriptTags.ponder"></script></head><body class="infusion-docs"><nav class="navbar navbar-default navbar-fixed-top navbar-custom" id="fl-id-site-4.documents.38.navbar"><div class="container-fluid"><div class="navbar-ponder"><a href="../../" class="navbar-ponder-brand">Antranig Basman</a><button data-target="#main-navbar" data-toggle="collapse" class="navbar-toggle" type="button"><span class="sr-only">Toggle navigation</span><svg xmlns="http://www.w3.org/2000/svg" stroke="#888" viewBox="0 0 24 24" height="36" width="36"><path stroke-linecap="round" stroke-width="1.5" d="M20 7L4 7" /><path stroke-linecap="round" stroke-width="1.5" d="M20 12L4 12" /><path stroke-linecap="round" stroke-width="1.5" d="M20 17L4 17" /></svg></button><div id="main-navbar" class="collapse navbar-collapse"><ul id="fl-id-site-4.documents.38.navbar.items" class="nav navbar-nav navbar-right"><li id="fl-id-site-4.documents.38.navbar.items.0"><a href="../../post" title="Posts">Posts</a></li><li id="fl-id-site-4.documents.38.navbar.items.1"><a href="../../wip" title="WiP">WiP</a></li><li id="fl-id-site-4.documents.38.navbar.items.2"><a href="../../page/about/" title="About">About</a></li><li id="fl-id-site-4.documents.38.navbar.items.3" class="navlinks-container"><a href="../../docs" class="navlinks-parent">Docs</a><div id="fl-id-site-4.documents.38.navbar.items.3.children" class="navlinks-children"><a href="../../docs/fluid-signals">Fluid Signals</a><a href="../../docs/fluid-integration-language">Fluid Integration Language</a><a href="../../docs/fluid-view">Fluid View</a><a href="../../docs/fluid-ptf">Fluid PTF</a><a href="../../docs/fluid-tldraw">Fluid tldraw integration</a><a href="../../docs/linearisation-algorithm">Layer Linearisation</a></div></li><li id="fl-id-site-4.documents.38.navbar.items.4"><a href="../../communities" title="Communities">Communities</a></li><li id="fl-id-site-4.documents.38.navbar.items.5"><a href="../../projects" title="Projects">Projects</a></li><li id="fl-id-site-4.documents.38.navbar.items.6"><a href="../../term" title="Terms">Terms</a></li></ul></div></div></div></nav><header class="header-section" id="fl-id-site-4.documents.38.header"><div class="intro-header no-img"><div class="container"><div class="header-row"><div class="infusion-docs-heading ponder-heading"><h1 class="ponder-title">Fluid View</h1><hr class="small"></div></div></div></div></header><div role="main" id="fl-id-site-4.documents.38.main"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article class="blog-post" role="main"><div id="fl-id-site-4.documents.38.main.content"><p>This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the
+Single File Component (SFC) format, the machinery of views, and rendering pages under node. It builds on the
 <a href="../../docs/fluid-integration-language">Fluid Integration Language</a> (layers, references, <code>$compute</code>, <code>$method</code>, <code>$effect</code>,
 <code>$component</code>) and on <a href="../../docs/fluid-signals"><code>fluid.cell</code></a> (signals, effects, source tracking).</p>
 <p>The raw markdown underlying these docs is available on <a href="https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/fluid-view.md">GitHub</a>,
@@ -63,7 +63,8 @@ element. The element is watched live: elements added to the document later are b
 <h3 id="what-the-sfc-loader-does">What the SFC loader does</h3>
 <p>When the SFC is loaded, its script is patched before execution:</p>
 <ul>
-<li><code>$layers</code> defaults to <code>["fluid.component", "fluid.sfcLayer"]</code>.</li>
+<li><code>$layers</code> defaults to <code>["fluid.sfcLayer", "fluid.component"]</code>, and <code>fluid.sfcLayer</code> is otherwise placed first, where it
+is weakest, amongst any <code>$layers</code> written.</li>
 <li>A <code>view</code> subcomponent is added, with layer <code>fluid.sfcTemplateViewComponent</code>, whose <code>template</code> refers to the SFC’s
 <code>&lt;template&gt;</code> block as <code>{sfcLayer: "my.counter"}</code> (see <a href="#views">Views</a>). Since this is an ordinary member of the view,
 a layer derived from the SFC’s layer may replace the template by supplying its own, e.g.
@@ -96,8 +97,19 @@ that owns the view, exactly as in configuration.</p>
 <td><code>@{{todoList}.todos.length}</code></td>
 <td>A full <a href="../../docs/fluid-integration-language#references">context reference</a></td>
 </tr>
+<tr>
+<td><code>@{my.urlize({self}.tag)}</code></td>
+<td>A call to a global function, whose arguments are references or literals as for a compact <a href="../../docs/fluid-integration-language#compute"><code>$compute</code></a></td>
+</tr>
+<tr>
+<td><code>@@{count}</code></td>
+<td>The literal text <code>@{count}</code>, not interpolated</td>
+</tr>
 </tbody>
 </table>
+<p>A function call is recomputed whenever any of its arguments changes, as for a <code>$compute</code>:</p>
+<pre><code class="language-html">&lt;a href="/tags/@{my.urlize({self}.tag)}/"&gt;@{tag}&lt;/a&gt;
+</code></pre>
 <p>Interpolations can be mixed with literal text, as in <code>title="Busy: @{busy}"</code>, which is rendered as a string. Every
 binding is a fine-grained effect bound to its own text node or attribute. A change updates exactly that node, with no
 re-rendering of the surrounding tree.</p>
@@ -249,7 +261,67 @@ sequence inside the element.</p>
 <p>Each <code>my.todoItem</code> then renders its own SFC template, in which <code>@{todo.text}</code> refers to its element of the list.
 Adding to or removing from <code>todos</code> creates or destroys exactly the corresponding item views.</p>
 <p>A subcomponent with <a href="../../docs/fluid-integration-language#if"><code>$if</code></a> renders into its <code>@id</code> element only while its
-condition is true.</p>
+condition is true. A subcomponent <a href="../../docs/fluid-integration-language#removing-a-subcomponent">removed</a> by a stronger
+layer holding <code>null</code> at its member renders nothing, and its <code>@id</code> element is omitted from the document altogether until
+the member is restored.</p>
+<p>The template of a subcomponent with <code>elideParent: false</code> may have several top-level nodes. All of them are rendered
+in sequence inside the <code>@id</code> element, after those of any preceding list member.</p>
+<h4 id="fragment-slots-fluid-fragment">Fragment slots: <code>&lt;fluid-fragment&gt;</code></h4>
+<p>Where the subcomponent’s nodes must appear without any wrapping element, for example a list of <code>&lt;link&gt;</code> elements
+inside <code>&lt;head&gt;</code>, mark its place with a <code>&lt;fluid-fragment&gt;</code> element. The slot renders no element of its own, and the
+subcomponent’s nodes, or those of each member of its list, are rendered in its place:</p>
+<pre><code class="language-html">&lt;head&gt;
+    &lt;title&gt;@{title}&lt;/title&gt;
+    &lt;fluid-fragment @id="stylesheetLinks"&gt;&lt;/fluid-fragment&gt;
+&lt;/head&gt;
+</code></pre>
+<pre><code class="language-js">stylesheetLinks: {
+    $component: {
+        $layers: "fluid.component",
+        $for: {source: "{page}.stylesheets", valueAs: "sheet"},
+        view: {
+            $component: {
+                $layers: "fluid.templateViewComponent",
+                template: `&lt;link rel="stylesheet" href="@{sheet.href}"&gt;`
+            }
+        }
+    }
+}
+</code></pre>
+<h4 id="separators-between-list-members">Separators between list members</h4>
+<p>A list member can render a separator before itself using its position, bound by
+<a href="../../docs/fluid-integration-language#for"><code>positionAs</code></a>. This works the same way whether the source is an array or a
+keyed collection:</p>
+<pre><code class="language-js">tagLinks: {   // Rendered into &lt;p @id="tagLinks"&gt;&lt;/p&gt; as "Alpha, Beta, Gamma"
+    $component: {
+        $layers: "fluid.component",
+        $for: {source: "{post}.tags", valueAs: "tag", positionAs: "position"},
+        view: {
+            $component: {
+                $layers: "fluid.templateViewComponent",
+                elideParent: false,
+                template: `&lt;span @if="!position.first" class="separator"&gt;, &lt;/span&gt;&lt;a href="@{tag.url}"&gt;@{tag.name}&lt;/a&gt;`
+            }
+        }
+    }
+}
+</code></pre>
+<h3 id="conditional-elements-if-and-else">Conditional elements: <code>@if</code> and <code>@else</code></h3>
+<pre><code class="language-html">&lt;h2 @if="subtitle" class="sub"&gt;@{subtitle}&lt;/h2&gt;
+&lt;p @else class="nosub"&gt;No subtitle&lt;/p&gt;
+&lt;hr @if="!@{compact}"/&gt;
+</code></pre>
+<p>An element bearing <code>@if</code> is rendered only while its condition is truthy. The condition is any expression which
+<code>@{...}</code> accepts (a bare path, a context reference or a function call), optionally enclosed in <code>@{</code> and <code>}</code>, and
+optionally preceded by <code>!</code> to negate it. As for <a href="../../docs/fluid-integration-language#if"><code>$if</code></a>, an unavailable value
+counts as false. An element bearing <code>@else</code> is rendered while the condition of the <code>@if</code> element preceding it, separated
+from it by nothing but whitespace, is false. An <code>@else</code> without such a predecessor is an error.</p>
+<p>References within a conditional element resolve against the component whose template it is, as for the rest of the
+template. While its condition holds, the element is rendered by an anonymous child component, so its bindings and any
+subcomponents designated by <code>@id</code> within it exist only while it is shown. The elements around it are undisturbed as it
+comes and goes.</p>
+<p>Unlike a subcomponent with <code>$if</code>, whose element in the template remains while the subcomponent renders nothing, an
+element bearing <code>@if</code> is removed from the document entirely.</p>
 <h2 id="views">Views</h2>
 <p>A component <em>has</em> a view rather than <em>being</em> one. Everything to do with rendering (container, template, virtual tree
 and the effects that patch the DOM) lives in a subcomponent at the member <code>view</code>. The component itself holds only model
@@ -325,7 +397,11 @@ a view, without its display.</p>
 </tr>
 <tr>
 <td><code>fluid.partialViewComponent</code></td>
-<td>Composites partial templates into a parent template at <code>relativeContainer</code>, e.g. <code>"after:.footer"</code></td>
+<td>Composites the <a href="#partial-templates">partial templates</a> of the component’s layers into its template</td>
+</tr>
+<tr>
+<td><code>fluid.outputDocumentView</code></td>
+<td>Mixed in alongside a template layer: renders into a whole document of its own at <code>documentLocation</code> - see <a href="#output-documents-and-server-side-rendering">Output documents</a></td>
 </tr>
 </tbody>
 </table>
@@ -336,6 +412,7 @@ a view, without its display.</p>
 <li><code>vTree</code> - The activated virtual tree, with all bindings resolved.</li>
 <li><code>elideParent</code> - Defaults to <code>true</code>, meaning the template’s root element is merged with the container rather than
 nested inside it. Set it to <code>false</code> to render the root element inside the container.</li>
+<li><code>verbatim</code> - Defaults to <code>false</code>. If <code>true</code>, a template supplied as markup is rendered <a href="#verbatim-markup-and-islands">verbatim</a>.</li>
 <li><code>renderedContainer</code> - A signal holding the element once it has been rendered.</li>
 <li><code>renderView</code> - The effect that patches <code>vTree</code> into <code>container</code>.</li>
 </ul>
@@ -395,6 +472,86 @@ template that binds <code>&lt;select value="@{selection}"&gt;</code> and needs n
 <p>Here <code>renderTemplate</code> builds the markup imperatively, including <code>@on...</code> attributes on its root element so that events
 are delegated to a few handlers. The string is reparsed on every change, but reconciliation still keeps the DOM
 updates minimal. Choose this approach when building the markup recursively is simpler than composing subcomponents.</p>
+<h3 id="partial-templates">Partial templates</h3>
+<p>A layer may contribute a <strong>partial template</strong>, a fragment of markup composited into the template of any component
+bearing it, without replacing that template. This lets independent layers each add to, or take away from, a shared
+page structure such as a header. The component’s view must bear <code>fluid.partialViewComponent</code> alongside its template
+layer:</p>
+<pre><code class="language-js">fluid.def("my.header", {
+    $layers: "fluid.component",
+    view: {
+        $component: {
+            $layers: ["fluid.templateViewComponent", "fluid.partialViewComponent"],
+            template: `&lt;header&gt;&lt;h1 class="title"&gt;@{title}&lt;/h1&gt;&lt;nav @id="navbar"&gt;&lt;/nav&gt;&lt;p class="strapline"&gt;...&lt;/p&gt;&lt;/header&gt;`
+        }
+    }
+});
+
+fluid.def("my.header.post", {
+    view: {
+        $component: {
+            relativeContainer: "after: h1.title",
+            partialTemplate: `&lt;span class="date"&gt;@{date}&lt;/span&gt;`
+        }
+    }
+});
+
+fluid.def("my.header.bare", {
+    view: {
+        $component: {
+            relativeContainer: "remove: .strapline"
+        }
+    }
+});
+</code></pre>
+<p>A layer contributes a partial if the view record in its own definition, <code>view.$component</code>, holds <code>relativeContainer</code>.
+Its markup is <code>partialTemplate</code> in the same record or, for a Single File Component, its <code>&lt;template&gt;</code> block.</p>
+<ul>
+<li><code>relativeContainer</code> - A <strong>cutpoint</strong> of the form <code>"disposition: selector"</code>. The selector must match exactly one node
+of the template, by tag, <code>.class</code>, <code>#id</code>, or <code>@member</code> for the element bearing <code>@id="member"</code>, combined with descendant
+and <code>&gt;</code> combinators. The disposition is one of:
+<ul>
+<li><code>before</code> or <code>after</code> - The partial’s nodes are placed before or after the matched node.</li>
+<li><code>first</code> or <code>last</code> - They are placed at the start or end of the matched node’s children.</li>
+<li><code>replace</code> - They replace the matched node.</li>
+<li><code>remove</code> - The matched node is removed, and the partial needs no markup.</li>
+</ul>
+</li>
+<li><code>@relative</code> - A top-level node of a partial bearing this attribute is placed at its own cutpoint instead of its
+layer’s, e.g. <code>&lt;div @relative="first: header"&gt;</code>, so one partial can contribute to several places.</li>
+<li><code>partialTemplateLayers</code> - A member of the merged view through which any layer may redirect the partial of another,
+e.g. <code>partialTemplateLayers: {"my.header.post": {relativeContainer: "before: @navbar"}}</code>.</li>
+</ul>
+<p>Partials are composited in order of their layers’ precedence, weakest first, and those placed at the same cutpoint
+appear in that order in the document. The selectors of later partials are matched against the template as composited
+so far. A malformed cutpoint, or a selector matching no node or several, makes the view’s template unavailable with an
+error naming the layer.</p>
+<h3 id="verbatim-markup-and-islands">Verbatim markup and islands</h3>
+<p>A view with <code>verbatim: true</code> renders markup produced elsewhere, such as HTML from a content pipeline, without treating
+it as a template:</p>
+<pre><code class="language-js">fluid.def("my.article", {
+    $layers: "fluid.component",
+    html: "&lt;p&gt;Rendered from &lt;em&gt;Markdown&lt;/em&gt;&lt;/p&gt;&lt;div fluid-layers=\"my.figure\" data-src=\"a.png\"&gt;&lt;/div&gt;",
+    view: {
+        $component: {
+            $layers: "fluid.templateViewComponent",
+            verbatim: true,
+            template: "{$parent}.html"
+        }
+    }
+});
+</code></pre>
+<ul>
+<li>The markup is not scanned for bindings, so text such as <code>@{count}</code> is rendered as it stands.</li>
+<li>Whitespace is kept, and the markup may have any number of top-level nodes, all of which are rendered within the
+container.</li>
+<li>An element bearing <code>fluid-layers</code> is an <strong>island</strong>: it is rendered by a child component bearing those layers. The
+child’s member <code>dataset</code> holds the element’s <code>data-</code> attributes, named as for the DOM’s <code>dataset</code>, so
+<code>data-image-caption</code> is read as <code>@{dataset.imageCaption}</code>. The child is named by the element’s <code>fluid-id</code> attribute,
+or otherwise receives a generated name, and the element keeps its attributes.</li>
+</ul>
+<p>When the markup changes, it is reconciled with the DOM as for any template. An island whose element changes layers
+is rebuilt with its new layers, and one whose element disappears is destroyed.</p>
 <h3 id="wrapping-an-external-widget-with-bindable">Wrapping an external widget with <code>$bindable</code></h3>
 <blockquote>
 <p><code>$bindable</code> is <strong>experimental and unstable</strong>. See <a href="../../docs/fluid-integration-language#bindable">its definition</a>.</p>
@@ -485,11 +642,118 @@ A <code>$compute</code> record does not yet forward them, so use an <code>$effec
 <p>Template bindings don’t need the annotation. A binding such as <code>value="@{text}"</code> writes back to the model, and when
 the model change returns, the binding compares the property with the new value and doesn’t write it again. Source
 tracking is needed where a widget can’t make that comparison cheaply or without side effects.</p>
-</div><div id="fl-id-site-11.documents.38.main.share"><hr><section id="social-share"><div class="list-inline footer-links"><div aria-hidden="true" class="share-box"><ul class="share"><li><a href="https://bsky.app/intent/compose?text=Just%20reading%20a%20post%20called%20Fluid%20View%20on%20Antranig%20Basman's%20blog%3A%20https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-view%2F" title="Share on BlueSky" target="_blank"><i class="fab fa-fw fa-bluesky"></i></a></li><li><a href="https://twitter.com/share?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-view%2F&text=Fluid%20View&via=amb26ponder" title="Share on Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-view%2F" title="Share on Facebook" target="_blank"><i class="fab fa-facebook"></i></a></li><li><a href="https://reddit.com/submit?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-view%2F&title=Fluid%20View" title="Share on Reddit" target="_blank"><i class="fab fa-reddit"></i></a></li><li><a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-view%2F&title=Fluid%20View" title="Share on LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a></li></ul></div></div></section></div></article><ul id="fl-id-site-11.documents.38.main.pager" class="pager blog-pager"><li class="next"><a title="Fluid tldraw integration" href="../../docs/fluid-tldraw/" data-placement="top" data-toggle="tooltip">Next Post →</a></li></ul><script data-lang="en" data-category-id="DIC_kwDOOKllGM4CvhAS" data-category="Announcements" data-repo-id="R_kgDOOKllGA" data-repo="amb26/ponder" id="fl-id-site-11.documents.38.main.comments" async crossorigin="anonymous" data-theme="light" data-input-position="bottom" data-emit-metadata="0" data-reactions-enabled="0" data-strict="0" data-mapping="pathname" src="https://giscus.app/client.js"></script></div></div></div><footer id="fl-id-site-11.documents.38.footer"><div class="container"><div class="row ponder-credits-row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p class="credits copyright text-muted"><a href="../../">Antranig Basman</a>
+<h2 id="output-documents-and-server-side-rendering">Output documents and server-side rendering</h2>
+<p>The same component tree which renders live in the browser can render static pages under node, for example to build a
+website, and those pages can later be made live again in the browser. Under node, Infusion renders into documents
+implemented by <a href="https://github.com/WebReflection/linkedom">linkedom</a>, and is loaded with <code>require("infusion-6")</code>.</p>
+<h3 id="fluidoutputdocumentview"><code>fluid.outputDocumentView</code></h3>
+<p>A view bearing <code>fluid.outputDocumentView</code> alongside its template layer renders into a whole document of its own. The
+root element of its template, normally <code>&lt;html&gt;</code>, is rendered onto the document’s root element:</p>
+<pre><code class="language-js">fluid.def("my.page", {
+    $layers: "fluid.component",
+    view: {
+        $component: {
+            $layers: ["fluid.templateViewComponent", "fluid.outputDocumentView"],
+            documentLocation: "$compute:my.outputPath({page}.entry.path)",
+            baseURL: "{site}.baseURL",
+            template: `&lt;html&gt;&lt;head&gt;&lt;title&gt;@{entry.title}&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;main @id="content"&gt;&lt;/main&gt;&lt;/body&gt;&lt;/html&gt;`
+        }
+    }
+});
+
+fluid.def("my.site", {
+    $layers: "fluid.component",
+    baseURL: "https://example.org/blog",
+    entries: {$reactiveRoot: []},
+    pages: {
+        $component: {
+            $layers: "my.page",
+            $for: {source: "{site}.entries", valueAs: "entry"}
+        }
+    }
+});
+</code></pre>
+<ul>
+<li><code>documentLocation</code> - Where the document is written, e.g. <code>"post/first/index.html"</code>. A relative location resolves
+against the working directory.</li>
+<li><code>baseURL</code> - Optional. The base URL of the site to which the page belongs. The page’s root element then records the
+relative URL of the site’s root in its <code>fluid-site-root</code> attribute, e.g. <code>"../../"</code>, so that in the browser the page
+recognises its own location wherever the site is served from, even from local files.</li>
+</ul>
+<p>Under node, the view creates a fresh <strong>output document</strong> while <code>documentLocation</code> is available, and releases it when
+the location becomes unavailable or the view is destroyed. A changed location creates a fresh document. Every output
+document is listed in the cell <code>fluid.outputDocuments</code>, as records <code>{dokkument, location, url}</code>, in order of creation.
+Nothing executes in an output document. The Single File Components of the layers of the component and its view are
+recorded in it as they would be in a live page: their styles as <code>&lt;style&gt;</code> elements, and their scripts as inert
+<code>&lt;script type="text/x-fluid-layer"&gt;</code> elements, which a browser does not run.</p>
+<p>In the browser, which can only see its own document, the same view renders into the current document if
+<code>documentLocation</code> designates it, and otherwise has no container and renders nothing. The locations are compared by
+their path relative to the site’s root, using <code>baseURL</code> and any <code>fluid-site-root</code> attribute recorded in the page. So a
+site’s whole component tree can be booted in each of its pages, and only the page being viewed renders.</p>
+<h3 id="writing-documents">Writing documents</h3>
+<p>These functions are defined in <code>src/framework/server/server-support.js</code>:</p>
+<ul>
+<li><code>fluid.writeOutputDocumentsWhenSettled([filenameFor], [prepare])</code> - Waits until the reactive graph has settled, and
+then writes every output document which is ready.
+<ul>
+<li><code>filenameFor</code> receives a record of <code>fluid.outputDocuments</code> and returns the file to write. By default this is the
+file at its location.</li>
+<li><code>prepare</code> receives each record just before its document is serialised, e.g. to strip material not wanted in a
+static build.</li>
+<li>Returns a promise for <code>{written, unchanged, unready}</code>, arrays of the records in each state. A file which already
+holds exactly the document’s markup is not rewritten, so a rebuild after an edit writes only the pages which
+changed. A document is unready while any injection into it is in progress, any script is loading or any
+component which may render into it is unavailable. Each unready record bears a <code>readiness</code> member giving the
+reason.</li>
+</ul>
+</li>
+<li><code>fluid.writeDocumentsWhenSettled(records, [prepare])</code> - As above, for an explicit list of <code>{dokkument, filename}</code>
+records.</li>
+<li><code>fluid.writeDocumentWhenSettled(dokkument, filename)</code> - Writes a single document, rejecting with the reason it is
+unready if it doesn’t become ready.</li>
+</ul>
+<p>A single host page, whose elements bear <code>fluid-layers</code> as in the browser, can be rendered from the command line:</p>
+<pre><code>node src/framework/server/hydrate.js page.html [-o out.html]
+</code></pre>
+<p>This boots the page as a browser would, waits for the graph to settle, and writes the rendered page, by default to
+<code>page-hydrated.html</code>. If the graph settles with the page still unready, it exits with an error listing the pending
+effects.</p>
+<h3 id="scripts">Scripts</h3>
+<p>A document booted under node evaluates its JavaScript scripts as a browser would, except for Infusion’s own scripts,
+which node already has, inert records of injections, and scripts marked as meant for the browser alone.
+<code>fluid.classifyScriptNode(node)</code> reports the role of a script element, so that a <code>prepare</code> function can
+decide which to keep:</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Script</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"framework"</code></td>
+<td>Boots Infusion itself, and bears <code>fluid-hydrated</code>, e.g. <code>fluid-hydrated="%infusion-6"</code></td>
+</tr>
+<tr>
+<td><code>"injection"</code></td>
+<td>Injected for a Single File Component, or an inert record of one in an output document</td>
+</tr>
+<tr>
+<td><code>"client"</code></td>
+<td>Payload for the browser, such as a widget library, bearing <code>fluid-client</code>. It is never evaluated under node, whether in a booted document or one rendered from a template</td>
+</tr>
+<tr>
+<td><code>"page"</code></td>
+<td>Any other script</td>
+</tr>
+</tbody>
+</table>
+</div><div id="fl-id-site-4.documents.38.main.share"><hr><section id="social-share"><div class="list-inline footer-links"><div aria-hidden="true" class="share-box"><ul class="share"><li><a href="https://bsky.app/intent/compose?text=Just%20reading%20a%20post%20called%20Fluid%20View%20on%20Antranig%20Basman's%20blog%3A%20https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-view%2F" title="Share on BlueSky" target="_blank"><i class="fab fa-fw fa-bluesky"></i></a></li><li><a href="https://twitter.com/share?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-view%2F&text=Fluid%20View&via=amb26ponder" title="Share on Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-view%2F" title="Share on Facebook" target="_blank"><i class="fab fa-facebook"></i></a></li><li><a href="https://reddit.com/submit?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-view%2F&title=Fluid%20View" title="Share on Reddit" target="_blank"><i class="fab fa-reddit"></i></a></li><li><a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-view%2F&title=Fluid%20View" title="Share on LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a></li></ul></div></div></section></div></article><ul id="fl-id-site-4.documents.38.main.pager" class="pager blog-pager"><li class="previous"><a title="Layer Linearisation" href="../../docs/linearisation-algorithm/" data-placement="top" data-toggle="tooltip">← Previous Post</a></li><li class="next"><a title="Fluid tldraw integration" href="../../docs/fluid-tldraw/" data-placement="top" data-toggle="tooltip">Next Post →</a></li></ul><script data-lang="en" data-category-id="DIC_kwDOOKllGM4CvhAS" data-category="Announcements" data-repo-id="R_kgDOOKllGA" data-repo="amb26/ponder" id="fl-id-site-4.documents.38.main.comments" async crossorigin="anonymous" data-theme="light" data-input-position="bottom" data-emit-metadata="0" data-reactions-enabled="0" data-strict="0" data-mapping="pathname" src="https://giscus.app/client.js"></script></div></div></div><footer id="fl-id-site-4.documents.38.footer"><div class="container"><div class="row ponder-credits-row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p class="credits copyright text-muted"><a href="../../">Antranig Basman</a>
                         &#160;©
                         2026
                     </p><p class="credits theme-by text-muted"><a href="https://github.com/fluid-project/infusion-6">Infusion 6</a> powered &#160;•&#160;
                         Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from
                         <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &#160;•&#160;
                         further <a href="../../term/lithification">lithified</a> by Boz
-                    </p></div></div></div></footer><script defer src="../../js/katex.min.js" id="fl-id-site-11.documents.38.footerScriptTags.katex"></script><script onload="renderMathInElement(document.body);" defer src="../../js/auto-render.min.js" id="fl-id-site-11.documents.38.footerScriptTags.katexAutoRender"></script><script src="../../js/highlight.min.js" id="fl-id-site-11.documents.38.footerScriptTags.hljs"></script><script id="fl-id-site-11.documents.38.footerScriptTags.hljsInit">hljs.initHighlightingOnLoad();</script></body></html>
+                    </p></div></div></div></footer><script defer src="../../js/katex.min.js" id="fl-id-site-4.documents.38.footerScriptTags.katex"></script><script onload="renderMathInElement(document.body);" defer src="../../js/auto-render.min.js" id="fl-id-site-4.documents.38.footerScriptTags.katexAutoRender"></script><script src="../../js/highlight.min.js" id="fl-id-site-4.documents.38.footerScriptTags.hljs"></script><script id="fl-id-site-4.documents.38.footerScriptTags.hljsInit">hljs.initHighlightingOnLoad();</script></body></html>

@@ -13,18 +13,129 @@ implemented as asked: `@member` selectors, `fl-id-` ids, and partials ordered by
 
 ## R3. Fragments and multi-root templates
 
-**Done since REQUIREMENTS.md:** steps (a) and (b) of the recommended order below. A list member's fragment root now
-contributes its nodes in place, and `<fluid-fragment @id="x">` is a slot that renders as its subcomponent's markup alone.
+**Done since REQUIREMENTS.md:** all of steps (a)–(c) of the recommended order. A list member's fragment root
+contributes its nodes in place. `<fluid-fragment @id="x">` is a slot that renders as its subcomponent's markup alone.
+`$for: {positionAs: "position"}` gives `{index, first, last}` (FLUID-7029), and `ponder-postMeta-translations.vue` now
+renders Hugo's `delimit` as `<span @if="!position.first">@{{i18n}.strings.translationsSeparator}</span>`. That isn't
+checked by the build, because the multilingual adaptation is only a sketch and this site has no translations.
 
-**Outstanding.**
+**Still outstanding, not urgent.** `<div id="header-big-imgs">` is still rendered *inside* `<header>`, not beside it.
+`ponder-document.vue` could use `<fluid-fragment @id="header">`, or an adaptation could contribute the div as a partial
+with `relativeContainer: "before: @header"`. This site doesn't use it.
 
-* `<div id="header-big-imgs">` is still rendered *inside* `<header>` rather than beside it. `ponder-document.vue` could
-  now use `<fluid-fragment @id="header">`, or an adaptation could contribute the div as a partial with
-  `relativeContainer: "before: @header"`. This site doesn't use it.
-* `$for` option `positionAs: "position"`, giving `{index, first, last}`, for separators over keyed collections (c).
+### Re-evaluation after FLUID-7029: the markup `<head>` needs
 
-**Response to the comment** ("Give more explicit examples here, as well as considering how much of this problem can be
-solved by elide-parent").
+`<head>` is where R3 matters most, because nothing may wrap its children: any element other than `<meta>`, `<link>`,
+`<title>`, `<base>`, `<style>`, `<script>`, `<noscript>` or `<template>` closes the head in a browser's parser. What
+Hugo's `head.html`, `seo/*.html` and `head_custom.html` emit for this site, and what the port can do now:
+
+| Markup | Requirement | Status |
+|---|---|---|
+| `<meta charset>`, viewport, `X-UA-Compatible` | static, `charset` within the first 1024 bytes | supported |
+| `<title>`, `description`, `author`, `og:*`, `generator` | static with interpolation | supported, matches Hugo |
+| `<link rel="icon">`, `<link rel="alternate" type="application/rss+xml">` | singletons, optional (`{{ with }}`) | supported (`@if` where optional) |
+| `<link rel="stylesheet">` × 7–8 | ordered list without a wrapper, since order is the cascade; entries swapped or added by adaptations (selfHosted, hljs, staticman) | supported: keyed records with `priority` and `$for` in a `<fluid-fragment>` slot. Output matches Hugo apart from `integrity`/`crossorigin` on CDN links when `selfHosted` is off |
+| `<script src="/js/ponder.js">` | list without a wrapper | supported, as above |
+| `<base href>` on the 404 page only | conditional singleton. It must come *before* any element with a URL, because the page is served at whatever URL was missing | **was missing; now fixed** (below) |
+| `og:image`, `fb:app_id` | optional singletons | supported (`fb:app_id` is unused by this site) |
+| `twitter:*` meta × 6 | static with interpolation and `truncate` | supportable now, not ported (R12) |
+| `<script type="application/ld+json">` × 2–4 (`seo/structured/*`) | JSON text inside `<script>`, built from page data | **not safely supportable**: script text interpolation isn't escaped (R13). The workaround today is a `$compute` that returns `JSON.stringify(record).replace(/</g, "\\u003c")`, bound as the element's whole text |
+| `hreflang` alternates per translation | list without a wrapper | supported as a fragment list, not modelled (R14) |
+| SFC `<style>` / `<style src>` injected by the framework | placed deterministically relative to the site's stylesheets | not exercised by this site (no SFC styles); see finding 4 |
+
+**The 404 `<base>`, fixed in this pass.** Hugo emits `<base href="https://ponder.org.uk/">` on the 404 page. Without
+it, the relativised URLs in the page (`./css/main.css` and every link) resolve against the missing URL, so a 404 at
+`/a/b/` is served unstyled with broken links. `ponder.head` now has a member `baseHref`, which defaults to `false`, and
+its template renders `<base @if="baseHref" href="@{baseHref}">`. `ponder.kind.404` sets it through
+`head: {$component: {baseHref: ...}}`. The element comes straight after `<meta charset>`, not where Hugo puts it after
+most of the stylesheets, because a `<base>` doesn't reliably rebase URLs that the parser has already resolved.
+
+So **for the static build no R3 framework fix is urgent**. Every element of `<head>` that the site uses renders
+correctly. The gaps are porting work (twitter meta) and R13 (JSON-LD).
+
+### What breaks once a `<head>` is live
+
+These findings come from an experiment run with linkedom through `fluid.patchChildren`, which is the same code that
+would run on the client. It rendered a head with
+`<base @if>`, a keyed `$for` of `<link>`s and one of `<script>`s in `<fluid-fragment>` slots, and a trailing `<meta>`,
+and then edited it. They don't affect a one-shot static build, but they block optimistic liveness, and `<head>` is
+where they bite, because there a node's identity is the resource: a `<link>` whose `href` changes is fetched again, and
+a `<script>` runs only when it is first connected.
+
+1. **Fragment members are reconciled by position, not by key.** Inserting stylesheet `m` between `a` and `b`
+   rewrote `href` on the existing nodes of `b` and `c`, and replaced the first `<script>` with a fresh `<link>`.
+   It then moved each script's `src` onto its neighbour's node and appended fresh nodes for the remainder, including
+   the unrelated trailing `<meta>`. In a browser, the stylesheets after the insertion point would be fetched again,
+   with a flash of unstyled content. A script whose `src` was rewritten would never run, and a freshly created one would
+   run again. FLUID-7029 keyed elements bearing `@id`, but the vnodes spliced in by `fluid.expandFragmentSlot` carry
+   no key. **Fix:** give the root vnode of each list member a `memberKey`, and have `patchChildren` match keyed vnodes to
+   nodes by key, moving rather than rewriting them. The positional pass would then apply to unkeyed nodes only.
+2. **Ids go stale on reused nodes.** The `fl-id-` id is a *default* attribute, written only when the node has none.
+   After the insertion above, the head serialised as `<link href="/m.css" id="fl-id-page-4.sheetTags.a">`, so every id
+   after the insertion point names the wrong member. Hydration and debugging both rely on these ids. Finding 1's fix
+   removes the cause, but a reused node should also have its id rewritten.
+3. **`<head>` assumes it owns all its children.** Only SFC injections (`flInjected`, ids `fl-script-`/`fl-style-`)
+   are skipped. A `<style>` appended by anything else, such as a browser extension, a widget loader (gcse, piwik), or
+   `fluid-hydrated` boot scripts in a hydrated host document, was **removed** by the next re-render of the head. A
+   rendered `<head>` has to tolerate foreign nodes. **Fix:** reconcile only nodes this render produced: nodes it created
+   (marked), plus, on hydration, nodes matched to the template. Insert relative to owned neighbours, and leave the rest
+   alone. A trailing unowned node is not "surplus".
+4. **Injections land in the middle of the rendered children.** In a `--live` build, the inert SFC records came out
+   between the first stylesheet (`katex`) and the rest. `fluid.swapInjectedNode` appends to `<head>` while the head is
+   still being rendered, and later members are appended after the injections. Inert records do no harm there, but SFC
+   `<style>` elements injected by the same route would end up at an arbitrary point in the cascade. They would come
+   before `bootstrap.min.css` and `main.css`, which would then override them at equal specificity. **Fix:** a fixed
+   injection point, e.g. the end of `<head>` after rendering, or a designated `<fluid-fragment>`/comment anchor. This
+   mechanism is shown by the inert records; it hasn't been tested with styles, since no SFC in this site has one.
+5. **A fragment slot leaves no anchor.** In the output, the slot is just its members, so a client hydrating an
+   *empty* list has nowhere to insert the first member except by position. Comments are allowed in `<head>` and
+   survive parsing, so `<!--fl:stylesheetTags-->…<!--/fl:stylesheetTags-->` around each fragment slot's output would
+   give a stable range. A static build could strip it, as it strips other traces (R11).
+
+Unrelated to `<head>`, the same experiment turned up a bug: a **`$reactiveRoot` holding a primitive reads wrongly on
+the first render**. `flag: {$reactiveRoot: false}` (or `0`, `null`, `""`) renders `@{flag}` as `[object Object]`, and
+`@if="flag"` as true. `$reactiveRoot: "x"` renders empty. All of these are correct after the first write. Ponder
+avoids this by using plain members.
+
+**Fixed in this pass: all five findings, and the primitive `$reactiveRoot`.**
+
+1. `fluid.patchChildren` now matches nodes by key. The markup of each list member is keyed by the list's path and the
+   member's key (`fluid.listViewTree`), an `@id` element by its member, and an `@if` element by its block. A keyed node
+   is reused only for the same key and is moved, never rewritten. Unkeyed nodes are matched by position among the
+   unkeyed ones. For a list over an *array*, members are keyed by index, so an insertion still shifts the keys of
+   later members. Lists keyed by record, as `stylesheetTags` is, keep their nodes.
+2. The `fl-id-` ids are removed entirely, both on containers and on `@id` elements. See below.
+3. A rendering reconciles only the nodes it owns: those it created, plus, on the first rendering over existing markup,
+   those it claims from it by position. Foreign nodes are neither reused nor removed. SFC injections and `fluid-hydrated`
+   boot scripts are never claimed. An error report rendered in place is owned, so the next rendering replaces it.
+4. Each created or moved node is placed immediately after the owned node that precedes it, so anything appended by
+   others, injections included, stays after all of the rendering's own nodes. In a `--live` build of this site, all
+   the inert records now follow `ponder.js`, after every stylesheet.
+5. No anchors are needed. A member of an empty list is inserted after the owned node preceding its slot.
+
+The test "Keyed list members keep their nodes, and nodes not rendered are left alone" in FluidViewTests.js covers
+insertion, reordering, emptying and refilling a fragment list beside foreign and injected nodes. Run against the
+previous `FluidView.js`, it fails. "Rendering against markup from an earlier rendering claims its nodes" covers
+hydration. A full build of this site produces the same output as before, apart from the ids.
+
+**The ids.** Nothing read them back. Ownership is recovered by rendering the same tree over the markup: the client
+claims nodes by position on its first rendering, which is how a static page will be made live. Without the ids, the
+free-component counter (R16) no longer appears in any page.
+
+**The primitive `$reactiveRoot`.** Two bugs: `fluid.expandElement` recognised record types by the truthiness of their
+key, so `{$reactiveRoot: false}` was taken as a plain object, and `fluid.expandReactiveRecord` treated any String as a
+context reference. A `$reactiveRoot` is now recognised by the key's presence (`fluid.elementTypeOf`), and only an IL
+reference is resolved.
+
+**Recommendation.** Fix 1 together with 2, and fix 3, before any liveness work on full documents. They are small
+changes within `patchChildren`, and without them a live `<head>` reloads its stylesheets and runs its scripts again,
+or skips them, whenever a list changes. Fix 4 matters as soon as a site with SFC styles renders whole documents. Fix 5
+can wait for hydration itself.
+
+### Earlier response to the comment
+
+The comment: "Give more explicit examples here, as well as considering how much of this problem can be solved by
+elide-parent".
 
 What `elideParent` does. A string template parses to a `fragment` node holding its top-level nodes. With
 `elideParent: true`, the default, the fragment's *first* child is rendered onto the container: its attributes are
@@ -47,7 +158,7 @@ Elision can't remove the need for a *container*. Three cases remain beyond it:
    now `<fluid-fragment @id="stylesheetTags">`.
 2. **A component whose output is siblings.** Hugo's header emits `<div id="header-big-imgs">` *beside* `<header>`. With
    `elideParent: false`, both would render *inside* the document's `<header @id="header">`, giving a header nested in
-   a header. This needs a `<fluid-fragment>` slot, or the partial described above. Still outstanding.
+   a header. This needs a `<fluid-fragment>` slot, or the partial described above. Still outstanding, as above.
 3. **Separators** (Hugo's `delimit`). These can be expressed in the member template with no new syntax:
    `<span @if="{self}.index">, </span><a href="@{translation.permalink}">…</a>`, with `$for: {keyAs: "index"}` over an
    array. Index 0 is falsy, so the separator precedes every member but the first. A keyed collection yields keys rather
@@ -56,9 +167,8 @@ Elision can't remove the need for a *container*. Three cases remain beyond it:
 
 ## R4. Element-level conditionals
 
-**Outstanding.** `@if`/`@else` are implemented. The port still uses the `showPager` and `showPageMeta` flags on
-`ponder.document` (`ponder-document.vue`, `ponder-main-single.vue`, `kinds/ponder-type-page.vue`). Following R9's
-response, `ponder.type.page` could restate the member records directly instead.
+**Done.** `@if`/`@else` are implemented. The `showPager`, `showPageMeta` and `showHeader` knobs on `ponder.document`
+have been removed in favour of removing members with `null` (R9).
 
 ## R6. Linkage ergonomics
 
@@ -90,18 +200,22 @@ templates is noticed.
 
 ## R9. Removing and adjusting subcomponents
 
+**Done since this was written (FLUID-7029):** removal with `null`, including leaving out the `@id` element. In the
+port:
+* `ponder.kind.404` has `header: null`;
+* `ponder.document` has `pageMeta: null`, which `ponder.type.page` restores with a complete record;
+* `ponder.type.page` removes the pager with `main: {$component: {pager: null}}`. This adjusts the `main` record
+  contributed by `ponder.kind.page` without restating it.
+
+The output is byte-identical to the knob-based version.
+
 **Outstanding.**
 
-1. **Removal with `null`.** `header: null` still fails with *"Cannot merge value null at path ... with a subcomponent
-   record"*, and the failure makes the whole parent unavailable. Hugo's 404 layout needs this
-   (`ponder-kind-404.vue`).
-2. **No way to replace or remove `$layers`.** They only concatenate, so a stronger layer can't swap `ponder.header` for
+1. **No way to replace or remove `$layers`.** They only concatenate, so a stronger layer can't swap `ponder.header` for
    `ponder.header.minimal`. One option: `$layers: {$replace: [...]}` in a contribution, resetting the layers of weaker
-   contributions.
-3. **No way to cancel a weaker `$if` or `$for`.** `$if: true` resolves as a function record, and the subcomponent comes
+   contributions. Removing with `null` and restoring with a complete record now covers the cases this site has.
+2. **No way to cancel a weaker `$if` or `$for`.** `$if: true` resolves as a function record, and the subcomponent comes
    out unavailable. `fluid.expandIfRecord` should accept Boolean literals.
-4. The comments in `ponder-type-page.vue` and `ponder-kind-404.vue` are out of date, and the `showPager` and
-   `showPageMeta` knobs can go (R4).
 
 **Response to the comment** ("This should have been implemented in the work in #19 inherited from FLUID-5614, report on
 what might be missing here. In Infusion 4 we had a special fluid.emptySubcomponent marker for this purpose but report on
@@ -196,7 +310,7 @@ Beyond bytes, these things stop a static build from leaving everything in:
    `ponder.site` was given. In the single-tree build, a page is a member of `documents` and has no root component of its
    own.
 
-The remaining traces cost only bytes and can stay, as reconstruction aids: `fl-id-` ids, `fluid-layers` on islands,
+The remaining traces cost only bytes and can stay, as reconstruction aids: `fluid-layers` on islands,
 `fluid-client` attributes, the inert records, and the `fluid-site-root` attribute on `<html>`.
 
 **Response to the third comment** ("Such bizarre things should be entirely unnecessary, the renderer has all the
@@ -271,6 +385,24 @@ are boolean attributes.
   rather than merging over it.
 * The docs don't say what `elideParent` means for the members of a list, or how a list's per-member containers are
   created. The R3 response above has the material for this.
+
+* A `$compute` whose function path has a numeric segment, e.g. `"$compute:ponder.kind.404.baseHref(...)"` for a
+  function defined as `ponder.kind["404"].baseHref`, makes the build hang rather than fail with a diagnostic. The
+  port names the function `ponder.kind.notFoundBaseHref` instead.
+  **Fixed, but the cause was different.** That `$compute` with that definition builds correctly, both now and with
+  the previous framework. The hang came from writing the definition as `ponder.kind.404.baseHref = ...`, which is a
+  JavaScript syntax error, so the SFC's script failed and `ponder.kind.404` was unavailable. That layer is a dynamic
+  layer of the page, read from `{self}`, and the page oscillated: with the layer it was unavailable, so the reference
+  was unavailable and the layer dropped. Without the layer it was available, so the layer returned. The dynamic layer
+  effect now keeps a reference's last resolution while the reference is unavailable. The build exits with status 1,
+  reporting the `SyntaxError` and the unavailable page. Tested by "A failed dynamic layer read from the component
+  itself leaves it stably unavailable" in FluidILTests.js. `ponder.kind["404"].baseHref` would work, but
+  `notFoundBaseHref` is clearer anyway.
+* The counter of free components is part of every container id (`fl-id-site-11.documents.0` in the last committed
+  build, `fl-id-site-4.documents.0` now). Every page's markup therefore changes whenever the order of construction
+  changes, which defeats "only pages whose markup has changed are rewritten", and the id exposes a detail of the
+  implementation.
+  **Fixed by removing the ids** (R3). No component path appears in the output any more.
 
 **Comment with no response yet:** "Give an example of what is meant by this", on the `$for` iteration variable. This
 was not answered in the first pass, and still needs an experiment.

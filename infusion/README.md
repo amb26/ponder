@@ -15,7 +15,7 @@ npm install --no-bin-links    # --no-bin-links on a shared folder such as vboxsf
 npm run build-infusion        # or: node infusion/js/buildSite.js [-o docs-infusion] [--live true]
 ```
 
-This writes the site to `docs-infusion/`, in about 35 seconds for its 69 pages. Only pages whose markup has changed
+This writes the site to `docs-infusion/`, in a few seconds for its 70 pages. Only pages whose markup has changed
 are rewritten, and pages left by an earlier build which no longer exist are removed. By default the build is static:
 the inert records of the SFCs' scripts which each page holds are stripped. `--live true` keeps them, so that a page
 records what it would need to be made live again (REQUIREMENTS.md R11). `--from M --limit N` renders just N pages from
@@ -24,15 +24,16 @@ the Mth, for working on the theme.
 The build runs on node 16.6.2 and later. smol-toml declares node >= 18, but needs only `Object.hasOwn` from it, which
 `siteModel.js` supplies when it is absent; npm warns of the engine mismatch when installing under node 16.
 
-The output has the same 69 pages as Hugo's `docs/`, with the same URLs, feeds (`index.xml`) and sitemap, and every
+The output has the same 70 pages as Hugo's `docs/`, with the same URLs, feeds (`index.xml`) and sitemap, and every
 local link resolves. Known differences from Hugo's output:
 
 * Code blocks are not highlighted on the server by chroma, with line numbers - they are highlighted in the browser by
   highlight.js, as the site's `useHLJS` already arranges.
 * Some elements bear a wrapper or an id which Hugo's output lacks: the `<div>` holding rendered content, ids
   `fl-id-...` on the containers of subcomponents (REQUIREMENTS.md R7), and the data attributes of shortcode islands.
+* The 404 page's `<base>` comes straight after `<meta charset>`, ahead of the stylesheets that Hugo's precedes.
 * `<div id="header-big-imgs">` is inside rather than beside `<header>` (REQUIREMENTS.md R3) - unused by this site.
-* The SEO partials (`seo/schema`, `seo/twitter`) and image processing of the home page's avatar are not ported
+* The SEO partials (`seo/schema`, `seo/twitter`; JSON-LD awaits REQUIREMENTS.md R13) and image processing of the home page's avatar are not ported
   (REQUIREMENTS.md R12).
 
 ## Layout

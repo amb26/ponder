@@ -85,7 +85,7 @@ ponder.main.single.showComments = function (pageParams, siteParams) {
                     <div @id="share" @if="ponder.main.single.showShare({document}.page.params, {site}.config.params)"></div>
                     <div @id="related" @if="ponder.main.single.showRelated({site}.pages, {document}.page, {site}.config.params)"></div>
                 </article>
-                <ul @id="pager" @if="{document}.showPager" class="pager blog-pager"></ul>
+                <ul @id="pager" class="pager blog-pager"></ul>
                 <script @id="comments" @if="ponder.main.single.showComments({document}.page.params, {site}.config.params)"></script>
             </div>
         </div>
