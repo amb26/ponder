@@ -8,8 +8,14 @@
 
       <title>More iNaturalist Shenanigans - Antranig Basman</title>
 
-  <meta name="description" content="This story has a familiar beginning. As with UI as Code, an innocuous UI request from Dana has unexpectedly deep consequences. Dana noticed that the Douglas fir image on the Xetthecum Forest community pane was no longer showing up&hellip; here is what we see:
-The cause in itself is indeed fairly innocuous. We are sourcing these images from iNaturalist&rsquo;s CDN which has been for many years in the slow process of migrating from URLs like https://static.">
+  <meta name="description" content="This story has a familiar beginning. As with UI as Code, an innocuous UI request from Dana has
+unexpectedly deep consequences. Dana noticed that the Douglas fir image on the Xetthecum Forest community pane
+was no longer showing up&hellip; here is what we see:
+
+The cause in itself is indeed fairly innocuous. We are sourcing these images from iNaturalist&rsquo;s CDN which has been
+for many years in the slow process of migrating from URLs like https://static.inaturalist.org/photos/641410/medium.jpg
+to URLs like https://inaturalist-open-data.s3.amazonaws.com/photos/641410/medium.jpg.
+The fix should be straightforward – rerunning the data pipeline behind the app will re-scrape the API and update the URL.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -58,7 +64,7 @@ The cause in itself is indeed fairly innocuous. We are sourcing these images fro
     "name" : "Antranig Basman"
   },
   "headline": "More iNaturalist Shenanigans",
-  "description" : "This story has a familiar beginning. As with UI as Code, an innocuous UI request from Dana has unexpectedly deep consequences. Dana noticed that the Douglas fir image on the Xetthecum Forest community pane was no longer showing up\u0026hellip; here is what we see:\nThe cause in itself is indeed fairly innocuous. We are sourcing these images from iNaturalist\u0026rsquo;s CDN which has been for many years in the slow process of migrating from URLs like https:\/\/static.",
+  "description" : "This story has a familiar beginning. As with UI as Code, an innocuous UI request from Dana has unexpectedly deep consequences. Dana noticed that the Douglas fir image on the Xetthecum Forest community pane was no longer showing up\u0026hellip; here is what we see:\nThe cause in itself is indeed fairly innocuous. We are sourcing these images from iNaturalist\u0026rsquo;s CDN which has been for many years in the slow process of migrating from URLs like https:\/\/static.inaturalist.org\/photos\/641410\/medium.jpg to URLs like https:\/\/inaturalist-open-data.s3.amazonaws.com\/photos\/641410\/medium.jpg. The fix should be straightforward – rerunning the data pipeline behind the app will re-scrape the API and update the URL.\n",
   "inLanguage" : "en",
   "wordCount":  1461 ,
   "datePublished" : "2025-09-25T00:00:00\u002b00:00",
@@ -81,21 +87,28 @@ The cause in itself is indeed fairly innocuous. We are sourcing these images fro
 
 
 <meta property="og:title" content="More iNaturalist Shenanigans" />
-<meta property="og:description" content="This story has a familiar beginning. As with UI as Code, an innocuous UI request from Dana has unexpectedly deep consequences. Dana noticed that the Douglas fir image on the Xetthecum Forest community pane was no longer showing up&hellip; here is what we see:
-The cause in itself is indeed fairly innocuous. We are sourcing these images from iNaturalist&rsquo;s CDN which has been for many years in the slow process of migrating from URLs like https://static.">
+<meta property="og:description" content="This story has a familiar beginning. As with UI as Code, an innocuous UI request from Dana has
+unexpectedly deep consequences. Dana noticed that the Douglas fir image on the Xetthecum Forest community pane
+was no longer showing up&hellip; here is what we see:
+
+The cause in itself is indeed fairly innocuous. We are sourcing these images from iNaturalist&rsquo;s CDN which has been
+for many years in the slow process of migrating from URLs like https://static.inaturalist.org/photos/641410/medium.jpg
+to URLs like https://inaturalist-open-data.s3.amazonaws.com/photos/641410/medium.jpg.
+The fix should be straightforward – rerunning the data pipeline behind the app will re-scrape the API and update the URL.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/wip/2025-09-25-more-inaturalist-shenanigans/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="More iNaturalist Shenanigans" />
-  <meta name="twitter:description" content="This story has a familiar beginning. As with UI as Code, an innocuous UI request from Dana has unexpectedly deep consequences. Dana noticed that the Douglas fir image on the Xetthecum Forest community …">
+  <meta name="twitter:description" content="This story has a familiar beginning. As with UI as Code, an innocuous UI request from Dana has
+unexpectedly deep consequences. Dana noticed that the Douglas fir image on the Xetthecum Forest community …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.123.7">
+  <meta name="generator" content="Hugo 0.154.5">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
@@ -531,7 +544,7 @@ moral issues, but thankfully I am not a consistent person.&#160;<a href="#fnref:
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

@@ -8,8 +8,20 @@
 
       <title>Fluid Integration Language - Antranig Basman</title>
 
-  <meta name="description" content="This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6 components are defined, composed and wired together as an integration domain. It is implemented in FluidIL.js on top of the reactive primitive fluid.cell, whose semantics (signals, effects, unavailable values, deferred stabilization) it inherits throughout.
-The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.">
+  <meta name="description" content="This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6
+components are defined, composed and wired together as an integration domain.
+It is implemented in FluidIL.js
+on top of the reactive primitive
+fluid.cell, whose semantics (signals, effects, unavailable values,
+deferred stabilization) it inherits throughout.
+The raw markdown underlying these docs is available on GitHub,
+suitable for direct ingestion by your friendly local neighbourhood intelligence.
+Model
+A program in the IL is derived from a set of named layers: plain JSON-like records registered in a global, reactive layer store
+via fluid.def. A component is a live instance whose contents are derived from the merge of an
+ordered set of layers. Within a layer, any value may written as be a plain value, a reference to a value elsewhere in the
+component tree, or a signal record ($compute, $method, $effect,
+$component, &hellip;) describing how the live value is produced.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -58,9 +70,9 @@ The raw markdown underlying these docs is available on GitHub, suitable for dire
     "name" : "Antranig Basman"
   },
   "headline": "Fluid Integration Language",
-  "description" : "This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6 components are defined, composed and wired together as an integration domain. It is implemented in FluidIL.js on top of the reactive primitive fluid.cell, whose semantics (signals, effects, unavailable values, deferred stabilization) it inherits throughout.\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.",
+  "description" : "This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6 components are defined, composed and wired together as an integration domain. It is implemented in FluidIL.js on top of the reactive primitive fluid.cell, whose semantics (signals, effects, unavailable values, deferred stabilization) it inherits throughout.\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.\nModel A program in the IL is derived from a set of named layers: plain JSON-like records registered in a global, reactive layer store via fluid.def. A component is a live instance whose contents are derived from the merge of an ordered set of layers. Within a layer, any value may written as be a plain value, a reference to a value elsewhere in the component tree, or a signal record ($compute, $method, $effect, $component, \u0026hellip;) describing how the live value is produced.\n",
   "inLanguage" : "en",
-  "wordCount":  6062 ,
+  "wordCount":  7292 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -81,21 +93,35 @@ The raw markdown underlying these docs is available on GitHub, suitable for dire
 
 
 <meta property="og:title" content="Fluid Integration Language" />
-<meta property="og:description" content="This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6 components are defined, composed and wired together as an integration domain. It is implemented in FluidIL.js on top of the reactive primitive fluid.cell, whose semantics (signals, effects, unavailable values, deferred stabilization) it inherits throughout.
-The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.">
+<meta property="og:description" content="This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6
+components are defined, composed and wired together as an integration domain.
+It is implemented in FluidIL.js
+on top of the reactive primitive
+fluid.cell, whose semantics (signals, effects, unavailable values,
+deferred stabilization) it inherits throughout.
+The raw markdown underlying these docs is available on GitHub,
+suitable for direct ingestion by your friendly local neighbourhood intelligence.
+Model
+A program in the IL is derived from a set of named layers: plain JSON-like records registered in a global, reactive layer store
+via fluid.def. A component is a live instance whose contents are derived from the merge of an
+ordered set of layers. Within a layer, any value may written as be a plain value, a reference to a value elsewhere in the
+component tree, or a signal record ($compute, $method, $effect,
+$component, &hellip;) describing how the live value is produced.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/docs/fluid-integration-language/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="Fluid Integration Language" />
-  <meta name="twitter:description" content="This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6 components are defined, composed and wired together as an integration domain. It is …">
+  <meta name="twitter:description" content="This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6
+components are defined, composed and wired together as an integration domain.
+It is …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.123.7">
+  <meta name="generator" content="Hugo 0.154.5">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
@@ -283,7 +309,7 @@ registered at the path <code>layerName</code>, which constructs a free-standing 
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">counter</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">counter</span><span class="p">({</span><span class="nx">count</span><span class="o">:</span> <span class="mi">5</span><span class="p">});</span> <span class="c1">// Creator function - argument is a &#34;user&#34; layer
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">counter</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span> <span class="c1">// 5
+</span></span></span><span class="line"><span class="cl"><span class="nx">counter</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span> <span class="c1">// 5
 </span></span></span></code></pre></div><p>With one argument, reads back the stored definition. A layer whose definition is not yet written reads as unavailable,
 and any component depending on it waits for it with its own unavailable status.</p>
 <h2 id="component-lifecycle">Component lifecycle</h2>
@@ -294,17 +320,29 @@ and any component depending on it waits for it with its own unavailable status.<
 </ul>
 <p>The returned <strong>component proxy</strong> (from regular client JavaScript code) has these semantics:</p>
 <ul>
-<li><strong>Reads</strong> resolve signals transparently: <code>that.count</code> returns the current concrete value, <code>that.child</code> returns a
-proxy to a subcomponent, <code>that.method(...)</code> invokes a <code>$method</code>.</li>
-<li><strong>Writes</strong> (<code>that.count = 6</code>, or mutating array methods such as <code>that.items.push(x)</code>) are recorded in the
+<li>
+<p><strong>Reads</strong> resolve signals transparently: <code>that.count</code> returns the current concrete value, <code>that.child</code> returns a
+proxy to a subcomponent, <code>that.method(...)</code> invokes a <code>$method</code>.</p>
+</li>
+<li>
+<p><strong>Writes</strong> (<code>that.count = 6</code>, or mutating array methods such as <code>that.items.push(x)</code>) are recorded in the
 component&rsquo;s <strong>live layer</strong>, the highest-precedence layer, and propagate reactively. A write beneath a
-<a href="#reactiveroot"><code>$reactiveRoot</code></a> is applied immutably to the root&rsquo;s value.</li>
-<li><strong>Reads within a computation</strong>, i.e. within the function of a <a href="#compute"><code>$compute</code></a> or <a href="#effect"><code>$effect</code></a>, make
+<a href="#reactiveroot"><code>$reactiveRoot</code></a> is applied immutably to the root&rsquo;s value. A write to a member which is defined by a
+reference to another site, e.g. <code>pane: &quot;{hashManager}.hash.pane&quot;</code>, is applied to that site rather than to the member,
+which goes on following it &mdash; so a member defined by a reference is never severed from its source by a write.
+A write or deletion made from within a computation or effect does not make it depend on what the write consults - the
+site written, the value overwritten or the component&rsquo;s layers. An effect which seeds a member, is therefore not rerun  when the member is later written.</p>
+</li>
+<li>
+<p><strong>Reads within a computation</strong>, i.e. within the function of a <a href="#compute"><code>$compute</code></a> or <a href="#effect"><code>$effect</code></a>, make
 the computation depend on the member read, so that it reruns when that member changes, as well as when its arguments
-do. A member which is only to be consulted, without the computation depending on it, is read within
-<a href="../../docs/fluid-signals#fluidcelluntrackedfn"><code>fluid.cell.untracked</code></a>, e.g. <code>fluid.cell.untracked(() =&gt; self.open)</code>.</li>
-<li>Access after destruction throws, other than within a computation, where a destroyed component and each of its members
-read as <a href="#unavailable-components">unavailable</a>.</li>
+do. To execute code without setting up tracking on its dependencies, wrap it in
+<a href="../../docs/fluid-signals#fluidcelluntrackedfn"><code>fluid.cell.untracked</code></a>, e.g. <code>fluid.cell.untracked(() =&gt; self.open)</code>.</p>
+</li>
+<li>
+<p>Access after destruction throws, other than within a computation, where a destroyed component and each of its members
+read as <a href="#unavailable-components">unavailable</a>.</p>
+</li>
 </ul>
 <h3 id="componentdestroy">Component.destroy()</h3>
 <p>Every component (via the base layer <code>fluid.component</code>) has a <code>destroy</code> method. Destruction disposes all of the
@@ -320,6 +358,11 @@ component in turn. A todo item can therefore delete itself with <code>{self}.des
 values within it<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, yield unavailable values; no effects are allocated within it. When the missing layers arrive, the
 component completes and its effects start. <code>fluid.unavailableComponents</code> is a global cell holding <code>true</code> once no
 component in the tree is unavailable, and an unavailable value otherwise.</p>
+<p>Reading a member of an unavailable component from outside a computation throws an error saying why it is unavailable,
+rather than quietly returning <code>undefined</code>, so that it is not mistaken for an empty component. Within a computation the
+member reads as unavailable, and the computation depends on the component becoming available. Members probed by generic
+code, such as <code>then</code>, <code>toJSON</code> and <code>constructor</code>, still read quietly.</p>
+<p>A layer which a component names but which is never defined leaves it unavailable.</p>
 <h2 id="layers">Layers</h2>
 <p>Infusion&rsquo;s behaviour is controlled by the contents of <em>layers</em>, which are declarative,
 serialisable blocks of configuration equivalent to their JSON representation. Layers may contain a variety of directives,
@@ -344,7 +387,7 @@ described in <a href="../../docs/linearisation-algorithm">Layer Linearisation</a
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">redTriangle</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="nx">t</span><span class="p">.</span><span class="nx">sides</span><span class="p">;</span>   <span class="c1">// 3 - my.triangle beats my.shape
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">t</span><span class="p">.</span><span class="nx">colour</span><span class="p">;</span>  <span class="c1">// &#34;red&#34; - my.red is listed after my.triangle and so beats my.shape
+</span></span></span><span class="line"><span class="cl"><span class="nx">t</span><span class="p">.</span><span class="nx">colour</span><span class="p">;</span>  <span class="c1">// &#34;red&#34; - my.red is listed after my.triangle and so beats my.shape
 </span></span></span></code></pre></div><p>An entry in <code>$layers</code> which is itself a <a href="#references">reference</a> is a <strong>dynamic layer name</strong>, resolved reactively from the
 component&rsquo;s context. The referenced value may be a layer name or array of names:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.panel&#34;</span><span class="p">,</span> <span class="p">{</span>
@@ -362,7 +405,7 @@ choose amongst candidate layers only those which exist, compute the name with <c
 </span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;post&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">candidates</span><span class="o">:</span> <span class="s2">&#34;$compute:my.document.candidates({self}.type)&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// my.type.post if it is defined, otherwise my.type.default
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">typeLayers</span><span class="o">:</span> <span class="s2">&#34;$compute:fluid.firstDefinedLayer({self}.candidates)&#34;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">typeLayers</span><span class="o">:</span> <span class="s2">&#34;$compute:fluid.firstDefinedLayer({self}.candidates)&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span><span class="line"><span class="cl"><span class="nx">my</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">candidates</span> <span class="o">=</span> <span class="nx">type</span> <span class="p">=&gt;</span> <span class="p">[</span><span class="s2">&#34;my.type.&#34;</span> <span class="o">+</span> <span class="nx">type</span><span class="p">,</span> <span class="s2">&#34;my.type.default&#34;</span><span class="p">];</span>
 </span></span></code></pre></div><p>Since these test whether a layer is defined reactively, the component switches to the preferred layer as soon as it is
@@ -371,46 +414,46 @@ defined, and back again if it is deleted.</p>
 <h4 id="merging-and-precedence">Merging and precedence</h4>
 <p>A component&rsquo;s contents are a deep merge of layer records, applied weakest first:</p>
 <table>
-<thead>
-<tr>
-<th>Precedence (weakest first)</th>
-<th>Source</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>def</code></td>
-<td>Static layers named in <code>$layers</code>, linearised; more derived beats less derived</td>
-</tr>
-<tr>
-<td><code>subcomponent</code></td>
-<td>The body of the <a href="#component"><code>$component</code></a> record which created this component</td>
-</tr>
-<tr>
-<td><code>forLayer</code></td>
-<td>The collection element merged into this component by <a href="#for"><code>$for</code></a>&rsquo;s <code>layerAs</code></td>
-</tr>
-<tr>
-<td><code>user</code></td>
-<td>The argument to a creator function</td>
-</tr>
-<tr>
-<td><code>template</code></td>
-<td>Material contributed by the template which renders this component, e.g. the markup at its <code>@id</code> element, or the layers and <code>data-</code> attributes of an <a href="../../docs/fluid-view#verbatim-markup-and-islands">island</a></td>
-</tr>
-<tr>
-<td><code>dynamicLayers</code></td>
-<td>Layers named via references in <code>$layers</code></td>
-</tr>
-<tr>
-<td><code>variables</code></td>
-<td>Iteration variables bound by <a href="#for"><code>$for</code></a></td>
-</tr>
-<tr>
-<td><code>live</code></td>
-<td>Writes made through the component proxy</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Precedence (weakest first)</th>
+          <th>Source</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>def</code></td>
+          <td>Static layers named in <code>$layers</code>, linearised; more derived beats less derived</td>
+      </tr>
+      <tr>
+          <td><code>subcomponent</code></td>
+          <td>The body of the <a href="#component"><code>$component</code></a> record which created this component</td>
+      </tr>
+      <tr>
+          <td><code>forLayer</code></td>
+          <td>The collection element merged into this component by <a href="#for"><code>$for</code></a>&rsquo;s <code>layerAs</code></td>
+      </tr>
+      <tr>
+          <td><code>user</code></td>
+          <td>The argument to a creator function</td>
+      </tr>
+      <tr>
+          <td><code>template</code></td>
+          <td>Material contributed by the template which renders this component, e.g. the markup at its <code>@id</code> element, or the layers and <code>data-</code> attributes of an <a href="../../docs/fluid-view#verbatim-markup-and-islands">island</a></td>
+      </tr>
+      <tr>
+          <td><code>dynamicLayers</code></td>
+          <td>Layers named via references in <code>$layers</code></td>
+      </tr>
+      <tr>
+          <td><code>variables</code></td>
+          <td>Iteration variables bound by <a href="#for"><code>$for</code></a></td>
+      </tr>
+      <tr>
+          <td><code>live</code></td>
+          <td>Writes made through the component proxy</td>
+      </tr>
+  </tbody>
 </table>
 <p>Merge rules:</p>
 <ul>
@@ -447,7 +490,7 @@ an unavailable value.</p>
 </span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;World&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">shout</span><span class="o">:</span> <span class="s2">&#34;{self}.name&#34;</span>           <span class="c1">// tracks name
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">});</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span></code></pre></div><p>A reference to a path holding mutable configuration is <strong>sited</strong>: writing through it writes to the original site.</p>
 <h3 id="literal-strings-beginning-with--or-">Literal strings beginning with <code>{</code> or <code>$</code></h3>
 <p>Only the first character of a configuration string is interpreted. A string beginning with <code>{</code> is a reference, and
@@ -457,10 +500,10 @@ that backslash. A backslash anywhere else in a string has no special meaning.</p
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.prices&#34;</span><span class="p">,</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">json</span><span class="o">:</span> <span class="s2">&#34;\\{\&#34;a\&#34;: 1}&#34;</span><span class="p">,</span>       <span class="c1">// the literal text {&#34;a&#34;: 1}
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">price</span><span class="o">:</span> <span class="s2">&#34;\\$5.00&#34;</span><span class="p">,</span>           <span class="c1">// the literal text $5.00
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">share</span><span class="o">:</span> <span class="s2">&#34;\\\\server&#34;</span><span class="p">,</span>         <span class="c1">// the literal text \server
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">path</span><span class="o">:</span> <span class="s2">&#34;C:\\temp&#34;</span>            <span class="c1">// unchanged: the backslash is not the first character
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">});</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">price</span><span class="o">:</span> <span class="s2">&#34;\\$5.00&#34;</span><span class="p">,</span>           <span class="c1">// the literal text $5.00
+</span></span></span><span class="line"><span class="cl">    <span class="nx">share</span><span class="o">:</span> <span class="s2">&#34;\\\\server&#34;</span><span class="p">,</span>         <span class="c1">// the literal text \server
+</span></span></span><span class="line"><span class="cl">    <span class="nx">path</span><span class="o">:</span> <span class="s2">&#34;C:\\temp&#34;</span>            <span class="c1">// unchanged: the backslash is not the first character
+</span></span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span></code></pre></div><p>The escape applies wherever configuration is interpreted, including arguments and nested material. Values written at
 runtime, e.g. <code>that.text = '{&quot;a&quot;: 1}'</code>, are data, and are never interpreted.</p>
 <p>A reference which designates its own value, or a value which includes or is included by it, yields an unavailable
@@ -469,46 +512,46 @@ mistake for a reference to the enclosing component, which should instead be name
 <code>bounds: &quot;{workspace}.bounds&quot;</code>.</p>
 <h3 id="context-names">Context names</h3>
 <table>
-<thead>
-<tr>
-<th>Context</th>
-<th>Resolves to</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>self</code></td>
-<td>The component in which the reference appears - within a <a href="#component"><code>$component</code></a> record, this is the subcomponent being defined, not the component holding the record</td>
-</tr>
-<tr>
-<td><code>$parent</code></td>
-<td>The parent of the component in which the reference appears</td>
-</tr>
-<tr>
-<td>A member name, e.g. <code>{panel}</code></td>
-<td>A component of that member name, in scope</td>
-</tr>
-<tr>
-<td>A layer name or its nickname (last segment), e.g. <code>{my.app.panel}</code> or <code>{panel}</code></td>
-<td>A component bearing that layer, in scope</td>
-</tr>
-<tr>
-<td><code>/</code></td>
-<td>The root of the component tree</td>
-</tr>
-<tr>
-<td><code>/path.to.component</code></td>
-<td>The component at that absolute path in the tree</td>
-</tr>
-<tr>
-<td><code>global</code></td>
-<td>The JavaScript global object</td>
-</tr>
-<tr>
-<td><code>0</code>, <code>1</code>, &hellip;</td>
-<td>The positional arguments of a <a href="#method"><code>$method</code></a> call</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Context</th>
+          <th>Resolves to</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>self</code></td>
+          <td>The component in which the reference appears - within a <a href="#component"><code>$component</code></a> record, this is the subcomponent being defined, not the component holding the record</td>
+      </tr>
+      <tr>
+          <td><code>$parent</code></td>
+          <td>The parent of the component in which the reference appears</td>
+      </tr>
+      <tr>
+          <td>A member name, e.g. <code>{panel}</code></td>
+          <td>A component of that member name, in scope</td>
+      </tr>
+      <tr>
+          <td>A layer name or its nickname (last segment), e.g. <code>{my.app.panel}</code> or <code>{panel}</code></td>
+          <td>A component bearing that layer, in scope</td>
+      </tr>
+      <tr>
+          <td><code>/</code></td>
+          <td>The root of the component tree</td>
+      </tr>
+      <tr>
+          <td><code>/path.to.component</code></td>
+          <td>The component at that absolute path in the tree</td>
+      </tr>
+      <tr>
+          <td><code>global</code></td>
+          <td>The JavaScript global object</td>
+      </tr>
+      <tr>
+          <td><code>0</code>, <code>1</code>, &hellip;</td>
+          <td>The positional arguments of a <a href="#method"><code>$method</code></a> call</td>
+      </tr>
+  </tbody>
 </table>
 <p><strong>Scope.</strong> A context name is resolved by searching outwards from the referring component: its own names, then its
 direct children&rsquo;s, then its parent&rsquo;s, then its siblings&rsquo;, and so on up through each ancestor and that ancestor&rsquo;s
@@ -523,7 +566,7 @@ Scope is reactive: a reference re-resolves when a matching component appears or 
 </span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.toolbar&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">theme</span><span class="o">:</span> <span class="s2">&#34;{app}.theme&#34;</span>     <span class="c1">// nickname of my.app
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span></code></pre></div><h3 id="selectors">Selectors</h3>
@@ -542,7 +585,7 @@ is a context name (layer name, nickname or member name) or <code>&amp;name</code
 <p>A signal record is an object with a single key starting with <code>$</code>, or equivalently a <strong>compact string</strong>
 <code>&quot;$type:body&quot;</code>. Function-bearing records share the <strong>function record</strong> syntax:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="p">{</span><span class="nx">func</span><span class="o">:</span> <span class="s2">&#34;my.global.fn&#34;</span><span class="p">,</span> <span class="nx">args</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;{self}.a&#34;</span><span class="p">,</span> <span class="mi">3</span><span class="p">]}</span>   <span class="c1">// full form
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;$compute:my.global.fn({self}.a, 3)&#34;</span>            <span class="c1">// compact form
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;$compute:my.global.fn({self}.a, 3)&#34;</span>            <span class="c1">// compact form
 </span></span></span></code></pre></div><ul>
 <li><code>func</code> - A global function name, a <a href="#references">reference</a> to a function (e.g. <code>&quot;{self}.helper&quot;</code>), or a function value.</li>
 <li><code>args</code> - Array (or single value) of argument material. References anywhere within it, including inside nested
@@ -563,7 +606,7 @@ If any argument is unavailable the function is not called and the value is unava
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">r</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">rect</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="nx">r</span><span class="p">.</span><span class="nx">area</span><span class="p">;</span>          <span class="c1">// 12
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">r</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">r</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nx">r</span><span class="p">.</span><span class="nx">area</span><span class="p">;</span>          <span class="c1">// 20
 </span></span></span></code></pre></div><p>The function may be asynchronous: if it returns a <code>Promise</code> or async iterator, e.g. as an <code>async</code> or <code>async*</code> function
 does, the value is pending until the promise settles or the first value is yielded, and is then the value it resolves
@@ -572,6 +615,86 @@ to or yields. Computations depending on it are not run with the promise itself -
 discovered from what the function returns.</p>
 <p>Members of components read within the function, as well as its arguments, are its dependencies - see the
 <a href="#creator-functions-layernameuserlayer">component proxy</a>.</p>
+<p>The full form <code>{$compute: {func, args, equiv}}</code> accepts:</p>
+<ul>
+<li><code>equiv</code> - A policy for when a recomputation leaves the value morally unchanged, as a function
+<code>(oldValue, newValue) =&gt; Boolean</code> or the global name of one, e.g. <code>&quot;fluid.equiv.elementwise&quot;</code>. The member then keeps
+the value it held, and notifies nothing - see the
+<a href="../../docs/fluid-signals#fluidcellinitialvalue-props"><code>equiv</code> of a cell</a>.</li>
+</ul>
+<p>An argument written as <code>{$oldValue}</code> receives the value the computation last produced, or <code>undefined</code> if it has
+produced none, so that it may build on its own previous result, as a reducer:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.history&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">current</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Every value current has held, most recent last
+</span></span></span><span class="line"><span class="cl">    <span class="nx">seen</span><span class="o">:</span> <span class="s2">&#34;$compute:my.appendValue({$oldValue}, {self}.current)&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">my</span><span class="p">.</span><span class="nx">appendValue</span> <span class="o">=</span> <span class="p">(</span><span class="nx">seen</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">[...</span><span class="nx">seen</span> <span class="o">||</span> <span class="p">[],</span> <span class="nx">value</span><span class="p">];</span>
+</span></span></code></pre></div><h3 id="transient">$transient</h3>
+<p>State belonging to one instance of a component which takes no part in the reactive graph, e.g. a drag in progress, a
+timer, or a handle onto an object outside the tree:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.dragger&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.viewComponent&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">drag</span><span class="o">:</span> <span class="p">{</span><span class="nx">$transient</span><span class="o">:</span> <span class="kc">null</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">autoScroll</span><span class="o">:</span> <span class="p">{</span><span class="nx">$transient</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">dispose</span><span class="o">:</span> <span class="s2">&#34;clearInterval&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">that</span><span class="p">.</span><span class="nx">drag</span> <span class="o">=</span> <span class="p">{</span><span class="nx">startX</span><span class="o">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="p">};</span>        <span class="c1">// No notification, no remerge
+</span></span></span><span class="line"><span class="cl"><span class="nx">that</span><span class="p">.</span><span class="nx">autoScroll</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="nx">scroll</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>Reading it creates no dependency, and writing it notifies nothing. A write is never raised into the
+<a href="#creator-functions-layernameuserlayer">live layer</a>, so it never remerges its component.</li>
+<li>The initial value is copied for each instance, and the value held survives turnover of the component while the
+record is unchanged.</li>
+<li><code>dispose</code> - Optionally, a function, or the global name of one, which receives each value as it is overwritten, and
+the value held when the member is withdrawn or its component destroyed, e.g. <code>&quot;clearTimeout&quot;</code> for a timer.</li>
+</ul>
+<p>A member is held as transient only at the top level of its component. Since nothing reruns when it changes, reading one among the
+arguments of a <code>$compute</code> is almost certainly a mistake, and logs a warning.</p>
+<h3 id="lens">$lens</h3>
+<p>A value which is a view of the value held at another site, its <strong>source</strong>, through a relation whose forward and
+backward arcs are written together in one spot. Unlike a <code>$compute</code>, a lens may be written - a write to it, or beneath
+it, is applied to its source:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">range</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$lens</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">source</span><span class="o">:</span> <span class="s2">&#34;{elevationFilter}.filterState&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">forward</span><span class="o">:</span> <span class="s2">&#34;my.toRange({0}, {self}.minRange, {self}.maxRange)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">backward</span><span class="o">:</span> <span class="s2">&#34;my.toState({0}, {self}.minRange, {self}.maxRange)&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><code>source</code> - A <a href="#references">reference</a> to the site viewed.</li>
+<li><code>path</code> - Optionally, the path of the address viewed within the source&rsquo;s value - a String, an Array of segments, or a
+reference resolving to either, e.g. <code>&quot;{self}.urlKey&quot;</code>. The lens owns only this address: writes through it leave the
+rest of the source&rsquo;s value as it was.</li>
+<li><code>forward</code> - A compute-style function record computing the lens&rsquo;s value, in whose arguments <code>{0}</code> designates the value
+at the lens&rsquo;s address. It is recomputed whenever any of its arguments changes, as for <code>$compute</code>.</li>
+<li><code>backward</code> - A method-style function record computing the value for the lens&rsquo;s address from a value written to the
+lens, which it receives as <code>{0}</code>. Returning <code>fluid.deleteMarker</code> removes the address from the source.</li>
+</ul>
+<p>A write to the lens, e.g. <code>that.range.min = 20</code> or <code>that.range = {min: 0, max: 100}</code>, is applied to the lens&rsquo;s current
+value, passed through <code>backward</code>, and the result is written at the lens&rsquo;s address within the source&rsquo;s site - following
+the fish upstream, as for a write to a <a href="#references">member defined by a reference</a>, so that a source which is itself a
+lens, or a reference to a reactive root elsewhere, is written in turn. The lens&rsquo;s value then follows from its source
+along <code>forward</code>; nothing is held at the lens&rsquo;s own site.</p>
+<p>The backward arc is not an edge in the graph of cells, but an <strong>address writer</strong> registered with the lens&rsquo;s component
+under the stable key of the lens&rsquo;s site, e.g. <code>&quot;app.filter:filterState&quot;</code> - see <code>fluid.siteWriterOf</code>. A lens allocated
+afresh at the same site replaces it. Each write it makes carries that key as its source marker, so that an effect may
+recognise, or decline with <code>excludeSource</code>, the writes which arrived through the lens, and it records its last write
+for explanation.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// A filter&#39;s state held in one entry of a hash shared with other filters
+</span></span></span><span class="line"><span class="cl"><span class="nx">filterState</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$lens</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">source</span><span class="o">:</span> <span class="s2">&#34;{hashManager}.hash&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">path</span><span class="o">:</span> <span class="s2">&#34;{self}.urlKey&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">forward</span><span class="o">:</span> <span class="s2">&#34;my.decode({0})&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">backward</span><span class="o">:</span> <span class="s2">&#34;my.encode({0})&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>A lens may be laid by a stronger layer over a member which a weaker one defines in any other way, including a
+<code>$reactiveRoot</code> and any links merged alongside it - the lens replaces it. This frees the site which a weaker layer used
+to hold state, e.g. a filter&rsquo;s <code>filterState</code>, to be supplied from elsewhere, such as the URL.</p>
 <h3 id="effect">$effect</h3>
 <p>A side effect upon the world outside the component tree, run during stabilization whenever its resolved arguments
 change. Effects are allocated only once the component is fully available, are not run while any
@@ -580,9 +703,13 @@ argument is unavailable, and are disposed when the component is destroyed or the
 <li><code>includeSource</code>, <code>excludeSource</code> (full form only) - restrict notification by update source, as for
 <a href="../../docs/fluid-signals#fluidcelleffectfn-staticsources-props"><code>fluid.cell.effect</code></a>. Any member which an effect writes
 is updated with the sources of the change which caused it to run, so that an effect further along can exclude a
-change however many effects it has passed through - see <a href="../../docs/fluid-signals#cellsetnewvalue-source"><code>Cell.set</code></a>.
+change however many effects it has passed through - see <a href="../../docs/fluid-signals#cellsetnewvalue-options"><code>Cell.set</code></a>.
 The source <code>&quot;self&quot;</code> matches the changes which the effect&rsquo;s own component originates, e.g. from its template&rsquo;s event
 handlers - see <a href="../../docs/fluid-view#excluding-self-widgets-that-should-not-hear-their-own-changes">Source tracking and the DOM</a>.</li>
+<li><code>debounce</code> (full form only) - a delay in milliseconds. The effect runs only once its arguments have rested unchanged
+for this long, with their latest values, rather than on every change - e.g. for writing a search query to the URL as
+the user types. A pending run is cancelled when the effect is disposed. A debounced effect runs outside the reactive
+graph, so <code>fluid.cell.settle</code>, and hence a static rendering, does not wait for it.</li>
 <li><code>source</code> (full form only) - a source with which every member the effect writes is marked, e.g. <code>&quot;self&quot;</code> for an
 effect which writes back the changes a widget wrapped by its component has reported. An effect of the component
 excluding <code>&quot;self&quot;</code> is then not notified of them. As for any writes made by an effect, this holds for members set
@@ -597,7 +724,7 @@ synchronously by its function, not for any set after an <code>await</code>.</li>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">logger</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">.</span><span class="nx">stabilize</span><span class="p">();</span>   <span class="c1">// Count is 1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">l</span><span class="p">.</span><span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">l</span><span class="p">.</span><span class="nx">count</span><span class="o">++</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">.</span><span class="nx">stabilize</span><span class="p">();</span>   <span class="c1">// Count is 2
 </span></span></span></code></pre></div><h4 id="composite-effects">Composite effects</h4>
 <p>An <code>$effect</code> may instead hold an array of <strong>listener records</strong>, each a <a href="#signal-directives">function record</a> which may
@@ -621,7 +748,7 @@ superseded run dispatches no further records.</p>
 </span></span><span class="line"><span class="cl">        <span class="nx">$effect</span><span class="o">:</span> <span class="p">[{</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">namespace</span><span class="o">:</span> <span class="s2">&#34;load&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">func</span><span class="o">:</span> <span class="s2">&#34;my.loadMap&#34;</span><span class="p">,</span>            <span class="c1">// Async, resolving to the loaded map
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">args</span><span class="o">:</span> <span class="s2">&#34;{self}.mapUrl&#34;</span>
+</span></span></span><span class="line"><span class="cl">            <span class="nx">args</span><span class="o">:</span> <span class="s2">&#34;{self}.mapUrl&#34;</span>
 </span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">namespace</span><span class="o">:</span> <span class="s2">&#34;applyStyle&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">priority</span><span class="o">:</span> <span class="s2">&#34;after:load&#34;</span><span class="p">,</span>
@@ -630,7 +757,7 @@ superseded run dispatches no further records.</p>
 </span></span><span class="line"><span class="cl">        <span class="p">}]</span>
 </span></span><span class="line"><span class="cl">    <span class="p">},</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">report</span><span class="o">:</span> <span class="s2">&#34;$effect:my.reportReady({self}.ready)&#34;</span>   <span class="c1">// Runs once the whole chain has completed
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">});</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span></code></pre></div><p>Effects supplied by several layers at the same member are <strong>merged by namespace</strong> rather than the stronger replacing
 the weaker. A stronger record displaces a weaker record of the same namespace in place, and a record with a new
 namespace joins the chain at the position given by its <code>priority</code>:</p>
@@ -663,11 +790,11 @@ suffix on a reference documents it and is otherwise ignored. A positional argume
 of a <code>$compute</code> or <code>$effect</code> which calls it. An effect may therefore call a method which updates the values it reads,
 such as one appending to a history, without rerunning itself:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">commit</span><span class="o">:</span> <span class="s2">&#34;$method:my.commit({self}, {0}:text)&#34;</span><span class="p">,</span>   <span class="c1">// reads and writes {self}.history and {self}.text
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">commitValid</span><span class="o">:</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">commitValid</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">$effect</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">func</span><span class="o">:</span> <span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">text</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">self</span><span class="p">.</span><span class="nx">commit</span><span class="p">(</span><span class="nx">text</span><span class="p">),</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">args</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;{self}&#34;</span><span class="p">,</span> <span class="s2">&#34;{self}.validText&#34;</span><span class="p">]</span>     <span class="c1">// reruns only when validText changes
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.taxa&#34;</span><span class="p">,</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
@@ -679,7 +806,7 @@ such as one appending to a history, without rerunning itself:</p>
 </span></span><span class="line"><span class="cl"><span class="nx">my</span><span class="p">.</span><span class="nx">describe</span> <span class="o">=</span> <span class="p">(</span><span class="nx">that</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">prefix</span> <span class="o">+</span> <span class="nx">that</span><span class="p">.</span><span class="nx">entries</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nx">my</span><span class="p">.</span><span class="nx">taxa</span><span class="p">().</span><span class="nx">lookup</span><span class="p">(</span><span class="s2">&#34;Vicia&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>   <span class="c1">// [&#34;Vicia hirsuta&#34;]
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">my</span><span class="p">.</span><span class="nx">taxa</span><span class="p">().</span><span class="nx">describe</span><span class="p">(</span><span class="s2">&#34;Count: &#34;</span><span class="p">);</span>  <span class="c1">// &#34;Count: 2&#34;
+</span></span></span><span class="line"><span class="cl"><span class="nx">my</span><span class="p">.</span><span class="nx">taxa</span><span class="p">().</span><span class="nx">describe</span><span class="p">(</span><span class="s2">&#34;Count: &#34;</span><span class="p">);</span>  <span class="c1">// &#34;Count: 2&#34;
 </span></span></span></code></pre></div><h2 id="other-directives">Other directives</h2>
 <h3 id="component">$component</h3>
 <p>Declares a subcomponent at this member. The record body is a layer merged at <code>subcomponent</code> precedence and must
@@ -718,7 +845,7 @@ destroyed.</p>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">},</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">current</span><span class="o">:</span> <span class="s2">&#34;{library}.items&#34;</span><span class="p">,</span>   <span class="c1">// Inject the library&#39;s catalogue at &#34;current&#34;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">searchBox</span><span class="o">:</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">searchBox</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.searchBox&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">entries</span><span class="o">:</span> <span class="s2">&#34;{current}.entries&#34;</span>
@@ -785,7 +912,7 @@ see <a href="#configuring-members-from-data">Configuring members from data</a></
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">h</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">editorHolder</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="nx">h</span><span class="p">.</span><span class="nx">names</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&#34;beta&#34;</span><span class="p">);</span>      <span class="c1">// Second editor is created on stabilize
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">h</span><span class="p">.</span><span class="nx">editors</span><span class="p">.</span><span class="nx">list</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>     <span class="c1">// 2
+</span></span></span><span class="line"><span class="cl"><span class="nx">h</span><span class="p">.</span><span class="nx">editors</span><span class="p">.</span><span class="nx">list</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>     <span class="c1">// 2
 </span></span></span></code></pre></div><p><strong>Keyed collections.</strong> When the source is an object, one subcomponent is created per entry, in the order of the merged
 object&rsquo;s keys, except that an entry holding a <code>priority</code> member is placed by it, as for the listener records of a
 <a href="#composite-effects">composite effect</a>: a number (higher numbers first), <code>&quot;first&quot;</code>, <code>&quot;last&quot;</code>, or <code>&quot;before:key&quot;</code> or
@@ -810,7 +937,7 @@ therefore contribute, reorder and remove entries independently:</p>
 </span></span><span class="line"><span class="cl">    <span class="nx">stylesheets</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">katex</span><span class="o">:</span> <span class="p">{</span><span class="nx">priority</span><span class="o">:</span> <span class="s2">&#34;before:main&#34;</span><span class="p">,</span> <span class="nx">href</span><span class="o">:</span> <span class="s2">&#34;katex.css&#34;</span><span class="p">},</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">print</span><span class="o">:</span> <span class="kc">null</span>                    <span class="c1">// No print stylesheet for this page
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span></code></pre></div><p><a id="configuring-members-from-data"></a><strong>Configuring members from data.</strong> Material reached through <code>valueAs</code> is data.
 It is final, and is never expanded: a reference within it stays a string, and a <code>$component</code> record within it stays a
@@ -841,12 +968,12 @@ and signal records within it are instantiated.</li>
 </span></span><span class="line"><span class="cl">                <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.choroplethSlider&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">                    <span class="nx">obsRows</span><span class="o">:</span> <span class="s2">&#34;{storyPage}.obsRows&#34;</span>    <span class="c1">// Resolved in the widget&#39;s own context
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">                <span class="p">}</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">title</span><span class="o">:</span> <span class="s2">&#34;Status&#34;</span>                              <span class="c1">// Gets maxObsCount 100 from my.paneHandler
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}],</span>
+</span></span></span><span class="line"><span class="cl">    <span class="p">}],</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">panes</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.paneHandler&#34;</span><span class="p">,</span>
@@ -860,8 +987,7 @@ list:</p>
 <ul>
 <li>A write beneath the variable, e.g. <code>self.todo.completed = true</code>, is applied to the original element of the source.</li>
 <li><code>delete self.todo</code> removes the element from the source, as does <a href="#componentdestroy"><code>destroy()</code></a> on the subcomponent.</li>
-<li>Writing to the variable itself, e.g. <code>self.todo = {...}</code>, rebinds it locally in the subcomponent&rsquo;s live layer and
-doesn&rsquo;t touch the source.</li>
+<li>Writing to the variable itself, e.g. <code>self.todo = {...}</code>, replaces the original element of the source.</li>
 </ul>
 <p>This holds across intermediate projections. Elements selected by a non-mutating array method such as <code>filter()</code>
 remain linked to their original source:</p>
@@ -870,7 +996,7 @@ remain linked to their original source:</p>
 </span></span><span class="line"><span class="cl">    <span class="nx">toggle</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">$method</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">func</span><span class="o">:</span> <span class="nx">self</span> <span class="p">=&gt;</span> <span class="nx">self</span><span class="p">.</span><span class="nx">todo</span><span class="p">.</span><span class="nx">completed</span> <span class="o">=</span> <span class="o">!</span><span class="nx">self</span><span class="p">.</span><span class="nx">todo</span><span class="p">.</span><span class="nx">completed</span><span class="p">,</span>   <span class="c1">// Writes into {todoList}.todos
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">args</span><span class="o">:</span> <span class="s2">&#34;{self}&#34;</span>
+</span></span></span><span class="line"><span class="cl">            <span class="nx">args</span><span class="o">:</span> <span class="s2">&#34;{self}&#34;</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
@@ -938,7 +1064,7 @@ literal values and references may be merged alongside a root.</p>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">todoList</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="nx">t</span><span class="p">.</span><span class="nx">todos</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">done</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>   <span class="c1">// Immutable update of todos
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">t</span><span class="p">.</span><span class="nx">remaining</span><span class="p">;</span>              <span class="c1">// 0
+</span></span></span><span class="line"><span class="cl"><span class="nx">t</span><span class="p">.</span><span class="nx">remaining</span><span class="p">;</span>              <span class="c1">// 0
 </span></span></span></code></pre></div><p>A layer deriving from another may wire a single member of its reactive state to a value elsewhere, leaving the rest of
 the root as it was:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.searchPanel&#34;</span><span class="p">,</span> <span class="p">{</span>
@@ -955,7 +1081,7 @@ the root as it was:</p>
 </span></span><span class="line"><span class="cl">    <span class="p">},</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">state</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">query</span><span class="o">:</span> <span class="s2">&#34;{finder}.foundText&#34;</span>   <span class="c1">// Tracks foundText; results is retained from my.searchPanel
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span></code></pre></div><h3 id="importmap">$importMap</h3>
 <p><code>{Object&lt;String, String&gt;}</code> - Maps layer names to module paths (<code>.js</code>, or <code>.vue</code> single-file components) from which
@@ -1003,9 +1129,6 @@ loses it.</p>
 <p>The linkage rule&rsquo;s effect lasts as long as the component holding it. Linkages are sometimes called
 <a href="https://hal.science/hal-01854418/file/AnAnatomyOfInteraction_authorversion.pdf">co-occurrences</a>.</p>
 <h3 id="bindable">$bindable</h3>
-<blockquote>
-<p><strong>Experimental and unstable.</strong> The syntax and semantics of <code>$bindable</code> are likely to change.</p>
-</blockquote>
 <p>A value produced by binding to a resource in the world, eagerly as soon as the arguments to <code>bind</code> are available.
 The value is released by <code>unbind</code> when any argument becomes unavailable, when it is rebound, or when the record is
 disposed, for example by destroying its component.</p>
@@ -1055,7 +1178,19 @@ layers. If any traversed component is unavailable, the cell holds the merged una
 </span></span></code></pre></div><p>In most cases, the same result should be achieved declaratively via a <a href="#selectors">selector reference</a> <code>&quot;{self my.app.editor}&quot;</code>,
 subject to current framework limitations.</p>
 <h3 id="fluidqueryilselectorroot-selector-flat">fluid.queryILSelector(root, selector, [flat])</h3>
-<p>As <code>fluid.liveQueryILSelector</code>, but returns a one-off array.</p>
+<p>As <code>fluid.liveQueryILSelector</code>, but returns a one-off array. It may be searched from the root of the tree. Each
+unavailable component matched is returned wrapped as an unavailable component proxy, which reads as an
+<a href="#unavailable-components">unavailable component</a> does.</p>
+<h3 id="fluidlayerformembercomponent-path">fluid.layerForMember(component, path)</h3>
+<ul>
+<li><code>{Component} component</code> - The component</li>
+<li><code>{String|String[]} path</code> - The path of the member, which may pass through subcomponents, e.g. <code>&quot;checklist.renderTooltip&quot;</code></li>
+<li>Returns: <code>{String|undefined}</code> - The name of the layer supplying the member&rsquo;s value, or <code>undefined</code> if none does, e.g.
+if it was written at run time</li>
+</ul>
+<p>Finds the strongest of the component&rsquo;s layers writing the member, or the layer of the parent configuring it onto the
+subcomponent - e.g. to diagnose why a layer&rsquo;s definition of a member is overridden. A component&rsquo;s own definition is
+stronger than every layer it names in its <code>$layers</code>.</p>
 <h3 id="fluidcontextreftopromisecontextref-root">fluid.contextRefToPromise(contextRef, root)</h3>
 <ul>
 <li><code>{String} contextRef</code> - A <a href="#references">context reference</a>, e.g. <code>&quot;{self}.results&quot;</code></li>
@@ -1081,12 +1216,22 @@ discover a widget&rsquo;s <code>preferredSize</code> or whether it bears <code>f
 <ul>
 <li><code>fluid.isComponent(value)</code> - <code>true</code> if <code>value</code> is a component instance</li>
 <li><code>fluid.isDestroyed(that, [strict])</code> - <code>true</code> if destruction of <code>that</code> has begun (or with <code>strict</code>, completed)</li>
-<li><code>fluid.unwrapProxy(value)</code> - The plain value underlying a component or mat proxy</li>
+<li><code>fluid.unwrapProxy(value)</code> - The plain value underlying a component or mat proxy. Reads through it are not tracked
+as dependencies, which may also pay off in performance-critical loops</li>
 <li><code>fluid.hasLayer(that, layerName)</code> - <code>true</code> if <code>layerName</code> is in the component&rsquo;s resolved <code>$layers</code></li>
 <li><code>fluid.definedLayers(...candidates)</code> - Those of the candidate layer names (strings or arrays of them) which are
 defined, in the order supplied. Since a later layer is stronger, list the most specific candidate last</li>
 <li><code>fluid.firstDefinedLayer(...candidates)</code> - An array holding just the first of the candidates which is defined, in
 order of preference, or an empty array if none is</li>
+</ul>
+<p>The layer store records who demanded each such layer - the layer naming it in its <code>$layers</code> and the path of the component waiting for it:</p>
+<ul>
+<li><code>fluid.undefinedLayers()</code> returns a record <code>{layerName, requiredBy, componentPaths, imported, message}</code> for each. The
+message says whether an import was registered under the layer&rsquo;s name and its file failed to define it, or else
+that nothing supplies it - recalling that an SFC imported by <code>&lt;fluid-import&gt;</code> is loaded only when the layer named
+after its file, e.g. <code>foo-barBaz.vue</code> for <code>foo.barBaz</code>, is demanded.</li>
+<li><code>fluid.reportUndefinedLayers()</code> logs each new such message at <code>FAIL</code> level. A booted document runs it whenever the
+cell graph falls idle, so a mistyped layer name is reported without being asked for.</li>
 </ul>
 <div class="footnotes" role="doc-endnotes">
 <hr>
@@ -1205,7 +1350,7 @@ values until they resolve. Inspector tools can use the Infusion JavaScript API t
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

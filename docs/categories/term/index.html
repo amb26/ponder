@@ -41,7 +41,7 @@
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.123.7">
+  <meta name="generator" content="Hugo 0.154.5">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
@@ -202,8 +202,19 @@
     </div>
     <div class="post-entry">
         
-        A good function is:
-A pure function, one without side-effects whose return value depends only on its arguments Available at a stable public name in a global namespace Performs work only linearly proportional to the size of its arguments (considered as structures) This notion was first described the Fluid wiki on this 2005 page which goes into some somewhat crusty historical detail for justification. The main upshot is that such a definition aids transparency &mdash; the ability to reason from effects to causes, and liveness &mdash; for the system to responsively adapt to the user&rsquo;s gestures.
+        <p>A <strong>good function</strong> is:</p>
+<ul>
+<li>A pure function, one without side-effects whose return value depends only on its arguments</li>
+<li>Available at a stable public name in a global namespace</li>
+<li>Performs work only linearly proportional to the size of its arguments (considered as structures)</li>
+</ul>
+<p>This notion was first described the Fluid wiki
+on <a href="https://fluidproject.atlassian.net/wiki/spaces/fluid/pages/11514225/A+Good+Function">this 2005 page</a> which goes
+into some somewhat crusty historical detail for justification. The main upshot is that such a definition aids
+transparency &mdash; the ability to reason from effects to causes, and liveness &mdash; for the system to responsively
+adapt to the user&rsquo;s gestures. This kind of liveness helps the system to form what Chris Hancock in his 2003 PhD
+<a href="https://boxer-project.github.io/boxer-literature/theses/Real-Time%20Programming%20and%20the%20Big%20Ideas%20of%20Computational%20Literacy%20(Hancock,%20MIT%20PhD,%202003).pdf">thesis on computation literacy</a>
+calls a &ldquo;steady frame&rdquo;.</p>
         <a href="../../term/a-good-function/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -231,8 +242,13 @@ A pure function, one without side-effects whose return value depends only on its
     </div>
     <div class="post-entry">
         
-        Cod reactivity (by analogy with Cod Latin)1 is a kind of semi-literate adoption of reactivity, reflecting either deficiencies in the underlying reactive implementation or the user&rsquo;s understanding of it.
-Typical of cod reactivity is the use of &ldquo;broken graphs&rdquo; &mdash; rather than being joined up into a coherent and connected overall application graph, the reactive graph is broken up into several formally isolated reactive islands. These are either self-standing little patches of reactivity, cranked manually by imperative updates to source signals, or else orchestrated by means of effects which bridge updates from one island to the other.
+        <p>Cod reactivity (by analogy with <a href="https://en.wikipedia.org/wiki/Cod_Latin">Cod Latin</a>)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> is a kind of semi-literate
+adoption of reactivity, reflecting either deficiencies in the underlying reactive implementation or the user&rsquo;s
+understanding of it.</p>
+<p>Typical of cod reactivity is the use of &ldquo;broken graphs&rdquo; &mdash; rather than being joined up into a coherent and connected
+overall application graph, the reactive graph is broken up into several formally isolated reactive islands. These are
+either self-standing little patches of reactivity, cranked manually by imperative updates to source signals, or else
+orchestrated by means of effects which bridge updates from one island to the other.</p>
         <a href="../../term/cod-reactivity/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -260,8 +276,13 @@ Typical of cod reactivity is the use of &ldquo;broken graphs&rdquo; &mdash; rath
     </div>
     <div class="post-entry">
         
-        I argue that what the public really wants is disclosable computing.
-The first error committed by those trying to make the power of computing accessible to the wider public is to assume that they want or need this power. Backed up by (Rode et al, 2006)1 I consider that what the public largely would like is some more or less coordinated access to some body of state. Whereas, the designer of a new kind of computational expression usually starts by seeing what form is taken by a recursive chestnut such as the Fibonacci numbers or the factorial function, as if these represented some kind of standard requirement rather than a certain kind of in-joke.
+        <p>I argue that what the public really wants is <strong>disclosable computing</strong>.</p>
+<p>The first error committed by those trying to make the power of computing accessible to the wider public is
+to assume that they want or need this power. Backed up by (Rode et al, 2006)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> I consider that what
+the public largely would like is some more or less coordinated access to some body of state. Whereas, the
+designer of a new kind of computational expression usually starts by seeing what form is taken by a recursive
+chestnut such as the <a href="https://github.com/fharookshaik/fibonacci-series/tree/main/fibonacci_series">Fibonacci numbers</a>
+or the factorial function, as if these represented some kind of standard requirement rather than a certain kind of in-joke.</p>
         <a href="../../term/disclosable-computing/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -289,8 +310,14 @@ The first error committed by those trying to make the power of computing accessi
     </div>
     <div class="post-entry">
         
-        Defined in my 2016 paper, divergence represents any discrepancy between the runtime state of a program, and the state through which it can be authored. Typical sources of divergence include the program&rsquo;s call stack, uninterpreted addresses within the heap, event listeners and typical sources of object representation such as vtables and the like.
-In a tradition of materialised programming, divergence should be minimised, in order to reduce the mental burden on those trying to visualise the effects of their edits.
+        <p>Defined in my <a href="https://www.ppig.org/files/2016-PPIG-27th-Basman1.pdf">2016 paper</a>, <strong>divergence</strong> represents
+any discrepancy between the runtime state of a program, and the state through which it can be authored. Typical
+sources of divergence include the program&rsquo;s <a href="https://en.wikipedia.org/wiki/Call_stack"><em>call stack</em></a>,
+uninterpreted addresses within the <a href="https://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap"><em>heap</em></a>,
+<a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Events">event listeners</a> and
+typical sources of object representation such as <a href="https://en.wikipedia.org/wiki/Virtual_method_table">vtables</a> and the like.</p>
+<p>In a tradition of materialised programming, divergence should be minimised, in order to reduce the mental burden on
+those trying to visualise the effects of their edits.</p>
         <a href="../../term/divergence/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -318,7 +345,13 @@ In a tradition of materialised programming, divergence should be minimised, in o
     </div>
     <div class="post-entry">
         
-        End-user programming is a time-honoured discipline but end-user tools such as spreadsheets are held in contempt by specialised developers. The discipline actively works to raise barriers of abstraction and tooling to ensure that it is only accessible by specialists and what investment is made in end-user tools is done under the assumption, like Gabriel&rsquo;s, that the gulf between those empowered to build software and those empowered to use it will stay unbridgeable.
+        <p><a href="https://en.wikipedia.org/wiki/End-user_development">End-user programming</a> is a time-honoured discipline but end-user
+tools such as spreadsheets are held in contempt by specialised developers. The discipline actively works to raise
+barriers of abstraction and tooling to ensure that it is only accessible by specialists and what investment is made in
+end-user tools is done under the assumption, like Gabriel&rsquo;s, that the gulf between those empowered to build software and
+those empowered to use it will stay unbridgeable. A &ldquo;macho intellectual culture&rdquo; ensures that if a tool or process
+can&rsquo;t be understood, it is the developer&rsquo;s challenge to understand it rather than the producer&rsquo;s challenge to make
+it comprehensible.</p>
         <a href="../../term/end-user-programming/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -346,8 +379,14 @@ In a tradition of materialised programming, divergence should be minimised, in o
     </div>
     <div class="post-entry">
         
-        Defined in my 2018 paper, externalisability, together with its dual property of addressibility, represents an essential property of a substrate supporting open authorship. An externalisable design is one which is serialisable in a form in which every design element has more or less stable and legible coordinates. An addressible, externalised serialisation of a design could be in terms of a JSON document with human-readable keys, to be contrasted with relatively opaque kinds of serialisation such as Python&rsquo;s pickling or Java&rsquo;s object serialization systems, designed to round-trip arbitrary in-memory structures allocated in a general-purpose programming language.
-        <a href="../../term/externalisability/" class="post-read-more">[Read More]</a>
+        <p>Defined in my <a href="../../papers/onward-2016.pdf">2018 paper</a>, <strong>externalisability</strong>, together with its dual property of
+<strong>addressibility</strong>, represents an essential property of a <a href="../../term/substrate">substrate</a> supporting open authorship.
+An externalisable design is one which is <a href="https://en.wikipedia.org/wiki/Serialization">serialisable</a> in a form in
+which every design element has more or less stable and legible coordinates. An addressible, externalised serialisation
+of a design could be in terms of a JSON document with human-readable keys, to be contrasted with relatively opaque
+kinds of serialisation such as Python&rsquo;s pickling or Java&rsquo;s object serialization systems, designed to round-trip
+arbitrary in-memory structures allocated in a general-purpose programming language.</p>
+
         
     </div>
 
@@ -374,9 +413,18 @@ In a tradition of materialised programming, divergence should be minimised, in o
     </div>
     <div class="post-entry">
         
-        The term glitch in the sense of a reactive miscomputation first entered the literature in Cooper &amp; Krishnamurthi&rsquo;s 2006 FrTime paper, &ldquo;Embedding Dynamic Dataflow in a Call-by-Value Language&rdquo;. They define it as
-where a signal is recomputed before all of its subordinate signals are up-to-date
-This definition appears helpful and clearcut, but the more one thinks about how to operationalise this definition in a particular context, and verify that a system is rigorously glitch-free, the less clear it seems.
+        <p>The term <strong>glitch</strong> in the sense of a reactive miscomputation first entered the literature in Cooper &amp; Krishnamurthi&rsquo;s
+2006 <a href="http://static.cs.brown.edu/~sk/Publications/Papers/Published/ck-frtime/paper.pdf">FrTime paper</a>,
+&ldquo;Embedding Dynamic Dataflow in a Call-by-Value Language&rdquo;. They define it as</p>
+<blockquote>
+<p>where a signal is recomputed before all of its subordinate signals are up-to-date</p>
+</blockquote>
+<p>This definition appears helpful and clearcut, but the more one thinks about how to operationalise this definition in a particular
+context, and verify that a system is rigorously glitch-free, the less clear it seems. I go into some of the
+complexities and murky history of this definition in <a href="../../post/2025-07-01-archaeology-of-glitches">Archaeology of Glitches</a>, which
+also delineates the dominant &ldquo;commodity signals&rdquo; implementations in JS (preact-signals, solid signals, alien
+signals, TC39 signals, etc.) which implement essentially the same algorithm as each other and which are all demonstrably (though not
+provably) glitch-free.</p>
         <a href="../../term/glitch/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -404,8 +452,13 @@ This definition appears helpful and clearcut, but the more one thinks about how 
     </div>
     <div class="post-entry">
         
-        Habitability as applied to software technology is a term coined by Richard Gabriel in his 1993 article &ldquo;Habitability and Piecemeal Growth&rdquo;. You can see part of this article reproduced on Kartik Agaram&rsquo;s excellent blog, as republished in Gabriel&rsquo;s book Patterns of Software which I hugely recommend – I consider Gabriel the finest writer on software technology of his generation.
-Connecting this idea with Christopher Alexander&rsquo;s idea of organic growth in the context of the architecture of buildings, Gabriel says
+        <p>Habitability as applied to software technology is a term coined by Richard Gabriel in his 1993 article
+&ldquo;Habitability and Piecemeal Growth&rdquo;. You can see <a href="https://akkartik.name/post/habitability">part of this article</a>
+reproduced on Kartik Agaram&rsquo;s excellent <a href="https://akkartik.name/">blog</a>, as republished in Gabriel&rsquo;s book
+<a href="https://www.dreamsongs.com/Files/PatternsOfSoftware.pdf">Patterns of Software</a> which I hugely recommend – I
+consider Gabriel the finest writer on software technology of his generation.</p>
+<p>Connecting this idea with Christopher Alexander&rsquo;s idea of <em>organic growth</em> in the context of the architecture of buildings,
+Gabriel says</p>
         <a href="../../term/habitable/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -433,8 +486,14 @@ Connecting this idea with Christopher Alexander&rsquo;s idea of organic growth i
     </div>
     <div class="post-entry">
         
-        An integration domain is defined in Stephen Kell&rsquo;s 2009 paper The Mythical Matched Modules as a domain where
-languages and tools are specialised towards composition of software, and so do not resemble conventional languages relations are expressed between runtime values, predicated on the context in which they occur In addition through Stephen&rsquo;s principle of interface hiding, dependencies do not explicitly manifest themselves in the domain except through the contextualised values which the domain puts into relation.
+        <p>An  <strong>integration domain</strong> is defined in Stephen Kell&rsquo;s 2009 paper
+<a href="https://www.cl.cam.ac.uk/research/srg/netos/papers/2009-kell2009mythical.pdf">The Mythical Matched Modules</a> as a domain where</p>
+<ul>
+<li>languages and tools are specialised towards composition of software, and so do not resemble conventional languages</li>
+<li>relations are expressed between runtime values, predicated on the context in which they occur</li>
+</ul>
+<p>In addition through Stephen&rsquo;s principle of <em>interface hiding</em>, dependencies do not explicitly manifest themselves in
+the domain except through the contextualised values which the domain puts into relation.</p>
         <a href="../../term/integration-domain/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -462,7 +521,13 @@ languages and tools are specialised towards composition of software, and so do n
     </div>
     <div class="post-entry">
         
-        The term lithification in software development was coined by r0ml (Robert Lefkowitz) in his incendiary 2017 talk Keeping Linux Great which is written up further in his equally trenchant article Giving up on Open Source Software. It describes a mode of software reuse that appears entirely anti-religious to anyone with a traditional programming education, of simply appropriating the source code for any library or implementation one needs, incorporating it into one&rsquo;s own codebase and then bashing on it.
+        <p>The term <strong>lithification</strong> in software development was coined by <a href="">r0ml</a> (Robert Lefkowitz) in his incendiary
+2017 talk <a href="https://www.youtube.com/watch?v=i3nJR7PNgI4">Keeping Linux Great</a> which is written up further in
+his equally trenchant article <a href="https://r0ml.medium.com/giving-up-on-open-source-software-526b63a90d5d">Giving up on Open Source Software</a>.
+It describes a mode of software reuse that appears entirely anti-religious to anyone with a traditional
+programming education, of simply appropriating the source code for any library or implementation one needs, incorporating
+it into one&rsquo;s own codebase and then bashing on it. This can be seen as an extreme form of vendoring, which itself is described in this
+<a href="https://gist.github.com/datagrok/8577287">gist rant</a> as a &ldquo;vile anti-pattern&rdquo;.</p>
         <a href="../../term/lithification/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -504,7 +569,7 @@ languages and tools are specialised towards composition of software, and so do n
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

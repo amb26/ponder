@@ -76,10 +76,15 @@ The returned **component proxy** (from regular client JavaScript code) has these
   proxy to a subcomponent, `that.method(...)` invokes a `$method`.
 * **Writes** (`that.count = 6`, or mutating array methods such as `that.items.push(x)`) are recorded in the
   component's **live layer**, the highest-precedence layer, and propagate reactively. A write beneath a
-  [`$reactiveRoot`](#reactiveroot) is applied immutably to the root's value.
+  [`$reactiveRoot`](#reactiveroot) is applied immutably to the root's value. A write to a member which is defined by a
+  reference to another site, e.g. `pane: "{hashManager}.hash.pane"`, is applied to that site rather than to the member,
+  which goes on following it --- so a member defined by a reference is never severed from its source by a write.
+  A write or deletion made from within a computation or effect does not make it depend on what the write consults - the
+  site written, the value overwritten or the component's layers. An effect which seeds a member, is therefore not rerun  when the member is later written.
+  
 * **Reads within a computation**, i.e. within the function of a [`$compute`](#compute) or [`$effect`](#effect), make
   the computation depend on the member read, so that it reruns when that member changes, as well as when its arguments
-  do. A member which is only to be consulted, without the computation depending on it, is read within
+  do. To execute code without setting up tracking on its dependencies, wrap it in 
   [`fluid.cell.untracked`](/docs/fluid-signals#fluidcelluntrackedfn), e.g. `fluid.cell.untracked(() => self.open)`.
 * Access after destruction throws, other than within a computation, where a destroyed component and each of its members
   read as [unavailable](#unavailable-components).
@@ -103,6 +108,13 @@ A component is **unavailable** while any of its layers is undefined, loading, or
 values within it[^1], yield unavailable values; no effects are allocated within it. When the missing layers arrive, the
 component completes and its effects start. `fluid.unavailableComponents` is a global cell holding `true` once no
 component in the tree is unavailable, and an unavailable value otherwise.
+
+Reading a member of an unavailable component from outside a computation throws an error saying why it is unavailable,
+rather than quietly returning `undefined`, so that it is not mistaken for an empty component. Within a computation the
+member reads as unavailable, and the computation depends on the component becoming available. Members probed by generic
+code, such as `then`, `toJSON` and `constructor`, still read quietly.
+
+A layer which a component names but which is never defined leaves it unavailable. 
 
 ## Layers
 
@@ -356,6 +368,105 @@ discovered from what the function returns.
 Members of components read within the function, as well as its arguments, are its dependencies - see the
 [component proxy](#creator-functions-layernameuserlayer).
 
+The full form `{$compute: {func, args, equiv}}` accepts:
+
+* `equiv` - A policy for when a recomputation leaves the value morally unchanged, as a function
+  `(oldValue, newValue) => Boolean` or the global name of one, e.g. `"fluid.equiv.elementwise"`. The member then keeps
+  the value it held, and notifies nothing - see the
+  [`equiv` of a cell](/docs/fluid-signals#fluidcellinitialvalue-props).
+
+An argument written as `{$oldValue}` receives the value the computation last produced, or `undefined` if it has
+produced none, so that it may build on its own previous result, as a reducer:
+
+```js
+fluid.def("my.history", {
+    $layers: "fluid.component",
+    current: 0,
+    // Every value current has held, most recent last
+    seen: "$compute:my.appendValue({$oldValue}, {self}.current)"
+});
+my.appendValue = (seen, value) => [...seen || [], value];
+```
+
+### $transient
+
+State belonging to one instance of a component which takes no part in the reactive graph, e.g. a drag in progress, a
+timer, or a handle onto an object outside the tree:
+
+```js
+fluid.def("my.dragger", {
+    $layers: "fluid.viewComponent",
+    drag: {$transient: null},
+    autoScroll: {$transient: null, dispose: "clearInterval"}
+});
+
+that.drag = {startX: e.clientX};        // No notification, no remerge
+that.autoScroll = setInterval(scroll, 50);
+```
+
+* Reading it creates no dependency, and writing it notifies nothing. A write is never raised into the
+  [live layer](#creator-functions-layernameuserlayer), so it never remerges its component.
+* The initial value is copied for each instance, and the value held survives turnover of the component while the
+  record is unchanged.
+* `dispose` - Optionally, a function, or the global name of one, which receives each value as it is overwritten, and
+  the value held when the member is withdrawn or its component destroyed, e.g. `"clearTimeout"` for a timer.
+
+A member is held as transient only at the top level of its component. Since nothing reruns when it changes, reading one among the
+arguments of a `$compute` is almost certainly a mistake, and logs a warning.
+
+### $lens
+
+A value which is a view of the value held at another site, its **source**, through a relation whose forward and
+backward arcs are written together in one spot. Unlike a `$compute`, a lens may be written - a write to it, or beneath
+it, is applied to its source:
+
+```js
+range: {
+    $lens: {
+        source: "{elevationFilter}.filterState",
+        forward: "my.toRange({0}, {self}.minRange, {self}.maxRange)",
+        backward: "my.toState({0}, {self}.minRange, {self}.maxRange)"
+    }
+}
+```
+
+* `source` - A [reference](#references) to the site viewed.
+* `path` - Optionally, the path of the address viewed within the source's value - a String, an Array of segments, or a
+  reference resolving to either, e.g. `"{self}.urlKey"`. The lens owns only this address: writes through it leave the
+  rest of the source's value as it was.
+* `forward` - A compute-style function record computing the lens's value, in whose arguments `{0}` designates the value
+  at the lens's address. It is recomputed whenever any of its arguments changes, as for `$compute`.
+* `backward` - A method-style function record computing the value for the lens's address from a value written to the
+  lens, which it receives as `{0}`. Returning `fluid.deleteMarker` removes the address from the source.
+
+A write to the lens, e.g. `that.range.min = 20` or `that.range = {min: 0, max: 100}`, is applied to the lens's current
+value, passed through `backward`, and the result is written at the lens's address within the source's site - following
+the fish upstream, as for a write to a [member defined by a reference](#references), so that a source which is itself a
+lens, or a reference to a reactive root elsewhere, is written in turn. The lens's value then follows from its source
+along `forward`; nothing is held at the lens's own site.
+
+The backward arc is not an edge in the graph of cells, but an **address writer** registered with the lens's component
+under the stable key of the lens's site, e.g. `"app.filter:filterState"` - see `fluid.siteWriterOf`. A lens allocated
+afresh at the same site replaces it. Each write it makes carries that key as its source marker, so that an effect may
+recognise, or decline with `excludeSource`, the writes which arrived through the lens, and it records its last write
+for explanation.
+
+```js
+// A filter's state held in one entry of a hash shared with other filters
+filterState: {
+    $lens: {
+        source: "{hashManager}.hash",
+        path: "{self}.urlKey",
+        forward: "my.decode({0})",
+        backward: "my.encode({0})"
+    }
+}
+```
+
+A lens may be laid by a stronger layer over a member which a weaker one defines in any other way, including a
+`$reactiveRoot` and any links merged alongside it - the lens replaces it. This frees the site which a weaker layer used
+to hold state, e.g. a filter's `filterState`, to be supplied from elsewhere, such as the URL.
+
 ### $effect
 
 A side effect upon the world outside the component tree, run during stabilization whenever its resolved arguments
@@ -365,9 +476,13 @@ argument is unavailable, and are disposed when the component is destroyed or the
 * `includeSource`, `excludeSource` (full form only) - restrict notification by update source, as for
   [`fluid.cell.effect`](/docs/fluid-signals#fluidcelleffectfn-staticsources-props). Any member which an effect writes
   is updated with the sources of the change which caused it to run, so that an effect further along can exclude a
-  change however many effects it has passed through - see [`Cell.set`](/docs/fluid-signals#cellsetnewvalue-source).
+  change however many effects it has passed through - see [`Cell.set`](/docs/fluid-signals#cellsetnewvalue-options).
   The source `"self"` matches the changes which the effect's own component originates, e.g. from its template's event
   handlers - see [Source tracking and the DOM](/docs/fluid-view#excluding-self-widgets-that-should-not-hear-their-own-changes).
+* `debounce` (full form only) - a delay in milliseconds. The effect runs only once its arguments have rested unchanged
+  for this long, with their latest values, rather than on every change - e.g. for writing a search query to the URL as
+  the user types. A pending run is cancelled when the effect is disposed. A debounced effect runs outside the reactive
+  graph, so `fluid.cell.settle`, and hence a static rendering, does not wait for it.
 * `source` (full form only) - a source with which every member the effect writes is marked, e.g. `"self"` for an
   effect which writes back the changes a widget wrapped by its component has reported. An effect of the component
   excluding `"self"` is then not notified of them. As for any writes made by an effect, this holds for members set
@@ -697,8 +812,7 @@ list:
 
 * A write beneath the variable, e.g. `self.todo.completed = true`, is applied to the original element of the source.
 * `delete self.todo` removes the element from the source, as does [`destroy()`](#componentdestroy) on the subcomponent.
-* Writing to the variable itself, e.g. `self.todo = {...}`, rebinds it locally in the subcomponent's live layer and
-  doesn't touch the source.
+* Writing to the variable itself, e.g. `self.todo = {...}`, replaces the original element of the source.
 
 This holds across intermediate projections. Elements selected by a non-mutating array method such as `filter()`
 remain linked to their original source:
@@ -878,8 +992,6 @@ The linkage rule's effect lasts as long as the component holding it. Linkages ar
 
 ### $bindable
 
-> **Experimental and unstable.** The syntax and semantics of `$bindable` are likely to change.
-
 A value produced by binding to a resource in the world, eagerly as soon as the arguments to `bind` are available.
 The value is released by `unbind` when any argument becomes unavailable, when it is rebound, or when the record is
 disposed, for example by destroying its component.
@@ -943,7 +1055,20 @@ subject to current framework limitations.
 
 ### fluid.queryILSelector(root, selector, [flat])
 
-As `fluid.liveQueryILSelector`, but returns a one-off array.
+As `fluid.liveQueryILSelector`, but returns a one-off array. It may be searched from the root of the tree. Each
+unavailable component matched is returned wrapped as an unavailable component proxy, which reads as an
+[unavailable component](#unavailable-components) does.
+
+### fluid.layerForMember(component, path)
+
+* `{Component} component` - The component
+* `{String|String[]} path` - The path of the member, which may pass through subcomponents, e.g. `"checklist.renderTooltip"`
+* Returns: `{String|undefined}` - The name of the layer supplying the member's value, or `undefined` if none does, e.g.
+  if it was written at run time
+
+Finds the strongest of the component's layers writing the member, or the layer of the parent configuring it onto the
+subcomponent - e.g. to diagnose why a layer's definition of a member is overridden. A component's own definition is
+stronger than every layer it names in its `$layers`.
 
 ### fluid.contextRefToPromise(contextRef, root)
 
@@ -972,12 +1097,22 @@ discover a widget's `preferredSize` or whether it bears `fluid.topLevelWidget`.
 
 * `fluid.isComponent(value)` - `true` if `value` is a component instance
 * `fluid.isDestroyed(that, [strict])` - `true` if destruction of `that` has begun (or with `strict`, completed)
-* `fluid.unwrapProxy(value)` - The plain value underlying a component or mat proxy
+* `fluid.unwrapProxy(value)` - The plain value underlying a component or mat proxy. Reads through it are not tracked
+  as dependencies, which may also pay off in performance-critical loops
 * `fluid.hasLayer(that, layerName)` - `true` if `layerName` is in the component's resolved `$layers`
 * `fluid.definedLayers(...candidates)` - Those of the candidate layer names (strings or arrays of them) which are
   defined, in the order supplied. Since a later layer is stronger, list the most specific candidate last
 * `fluid.firstDefinedLayer(...candidates)` - An array holding just the first of the candidates which is defined, in
   order of preference, or an empty array if none is
+
+The layer store records who demanded each such layer - the layer naming it in its `$layers` and the path of the component waiting for it:
+
+* `fluid.undefinedLayers()` returns a record `{layerName, requiredBy, componentPaths, imported, message}` for each. The
+  message says whether an import was registered under the layer's name and its file failed to define it, or else
+  that nothing supplies it - recalling that an SFC imported by `<fluid-import>` is loaded only when the layer named
+  after its file, e.g. `foo-barBaz.vue` for `foo.barBaz`, is demanded.
+* `fluid.reportUndefinedLayers()` logs each new such message at `FAIL` level. A booted document runs it whenever the
+  cell graph falls idle, so a mistyped layer name is reported without being asked for.
 
 [^1]: From components designated by ordinary user configuration - under the covers, components with unavailable 
 constituents actually continue to evaluate and elaborate as normal, routing around the individual unavailable

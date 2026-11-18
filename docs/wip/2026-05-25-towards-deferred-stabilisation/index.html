@@ -9,7 +9,13 @@
       <title>Towards Deferred Stabilisation - Antranig Basman</title>
 
   <meta name="description" content="aka &ldquo;A Farewell to preact-signals&rdquo;
-This posting is a story that can be told from two ends, the theoretical and the practical. To jump ahead to one of the punchlines, it turns out that Milo&rsquo;s reactively system, hailed in Understanding Reactivity and other posts, harbours yet more riches than had been explored so far. When looking through Milo&rsquo;s Reactivity Benchmark with Chee last year, I was greatly taken with the staggering simplicity of the benchmark&rsquo;s adaptor for update batching, which looks like this:">
+This posting is a story that can be told from two ends, the theoretical and the practical. To jump ahead to one of
+the punchlines, it turns out that Milo&rsquo;s reactively system, hailed in
+Understanding Reactivity and other posts, harbours yet more riches than
+had been explored so far. When looking through Milo&rsquo;s Reactivity Benchmark
+with Chee last year, I was greatly taken with the staggering simplicity of the benchmark&rsquo;s
+adaptor for update batching,
+which looks like this:">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -58,7 +64,7 @@ This posting is a story that can be told from two ends, the theoretical and the 
     "name" : "Antranig Basman"
   },
   "headline": "Towards Deferred Stabilisation",
-  "description" : "aka \u0026ldquo;A Farewell to preact-signals\u0026rdquo;\nThis posting is a story that can be told from two ends, the theoretical and the practical. To jump ahead to one of the punchlines, it turns out that Milo\u0026rsquo;s reactively system, hailed in Understanding Reactivity and other posts, harbours yet more riches than had been explored so far. When looking through Milo\u0026rsquo;s Reactivity Benchmark with Chee last year, I was greatly taken with the staggering simplicity of the benchmark\u0026rsquo;s adaptor for update batching, which looks like this:",
+  "description" : "aka \u0026ldquo;A Farewell to preact-signals\u0026rdquo;\nThis posting is a story that can be told from two ends, the theoretical and the practical. To jump ahead to one of the punchlines, it turns out that Milo\u0026rsquo;s reactively system, hailed in Understanding Reactivity and other posts, harbours yet more riches than had been explored so far. When looking through Milo\u0026rsquo;s Reactivity Benchmark with Chee last year, I was greatly taken with the staggering simplicity of the benchmark\u0026rsquo;s adaptor for update batching, which looks like this:\n",
   "inLanguage" : "en",
   "wordCount":  2283 ,
   "datePublished" : "2026-05-25T00:00:00\u002b00:00",
@@ -82,7 +88,13 @@ This posting is a story that can be told from two ends, the theoretical and the 
 
 <meta property="og:title" content="Towards Deferred Stabilisation" />
 <meta property="og:description" content="aka &ldquo;A Farewell to preact-signals&rdquo;
-This posting is a story that can be told from two ends, the theoretical and the practical. To jump ahead to one of the punchlines, it turns out that Milo&rsquo;s reactively system, hailed in Understanding Reactivity and other posts, harbours yet more riches than had been explored so far. When looking through Milo&rsquo;s Reactivity Benchmark with Chee last year, I was greatly taken with the staggering simplicity of the benchmark&rsquo;s adaptor for update batching, which looks like this:">
+This posting is a story that can be told from two ends, the theoretical and the practical. To jump ahead to one of
+the punchlines, it turns out that Milo&rsquo;s reactively system, hailed in
+Understanding Reactivity and other posts, harbours yet more riches than
+had been explored so far. When looking through Milo&rsquo;s Reactivity Benchmark
+with Chee last year, I was greatly taken with the staggering simplicity of the benchmark&rsquo;s
+adaptor for update batching,
+which looks like this:">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/wip/2026-05-25-towards-deferred-stabilisation/" />
 <meta property="og:type" content="website" />
@@ -90,13 +102,14 @@ This posting is a story that can be told from two ends, the theoretical and the 
 
   <meta name="twitter:title" content="Towards Deferred Stabilisation" />
   <meta name="twitter:description" content="aka &ldquo;A Farewell to preact-signals&rdquo;
-This posting is a story that can be told from two ends, the theoretical and the practical. To jump ahead to one of the punchlines, it turns out that …">
+This posting is a story that can be told from two ends, the theoretical and the practical. To jump ahead to one of
+the punchlines, it turns out that …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.123.7">
+  <meta name="generator" content="Hugo 0.154.5">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
@@ -381,7 +394,7 @@ disorderly ways which need bracketing with <code>batch()</code> but a particular
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">derived</span> <span class="o">=</span> <span class="nx">computed</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">value</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">effect</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">derived</span><span class="p">.</span><span class="nx">value</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">initial</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// &lt;-- effect fires here
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>which even if part of the body is guarded with <code>batch()</code> still harbours risks of re-entrancy. Here&rsquo;s Claude&rsquo;s helpful
 commentary:</p>
@@ -556,7 +569,7 @@ if everyone did nothing, then noone would learn anything.</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

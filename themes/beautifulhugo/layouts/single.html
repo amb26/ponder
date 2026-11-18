@@ -11,7 +11,7 @@
             {{ range .Params.tags }}
               <!-- Fix for "https://github.com/halogenica/beautifulhugo/issues/349".
               Inspired by "https://github.com/dovidio/personalwebsite/commit/34762e94c29fd2c26c16c45f8ae2de21bdf9b46d".
-              <a href="{{ $.Site.LanguagePrefix | absURL }}/tags/{{ . | urlize }}/">{{ . }}</a>&nbsp;
+              <a href="{{ printf "tags/%s/" (. | urlize) | absLangURL }}">{{ . }}</a>&nbsp;
               -->
               <a href="{{"tags" | absLangURL}}/{{ . | urlize }}/">{{ . }}</a>&nbsp;
             {{ end }}
@@ -29,10 +29,10 @@
 
         {{ if .Site.Params.showRelatedPosts }}
           {{ range first 1 (where (where .Site.Pages ".Params.tags" "intersect" .Params.tags) "Permalink" "!=" .Permalink) }}
-            {{ $.Scratch.Set "has_related" true }}
+            {{ $.Store.Set "has_related" true }}
           {{ end }}
 
-          {{ if $.Scratch.Get "has_related" }}
+          {{ if $.Store.Get "has_related" }}
                   <h4 class="see-also">{{ i18n "seeAlso" }}</h4>
                   <ul>
                 {{ $num_to_show := .Site.Params.related_content_limit | default 5 }}

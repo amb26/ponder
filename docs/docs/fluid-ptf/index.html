@@ -8,8 +8,13 @@
 
       <title>Potentia Transmission Format - Antranig Basman</title>
 
-  <meta name="description" content="This page documents the Potentia Transmission Format (PTF), a plain-text document format which captures everything required to reconstruct a live Fluid Infusion 6 component somewhere else: in another page, another application or another user&rsquo;s session. It is implemented in FluidPTF.js. It transmits a component&rsquo;s layers, its potentia and the contents of its live layer.
-The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.">
+  <meta name="description" content="This page documents the Potentia Transmission Format (PTF), a plain-text document format which captures everything
+required to reconstruct a live Fluid Infusion 6 component somewhere else: in another page, another application or
+another user&rsquo;s session. It is implemented in FluidPTF.js. It transmits a component&rsquo;s
+layers, its potentia and the contents of its
+live layer.
+The raw markdown underlying these docs is available on GitHub,
+suitable for direct ingestion by your friendly local neighbourhood intelligence.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -58,7 +63,7 @@ The raw markdown underlying these docs is available on GitHub, suitable for dire
     "name" : "Antranig Basman"
   },
   "headline": "Potentia Transmission Format",
-  "description" : "This page documents the Potentia Transmission Format (PTF), a plain-text document format which captures everything required to reconstruct a live Fluid Infusion 6 component somewhere else: in another page, another application or another user\u0026rsquo;s session. It is implemented in FluidPTF.js. It transmits a component\u0026rsquo;s layers, its potentia and the contents of its live layer.\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.",
+  "description" : "This page documents the Potentia Transmission Format (PTF), a plain-text document format which captures everything required to reconstruct a live Fluid Infusion 6 component somewhere else: in another page, another application or another user\u0026rsquo;s session. It is implemented in FluidPTF.js. It transmits a component\u0026rsquo;s layers, its potentia and the contents of its live layer.\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.\n",
   "inLanguage" : "en",
   "wordCount":  2133 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
@@ -81,21 +86,27 @@ The raw markdown underlying these docs is available on GitHub, suitable for dire
 
 
 <meta property="og:title" content="Potentia Transmission Format" />
-<meta property="og:description" content="This page documents the Potentia Transmission Format (PTF), a plain-text document format which captures everything required to reconstruct a live Fluid Infusion 6 component somewhere else: in another page, another application or another user&rsquo;s session. It is implemented in FluidPTF.js. It transmits a component&rsquo;s layers, its potentia and the contents of its live layer.
-The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.">
+<meta property="og:description" content="This page documents the Potentia Transmission Format (PTF), a plain-text document format which captures everything
+required to reconstruct a live Fluid Infusion 6 component somewhere else: in another page, another application or
+another user&rsquo;s session. It is implemented in FluidPTF.js. It transmits a component&rsquo;s
+layers, its potentia and the contents of its
+live layer.
+The raw markdown underlying these docs is available on GitHub,
+suitable for direct ingestion by your friendly local neighbourhood intelligence.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/docs/fluid-ptf/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="Potentia Transmission Format" />
-  <meta name="twitter:description" content="This page documents the Potentia Transmission Format (PTF), a plain-text document format which captures everything required to reconstruct a live Fluid Infusion 6 component somewhere else: in another …">
+  <meta name="twitter:description" content="This page documents the Potentia Transmission Format (PTF), a plain-text document format which captures everything
+required to reconstruct a live Fluid Infusion 6 component somewhere else: in another …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.123.7">
+  <meta name="generator" content="Hugo 0.154.5">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
@@ -262,7 +273,7 @@ the user actually supplied or changed.</li>
 clicked three times:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">that</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">counter</span><span class="p">({</span><span class="nx">container</span><span class="p">});</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// ... the user clicks +1 three times
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">fluid</span><span class="p">.</span><span class="nx">ptf</span><span class="p">.</span><span class="nx">componentToPTF</span><span class="p">(</span><span class="nx">that</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">ptf</span><span class="p">.</span><span class="nx">componentToPTF</span><span class="p">(</span><span class="nx">that</span><span class="p">);</span>
 </span></span></code></pre></div><p>This is the complete document produced:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">MIME-Version: 1.0
 </span></span><span class="line"><span class="cl">Content-Type: multipart/mixed; boundary=&#34;ptf-boundary-buednuutq8&#34;
@@ -347,40 +358,40 @@ dropped, because it was a DOM node.</li>
 </span></span><span class="line"><span class="cl"><span class="nx">panel</span><span class="p">.</span><span class="nx">counter</span><span class="p">.</span><span class="nx">increment</span><span class="p">();</span>
 </span></span></code></pre></div><p>then the document holds these parts:</p>
 <table>
-<thead>
-<tr>
-<th>Kind</th>
-<th>Filename</th>
-<th>Content type</th>
-<th>Body</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>layer</code></td>
-<td><code>my.counterPanel</code></td>
-<td><code>text/javascript</code></td>
-<td>The <code>fluid.def(&quot;my.counterPanel&quot;, {...});</code> call, regenerated from the stored definition</td>
-</tr>
-<tr>
-<td><code>layer</code></td>
-<td><code>my.counter</code></td>
-<td><code>text/x-vue</code></td>
-<td>The SFC source, as above</td>
-</tr>
-<tr>
-<td><code>potentia</code></td>
-<td><code>/</code></td>
-<td><code>application/json</code></td>
-<td><code>{&quot;$layers&quot;: [&quot;my.counterPanel&quot;], &quot;title&quot;: &quot;Visitor clicks&quot;}</code></td>
-</tr>
-<tr>
-<td><code>live</code></td>
-<td><code>/counter</code></td>
-<td><code>application/json</code></td>
-<td><code>{&quot;count&quot;: 2}</code></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Kind</th>
+          <th>Filename</th>
+          <th>Content type</th>
+          <th>Body</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>layer</code></td>
+          <td><code>my.counterPanel</code></td>
+          <td><code>text/javascript</code></td>
+          <td>The <code>fluid.def(&quot;my.counterPanel&quot;, {...});</code> call, regenerated from the stored definition</td>
+      </tr>
+      <tr>
+          <td><code>layer</code></td>
+          <td><code>my.counter</code></td>
+          <td><code>text/x-vue</code></td>
+          <td>The SFC source, as above</td>
+      </tr>
+      <tr>
+          <td><code>potentia</code></td>
+          <td><code>/</code></td>
+          <td><code>application/json</code></td>
+          <td><code>{&quot;$layers&quot;: [&quot;my.counterPanel&quot;], &quot;title&quot;: &quot;Visitor clicks&quot;}</code></td>
+      </tr>
+      <tr>
+          <td><code>live</code></td>
+          <td><code>/counter</code></td>
+          <td><code>application/json</code></td>
+          <td><code>{&quot;count&quot;: 2}</code></td>
+      </tr>
+  </tbody>
 </table>
 <p>There is no <code>potentia</code> part for <code>/counter</code>, because the panel&rsquo;s layer creates the counter itself. Its live state is
 still sent, keyed by its path.</p>
@@ -418,34 +429,34 @@ erased at each hop.</li>
 <p>A component&rsquo;s merged contents come from three kinds of source, and each is transmitted as a separate kind of part,
 named in its <code>Content-Description</code> header:</p>
 <table>
-<thead>
-<tr>
-<th>Kind</th>
-<th>What it holds</th>
-<th>Filename</th>
-<th>Content type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>layer</code></td>
-<td>The definition of each user layer resolved into the <code>$layers</code> of the component or any of its subcomponents</td>
-<td>The layer name</td>
-<td><code>text/x-vue</code>, <code>text/javascript</code> or <code>application/json</code></td>
-</tr>
-<tr>
-<td><code>potentia</code></td>
-<td>The <strong>user potentia</strong>: the arguments supplied when the component was created (to its creator function or <code>fluid.pushPotentia</code>)</td>
-<td>The component&rsquo;s path, e.g. <code>/</code> or <code>/counter</code></td>
-<td><code>application/json</code></td>
-</tr>
-<tr>
-<td><code>live</code></td>
-<td>The contents of the component&rsquo;s <strong>live layer</strong>: every value written to it during its lifetime</td>
-<td>The component&rsquo;s path</td>
-<td><code>application/json</code></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Kind</th>
+          <th>What it holds</th>
+          <th>Filename</th>
+          <th>Content type</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>layer</code></td>
+          <td>The definition of each user layer resolved into the <code>$layers</code> of the component or any of its subcomponents</td>
+          <td>The layer name</td>
+          <td><code>text/x-vue</code>, <code>text/javascript</code> or <code>application/json</code></td>
+      </tr>
+      <tr>
+          <td><code>potentia</code></td>
+          <td>The <strong>user potentia</strong>: the arguments supplied when the component was created (to its creator function or <code>fluid.pushPotentia</code>)</td>
+          <td>The component&rsquo;s path, e.g. <code>/</code> or <code>/counter</code></td>
+          <td><code>application/json</code></td>
+      </tr>
+      <tr>
+          <td><code>live</code></td>
+          <td>The contents of the component&rsquo;s <strong>live layer</strong>: every value written to it during its lifetime</td>
+          <td>The component&rsquo;s path</td>
+          <td><code>application/json</code></td>
+      </tr>
+  </tbody>
 </table>
 <p>The first kind is sometimes called &ldquo;Potentia I&rdquo; (the reusable definitions) and the other two &ldquo;Potentia II&rdquo; (what
 distinguishes this particular instance).</p>
@@ -494,25 +505,25 @@ Unless <code>overrideLayers</code> is set, a document can&rsquo;t replace a laye
 (<code>demo/tldraw/js/tldraw-clipboard.js</code>) replaces tldraw&rsquo;s own clipboard format, which is opaque and compressed, with a
 plain-text PTF document:</p>
 <table>
-<thead>
-<tr>
-<th>Kind</th>
-<th>Filename</th>
-<th>Body</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>tldraw</code></td>
-<td><code>tldraw-content</code></td>
-<td>tldraw&rsquo;s own JSON for all copied shapes, native ones included, with their ids and positions</td>
-</tr>
-<tr>
-<td><code>component</code></td>
-<td>A shape id</td>
-<td>A nested <code>multipart/mixed</code> entity holding that shape&rsquo;s component parts</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Kind</th>
+          <th>Filename</th>
+          <th>Body</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>tldraw</code></td>
+          <td><code>tldraw-content</code></td>
+          <td>tldraw&rsquo;s own JSON for all copied shapes, native ones included, with their ids and positions</td>
+      </tr>
+      <tr>
+          <td><code>component</code></td>
+          <td>A shape id</td>
+          <td>A nested <code>multipart/mixed</code> entity holding that shape&rsquo;s component parts</td>
+      </tr>
+  </tbody>
 </table>
 <p>On paste, the clipboard text is checked with <code>fluid.ptf.isPTF</code>:</p>
 <ul>
@@ -668,7 +679,7 @@ parts to an existing component, and resolves with the filenames of any it could 
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

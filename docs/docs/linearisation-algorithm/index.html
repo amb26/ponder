@@ -8,7 +8,12 @@
 
       <title>Layer Linearisation - Antranig Basman</title>
 
-  <meta name="description" content="This note describes how Infusion 6 orders the layers of a component: how the $layers lists written by authors are linearised into the single list held at that.$layers, and so which layer&rsquo;s contributions win a merge. It records the decisions taken in FLUID-5743, which made a layer listed further right beat those to its left, together with a relaxation of the C3 consistency rule and an assessment of its consequences against the &ldquo;pedalo&rdquo; example of Barrett et al.">
+  <meta name="description" content="This note describes how Infusion 6 orders the layers of a component: how the $layers lists written by authors are
+linearised into the single list held at that.$layers, and so which layer&rsquo;s contributions win a merge. It records the
+decisions taken in FLUID-5743, which made a layer listed further
+right beat those to its left, together with a relaxation of the C3 consistency rule and an assessment of its
+consequences against the &ldquo;pedalo&rdquo; example of Barrett et al.,
+A Monotonic Superclass Linearization for Dylan (OOPSLA 1996).">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -57,7 +62,7 @@
     "name" : "Antranig Basman"
   },
   "headline": "Layer Linearisation",
-  "description" : "This note describes how Infusion 6 orders the layers of a component: how the $layers lists written by authors are linearised into the single list held at that.$layers, and so which layer\u0026rsquo;s contributions win a merge. It records the decisions taken in FLUID-5743, which made a layer listed further right beat those to its left, together with a relaxation of the C3 consistency rule and an assessment of its consequences against the \u0026ldquo;pedalo\u0026rdquo; example of Barrett et al.",
+  "description" : "This note describes how Infusion 6 orders the layers of a component: how the $layers lists written by authors are linearised into the single list held at that.$layers, and so which layer\u0026rsquo;s contributions win a merge. It records the decisions taken in FLUID-5743, which made a layer listed further right beat those to its left, together with a relaxation of the C3 consistency rule and an assessment of its consequences against the \u0026ldquo;pedalo\u0026rdquo; example of Barrett et al., A Monotonic Superclass Linearization for Dylan (OOPSLA 1996).\n",
   "inLanguage" : "en",
   "wordCount":  1574 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
@@ -80,20 +85,26 @@
 
 
 <meta property="og:title" content="Layer Linearisation" />
-<meta property="og:description" content="This note describes how Infusion 6 orders the layers of a component: how the $layers lists written by authors are linearised into the single list held at that.$layers, and so which layer&rsquo;s contributions win a merge. It records the decisions taken in FLUID-5743, which made a layer listed further right beat those to its left, together with a relaxation of the C3 consistency rule and an assessment of its consequences against the &ldquo;pedalo&rdquo; example of Barrett et al.">
+<meta property="og:description" content="This note describes how Infusion 6 orders the layers of a component: how the $layers lists written by authors are
+linearised into the single list held at that.$layers, and so which layer&rsquo;s contributions win a merge. It records the
+decisions taken in FLUID-5743, which made a layer listed further
+right beat those to its left, together with a relaxation of the C3 consistency rule and an assessment of its
+consequences against the &ldquo;pedalo&rdquo; example of Barrett et al.,
+A Monotonic Superclass Linearization for Dylan (OOPSLA 1996).">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/docs/linearisation-algorithm/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="Layer Linearisation" />
-  <meta name="twitter:description" content="This note describes how Infusion 6 orders the layers of a component: how the $layers lists written by authors are linearised into the single list held at that.$layers, and so which layer&rsquo;s …">
+  <meta name="twitter:description" content="This note describes how Infusion 6 orders the layers of a component: how the $layers lists written by authors are
+linearised into the single list held at that.$layers, and so which layer&rsquo;s …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.123.7">
+  <meta name="generator" content="Hugo 0.154.5">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
@@ -259,7 +270,7 @@ and subcomponent records). Tests are in <code>tests/framework-tests/core/js/Flui
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">my</span><span class="p">.</span><span class="nx">redTriangle</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="nx">t</span><span class="p">.</span><span class="nx">colour</span><span class="p">;</span>    <span class="c1">// &#34;red&#34; - my.red is listed after my.triangle, and so beats it and my.shape
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">t</span><span class="p">.</span><span class="nx">$layers</span><span class="p">;</span>   <span class="c1">// [&#34;fluid.component&#34;, &#34;my.shape&#34;, &#34;my.triangle&#34;, &#34;my.red&#34;, &#34;my.redTriangle&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="nx">t</span><span class="p">.</span><span class="nx">$layers</span><span class="p">;</span>   <span class="c1">// [&#34;fluid.component&#34;, &#34;my.shape&#34;, &#34;my.triangle&#34;, &#34;my.red&#34;, &#34;my.redTriangle&#34;]
 </span></span></span></code></pre></div><p>This reverses the order used by Infusion 1.x, in which the leftmost entry won. FLUID-5743 reported that users
 generally expect the opposite, matching the reading order of CSS cascades and of most mixin systems.</p>
 <h2 id="c3-underneath">C3 underneath</h2>
@@ -313,30 +324,30 @@ so a method on <code>dayBoat</code> is the most specific for both of <code>pedal
 specific for <code>pedalo</code> itself. C3 forbids this, and so does Infusion.</p>
 <p>Suppose the author of <code>pedalWheelBoat</code> restates <code>dayBoat</code>. Strongest first, for comparison with the paper:</p>
 <table>
-<thead>
-<tr>
-<th><code>pedalWheelBoat</code> <code>$layers</code></th>
-<th>Linearisation, strongest first</th>
-<th>Outcome</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>[&quot;wheelBoat&quot;, &quot;engineless&quot;]</code></td>
-<td>pedalWheelBoat, engineless, dayBoat, wheelBoat, boat</td>
-<td><code>dayBoat</code> beats <code>wheelBoat</code></td>
-</tr>
-<tr>
-<td><code>[&quot;dayBoat&quot;, &quot;wheelBoat&quot;, &quot;engineless&quot;]</code></td>
-<td>pedalWheelBoat, engineless, wheelBoat, dayBoat, boat</td>
-<td>Restatement kept: <code>wheelBoat</code> beats <code>dayBoat</code></td>
-</tr>
-<tr>
-<td><code>[&quot;wheelBoat&quot;, &quot;engineless&quot;, &quot;dayBoat&quot;]</code></td>
-<td>pedalWheelBoat, engineless, dayBoat, wheelBoat, boat</td>
-<td>Previously an error, now the restatement is ignored</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th><code>pedalWheelBoat</code> <code>$layers</code></th>
+          <th>Linearisation, strongest first</th>
+          <th>Outcome</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>[&quot;wheelBoat&quot;, &quot;engineless&quot;]</code></td>
+          <td>pedalWheelBoat, engineless, dayBoat, wheelBoat, boat</td>
+          <td><code>dayBoat</code> beats <code>wheelBoat</code></td>
+      </tr>
+      <tr>
+          <td><code>[&quot;dayBoat&quot;, &quot;wheelBoat&quot;, &quot;engineless&quot;]</code></td>
+          <td>pedalWheelBoat, engineless, wheelBoat, dayBoat, boat</td>
+          <td>Restatement kept: <code>wheelBoat</code> beats <code>dayBoat</code></td>
+      </tr>
+      <tr>
+          <td><code>[&quot;wheelBoat&quot;, &quot;engineless&quot;, &quot;dayBoat&quot;]</code></td>
+          <td>pedalWheelBoat, engineless, dayBoat, wheelBoat, boat</td>
+          <td>Previously an error, now the restatement is ignored</td>
+      </tr>
+  </tbody>
 </table>
 <p>In each case the linearisation of <code>pedalo</code> extends that of <code>pedalWheelBoat</code>, as C3 requires. With the second variant
 it is pedalo, pedalWheelBoat, engineless, wheelBoat, smallCatamaran, smallMultihull, dayBoat, boat. The three variants
@@ -508,7 +519,7 @@ is ignored, should this prove confusing in practice.</li>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

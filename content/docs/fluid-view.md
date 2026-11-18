@@ -50,14 +50,17 @@ fluid.def("my.counter", {
 * `self.count++` writes through the component proxy into its live layer. The text node updates, and nothing else
   in the DOM is touched.
 
+These are not quite in the same format as the [Vue framework's SFC files](https://vuejs.org/guide/scaling-up/sfc.html) 
+but the top-level file organisation and overall conception is the same, of keeping markup, behaviour and styling
+related to the same component together in one place.
+
 To use it, declare the module and import the SFC in a host page, and mark an element with the layers to instantiate
 on it:
 
 ```html
 <head>
-    <fluid-module id="infusion-6" src="../../"></fluid-module>
-    <!-- Infusion core script tags here -->
-    <fluid-module id="myApp" src="./"></fluid-module>
+    <script src="../../src/framework/core/js/FluidBoot.js"></script>
+    <fluid-module id="myApp" src="./" modules="fluid-modules.json"></fluid-module>
     <fluid-import src="%myApp/sfc/my-counter.vue"></fluid-import>
 </head>
 <body>
@@ -65,7 +68,13 @@ on it:
 </body>
 ```
 
-* `<fluid-module id src>` registers a module root, referred to in paths as `%id`.
+* `FluidBoot.js` is the page's one reference to where Infusion lives. It declares Infusion as the module
+  `infusion-6`, at the directory holding it, and loads Infusion's files in order as the page is parsed. 
+* `<fluid-module id src>` registers a module root, referred to in paths as `%id`. Every page declares the module
+  holding it. Its optional `modules` attribute names a module map, relative to the module's root - a JSON object
+  locating each module the page reaches, e.g. `{"maplibre-gl": "vendor/maplibre-gl"}`, relative to the map. Every
+  other reference a page or SFC makes is relative to the file making it, or through a module, e.g.
+  `%maplibre-gl/dist/maplibre-gl-dev.js` or `%@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw-unminified.js`.
 * `<fluid-import src [layer]>` loads an SFC on demand. The layer name defaults to the file name with `-` replaced by
   `.`, so `my-counter.vue` must define `my.counter`.
 * `fluid-layers="layerA layerB"` on any element instantiates a component with those layers, rendering into that
@@ -85,7 +94,51 @@ When the SFC is loaded, its script is patched before execution:
   a layer derived from the SFC's layer may replace the template by supplying its own, e.g.
   `view: {$component: {template: "<div>...</div>"}}`, whilst keeping the rest of the SFC's definition.
 * Each `<style>` and further `<script>` block is injected into the document. `<script src="..." data-fl-scope="global">`
-  loads a classic global script. `src` paths may use `%module` prefixes.
+  loads a classic global script. `src` paths may use `%module` prefixes. Any other relative path is relative to the SFC
+  itself, so that a family of SFCs and the files they refer to can be moved together, e.g. by copying them into another
+  project. A relative path in a `<fluid-import>` of a host page is relative to the page.
+* A script referred to by `src` from several SFCs, e.g. a library or a file of shared utilities and base layers, is
+  executed once in each document. The first SFC to reach it injects it, and the others commit their own injections
+  only once it has executed, so their scripts may rely on it.
+* A `<script src="..." fluid-client>` block is payload for the browser alone, e.g. a widget library such as a map.
+  When a page is rendered under node, it is written into the page but not evaluated, and components depending on it
+  remain unavailable there.
+* Top-level `<fluid-import src="..." [layer="..."]>` blocks import further SFCs, as in a host page. Their paths are
+  relative to the importing SFC, so an SFC declares the SFCs it depends on, and a page need only import the root of the
+  tree:
+
+```html
+<fluid-import src="my-list-item.vue"></fluid-import>
+<script>
+fluid.def("my.list", {
+    items: {
+        $component: {
+            $layers: "my.listItem",
+            $for: {source: "{list}.records", valueAs: "record"}
+        }
+    }
+});
+</script>
+```
+
+* An optional `<symbols>` block holds SVG `<symbol>` elements which the SFC's template, or any other markup in the document,
+  refers to with `<use href="#id">`. Its markup is injected verbatim as a `<defs>` element within a single hidden
+  `<svg id="fl-symbols-host">`, shared by every SFC, at the start of the document's `<body>`:
+
+```html
+<symbols>
+    <symbol id="my-chevron" viewBox="0 0 16 16">
+        <path d="M6 3l5 5-5 5" fill="none" stroke="currentColor"/>
+    </symbol>
+</symbols>
+<template>
+    <button><svg width="14" height="14"><use href="#my-chevron"/></svg> More</button>
+</template>
+```
+
+  Symbol ids are global to the document, so they should be prefixed to avoid clashes between SFCs. 
+* A `<placeholder name type [encoding]>` block holds a placeholder for the data of the SFC's layer - see
+  [Minimal pages and placeholder data](#minimal-pages-and-placeholder-data).
 
 Editing the file and reloading it, for example through the Fluid editor, updates every live instance in place.
 
@@ -161,8 +214,11 @@ user's changes:
   `<input value="@{text}"/>` is a two-way binding with no handler code. Writing into a
   [`$reactiveRoot`](/docs/fluid-integration-language#reactiveroot) path such as `@{state.prompt}` updates that root
   immutably.
-* **Read-only sources.** If the site holds a computed value (`$compute`), it is not written. The attribute is
-  re-materialised from the element's state, so the page still serialises faithfully.
+* **Read-only sources.** If the site holds a computed value (`$compute`), or lies anywhere within one, e.g. a form
+  bound to a model computed from component state, it is not written. Writing it would detach the member from its inputs
+  and leave the other bindings stale. The attribute is re-materialised from the element's state, so the page still
+  serialises faithfully. Within a [`$reactiveRoot`](/docs/fluid-integration-language#reactiveroot), every path is
+  writable.
 * **Special elements.** `<textarea value="@{...}">` is materialised as the textarea's content. `<select value="@{...}">`
   is materialised as `selected` on the matching `<option>`.
 * **No redundant writes.** A property is written only if it differs, so binding `value` doesn't disturb the caret in a
@@ -194,7 +250,8 @@ while the item is *not* completed. Classes in a static `class` attribute are kep
 * **Invocation.** The value is a compact function call in the syntax of
   [`$method`](/docs/fluid-integration-language#method). The function is either a method reference such as
   `{self}.increment()` or a global function name. Within the arguments, `{0}` is the DOM event.
-* **Assignment.** `target = source` writes to a component site. `source` is a reference, read at the time of the
+* **Assignment.** `target = source` writes to a component site. A target's path may pass through subcomponents, e.g.
+  `{self}.panel.open = true` writes `open` of the subcomponent `panel`. `source` is a reference, read at the time of the
   event, or a literal (`edit`, `3`, `true`). A `!` before the source negates it in place, so
   `{self}.open = !{self}.open` is a toggle.
 * **Modifiers.** These are dot suffixes on the event name, following Vue:
@@ -230,7 +287,9 @@ fluid.def("my.todoList", {
 ```
 
 Each `my.todoItem` then renders its own SFC template, in which `@{todo.text}` refers to its element of the list.
-Adding to or removing from `todos` creates or destroys exactly the corresponding item views.
+Adding to or removing from `todos` creates or destroys exactly the corresponding item views. Each `@id` slot keeps
+one stable record of its container, so a parent's re-render which leaves a slot's markup unchanged does not rebuild the
+child rendered into it.
 
 A subcomponent with [`$if`](/docs/fluid-integration-language#if) renders into its `@id` element only while its
 condition is true. A subcomponent [removed](/docs/fluid-integration-language#removing-a-subcomponent) by a stronger
@@ -389,7 +448,13 @@ Members of `fluid.viewComponent`:
 * `templateTree` - The parsed template.
 * `vTree` - The activated virtual tree, with all bindings resolved.
 * `elideParent` - Defaults to `true`, meaning the template's root element is merged with the container rather than
-  nested inside it. Set it to `false` to render the root element inside the container.
+  nested inside it. Set it to `false` to render the root element inside the container. The container's classes are
+  the union of those written by the element bearing `@id` in the parent's template, those of the template's root, and
+  any added by other code, e.g. a widget, in that order. Either template may re-render without the other, and each
+  removes only classes which it wrote and no longer writes. Likewise, a template never removes an attribute which it
+  did not write, such as one a widget sets on an element of the template. A class bound by the parent onto the element bearing `@id` is written by
+  interpolation, as `class="slot @{extraClass}"`, since a `@class` there belongs to the child's placeholder template.
+  Other attributes of the container are written by whichever template last wrote them.
 * `verbatim` - Defaults to `false`. If `true`, a template supplied as markup is rendered [verbatim](#verbatim-markup-and-islands).
 * `renderedContainer` - A signal holding the element once it has been rendered.
 * `renderView` - The effect that patches `vTree` into `container`.
@@ -568,8 +633,6 @@ When the markup changes, it is reconciled with the DOM as for any template. An i
 is rebuilt with its new layers, and one whose element disappears is destroyed.
 
 ### Wrapping an external widget with `$bindable`
-
-> `$bindable` is **experimental and unstable**. See [its definition](/docs/fluid-integration-language#bindable).
 
 Some widgets, such as code editors, maps or charts, own a complex DOM and have their own lifecycle: they must be
 constructed once, on a real element, and kept alive while the component's configuration varies. `$bindable`
@@ -806,7 +869,173 @@ node src/framework/server/hydrate.js page.html [-o out.html]
 
 This boots the page as a browser would, waits for the graph to settle, and writes the rendered page, by default to
 `page-hydrated.html`. If the graph settles with the page still unready, it exits with an error listing the pending
-effects.
+effects. Data fetched by `fluid.fetch` and its relatives, or by any asynchronous `$compute`, is waited for, and a
+relative URL is resolved against the page. Scripts the page holds as its own are evaluated in document order before it
+boots, as in the browser. An example is a script defining the layer named by its `fluid-layers`. A script whose `src`
+is remote is not evaluated, and nor is one bearing `fluid-client`. Injected scripts, stylesheets and symbols are placed
+in the head after its last `<fluid-import>`, in the order they are made. So a stylesheet the page holds after its
+imports overrides those of its SFCs in the same way, whether the page is hydrated or booted in the browser.
+
+The `sourceURL` comment naming each injected style's file is written relative to the document, as for scripts and
+links, so a hydrated page reveals nothing of the builder's file system and is the same whichever machine built it.
+
+Hydration is reversible. Everything `hydrate.js` adds to the page is marked with `data-fluid-hydrated`:
+
+* An element added beside the page's own, e.g. an injected script, stylesheet or symbol host, bears an empty value.
+* An element on which a component booted bears the JSON of its attributes and content as the page wrote them.
+* When the bootstrap of Infusion is written in the `source` or `built` form, the first script it is expanded into
+  bears `boot:` followed by the bootstrap's `src`.
+
+`src/framework/server/dehydrate.js` reverses this. It writes the page exactly as `hydrate.js` read it, as serialised
+by `fluid.serializeDocument`:
+
+```
+node src/framework/server/dehydrate.js page-hydrated.html [-o page.html]
+```
+
+So a site may keep its pages hydrated in place and recover each page's source from it. The round-trip support
+described below also checks that dehydrating each hydrated page gives back the page.
+
+#### Minimal pages and placeholder data
+
+A page need hold no more than its bootstrap of Infusion, a `<fluid-import>` of the Single File Component at the root of
+its tree, and an element bearing `fluid-layers`. The SFCs it imports, and those they import in turn, supply all of its
+scripts, stylesheets, symbols and markup. Booted in the browser, such a page discovers them as its components are
+instantiated. Rendered by `hydrate.js`, the page is written with all of them in place, and the browser shows its markup
+as soon as it is parsed.
+
+A **placeholder** is a minimal representative of the data a layer needs in order to instantiate and render most of its
+content, used by rendering test fixtures and authoring tools. A layer names one as the default of a member holding a
+URL, by the scheme `placeholder://{layerName}/{resourceName}`, and a runnable application overrides the member with
+the URL of its real data. The component which fetches it bears the mixin `fluid.withPlaceholder`, beside a reader such
+as `fluid.jsonReader`:
+
+```js
+fluid.def("my.app", {
+    records: {
+        $component: {
+            $layers: ["fluid.jsonReader", "fluid.withPlaceholder"],
+            url: "placeholder://my.app/records"
+        }
+    }
+});
+
+// A runnable application, rendered from its real data, statically as in the browser
+fluid.def("my.site", {
+    $layers: "my.app",
+    records: {url: "data/records.json"}
+});
+```
+
+Since a placeholder is as small as possible, it is always held inline, by a top-level `<placeholder>` block of the
+layer's Single File Component, so that it travels with the SFC wherever it is copied. Its material is held as text, or,
+if it is binary or holds markup, in base64:
+
+```html
+<placeholder name="records" type="application/json">[{"name": "Placeholder"}]</placeholder>
+<placeholder name="viz" type="application/octet-stream" encoding="base64">H4sIAAAAAAAA...</placeholder>
+```
+
+A block bearing `src` is rejected. `src/framework/server/inlinePlaceholder.js` writes a file into an SFC as such a
+block, replacing any of the same name, choosing the encoding and media type from the file unless told otherwise:
+
+```
+node src/framework/server/inlinePlaceholder.js my-app.vue records data/records.json [--type <media type>]
+    [--encoding base64|text] [-n]
+```
+
+A placeholder may also be declared from script by `fluid.registerPlaceholder`. The mixin computes the reader's
+`fetchUrl` by `fluid.resolveUrl`, which resolves a placeholder's URL to a Blob URL onto its material, a
+module-relative URL such as `%my-module/data/records.json` through its module, and leaves any other URL as it is. It
+also makes `isPlaceholder` `true` while `url` is a placeholder's, so that the component, or what holds it, can show that
+its data is a stand-in. Any reader can take the mixin, provided it fetches its `fetchUrl` - e.g. bagatelle's
+`hortis.csvReader`.
+
+Every live component bearing the mixin is listed in `fluid.withPlaceholder.instances`, so the hydrater can find,
+without knowing the page's design, which components were rendered from placeholders - see `fluid.documentPlaceholders`
+in `server-support.js`. `hydrate.js` reports each one, and with `--no-placeholders` refuses to write a page which has
+any - for a page which is a runnable application rather than a test fixture. `fluid.renderingStatically` is `true`
+whilst a page is rendered under node, but no longer determines what a component fetches: a page is rendered
+statically from the same data as in the browser.
+
+When the browser boots a page written by `hydrate.js`, it adopts what the page already holds:
+
+* Injected scripts, styles and symbols are not injected again. A script referred to by `src` records its source as
+  `fluid-src`, so that it is recognised, and is not run a second time, by any other SFC which refers to it.
+* Scripts bearing `fluid-client`, which were written but not run under node, load as the page does.
+* The rendered markup is claimed by position, and rerendered as the real data arrives. Classes and attributes which
+  the templates no longer write are removed from it. Those of a container which are its own, e.g. those written on the
+  element bearing `fluid-layers`, are recorded as `fluid-own-class` when a template first renders into it, and are kept.
+
+Once ready, the page renders the same markup whether it was booted from its minimal form or from its hydrated one.
+`tests/framework-tests/server/hydrate-roundtrip-test.js` tests this, using the support in
+`tests/test-core/browser/js/hydration-roundtrip.js`, which other projects can use for their own pages.
+
+#### Copying out the files a page depends on
+
+A page reaches every module through its bootstrap, for Infusion, and its module map, for the rest:
+
+```html
+<script src="../vendor/infusion/src/framework/core/js/FluidBoot.js"></script>
+<fluid-module id="my-site" src="../" modules="fluid-modules.json"></fluid-module>
+<fluid-import src="%imerss-bioinfo/src/client/sfc/bbea/hortis-beaVizLoader.vue"></fluid-import>
+```
+
+`src/framework/server/copyOut.js` copies the modules into the site from their checkouts, and writes the map:
+
+```
+node copyOut.js story/index.html --source infusion-6=../infusion-6 --source imerss-bioinfo=../bagatelle [-n] [--list]
+    [--vendor <dir>] [--framework boot|source|built] [--in-place]
+```
+
+It boots the page under node, as `hydrate.js` does, with each module's files read from its source. That is the
+checkout given by `--source`, or else, for a module named like an npm package such as `maplibre-gl` or
+`@mapbox/mapbox-gl-draw`, the directory where node finds that package - from the page's module or any of the
+checkouts given, so wherever npm installed or hoisted it. Each module is placed where the map already locates it, or
+else at `<vendor>/<module>`, by default `vendor` beside the map. It then copies into each module's directory every
+file the page demanded from it. These are:
+
+* the SFCs it imported, and those they import in turn;
+* the scripts and stylesheets they inject, including those bearing `fluid-client`, which are not run under node;
+* Infusion's files, in the form `--framework` chooses - see below;
+* the images and fonts its stylesheets refer to;
+* any data it fetched.
+
+Before copying anything, it checks the version of each module copied from an installed npm package against the
+version the project's `package.json` specifies for it, and copies nothing if they differ, so that a stale
+`node_modules` cannot revert vendored copies to an older release - `--skip-version-check` overrides this. A module
+copied from a checkout given by `--source` is not held to its version, but a warning is given if the checkout's version
+differs, or if any of the files copied from it have uncommitted changes.
+
+Finally, it writes the page's module map, locating every module it reached other than its own and Infusion. Nothing
+else in the checkouts is copied, and the page and its SFCs need no rewriting. Run again, it reports which files have
+changed in their checkouts, and with `-n` copies and writes nothing. A file the page demands from outside any module,
+such as its own data, is not copied, but must exist. Sources may also be given by `--sources moduleOverrides.json5`,
+an array of `{moduleName, baseDir}`.
+
+With `--in-place`, nothing is copied: the map locates each module where its source is found. This suits a page
+served from a checkout - e.g. bagatelle's own pages, whose map points into its `node_modules`.
+
+**The form of Infusion's bootstrap.** `hydrate.js --framework` and `copyOut.js --framework` choose how a page's
+`FluidBoot.js` is written out:
+
+* `boot` (the default) - left as it is, to load Infusion's files in the browser;
+* `source` - replaced by a `<script>` for each of Infusion's files;
+* `built` - replaced by their bundle, `dist/fluid.boot.min.js`, built by Infusion's `build.js`.
+
+`tests/framework-tests/server/copyout-test.js` copies out a page whose SFCs depend on a package installed beneath
+their module and one hoisted above it, checks the map written, and checks that the page renders correctly from each
+form of its bootstrap, served from its own directory alone.
+
+#### Development affordances
+
+A page in development may mark `FluidBoot.js` with `<script src=".../FluidBoot.js" data-fluid-dev-mode>`. It then looks for a
+`moduleOverrides.json5` in the directory holding Infusion's root, and in each directory above it up to the root of
+the server, and honours the nearest found. If its `infusion-6` entry names another checkout, that checkout's
+`FluidBoot.js` is booted instead, so that the page runs the same Infusion as the site's tools, wherever the site
+keeps the Infusion it names - in `node_modules` or vendored. The checkout is reached only if it is served too, e.g.
+from a common parent of the site and the checkout; if it can't be fetched, a warning is logged and the named Infusion
+boots. Without the attribute nothing is looked for, so a deployed page makes no requests beyond Infusion's own files.
 
 ### Scripts
 

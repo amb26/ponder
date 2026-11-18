@@ -8,7 +8,8 @@
 
       <title>Works in Progress - Antranig Basman</title>
 
-  <meta name="description" content="A collection of stream-of-consciousness posts during the development of upcoming Infusion 6, an substrate forming an integration domain.">
+  <meta name="description" content="A collection of stream-of-consciousness posts during the development of upcoming Infusion 6, an
+substrate forming an integration domain.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -31,20 +32,22 @@
 </script>
 
 <meta property="og:title" content="Works in Progress" />
-<meta property="og:description" content="A collection of stream-of-consciousness posts during the development of upcoming Infusion 6, an substrate forming an integration domain.">
+<meta property="og:description" content="A collection of stream-of-consciousness posts during the development of upcoming Infusion 6, an
+substrate forming an integration domain.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/wip/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="Works in Progress" />
-  <meta name="twitter:description" content="A collection of stream-of-consciousness posts during the development of upcoming Infusion 6, an substrate forming an integration domain.">
+  <meta name="twitter:description" content="A collection of stream-of-consciousness posts during the development of upcoming Infusion 6, an
+substrate forming an integration domain.">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.123.7">
+  <meta name="generator" content="Hugo 0.154.5">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../css/katex.min.css" />
   <link rel="stylesheet" href="../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../css/bootstrap.min.css" /><link rel="stylesheet" href="../css/main.css" />
@@ -214,8 +217,18 @@
     </div>
     <div class="post-entry">
         
-        After beholding Clayton&rsquo;s Antigravity-fuelled conversion of his 1987 NoPumpG spreadsheet-inspired visual programming system, I started to wonder what it would take to get in-browser AI assistance and explanation of the interface. Below is reproduced a Gemini Q&amp;A session where I started from the assumption that some kind of MCP-like construct, mapping the materialised interface contents onto a structured query API, would be relevant.
-The conversation revealed that whilst an MCP-like mapping could be a helpful intermediate, this is secondary compared to the central difficulty of getting the AI mustered into the browser environment itself, at a price/availability that made sense for a non-technical user.
+        <style>
+@media (min-width: 992px) {
+h1 {
+margin-left: -25px;
+}
+}
+</style>
+<p>After beholding Clayton&rsquo;s Antigravity-fuelled <a href="https://fluid-project.github.io/NoPumpG/">conversion</a> of his
+1987 <a href="https://web.archive.org/web/20250202091404/https://apps.dtic.mil/sti/tr/pdf/ADA460027.pdf">NoPumpG</a> spreadsheet-inspired visual
+programming system, I started to wonder what it would take to get in-browser AI assistance and explanation
+of the interface. Below is reproduced a Gemini Q&amp;A session where I started from the assumption that some kind of
+MCP-like construct, mapping the materialised interface contents onto a structured query API, would be relevant.</p>
         <a href="../wip/2026-07-31-researching-in-browser-ai/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -246,8 +259,14 @@ The conversation revealed that whilst an MCP-like mapping could be a helpful int
     </div>
     <div class="post-entry">
         
-        aka &ldquo;A Farewell to preact-signals&rdquo;
-This posting is a story that can be told from two ends, the theoretical and the practical. To jump ahead to one of the punchlines, it turns out that Milo&rsquo;s reactively system, hailed in Understanding Reactivity and other posts, harbours yet more riches than had been explored so far. When looking through Milo&rsquo;s Reactivity Benchmark with Chee last year, I was greatly taken with the staggering simplicity of the benchmark&rsquo;s adaptor for update batching, which looks like this:
+        <p>aka &ldquo;A Farewell to preact-signals&rdquo;</p>
+<p>This posting is a story that can be told from two ends, the theoretical and the practical. To jump ahead to one of
+the punchlines, it turns out that Milo&rsquo;s <a href="https://github.com/milomg/reactively">reactively</a> system, hailed in
+<a href="../wip/2025-12-15-understanding-reactivity">Understanding Reactivity</a> and other posts, harbours yet more riches than
+had been explored so far. When looking through Milo&rsquo;s <a href="https://github.com/milomg/js-reactivity-benchmark">Reactivity Benchmark</a>
+with Chee last year, I was greatly taken with the staggering simplicity of the benchmark&rsquo;s
+<a href="https://github.com/milomg/js-reactivity-benchmark/blob/main/packages/core/src/frameworks/reactively.ts#L20-L23">adaptor</a> for update batching,
+which looks like this:</p>
         <a href="../wip/2026-05-25-towards-deferred-stabilisation/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -278,8 +297,13 @@ This posting is a story that can be told from two ends, the theoretical and the 
     </div>
     <div class="post-entry">
         
-        In late 2023, staring at the &ldquo;flag&rdquo; test case in preact-signals that I describe in my Archaeology of Glitches posting, I realised something decisive: reactive systems can provide a strong, structural guarantee of data consistency. Given that, it became clear that Infusion could be reworked as a fully reactive system, rather than the opportunistic hybrid I had been building through the 2010s.
-This post will notice that the apparent diversity of reactive systems masks a simple unifying principle, related to a principle I had already been following in Infusion&rsquo;s development.
+        <p>In late 2023, staring at the &ldquo;flag&rdquo; test case in preact-signals that I describe in my
+<a href="../post/2025-07-01-archaeology-of-glitches">Archaeology of Glitches</a> posting, I realised something decisive:
+reactive systems can provide a strong, structural guarantee of data consistency.
+Given that, it became clear that Infusion could be reworked as a fully reactive system,
+rather than the opportunistic hybrid I had been building through the 2010s.</p>
+<p>This post will notice that the apparent diversity of reactive systems masks a simple unifying principle, related to
+a principle I had already been following in Infusion&rsquo;s development.</p>
         <a href="../wip/2025-12-15-understanding-reactivity/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -310,8 +334,13 @@ This post will notice that the apparent diversity of reactive systems masks a si
     </div>
     <div class="post-entry">
         
-        This has been a period of consolidation since pushing on demos of Infusion 6 for the Substrates 2025 workshop and my 2025 Live incurred a good amount of technical debt. Lots of demo features were hacked on by banging on framework internals rather than by proper userland constructs, and the tidyup has proved more meaty than I imagined, with several test cases still failing for fairly fundamental reasons.
-However this has been a great opportunity to deliver more soundly on some of Infusion&rsquo;s goals and work out more of the implications of its model for software&rsquo;s material.
+        <p>This has been a period of consolidation since pushing on demos of Infusion 6 for the
+<a href="https://2025.programming-conference.org/home/substrates-2025">Substrates 2025</a> workshop and my
+<a href="https://www.youtube.com/watch?v=ai2fbWi3kUU">2025 Live</a> incurred a good amount of technical debt.
+Lots of demo features were hacked on by banging on framework internals rather than by proper userland constructs, and the
+tidyup has proved more meaty than I imagined, with several test cases still failing for fairly fundamental reasons.</p>
+<p>However this has been a great opportunity to deliver more soundly on some of Infusion&rsquo;s goals and work out more
+of the implications of its model for software&rsquo;s material.</p>
         <a href="../wip/2025-12-12-infinite-apps-and-unshaking/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -342,8 +371,14 @@ However this has been a great opportunity to deliver more soundly on some of Inf
     </div>
     <div class="post-entry">
         
-        Last month I received some great feedback and searching questions from Josh Horowitz about my 2025 Live submission. Whilst it was rejected this time round, the submission achieved its aim of engaging with the most thoughtful minds in the field, and starting the long process of sharpening up these ideas so that they can be widely intelligible and adopted.
-There&rsquo;s been no substantial writing on Infusion&rsquo;s goals since the 2018 Open Authorial Principle and since then both the ideas and implementation have evolved significantly.
+        <p>Last month I received some great feedback and searching questions from <a href="https://joshuahhh.com/">Josh Horowitz</a> about
+my <a href="https://www.youtube.com/watch?v=ai2fbWi3kUU">2025 Live</a> submission. Whilst
+it was rejected this time round, the submission achieved its aim of engaging with the most thoughtful minds in the field,
+and starting the long process of sharpening up these ideas so that they can be widely intelligible and adopted.</p>
+<p>There&rsquo;s been no substantial writing on Infusion&rsquo;s goals since the 2018 <a href="../papers/onward-2016.pdf">Open Authorial Principle</a>
+and since then both the ideas and implementation have evolved significantly. Since it looks like another big paper
+is some way off this looks like a good opportunity to respond to the questions inline and continue the conversation until
+I&rsquo;m in a position to write up the system properly.</p>
         <a href="../wip/2025-10-07-josh-horowitz-review/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -374,7 +409,23 @@ There&rsquo;s been no substantial writing on Infusion&rsquo;s goals since the 20
     </div>
     <div class="post-entry">
         
-        It finally seems to be time to do something decisive about this issue which seems to have been pending for longer than I&rsquo;ve been alive, the Infusion Module System. There are Notes on the Infusion Module Loader and Notes on Modularisation of Infusion as well as ancient tickets going back as far as 2014 which read as if before the era of the printing press. The landscape has changed profoundly since then -
+        <p>It finally seems to be time to do something decisive about this issue which seems to have been pending for longer
+than I&rsquo;ve been alive, the Infusion Module System. There are <a href="https://fluidproject.atlassian.net/wiki/spaces/fluid/pages/11643260/Notes+on+the+Infusion+Module+Loader">Notes on the Infusion Module Loader</a>
+and <a href="https://fluidproject.atlassian.net/wiki/spaces/fluid/pages/11527165/Notes+on+Modularisation+of+Infusion">Notes on Modularisation of Infusion</a>
+as well as ancient <a href="https://fluidproject.atlassian.net/browse/FLUID-5521">tickets</a>
+going back as far as 2014 which read as if before the era of the printing press. The landscape has changed profoundly
+since then -</p>
+<ul>
+<li>There are numerous other package managers than npm for node, and even npm changed its module layout pretty significantly</li>
+<li>There are several alternatives to node itself for JS on the server</li>
+<li>Various monorepo orchestrators solve many of the problems described here</li>
+<li>The already highly confused state of JS module loading, which had 5 major competing variants then, has been totally
+shredded by the &ldquo;nuclear option&rdquo; of ES6 modules with their impermissive &ldquo;viral&rdquo; footprint - only an ES6 module can load
+another ES6 module.</li>
+</ul>
+<p>On the other hand the way we are thinking about Infusion itself, as a &ldquo;reactive-first&rdquo; system, has changed significantly too.
+This promises to ease several of the deeper conundrums around how Infusion coexists with code loading schemes, and more
+deeply, how it is meant to cooperate with a &ldquo;foreign Infusion&rdquo; that it finds loaded into a neighbouring context.</p>
         <a href="../wip/2025-09-30-module-system-once-more/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -405,8 +456,15 @@ There&rsquo;s been no substantial writing on Infusion&rsquo;s goals since the 20
     </div>
     <div class="post-entry">
         
-        Some good chats this week on reactive matters. Firstly on Tuesday with Patrick Dubroy, a fellow substratist. Patrick is a splendid chap who amongst many other works is the maintainer of a powerful, user-friendly parsing toolkit Ohm.
-Patrick pinged me last week explaining that he was contemplating a collaboration with Camille and Yann who were building a document publishing pipeline sourced from, amongst other formats, AsciiDoc (for related details see Camille&rsquo;s recent PhD thesis).
+        <p>Some good chats this week on reactive matters. Firstly on Tuesday with <a href="https://dubroy.com/blog/">Patrick Dubroy</a>,
+a fellow <a href="https://2025.programming-conference.org/home/substrates-2025">substratist</a>. Patrick is a splendid chap who amongst
+many other works is the maintainer of a powerful, user-friendly parsing toolkit <a href="https://ohmjs.org/">Ohm</a>.</p>
+<p>Patrick pinged me last week
+explaining that he was contemplating a collaboration with <a href="https://www.lri.fr/~gobert/">Camille</a> and
+<a href="https://www.yanntrividic.fr/?lang=en">Yann</a> who were building a document publishing pipeline sourced from, amongst other
+formats, <a href="https://asciidoc.org/">AsciiDoc</a>
+(for related details see Camille&rsquo;s recent <a href="https://theses.hal.science/tel-04551620v1/file/125450_GOBERT_2024_diffusion.pdf">PhD thesis</a>).
+This is an exciting potential cross-link between the work of members of the nascent substrates community.</p>
         <a href="../wip/2025-09-26-this-weeks-reactive-chats/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -437,8 +495,14 @@ Patrick pinged me last week explaining that he was contemplating a collaboration
     </div>
     <div class="post-entry">
         
-        This story has a familiar beginning. As with UI as Code, an innocuous UI request from Dana has unexpectedly deep consequences. Dana noticed that the Douglas fir image on the Xetthecum Forest community pane was no longer showing up&hellip; here is what we see:
-The cause in itself is indeed fairly innocuous. We are sourcing these images from iNaturalist&rsquo;s CDN which has been for many years in the slow process of migrating from URLs like https://static.
+        <p>This story has a familiar beginning. As with <a href="../post/2025-03-20-ui-as-code">UI as Code</a>, an innocuous UI request from Dana has
+unexpectedly deep consequences. Dana noticed that the Douglas fir image on the <a href="https://imerss.github.io/xetthecum-storymap-story/Xetthecum-Storymap-Reknitted.html">Xetthecum</a> Forest community pane
+was no longer showing up&hellip; here is what we see:</p>
+<p><img src="../img/douglas-fir.png" alt="Douglas fir in forest"></p>
+<p>The cause in itself is indeed fairly innocuous. We are sourcing these images from iNaturalist&rsquo;s CDN which has been
+for many years in the slow process of migrating from URLs like <a href="https://static.inaturalist.org/photos/641410/medium.jpg">https://static.inaturalist.org/photos/641410/medium.jpg</a>
+to URLs like <a href="https://inaturalist-open-data.s3.amazonaws.com/photos/641410/medium.jpg">https://inaturalist-open-data.s3.amazonaws.com/photos/641410/medium.jpg</a>.
+The fix should be straightforward – rerunning the data pipeline behind the app will re-scrape the API and update the URL.</p>
         <a href="../wip/2025-09-25-more-inaturalist-shenanigans/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -469,8 +533,24 @@ The cause in itself is indeed fairly innocuous. We are sourcing these images fro
     </div>
     <div class="post-entry">
         
-        For the last few days I&rsquo;ve been looking at the amazing Codestrates project, a development from Webstrates that has been under development by Clemens Klokmose and his team at CAVI since 2015. This has always been a close sibling project since the days of our 2016 paper and the development into Codestrates with its powerful in-browser IDE makes the convergence even more interesting.
-Reuse and abstractions in Substrates There has always been a fundamental difference in philosophy between Webstrates and Infusion, in that the substrate underlying Webstrates is simply the DOM itself.
+        <p>For the last few days I&rsquo;ve been looking at the amazing <a href="https://codestrates.projects.cavi.au.dk/">Codestrates</a> project,
+a development from Webstrates that has been under development by Clemens Klokmose and his team at <a href="https://cavi.au.dk/">CAVI</a>
+since 2015. This has always been a close sibling project since the days of our <a href="https://www.ppig.org/files/2016-PPIG-27th-Basman1.pdf">2016 paper</a>
+and the development into Codestrates with its powerful in-browser IDE makes the convergence even more interesting.</p>
+<h3 id="reuse-and-abstractions-in-substrates">Reuse and abstractions in Substrates</h3>
+<p>There has always been a fundamental difference in philosophy between Webstrates and Infusion,
+in that the substrate underlying Webstrates is simply
+the DOM itself. Whilst in the latest <a href="https://cs.au.dk/~clemens/files/MyWebstrates-UIST2024.pdf">MyWebstrates</a> this has
+been displaced one level lower in the stack into an <a href="https://github.com/automerge/automerge">Automerge</a> document,
+the representation of the UI held in the substrate is still isomorphic to the DOM and so does not permit idiomatic
+abstraction or reuse. I talk a little about the vexed concept of &ldquo;objects/types/abstractions&rdquo; in my
+<a href="../papers/Substrates-25_paper_8.pdf">position paper</a> for the upcoming
+<a href="https://2025.programming-conference.org/home/substrates-2025">Substrates Workshop</a>
+at &lt;Programming 2025&gt;. Folding together design time and run time causes many notions of &ldquo;types&rdquo; to collapse, but there
+remains a core notion of a named, reusable design unit. Boxer, one of the few true substrates created, apparently
+lacks such a notion, but there is a functional standin – at the moment a &ldquo;doit&rdquo; box begins to execute, a
+(recursive, lazy) copy is made of it. This copying process is at the core of Boxer&rsquo;s reuse model, which otherwise
+relies on wholesale copying of material adopted into one&rsquo;s microworld through <a href="../term/lithification">lithification</a>.</p>
         <a href="../wip/2025-04-24-learning-from-codestrates/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -501,9 +581,16 @@ Reuse and abstractions in Substrates There has always been a fundamental differe
     </div>
     <div class="post-entry">
         
-        Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter features at the expense of what might have been &ldquo;speculative nonsense&rdquo; in its earlier history. However, implementing something pretty basic – the ability to render lists of components – brought me right back to an old conversation.
-Here&rsquo;s the situation – one author wrote a todoItem which is a templateViewComponent:
-fluid.def(&#34;fluid.tests.todoItem&#34;, { $layers: &#34;fluid.
+        <p>Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter
+features at the expense of what might have been &ldquo;speculative nonsense&rdquo; in its earlier history. However, implementing
+something pretty basic – the ability to render lists of components – brought me right back to an old
+conversation.</p>
+<p>Here&rsquo;s the situation – one author wrote a <code>todoItem</code> which is a <code>templateViewComponent</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fluid.def(&#34;fluid.tests.todoItem&#34;, {
+</span></span><span class="line"><span class="cl">    $layers: &#34;fluid.templateViewComponent&#34;,
+</span></span><span class="line"><span class="cl">    template: &#39;&lt;span class=&#34;todo tag is-large&#34;&gt;@text&lt;button class=&#34;delete is-small&#34;&gt;&lt;/button&gt;&lt;/span&gt;&#39;
+</span></span><span class="line"><span class="cl">});
+</span></span></code></pre></div><p>Another author now wants to iterate over a list of these items:</p>
         <a href="../wip/2025-04-21-co-occurrences-are-here-again/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -545,7 +632,7 @@ fluid.def(&#34;fluid.tests.todoItem&#34;, { $layers: &#34;fluid.
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

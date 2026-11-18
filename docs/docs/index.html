@@ -41,7 +41,7 @@
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.123.7">
+  <meta name="generator" content="Hugo 0.154.5">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../css/katex.min.css" />
   <link rel="stylesheet" href="../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../css/bootstrap.min.css" /><link rel="stylesheet" href="../css/main.css" />
@@ -202,8 +202,20 @@
     </div>
     <div class="post-entry">
         
-        This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6 components are defined, composed and wired together as an integration domain. It is implemented in FluidIL.js on top of the reactive primitive fluid.cell, whose semantics (signals, effects, unavailable values, deferred stabilization) it inherits throughout.
-The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.
+        <p>This page documents the Fluid Integration Language (IL), the configuration language through which Fluid Infusion 6
+components are defined, composed and wired together as an <a href="../term/integration-domain">integration domain</a>.
+It is implemented in <a href="https://github.com/fluid-project/infusion-6/blob/main/src/framework/core/js/FluidIL.js"><code>FluidIL.js</code></a>
+on top of the reactive primitive
+<a href="../docs/fluid-signals"><code>fluid.cell</code></a>, whose semantics (signals, effects, <a href="../docs/fluid-signals#unavailable-values">unavailable values</a>,
+deferred stabilization) it inherits throughout.</p>
+<p>The raw markdown underlying these docs is available on <a href="https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/fluid-integration-language.md">GitHub</a>,
+suitable for direct ingestion by your friendly local neighbourhood intelligence.</p>
+<h2 id="model">Model</h2>
+<p>A program in the IL is derived from a set of named <strong>layers</strong>: plain JSON-like records registered in a global, reactive layer store
+via <a href="#fluiddeflayername-layer"><code>fluid.def</code></a>. A <strong>component</strong> is a live instance whose contents are derived from the merge of an
+ordered set of layers. Within a layer, any value may written as be a plain value, a <strong>reference</strong> to a value elsewhere in the
+component tree, or a <strong>signal record</strong> (<a href="#compute"><code>$compute</code></a>, <a href="#method"><code>$method</code></a>, <a href="#effect"><code>$effect</code></a>,
+<a href="#component"><code>$component</code></a>, &hellip;) describing how the live value is produced.</p>
         <a href="../docs/fluid-integration-language/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -231,9 +243,23 @@ The raw markdown underlying these docs is available on GitHub, suitable for dire
     </div>
     <div class="post-entry">
         
-        This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra capabilities above traditional reactive libraries, and also a more extended essay explaining its goals in the context of a malleable substrate.
-The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.
-Construction fluid.
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="../js/fluid-code-box.js"></script>
+<link rel="stylesheet" href="../css/fluid-code-box.css" />
+<p>This page documents the API of <code>fluid.cell</code>, the primitive of the reactive library underlying Fluid Infusion 6.
+You can read <a href="../docs/fluid-signals-background">background information</a> on how <code>fluid.cell</code> offers extra capabilities
+above traditional reactive libraries, and also a more
+<a href="../post/2026-02-20-reactivity-for-malleability">extended essay</a> explaining its goals in the context of a malleable substrate.</p>
+<p>The raw markdown underlying these docs is available on <a href="https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/fluid-signals.md">GitHub</a>,
+suitable for direct ingestion by your friendly local neighbourhood intelligence.</p>
+<h2 id="construction">Construction</h2>
+<h3 id="fluidcellinitialvalue-props">fluid.cell(initialValue, props)</h3>
+<ul>
+<li><code>{Any} [initialValue]</code> - The initial value to store in the cell</li>
+<li><code>{Object} [props]</code> - Optional additional properties to contextualise the cell</li>
+<li>Returns: <code>{Cell}</code> - The freshly constructed cell</li>
+</ul>
+<p>A fresh reactive cell is constructed, with an optional initial value and optional additional properties.</p>
         <a href="../docs/fluid-signals/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -261,8 +287,11 @@ Construction fluid.
     </div>
     <div class="post-entry">
         
-        This page contains background information motivating the design of fluid.cell, the reactive primitive built to support Infusion 6, explaining how it differs from traditional reactive libraries. There are also API docs for fluid.cell and also a more extended essay explaining its goals in the context of a malleable substrate.
-I chose the name &ldquo;cell&rdquo;, rather than &ldquo;signal&rdquo; which is more common in the 2020s JavaScript reactive community, in honour of 3 traditions:
+        <p>This page contains background information motivating the design of <code>fluid.cell</code>, the reactive primitive built to support
+Infusion 6, explaining how it differs from traditional reactive libraries. There are also <a href="../docs/fluid-signals">API docs</a> for <code>fluid.cell</code> and also a more
+<a href="../post/2026-02-20-reactivity-for-malleability">extended essay</a> explaining its goals in the context of a malleable substrate.</p>
+<p>I chose the name &ldquo;cell&rdquo;, rather than &ldquo;signal&rdquo; which is more common in the 2020s JavaScript reactive community,
+in honour of 3 traditions:</p>
         <a href="../docs/fluid-signals-background/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -290,8 +319,14 @@ I chose the name &ldquo;cell&rdquo;, rather than &ldquo;signal&rdquo; which is m
     </div>
     <div class="post-entry">
         
-        This page documents how Fluid Infusion 6 components are hosted as widgets on a tldraw canvas: how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how widgets are nested and composed. It builds on Fluid View (views, and sharing them between components) and on the Fluid Integration Language (layers, references, $linkage, $bindable).
-The layers marking and receiving hosting, fluid.topLevelWidget and fluid.
+        <p>This page documents how Fluid Infusion 6 components are hosted as widgets on a <a href="https://tldraw.dev">tldraw</a> canvas:
+how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how widgets are
+nested and composed. It builds on <a href="../docs/fluid-view">Fluid View</a> (views, and sharing them between components) and on
+the <a href="../docs/fluid-integration-language">Fluid Integration Language</a> (layers, references, <code>$linkage</code>, <code>$bindable</code>).</p>
+<p>The layers marking and receiving hosting, <code>fluid.topLevelWidget</code> and <code>fluid.topLevelWidgetView</code>, are part of the
+framework, in <code>FluidView.js</code>, and say nothing about tldraw. The tldraw host itself is in the
+<a href="https://github.com/fluid-project/infusion-6/tree/main/demo/tldraw">tldraw demo</a>, mostly in
+<code>demo/tldraw/js/tldraw-driver.js</code>.</p>
         <a href="../docs/fluid-tldraw/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -319,9 +354,15 @@ The layers marking and receiving hosting, fluid.topLevelWidget and fluid.
     </div>
     <div class="post-entry">
         
-        This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, the machinery of views, and rendering pages under node. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).
-The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.
-A first component A Single File Component is a .
+        <p>This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the
+Single File Component (SFC) format, the machinery of views, and rendering pages under node. It builds on the
+<a href="../docs/fluid-integration-language">Fluid Integration Language</a> (layers, references, <code>$compute</code>, <code>$method</code>, <code>$effect</code>,
+<code>$component</code>) and on <a href="../docs/fluid-signals"><code>fluid.cell</code></a> (signals, effects, source tracking).</p>
+<p>The raw markdown underlying these docs is available on <a href="https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/fluid-view.md">GitHub</a>,
+suitable for direct ingestion by your friendly local neighbourhood intelligence.</p>
+<h2 id="a-first-component">A first component</h2>
+<p>A Single File Component is a <code>.vue</code> file holding a <code>&lt;script&gt;</code> defining one layer, a <code>&lt;template&gt;</code> holding its markup,
+and optionally <code>&lt;style&gt;</code>. Here is a complete counter, in a file named <code>my-counter.vue</code>:</p>
         <a href="../docs/fluid-view/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -349,7 +390,12 @@ A first component A Single File Component is a .
     </div>
     <div class="post-entry">
         
-        This note describes how Infusion 6 orders the layers of a component: how the $layers lists written by authors are linearised into the single list held at that.$layers, and so which layer&rsquo;s contributions win a merge. It records the decisions taken in FLUID-5743, which made a layer listed further right beat those to its left, together with a relaxation of the C3 consistency rule and an assessment of its consequences against the &ldquo;pedalo&rdquo; example of Barrett et al.
+        <p>This note describes how Infusion 6 orders the layers of a component: how the <code>$layers</code> lists written by authors are
+linearised into the single list held at <code>that.$layers</code>, and so which layer&rsquo;s contributions win a merge. It records the
+decisions taken in <a href="https://issues.fluidproject.org/browse/FLUID-5743">FLUID-5743</a>, which made a layer listed further
+right beat those to its left, together with a relaxation of the C3 consistency rule and an assessment of its
+consequences against the &ldquo;pedalo&rdquo; example of Barrett et al.,
+<a href="https://opendylan.org/_static/c3-linearization.pdf">A Monotonic Superclass Linearization for Dylan</a> (OOPSLA 1996).</p>
         <a href="../docs/linearisation-algorithm/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -377,8 +423,13 @@ A first component A Single File Component is a .
     </div>
     <div class="post-entry">
         
-        This page documents the Potentia Transmission Format (PTF), a plain-text document format which captures everything required to reconstruct a live Fluid Infusion 6 component somewhere else: in another page, another application or another user&rsquo;s session. It is implemented in FluidPTF.js. It transmits a component&rsquo;s layers, its potentia and the contents of its live layer.
-The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.
+        <p>This page documents the Potentia Transmission Format (PTF), a plain-text document format which captures everything
+required to reconstruct a live Fluid Infusion 6 component somewhere else: in another page, another application or
+another user&rsquo;s session. It is implemented in <code>FluidPTF.js</code>. It transmits a component&rsquo;s
+<a href="../docs/fluid-integration-language#layers">layers</a>, its <a href="#what-is-transmitted">potentia</a> and the contents of its
+<a href="../docs/fluid-integration-language#creator-functions-layernameuserlayer">live layer</a>.</p>
+<p>The raw markdown underlying these docs is available on <a href="https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/fluid-ptf.md">GitHub</a>,
+suitable for direct ingestion by your friendly local neighbourhood intelligence.</p>
         <a href="../docs/fluid-ptf/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -411,7 +462,7 @@ The raw markdown underlying these docs is available on GitHub, suitable for dire
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

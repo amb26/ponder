@@ -8,9 +8,16 @@
 
       <title>Co-occurrences are here again - Antranig Basman</title>
 
-  <meta name="description" content="Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter features at the expense of what might have been &ldquo;speculative nonsense&rdquo; in its earlier history. However, implementing something pretty basic – the ability to render lists of components – brought me right back to an old conversation.
+  <meta name="description" content="Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter
+features at the expense of what might have been &ldquo;speculative nonsense&rdquo; in its earlier history. However, implementing
+something pretty basic – the ability to render lists of components – brought me right back to an old
+conversation.
 Here&rsquo;s the situation – one author wrote a todoItem which is a templateViewComponent:
-fluid.def(&#34;fluid.tests.todoItem&#34;, { $layers: &#34;fluid.">
+fluid.def(&#34;fluid.tests.todoItem&#34;, {
+    $layers: &#34;fluid.templateViewComponent&#34;,
+    template: &#39;&lt;span class=&#34;todo tag is-large&#34;&gt;@text&lt;button class=&#34;delete is-small&#34;&gt;&lt;/button&gt;&lt;/span&gt;&#39;
+});
+Another author now wants to iterate over a list of these items:">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -59,7 +66,7 @@ fluid.def(&#34;fluid.tests.todoItem&#34;, { $layers: &#34;fluid.">
     "name" : "Antranig Basman"
   },
   "headline": "Co-occurrences are here again",
-  "description" : "Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter features at the expense of what might have been \u0026ldquo;speculative nonsense\u0026rdquo; in its earlier history. However, implementing something pretty basic – the ability to render lists of components – brought me right back to an old conversation.\nHere\u0026rsquo;s the situation – one author wrote a todoItem which is a templateViewComponent:\nfluid.def(\u0026#34;fluid.tests.todoItem\u0026#34;, { $layers: \u0026#34;fluid.",
+  "description" : "Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter features at the expense of what might have been \u0026ldquo;speculative nonsense\u0026rdquo; in its earlier history. However, implementing something pretty basic – the ability to render lists of components – brought me right back to an old conversation.\nHere\u0026rsquo;s the situation – one author wrote a todoItem which is a templateViewComponent:\nfluid.def(\u0026#34;fluid.tests.todoItem\u0026#34;, { $layers: \u0026#34;fluid.templateViewComponent\u0026#34;, template: \u0026#39;\u0026lt;span class=\u0026#34;todo tag is-large\u0026#34;\u0026gt;@text\u0026lt;button class=\u0026#34;delete is-small\u0026#34;\u0026gt;\u0026lt;\/button\u0026gt;\u0026lt;\/span\u0026gt;\u0026#39; }); Another author now wants to iterate over a list of these items:\n",
   "inLanguage" : "en",
   "wordCount":  1258 ,
   "datePublished" : "2025-04-21T00:00:00\u002b00:00",
@@ -82,22 +89,30 @@ fluid.def(&#34;fluid.tests.todoItem&#34;, { $layers: &#34;fluid.">
 
 
 <meta property="og:title" content="Co-occurrences are here again" />
-<meta property="og:description" content="Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter features at the expense of what might have been &ldquo;speculative nonsense&rdquo; in its earlier history. However, implementing something pretty basic – the ability to render lists of components – brought me right back to an old conversation.
+<meta property="og:description" content="Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter
+features at the expense of what might have been &ldquo;speculative nonsense&rdquo; in its earlier history. However, implementing
+something pretty basic – the ability to render lists of components – brought me right back to an old
+conversation.
 Here&rsquo;s the situation – one author wrote a todoItem which is a templateViewComponent:
-fluid.def(&#34;fluid.tests.todoItem&#34;, { $layers: &#34;fluid.">
+fluid.def(&#34;fluid.tests.todoItem&#34;, {
+    $layers: &#34;fluid.templateViewComponent&#34;,
+    template: &#39;&lt;span class=&#34;todo tag is-large&#34;&gt;@text&lt;button class=&#34;delete is-small&#34;&gt;&lt;/button&gt;&lt;/span&gt;&#39;
+});
+Another author now wants to iterate over a list of these items:">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/wip/2025-04-21-co-occurrences-are-here-again/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="Co-occurrences are here again" />
-  <meta name="twitter:description" content="Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter features at the expense of what might have been &ldquo;speculative nonsense&rdquo; in its …">
+  <meta name="twitter:description" content="Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter
+features at the expense of what might have been &ldquo;speculative nonsense&rdquo; in its …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.123.7">
+  <meta name="generator" content="Hugo 0.154.5">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
@@ -467,7 +482,7 @@ of protoypal inheritance, another ancient paradigm whose time is to come.</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
           
         </p>
       </div>
