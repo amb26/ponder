@@ -29,9 +29,25 @@ A fresh reactive cell is constructed, with an optional initial value and optiona
 If the initial value is `undefined`, this will be upgraded to an [unavailable](#unavailable-values) value marking
 the signal's value as uninitialised.
 
-The only currently supported property in `props` is 
+The supported properties in `props` are
 
-* `{String} name` - Supplies a name or address for this cell
+* `{String} name` - Supplies a name or address for this cell, reported by [`fluid.cell.explain`](#fluidcellexplaincell)
+  and [`fluid.cell.findCause`](#fluidcellfindcausecell). Cells allocated by the framework are named by the convention
+  `<role> for path <component path>`, e.g. `potentia for path story-6.lostPlants`
+* `{Function} equiv` - A policy `(oldValue, newValue) => Boolean` deciding when an update leaves the cell's value
+  morally unchanged. If it finds the new value equivalent to the old, the cell keeps the value it held and notifies
+  nothing downstream. It is consulted only when both values are available - otherwise, and for a cell without one,
+  values are compared by `fluid.cell.equals`. `fluid.cell.isEquivalent(cell, oldValue, newValue)` applies a cell's
+  policy. Two policies are supplied:
+  * `fluid.equiv.elementwise` - Arrays of the same length holding identical elements in the same order, or plain
+    objects with the same keys holding identical values, are equivalent - e.g. a list of components assembled afresh
+  * `fluid.equiv.byKey(keyOf)` - Values are equivalent if identical, or if `keyOf` returns the same key for each
+
+```js
+// A recomputed list of the same records, freshly allocated, notifies nothing
+const visible = fluid.cell(undefined, {name: "visible", equiv: fluid.equiv.elementwise})
+    .computed((records, filter) => records.filter(filter), [records, filter]);
+```
 
 ## Reading and writing
 
@@ -46,10 +62,14 @@ will be torn down.
 To read a cell within a computation without subscribing to it, read it within
 [`fluid.cell.untracked`](#fluidcelluntrackedfn).
 
-### Cell.set(newValue, [source])
+### Cell.set(newValue, [options])
 
 * `{any} newValue` The new value to which the cell is to be updated
-* `{String} [source]` An optional source tag name to be applied to this update as is propagates.
+* `{String|Object} [options]` Either a source tag to be applied to this update as it propagates, or an object holding
+  any of
+  * `{Any} source` - The source tag
+  * `{String} cause` - Why the write was made, recorded for diagnostics alone and reported by
+    [`fluid.cell.explain`](#fluidcellexplaincell). Unlike a source, it takes no part in propagation
 
 The reactive cell's value can be updated by calling `Cell.set`. This will trigger a cascade of updates through the
 reactive tree. Any computed values that are depended on by effects will be marked to execute when 
@@ -226,7 +246,7 @@ Blogger.dispose();
 </textarea>
 
 This example shows `fluid.cell`'s ___source tracking___ facility. If a source of changes is tagged by using the 
-`source` argument to [`Cell.set`](#cellsetnewvalue-source), changes due to this source can skip notifying an effect with a matching
+`source` argument to [`Cell.set`](#cellsetnewvalue-options), changes due to this source can skip notifying an effect with a matching
 `excludeSource` argument. This can be helpful when interfacing with external systems which should not be
 notified of changes that they themselves have caused:
 
@@ -250,6 +270,10 @@ A.set(3, {source: "scrollbar"});
 fluid.cell.stabilize(); // No notification: B excludes scrollbar source
 </textarea>
 
+An effect which is skipped - because its arguments are unchanged, or through `includeSource` or `excludeSource` - keeps
+observing every cell it read dynamically when it last ran, and still waits on any of them which is pending. An effect
+downstream of an asynchronous computation therefore sees it settle even if it was skipped meanwhile.
+
 ### fluid.cell.stabilize()
 
 `fluid.cell.stabilize` will run all effects whose reactive arguments have changed, after pulling updates through the reactive graph.
@@ -265,6 +289,43 @@ a promise which may be `await`ed, to be notified when any asynchronous computati
 operation have successfully notified the effects which depend on them.
 
 ## Comprehension
+
+When something updates, re-renders or turns over unexpectedly, ask the graph why before instrumenting it.
+
+### fluid.cell.explain([cell])
+
+* `{Cell} [cell]` The cell whose last change is to be explained. If absent, the cell whose update is in progress is
+  used, so that it may be called from within a computation or effect
+* Returns: `{String[]}` The descriptions of the cells along the whole chain of cause, starting with `cell`, or an empty
+  array if there is no target
+
+This is the first tool to reach for. It follows the chain reported by [`fluid.cell.findCause`](#fluidcellfindcausecell)
+back to the cell whose change began the reaction. Where that cell was given its value by `set`, it reports why - the
+`cause` and sources supplied to [`Cell.set`](#cellsetnewvalue-options) - and continues from the update during which it
+was set, e.g. the effect which wrote it. The chain therefore reaches back past each write to what provoked it:
+
+```js
+fluid.cell.explain(cell);
+// ["flatMergedComputer for path story-6.lostPlants",
+//  "potentia for path story-6.lostPlants (set: first write to cards of component at path story-6.lostPlants, ...)",
+//  "during $effect at path load of component at path story-6.lostPlants", ...]
+```
+
+Pass `{cause: "..."}` to `Cell.set` in your own code to make its writes explain themselves.
+
+### fluid.cell.findAllCauses()
+
+Gathers the [causes](#fluidcellfindcausecell) of each source of the reaction in progress.
+
+### fluid.cell.pendingEffects()
+
+* Returns: `{Cell[]}` The effects holding the graph unsettled, e.g. those awaiting I/O or an asynchronous computation -
+  the outstanding work for which `fluid.cell.settle` waits
+
+### Profiling
+
+To profile, or to find when events happen, wrap `fluid.cell.update` in the page and filter on `cell.name`, masking
+instance numbers (`/\d+/g`) to aggregate.
 
 ### fluid.cell.findCause([cell])
 

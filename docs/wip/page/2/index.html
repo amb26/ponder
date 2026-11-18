@@ -8,7 +8,8 @@
 
       <title>Works in Progress - Antranig Basman</title>
 
-  <meta name="description" content="A collection of stream-of-consciousness posts during the development of upcoming Infusion 6, an substrate forming an integration domain.">
+  <meta name="description" content="A collection of stream-of-consciousness posts during the development of upcoming Infusion 6, an
+substrate forming an integration domain.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -31,20 +32,22 @@
 </script>
 
 <meta property="og:title" content="Works in Progress" />
-<meta property="og:description" content="A collection of stream-of-consciousness posts during the development of upcoming Infusion 6, an substrate forming an integration domain.">
+<meta property="og:description" content="A collection of stream-of-consciousness posts during the development of upcoming Infusion 6, an
+substrate forming an integration domain.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/wip/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="Works in Progress" />
-  <meta name="twitter:description" content="A collection of stream-of-consciousness posts during the development of upcoming Infusion 6, an substrate forming an integration domain.">
+  <meta name="twitter:description" content="A collection of stream-of-consciousness posts during the development of upcoming Infusion 6, an
+substrate forming an integration domain.">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.123.7">
+  <meta name="generator" content="Hugo 0.154.5">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../../css/katex.min.css" />
   <link rel="stylesheet" href="../../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../../css/main.css" />
@@ -214,9 +217,19 @@
     </div>
     <div class="post-entry">
         
-        Trying to put into practice thoughts from the previous two postings on template thinking and weird attributes for event binding revealed some interesting problems.
-Firing up ${ }-based templates revealed an awkward problem. This prevents us using backtick template literals in code since these automatically interpret ${} syntax and so will break as soon as they are evaluated.
-At the same time, use of @click style event binding revealed a really interesting limitation.
+        <p>Trying to put into practice thoughts from the previous two postings on <a href="../../../wip/2025-04-03-change-of-tack-on-templating">template thinking</a>
+and <a href="../../../wip/2025-04-04-staring-at-the-wand">weird attributes</a> for event binding revealed some interesting problems.</p>
+<p>Firing up <code>${ }</code>-based templates revealed an awkward problem. This prevents us using
+backtick template literals in code since these automatically interpret <code>${}</code> syntax and so will break as soon
+as they are evaluated.</p>
+<p>At the same time, use of <code>@click</code> style event binding revealed a really interesting limitation. Whilst it is perfect
+possible to parse overall HTML documents containing weird attributes like these, <em>and</em> it is possible to assign them
+into the document in bulk using <code>innerHTML</code> or <code>createContextualFragment</code> these may <em>not</em> be set on individual nodes using a
+call to <code>node.setAttribute</code>. There is an amazing inconsistency that the latter is subject to a special
+check leading to an error <code>@click is not a valid attribute name</code>. Which it is not, of course –
+<a href="https://stackoverflow.com/questions/925994/what-characters-are-allowed-in-an-html-attribute-name">this posting</a> holds
+a pointer to the documentation on a valid <a href="https://www.w3.org/TR/xml/#NT-Name">XML name</a> which shows these are highly
+restricted. They can only begin with a colon (boo!), underscore or letter character.</p>
         <a href="../../../wip/2025-04-07-templates-and-weird-attributes-together/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -247,8 +260,16 @@ At the same time, use of @click style event binding revealed a really interestin
     </div>
     <div class="post-entry">
         
-        OK, so we have now imported a visually reasonable and properly lithified version of Pell into a tiny static page which is itself lithified from the rendered output of the substrates page, which will be where the most basic editing demo gets scaffolded.
-I mused about making the disclosing tool into a pencil of the kind we see in the Lively Kernel UI but the &ldquo;magic wand&rdquo; was hard to resist and fits in with some rhetoric about this gesture.
+        <p>OK, so we have now imported a visually reasonable and properly lithified version of
+<a href="https://github.com/jaredreich/pell/blob/master/src/pell.js">Pell</a> into a tiny static page which is itself
+lithified from the rendered output of the <a href="../../../term/substrate">substrates</a> page, which will be where the
+<a href="https://fluid-project.github.io/infusion-6/demo/">most basic editing demo</a> gets scaffolded.</p>
+<p>I mused about making the <a href="../../../term/disclosable-computing">disclosing tool</a> into a pencil of the kind we see
+in the <a href="https://github.com/LivelyKernel/lively4-core">Lively Kernel</a> UI but the &ldquo;magic wand&rdquo; was
+hard to resist and fits in with some rhetoric about this gesture. I recently dug out my original
+<a href="https://x.com/amb26ponder/status/304536562820063232">2013 Tweet</a>
+about having invented a CSS-like design extension scheme<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> and this lovely <a href="https://ponder.org.uk/public/patent3.png">Mulla Nasruddin cartoon</a>
+feels as funny as it did when I saw it in one of my father&rsquo;s <a href="https://en.wikipedia.org/wiki/Idries_Shah">Idries Shah</a> books as a teenager.</p>
         <a href="../../../wip/2025-04-04-staring-at-the-wand/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -279,7 +300,14 @@ I mused about making the disclosing tool into a pencil of the kind we see in the
     </div>
     <div class="post-entry">
         
-        I get to staring at the markup templates that were already implemented for the Galiano 2023 Bioblitz and thinking how to adapt/reuse them for the upcoming Diatoms of the Salish Sea viz forces me to put some things in focus about how templating is going to have to work for these communities. I&rsquo;d vaguely hoped that the details of how Infusion templating was going to interact with Hugo templating would somehow just &ldquo;come out in the wash&rdquo; but naturally this isn&rsquo;t going to happen without some kind of focused plan!
+        <p>I get to staring at the <a href="https://github.com/IMERSS/imerss-bioinfo/blob/main/indexBlitz.html">markup templates</a>
+that were already implemented for the
+<a href="https://imerss.github.io/galiano-bioblitz-2023/Galiano-BioBlitz-2023-Reknitted.html">Galiano 2023 Bioblitz</a>
+and thinking how to adapt/reuse them for the upcoming
+<a href="https://imerss.org/projects/diatoms/">Diatoms of the Salish Sea</a>
+viz forces me to put some things in focus about how templating is going to have to work for these communities. I&rsquo;d
+vaguely hoped that the details of how Infusion templating was going to interact with Hugo templating would
+somehow just &ldquo;come out in the wash&rdquo; but naturally this isn&rsquo;t going to happen without some kind of focused plan!</p>
         <a href="../../../wip/2025-04-03-change-of-tack-on-templating/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -310,7 +338,17 @@ I mused about making the disclosing tool into a pencil of the kind we see in the
     </div>
     <div class="post-entry">
         
-        The substrate&rsquo;s transition to editability will need to present a &ldquo;mostly rendered&rdquo; view of itself – managed by some form of rich text editor. A huge &ldquo;grab-bag list&rdquo; is at JefMari&rsquo;s curated list of Awesome Wysiwyg Editors which can rapidly be whittled down to a shortlist. CKEditor 5 and TinyMCE are familiar from decades ago. But the gold standard is clearly Marijn&rsquo;s ProseMirror – basic example here and really nice markdown editing example here.
+        <p>The substrate&rsquo;s transition to editability will need to present a &ldquo;mostly rendered&rdquo; view of itself – managed
+by some form of rich text editor. A huge &ldquo;grab-bag list&rdquo; is at JefMari&rsquo;s curated list of
+<a href="https://github.com/JefMari/awesome-wysiwyg-editors">Awesome Wysiwyg Editors</a> which can rapidly be whittled down
+to a shortlist. <a href="https://github.com/ckeditor/ckeditor5">CKEditor 5</a> and <a href="https://github.com/tinymce/tinymce">TinyMCE</a>
+are familiar from decades ago. But the gold standard is clearly Marijn&rsquo;s <a href="https://prosemirror.net/">ProseMirror</a> –
+<a href="https://prosemirror.net/examples/basic/">basic example</a> here and really nice markdown editing example here.</p>
+<p>It feels as if an Infusion component tree could very easily be the backing of one of Marijn&rsquo;s <a href="https://prosemirror.net/docs/guide/#doc">document models</a>
+but we&rsquo;d need to produce a <a href="https://prosemirror.net/docs/guide/#schema">schema</a>. Indeed the whole thing is feeling
+rather heavyweight and not the kind of thing we could bash into a demo in a couple of weeks. A checkin confirms that
+a minimal sort of bundle size of ProseMirror is in the region of 200K, <a href="https://discuss.prosemirror.net/t/reduce-size-of-bundle/1705">Marijn concurs</a>.
+TinyMCE and CKEditor don&rsquo;t seem much different.</p>
         <a href="../../../wip/2025-03-28-hunting-rich-editors/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -352,7 +390,7 @@ I mused about making the disclosing tool into a pencil of the kind we see in the
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

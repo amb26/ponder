@@ -8,8 +8,13 @@
 
       <title>Bridging the gap between static and dynamic analysis through fully deferred stabilization - Antranig Basman</title>
 
-  <meta name="description" content="It is now ten years since some of us wrote 2016&rsquo;s Software and How it Lives On (SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded communities of authors.
-In the time since then, progress in reactive software, particularly in the JavaScript community, has now made it possible to tighten up some of the details of how this vision can be brought about.">
+  <meta name="description" content="It is now ten years since some of us wrote 2016&rsquo;s Software and How it Lives On
+(SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded communities of authors.
+In the time since then, progress in reactive software, particularly in the JavaScript community, has now made it possible to tighten
+up some of the details of how this vision can be brought about. In that paper&rsquo;s sections 4.4.6, and 4.4.7, entitled
+&ldquo;Homeostasis rather than Execution&rdquo; and &ldquo;Mocks and a Taxonomy of Effects&rdquo; it is announced somewhat diffusely,
+that we should seek an alternative to the dominant execution paradigm for organising our software, and that we should
+organise these designs around a clear schema identifying where side-effects may occur in a design.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -58,7 +63,7 @@ In the time since then, progress in reactive software, particularly in the JavaS
     "name" : "Antranig Basman"
   },
   "headline": "Bridging the gap between static and dynamic analysis through fully deferred stabilization",
-  "description" : "It is now ten years since some of us wrote 2016\u0026rsquo;s Software and How it Lives On (SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded communities of authors.\nIn the time since then, progress in reactive software, particularly in the JavaScript community, has now made it possible to tighten up some of the details of how this vision can be brought about.",
+  "description" : "It is now ten years since some of us wrote 2016\u0026rsquo;s Software and How it Lives On (SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded communities of authors.\nIn the time since then, progress in reactive software, particularly in the JavaScript community, has now made it possible to tighten up some of the details of how this vision can be brought about. In that paper\u0026rsquo;s sections 4.4.6, and 4.4.7, entitled \u0026ldquo;Homeostasis rather than Execution\u0026rdquo; and \u0026ldquo;Mocks and a Taxonomy of Effects\u0026rdquo; it is announced somewhat diffusely, that we should seek an alternative to the dominant execution paradigm for organising our software, and that we should organise these designs around a clear schema identifying where side-effects may occur in a design.\n",
   "inLanguage" : "en",
   "wordCount":  1919 ,
   "datePublished" : "2026-06-28T00:00:00\u002b00:00",
@@ -81,21 +86,27 @@ In the time since then, progress in reactive software, particularly in the JavaS
 
 
 <meta property="og:title" content="Bridging the gap between static and dynamic analysis through fully deferred stabilization" />
-<meta property="og:description" content="It is now ten years since some of us wrote 2016&rsquo;s Software and How it Lives On (SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded communities of authors.
-In the time since then, progress in reactive software, particularly in the JavaScript community, has now made it possible to tighten up some of the details of how this vision can be brought about.">
+<meta property="og:description" content="It is now ten years since some of us wrote 2016&rsquo;s Software and How it Lives On
+(SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded communities of authors.
+In the time since then, progress in reactive software, particularly in the JavaScript community, has now made it possible to tighten
+up some of the details of how this vision can be brought about. In that paper&rsquo;s sections 4.4.6, and 4.4.7, entitled
+&ldquo;Homeostasis rather than Execution&rdquo; and &ldquo;Mocks and a Taxonomy of Effects&rdquo; it is announced somewhat diffusely,
+that we should seek an alternative to the dominant execution paradigm for organising our software, and that we should
+organise these designs around a clear schema identifying where side-effects may occur in a design.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/post/2026-06-28-fully-deferred-stabilization/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="Bridging the gap between static and dynamic analysis through fully …" />
-  <meta name="twitter:description" content="It is now ten years since some of us wrote 2016&rsquo;s Software and How it Lives On (SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded …">
+  <meta name="twitter:description" content="It is now ten years since some of us wrote 2016&rsquo;s Software and How it Lives On
+(SaHiLO) which set out a manifesto for durable, live software embedded in open contexts, worked on by unbounded …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.123.7">
+  <meta name="generator" content="Hugo 0.154.5">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
@@ -506,7 +517,7 @@ from raw persistence during the notification process.</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

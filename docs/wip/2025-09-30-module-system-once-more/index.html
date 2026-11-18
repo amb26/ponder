@@ -8,7 +8,23 @@
 
       <title>The Module System Once More - Antranig Basman</title>
 
-  <meta name="description" content="It finally seems to be time to do something decisive about this issue which seems to have been pending for longer than I&rsquo;ve been alive, the Infusion Module System. There are Notes on the Infusion Module Loader and Notes on Modularisation of Infusion as well as ancient tickets going back as far as 2014 which read as if before the era of the printing press. The landscape has changed profoundly since then -">
+  <meta name="description" content="It finally seems to be time to do something decisive about this issue which seems to have been pending for longer
+than I&rsquo;ve been alive, the Infusion Module System. There are Notes on the Infusion Module Loader
+and Notes on Modularisation of Infusion
+as well as ancient tickets
+going back as far as 2014 which read as if before the era of the printing press. The landscape has changed profoundly
+since then -
+
+There are numerous other package managers than npm for node, and even npm changed its module layout pretty significantly
+There are several alternatives to node itself for JS on the server
+Various monorepo orchestrators solve many of the problems described here
+The already highly confused state of JS module loading, which had 5 major competing variants then, has been totally
+shredded by the &ldquo;nuclear option&rdquo; of ES6 modules with their impermissive &ldquo;viral&rdquo; footprint - only an ES6 module can load
+another ES6 module.
+
+On the other hand the way we are thinking about Infusion itself, as a &ldquo;reactive-first&rdquo; system, has changed significantly too.
+This promises to ease several of the deeper conundrums around how Infusion coexists with code loading schemes, and more
+deeply, how it is meant to cooperate with a &ldquo;foreign Infusion&rdquo; that it finds loaded into a neighbouring context.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -57,7 +73,7 @@
     "name" : "Antranig Basman"
   },
   "headline": "The Module System Once More",
-  "description" : "It finally seems to be time to do something decisive about this issue which seems to have been pending for longer than I\u0026rsquo;ve been alive, the Infusion Module System. There are Notes on the Infusion Module Loader and Notes on Modularisation of Infusion as well as ancient tickets going back as far as 2014 which read as if before the era of the printing press. The landscape has changed profoundly since then -",
+  "description" : "It finally seems to be time to do something decisive about this issue which seems to have been pending for longer than I\u0026rsquo;ve been alive, the Infusion Module System. There are Notes on the Infusion Module Loader and Notes on Modularisation of Infusion as well as ancient tickets going back as far as 2014 which read as if before the era of the printing press. The landscape has changed profoundly since then -\nThere are numerous other package managers than npm for node, and even npm changed its module layout pretty significantly There are several alternatives to node itself for JS on the server Various monorepo orchestrators solve many of the problems described here The already highly confused state of JS module loading, which had 5 major competing variants then, has been totally shredded by the \u0026ldquo;nuclear option\u0026rdquo; of ES6 modules with their impermissive \u0026ldquo;viral\u0026rdquo; footprint - only an ES6 module can load another ES6 module. On the other hand the way we are thinking about Infusion itself, as a \u0026ldquo;reactive-first\u0026rdquo; system, has changed significantly too. This promises to ease several of the deeper conundrums around how Infusion coexists with code loading schemes, and more deeply, how it is meant to cooperate with a \u0026ldquo;foreign Infusion\u0026rdquo; that it finds loaded into a neighbouring context.\n",
   "inLanguage" : "en",
   "wordCount":  724 ,
   "datePublished" : "2025-09-30T00:00:00\u002b00:00",
@@ -80,20 +96,37 @@
 
 
 <meta property="og:title" content="The Module System Once More" />
-<meta property="og:description" content="It finally seems to be time to do something decisive about this issue which seems to have been pending for longer than I&rsquo;ve been alive, the Infusion Module System. There are Notes on the Infusion Module Loader and Notes on Modularisation of Infusion as well as ancient tickets going back as far as 2014 which read as if before the era of the printing press. The landscape has changed profoundly since then -">
+<meta property="og:description" content="It finally seems to be time to do something decisive about this issue which seems to have been pending for longer
+than I&rsquo;ve been alive, the Infusion Module System. There are Notes on the Infusion Module Loader
+and Notes on Modularisation of Infusion
+as well as ancient tickets
+going back as far as 2014 which read as if before the era of the printing press. The landscape has changed profoundly
+since then -
+
+There are numerous other package managers than npm for node, and even npm changed its module layout pretty significantly
+There are several alternatives to node itself for JS on the server
+Various monorepo orchestrators solve many of the problems described here
+The already highly confused state of JS module loading, which had 5 major competing variants then, has been totally
+shredded by the &ldquo;nuclear option&rdquo; of ES6 modules with their impermissive &ldquo;viral&rdquo; footprint - only an ES6 module can load
+another ES6 module.
+
+On the other hand the way we are thinking about Infusion itself, as a &ldquo;reactive-first&rdquo; system, has changed significantly too.
+This promises to ease several of the deeper conundrums around how Infusion coexists with code loading schemes, and more
+deeply, how it is meant to cooperate with a &ldquo;foreign Infusion&rdquo; that it finds loaded into a neighbouring context.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/wip/2025-09-30-module-system-once-more/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="The Module System Once More" />
-  <meta name="twitter:description" content="It finally seems to be time to do something decisive about this issue which seems to have been pending for longer than I&rsquo;ve been alive, the Infusion Module System. There are Notes on the …">
+  <meta name="twitter:description" content="It finally seems to be time to do something decisive about this issue which seems to have been pending for longer
+than I&rsquo;ve been alive, the Infusion Module System. There are Notes on the …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.123.7">
+  <meta name="generator" content="Hugo 0.154.5">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
@@ -416,7 +449,7 @@ really prohibitive.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-b
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

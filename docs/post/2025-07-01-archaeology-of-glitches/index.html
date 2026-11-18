@@ -8,8 +8,39 @@
 
       <title>Archaeology of Glitches - Antranig Basman</title>
 
-  <meta name="description" content="In 2024 I was working on a small project that I wanted to be able to be handed over, and wondered what was the most congenial way out there of rendering apps that wouldn&rsquo;t bring in too heavy a dependency. My eye was caught by the following passage in preact-signals&rsquo; test cases:
-it(&#34;should drop A-&gt;B-&gt;A updates&#34;, async () =&gt; { // A // / | // B | &lt;- Looks like a flag doesn&#39;t it?">
+  <meta name="description" content="In 2024 I was working on a small project that I wanted to be able to be handed over,
+and wondered what was the most congenial way out there of rendering apps that wouldn&rsquo;t bring in too heavy a dependency.
+My eye was caught by the
+following passage
+in preact-signals&rsquo; test cases:
+    it(&#34;should drop A-&gt;B-&gt;A updates&#34;, async () =&gt; {
+        //     A
+        //   / |
+        //  B  | &lt;- Looks like a flag doesn&#39;t it? :D
+        //   \ |
+        //     C
+        //     |
+        //     D
+        const a = signal(2);
+
+        const b = computed(() =&gt; a.value – 1);
+        const c = computed(() =&gt; a.value &#43; b.value);
+
+        const compute = sinon.spy(() =&gt; &#34;d: &#34; &#43; c.value);
+        const d = computed(compute);
+
+        // Trigger read
+        expect(d.value).to.equal(&#34;d: 3&#34;);
+        expect(compute).to.have.been.calledOnce;
+        compute.resetHistory();
+
+        a.value = 4;
+        d.value;
+        expect(compute).to.have.been.calledOnce;
+    });
+I was mostly in pursuit of the Preact &#43; HTM templating
+rendering approach that seemed harmless and minimal, but with also the promise of rendering optimisations
+which could route signal updates directly to leaves in the DOM, bypassing the horrors of React-style top-down global updates.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -58,7 +89,7 @@ it(&#34;should drop A-&gt;B-&gt;A updates&#34;, async () =&gt; { // A // / | // 
     "name" : "Antranig Basman"
   },
   "headline": "Archaeology of Glitches",
-  "description" : "In 2024 I was working on a small project that I wanted to be able to be handed over, and wondered what was the most congenial way out there of rendering apps that wouldn\u0026rsquo;t bring in too heavy a dependency. My eye was caught by the following passage in preact-signals\u0026rsquo; test cases:\nit(\u0026#34;should drop A-\u0026gt;B-\u0026gt;A updates\u0026#34;, async () =\u0026gt; { \/\/ A \/\/ \/ | \/\/ B | \u0026lt;- Looks like a flag doesn\u0026#39;t it?",
+  "description" : "In 2024 I was working on a small project that I wanted to be able to be handed over, and wondered what was the most congenial way out there of rendering apps that wouldn\u0026rsquo;t bring in too heavy a dependency. My eye was caught by the following passage in preact-signals\u0026rsquo; test cases:\nit(\u0026#34;should drop A-\u0026gt;B-\u0026gt;A updates\u0026#34;, async () =\u0026gt; { \/\/ A \/\/ \/ | \/\/ B | \u0026lt;- Looks like a flag doesn\u0026#39;t it? :D \/\/ \\ | \/\/ C \/\/ | \/\/ D const a = signal(2); const b = computed(() =\u0026gt; a.value – 1); const c = computed(() =\u0026gt; a.value \u002b b.value); const compute = sinon.spy(() =\u0026gt; \u0026#34;d: \u0026#34; \u002b c.value); const d = computed(compute); \/\/ Trigger read expect(d.value).to.equal(\u0026#34;d: 3\u0026#34;); expect(compute).to.have.been.calledOnce; compute.resetHistory(); a.value = 4; d.value; expect(compute).to.have.been.calledOnce; }); I was mostly in pursuit of the Preact \u002b HTM templating rendering approach that seemed harmless and minimal, but with also the promise of rendering optimisations which could route signal updates directly to leaves in the DOM, bypassing the horrors of React-style top-down global updates.\n",
   "inLanguage" : "en",
   "wordCount":  2072 ,
   "datePublished" : "2025-07-01T00:00:00\u002b00:00",
@@ -81,21 +112,53 @@ it(&#34;should drop A-&gt;B-&gt;A updates&#34;, async () =&gt; { // A // / | // 
 
 
 <meta property="og:title" content="Archaeology of Glitches" />
-<meta property="og:description" content="In 2024 I was working on a small project that I wanted to be able to be handed over, and wondered what was the most congenial way out there of rendering apps that wouldn&rsquo;t bring in too heavy a dependency. My eye was caught by the following passage in preact-signals&rsquo; test cases:
-it(&#34;should drop A-&gt;B-&gt;A updates&#34;, async () =&gt; { // A // / | // B | &lt;- Looks like a flag doesn&#39;t it?">
+<meta property="og:description" content="In 2024 I was working on a small project that I wanted to be able to be handed over,
+and wondered what was the most congenial way out there of rendering apps that wouldn&rsquo;t bring in too heavy a dependency.
+My eye was caught by the
+following passage
+in preact-signals&rsquo; test cases:
+    it(&#34;should drop A-&gt;B-&gt;A updates&#34;, async () =&gt; {
+        //     A
+        //   / |
+        //  B  | &lt;- Looks like a flag doesn&#39;t it? :D
+        //   \ |
+        //     C
+        //     |
+        //     D
+        const a = signal(2);
+
+        const b = computed(() =&gt; a.value – 1);
+        const c = computed(() =&gt; a.value &#43; b.value);
+
+        const compute = sinon.spy(() =&gt; &#34;d: &#34; &#43; c.value);
+        const d = computed(compute);
+
+        // Trigger read
+        expect(d.value).to.equal(&#34;d: 3&#34;);
+        expect(compute).to.have.been.calledOnce;
+        compute.resetHistory();
+
+        a.value = 4;
+        d.value;
+        expect(compute).to.have.been.calledOnce;
+    });
+I was mostly in pursuit of the Preact &#43; HTM templating
+rendering approach that seemed harmless and minimal, but with also the promise of rendering optimisations
+which could route signal updates directly to leaves in the DOM, bypassing the horrors of React-style top-down global updates.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/post/2025-07-01-archaeology-of-glitches/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="Archaeology of Glitches" />
-  <meta name="twitter:description" content="In 2024 I was working on a small project that I wanted to be able to be handed over, and wondered what was the most congenial way out there of rendering apps that wouldn&rsquo;t bring in too heavy a …">
+  <meta name="twitter:description" content="In 2024 I was working on a small project that I wanted to be able to be handed over,
+and wondered what was the most congenial way out there of rendering apps that wouldn&rsquo;t bring in too heavy a …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.123.7">
+  <meta name="generator" content="Hugo 0.154.5">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
@@ -548,7 +611,7 @@ they don&rsquo;t seem to differ in terms of the graph topologies and update patt
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

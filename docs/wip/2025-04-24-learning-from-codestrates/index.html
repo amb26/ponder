@@ -8,8 +8,24 @@
 
       <title>Learning from Codestrates - Antranig Basman</title>
 
-  <meta name="description" content="For the last few days I&rsquo;ve been looking at the amazing Codestrates project, a development from Webstrates that has been under development by Clemens Klokmose and his team at CAVI since 2015. This has always been a close sibling project since the days of our 2016 paper and the development into Codestrates with its powerful in-browser IDE makes the convergence even more interesting.
-Reuse and abstractions in Substrates There has always been a fundamental difference in philosophy between Webstrates and Infusion, in that the substrate underlying Webstrates is simply the DOM itself.">
+  <meta name="description" content="For the last few days I&rsquo;ve been looking at the amazing Codestrates project,
+a development from Webstrates that has been under development by Clemens Klokmose and his team at CAVI
+since 2015. This has always been a close sibling project since the days of our 2016 paper
+and the development into Codestrates with its powerful in-browser IDE makes the convergence even more interesting.
+Reuse and abstractions in Substrates
+There has always been a fundamental difference in philosophy between Webstrates and Infusion,
+in that the substrate underlying Webstrates is simply
+the DOM itself. Whilst in the latest MyWebstrates this has
+been displaced one level lower in the stack into an Automerge document,
+the representation of the UI held in the substrate is still isomorphic to the DOM and so does not permit idiomatic
+abstraction or reuse. I talk a little about the vexed concept of &ldquo;objects/types/abstractions&rdquo; in my
+position paper for the upcoming
+Substrates Workshop
+at &lt;Programming 2025&gt;. Folding together design time and run time causes many notions of &ldquo;types&rdquo; to collapse, but there
+remains a core notion of a named, reusable design unit. Boxer, one of the few true substrates created, apparently
+lacks such a notion, but there is a functional standin – at the moment a &ldquo;doit&rdquo; box begins to execute, a
+(recursive, lazy) copy is made of it. This copying process is at the core of Boxer&rsquo;s reuse model, which otherwise
+relies on wholesale copying of material adopted into one&rsquo;s microworld through lithification.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -58,7 +74,7 @@ Reuse and abstractions in Substrates There has always been a fundamental differe
     "name" : "Antranig Basman"
   },
   "headline": "Learning from Codestrates",
-  "description" : "For the last few days I\u0026rsquo;ve been looking at the amazing Codestrates project, a development from Webstrates that has been under development by Clemens Klokmose and his team at CAVI since 2015. This has always been a close sibling project since the days of our 2016 paper and the development into Codestrates with its powerful in-browser IDE makes the convergence even more interesting.\nReuse and abstractions in Substrates There has always been a fundamental difference in philosophy between Webstrates and Infusion, in that the substrate underlying Webstrates is simply the DOM itself.",
+  "description" : "For the last few days I\u0026rsquo;ve been looking at the amazing Codestrates project, a development from Webstrates that has been under development by Clemens Klokmose and his team at CAVI since 2015. This has always been a close sibling project since the days of our 2016 paper and the development into Codestrates with its powerful in-browser IDE makes the convergence even more interesting.\nReuse and abstractions in Substrates There has always been a fundamental difference in philosophy between Webstrates and Infusion, in that the substrate underlying Webstrates is simply the DOM itself. Whilst in the latest MyWebstrates this has been displaced one level lower in the stack into an Automerge document, the representation of the UI held in the substrate is still isomorphic to the DOM and so does not permit idiomatic abstraction or reuse. I talk a little about the vexed concept of \u0026ldquo;objects\/types\/abstractions\u0026rdquo; in my position paper for the upcoming Substrates Workshop at \u0026lt;Programming 2025\u0026gt;. Folding together design time and run time causes many notions of \u0026ldquo;types\u0026rdquo; to collapse, but there remains a core notion of a named, reusable design unit. Boxer, one of the few true substrates created, apparently lacks such a notion, but there is a functional standin – at the moment a \u0026ldquo;doit\u0026rdquo; box begins to execute, a (recursive, lazy) copy is made of it. This copying process is at the core of Boxer\u0026rsquo;s reuse model, which otherwise relies on wholesale copying of material adopted into one\u0026rsquo;s microworld through lithification.\n",
   "inLanguage" : "en",
   "wordCount":  1659 ,
   "datePublished" : "2025-04-24T00:00:00\u002b00:00",
@@ -81,21 +97,39 @@ Reuse and abstractions in Substrates There has always been a fundamental differe
 
 
 <meta property="og:title" content="Learning from Codestrates" />
-<meta property="og:description" content="For the last few days I&rsquo;ve been looking at the amazing Codestrates project, a development from Webstrates that has been under development by Clemens Klokmose and his team at CAVI since 2015. This has always been a close sibling project since the days of our 2016 paper and the development into Codestrates with its powerful in-browser IDE makes the convergence even more interesting.
-Reuse and abstractions in Substrates There has always been a fundamental difference in philosophy between Webstrates and Infusion, in that the substrate underlying Webstrates is simply the DOM itself.">
+<meta property="og:description" content="For the last few days I&rsquo;ve been looking at the amazing Codestrates project,
+a development from Webstrates that has been under development by Clemens Klokmose and his team at CAVI
+since 2015. This has always been a close sibling project since the days of our 2016 paper
+and the development into Codestrates with its powerful in-browser IDE makes the convergence even more interesting.
+Reuse and abstractions in Substrates
+There has always been a fundamental difference in philosophy between Webstrates and Infusion,
+in that the substrate underlying Webstrates is simply
+the DOM itself. Whilst in the latest MyWebstrates this has
+been displaced one level lower in the stack into an Automerge document,
+the representation of the UI held in the substrate is still isomorphic to the DOM and so does not permit idiomatic
+abstraction or reuse. I talk a little about the vexed concept of &ldquo;objects/types/abstractions&rdquo; in my
+position paper for the upcoming
+Substrates Workshop
+at &lt;Programming 2025&gt;. Folding together design time and run time causes many notions of &ldquo;types&rdquo; to collapse, but there
+remains a core notion of a named, reusable design unit. Boxer, one of the few true substrates created, apparently
+lacks such a notion, but there is a functional standin – at the moment a &ldquo;doit&rdquo; box begins to execute, a
+(recursive, lazy) copy is made of it. This copying process is at the core of Boxer&rsquo;s reuse model, which otherwise
+relies on wholesale copying of material adopted into one&rsquo;s microworld through lithification.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/wip/2025-04-24-learning-from-codestrates/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="Learning from Codestrates" />
-  <meta name="twitter:description" content="For the last few days I&rsquo;ve been looking at the amazing Codestrates project, a development from Webstrates that has been under development by Clemens Klokmose and his team at CAVI since 2015. …">
+  <meta name="twitter:description" content="For the last few days I&rsquo;ve been looking at the amazing Codestrates project,
+a development from Webstrates that has been under development by Clemens Klokmose and his team at CAVI
+since 2015. …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.123.7">
+  <meta name="generator" content="Hugo 0.154.5">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
@@ -466,7 +500,7 @@ top-level entry in a MyWebstrates AutoMerge document.</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

@@ -8,8 +8,14 @@
 
       <title>Fluid tldraw integration - Antranig Basman</title>
 
-  <meta name="description" content="This page documents how Fluid Infusion 6 components are hosted as widgets on a tldraw canvas: how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how widgets are nested and composed. It builds on Fluid View (views, and sharing them between components) and on the Fluid Integration Language (layers, references, $linkage, $bindable).
-The layers marking and receiving hosting, fluid.topLevelWidget and fluid.">
+  <meta name="description" content="This page documents how Fluid Infusion 6 components are hosted as widgets on a tldraw canvas:
+how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how widgets are
+nested and composed. It builds on Fluid View (views, and sharing them between components) and on
+the Fluid Integration Language (layers, references, $linkage, $bindable).
+The layers marking and receiving hosting, fluid.topLevelWidget and fluid.topLevelWidgetView, are part of the
+framework, in FluidView.js, and say nothing about tldraw. The tldraw host itself is in the
+tldraw demo, mostly in
+demo/tldraw/js/tldraw-driver.js.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -58,7 +64,7 @@ The layers marking and receiving hosting, fluid.topLevelWidget and fluid.">
     "name" : "Antranig Basman"
   },
   "headline": "Fluid tldraw integration",
-  "description" : "This page documents how Fluid Infusion 6 components are hosted as widgets on a tldraw canvas: how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how widgets are nested and composed. It builds on Fluid View (views, and sharing them between components) and on the Fluid Integration Language (layers, references, $linkage, $bindable).\nThe layers marking and receiving hosting, fluid.topLevelWidget and fluid.",
+  "description" : "This page documents how Fluid Infusion 6 components are hosted as widgets on a tldraw canvas: how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how widgets are nested and composed. It builds on Fluid View (views, and sharing them between components) and on the Fluid Integration Language (layers, references, $linkage, $bindable).\nThe layers marking and receiving hosting, fluid.topLevelWidget and fluid.topLevelWidgetView, are part of the framework, in FluidView.js, and say nothing about tldraw. The tldraw host itself is in the tldraw demo, mostly in demo\/tldraw\/js\/tldraw-driver.js.\n",
   "inLanguage" : "en",
   "wordCount":  870 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
@@ -81,21 +87,28 @@ The layers marking and receiving hosting, fluid.topLevelWidget and fluid.">
 
 
 <meta property="og:title" content="Fluid tldraw integration" />
-<meta property="og:description" content="This page documents how Fluid Infusion 6 components are hosted as widgets on a tldraw canvas: how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how widgets are nested and composed. It builds on Fluid View (views, and sharing them between components) and on the Fluid Integration Language (layers, references, $linkage, $bindable).
-The layers marking and receiving hosting, fluid.topLevelWidget and fluid.">
+<meta property="og:description" content="This page documents how Fluid Infusion 6 components are hosted as widgets on a tldraw canvas:
+how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how widgets are
+nested and composed. It builds on Fluid View (views, and sharing them between components) and on
+the Fluid Integration Language (layers, references, $linkage, $bindable).
+The layers marking and receiving hosting, fluid.topLevelWidget and fluid.topLevelWidgetView, are part of the
+framework, in FluidView.js, and say nothing about tldraw. The tldraw host itself is in the
+tldraw demo, mostly in
+demo/tldraw/js/tldraw-driver.js.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/docs/fluid-tldraw/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="Fluid tldraw integration" />
-  <meta name="twitter:description" content="This page documents how Fluid Infusion 6 components are hosted as widgets on a tldraw canvas: how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how …">
+  <meta name="twitter:description" content="This page documents how Fluid Infusion 6 components are hosted as widgets on a tldraw canvas:
+how a layer marks itself as a widget, what the canvas tells a widget about where it is hosted, and how …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.123.7">
+  <meta name="generator" content="Hugo 0.154.5">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
@@ -454,7 +467,7 @@ carries them as described in <a href="../../docs/fluid-ptf#embedding-ptf-the-tld
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

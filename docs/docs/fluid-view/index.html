@@ -8,9 +8,15 @@
 
       <title>Fluid View - Antranig Basman</title>
 
-  <meta name="description" content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, the machinery of views, and rendering pages under node. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).
-The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.
-A first component A Single File Component is a .">
+  <meta name="description" content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the
+Single File Component (SFC) format, the machinery of views, and rendering pages under node. It builds on the
+Fluid Integration Language (layers, references, $compute, $method, $effect,
+$component) and on fluid.cell (signals, effects, source tracking).
+The raw markdown underlying these docs is available on GitHub,
+suitable for direct ingestion by your friendly local neighbourhood intelligence.
+A first component
+A Single File Component is a .vue file holding a &lt;script&gt; defining one layer, a &lt;template&gt; holding its markup,
+and optionally &lt;style&gt;. Here is a complete counter, in a file named my-counter.vue:">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -59,9 +65,9 @@ A first component A Single File Component is a .">
     "name" : "Antranig Basman"
   },
   "headline": "Fluid View",
-  "description" : "This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, the machinery of views, and rendering pages under node. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.\nA first component A Single File Component is a .",
+  "description" : "This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, the machinery of views, and rendering pages under node. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.\nA first component A Single File Component is a .vue file holding a \u0026lt;script\u0026gt; defining one layer, a \u0026lt;template\u0026gt; holding its markup, and optionally \u0026lt;style\u0026gt;. Here is a complete counter, in a file named my-counter.vue:\n",
   "inLanguage" : "en",
-  "wordCount":  5162 ,
+  "wordCount":  7390 ,
   "datePublished" : "0001-01-01T00:00:00\u002b00:00",
   "dateModified" : "0001-01-01T00:00:00\u002b00:00",
   "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
@@ -82,22 +88,29 @@ A first component A Single File Component is a .">
 
 
 <meta property="og:title" content="Fluid View" />
-<meta property="og:description" content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, the machinery of views, and rendering pages under node. It builds on the Fluid Integration Language (layers, references, $compute, $method, $effect, $component) and on fluid.cell (signals, effects, source tracking).
-The raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.
-A first component A Single File Component is a .">
+<meta property="og:description" content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the
+Single File Component (SFC) format, the machinery of views, and rendering pages under node. It builds on the
+Fluid Integration Language (layers, references, $compute, $method, $effect,
+$component) and on fluid.cell (signals, effects, source tracking).
+The raw markdown underlying these docs is available on GitHub,
+suitable for direct ingestion by your friendly local neighbourhood intelligence.
+A first component
+A Single File Component is a .vue file holding a &lt;script&gt; defining one layer, a &lt;template&gt; holding its markup,
+and optionally &lt;style&gt;. Here is a complete counter, in a file named my-counter.vue:">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/docs/fluid-view/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="Fluid View" />
-  <meta name="twitter:description" content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the Single File Component (SFC) format, the machinery of views, and rendering pages under node. It …">
+  <meta name="twitter:description" content="This page documents how Fluid Infusion 6 components render markup: the template binding syntax, the
+Single File Component (SFC) format, the machinery of views, and rendering pages under node. It …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.123.7">
+  <meta name="generator" content="Hugo 0.154.5">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
@@ -279,19 +292,27 @@ and optionally <code>&lt;style&gt;</code>. Here is a complete counter, in a file
 <li><code>self.count++</code> writes through the component proxy into its live layer. The text node updates, and nothing else
 in the DOM is touched.</li>
 </ul>
+<p>These are not quite in the same format as the <a href="https://vuejs.org/guide/scaling-up/sfc.html">Vue framework&rsquo;s SFC files</a>
+but the top-level file organisation and overall conception is the same, of keeping markup, behaviour and styling
+related to the same component together in one place.</p>
 <p>To use it, declare the module and import the SFC in a host page, and mark an element with the layers to instantiate
 on it:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">fluid-module</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;infusion-6&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;../../&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">fluid-module</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- Infusion core script tags here --&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">fluid-module</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;myApp&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;./&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">fluid-module</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;../../src/framework/core/js/FluidBoot.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">fluid-module</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;myApp&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;./&#34;</span> <span class="na">modules</span><span class="o">=</span><span class="s">&#34;fluid-modules.json&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">fluid-module</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">fluid-import</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;%myApp/sfc/my-counter.vue&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">fluid-import</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">fluid-layers</span><span class="o">=</span><span class="s">&#34;my.counter&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </span></span></code></pre></div><ul>
-<li><code>&lt;fluid-module id src&gt;</code> registers a module root, referred to in paths as <code>%id</code>.</li>
+<li><code>FluidBoot.js</code> is the page&rsquo;s one reference to where Infusion lives. It declares Infusion as the module
+<code>infusion-6</code>, at the directory holding it, and loads Infusion&rsquo;s files in order as the page is parsed.</li>
+<li><code>&lt;fluid-module id src&gt;</code> registers a module root, referred to in paths as <code>%id</code>. Every page declares the module
+holding it. Its optional <code>modules</code> attribute names a module map, relative to the module&rsquo;s root - a JSON object
+locating each module the page reaches, e.g. <code>{&quot;maplibre-gl&quot;: &quot;vendor/maplibre-gl&quot;}</code>, relative to the map. Every
+other reference a page or SFC makes is relative to the file making it, or through a module, e.g.
+<code>%maplibre-gl/dist/maplibre-gl-dev.js</code> or <code>%@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw-unminified.js</code>.</li>
 <li><code>&lt;fluid-import src [layer]&gt;</code> loads an SFC on demand. The layer name defaults to the file name with <code>-</code> replaced by
 <code>.</code>, so <code>my-counter.vue</code> must define <code>my.counter</code>.</li>
 <li><code>fluid-layers=&quot;layerA layerB&quot;</code> on any element instantiates a component with those layers, rendering into that
@@ -309,7 +330,47 @@ is weakest, amongst any <code>$layers</code> written.</li>
 a layer derived from the SFC&rsquo;s layer may replace the template by supplying its own, e.g.
 <code>view: {$component: {template: &quot;&lt;div&gt;...&lt;/div&gt;&quot;}}</code>, whilst keeping the rest of the SFC&rsquo;s definition.</li>
 <li>Each <code>&lt;style&gt;</code> and further <code>&lt;script&gt;</code> block is injected into the document. <code>&lt;script src=&quot;...&quot; data-fl-scope=&quot;global&quot;&gt;</code>
-loads a classic global script. <code>src</code> paths may use <code>%module</code> prefixes.</li>
+loads a classic global script. <code>src</code> paths may use <code>%module</code> prefixes. Any other relative path is relative to the SFC
+itself, so that a family of SFCs and the files they refer to can be moved together, e.g. by copying them into another
+project. A relative path in a <code>&lt;fluid-import&gt;</code> of a host page is relative to the page.</li>
+<li>A script referred to by <code>src</code> from several SFCs, e.g. a library or a file of shared utilities and base layers, is
+executed once in each document. The first SFC to reach it injects it, and the others commit their own injections
+only once it has executed, so their scripts may rely on it.</li>
+<li>A <code>&lt;script src=&quot;...&quot; fluid-client&gt;</code> block is payload for the browser alone, e.g. a widget library such as a map.
+When a page is rendered under node, it is written into the page but not evaluated, and components depending on it
+remain unavailable there.</li>
+<li>Top-level <code>&lt;fluid-import src=&quot;...&quot; [layer=&quot;...&quot;]&gt;</code> blocks import further SFCs, as in a host page. Their paths are
+relative to the importing SFC, so an SFC declares the SFCs it depends on, and a page need only import the root of the
+tree:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">fluid-import</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;my-list-item.vue&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">fluid-import</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.list&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.listItem&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$for</span><span class="o">:</span> <span class="p">{</span><span class="nx">source</span><span class="o">:</span> <span class="s2">&#34;{list}.records&#34;</span><span class="p">,</span> <span class="nx">valueAs</span><span class="o">:</span> <span class="s2">&#34;record&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></div><ul>
+<li>An optional <code>&lt;symbols&gt;</code> block holds SVG <code>&lt;symbol&gt;</code> elements which the SFC&rsquo;s template, or any other markup in the document,
+refers to with <code>&lt;use href=&quot;#id&quot;&gt;</code>. Its markup is injected verbatim as a <code>&lt;defs&gt;</code> element within a single hidden
+<code>&lt;svg id=&quot;fl-symbols-host&quot;&gt;</code>, shared by every SFC, at the start of the document&rsquo;s <code>&lt;body&gt;</code>:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">symbols</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">symbol</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;my-chevron&#34;</span> <span class="na">viewBox</span><span class="o">=</span><span class="s">&#34;0 0 16 16&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">path</span> <span class="na">d</span><span class="o">=</span><span class="s">&#34;M6 3l5 5-5 5&#34;</span> <span class="na">fill</span><span class="o">=</span><span class="s">&#34;none&#34;</span> <span class="na">stroke</span><span class="o">=</span><span class="s">&#34;currentColor&#34;</span><span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">symbol</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">symbols</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;&lt;</span><span class="nt">svg</span> <span class="na">width</span><span class="o">=</span><span class="s">&#34;14&#34;</span> <span class="na">height</span><span class="o">=</span><span class="s">&#34;14&#34;</span><span class="p">&gt;&lt;</span><span class="nt">use</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;#my-chevron&#34;</span><span class="p">/&gt;&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span> More<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>Symbol ids are global to the document, so they should be prefixed to avoid clashes between SFCs.</p>
+<ul>
+<li>A <code>&lt;placeholder name type [encoding]&gt;</code> block holds a placeholder for the data of the SFC&rsquo;s layer - see
+<a href="#minimal-pages-and-placeholder-data">Minimal pages and placeholder data</a>.</li>
 </ul>
 <p>Editing the file and reloading it, for example through the Fluid editor, updates every live instance in place.</p>
 <h2 id="template-binding-syntax">Template binding syntax</h2>
@@ -317,34 +378,34 @@ loads a classic global script. <code>src</code> paths may use <code>%module</cod
 that owns the view, exactly as in configuration.</p>
 <h3 id="text-and-attribute-interpolation-">Text and attribute interpolation: <code>@{...}</code></h3>
 <table>
-<thead>
-<tr>
-<th>Form</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>@{count}</code></td>
-<td>Shorthand for <code>{self}.count</code></td>
-</tr>
-<tr>
-<td><code>@{todo.text}</code></td>
-<td>Shorthand for <code>{self}.todo.text</code></td>
-</tr>
-<tr>
-<td><code>@{{todoList}.todos.length}</code></td>
-<td>A full <a href="../../docs/fluid-integration-language#references">context reference</a></td>
-</tr>
-<tr>
-<td><code>@{my.urlize({self}.tag)}</code></td>
-<td>A call to a global function, whose arguments are references or literals as for a compact <a href="../../docs/fluid-integration-language#compute"><code>$compute</code></a></td>
-</tr>
-<tr>
-<td><code>@@{count}</code></td>
-<td>The literal text <code>@{count}</code>, not interpolated</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Form</th>
+          <th>Meaning</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>@{count}</code></td>
+          <td>Shorthand for <code>{self}.count</code></td>
+      </tr>
+      <tr>
+          <td><code>@{todo.text}</code></td>
+          <td>Shorthand for <code>{self}.todo.text</code></td>
+      </tr>
+      <tr>
+          <td><code>@{{todoList}.todos.length}</code></td>
+          <td>A full <a href="../../docs/fluid-integration-language#references">context reference</a></td>
+      </tr>
+      <tr>
+          <td><code>@{my.urlize({self}.tag)}</code></td>
+          <td>A call to a global function, whose arguments are references or literals as for a compact <a href="../../docs/fluid-integration-language#compute"><code>$compute</code></a></td>
+      </tr>
+      <tr>
+          <td><code>@@{count}</code></td>
+          <td>The literal text <code>@{count}</code>, not interpolated</td>
+      </tr>
+  </tbody>
 </table>
 <p>A function call is recomputed whenever any of its arguments changes, as for a <code>$compute</code>:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;/tags/@{my.urlize({self}.tag)}/&#34;</span><span class="p">&gt;</span>@{tag}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
@@ -366,30 +427,30 @@ booleans and live DOM state to be bound directly:</p>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
 </span></span></code></pre></div><p>How a bound value is applied:</p>
 <table>
-<thead>
-<tr>
-<th>Bound value</th>
-<th>Result</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>false</code>, <code>null</code>, <code>undefined</code>, unavailable</td>
-<td>Attribute removed. Exception: <code>aria-*</code> attributes render <code>false</code> as <code>&quot;false&quot;</code></td>
-</tr>
-<tr>
-<td><code>true</code> on a boolean attribute</td>
-<td>Attribute present with empty value, e.g. <code>disabled=&quot;&quot;</code></td>
-</tr>
-<tr>
-<td><code>&quot;false&quot;</code> on a boolean attribute</td>
-<td>Treated as <code>false</code></td>
-</tr>
-<tr>
-<td>Anything else</td>
-<td>Attribute set to <code>String(value)</code></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Bound value</th>
+          <th>Result</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>false</code>, <code>null</code>, <code>undefined</code>, unavailable</td>
+          <td>Attribute removed. Exception: <code>aria-*</code> attributes render <code>false</code> as <code>&quot;false&quot;</code></td>
+      </tr>
+      <tr>
+          <td><code>true</code> on a boolean attribute</td>
+          <td>Attribute present with empty value, e.g. <code>disabled=&quot;&quot;</code></td>
+      </tr>
+      <tr>
+          <td><code>&quot;false&quot;</code> on a boolean attribute</td>
+          <td>Treated as <code>false</code></td>
+      </tr>
+      <tr>
+          <td>Anything else</td>
+          <td>Attribute set to <code>String(value)</code></td>
+      </tr>
+  </tbody>
 </table>
 <p>The boolean attributes are <code>disabled</code>, <code>checked</code>, <code>selected</code>, <code>readonly</code>, <code>required</code>, <code>hidden</code>, <code>multiple</code>, <code>open</code>,
 <code>inert</code>, <code>autofocus</code>, <code>novalidate</code> and <code>indeterminate</code>.</p>
@@ -397,48 +458,51 @@ booleans and live DOM state to be bound directly:</p>
 user can change. For these attributes the binding writes <strong>both</strong> the attribute and the property, and listens for the
 user&rsquo;s changes:</p>
 <table>
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Property</th>
-<th>Event listened to</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>value</code></td>
-<td><code>value</code></td>
-<td><code>input</code></td>
-</tr>
-<tr>
-<td><code>checked</code></td>
-<td><code>checked</code></td>
-<td><code>change</code></td>
-</tr>
-<tr>
-<td><code>selected</code></td>
-<td><code>selected</code></td>
-<td><code>change</code></td>
-</tr>
-<tr>
-<td><code>open</code></td>
-<td><code>open</code></td>
-<td><code>toggle</code></td>
-</tr>
-<tr>
-<td><code>indeterminate</code></td>
-<td><code>indeterminate</code></td>
-<td><code>change</code></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Attribute</th>
+          <th>Property</th>
+          <th>Event listened to</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>value</code></td>
+          <td><code>value</code></td>
+          <td><code>input</code></td>
+      </tr>
+      <tr>
+          <td><code>checked</code></td>
+          <td><code>checked</code></td>
+          <td><code>change</code></td>
+      </tr>
+      <tr>
+          <td><code>selected</code></td>
+          <td><code>selected</code></td>
+          <td><code>change</code></td>
+      </tr>
+      <tr>
+          <td><code>open</code></td>
+          <td><code>open</code></td>
+          <td><code>toggle</code></td>
+      </tr>
+      <tr>
+          <td><code>indeterminate</code></td>
+          <td><code>indeterminate</code></td>
+          <td><code>change</code></td>
+      </tr>
+  </tbody>
 </table>
 <ul>
 <li><strong>Write-back.</strong> When the user changes the element, the new value is written back to the bound model site, so
 <code>&lt;input value=&quot;@{text}&quot;/&gt;</code> is a two-way binding with no handler code. Writing into a
 <a href="../../docs/fluid-integration-language#reactiveroot"><code>$reactiveRoot</code></a> path such as <code>@{state.prompt}</code> updates that root
 immutably.</li>
-<li><strong>Read-only sources.</strong> If the site holds a computed value (<code>$compute</code>), it is not written. The attribute is
-re-materialised from the element&rsquo;s state, so the page still serialises faithfully.</li>
+<li><strong>Read-only sources.</strong> If the site holds a computed value (<code>$compute</code>), or lies anywhere within one, e.g. a form
+bound to a model computed from component state, it is not written. Writing it would detach the member from its inputs
+and leave the other bindings stale. The attribute is re-materialised from the element&rsquo;s state, so the page still
+serialises faithfully. Within a <a href="../../docs/fluid-integration-language#reactiveroot"><code>$reactiveRoot</code></a>, every path is
+writable.</li>
 <li><strong>Special elements.</strong> <code>&lt;textarea value=&quot;@{...}&quot;&gt;</code> is materialised as the textarea&rsquo;s content. <code>&lt;select value=&quot;@{...}&quot;&gt;</code>
 is materialised as <code>selected</code> on the matching <code>&lt;option&gt;</code>.</li>
 <li><strong>No redundant writes.</strong> A property is written only if it differs, so binding <code>value</code> doesn&rsquo;t disturb the caret in a
@@ -461,7 +525,8 @@ while the item is <em>not</em> completed. Classes in a static <code>class</code>
 <li><strong>Invocation.</strong> The value is a compact function call in the syntax of
 <a href="../../docs/fluid-integration-language#method"><code>$method</code></a>. The function is either a method reference such as
 <code>{self}.increment()</code> or a global function name. Within the arguments, <code>{0}</code> is the DOM event.</li>
-<li><strong>Assignment.</strong> <code>target = source</code> writes to a component site. <code>source</code> is a reference, read at the time of the
+<li><strong>Assignment.</strong> <code>target = source</code> writes to a component site. A target&rsquo;s path may pass through subcomponents, e.g.
+<code>{self}.panel.open = true</code> writes <code>open</code> of the subcomponent <code>panel</code>. <code>source</code> is a reference, read at the time of the
 event, or a literal (<code>edit</code>, <code>3</code>, <code>true</code>). A <code>!</code> before the source negates it in place, so
 <code>{self}.open = !{self}.open</code> is a toggle.</li>
 <li><strong>Modifiers.</strong> These are dot suffixes on the event name, following Vue:
@@ -492,7 +557,9 @@ sequence inside the element.</p>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span></code></pre></div><p>Each <code>my.todoItem</code> then renders its own SFC template, in which <code>@{todo.text}</code> refers to its element of the list.
-Adding to or removing from <code>todos</code> creates or destroys exactly the corresponding item views.</p>
+Adding to or removing from <code>todos</code> creates or destroys exactly the corresponding item views. Each <code>@id</code> slot keeps
+one stable record of its container, so a parent&rsquo;s re-render which leaves a slot&rsquo;s markup unchanged does not rebuild the
+child rendered into it.</p>
 <p>A subcomponent with <a href="../../docs/fluid-integration-language#if"><code>$if</code></a> renders into its <code>@id</code> element only while its
 condition is true. A subcomponent <a href="../../docs/fluid-integration-language#removing-a-subcomponent">removed</a> by a stronger
 layer holding <code>null</code> at its member renders nothing, and its <code>@id</code> element is omitted from the document altogether until
@@ -524,7 +591,7 @@ subcomponent&rsquo;s nodes, or those of each member of its list, are rendered in
 <a href="../../docs/fluid-integration-language#for"><code>positionAs</code></a>. This works the same way whether the source is an array or a
 keyed collection:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">tagLinks</span><span class="o">:</span> <span class="p">{</span>   <span class="c1">// Rendered into &lt;p @id=&#34;tagLinks&#34;&gt;&lt;/p&gt; as &#34;Alpha, Beta, Gamma&#34;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.component&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">$for</span><span class="o">:</span> <span class="p">{</span><span class="nx">source</span><span class="o">:</span> <span class="s2">&#34;{post}.tags&#34;</span><span class="p">,</span> <span class="nx">valueAs</span><span class="o">:</span> <span class="s2">&#34;tag&#34;</span><span class="p">,</span> <span class="nx">positionAs</span><span class="o">:</span> <span class="s2">&#34;position&#34;</span><span class="p">},</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">view</span><span class="o">:</span> <span class="p">{</span>
@@ -598,38 +665,38 @@ its other members continue to be computed as usual. This is a way of mixing in t
 a view, without its display.</p>
 <h3 id="view-layers">View layers</h3>
 <table>
-<thead>
-<tr>
-<th>Layer</th>
-<th>Template source</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>fluid.viewComponent</code></td>
-<td>Base layer. Supplies <code>vTree</code>, a virtual DOM tree, directly or computed from <code>templateTree</code></td>
-</tr>
-<tr>
-<td><code>fluid.templateViewComponent</code></td>
-<td><code>template</code> - an HTML string, or <code>{sfcLayer: layerName}</code> for the <code>&lt;template&gt;</code> block of that SFC</td>
-</tr>
-<tr>
-<td><code>fluid.sfcTemplateViewComponent</code></td>
-<td>Tag layer which the loader adds to the view of an SFC with a <code>&lt;template&gt;</code> block, when it sets the view&rsquo;s <code>template</code> as above</td>
-</tr>
-<tr>
-<td><code>fluid.selfTemplateViewComponent</code></td>
-<td>The markup its parent placed inside its <code>@id</code> element</td>
-</tr>
-<tr>
-<td><code>fluid.partialViewComponent</code></td>
-<td>Composites the <a href="#partial-templates">partial templates</a> of the component&rsquo;s layers into its template</td>
-</tr>
-<tr>
-<td><code>fluid.outputDocumentView</code></td>
-<td>Mixed in alongside a template layer: renders into a whole document of its own at <code>documentLocation</code> - see <a href="#output-documents-and-server-side-rendering">Output documents</a></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Layer</th>
+          <th>Template source</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>fluid.viewComponent</code></td>
+          <td>Base layer. Supplies <code>vTree</code>, a virtual DOM tree, directly or computed from <code>templateTree</code></td>
+      </tr>
+      <tr>
+          <td><code>fluid.templateViewComponent</code></td>
+          <td><code>template</code> - an HTML string, or <code>{sfcLayer: layerName}</code> for the <code>&lt;template&gt;</code> block of that SFC</td>
+      </tr>
+      <tr>
+          <td><code>fluid.sfcTemplateViewComponent</code></td>
+          <td>Tag layer which the loader adds to the view of an SFC with a <code>&lt;template&gt;</code> block, when it sets the view&rsquo;s <code>template</code> as above</td>
+      </tr>
+      <tr>
+          <td><code>fluid.selfTemplateViewComponent</code></td>
+          <td>The markup its parent placed inside its <code>@id</code> element</td>
+      </tr>
+      <tr>
+          <td><code>fluid.partialViewComponent</code></td>
+          <td>Composites the <a href="#partial-templates">partial templates</a> of the component&rsquo;s layers into its template</td>
+      </tr>
+      <tr>
+          <td><code>fluid.outputDocumentView</code></td>
+          <td>Mixed in alongside a template layer: renders into a whole document of its own at <code>documentLocation</code> - see <a href="#output-documents-and-server-side-rendering">Output documents</a></td>
+      </tr>
+  </tbody>
 </table>
 <p>Members of <code>fluid.viewComponent</code>:</p>
 <ul>
@@ -637,7 +704,13 @@ a view, without its display.</p>
 <li><code>templateTree</code> - The parsed template.</li>
 <li><code>vTree</code> - The activated virtual tree, with all bindings resolved.</li>
 <li><code>elideParent</code> - Defaults to <code>true</code>, meaning the template&rsquo;s root element is merged with the container rather than
-nested inside it. Set it to <code>false</code> to render the root element inside the container.</li>
+nested inside it. Set it to <code>false</code> to render the root element inside the container. The container&rsquo;s classes are
+the union of those written by the element bearing <code>@id</code> in the parent&rsquo;s template, those of the template&rsquo;s root, and
+any added by other code, e.g. a widget, in that order. Either template may re-render without the other, and each
+removes only classes which it wrote and no longer writes. Likewise, a template never removes an attribute which it
+did not write, such as one a widget sets on an element of the template. A class bound by the parent onto the element bearing <code>@id</code> is written by
+interpolation, as <code>class=&quot;slot @{extraClass}&quot;</code>, since a <code>@class</code> there belongs to the child&rsquo;s placeholder template.
+Other attributes of the container are written by whichever template last wrote them.</li>
 <li><code>verbatim</code> - Defaults to <code>false</code>. If <code>true</code>, a template supplied as markup is rendered <a href="#verbatim-markup-and-islands">verbatim</a>.</li>
 <li><code>renderedContainer</code> - A signal holding the element once it has been rendered.</li>
 <li><code>renderView</code> - The effect that patches <code>vTree</code> into <code>container</code>.</li>
@@ -794,9 +867,6 @@ or otherwise receives a generated name, and the element keeps its attributes.</l
 <p>When the markup changes, it is reconciled with the DOM as for any template. An island whose element changes layers
 is rebuilt with its new layers, and one whose element disappears is destroyed.</p>
 <h3 id="wrapping-an-external-widget-with-bindable">Wrapping an external widget with <code>$bindable</code></h3>
-<blockquote>
-<p><code>$bindable</code> is <strong>experimental and unstable</strong>. See <a href="../../docs/fluid-integration-language#bindable">its definition</a>.</p>
-</blockquote>
 <p>Some widgets, such as code editors, maps or charts, own a complex DOM and have their own lifecycle: they must be
 constructed once, on a real element, and kept alive while the component&rsquo;s configuration varies. <code>$bindable</code>
 constructs such an object as soon as its arguments are available. By default it rebuilds the object whenever an
@@ -816,7 +886,7 @@ its own view renders:</p>
 </span></span><span class="line"><span class="cl">            <span class="nx">bind</span><span class="o">:</span> <span class="s2">&#34;fluid.codemirror.construct({self}, {self}.view.renderedContainer, {global}.CodeMirror)&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">unbind</span><span class="o">:</span> <span class="s2">&#34;fluid.codemirror.destroy({boundValue})&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="c1">// Rebuilding the editor would lose its undo history, selection and scroll position
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">onceOnly</span><span class="o">:</span> <span class="kc">true</span>
+</span></span></span><span class="line"><span class="cl">            <span class="nx">onceOnly</span><span class="o">:</span> <span class="kc">true</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">},</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">readEffect</span><span class="o">:</span> <span class="s2">&#34;$effect:fluid.codemirror.updateText({self}.instance, {self}.text)&#34;</span>
@@ -825,8 +895,8 @@ its own view renders:</p>
 </span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">codemirror</span><span class="p">.</span><span class="nx">construct</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">container</span><span class="p">,</span> <span class="nx">CodeMirror</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">instance</span> <span class="o">=</span> <span class="nx">CodeMirror</span><span class="p">.</span><span class="nx">fromTextArea</span><span class="p">(</span><span class="nx">container</span><span class="p">.</span><span class="nx">firstElementChild</span><span class="p">,</span> <span class="p">{</span><span class="nx">lineNumbers</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">instance</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;change&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">self</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">instance</span><span class="p">.</span><span class="nx">getValue</span><span class="p">());</span>   <span class="c1">// Widget -&gt; model
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">fluid</span><span class="p">.</span><span class="nx">disableRendering</span><span class="p">(</span><span class="nx">self</span><span class="p">);</span>   <span class="c1">// CodeMirror now owns this markup
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="nx">instance</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">fluid</span><span class="p">.</span><span class="nx">disableRendering</span><span class="p">(</span><span class="nx">self</span><span class="p">);</span>   <span class="c1">// CodeMirror now owns this markup
+</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">instance</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></div><p>The pattern:</p>
 <ol>
@@ -879,11 +949,11 @@ component&rsquo;s own template with it automatically. A third-party widget&rsquo
 written back by an effect declaring <code>source: &quot;self&quot;</code>. Here the widget&rsquo;s listener only records what the widget reports,
 and the effect writes it back to the model:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">validText</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>              <span class="c1">// set by the widget&#39;s listener: self.validText = text
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">writeEffect</span><span class="o">:</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">writeEffect</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">$effect</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">func</span><span class="o">:</span> <span class="s2">&#34;fluid.codemirror.writeText&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// The instance is an argument so that nothing is written before the widget is constructed
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">args</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;{self}&#34;</span><span class="p">,</span> <span class="s2">&#34;{fluid.editor}&#34;</span><span class="p">,</span> <span class="s2">&#34;{self}.validText&#34;</span><span class="p">,</span> <span class="s2">&#34;{self}.instance&#34;</span><span class="p">],</span>
+</span></span></span><span class="line"><span class="cl">        <span class="nx">args</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;{self}&#34;</span><span class="p">,</span> <span class="s2">&#34;{fluid.editor}&#34;</span><span class="p">,</span> <span class="s2">&#34;{self}.validText&#34;</span><span class="p">,</span> <span class="s2">&#34;{self}.instance&#34;</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">source</span><span class="o">:</span> <span class="s2">&#34;self&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -988,37 +1058,165 @@ unready if it doesn&rsquo;t become ready.</li>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">node src/framework/server/hydrate.js page.html [-o out.html]
 </span></span></code></pre></div><p>This boots the page as a browser would, waits for the graph to settle, and writes the rendered page, by default to
 <code>page-hydrated.html</code>. If the graph settles with the page still unready, it exits with an error listing the pending
-effects.</p>
+effects. Data fetched by <code>fluid.fetch</code> and its relatives, or by any asynchronous <code>$compute</code>, is waited for, and a
+relative URL is resolved against the page. Scripts the page holds as its own are evaluated in document order before it
+boots, as in the browser. An example is a script defining the layer named by its <code>fluid-layers</code>. A script whose <code>src</code>
+is remote is not evaluated, and nor is one bearing <code>fluid-client</code>. Injected scripts, stylesheets and symbols are placed
+in the head after its last <code>&lt;fluid-import&gt;</code>, in the order they are made. So a stylesheet the page holds after its
+imports overrides those of its SFCs in the same way, whether the page is hydrated or booted in the browser.</p>
+<p>The <code>sourceURL</code> comment naming each injected style&rsquo;s file is written relative to the document, as for scripts and
+links, so a hydrated page reveals nothing of the builder&rsquo;s file system and is the same whichever machine built it.</p>
+<p>Hydration is reversible. Everything <code>hydrate.js</code> adds to the page is marked with <code>data-fluid-hydrated</code>:</p>
+<ul>
+<li>An element added beside the page&rsquo;s own, e.g. an injected script, stylesheet or symbol host, bears an empty value.</li>
+<li>An element on which a component booted bears the JSON of its attributes and content as the page wrote them.</li>
+<li>When the bootstrap of Infusion is written in the <code>source</code> or <code>built</code> form, the first script it is expanded into
+bears <code>boot:</code> followed by the bootstrap&rsquo;s <code>src</code>.</li>
+</ul>
+<p><code>src/framework/server/dehydrate.js</code> reverses this. It writes the page exactly as <code>hydrate.js</code> read it, as serialised
+by <code>fluid.serializeDocument</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">node src/framework/server/dehydrate.js page-hydrated.html [-o page.html]
+</span></span></code></pre></div><p>So a site may keep its pages hydrated in place and recover each page&rsquo;s source from it. The round-trip support
+described below also checks that dehydrating each hydrated page gives back the page.</p>
+<h4 id="minimal-pages-and-placeholder-data">Minimal pages and placeholder data</h4>
+<p>A page need hold no more than its bootstrap of Infusion, a <code>&lt;fluid-import&gt;</code> of the Single File Component at the root of
+its tree, and an element bearing <code>fluid-layers</code>. The SFCs it imports, and those they import in turn, supply all of its
+scripts, stylesheets, symbols and markup. Booted in the browser, such a page discovers them as its components are
+instantiated. Rendered by <code>hydrate.js</code>, the page is written with all of them in place, and the browser shows its markup
+as soon as it is parsed.</p>
+<p>A <strong>placeholder</strong> is a minimal representative of the data a layer needs in order to instantiate and render most of its
+content, used by rendering test fixtures and authoring tools. A layer names one as the default of a member holding a
+URL, by the scheme <code>placeholder://{layerName}/{resourceName}</code>, and a runnable application overrides the member with
+the URL of its real data. The component which fetches it bears the mixin <code>fluid.withPlaceholder</code>, beside a reader such
+as <code>fluid.jsonReader</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.app&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">records</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;fluid.jsonReader&#34;</span><span class="p">,</span> <span class="s2">&#34;fluid.withPlaceholder&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">url</span><span class="o">:</span> <span class="s2">&#34;placeholder://my.app/records&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// A runnable application, rendered from its real data, statically as in the browser
+</span></span></span><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">def</span><span class="p">(</span><span class="s2">&#34;my.site&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;my.app&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">records</span><span class="o">:</span> <span class="p">{</span><span class="nx">url</span><span class="o">:</span> <span class="s2">&#34;data/records.json&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>Since a placeholder is as small as possible, it is always held inline, by a top-level <code>&lt;placeholder&gt;</code> block of the
+layer&rsquo;s Single File Component, so that it travels with the SFC wherever it is copied. Its material is held as text, or,
+if it is binary or holds markup, in base64:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">placeholder</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;records&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;application/json&#34;</span><span class="p">&gt;</span>[{&#34;name&#34;: &#34;Placeholder&#34;}]<span class="p">&lt;/</span><span class="nt">placeholder</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">placeholder</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viz&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;application/octet-stream&#34;</span> <span class="na">encoding</span><span class="o">=</span><span class="s">&#34;base64&#34;</span><span class="p">&gt;</span>H4sIAAAAAAAA...<span class="p">&lt;/</span><span class="nt">placeholder</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>A block bearing <code>src</code> is rejected. <code>src/framework/server/inlinePlaceholder.js</code> writes a file into an SFC as such a
+block, replacing any of the same name, choosing the encoding and media type from the file unless told otherwise:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">node src/framework/server/inlinePlaceholder.js my-app.vue records data/records.json [--type &lt;media type&gt;]
+</span></span><span class="line"><span class="cl">    [--encoding base64|text] [-n]
+</span></span></code></pre></div><p>A placeholder may also be declared from script by <code>fluid.registerPlaceholder</code>. The mixin computes the reader&rsquo;s
+<code>fetchUrl</code> by <code>fluid.resolveUrl</code>, which resolves a placeholder&rsquo;s URL to a Blob URL onto its material, a
+module-relative URL such as <code>%my-module/data/records.json</code> through its module, and leaves any other URL as it is. It
+also makes <code>isPlaceholder</code> <code>true</code> while <code>url</code> is a placeholder&rsquo;s, so that the component, or what holds it, can show that
+its data is a stand-in. Any reader can take the mixin, provided it fetches its <code>fetchUrl</code> - e.g. bagatelle&rsquo;s
+<code>hortis.csvReader</code>.</p>
+<p>Every live component bearing the mixin is listed in <code>fluid.withPlaceholder.instances</code>, so the hydrater can find,
+without knowing the page&rsquo;s design, which components were rendered from placeholders - see <code>fluid.documentPlaceholders</code>
+in <code>server-support.js</code>. <code>hydrate.js</code> reports each one, and with <code>--no-placeholders</code> refuses to write a page which has
+any - for a page which is a runnable application rather than a test fixture. <code>fluid.renderingStatically</code> is <code>true</code>
+whilst a page is rendered under node, but no longer determines what a component fetches: a page is rendered
+statically from the same data as in the browser.</p>
+<p>When the browser boots a page written by <code>hydrate.js</code>, it adopts what the page already holds:</p>
+<ul>
+<li>Injected scripts, styles and symbols are not injected again. A script referred to by <code>src</code> records its source as
+<code>fluid-src</code>, so that it is recognised, and is not run a second time, by any other SFC which refers to it.</li>
+<li>Scripts bearing <code>fluid-client</code>, which were written but not run under node, load as the page does.</li>
+<li>The rendered markup is claimed by position, and rerendered as the real data arrives. Classes and attributes which
+the templates no longer write are removed from it. Those of a container which are its own, e.g. those written on the
+element bearing <code>fluid-layers</code>, are recorded as <code>fluid-own-class</code> when a template first renders into it, and are kept.</li>
+</ul>
+<p>Once ready, the page renders the same markup whether it was booted from its minimal form or from its hydrated one.
+<code>tests/framework-tests/server/hydrate-roundtrip-test.js</code> tests this, using the support in
+<code>tests/test-core/browser/js/hydration-roundtrip.js</code>, which other projects can use for their own pages.</p>
+<h4 id="copying-out-the-files-a-page-depends-on">Copying out the files a page depends on</h4>
+<p>A page reaches every module through its bootstrap, for Infusion, and its module map, for the rest:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;../vendor/infusion/src/framework/core/js/FluidBoot.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">fluid-module</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;my-site&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;../&#34;</span> <span class="na">modules</span><span class="o">=</span><span class="s">&#34;fluid-modules.json&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">fluid-module</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">fluid-import</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;%imerss-bioinfo/src/client/sfc/bbea/hortis-beaVizLoader.vue&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">fluid-import</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p><code>src/framework/server/copyOut.js</code> copies the modules into the site from their checkouts, and writes the map:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">node copyOut.js story/index.html --source infusion-6=../infusion-6 --source imerss-bioinfo=../bagatelle [-n] [--list]
+</span></span><span class="line"><span class="cl">    [--vendor &lt;dir&gt;] [--framework boot|source|built] [--in-place]
+</span></span></code></pre></div><p>It boots the page under node, as <code>hydrate.js</code> does, with each module&rsquo;s files read from its source. That is the
+checkout given by <code>--source</code>, or else, for a module named like an npm package such as <code>maplibre-gl</code> or
+<code>@mapbox/mapbox-gl-draw</code>, the directory where node finds that package - from the page&rsquo;s module or any of the
+checkouts given, so wherever npm installed or hoisted it. Each module is placed where the map already locates it, or
+else at <code>&lt;vendor&gt;/&lt;module&gt;</code>, by default <code>vendor</code> beside the map. It then copies into each module&rsquo;s directory every
+file the page demanded from it. These are:</p>
+<ul>
+<li>the SFCs it imported, and those they import in turn;</li>
+<li>the scripts and stylesheets they inject, including those bearing <code>fluid-client</code>, which are not run under node;</li>
+<li>Infusion&rsquo;s files, in the form <code>--framework</code> chooses - see below;</li>
+<li>the images and fonts its stylesheets refer to;</li>
+<li>any data it fetched.</li>
+</ul>
+<p>Before copying anything, it checks the version of each module copied from an installed npm package against the
+version the project&rsquo;s <code>package.json</code> specifies for it, and copies nothing if they differ, so that a stale
+<code>node_modules</code> cannot revert vendored copies to an older release - <code>--skip-version-check</code> overrides this. A module
+copied from a checkout given by <code>--source</code> is not held to its version, but a warning is given if the checkout&rsquo;s version
+differs, or if any of the files copied from it have uncommitted changes.</p>
+<p>Finally, it writes the page&rsquo;s module map, locating every module it reached other than its own and Infusion. Nothing
+else in the checkouts is copied, and the page and its SFCs need no rewriting. Run again, it reports which files have
+changed in their checkouts, and with <code>-n</code> copies and writes nothing. A file the page demands from outside any module,
+such as its own data, is not copied, but must exist. Sources may also be given by <code>--sources moduleOverrides.json5</code>,
+an array of <code>{moduleName, baseDir}</code>.</p>
+<p>With <code>--in-place</code>, nothing is copied: the map locates each module where its source is found. This suits a page
+served from a checkout - e.g. bagatelle&rsquo;s own pages, whose map points into its <code>node_modules</code>.</p>
+<p><strong>The form of Infusion&rsquo;s bootstrap.</strong> <code>hydrate.js --framework</code> and <code>copyOut.js --framework</code> choose how a page&rsquo;s
+<code>FluidBoot.js</code> is written out:</p>
+<ul>
+<li><code>boot</code> (the default) - left as it is, to load Infusion&rsquo;s files in the browser;</li>
+<li><code>source</code> - replaced by a <code>&lt;script&gt;</code> for each of Infusion&rsquo;s files;</li>
+<li><code>built</code> - replaced by their bundle, <code>dist/fluid.boot.min.js</code>, built by Infusion&rsquo;s <code>build.js</code>.</li>
+</ul>
+<p><code>tests/framework-tests/server/copyout-test.js</code> copies out a page whose SFCs depend on a package installed beneath
+their module and one hoisted above it, checks the map written, and checks that the page renders correctly from each
+form of its bootstrap, served from its own directory alone.</p>
+<h4 id="development-affordances">Development affordances</h4>
+<p>A page in development may mark <code>FluidBoot.js</code> with <code>&lt;script src=&quot;.../FluidBoot.js&quot; data-fluid-dev-mode&gt;</code>. It then looks for a
+<code>moduleOverrides.json5</code> in the directory holding Infusion&rsquo;s root, and in each directory above it up to the root of
+the server, and honours the nearest found. If its <code>infusion-6</code> entry names another checkout, that checkout&rsquo;s
+<code>FluidBoot.js</code> is booted instead, so that the page runs the same Infusion as the site&rsquo;s tools, wherever the site
+keeps the Infusion it names - in <code>node_modules</code> or vendored. The checkout is reached only if it is served too, e.g.
+from a common parent of the site and the checkout; if it can&rsquo;t be fetched, a warning is logged and the named Infusion
+boots. Without the attribute nothing is looked for, so a deployed page makes no requests beyond Infusion&rsquo;s own files.</p>
 <h3 id="scripts">Scripts</h3>
 <p>A document booted under node evaluates its JavaScript scripts as a browser would, except for Infusion&rsquo;s own scripts,
 which node already has, inert records of injections, and scripts marked as meant for the browser alone.
 <code>fluid.classifyScriptNode(node)</code> reports the role of a script element, so that a <code>prepare</code> function can
 decide which to keep:</p>
 <table>
-<thead>
-<tr>
-<th>Role</th>
-<th>Script</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>&quot;framework&quot;</code></td>
-<td>Boots Infusion itself, and bears <code>fluid-hydrated</code>, e.g. <code>fluid-hydrated=&quot;%infusion-6&quot;</code></td>
-</tr>
-<tr>
-<td><code>&quot;injection&quot;</code></td>
-<td>Injected for a Single File Component, or an inert record of one in an output document</td>
-</tr>
-<tr>
-<td><code>&quot;client&quot;</code></td>
-<td>Payload for the browser, such as a widget library, bearing <code>fluid-client</code>. It is never evaluated under node, whether in a booted document or one rendered from a template</td>
-</tr>
-<tr>
-<td><code>&quot;page&quot;</code></td>
-<td>Any other script</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Role</th>
+          <th>Script</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>&quot;framework&quot;</code></td>
+          <td>Boots Infusion itself, and bears <code>fluid-hydrated</code>, e.g. <code>fluid-hydrated=&quot;%infusion-6&quot;</code></td>
+      </tr>
+      <tr>
+          <td><code>&quot;injection&quot;</code></td>
+          <td>Injected for a Single File Component, or an inert record of one in an output document</td>
+      </tr>
+      <tr>
+          <td><code>&quot;client&quot;</code></td>
+          <td>Payload for the browser, such as a widget library, bearing <code>fluid-client</code>. It is never evaluated under node, whether in a booted document or one rendered from a template</td>
+      </tr>
+      <tr>
+          <td><code>&quot;page&quot;</code></td>
+          <td>Any other script</td>
+      </tr>
+  </tbody>
 </table>
 
 
@@ -1131,7 +1329,7 @@ decide which to keep:</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
           
         </p>
       </div>

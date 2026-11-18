@@ -8,9 +8,19 @@
 
       <title>Templates and weird attributes together - Antranig Basman</title>
 
-  <meta name="description" content="Trying to put into practice thoughts from the previous two postings on template thinking and weird attributes for event binding revealed some interesting problems.
-Firing up ${ }-based templates revealed an awkward problem. This prevents us using backtick template literals in code since these automatically interpret ${} syntax and so will break as soon as they are evaluated.
-At the same time, use of @click style event binding revealed a really interesting limitation.">
+  <meta name="description" content="Trying to put into practice thoughts from the previous two postings on template thinking
+and weird attributes for event binding revealed some interesting problems.
+Firing up ${ }-based templates revealed an awkward problem. This prevents us using
+backtick template literals in code since these automatically interpret ${} syntax and so will break as soon
+as they are evaluated.
+At the same time, use of @click style event binding revealed a really interesting limitation. Whilst it is perfect
+possible to parse overall HTML documents containing weird attributes like these, and it is possible to assign them
+into the document in bulk using innerHTML or createContextualFragment these may not be set on individual nodes using a
+call to node.setAttribute. There is an amazing inconsistency that the latter is subject to a special
+check leading to an error @click is not a valid attribute name. Which it is not, of course –
+this posting holds
+a pointer to the documentation on a valid XML name which shows these are highly
+restricted. They can only begin with a colon (boo!), underscore or letter character.">
   <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -59,7 +69,7 @@ At the same time, use of @click style event binding revealed a really interestin
     "name" : "Antranig Basman"
   },
   "headline": "Templates and weird attributes together",
-  "description" : "Trying to put into practice thoughts from the previous two postings on template thinking and weird attributes for event binding revealed some interesting problems.\nFiring up ${ }-based templates revealed an awkward problem. This prevents us using backtick template literals in code since these automatically interpret ${} syntax and so will break as soon as they are evaluated.\nAt the same time, use of @click style event binding revealed a really interesting limitation.",
+  "description" : "Trying to put into practice thoughts from the previous two postings on template thinking and weird attributes for event binding revealed some interesting problems.\nFiring up ${ }-based templates revealed an awkward problem. This prevents us using backtick template literals in code since these automatically interpret ${} syntax and so will break as soon as they are evaluated.\nAt the same time, use of @click style event binding revealed a really interesting limitation. Whilst it is perfect possible to parse overall HTML documents containing weird attributes like these, and it is possible to assign them into the document in bulk using innerHTML or createContextualFragment these may not be set on individual nodes using a call to node.setAttribute. There is an amazing inconsistency that the latter is subject to a special check leading to an error @click is not a valid attribute name. Which it is not, of course – this posting holds a pointer to the documentation on a valid XML name which shows these are highly restricted. They can only begin with a colon (boo!), underscore or letter character.\n",
   "inLanguage" : "en",
   "wordCount":  440 ,
   "datePublished" : "2025-04-07T00:00:00\u002b00:00",
@@ -82,23 +92,34 @@ At the same time, use of @click style event binding revealed a really interestin
 
 
 <meta property="og:title" content="Templates and weird attributes together" />
-<meta property="og:description" content="Trying to put into practice thoughts from the previous two postings on template thinking and weird attributes for event binding revealed some interesting problems.
-Firing up ${ }-based templates revealed an awkward problem. This prevents us using backtick template literals in code since these automatically interpret ${} syntax and so will break as soon as they are evaluated.
-At the same time, use of @click style event binding revealed a really interesting limitation.">
+<meta property="og:description" content="Trying to put into practice thoughts from the previous two postings on template thinking
+and weird attributes for event binding revealed some interesting problems.
+Firing up ${ }-based templates revealed an awkward problem. This prevents us using
+backtick template literals in code since these automatically interpret ${} syntax and so will break as soon
+as they are evaluated.
+At the same time, use of @click style event binding revealed a really interesting limitation. Whilst it is perfect
+possible to parse overall HTML documents containing weird attributes like these, and it is possible to assign them
+into the document in bulk using innerHTML or createContextualFragment these may not be set on individual nodes using a
+call to node.setAttribute. There is an amazing inconsistency that the latter is subject to a special
+check leading to an error @click is not a valid attribute name. Which it is not, of course –
+this posting holds
+a pointer to the documentation on a valid XML name which shows these are highly
+restricted. They can only begin with a colon (boo!), underscore or letter character.">
 <meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
 <meta property="og:url" content="https://ponder.org.uk/wip/2025-04-07-templates-and-weird-attributes-together/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Antranig Basman" />
 
   <meta name="twitter:title" content="Templates and weird attributes together" />
-  <meta name="twitter:description" content="Trying to put into practice thoughts from the previous two postings on template thinking and weird attributes for event binding revealed some interesting problems.
+  <meta name="twitter:description" content="Trying to put into practice thoughts from the previous two postings on template thinking
+and weird attributes for event binding revealed some interesting problems.
 Firing up ${ }-based templates …">
   <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@amb26ponder" />
   <meta name="twitter:creator" content="@amb26ponder" />
   <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.123.7">
+  <meta name="generator" content="Hugo 0.154.5">
   <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
   <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
@@ -379,7 +400,7 @@ with <code>$</code>.</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.123.7</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
+          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
           
         </p>
       </div>
