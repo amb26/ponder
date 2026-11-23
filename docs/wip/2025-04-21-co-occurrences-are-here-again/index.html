@@ -1,279 +1,25 @@
-<!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/WebPage">
-  <head>
-    
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-      <title>Co-occurrences are here again - Antranig Basman</title>
-
-  <meta name="description" content="Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter
-features at the expense of what might have been &ldquo;speculative nonsense&rdquo; in its earlier history. However, implementing
-something pretty basic – the ability to render lists of components – brought me right back to an old
-conversation.
-Here&rsquo;s the situation – one author wrote a todoItem which is a templateViewComponent:
-fluid.def(&#34;fluid.tests.todoItem&#34;, {
-    $layers: &#34;fluid.templateViewComponent&#34;,
-    template: &#39;&lt;span class=&#34;todo tag is-large&#34;&gt;@text&lt;button class=&#34;delete is-small&#34;&gt;&lt;/button&gt;&lt;/span&gt;&#39;
-});
-Another author now wants to iterate over a list of these items:">
-  <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
-{
-    "@context": "http://schema.org",
-    "@type": "WebSite",
-    "name": "Antranig Basman",
-    
-    "url": "https:\/\/ponder.org.uk\/"
-}
-</script><script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Organization",
-  "name": "",
-  "url": "https:\/\/ponder.org.uk\/"
-  
-  
-  
-  
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@id": "https:\/\/ponder.org.uk\/",
-          "name": "home"
-        }
-    },{
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@id": "https:\/\/ponder.org.uk\/wip\/2025-04-21-co-occurrences-are-here-again\/",
-          "name": "Co occurrences are here again"
-        }
-    }]
-}
-</script><script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Article",
-  "author": {
-    "name" : "Antranig Basman"
-  },
-  "headline": "Co-occurrences are here again",
-  "description" : "Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter features at the expense of what might have been \u0026ldquo;speculative nonsense\u0026rdquo; in its earlier history. However, implementing something pretty basic – the ability to render lists of components – brought me right back to an old conversation.\nHere\u0026rsquo;s the situation – one author wrote a todoItem which is a templateViewComponent:\nfluid.def(\u0026#34;fluid.tests.todoItem\u0026#34;, { $layers: \u0026#34;fluid.templateViewComponent\u0026#34;, template: \u0026#39;\u0026lt;span class=\u0026#34;todo tag is-large\u0026#34;\u0026gt;@text\u0026lt;button class=\u0026#34;delete is-small\u0026#34;\u0026gt;\u0026lt;\/button\u0026gt;\u0026lt;\/span\u0026gt;\u0026#39; }); Another author now wants to iterate over a list of these items:\n",
-  "inLanguage" : "en",
-  "wordCount":  1258 ,
-  "datePublished" : "2025-04-21T00:00:00\u002b00:00",
-  "dateModified" : "2025-04-21T00:00:00\u002b00:00",
-  "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
-  "keywords" : [ "" ],
-  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/wip\/2025-04-21-co-occurrences-are-here-again\/",
-  "publisher" : {
-    "@type": "Organization",
-    "name" : "https:\/\/ponder.org.uk\/",
-    "logo" : {
-        "@type" : "ImageObject",
-        "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
-        "height" :  60 ,
-        "width" :  60
-    }
-  }
-}
-</script>
-
-
-<meta property="og:title" content="Co-occurrences are here again" />
-<meta property="og:description" content="Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter
-features at the expense of what might have been &ldquo;speculative nonsense&rdquo; in its earlier history. However, implementing
-something pretty basic – the ability to render lists of components – brought me right back to an old
-conversation.
-Here&rsquo;s the situation – one author wrote a todoItem which is a templateViewComponent:
-fluid.def(&#34;fluid.tests.todoItem&#34;, {
-    $layers: &#34;fluid.templateViewComponent&#34;,
-    template: &#39;&lt;span class=&#34;todo tag is-large&#34;&gt;@text&lt;button class=&#34;delete is-small&#34;&gt;&lt;/button&gt;&lt;/span&gt;&#39;
-});
-Another author now wants to iterate over a list of these items:">
-<meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
-<meta property="og:url" content="https://ponder.org.uk/wip/2025-04-21-co-occurrences-are-here-again/" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="Antranig Basman" />
-
-  <meta name="twitter:title" content="Co-occurrences are here again" />
-  <meta name="twitter:description" content="Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter
-features at the expense of what might have been &ldquo;speculative nonsense&rdquo; in its …">
-  <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@amb26ponder" />
-  <meta name="twitter:creator" content="@amb26ponder" />
-  <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.154.5">
-  <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
-  <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
-  <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
-  <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
-<script type="text/javascript" src="../../js/ponder.js" ></script>
-
-  </head>
-  <body class="wip" >
-    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
-    <div class="navbar-ponder">
-      <a class="navbar-ponder-brand" href="../../">Antranig Basman</a>
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <svg width="36" height="36" viewBox="0 0 24 24" stroke="#888" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 7L4 7" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M20 12L4 12" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M20 17L4 17" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </button>
-
-
-      <div class="collapse navbar-collapse" id="main-navbar">
-        <ul class="nav navbar-nav navbar-right">
-          
-          
-          <li>
-            <a title="Posts" href="../../post">Posts</a>
-          </li>
-          
-          
-          
-          <li>
-            <a title="WiP" href="../../wip">WiP</a>
-          </li>
-          
-          
-          
-          <li>
-            <a title="About" href="../../page/about/">About</a>
-          </li>
-          
-          
-          
-          <li class="navlinks-container">
-            
-            <a class="navlinks-parent" href="../../docs">Docs</a>
-            
-            <div class="navlinks-children">
-              
-              <a href="../../docs/fluid-signals">Fluid Signals</a>
-              
-              <a href="../../docs/fluid-integration-language">Fluid Integration Language</a>
-              
-              <a href="../../docs/fluid-view">Fluid View</a>
-              
-              <a href="../../docs/fluid-ptf">Fluid PTF</a>
-              
-              <a href="../../docs/fluid-tldraw">Fluid tldraw integration</a>
-              
-              <a href="../../docs/linearisation-algorithm">Layer Linearisation</a>
-              
-            </div>
-          </li>
-          
-          
-          
-          <li>
-            <a title="Communities" href="../../communities">Communities</a>
-          </li>
-          
-          
-          
-          <li>
-            <a title="Projects" href="../../projects">Projects</a>
-          </li>
-          
-          
-          
-          <li>
-            <a title="Terms" href="../../term">Terms</a>
-          </li>
-          
-          
-
-          
-
-          
-        </ul>
-      </div>
-    </div>
-
-  </div>
-</nav>
-
-
-
-
-    
-  
-  
-  
-
-
-
-
-
-
-  
-
-  <header class="header-section ">
-    
-    
-    <div class="intro-header no-img">
-      <div class="container">
-        <div class="header-row">
-          
-
-            <div class="wip-heading">
-              
-                <h1>Co-occurrences are here again  </h1>
-              
-              
-                <hr class="small">
-              
-              
-
-            </div>
-        </div>
-      </div>
-    </div>
-  
-  </header>
-
-
-    
-<div role="main">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-      <article role="main" class="blog-post">
-        <p>Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter
-features at the expense of what might have been &ldquo;speculative nonsense&rdquo; in its earlier history. However, implementing
+<!DOCTYPE html><html lang="en" itemtype="http://schema.org/WebPage" itemscope fluid-site-root="../../"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"><title>Co-occurrences are here again - Antranig Basman</title><meta content="Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter features at the expense of what might have been “speculative nonsense…" name="description"><meta content="Antranig Basman" name="author"><meta content="Co-occurrences are here again" property="og:title"><meta content="Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter features at the expense of what might have been “speculative nonsense…" property="og:description"><meta content="https://ponder.org.uk/img/pond.jpg" property="og:image"><meta content="https://ponder.org.uk/wip/2025-04-21-co-occurrences-are-here-again/" property="og:url"><meta content="website" property="og:type"><meta content="Antranig Basman" property="og:site_name"><link href="https://ponder.org.uk/img/favicon.ico" type="image/x-icon" rel="icon"><meta content="Infusion 6" name="generator"><link title="Antranig Basman" href="https://ponder.org.uk/index.xml" type="application/rss+xml" rel="alternate"><link href="../../css/katex.min.css" rel="stylesheet"><link href="../../fontawesome/css/all.min.css" rel="stylesheet"><link href="../../css/bootstrap.min.css" rel="stylesheet"><link href="../../css/main.css" rel="stylesheet"><link href="../../css/highlight.min.css" rel="stylesheet"><link href="../../css/codeblock.css" rel="stylesheet"><link href="../../css/ponder.css" rel="stylesheet"><script fluid-hydrated="provenance" id="fluid-provenance" type="application/fluid-provenance+json">{"version":1,"repo":"amb26/ponder","branch":"ponder-infusion","trace":"../../fluid-trace.json","page":"/wip/2025-04-21-co-occurrences-are-here-again/","model":"index.model.json","migration":{"framework":{"root":"../../js/infusion-6/","files":["src/framework/core/js/FluidCore.js","src/framework/core/js/FluidSignals.js","src/framework/core/js/Fluid.js","src/framework/core/js/FluidModules.js","src/framework/core/js/FluidIL.js","src/framework/core/js/FluidView.js","src/framework/core/js/FluidPTF.js","src/framework/core/js/template-parser.js","src/framework/core/js/FluidView-browser.js"]},"modules":{"wend":"../../js/wend-wend-b02ba16204a3/","beautifulWend":"../../js/wend-beautifulWend-d18b087d22f2/","ponderSite":"../../js/wend-ponderSite-d77c30e6608f/","wendWidgets":"../../sfc/"},"siteImports":["%beautifulWend/adapt/disclaimer/beautifulWend-feature-disclaimer.vue","%beautifulWend/adapt/disclaimer/beautifulWend-footer-disclaimer.vue","%beautifulWend/adapt/gcse/beautifulWend-document-gcse.vue","%beautifulWend/adapt/gcse/beautifulWend-feature-gcse.vue","%beautifulWend/adapt/gcse/beautifulWend-navbar-gcse.vue","%beautifulWend/adapt/gcse/beautifulWend-navItem-gcseSearch.vue","%beautifulWend/adapt/hljs/beautifulWend-document-hljs.vue","%beautifulWend/adapt/hljs/beautifulWend-feature-hljs.vue","%beautifulWend/adapt/multilingual/beautifulWend-feature-multilingual.vue","%beautifulWend/adapt/multilingual/beautifulWend-navbar-multilingual.vue","%beautifulWend/adapt/multilingual/beautifulWend-navItem-languages.vue","%beautifulWend/adapt/multilingual/beautifulWend-postMeta-translations.vue","%beautifulWend/adapt/piwik/beautifulWend-document-piwik.vue","%beautifulWend/adapt/piwik/beautifulWend-feature-piwik.vue","%beautifulWend/adapt/selfHosted/beautifulWend-document-selfHosted.vue","%beautifulWend/adapt/selfHosted/beautifulWend-feature-selfHosted.vue","%beautifulWend/adapt/staticman/beautifulWend-document-staticman.vue","%beautifulWend/adapt/staticman/beautifulWend-feature-staticman.vue","%beautifulWend/adapt/staticman/beautifulWend-postMeta-staticman.vue","%beautifulWend/sfc/i18n/beautifulWend-i18n-en.vue","%beautifulWend/sfc/i18n/beautifulWend-i18n.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-404.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-home.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-page.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-section.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-taxonomy.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-term.vue","%beautifulWend/sfc/kinds/beautifulWend-type-page.vue","%beautifulWend/sfc/kinds/beautifulWend-type-post.vue","%beautifulWend/sfc/beautifulWend-comments-giscus.vue","%wend/sfc/wend-alias.vue","%wend/sfc/wend-content.vue","%beautifulWend/sfc/beautifulWend-document.vue","%beautifulWend/sfc/beautifulWend-footer.vue","%beautifulWend/sfc/beautifulWend-header-bigimg.vue","%beautifulWend/sfc/beautifulWend-header-home.vue","%beautifulWend/sfc/beautifulWend-header-page.vue","%beautifulWend/sfc/beautifulWend-header-post.vue","%beautifulWend/sfc/beautifulWend-header.vue","%beautifulWend/sfc/beautifulWend-head.vue","%beautifulWend/sfc/beautifulWend-listPager.vue","%beautifulWend/sfc/beautifulWend-main-home.vue","%beautifulWend/sfc/beautifulWend-main-list.vue","%beautifulWend/sfc/beautifulWend-main-notFound.vue","%beautifulWend/sfc/beautifulWend-main-single.vue","%beautifulWend/sfc/beautifulWend-main-terms.vue","%beautifulWend/sfc/beautifulWend-main.vue","%beautifulWend/sfc/beautifulWend-mediaIcons.vue","%beautifulWend/sfc/beautifulWend-navbar.vue","%beautifulWend/sfc/beautifulWend-navItem-leaf.vue","%beautifulWend/sfc/beautifulWend-navItem-parent.vue","%beautifulWend/sfc/beautifulWend-navItem.vue","%beautifulWend/sfc/beautifulWend-pageMeta.vue","%beautifulWend/sfc/beautifulWend-pager.vue","%beautifulWend/sfc/beautifulWend-postMeta.vue","%beautifulWend/sfc/beautifulWend-postPreview.vue","%beautifulWend/sfc/beautifulWend-relatedPosts.vue","%wend/sfc/wend-scriptTag.vue","%beautifulWend/sfc/beautifulWend-shareLinks.vue","%beautifulWend/sfc/beautifulWend-site.vue","%wend/sfc/wend-stylesheetTag.vue","%beautifulWend/sfc/beautifulWend-tags.vue","%beautifulWend/sfc/beautifulWend-termPanel.vue","%ponderSite/sfc/shortcodes/wend-shortcode-figure.vue","%ponderSite/sfc/shortcodes/wend-shortcode-stabilization.vue","%ponderSite/sfc/shortcodes/wend-shortcode-vizreactive.vue","%infusion-6/src/components/sfc/fluid-liveExample.vue"],"pageBoot":"../../js/wend-wend-b02ba16204a3/js/pageBoot.js","root":"beautifulWend.site"},"framing":[{"path":"wend/override/beautifulWend/sfc/beautifulWend-footer.vue","kind":"sfc","layer":"beautifulWend.footer","label":"Footer","hash":"sha256-0e7407de182a644fc7a80bd262df843fdf27f470189ab0929ba72ca717e35418","origin":"../../js/wend-beautifulWend-d18b087d22f2/sfc/beautifulWend-footer.vue"},{"path":"wend/override/beautifulWend/sfc/beautifulWend-navbar.vue","kind":"sfc","layer":"beautifulWend.navbar","label":"Navigation bar","hash":"sha256-7c0e5b12cef631b97ea4bc1c578bb3a2fab34f9876524569bfc298c338017b20","origin":"../../js/wend-beautifulWend-d18b087d22f2/sfc/beautifulWend-navbar.vue"},{"path":"wend.json","kind":"patch","label":"Site configuration","hash":"sha256-e225e29ce6c7520086d1aa231fe733a0cce0ca4dc05f6f4a8b296fa400a21bb3"}],"source":{"path":"content/wip/2025-04-21-co-occurrences-are-here-again.md","hash":"sha256-a478a8c1382bbb627371cc12e75bfadc36b6fe6cc3ca8a1afc0469cea9e2fe1a"},"blocks":[{"selector":"[data-fluid-block=\"markdown\"]","kind":"markdown","key":"content/wip/2025-04-21-co-occurrences-are-here-again.md#body","layers":["wend.content"]}],"renderers":{"markdown":{"scripts":["../../js/fluid-markdown/markdown-it-14.3.2.js","../../js/fluid-markdown/markdown-it-attrs-5.0.1.js","../../js/fluid-markdown/markdown-it-footnote-4.0.0.js","../../js/fluid-markdown/markdown-it-deflist-4.0.0.js","../../js/fluid-markdown/highlight-fa7fed3307d5.js","../../js/fluid-markdown/wend-markdown-1b00c5bac782.js"],"global":"wendMarkdown"}},"widgets":{"dir":"static/sfc","layers":[]},"images":{"dir":"static/img"}}</script></head><body class="wip"><nav class="navbar navbar-default navbar-fixed-top navbar-custom"><div class="container-fluid"><div class="navbar-ponder"><a href="../../" class="navbar-ponder-brand">Antranig Basman</a><button data-target="#main-navbar" data-toggle="collapse" type="button" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><svg xmlns="http://www.w3.org/2000/svg" stroke="#888" viewBox="0 0 24 24" height="36" width="36"><path stroke-linecap="round" stroke-width="1.5" d="M20 7L4 7" /><path stroke-linecap="round" stroke-width="1.5" d="M20 12L4 12" /><path stroke-linecap="round" stroke-width="1.5" d="M20 17L4 17" /></svg></button><div id="main-navbar" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="../../post" title="Posts">Posts</a></li><li><a href="../../wip" title="WiP">WiP</a></li><li><a href="../../page/about/" title="About">About</a></li><li class="navlinks-container"><a href="../../docs" class="navlinks-parent">Docs</a><div class="navlinks-children"><a href="../../docs/fluid-signals">Fluid Signals</a><a href="../../docs/fluid-integration-language">Fluid Integration Language</a><a href="../../docs/fluid-view">Fluid View</a><a href="../../docs/fluid-ptf">Fluid PTF</a><a href="../../docs/fluid-tldraw">Fluid tldraw integration</a><a href="../../docs/linearisation-algorithm">Layer Linearisation</a></div></li><li><a href="../../communities" title="Communities">Communities</a></li><li><a href="../../projects" title="Projects">Projects</a></li><li><a href="../../term" title="Terms">Terms</a></li></ul></div></div></div></nav><header class="header-section"><div class="intro-header no-img"><div class="container"><div class="header-row"><div class="wip-heading ponder-heading"><h1 class="ponder-title">Co-occurrences are here again</h1><hr class="small"></div></div></div></div></header><div role="main"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article role="main" class="blog-post"><div data-fluid-block="markdown"><p>Reimplementing Infusion for its reactive version made me vow to concentrate on its everyday, bread and butter
+features at the expense of what might have been “speculative nonsense” in its earlier history. However, implementing
 something pretty basic – the ability to render lists of components – brought me right back to an old
 conversation.</p>
-<p>Here&rsquo;s the situation – one author wrote a <code>todoItem</code> which is a <code>templateViewComponent</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fluid.def(&#34;fluid.tests.todoItem&#34;, {
-</span></span><span class="line"><span class="cl">    $layers: &#34;fluid.templateViewComponent&#34;,
-</span></span><span class="line"><span class="cl">    template: &#39;&lt;span class=&#34;todo tag is-large&#34;&gt;@text&lt;button class=&#34;delete is-small&#34;&gt;&lt;/button&gt;&lt;/span&gt;&#39;
-</span></span><span class="line"><span class="cl">});
-</span></span></code></pre></div><p>Another author now wants to iterate over a list of these items:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$component: {
-</span></span><span class="line"><span class="cl">    $layers: &#34;fluid.tests.todoItem&#34;,
-</span></span><span class="line"><span class="cl">    $for: {
-</span></span><span class="line"><span class="cl">        source: &#34;{forTodo}.todos&#34;,
-</span></span><span class="line"><span class="cl">        value: &#34;todo&#34;,
-</span></span><span class="line"><span class="cl">        key: &#34;todoIndex&#34;
-</span></span><span class="line"><span class="cl">    },
-</span></span><span class="line"><span class="cl">    text: &#34;{todo}.text&#34;
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></div><p>What kind of component ends up this path? One author has contributed that it is a view component, and another has
+<p>Here’s the situation – one author wrote a <code>todoItem</code> which is a <code>templateViewComponent</code>:</p>
+<pre><code class="hljs xml">fluid.def("fluid.tests.todoItem", {
+    $layers: "fluid.templateViewComponent",
+    template: '<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"todo tag is-large"</span>&gt;</span>@text<span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"delete is-small"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>'
+});
+</code></pre>
+<p>Another author now wants to iterate over a list of these items:</p>
+<pre><code class="hljs bash"><span class="hljs-variable">$component</span>: {
+    <span class="hljs-variable">$layers</span>: <span class="hljs-string">"fluid.tests.todoItem"</span>,
+    <span class="hljs-variable">$for</span>: {
+        <span class="hljs-built_in">source</span>: <span class="hljs-string">"{forTodo}.todos"</span>,
+        value: <span class="hljs-string">"todo"</span>,
+        key: <span class="hljs-string">"todoIndex"</span>
+    },
+    text: <span class="hljs-string">"{todo}.text"</span>
+}
+</code></pre>
+<p>What kind of component ends up this path? One author has contributed that it is a view component, and another has
 contributed that it is a list. Given these two separate contributions we need to determine that it is more
 than the sum of its parts – a <code>fluid.listViewComponent</code> whose job it is to collect markup from all its
 children and contribute it into the document.</p>
@@ -283,220 +29,103 @@ esoteric languages but is over time becoming more mainstream.</p>
 <p>Infusion as a substrate folds together design time and run time, and also does not focus on execution. Our rendition of this
 notion was called co-occurrence, written up in the 2018 paper
 <a href="https://www.shift-society.org/salon/papers/2018/revised/anatomy-of-interaction-authorversion.pdf">An Anatomy of Interaction: Co-occurrences and Entanglements</a>.
-There&rsquo;s a lot of excess detail there, but the kernel of the idea is pretty simple – given parts of the design where
-two or more (layer) names occur together (&ldquo;reactants&rdquo;), the system can contribute some extra layer names looked up from the
-co-occurrence (&ldquo;product&rdquo;). Now that all of the system will be reactive, we can do far better than old Infusion ever could and
-don&rsquo;t need to construct fresh components as the products using a dedicated engine. An existing component can simply be
+There’s a lot of excess detail there, but the kernel of the idea is pretty simple – given parts of the design where
+two or more (layer) names occur together (“reactants”), the system can contribute some extra layer names looked up from the
+co-occurrence (“product”). Now that all of the system will be reactive, we can do far better than old Infusion ever could and
+don’t need to construct fresh components as the products using a dedicated engine. An existing component can simply be
 adapted in place – but the configuration has just the same form as the old Infusion
 API <a href="https://docs.fluidproject.org/infusion/development/IoCAPI#fluidmakegradelinkagelinkagename-inputnames-outputnames">makeGradeLinkage</a>.</p>
-<p>We&rsquo;re in a hurry now and given this has only arisen in the design of Infusion itself rather than in a user program
-we don&rsquo;t need a general facility yet and can just quickly hack this using a global array:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// In Fluid.js
-</span></span><span class="line"><span class="cl">    fluid.coOccurrenceRegistry = [];
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">...
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">// In FluidView.js
-</span></span><span class="line"><span class="cl">    fluid.coOccurrenceRegistry.push({
-</span></span><span class="line"><span class="cl">        inputNames: [&#34;fluid.viewComponent&#34;, &#34;fluid.componentList&#34;],
-</span></span><span class="line"><span class="cl">        outputNames: [&#34;fluid.viewComponentList&#34;]
-</span></span><span class="line"><span class="cl">    });
-</span></span></code></pre></div><p>Funny to meet this old friend again, but I guess given this idea is already inscribed into my model of how I think
-programming should be, it shouldn&rsquo;t be a great surprise to have it reappear.</p>
-<p>But I can&rsquo;t help feeling a general issue emerging that a rendition of this multiple dispatch/co-occurrence concept is
+<p>We’re in a hurry now and given this has only arisen in the design of Infusion itself rather than in a user program
+we don’t need a general facility yet and can just quickly hack this using a global array:</p>
+<pre><code class="hljs cpp"><span class="hljs-comment">// In Fluid.js</span>
+    fluid.coOccurrenceRegistry = [];
+
+...
+
+<span class="hljs-comment">// In FluidView.js</span>
+    fluid.coOccurrenceRegistry.push({
+        inputNames: [<span class="hljs-string">"fluid.viewComponent"</span>, <span class="hljs-string">"fluid.componentList"</span>],
+        outputNames: [<span class="hljs-string">"fluid.viewComponentList"</span>]
+    });
+
+</code></pre>
+<p>Funny to meet this old friend again, but I guess given this idea is already inscribed into my model of how I think
+programming should be, it shouldn’t be a great surprise to have it reappear.</p>
+<p>But I can’t help feeling a general issue emerging that a rendition of this multiple dispatch/co-occurrence concept is
 an essential part of the responsibilities of a competent <a href="../../term/integration-domain">integration domain</a>. This is because
 the core responsibility of such a domain is to integrate and synthesize intentions which emerge in different places.
 Taking this kind of responsibility out of the domain of code (execution) feels like a helpful disempowering of that domain.</p>
 <p>Implementing this, however, raised a few knock-on issues:</p>
-<h3 id="reactive-control-flow">Reactive control flow</h3>
-<p>Firstly, this kind of &ldquo;recurrent&rdquo; computation sits uneasily with conventional reactive primitives.
+<h3 id="reactive-control-flow"><a href="#reactive-control-flow" aria-label="Reactive control flow" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Reactive control flow</h3>
+<p>Firstly, this kind of “recurrent” computation sits uneasily with conventional reactive primitives.
 At a low level, there now needs to be a <code>while</code> loop which repeatedly iterates over co-occurrences until no
-further ones arrive. Staring at the inside, say, of `fluid.flatMergedComputer&quot;</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">    <span class="n">fluid</span><span class="o">.</span><span class="n">flatMergedComputer</span> <span class="o">=</span> <span class="n">function</span> <span class="p">(</span><span class="n">shadow</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">computed</span><span class="p">(</span><span class="n">function</span> <span class="n">flatMergedComputer</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">const</span> <span class="p">{</span><span class="n">layerNames</span><span class="p">,</span> <span class="n">mergeRecords</span><span class="p">}</span> <span class="o">=</span> <span class="n">shadow</span><span class="o">.</span><span class="n">potentia</span><span class="o">.</span><span class="n">value</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">const</span> <span class="n">memberName</span> <span class="o">=</span> <span class="n">shadow</span><span class="o">.</span><span class="n">memberName</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="o">...</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">});</span>
-</span></span></code></pre></div><p>I boggle a bit that it is all several <code>computed</code> deep and that it can&rsquo;t do anything about returning any &ldquo;provisional&rdquo;
+further ones arrive. Staring at the inside, say, of `fluid.flatMergedComputer"</p>
+<pre><code class="hljs javascript">    fluid.flatMergedComputer = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(shadow)</span> </span>{
+        <span class="hljs-keyword">return</span> computed(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">flatMergedComputer</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">const</span> {layerNames, mergeRecords} = shadow.potentia.value;
+            <span class="hljs-keyword">const</span> memberName = shadow.memberName;
+            ...
+        }
+    });
+</code></pre>
+<p>I boggle a bit that it is all several <code>computed</code> deep and that it can’t do anything about returning any “provisional”
 values until it is completely sure of them. Any more complex control flow needs to be pushed into the deepest
 nested reactive level where everything consists of conventional values which I guess is as it should be, but makes me
-want to unbundle the contract of reactive primitives rather more. Hammer et. al&rsquo;s <a href="https://arxiv.org/pdf/1609.05337.pdf">miniAdapton</a>
+want to unbundle the contract of reactive primitives rather more. Hammer et. al’s <a href="https://arxiv.org/pdf/1609.05337.pdf">miniAdapton</a>
 looks like it loosens this a bit by being better at allocating reactive values during a computation (but is it really
 better than state of the art computeds?) but I think this could go further. Two main directions – dealing with
-cyclic or bidirectional relations, and arranging for &ldquo;computed&rdquo; values to be writeable. They are in a sense the same
+cyclic or bidirectional relations, and arranging for “computed” values to be writeable. They are in a sense the same
 direction – can this be achieved without creating a chaos?</p>
-<p>We can get away with a simple implementation here because the accumulation is &ldquo;monotonic&rdquo; – we can
+<p>We can get away with a simple implementation here because the accumulation is “monotonic” – we can
 make use of the same <code>hierarchyResolver</code> and all of its reactive contents. Note that if there were any changes
-to the co-occurrence registry, we&rsquo;d likely have to recompute everything in the world – if we wanted to do this
-in a principled way we&rsquo;d have to create &ldquo;fake&rdquo; reactive dependencies on all of the <code>inputNames</code>? For a start,
-typical frameworks don&rsquo;t let us create fake dependencies, data actually needs to be seen to change. This is in the same
-category of our problem with &ldquo;reactive scopes&rdquo; which have to pool together a number of separately reactive records
+to the co-occurrence registry, we’d likely have to recompute everything in the world – if we wanted to do this
+in a principled way we’d have to create “fake” reactive dependencies on all of the <code>inputNames</code>? For a start,
+typical frameworks don’t let us create fake dependencies, data actually needs to be seen to change. This is in the same
+category of our problem with “reactive scopes” which have to pool together a number of separately reactive records
 into a bigger one. How reactive in practice do we need the system to be? An idea twigged recently that React really
 <em>is</em> in a sense reactive since it just reruns everything from top-down whenever anything changes. It is bone-headedly
 reactive but still ended up being highly usable by millions.</p>
-<h3 id="possible-return-of-merge-policies">Possible return of merge policies</h3>
-<p>Secondly, this exposes the fact that layer names are not currently being accumulated properly. In test cases so far there&rsquo;s never been a design
-where layer names have themselves been drawn from more than one layer, and there&rsquo;s right now just the most basic &ldquo;last write wins&rdquo;
+<h3 id="possible-return-of-merge-policies"><a href="#possible-return-of-merge-policies" aria-label="Possible return of merge policies" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Possible return of merge policies</h3>
+<p>Secondly, this exposes the fact that layer names are not currently being accumulated properly. In test cases so far there’s never been a design
+where layer names have themselves been drawn from more than one layer, and there’s right now just the most basic “last write wins”
 model. This implies that yet another old Infusion chestnut, <a href="https://docs.fluidproject.org/infusion/development/OptionsMerging#use-of-fluidmerge">merge policies</a>
-needs to come back too. Again, this can just be in a very basic form since there&rsquo;s no demand for it in user programs.
+needs to come back too. Again, this can just be in a very basic form since there’s no demand for it in user programs.
 This was perhaps the biggest contributor to the massive inefficiency of old Infusion and can now be close to zero
-overhead once we implement a kind of &ldquo;inline cache for the merged layer registry&rdquo;. But as with co-occurrences since this
-isn&rsquo;t emerging in user programs yet we can for the time being hack this very simply but reminiscently:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fluid.staticMergePolicy = {
-</span></span><span class="line"><span class="cl">    $layers: {
-</span></span><span class="line"><span class="cl">        [$m]: fluid.arrayConcatPolicy
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};
-</span></span></code></pre></div><p>[Edit 2025-04-22:] It turns out merge policies are not returning just yet – rather thankfully. The above merge
-policy is no use without even further unnecessary complexity (such as &ldquo;local merge policies&rdquo;) because the only
-way we can express the output of the <a href="https://web.archive.org/web/20250409185200/https://en.wikipedia.org/wiki/C3_linearization">C3 algorithm</a><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> we use to linearize
+overhead once we implement a kind of “inline cache for the merged layer registry”. But as with co-occurrences since this
+isn’t emerging in user programs yet we can for the time being hack this very simply but reminiscently:</p>
+<pre><code class="hljs bash">fluid.staticMergePolicy = {
+    <span class="hljs-variable">$layers</span>: {
+        [<span class="hljs-variable">$m</span>]: fluid.arrayConcatPolicy
+    }
+};
+</code></pre>
+<p>[Edit 2025-04-22:] It turns out merge policies are not returning just yet – rather thankfully. The above merge
+policy is no use without even further unnecessary complexity (such as “local merge policies”) because the only
+way we can express the output of the <a href="https://web.archive.org/web/20250409185200/https://en.wikipedia.org/wiki/C3_linearization">C3 algorithm</a><sup class="footnote-ref"><a id="fnref1" href="#fn1">[1]</a></sup> we use to linearize
 layer hierarchies is to push it to the top of the layer stack so that it definitively trumps any previous attempts
 to assign layers. In tidying this up we also presented a slightly better front end to C3 which up front accepts an
-array of layer names rather than the single &ldquo;class name&rdquo; in the classic implementation. This means we don&rsquo;t need
+array of layer names rather than the single “class name” in the classic implementation. This means we don’t need
 to do weird stuff when the user writes (in that rare, exiguous world of direct function calls) an instantiation like</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fluid.someComponent({
-</span></span><span class="line"><span class="cl">   $layers: &#34;fluid.someParent&#34;
-</span></span><span class="line"><span class="cl">})
-</span></span></code></pre></div><p>which would otherwise require us to create some special node in the layer graph representing this single instance&rsquo;s
-layer hierarchy. Thus we squarely align ourselves with Gilad&rsquo;s other great direction forged in his <a href="https://newspeaklanguage.org/">Newspeak</a>
-system – that &ldquo;kinds of things are just things too&rdquo; – which can be seen as a generalisation of the notion
+<pre><code class="hljs bash">fluid.someComponent({
+   <span class="hljs-variable">$layers</span>: <span class="hljs-string">"fluid.someParent"</span>
+})
+</code></pre>
+<p>which would otherwise require us to create some special node in the layer graph representing this single instance’s
+layer hierarchy. Thus we squarely align ourselves with Gilad’s other great direction forged in his <a href="https://newspeaklanguage.org/">Newspeak</a>
+system – that “kinds of things are just things too” – which can be seen as a generalisation of the notion
 of protoypal inheritance, another ancient paradigm whose time is to come.</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>Insufferably, this extremely helpful Wikipedia article has now been deleted.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Insufferably, this extremely helpful Wikipedia article has now been deleted. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
 </li>
 </ol>
-</div>
-
-
-        
-
-        
-            <hr/>
-            <section id="social-share">
-              <div class="list-inline footer-links">
-                
-
-<div class="share-box" aria-hidden="true">
-    <ul class="share">
-      
-      <li>
-        
-        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;Co-occurrences&#43;are&#43;here&#43;again&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-04-21-co-occurrences-are-here-again%2F" target="_blank" title="Share on BlueSky">
-          <i class="fab fa-fw fa-bluesky"></i>
-        </a>
-      </li>
-
-      
-      <li>
-        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-04-21-co-occurrences-are-here-again%2f&amp;text=Co-occurrences%20are%20here%20again&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </li>
-
-      
-      <li>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fwip%2f2025-04-21-co-occurrences-are-here-again%2f" target="_blank" title="Share on Facebook">
-          <i class="fab fa-facebook"></i>
-        </a>
-      </li>
-
-      
-      <li>
-        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-04-21-co-occurrences-are-here-again%2f&amp;title=Co-occurrences%20are%20here%20again" target="_blank" title="Share on Reddit">
-          <i class="fab fa-reddit"></i>
-        </a>
-      </li>
-
-      
-      <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fwip%2f2025-04-21-co-occurrences-are-here-again%2f&amp;title=Co-occurrences%20are%20here%20again" target="_blank" title="Share on LinkedIn">
-          <i class="fab fa-linkedin"></i>
-        </a>
-      </li>
-
-    </ul>
-  </div>
-  
-
-              </div>
-            </section>
-        
-
-        
-          
-
-          
-        
-      </article>
-
-      
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="../../wip/2025-04-07-templates-and-weird-attributes-together/" data-toggle="tooltip" data-placement="top" title="Templates and weird attributes together">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="../../wip/2025-04-24-learning-from-codestrates/" data-toggle="tooltip" data-placement="top" title="Learning from Codestrates">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-      <script src="https://giscus.app/client.js"
-                data-repo="amb26/ponder"
-                data-repo-id="R_kgDOOKllGA"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOOKllGM4CvhAS"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="0"
-                data-emit-metadata="0"
-                data-input-position="bottom"
-                data-theme="light"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script></div>
-  </div>
-</div>
-
-      <footer>
-  <div class="container">
-    
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <p class="credits copyright text-muted">
-          
-            
-              <a href="../../">Antranig Basman</a>
-            
-          
-          &nbsp;&copy;
-          2026
-
-        </p>
-        
-        <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
-          
-        </p>
-      </div>
-    </div>
-  </div>
-</footer><script defer src="../../js/katex.min.js"></script>
-<script defer src="../../js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-<script src="../../js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-
-
-
-
-
-    
-  </body>
-</html>
+</section>
+</div><div><hr><section id="social-share"><div class="list-inline footer-links"><div aria-hidden="true" class="share-box"><ul class="share"><li><a href="https://bsky.app/intent/compose?text=Just%20reading%20a%20post%20called%20Co-occurrences%20are%20here%20again%20on%20Antranig%20Basman's%20blog%3A%20https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-04-21-co-occurrences-are-here-again%2F" title="Share on BlueSky" target="_blank"><i class="fab fa-fw fa-bluesky"></i></a></li><li><a href="https://twitter.com/share?url=https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-04-21-co-occurrences-are-here-again%2F&text=Co-occurrences%20are%20here%20again&via=amb26ponder" title="Share on Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-04-21-co-occurrences-are-here-again%2F" title="Share on Facebook" target="_blank"><i class="fab fa-facebook"></i></a></li><li><a href="https://reddit.com/submit?url=https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-04-21-co-occurrences-are-here-again%2F&title=Co-occurrences%20are%20here%20again" title="Share on Reddit" target="_blank"><i class="fab fa-reddit"></i></a></li><li><a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fponder.org.uk%2Fwip%2F2025-04-21-co-occurrences-are-here-again%2F&title=Co-occurrences%20are%20here%20again" title="Share on LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a></li></ul></div></div></section></div></article><ul class="pager blog-pager"><li class="previous"><a title="Templates and weird attributes together" href="../../wip/2025-04-07-templates-and-weird-attributes-together/" data-placement="top" data-toggle="tooltip">← Previous Post</a></li><li class="next"><a title="Learning from Codestrates" href="../../wip/2025-04-24-learning-from-codestrates/" data-placement="top" data-toggle="tooltip">Next Post →</a></li></ul><script data-lang="en" data-category-id="DIC_kwDOOKllGM4CvhAS" data-category="Announcements" data-repo-id="R_kgDOOKllGA" data-repo="amb26/ponder" async crossorigin="anonymous" data-theme="light" data-input-position="bottom" data-emit-metadata="0" data-reactions-enabled="0" data-strict="0" data-mapping="pathname" src="https://giscus.app/client.js"></script></div></div></div><footer><div class="container"><div class="row ponder-credits-row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p class="credits copyright text-muted"><a href="../../">Antranig Basman</a>
+                        &#160;©
+                        2026
+                    </p><p class="credits theme-by text-muted"><a href="https://github.com/fluid-project/infusion-6">Infusion 6</a> powered &#160;•&#160;
+                        Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from
+                        <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &#160;•&#160;
+                        further <a href="../../term/lithification">lithified</a> by Boz
+                    </p></div></div></div></footer><script defer src="../../js/katex.min.js" fluid-client=""></script><script onload="renderMathInElement(document.body);" defer src="../../js/auto-render.min.js" fluid-client=""></script></body></html>

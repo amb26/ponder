@@ -17,21 +17,28 @@ The implementation is in [`Fluid.js`](https://github.com/fluid-project/infusion-
 and subcomponent records). Tests are in `tests/framework-tests/core/js/FluidJSTests.js`, under
 "C3 linearisation for FLUID-5800".
 
+Some examples on this page are live - complete and self-contained, they can be edited, and are run once they are
+free of errors: what each logs appears in the console beneath it, and a view it defines, or a Single File Component,
+is shown beside it. An example's code receives `console`, and `container`, the element beside it. The other examples
+show syntax alone, e.g. a fragment of a layer record, and are read-only. Every example is checked by Infusion's
+linter, down to the interiors of its references and directives as Infusion reads them - hover over a marked error to
+see what is wrong, and, for an editable example, a fix.
+
 ## The rule as authors see it
 
 * Every list of layer names is read **weakest first**: a layer listed later in `$layers` beats one listed earlier.
 * A layer always beats the layers it inherits from.
 * The resolved list at `that.$layers` is also weakest first, so it reads in the same direction as it is written.
 
-```js
+```js live
 fluid.def("my.shape", {$layers: "fluid.component", sides: 0, colour: "black"});
 fluid.def("my.red", {$layers: "fluid.component", colour: "red"});
 fluid.def("my.triangle", {$layers: "my.shape", sides: 3});
 fluid.def("my.redTriangle", {$layers: ["my.triangle", "my.red"]});
 
 const t = my.redTriangle();
-t.colour;    // "red" - my.red is listed after my.triangle, and so beats it and my.shape
-t.$layers;   // ["fluid.component", "my.shape", "my.triangle", "my.red", "my.redTriangle"]
+console.log(t.colour); // "red" - my.red is listed after my.triangle, and so beats it and my.shape
+console.log(t.$layers); // ["fluid.component", "my.shape", "my.triangle", "my.red", "my.redTriangle"]
 ```
 
 This reverses the order used by Infusion 1.x, in which the leftmost entry won. FLUID-5743 reported that users
@@ -65,7 +72,7 @@ and reverses the result, so that the algorithm is unchanged and only the reading
 A list which names a layer to the right of another layer that already inherits from it asks for the ancestor to beat
 its own descendant. For example, `fluid.resolveRoot` inherits from `fluid.component`, so in
 
-```js
+```js syntax
 $layers: ["fluid.resolveRoot", "fluid.component"]
 ```
 
@@ -88,7 +95,7 @@ any layer deriving from both `A` and `B` still fails with "Inconsistent hierarch
 
 Figure 2 of Barrett et al. gives this hierarchy, written here as Infusion `$layers`, weakest first:
 
-```js
+```js live
 fluid.def("boat", {$layers: "fluid.component"});
 fluid.def("dayBoat", {$layers: "boat"});
 fluid.def("wheelBoat", {$layers: "boat"});
@@ -97,6 +104,12 @@ fluid.def("smallMultihull", {$layers: "dayBoat"});
 fluid.def("pedalWheelBoat", {$layers: ["wheelBoat", "engineless"]});
 fluid.def("smallCatamaran", {$layers: "smallMultihull"});
 fluid.def("pedalo", {$layers: ["smallCatamaran", "pedalWheelBoat"]});
+
+const p = fluid.initFreeComponent("pedalo");
+// Strongest first, as the paper writes it - pedalWheelBoat, listed last, is pedalo's strongest parent:
+// ["pedalo", "pedalWheelBoat", "engineless", "smallCatamaran", "smallMultihull", "dayBoat", "wheelBoat", "boat", "fluid.component"]
+console.log([...p.$layers].reverse());
+p.destroy();
 ```
 
 `dayBoat` reaches `pedalWheelBoat` through `engineless`, its strongest parent, so `dayBoat` beats `wheelBoat`. The paper

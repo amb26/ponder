@@ -1,7 +1,7 @@
 .DS_Store
+.idea
 
 node_modules/
 
-.hugo_build.lock
-
-.idea
+# Names a local checkout of Infusion 6 to build against - see README.md
+moduleOverrides.json5

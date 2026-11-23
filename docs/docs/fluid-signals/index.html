@@ -1,288 +1,139 @@
-<!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/WebPage">
-  <head>
-    
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-      <title>Fluid Signals API - Antranig Basman</title>
-
-  <meta name="description" content="
-
-
-This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6.
-You can read background information on how fluid.cell offers extra capabilities
-above traditional reactive libraries, and also a more
-extended essay explaining its goals in the context of a malleable substrate.
-The raw markdown underlying these docs is available on GitHub,
-suitable for direct ingestion by your friendly local neighbourhood intelligence.
-Construction
-fluid.cell(initialValue, props)
-
-{Any} [initialValue] - The initial value to store in the cell
-{Object} [props] - Optional additional properties to contextualise the cell
-Returns: {Cell} - The freshly constructed cell
-
-A fresh reactive cell is constructed, with an optional initial value and optional additional properties.">
-  <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
-{
-    "@context": "http://schema.org",
-    "@type": "WebSite",
-    "name": "Antranig Basman",
-    
-    "url": "https:\/\/ponder.org.uk\/"
+<!DOCTYPE html><html fluid-page-boot="" lang="en" itemtype="http://schema.org/WebPage" itemscope fluid-site-root="../../"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"><title>Fluid Signals API - Antranig Basman</title><meta content="This page documents the API of fluid.cell , the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra c…" name="description"><meta content="Antranig Basman" name="author"><meta content="Fluid Signals API" property="og:title"><meta content="This page documents the API of fluid.cell , the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra c…" property="og:description"><meta content="https://ponder.org.uk/img/pond.jpg" property="og:image"><meta content="https://ponder.org.uk/docs/fluid-signals/" property="og:url"><meta content="website" property="og:type"><meta content="Antranig Basman" property="og:site_name"><link href="https://ponder.org.uk/img/favicon.ico" type="image/x-icon" rel="icon"><meta content="Infusion 6" name="generator"><link title="Antranig Basman" href="https://ponder.org.uk/index.xml" type="application/rss+xml" rel="alternate"><link href="../../css/katex.min.css" rel="stylesheet"><link href="../../fontawesome/css/all.min.css" rel="stylesheet"><link href="../../css/bootstrap.min.css" rel="stylesheet"><link href="../../css/main.css" rel="stylesheet"><link href="../../css/highlight.min.css" rel="stylesheet"><link href="../../css/codeblock.css" rel="stylesheet"><link href="../../css/ponder.css" rel="stylesheet"><style id="fl-style-fluid.liveExample-0">
+.fl-live-example {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "source" "console";
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 1em 0;
+    overflow: hidden;
 }
-</script><script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Organization",
-  "name": "",
-  "url": "https:\/\/ponder.org.uk\/"
-  
-  
-  
-  
+
+.fl-live-example.fl-live-example-has-instance {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    grid-template-areas: "instance source" "console console";
 }
-</script>
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@id": "https:\/\/ponder.org.uk\/",
-          "name": "home"
-        }
-    },{
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@id": "https:\/\/ponder.org.uk\/docs\/fluid-signals\/",
-          "name": "Fluid signals API"
-        }
-    }]
+
+.fl-live-example-instance {
+    grid-area: instance;
+    display: none;
+    padding: 0.75em;
+    border-right: 1px solid #ccc;
+    overflow: auto;
 }
-</script><script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Article",
-  "author": {
-    "name" : "Antranig Basman"
-  },
-  "headline": "Fluid Signals API",
-  "description" : " This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6. You can read background information on how fluid.cell offers extra capabilities above traditional reactive libraries, and also a more extended essay explaining its goals in the context of a malleable substrate.\nThe raw markdown underlying these docs is available on GitHub, suitable for direct ingestion by your friendly local neighbourhood intelligence.\nConstruction fluid.cell(initialValue, props) {Any} [initialValue] - The initial value to store in the cell {Object} [props] - Optional additional properties to contextualise the cell Returns: {Cell} - The freshly constructed cell A fresh reactive cell is constructed, with an optional initial value and optional additional properties.\n",
-  "inLanguage" : "en",
-  "wordCount":  3348 ,
-  "datePublished" : "0001-01-01T00:00:00\u002b00:00",
-  "dateModified" : "0001-01-01T00:00:00\u002b00:00",
-  "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
-  "keywords" : [ "" ],
-  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/docs\/fluid-signals\/",
-  "publisher" : {
-    "@type": "Organization",
-    "name" : "https:\/\/ponder.org.uk\/",
-    "logo" : {
-        "@type" : "ImageObject",
-        "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
-        "height" :  60 ,
-        "width" :  60
+
+.fl-live-example-has-instance .fl-live-example-instance {
+    display: block;
+}
+
+.fl-live-example-source {
+    grid-area: source;
+    min-width: 0;
+}
+
+/* The code as rendered statically, before the editor replaces it, takes the editor's size, so that the page does not
+   shift as it is booted */
+/* The editor's font, which is also that of the code rendered statically */
+.fl-live-example-source pre,
+.fl-live-example-source .cm-editor .cm-scroller {
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+}
+
+.fl-live-example-source pre {
+    margin: 0;
+    border: none;
+    max-height: 32em;
+    overflow: auto;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.fl-live-example-source .cm-editor {
+    max-height: 32em;
+    font-size: 13px;
+}
+
+/* The console is shown only once the example is live - not statically, nor for an example of syntax alone */
+.fl-live-example-console {
+    grid-area: console;
+    display: none;
+    border-top: 1px solid #ccc;
+    background: #f7f7f7;
+    font-size: 12px;
+}
+
+.fl-live-example-live .fl-live-example-console {
+    display: block;
+}
+
+.fl-live-example-console-title {
+    padding: 0.15em 0.75em;
+    color: #777;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.fl-live-example-console-lines {
+    max-height: 10em;
+    min-height: 1.6em;
+    overflow: auto;
+    padding: 0.2em 0.75em;
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+}
+
+.fl-live-example-console-lines:empty::before {
+    content: "No output";
+    color: #aaa;
+    font-style: italic;
+}
+
+/* An example of syntax alone is shown, not edited */
+.fl-live-example-syntax .fl-live-example-source .cm-editor {
+    background: #fafafa;
+}
+
+.fl-live-example-syntax .cm-activeLine,
+.fl-live-example-syntax .cm-activeLineGutter {
+    background: transparent;
+}
+
+.fl-live-example-warn {
+    color: #8a6d00;
+}
+
+.fl-live-example-error {
+    color: #b00020;
+}
+
+@media (max-width: 640px) {
+    .fl-live-example.fl-live-example-has-instance {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas: "instance" "source" "console";
     }
-  }
+
+    .fl-live-example-instance {
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+    }
 }
-</script>
-
-
-<meta property="og:title" content="Fluid Signals API" />
-<meta property="og:description" content="
-
-
-This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6.
-You can read background information on how fluid.cell offers extra capabilities
-above traditional reactive libraries, and also a more
-extended essay explaining its goals in the context of a malleable substrate.
-The raw markdown underlying these docs is available on GitHub,
-suitable for direct ingestion by your friendly local neighbourhood intelligence.
-Construction
-fluid.cell(initialValue, props)
-
-{Any} [initialValue] - The initial value to store in the cell
-{Object} [props] - Optional additional properties to contextualise the cell
-Returns: {Cell} - The freshly constructed cell
-
-A fresh reactive cell is constructed, with an optional initial value and optional additional properties.">
-<meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
-<meta property="og:url" content="https://ponder.org.uk/docs/fluid-signals/" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="Antranig Basman" />
-
-  <meta name="twitter:title" content="Fluid Signals API" />
-  <meta name="twitter:description" content="
-
-
-This page documents the API of fluid.cell, the primitive of the reactive library underlying Fluid Infusion 6.
-You can read background information on how fluid.cell offers extra capabilities
-above …">
-  <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@amb26ponder" />
-  <meta name="twitter:creator" content="@amb26ponder" />
-  <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.154.5">
-  <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
-  <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
-  <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
-  <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
-<script type="text/javascript" src="../../js/ponder.js" ></script>
-
-  </head>
-  <body class="infusion-docs" >
-    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
-    <div class="navbar-ponder">
-      <a class="navbar-ponder-brand" href="../../">Antranig Basman</a>
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <svg width="36" height="36" viewBox="0 0 24 24" stroke="#888" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 7L4 7" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M20 12L4 12" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M20 17L4 17" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </button>
-
-
-      <div class="collapse navbar-collapse" id="main-navbar">
-        <ul class="nav navbar-nav navbar-right">
-          
-          
-          <li>
-            <a title="Posts" href="../../post">Posts</a>
-          </li>
-          
-          
-          
-          <li>
-            <a title="WiP" href="../../wip">WiP</a>
-          </li>
-          
-          
-          
-          <li>
-            <a title="About" href="../../page/about/">About</a>
-          </li>
-          
-          
-          
-          <li class="navlinks-container">
-            
-            <a class="navlinks-parent" href="../../docs">Docs</a>
-            
-            <div class="navlinks-children">
-              
-              <a href="../../docs/fluid-signals">Fluid Signals</a>
-              
-              <a href="../../docs/fluid-integration-language">Fluid Integration Language</a>
-              
-              <a href="../../docs/fluid-view">Fluid View</a>
-              
-              <a href="../../docs/fluid-ptf">Fluid PTF</a>
-              
-              <a href="../../docs/fluid-tldraw">Fluid tldraw integration</a>
-              
-              <a href="../../docs/linearisation-algorithm">Layer Linearisation</a>
-              
-            </div>
-          </li>
-          
-          
-          
-          <li>
-            <a title="Communities" href="../../communities">Communities</a>
-          </li>
-          
-          
-          
-          <li>
-            <a title="Projects" href="../../projects">Projects</a>
-          </li>
-          
-          
-          
-          <li>
-            <a title="Terms" href="../../term">Terms</a>
-          </li>
-          
-          
-
-          
-
-          
-        </ul>
-      </div>
-    </div>
-
-  </div>
-</nav>
-
-
-
-
-    
-  
-  
-  
-
-
-
-
-
-
-  
-
-  <header class="header-section ">
-    
-    
-    <div class="intro-header no-img">
-      <div class="container">
-        <div class="header-row">
-          
-
-            <div class="infusion-docs-heading">
-              
-                <h1>Fluid Signals API  </h1>
-              
-              
-                <hr class="small">
-              
-              
-
-            </div>
-        </div>
-      </div>
-    </div>
-  
-  </header>
-
-
-    
-<div role="main">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-      <article role="main" class="blog-post">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" crossorigin="anonymous">
+</style><script fluid-hydrated="provenance" id="fluid-provenance" type="application/fluid-provenance+json">{"version":1,"repo":"amb26/ponder","branch":"ponder-infusion","trace":"../../fluid-trace.json","page":"/docs/fluid-signals/","model":"index.model.json","migration":{"framework":{"root":"../../js/infusion-6/","files":["src/framework/core/js/FluidCore.js","src/framework/core/js/FluidSignals.js","src/framework/core/js/Fluid.js","src/framework/core/js/FluidModules.js","src/framework/core/js/FluidIL.js","src/framework/core/js/FluidView.js","src/framework/core/js/FluidPTF.js","src/framework/core/js/template-parser.js","src/framework/core/js/FluidView-browser.js"]},"modules":{"wend":"../../js/wend-wend-b02ba16204a3/","beautifulWend":"../../js/wend-beautifulWend-d18b087d22f2/","ponderSite":"../../js/wend-ponderSite-d77c30e6608f/","wendWidgets":"../../sfc/"},"siteImports":["%beautifulWend/adapt/disclaimer/beautifulWend-feature-disclaimer.vue","%beautifulWend/adapt/disclaimer/beautifulWend-footer-disclaimer.vue","%beautifulWend/adapt/gcse/beautifulWend-document-gcse.vue","%beautifulWend/adapt/gcse/beautifulWend-feature-gcse.vue","%beautifulWend/adapt/gcse/beautifulWend-navbar-gcse.vue","%beautifulWend/adapt/gcse/beautifulWend-navItem-gcseSearch.vue","%beautifulWend/adapt/hljs/beautifulWend-document-hljs.vue","%beautifulWend/adapt/hljs/beautifulWend-feature-hljs.vue","%beautifulWend/adapt/multilingual/beautifulWend-feature-multilingual.vue","%beautifulWend/adapt/multilingual/beautifulWend-navbar-multilingual.vue","%beautifulWend/adapt/multilingual/beautifulWend-navItem-languages.vue","%beautifulWend/adapt/multilingual/beautifulWend-postMeta-translations.vue","%beautifulWend/adapt/piwik/beautifulWend-document-piwik.vue","%beautifulWend/adapt/piwik/beautifulWend-feature-piwik.vue","%beautifulWend/adapt/selfHosted/beautifulWend-document-selfHosted.vue","%beautifulWend/adapt/selfHosted/beautifulWend-feature-selfHosted.vue","%beautifulWend/adapt/staticman/beautifulWend-document-staticman.vue","%beautifulWend/adapt/staticman/beautifulWend-feature-staticman.vue","%beautifulWend/adapt/staticman/beautifulWend-postMeta-staticman.vue","%beautifulWend/sfc/i18n/beautifulWend-i18n-en.vue","%beautifulWend/sfc/i18n/beautifulWend-i18n.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-404.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-home.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-page.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-section.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-taxonomy.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-term.vue","%beautifulWend/sfc/kinds/beautifulWend-type-page.vue","%beautifulWend/sfc/kinds/beautifulWend-type-post.vue","%beautifulWend/sfc/beautifulWend-comments-giscus.vue","%wend/sfc/wend-alias.vue","%wend/sfc/wend-content.vue","%beautifulWend/sfc/beautifulWend-document.vue","%beautifulWend/sfc/beautifulWend-footer.vue","%beautifulWend/sfc/beautifulWend-header-bigimg.vue","%beautifulWend/sfc/beautifulWend-header-home.vue","%beautifulWend/sfc/beautifulWend-header-page.vue","%beautifulWend/sfc/beautifulWend-header-post.vue","%beautifulWend/sfc/beautifulWend-header.vue","%beautifulWend/sfc/beautifulWend-head.vue","%beautifulWend/sfc/beautifulWend-listPager.vue","%beautifulWend/sfc/beautifulWend-main-home.vue","%beautifulWend/sfc/beautifulWend-main-list.vue","%beautifulWend/sfc/beautifulWend-main-notFound.vue","%beautifulWend/sfc/beautifulWend-main-single.vue","%beautifulWend/sfc/beautifulWend-main-terms.vue","%beautifulWend/sfc/beautifulWend-main.vue","%beautifulWend/sfc/beautifulWend-mediaIcons.vue","%beautifulWend/sfc/beautifulWend-navbar.vue","%beautifulWend/sfc/beautifulWend-navItem-leaf.vue","%beautifulWend/sfc/beautifulWend-navItem-parent.vue","%beautifulWend/sfc/beautifulWend-navItem.vue","%beautifulWend/sfc/beautifulWend-pageMeta.vue","%beautifulWend/sfc/beautifulWend-pager.vue","%beautifulWend/sfc/beautifulWend-postMeta.vue","%beautifulWend/sfc/beautifulWend-postPreview.vue","%beautifulWend/sfc/beautifulWend-relatedPosts.vue","%wend/sfc/wend-scriptTag.vue","%beautifulWend/sfc/beautifulWend-shareLinks.vue","%beautifulWend/sfc/beautifulWend-site.vue","%wend/sfc/wend-stylesheetTag.vue","%beautifulWend/sfc/beautifulWend-tags.vue","%beautifulWend/sfc/beautifulWend-termPanel.vue","%ponderSite/sfc/shortcodes/wend-shortcode-figure.vue","%ponderSite/sfc/shortcodes/wend-shortcode-stabilization.vue","%ponderSite/sfc/shortcodes/wend-shortcode-vizreactive.vue","%infusion-6/src/components/sfc/fluid-liveExample.vue"],"pageBoot":"../../js/wend-wend-b02ba16204a3/js/pageBoot.js","root":"beautifulWend.site"},"framing":[{"path":"wend/override/beautifulWend/sfc/beautifulWend-footer.vue","kind":"sfc","layer":"beautifulWend.footer","label":"Footer","hash":"sha256-0e7407de182a644fc7a80bd262df843fdf27f470189ab0929ba72ca717e35418","origin":"../../js/wend-beautifulWend-d18b087d22f2/sfc/beautifulWend-footer.vue"},{"path":"wend/override/beautifulWend/sfc/beautifulWend-navbar.vue","kind":"sfc","layer":"beautifulWend.navbar","label":"Navigation bar","hash":"sha256-7c0e5b12cef631b97ea4bc1c578bb3a2fab34f9876524569bfc298c338017b20","origin":"../../js/wend-beautifulWend-d18b087d22f2/sfc/beautifulWend-navbar.vue"},{"path":"wend.json","kind":"patch","label":"Site configuration","hash":"sha256-e225e29ce6c7520086d1aa231fe733a0cce0ca4dc05f6f4a8b296fa400a21bb3"}],"source":{"path":"content/docs/fluid-signals.md","hash":"sha256-24d42abc79f0cc6c63035921e856bebe86798b54896f761f2dedac3552d62489"},"blocks":[{"selector":"[data-fluid-block=\"markdown\"]","kind":"markdown","key":"content/docs/fluid-signals.md#body","layers":["wend.content"]}],"renderers":{"markdown":{"scripts":["../../js/fluid-markdown/markdown-it-14.3.2.js","../../js/fluid-markdown/markdown-it-attrs-5.0.1.js","../../js/fluid-markdown/markdown-it-footnote-4.0.0.js","../../js/fluid-markdown/markdown-it-deflist-4.0.0.js","../../js/fluid-markdown/highlight-fa7fed3307d5.js","../../js/fluid-markdown/wend-markdown-1b00c5bac782.js"],"global":"wendMarkdown"}},"widgets":{"dir":"static/sfc","layers":[]},"images":{"dir":"static/img"}}</script></head><body class="infusion-docs"><nav class="navbar navbar-default navbar-fixed-top navbar-custom"><div class="container-fluid"><div class="navbar-ponder"><a href="../../" class="navbar-ponder-brand">Antranig Basman</a><button data-target="#main-navbar" data-toggle="collapse" type="button" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><svg xmlns="http://www.w3.org/2000/svg" stroke="#888" viewBox="0 0 24 24" height="36" width="36"><path stroke-linecap="round" stroke-width="1.5" d="M20 7L4 7" /><path stroke-linecap="round" stroke-width="1.5" d="M20 12L4 12" /><path stroke-linecap="round" stroke-width="1.5" d="M20 17L4 17" /></svg></button><div id="main-navbar" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="../../post" title="Posts">Posts</a></li><li><a href="../../wip" title="WiP">WiP</a></li><li><a href="../../page/about/" title="About">About</a></li><li class="navlinks-container"><a href="../../docs" class="navlinks-parent">Docs</a><div class="navlinks-children"><a href="../../docs/fluid-signals">Fluid Signals</a><a href="../../docs/fluid-integration-language">Fluid Integration Language</a><a href="../../docs/fluid-view">Fluid View</a><a href="../../docs/fluid-ptf">Fluid PTF</a><a href="../../docs/fluid-tldraw">Fluid tldraw integration</a><a href="../../docs/linearisation-algorithm">Layer Linearisation</a></div></li><li><a href="../../communities" title="Communities">Communities</a></li><li><a href="../../projects" title="Projects">Projects</a></li><li><a href="../../term" title="Terms">Terms</a></li></ul></div></div></div></nav><header class="header-section"><div class="intro-header no-img"><div class="container"><div class="header-row"><div class="infusion-docs-heading ponder-heading"><h1 class="ponder-title">Fluid Signals API</h1><hr class="small"></div></div></div></div></header><div role="main"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article role="main" class="blog-post"><div data-fluid-block="markdown"><link crossorigin="anonymous" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="../../js/fluid-code-box.js"></script>
-<link rel="stylesheet" href="../../css/fluid-code-box.css" />
+<link href="../../css/fluid-code-box.css" rel="stylesheet">
 <p>This page documents the API of <code>fluid.cell</code>, the primitive of the reactive library underlying Fluid Infusion 6.
 You can read <a href="../../docs/fluid-signals-background">background information</a> on how <code>fluid.cell</code> offers extra capabilities
 above traditional reactive libraries, and also a more
 <a href="../../post/2026-02-20-reactivity-for-malleability">extended essay</a> explaining its goals in the context of a malleable substrate.</p>
 <p>The raw markdown underlying these docs is available on <a href="https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/fluid-signals.md">GitHub</a>,
 suitable for direct ingestion by your friendly local neighbourhood intelligence.</p>
-<h2 id="construction">Construction</h2>
-<h3 id="fluidcellinitialvalue-props">fluid.cell(initialValue, props)</h3>
+<p>Some examples on this page are live - complete and self-contained, they can be edited, and are run once they are
+free of errors: what each logs appears in the console beneath it. The other examples show syntax alone, e.g. a
+fragment of a layer record, and are read-only. Every example is checked by Infusion’s linter, down to the interiors of
+its references and directives as Infusion reads them - hover over a marked error to see what is wrong, and, for an
+editable example, a fix.</p>
+<h2 id="construction"><a href="#construction" aria-label="Construction" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Construction</h2>
+<h3 id="fluidcellinitialvalue-props"><a href="#fluidcellinitialvalue-props" aria-label="fluid.cell(initialValue, props)" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>fluid.cell(initialValue, props)</h3>
 <ul>
 <li><code>{Any} [initialValue]</code> - The initial value to store in the cell</li>
 <li><code>{Object} [props]</code> - Optional additional properties to contextualise the cell</li>
@@ -290,16 +141,16 @@ suitable for direct ingestion by your friendly local neighbourhood intelligence.
 </ul>
 <p>A fresh reactive cell is constructed, with an optional initial value and optional additional properties.</p>
 <p>If the initial value is <code>undefined</code>, this will be upgraded to an <a href="#unavailable-values">unavailable</a> value marking
-the signal&rsquo;s value as uninitialised.</p>
+the signal’s value as uninitialised.</p>
 <p>The supported properties in <code>props</code> are</p>
 <ul>
 <li><code>{String} name</code> - Supplies a name or address for this cell, reported by <a href="#fluidcellexplaincell"><code>fluid.cell.explain</code></a>
 and <a href="#fluidcellfindcausecell"><code>fluid.cell.findCause</code></a>. Cells allocated by the framework are named by the convention
 <code>&lt;role&gt; for path &lt;component path&gt;</code>, e.g. <code>potentia for path story-6.lostPlants</code></li>
-<li><code>{Function} equiv</code> - A policy <code>(oldValue, newValue) =&gt; Boolean</code> deciding when an update leaves the cell&rsquo;s value
+<li><code>{Function} equiv</code> - A policy <code>(oldValue, newValue) =&gt; Boolean</code> deciding when an update leaves the cell’s value
 morally unchanged. If it finds the new value equivalent to the old, the cell keeps the value it held and notifies
 nothing downstream. It is consulted only when both values are available - otherwise, and for a cell without one,
-values are compared by <code>fluid.cell.equals</code>. <code>fluid.cell.isEquivalent(cell, oldValue, newValue)</code> applies a cell&rsquo;s
+values are compared by <code>fluid.cell.equals</code>. <code>fluid.cell.isEquivalent(cell, oldValue, newValue)</code> applies a cell’s
 policy. Two policies are supplied:
 <ul>
 <li><code>fluid.equiv.elementwise</code> - Arrays of the same length holding identical elements in the same order, or plain
@@ -308,11 +159,20 @@ objects with the same keys holding identical values, are equivalent - e.g. a lis
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// A recomputed list of the same records, freshly allocated, notifies nothing
-</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">visible</span> <span class="o">=</span> <span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;visible&#34;</span><span class="p">,</span> <span class="nx">equiv</span><span class="o">:</span> <span class="nx">fluid</span><span class="p">.</span><span class="nx">equiv</span><span class="p">.</span><span class="nx">elementwise</span><span class="p">})</span>
-</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">computed</span><span class="p">((</span><span class="nx">records</span><span class="p">,</span> <span class="nx">filter</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">records</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">filter</span><span class="p">),</span> <span class="p">[</span><span class="nx">records</span><span class="p">,</span> <span class="nx">filter</span><span class="p">]);</span>
-</span></span></code></pre></div><h2 id="reading-and-writing">Reading and writing</h2>
-<h3 id="cellget">Cell.get()</h3>
+<div class="fl-live-example" fluid-potentia="{&quot;code&quot;:&quot;const records = fluid.cell([{name: \&quot;Vicia\&quot;, shown: true}, {name: \&quot;Stellaria\&quot;, shown: false}]);\nconst filter = fluid.cell(record => record.shown);\n\n// A recomputed list of the same records, freshly allocated, notifies nothing\nconst visible = fluid.cell(undefined, {name: \&quot;visible\&quot;, equiv: fluid.equiv.elementwise})\n    .computed((records, filter) => records.filter(filter), [records, filter]);\n\nfluid.cell.effect(list => console.log(\&quot;Visible:\&quot;, list.map(record => record.name)), [visible]); // Visible: [\&quot;Vicia\&quot;]\nrecords.set([...records.get()]);                          // A fresh array of the same records - nothing logged\nfluid.cell.stabilize();\nrecords.set([...records.get(), {name: \&quot;Galium\&quot;, shown: true}]); // Visible: [\&quot;Vicia\&quot;, \&quot;Galium\&quot;]\nfluid.cell.stabilize();&quot;,&quot;kind&quot;:&quot;js&quot;,&quot;mode&quot;:&quot;live&quot;}" fluid-layers="fluid.liveExample"><div class="fl-live-example-instance"></div><div class="fl-live-example-source"><pre><code>const records = fluid.cell([{name: "Vicia", shown: true}, {name: "Stellaria", shown: false}]);
+const filter = fluid.cell(record =&gt; record.shown);
+
+// A recomputed list of the same records, freshly allocated, notifies nothing
+const visible = fluid.cell(undefined, {name: "visible", equiv: fluid.equiv.elementwise})
+    .computed((records, filter) =&gt; records.filter(filter), [records, filter]);
+
+fluid.cell.effect(list =&gt; console.log("Visible:", list.map(record =&gt; record.name)), [visible]); // Visible: ["Vicia"]
+records.set([...records.get()]);                          // A fresh array of the same records - nothing logged
+fluid.cell.stabilize();
+records.set([...records.get(), {name: "Galium", shown: true}]); // Visible: ["Vicia", "Galium"]
+fluid.cell.stabilize();</code></pre></div><div class="fl-live-example-console"><div class="fl-live-example-console-title">Console</div><div class="fl-live-example-console-lines"></div></div></div>
+<h2 id="reading-and-writing"><a href="#reading-and-writing" aria-label="Reading and writing" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Reading and writing</h2>
+<h3 id="cellget"><a href="#cellget" aria-label="Cell.get()" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Cell.get()</h3>
 <p>The value of a reactive cell can be read by calling <code>Cell.get</code>. This forces the reactive tree of computations
 behind the cell to bring its value up to date. A call to <code>Cell.get</code> of some cell within the reactive context of a <code>computed</code>
 function (that is, further up its call stack) will set up an automatic subscription of the function to updates of that cell, rerunning the function whenever the value
@@ -320,7 +180,7 @@ changes. If a further invocation of the <code>computed</code> does not execute <
 will be torn down.</p>
 <p>To read a cell within a computation without subscribing to it, read it within
 <a href="#fluidcelluntrackedfn"><code>fluid.cell.untracked</code></a>.</p>
-<h3 id="cellsetnewvalue-options">Cell.set(newValue, [options])</h3>
+<h3 id="cellsetnewvalue-options"><a href="#cellsetnewvalue-options" aria-label="Cell.set(newValue, [options])" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Cell.set(newValue, [options])</h3>
 <ul>
 <li><code>{any} newValue</code> The new value to which the cell is to be updated</li>
 <li><code>{String|Object} [options]</code> Either a source tag to be applied to this update as it propagates, or an object holding
@@ -332,7 +192,7 @@ any of
 </ul>
 </li>
 </ul>
-<p>The reactive cell&rsquo;s value can be updated by calling <code>Cell.set</code>. This will trigger a cascade of updates through the
+<p>The reactive cell’s value can be updated by calling <code>Cell.set</code>. This will trigger a cascade of updates through the
 reactive tree. Any computed values that are depended on by effects will be marked to execute when
 <a href="#fluidcellstabilize"><code>fluid.cell.stabilize</code></a> is next called. Computed values that are not depended on by effects will
 only be updated if <code>Cell.get</code> is called for a cell which depends on them.</p>
@@ -349,19 +209,19 @@ well as any source of its own. A change caused by a source therefore remains mar
 passes through - see <a href="https://issues.fluidproject.org/browse/FLUID-5498">FLUID-5498</a>. It is also carried across an
 <a href="#asynchronous-computations">asynchronous computation</a>. Its eventual value, once it settles, reaches its dependents
 still marked with the sources of the change which started it. Within an effect, this holds only for cells set
-synchronously by the effect&rsquo;s function, not for any set later, e.g. after an <code>await</code>.</p>
+synchronously by the effect’s function, not for any set later, e.g. after an <code>await</code>.</p>
 <p>Each fresh change to a cell from outside the reactive graph carries only its own sources. The sources of an earlier change
-don&rsquo;t linger on the cell, even while an asynchronous effect that the earlier change triggered is still pending.</p>
+don’t linger on the cell, even while an asynchronous effect that the earlier change triggered is still pending.</p>
 <p>Sources can also be applied to every cell set within a function by wrapping it with
 <code>fluid.cell.withAmbientSource(source, fn)</code>, where <code>source</code> is a source or an array of them. This returns a function
 suitable for use as an event listener. Calls may be nested, and a cell set within them carries the sources of each.</p>
-<h3 id="cell_value">Cell._value</h3>
-<p>A &ldquo;blind read&rdquo; of the current value of the cell, regardless of how stale it is, can be made by looking at the <code>_value</code>
-property. This isn&rsquo;t recommended except in specialised cases, usually of framework-building.</p>
-<h2 id="relations-and-effects">Relations and effects</h2>
-<h3 id="cellcomputedfn-staticsources-props">Cell.computed(fn, staticSources, props)</h3>
+<h3 id="cell_value"><a href="#cell_value" aria-label="Cell._value" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Cell._value</h3>
+<p>A “blind read” of the current value of the cell, regardless of how stale it is, can be made by looking at the <code>_value</code>
+property. This isn’t recommended except in specialised cases, usually of framework-building.</p>
+<h2 id="relations-and-effects"><a href="#relations-and-effects" aria-label="Relations and effects" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Relations and effects</h2>
+<h3 id="cellcomputedfn-staticsources-props"><a href="#cellcomputedfn-staticsources-props" aria-label="Cell.computed(fn, staticSources, props)" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Cell.computed(fn, staticSources, props)</h3>
 <ul>
-<li><code>{Function | null} fn</code> - The function which will reactively evaluate this cell&rsquo;s value, or <code>null</code> if an existing relation is to be torn down</li>
+<li><code>{Function | null} fn</code> - The function which will reactively evaluate this cell’s value, or <code>null</code> if an existing relation is to be torn down</li>
 <li><code>{Cell[]} [staticSources]</code> - Any statically known cell dependencies whose reactively evaluated arguments will be supplied to <code>fn</code> when it is called</li>
 <li><code>{ComputedProps} [props]</code> - Optional additional properties to contextualise the computation</li>
 <li>Returns: <code>{Cell}</code> - This cell</li>
@@ -383,11 +243,10 @@ If an existing relation is present on the target cell with the same key, it will
 <p>The additional <code>ComputedProps</code> argument can contain the following fields:</p>
 <p><code>{Object} ComputedProps</code>:</p>
 <ul>
-<li><code>{Boolean} isFree</code> - Indicates if this is a &ldquo;free&rdquo; computation that will deliver unavailable values.</li>
+<li><code>{Boolean} isFree</code> - Indicates if this is a “free” computation that will deliver unavailable values.</li>
 </ul>
 <p>Here is a basic example setting up two cells connected by a simple computation:</p>
-<textarea class="fluid-code-box">
-import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
+<textarea class="fluid-code-box">import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
 
 const A = fluid.cell(1);
 
@@ -398,7 +257,7 @@ console.log("B's value computed to ", B.get()); // Outputs 2
 <p>For a more advanced example setting up and tearing down bidirectional relationships, you can see the
 visual test sample for <a href="https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/?selectedTest=bidirectional_tests_-_temperature_conversion_with_two_nodes">Bidirectional temperature conversion</a>
 in the extended essay.</p>
-<h3 id="asynchronous-computations">Asynchronous computations</h3>
+<h3 id="asynchronous-computations"><a href="#asynchronous-computations" aria-label="Asynchronous computations" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Asynchronous computations</h3>
 <p>A computation set up by <a href="#cellcomputedfn-staticsources-props"><code>Cell.computed</code></a> may be asynchronous. If its function
 returns, rather than a plain value, either:</p>
 <ul>
@@ -414,10 +273,9 @@ promise, but once its value is available.</p>
 <p>Whether a computation is asynchronous is discovered from what its function returns, and so no declaration is needed -
 an <code>async</code> function, and a plain function which returns a promise, are treated alike. Once a computation has returned a
 promise or async iterator, its cell is marked pending from the outset of each later run.</p>
-<p>Here&rsquo;s an example receiving a result through an asynchronous computation. Rather than manually waiting for event turns
+<p>Here’s an example receiving a result through an asynchronous computation. Rather than manually waiting for event turns
 as here, asynchronous results are more conveniently received through <a href="#fluidcellsignaltopromisevalsignal">fluid.cell.signalToPromise</a>, see below.</p>
-<textarea class="fluid-code-box" rows="13">
-import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
+<textarea rows="13" class="fluid-code-box">import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
 
 const A = fluid.cell(1);
 
@@ -430,7 +288,7 @@ await new Promise(resolve => setTimeout(() => resolve(), 0)); // Wait for async 
 
 console.log("B's value computed to ", B.get()); // Outputs B's value computed to 2
 </textarea>
-<h3 id="fluidcelleffectfn-staticsources-props">fluid.cell.effect(fn, [staticSources], [props])</h3>
+<h3 id="fluidcelleffectfn-staticsources-props"><a href="#fluidcelleffectfn-staticsources-props" aria-label="fluid.cell.effect(fn, [staticSources], [props])" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>fluid.cell.effect(fn, [staticSources], [props])</h3>
 <ul>
 <li>
 <p><code>{Function} fn</code> - The function to execute reactively when any of the staticSources change</p>
@@ -460,7 +318,7 @@ will notify this effect.</p>
 </li>
 </ul>
 <p><code>fluid.cell.effect</code> accepts a function and arguments to run when one or more reactive values change. The signature
-is similar to <code>Cell.compute</code> only an effect&rsquo;s <code>fn</code> is expected to have some side-effect upon the world,
+is similar to <code>Cell.compute</code> only an effect’s <code>fn</code> is expected to have some side-effect upon the world,
 such as printing a value or writing to a database, rather than computing a value internal to the reactive graph.
 Values returned from <code>fn</code> are ignored.</p>
 <p>Effects do not activate automatically. Every effect cell is specially marked to be activated by <code>fluid.cell.stabilize</code>
@@ -475,8 +333,7 @@ when it is torn down. The optional <code>props</code> argument accepts a callbac
 is disposed via <code>Effect.dispose()</code>.</p>
 <p>This simple example follows the pattern of previous examples, but actively pulls updates to B using an effect
 rather than manually pulling them via <code>get()</code>:</p>
-<textarea class="fluid-code-box">
-import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
+<textarea class="fluid-code-box">import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
 
 const A = fluid.cell(1);
 
@@ -493,12 +350,11 @@ fluid.cell.stabilize() // Outputs B's value computed to 3
 
 Blogger.dispose();
 </textarea>
-<p>This example shows <code>fluid.cell</code>&rsquo;s <em><strong>source tracking</strong></em> facility. If a source of changes is tagged by using the
+<p>This example shows <code>fluid.cell</code>’s <em><strong>source tracking</strong></em> facility. If a source of changes is tagged by using the
 <code>source</code> argument to <a href="#cellsetnewvalue-options"><code>Cell.set</code></a>, changes due to this source can skip notifying an effect with a matching
 <code>excludeSource</code> argument. This can be helpful when interfacing with external systems which should not be
 notified of changes that they themselves have caused:</p>
-<textarea class="fluid-code-box">
-import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
+<textarea class="fluid-code-box">import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
 
 const A = fluid.cell();
 const B = fluid.cell().computed(a => a + 1, [A]);
@@ -519,18 +375,18 @@ fluid.cell.stabilize(); // No notification: B excludes scrollbar source
 <p>An effect which is skipped - because its arguments are unchanged, or through <code>includeSource</code> or <code>excludeSource</code> - keeps
 observing every cell it read dynamically when it last ran, and still waits on any of them which is pending. An effect
 downstream of an asynchronous computation therefore sees it settle even if it was skipped meanwhile.</p>
-<h3 id="fluidcellstabilize">fluid.cell.stabilize()</h3>
+<h3 id="fluidcellstabilize"><a href="#fluidcellstabilize" aria-label="fluid.cell.stabilize()" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>fluid.cell.stabilize()</h3>
 <p><code>fluid.cell.stabilize</code> will run all effects whose reactive arguments have changed, after pulling updates through the reactive graph.
 Example code is in the section on <a href="#fluidcelleffectfn-staticsources-props"><code>effects</code></a>.</p>
-<p>Unlike in many reactive frameworks, effects do not run eagerly or synchronously &mdash; this choice is motivated in
+<p>Unlike in many reactive frameworks, effects do not run eagerly or synchronously — this choice is motivated in
 the <a href="../../wip/2026-05-25-towards-deferred-stabilisation/">deferred stabilization</a> posting.</p>
-<h3 id="fluidcellstabilizeasync">fluid.cell.stabilizeAsync()</h3>
+<h3 id="fluidcellstabilizeasync"><a href="#fluidcellstabilizeasync" aria-label="fluid.cell.stabilizeAsync()" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>fluid.cell.stabilizeAsync()</h3>
 <p>A helpful utility layered on top of <code>fluid.cell.stabilize</code> which as well as scheduling any effects, will also return
 a promise which may be <code>await</code>ed, to be notified when any asynchronous computations launched by the stabilization
 operation have successfully notified the effects which depend on them.</p>
-<h2 id="comprehension">Comprehension</h2>
+<h2 id="comprehension"><a href="#comprehension" aria-label="Comprehension" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Comprehension</h2>
 <p>When something updates, re-renders or turns over unexpectedly, ask the graph why before instrumenting it.</p>
-<h3 id="fluidcellexplaincell">fluid.cell.explain([cell])</h3>
+<h3 id="fluidcellexplaincell"><a href="#fluidcellexplaincell" aria-label="fluid.cell.explain([cell])" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>fluid.cell.explain([cell])</h3>
 <ul>
 <li><code>{Cell} [cell]</code> The cell whose last change is to be explained. If absent, the cell whose update is in progress is
 used, so that it may be called from within a computation or effect</li>
@@ -541,22 +397,22 @@ array if there is no target</li>
 back to the cell whose change began the reaction. Where that cell was given its value by <code>set</code>, it reports why - the
 <code>cause</code> and sources supplied to <a href="#cellsetnewvalue-options"><code>Cell.set</code></a> - and continues from the update during which it
 was set, e.g. the effect which wrote it. The chain therefore reaches back past each write to what provoked it:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">.</span><span class="nx">explain</span><span class="p">(</span><span class="nx">cell</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// [&#34;flatMergedComputer for path story-6.lostPlants&#34;,
-</span></span></span><span class="line"><span class="cl"><span class="c1">//  &#34;potentia for path story-6.lostPlants (set: first write to cards of component at path story-6.lostPlants, ...)&#34;,
-</span></span></span><span class="line"><span class="cl"><span class="c1">//  &#34;during $effect at path load of component at path story-6.lostPlants&#34;, ...]
-</span></span></span></code></pre></div><p>Pass <code>{cause: &quot;...&quot;}</code> to <code>Cell.set</code> in your own code to make its writes explain themselves.</p>
-<h3 id="fluidcellfindallcauses">fluid.cell.findAllCauses()</h3>
+<div class="fl-live-example" fluid-potentia="{&quot;code&quot;:&quot;fluid.cell.explain(cell);\n// [\&quot;flatMergedComputer for path story-6.lostPlants\&quot;,\n//  \&quot;potentia for path story-6.lostPlants (set: first write to cards of component at path story-6.lostPlants, ...)\&quot;,\n//  \&quot;during $effect at path load of component at path story-6.lostPlants\&quot;, ...]&quot;,&quot;kind&quot;:&quot;js&quot;,&quot;mode&quot;:&quot;syntax&quot;}" fluid-layers="fluid.liveExample"><div class="fl-live-example-instance"></div><div class="fl-live-example-source"><pre><code>fluid.cell.explain(cell);
+// ["flatMergedComputer for path story-6.lostPlants",
+//  "potentia for path story-6.lostPlants (set: first write to cards of component at path story-6.lostPlants, ...)",
+//  "during $effect at path load of component at path story-6.lostPlants", ...]</code></pre></div><div class="fl-live-example-console"><div class="fl-live-example-console-title">Console</div><div class="fl-live-example-console-lines"></div></div></div>
+<p>Pass <code>{cause: "..."}</code> to <code>Cell.set</code> in your own code to make its writes explain themselves.</p>
+<h3 id="fluidcellfindallcauses"><a href="#fluidcellfindallcauses" aria-label="fluid.cell.findAllCauses()" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>fluid.cell.findAllCauses()</h3>
 <p>Gathers the <a href="#fluidcellfindcausecell">causes</a> of each source of the reaction in progress.</p>
-<h3 id="fluidcellpendingeffects">fluid.cell.pendingEffects()</h3>
+<h3 id="fluidcellpendingeffects"><a href="#fluidcellpendingeffects" aria-label="fluid.cell.pendingEffects()" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>fluid.cell.pendingEffects()</h3>
 <ul>
 <li>Returns: <code>{Cell[]}</code> The effects holding the graph unsettled, e.g. those awaiting I/O or an asynchronous computation -
 the outstanding work for which <code>fluid.cell.settle</code> waits</li>
 </ul>
-<h3 id="profiling">Profiling</h3>
+<h3 id="profiling"><a href="#profiling" aria-label="Profiling" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Profiling</h3>
 <p>To profile, or to find when events happen, wrap <code>fluid.cell.update</code> in the page and filter on <code>cell.name</code>, masking
 instance numbers (<code>/\d+/g</code>) to aggregate.</p>
-<h3 id="fluidcellfindcausecell">fluid.cell.findCause([cell])</h3>
+<h3 id="fluidcellfindcausecell"><a href="#fluidcellfindcausecell" aria-label="fluid.cell.findCause([cell])" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>fluid.cell.findCause([cell])</h3>
 <ul>
 <li><code>{Cell} cell</code> If supplied, the cell whose update cause should be reported. If absent, any current
 reaction will be used instead.</li>
@@ -565,8 +421,7 @@ reaction will be used instead.</li>
 <p>Reports the cause of any reaction which has updated a given cell, or else the one that is currently
 in progress, in the form of an array of nodes reaching back from the supplied cell to the one whose modification
 triggered the reaction. The triggering cell appears first in the array.</p>
-<textarea class="fluid-code-box">
-import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
+<textarea class="fluid-code-box">import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs"
 
 const A = fluid.cell(1, {name: "A"});
 
@@ -586,16 +441,15 @@ fluid.cell.stabilize(); // Outputs "Blogger, B, A"
 
 Blogger.dispose();
 </textarea>
-<h2 id="utilities">Utilities</h2>
-<h3 id="fluidcellsignaltopromisevalsignal">fluid.cell.signalToPromise(valSignal)</h3>
+<h2 id="utilities"><a href="#utilities" aria-label="Utilities" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Utilities</h2>
+<h3 id="fluidcellsignaltopromisevalsignal"><a href="#fluidcellsignaltopromisevalsignal" aria-label="fluid.cell.signalToPromise(valSignal)" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>fluid.cell.signalToPromise(valSignal)</h3>
 <ul>
 <li><code>{Cell&lt;any&gt;} valSignal</code> - The signal to monitor.</li>
-<li>Returns: <code>Promise&lt;any&gt;</code> - A Promise that resolves with the signal&rsquo;s first available value.</li>
+<li>Returns: <code>Promise&lt;any&gt;</code> - A Promise that resolves with the signal’s first available value.</li>
 </ul>
 <p>Gear from the world of signals into a Promise that can be <code>await</code>ed.</p>
 <p>The <a href="#asynchronous-computations">asynchronous computation</a> example from above is more conveniently written:</p>
-<textarea class="fluid-code-box">
-import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs";
+<textarea class="fluid-code-box">import fluid from "https://unpkg.com/infusion-6@6.1.0/dist/FluidCell.mjs";
 
 const A = fluid.cell(1);
 
@@ -605,16 +459,16 @@ const B = fluid.cell().computed(a =>
 console.log("B's value computed to ",
     await (fluid.cell.signalToPromise(B))); // Outputs B's value computed to 2
 </textarea>
-<h3 id="cellrefreshstaticsources">Cell.refresh(staticSources)</h3>
+<h3 id="cellrefreshstaticsources"><a href="#cellrefreshstaticsources" aria-label="Cell.refresh(staticSources)" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Cell.refresh(staticSources)</h3>
 <ul>
 <li><code>{Cell[]} [staticSources]</code> - An optional array of static source cells to identify the computation edge to be refreshed</li>
 <li><code>this: {Cell}</code> The cell for which an incoming edge is to be refreshed</li>
 </ul>
 <p>A method available on any <code>Cell</code>: Refreshes the value of the cell by re-evaluating its computation for the specified static sources.
 Finds the incoming edge corresponding to the given static sources and triggers an update for this cell along that edge. Particularly
-useful when the value is computed via an asynchronous activity in the world &mdash; if the edge is async, the cell&rsquo;s value
+useful when the value is computed via an asynchronous activity in the world — if the edge is async, the cell’s value
 will be set to stale and the asynchronous activity will be restarted.</p>
-<h3 id="fluidcelluntrackedfn">fluid.cell.untracked(fn)</h3>
+<h3 id="fluidcelluntrackedfn"><a href="#fluidcelluntrackedfn" aria-label="fluid.cell.untracked(fn)" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>fluid.cell.untracked(fn)</h3>
 <ul>
 <li><code>{Function} fn</code> - The function to execute without tracking</li>
 <li>Returns: <code>{any}</code> - The value returned by <code>fn</code></li>
@@ -623,193 +477,79 @@ will be set to stale and the asynchronous activity will be restarted.</p>
 reads. This suits a value which is consulted rather than depended upon. For example, an effect which closes a popup on
 a press outside it should read whether the popup is open, but should not rerun when it is opened, since opening it is no
 reason to look again at a press made before it was opened:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">.</span><span class="nx">effect</span><span class="p">(</span><span class="nx">press</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">press</span> <span class="o">&amp;&amp;</span> <span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">.</span><span class="nx">untracked</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="nx">popupOpen</span><span class="p">.</span><span class="nx">get</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">popup</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">press</span><span class="p">.</span><span class="nx">target</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">popupOpen</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">},</span> <span class="p">[</span><span class="nx">lastPress</span><span class="p">]);</span>
-</span></span></code></pre></div><p><code>untracked</code> is needed whenever an effect reads a value which it also writes, for example an effect which appends to a
+<div class="fl-live-example" fluid-potentia="{&quot;code&quot;:&quot;fluid.cell.effect(press => {\n    if (press && fluid.cell.untracked(() => popupOpen.get()) && !popup.contains(press.target)) {\n        popupOpen.set(false);\n    }\n}, [lastPress]);&quot;,&quot;kind&quot;:&quot;js&quot;,&quot;mode&quot;:&quot;syntax&quot;}" fluid-layers="fluid.liveExample"><div class="fl-live-example-instance"></div><div class="fl-live-example-source"><pre><code>fluid.cell.effect(press =&gt; {
+    if (press &amp;&amp; fluid.cell.untracked(() =&gt; popupOpen.get()) &amp;&amp; !popup.contains(press.target)) {
+        popupOpen.set(false);
+    }
+}, [lastPress]);</code></pre></div><div class="fl-live-example-console"><div class="fl-live-example-console-title">Console</div><div class="fl-live-example-console-lines"></div></div></div>
+<p><code>untracked</code> is needed whenever an effect reads a value which it also writes, for example an effect which appends to a
 history:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">.</span><span class="nx">effect</span><span class="p">(</span><span class="nx">text</span> <span class="p">=&gt;</span> <span class="nx">fluid</span><span class="p">.</span><span class="nx">cell</span><span class="p">.</span><span class="nx">untracked</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">history</span><span class="p">.</span><span class="nx">set</span><span class="p">([...</span><span class="nx">history</span><span class="p">.</span><span class="nx">get</span><span class="p">(),</span> <span class="nx">current</span><span class="p">.</span><span class="nx">get</span><span class="p">()]);</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">current</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}),</span> <span class="p">[</span><span class="nx">validText</span><span class="p">]);</span>
-</span></span></code></pre></div><p>Without it, the effect depends on <code>history</code>, so each write reruns it, and it would append forever. An effect which keeps
+<div class="fl-live-example" fluid-potentia="{&quot;code&quot;:&quot;const validText = fluid.cell(\&quot;first\&quot;), current = fluid.cell(\&quot;start\&quot;), history = fluid.cell([]);\n\nfluid.cell.effect(text => fluid.cell.untracked(() => {\n    history.set([...history.get(), current.get()]);\n    current.set(text);\n}), [validText]);\nfluid.cell.stabilize();\n\nvalidText.set(\&quot;second\&quot;);\nfluid.cell.stabilize();\nconsole.log(history.get(), current.get()); // [\&quot;start\&quot;, \&quot;first\&quot;] second&quot;,&quot;kind&quot;:&quot;js&quot;,&quot;mode&quot;:&quot;live&quot;}" fluid-layers="fluid.liveExample"><div class="fl-live-example-instance"></div><div class="fl-live-example-source"><pre><code>const validText = fluid.cell("first"), current = fluid.cell("start"), history = fluid.cell([]);
+
+fluid.cell.effect(text =&gt; fluid.cell.untracked(() =&gt; {
+    history.set([...history.get(), current.get()]);
+    current.set(text);
+}), [validText]);
+fluid.cell.stabilize();
+
+validText.set("second");
+fluid.cell.stabilize();
+console.log(history.get(), current.get()); // ["start", "first"] second</code></pre></div><div class="fl-live-example-console"><div class="fl-live-example-console-title">Console</div><div class="fl-live-example-console-lines"></div></div></div>
+<p>Without it, the effect depends on <code>history</code>, so each write reruns it, and it would append forever. An effect which keeps
 triggering itself like this is stopped after <code>fluid.cell.maxEffectRuns</code> (100) runs within one stabilization, and is
 reported, naming the effect, through <code>fluid.cell.reportCycle</code>, which logs to <code>console.error</code>. In the Integration Language
 this is rarely needed, since a <a href="../../docs/fluid-integration-language#method"><code>$method</code></a> runs untracked - an effect which
 updates such values by calling a method needs no <code>untracked</code> of its own.</p>
-<h2 id="unavailable-values">Unavailable values</h2>
+<h2 id="unavailable-values"><a href="#unavailable-values" aria-label="Unavailable values" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Unavailable values</h2>
 <p>Some background on unavailable values is available on their <a href="../../term/unavailable-value">own page</a>. An unavailable
 value held at a cell represents a value which is either uninitialised, pending due to outstanding I/O, or an error.</p>
-<p>Unavailable values can be received by <a href="#fluidcelleffectfn-staticsources-props"><code>effect</code></a>s by marking them with the <code>isFree</code> property &mdash; otherwise, they
+<p>Unavailable values can be received by <a href="#fluidcelleffectfn-staticsources-props"><code>effect</code></a>s by marking them with the <code>isFree</code> property — otherwise, they
 only receive fully settled, concrete values.</p>
 <p>An unavailable value is created using the <code>fluid.unavailable</code> API, which in the simplest usage simply accepts a
 string holding a message explaining why the value is unavailable. These values are normally created by frameworks
 rather than users.</p>
-<h3 id="fluidunavailablecause---variety--error">fluid.unavailable(cause = {}, variety = &ldquo;error&rdquo;)</h3>
+<h3 id="fluidunavailablecause---variety--error"><a href="#fluidunavailablecause---variety--error" aria-label="fluid.unavailable(cause = {}, variety = “error”)" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>fluid.unavailable(cause = {}, variety = “error”)</h3>
 <ul>
 <li><code>{String|Object|Array} [cause={}]</code> - A list of dependencies or reasons for unavailability.</li>
-<li><code>{String} [variety=&quot;error&quot;]</code> - The variety of unavailable value:</li>
+<li><code>{String} [variety="error"]</code> - The variety of unavailable value:</li>
 <li>
 <ul>
-<li><code>&quot;error&quot;</code> indicates a syntax issue that needs design intervention.</li>
+<li><code>"error"</code> indicates a syntax issue that needs design intervention.</li>
 </ul>
 </li>
 <li>
 <ul>
-<li><code>&quot;config&quot;</code> indicates that an expected value has been configured away or is missing - the value may appear through regular user action</li>
+<li><code>"config"</code> indicates that an expected value has been configured away or is missing - the value may appear through regular user action</li>
 </ul>
 </li>
 <li>
 <ul>
-<li><code>&quot;pending&quot;</code> indicates the value depends on pending I/O which is expected to imminently resolve</li>
+<li><code>"pending"</code> indicates the value depends on pending I/O which is expected to imminently resolve</li>
 </ul>
 </li>
 <li>Returns: <code>{Unavailable}</code> An unavailable value marker.</li>
 </ul>
 <p>A special variety of unavailable value represents a value which is temporarily stale as a result of I/O pending
 to update it. This is created by <code>fluid.pending</code> which is just a wrapper for <code>fluid.unavailable</code>:</p>
-<h3 id="fluidpendingstalevalue-site">fluid.pending(staleValue, site)</h3>
+<h3 id="fluidpendingstalevalue-site"><a href="#fluidpendingstalevalue-site" aria-label="fluid.pending(staleValue, site)" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>fluid.pending(staleValue, site)</h3>
 <ul>
 <li><code>{Any} staleValue</code> - The most recently seen value before it became unavailable due to pending I/O.</li>
 <li><code>{String} site</code> - The site or resource (e.g. URL) responsible for the pending I/O.</li>
 <li>Returns: <code>{Unavailable}</code> An object representing the unavailable state due to pending I/O.</li>
 </ul>
-<h3 id="fluidisunavailabletotest">fluid.isUnavailable(totest)</h3>
+<h3 id="fluidisunavailabletotest"><a href="#fluidisunavailabletotest" aria-label="fluid.isUnavailable(totest)" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>fluid.isUnavailable(totest)</h3>
 <ul>
 <li><code>{any} totest</code> - The value to be tested for being an unavailable value</li>
 <li>Returns <code>{Boolean}</code> <code>true</code> if the supplied value was an unavailable, <code>false</code> if it is a plain value.</li>
 </ul>
 <p>For more complex examples of propagating and receiving unavailable states, please consult the test cases
 in <a href="https://github.com/fluid-project/infusion-6/blob/main/tests/framework-tests/core/js/FluidSignalsAsyncTests.js">GitHub</a>,
-and in this context, &ldquo;Error propagation across async graph&rdquo;, &ldquo;Error propagation across async surfacing as promise rejection&rdquo;.</p>
-
-
-        
-
-        
-            <hr/>
-            <section id="social-share">
-              <div class="list-inline footer-links">
-                
-
-<div class="share-box" aria-hidden="true">
-    <ul class="share">
-      
-      <li>
-        
-        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;Fluid&#43;Signals&#43;API&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-signals%2F" target="_blank" title="Share on BlueSky">
-          <i class="fab fa-fw fa-bluesky"></i>
-        </a>
-      </li>
-
-      
-      <li>
-        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fdocs%2ffluid-signals%2f&amp;text=Fluid%20Signals%20API&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </li>
-
-      
-      <li>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fdocs%2ffluid-signals%2f" target="_blank" title="Share on Facebook">
-          <i class="fab fa-facebook"></i>
-        </a>
-      </li>
-
-      
-      <li>
-        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fdocs%2ffluid-signals%2f&amp;title=Fluid%20Signals%20API" target="_blank" title="Share on Reddit">
-          <i class="fab fa-reddit"></i>
-        </a>
-      </li>
-
-      
-      <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fdocs%2ffluid-signals%2f&amp;title=Fluid%20Signals%20API" target="_blank" title="Share on LinkedIn">
-          <i class="fab fa-linkedin"></i>
-        </a>
-      </li>
-
-    </ul>
-  </div>
-  
-
-              </div>
-            </section>
-        
-
-        
-          
-
-          
-        
-      </article>
-
-      
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="../../docs/fluid-signals-background/" data-toggle="tooltip" data-placement="top" title="Fluid Signals background">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="../../docs/fluid-integration-language/" data-toggle="tooltip" data-placement="top" title="Fluid Integration Language">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-      <script src="https://giscus.app/client.js"
-                data-repo="amb26/ponder"
-                data-repo-id="R_kgDOOKllGA"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOOKllGM4CvhAS"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="0"
-                data-emit-metadata="0"
-                data-input-position="bottom"
-                data-theme="light"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script></div>
-  </div>
-</div>
-
-      <footer>
-  <div class="container">
-    
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <p class="credits copyright text-muted">
-          
-            
-              <a href="../../">Antranig Basman</a>
-            
-          
-          &nbsp;&copy;
-          2026
-
-        </p>
-        
-        <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
-          
-        </p>
-      </div>
-    </div>
-  </div>
-</footer><script defer src="../../js/katex.min.js"></script>
-<script defer src="../../js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-<script src="../../js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-
-
-
-
-
-    
-  </body>
-</html>
+and in this context, “Error propagation across async graph”, “Error propagation across async surfacing as promise rejection”.</p>
+</div><div><hr><section id="social-share"><div class="list-inline footer-links"><div aria-hidden="true" class="share-box"><ul class="share"><li><a href="https://bsky.app/intent/compose?text=Just%20reading%20a%20post%20called%20Fluid%20Signals%20API%20on%20Antranig%20Basman's%20blog%3A%20https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-signals%2F" title="Share on BlueSky" target="_blank"><i class="fab fa-fw fa-bluesky"></i></a></li><li><a href="https://twitter.com/share?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-signals%2F&text=Fluid%20Signals%20API&via=amb26ponder" title="Share on Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-signals%2F" title="Share on Facebook" target="_blank"><i class="fab fa-facebook"></i></a></li><li><a href="https://reddit.com/submit?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-signals%2F&title=Fluid%20Signals%20API" title="Share on Reddit" target="_blank"><i class="fab fa-reddit"></i></a></li><li><a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fponder.org.uk%2Fdocs%2Ffluid-signals%2F&title=Fluid%20Signals%20API" title="Share on LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a></li></ul></div></div></section></div></article><ul class="pager blog-pager"><li class="previous"><a title="Fluid tldraw integration" href="../../docs/fluid-tldraw/" data-placement="top" data-toggle="tooltip">← Previous Post</a></li><li class="next"><a title="Fluid Signals background" href="../../docs/fluid-signals-background/" data-placement="top" data-toggle="tooltip">Next Post →</a></li></ul><script data-lang="en" data-category-id="DIC_kwDOOKllGM4CvhAS" data-category="Announcements" data-repo-id="R_kgDOOKllGA" data-repo="amb26/ponder" async crossorigin="anonymous" data-theme="light" data-input-position="bottom" data-emit-metadata="0" data-reactions-enabled="0" data-strict="0" data-mapping="pathname" src="https://giscus.app/client.js"></script></div></div></div><footer><div class="container"><div class="row ponder-credits-row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p class="credits copyright text-muted"><a href="../../">Antranig Basman</a>
+                        &#160;©
+                        2026
+                    </p><p class="credits theme-by text-muted"><a href="https://github.com/fluid-project/infusion-6">Infusion 6</a> powered &#160;•&#160;
+                        Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from
+                        <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &#160;•&#160;
+                        further <a href="../../term/lithification">lithified</a> by Boz
+                    </p></div></div></div></footer><script defer src="../../js/katex.min.js" fluid-client=""></script><script onload="renderMathInElement(document.body);" defer src="../../js/auto-render.min.js" fluid-client=""></script><fluid-module src="../../js/wend-wend-b02ba16204a3/" id="wend"></fluid-module><fluid-module src="../../js/wend-beautifulWend-d18b087d22f2/" id="beautifulWend"></fluid-module><fluid-module src="../../js/wend-ponderSite-d77c30e6608f/" id="ponderSite"></fluid-module><fluid-import src="%beautifulWend/adapt/disclaimer/beautifulWend-feature-disclaimer.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/disclaimer/beautifulWend-footer-disclaimer.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/gcse/beautifulWend-document-gcse.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/gcse/beautifulWend-feature-gcse.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/gcse/beautifulWend-navbar-gcse.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/gcse/beautifulWend-navItem-gcseSearch.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/hljs/beautifulWend-document-hljs.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/hljs/beautifulWend-feature-hljs.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/multilingual/beautifulWend-feature-multilingual.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/multilingual/beautifulWend-navbar-multilingual.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/multilingual/beautifulWend-navItem-languages.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/multilingual/beautifulWend-postMeta-translations.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/piwik/beautifulWend-document-piwik.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/piwik/beautifulWend-feature-piwik.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/selfHosted/beautifulWend-document-selfHosted.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/selfHosted/beautifulWend-feature-selfHosted.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/staticman/beautifulWend-document-staticman.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/staticman/beautifulWend-feature-staticman.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/staticman/beautifulWend-postMeta-staticman.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/i18n/beautifulWend-i18n-en.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/i18n/beautifulWend-i18n.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/kinds/beautifulWend-kind-404.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/kinds/beautifulWend-kind-home.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/kinds/beautifulWend-kind-page.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/kinds/beautifulWend-kind-section.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/kinds/beautifulWend-kind-taxonomy.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/kinds/beautifulWend-kind-term.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/kinds/beautifulWend-type-page.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/kinds/beautifulWend-type-post.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-comments-giscus.vue"></fluid-import><fluid-import src="%wend/sfc/wend-alias.vue"></fluid-import><fluid-import src="%wend/sfc/wend-content.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-document.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-footer.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-header-bigimg.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-header-home.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-header-page.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-header-post.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-header.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-head.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-listPager.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-main-home.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-main-list.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-main-notFound.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-main-single.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-main-terms.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-main.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-mediaIcons.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-navbar.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-navItem-leaf.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-navItem-parent.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-navItem.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-pageMeta.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-pager.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-postMeta.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-postPreview.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-relatedPosts.vue"></fluid-import><fluid-import src="%wend/sfc/wend-scriptTag.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-shareLinks.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-site.vue"></fluid-import><fluid-import src="%wend/sfc/wend-stylesheetTag.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-tags.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-termPanel.vue"></fluid-import><fluid-import src="%ponderSite/sfc/shortcodes/wend-shortcode-figure.vue"></fluid-import><fluid-import src="%ponderSite/sfc/shortcodes/wend-shortcode-stabilization.vue"></fluid-import><fluid-import src="%ponderSite/sfc/shortcodes/wend-shortcode-vizreactive.vue"></fluid-import><fluid-import src="%infusion-6/src/components/sfc/fluid-liveExample.vue"></fluid-import><script fluid-hydrated="%infusion-6" src="../../js/infusion-6/src/framework/core/js/FluidBoot.js"></script><script data-fluid-boot-page="" fluid-hydrated="%wend" src="../../js/wend-wend-b02ba16204a3/js/pageBoot.js"></script></body></html>

@@ -1,0 +1,2319 @@
+{
+  "version": 1,
+  "commit": null,
+  "infusion": "6.5.1",
+  "template": "sha256-bc8c20dcdcbb8be7fba219f5f7f5e9f516fa2ce6ffafefc174a698866eaafc62",
+  "sources": {
+    "content/_index.md": "sha256-c19aa9bdf10e838e56d93e1f9f018c6f49f3c0f6f4a43461312dfebbc1b48ace",
+    "content/communities.md": "sha256-8adbdf97dad45ee758c98ef4f681cbd0c5f240c7950b1279a1f55ef20f97840c",
+    "content/docs/fluid-integration-language.md": "sha256-8eba5f58c343bf40d5d58137d82693bd7a49c71a85b82135d8e2a7e33eb0f4a9",
+    "content/docs/fluid-ptf.md": "sha256-8cf1424c65cab7a68d91c93396584a16aa0031b5a46c499c41b8050a02efa9c0",
+    "content/docs/fluid-signals-background.md": "sha256-09b3f79ebe7fdd3b3924a793dee1eb6df9b57a014b06a2a47ab1687bbc7241dd",
+    "content/docs/fluid-signals.md": "sha256-24d42abc79f0cc6c63035921e856bebe86798b54896f761f2dedac3552d62489",
+    "content/docs/fluid-tldraw.md": "sha256-59f8aef3ddf69e00568128eef68e82e434bfd84598defd1f50724351d3b0cd4f",
+    "content/docs/fluid-view.md": "sha256-48a2c0f0e0337cdd1f523ef640285a459e58857dd10675ce5d4d1fccecb42aa2",
+    "content/docs/linearisation-algorithm.md": "sha256-646d22dd55c06a8cbfb2165d520dadd14c139f24ecad0f2422ac3b6c166560f5",
+    "content/edit-in-infusion-privacy.md": "sha256-87a77c4a3093a629149efdb7da3a47cfd0fc1b8c0d2ab93098d357e96b44f6d3",
+    "content/infusion.md": "sha256-b7c811e755cb9656a00c030da0298b9b862f625dcdbee55384241654b0fd6ca2",
+    "content/page/about.md": "sha256-15d69eeb2d4aea825e769c28d571ed1fdc4e24f417b45708a87375608a9b6c70",
+    "content/post/2025-02-07-benchmarking-dom-reconciliation.md": "sha256-7ccc5493bf82d8a68891768e795175783957cb9bb871e6b4c1b394e55bfa6bcb",
+    "content/post/2025-03-14-development-speed.md": "sha256-dbb9c212002aee913832240b71ed12284ac8d26cd0507fed8857075f3615136d",
+    "content/post/2025-03-20-ui-as-code.md": "sha256-6fddc8ee174d3fc6659b85231b31cc833a1efd71baf21414a4c3adbfbd6b7383",
+    "content/post/2025-04-13-coming-out-of-the-shadows.md": "sha256-6ec416e63e044052b82b76e040094c0b432a7a567ebe112f89b02b6bf32caac9",
+    "content/post/2025-04-19-new-notation-era.md": "sha256-abd40223fc53974a351a36e206ae7fb9f1b95fd503f1cba69b53cb36cdb562d6",
+    "content/post/2025-06-03-substrates-vision.md": "sha256-e3aaff1b7ab044eb75c919eee0a3c55be4ffda3f87529b941b0346ac79a5741c",
+    "content/post/2025-07-01-archaeology-of-glitches.md": "sha256-55934ab7f03449cd13673edf174de75b4f1f94a2868069a43dcbb504d5611843",
+    "content/post/2026-02-20-reactivity-for-malleability.md": "sha256-5e065042edc1d56fc9ddcc91243dec0d06066fd71638929bf02f13f44961be6b",
+    "content/post/2026-03-27-ai-cries-out-for-better-notations.md": "sha256-2872999ca45eae3415d26bf5255f77ee35ec1d418ae808835aaefba4426a1f1f",
+    "content/post/2026-06-28-fully-deferred-stabilization.md": "sha256-484e420ae619fbfa80301072207a6cf47e48933abfde3606be3dcf0c82637373",
+    "content/projects.md": "sha256-56599415650749619092263dfa5d7f80c012dafad6e2f50642c1223000846809",
+    "content/term/a-good-function.md": "sha256-fcc14187a43d76cc223fd46984cea783b7c4c0ea04378873f0bae7b8030ad2aa",
+    "content/term/cod-reactivity.md": "sha256-facc8e8dc2b3a51bce194d34e348b6de19b2124c06ea6a61f70bd1d8794c81f2",
+    "content/term/disclosable-computing.md": "sha256-c28a41a579dc628b52f240e339464c7e9467f04da176f7c8b2a03e078c560fef",
+    "content/term/divergence.md": "sha256-86385f1ea3ae5749293adc5fde266f3c76ed3991b2ad6c6864d4df30c4d80793",
+    "content/term/end-user-programming.md": "sha256-5b34d30f42129ae20302ff8e4bebc5be17b02f1bcc87bb154452389cda82711e",
+    "content/term/externalisability.md": "sha256-6c3ba1a86615f75805ab1a73192f450ac1099dc71822f27dfe56878824cfce21",
+    "content/term/glitch.md": "sha256-73a60f320c9977b2ec151d1821bcf2d4cba404ca9968475de361ca4286d5bfa6",
+    "content/term/habitable.md": "sha256-f799dc81aeb7e1d2533b805a1de395953a90a9bd9ef76ecb5a44bd5e6f0126ac",
+    "content/term/integration-domain.md": "sha256-0d0eb40c914db26509e27d2e42cf14bacdda14e6b01a7d5391118f9f79be594e",
+    "content/term/lithification.md": "sha256-a071e07a1e93bf6e416805e4de860f186e63c2ba591cbf4b4992af40a2a69ea1",
+    "content/term/substrate.md": "sha256-4010e5756775bafe429d6bbd5dd419c93fe0d2d3257dca18a5d9507af2d378b2",
+    "content/term/unavailable-value.md": "sha256-e2256540c6ade1a8508ffee7e004537b1d4755401df3b0f20197976ed3c0e815",
+    "content/wip/2025-03-28-hunting-rich-editors.md": "sha256-8cbd8ba2957ac755ea28271e253a7b9833d8a845a34f6c39977b54f8e0e262b7",
+    "content/wip/2025-04-03-change-of-tack-on-templating.md": "sha256-98317b42d661c321e553840c7c4acfae973d4a54dd516ada46347a5af4ea03f4",
+    "content/wip/2025-04-04-staring-at-the-wand.md": "sha256-8e17e7be7aaee133ee95f214f77ef1a7362a53fd543661c1a182f0fdbf73451c",
+    "content/wip/2025-04-07-templates-and-weird-attributes-together.md": "sha256-125466c5c95f3f4d406068a6b570ca672a87ec38cf2dfc5de47ee79b192245be",
+    "content/wip/2025-04-21-co-occurrences-are-here-again.md": "sha256-a478a8c1382bbb627371cc12e75bfadc36b6fe6cc3ca8a1afc0469cea9e2fe1a",
+    "content/wip/2025-04-24-learning-from-codestrates.md": "sha256-95a217245aa33bbf8cea18394864bc209f5187999d7719cd15f3ad388974d632",
+    "content/wip/2025-09-25-more-inaturalist-shenanigans.md": "sha256-41e80eb7d1d014569044d8b1229e0680a6fdfe3f06981797e1c35fa0ccaf87ab",
+    "content/wip/2025-09-26-this-week's-reactive-chats.md": "sha256-b5b76555ad7a735e2d5613d87340815ea961b8beaadb3f4eb1f34be127ae1d71",
+    "content/wip/2025-09-30-module-system-once-more.md": "sha256-32ba8c719ea8dabec140216134575d4c28c31033d88bc2df3407ea4b15e086bd",
+    "content/wip/2025-10-07-josh-horowitz-review.md": "sha256-de3e83e1bc9f50215e17eb03a61e12ac589eabdd095f9f68bcf98cea3d0cd604",
+    "content/wip/2025-12-12-infinite-apps-and-unshaking.md": "sha256-f8c305062acf8db77753a1776f33fe5a45972e07b7f60e866e2e64e6bd5c3c85",
+    "content/wip/2025-12-15-understanding-reactivity.md": "sha256-cd815bcc9d853d1de079663423c95b87a196cd4667befc6c56858b8c74c10266",
+    "content/wip/2026-05-25-towards-deferred-stabilisation.md": "sha256-991a8f91919eb836126bfa2ac278e79bdf6ff89ab630a9718898b09ea74dc1c1",
+    "content/wip/2026-07-31-researching-in-browser-ai.md": "sha256-1f288b78b96c2fe283bbf41a42cd71aa96eb68552c5bf3d4585a52611b95257c",
+    "content/wip/_index.md": "sha256-9b4e0e809645bf1d01a84e3768c48e45aae9539ead4429fa21558b9d13e0a1da",
+    "wend/override/beautifulWend/sfc/beautifulWend-footer.vue": "sha256-0e7407de182a644fc7a80bd262df843fdf27f470189ab0929ba72ca717e35418",
+    "wend/override/beautifulWend/sfc/beautifulWend-navbar.vue": "sha256-7c0e5b12cef631b97ea4bc1c578bb3a2fab34f9876524569bfc298c338017b20",
+    "wend.json": "sha256-e225e29ce6c7520086d1aa231fe733a0cce0ca4dc05f6f4a8b296fa400a21bb3"
+  },
+  "pages": {
+    "/": {
+      "title": "Antranig Basman",
+      "kind": "home",
+      "headings": [],
+      "outputPath": "/index.html",
+      "output": "sha256-70ecfddbe439d01e9f89494452573008fafab5797bd7548dcac746cb4cc7ce72",
+      "inputs": [
+        "#template",
+        "content/post/2025-02-07-benchmarking-dom-reconciliation.md",
+        "content/post/2025-03-14-development-speed.md",
+        "content/post/2025-03-20-ui-as-code.md",
+        "content/post/2025-04-13-coming-out-of-the-shadows.md",
+        "content/post/2025-04-19-new-notation-era.md",
+        "content/post/2025-06-03-substrates-vision.md",
+        "content/post/2025-07-01-archaeology-of-glitches.md",
+        "content/post/2026-02-20-reactivity-for-malleability.md",
+        "content/post/2026-03-27-ai-cries-out-for-better-notations.md",
+        "content/post/2026-06-28-fully-deferred-stabilization.md"
+      ]
+    },
+    "/post/": {
+      "title": "post",
+      "kind": "section",
+      "headings": [],
+      "outputPath": "/post/index.html",
+      "output": "sha256-0c7a6cff6de59b861f70c423b84d20e9cd30f2a212c6b73cdf15e2558f484e47",
+      "inputs": [
+        "#template",
+        "content/post/2025-02-07-benchmarking-dom-reconciliation.md",
+        "content/post/2025-03-14-development-speed.md",
+        "content/post/2025-03-20-ui-as-code.md",
+        "content/post/2025-04-13-coming-out-of-the-shadows.md",
+        "content/post/2025-04-19-new-notation-era.md",
+        "content/post/2025-06-03-substrates-vision.md",
+        "content/post/2025-07-01-archaeology-of-glitches.md",
+        "content/post/2026-02-20-reactivity-for-malleability.md",
+        "content/post/2026-03-27-ai-cries-out-for-better-notations.md",
+        "content/post/2026-06-28-fully-deferred-stabilization.md"
+      ]
+    },
+    "/wip/": {
+      "title": "wip",
+      "kind": "section",
+      "headings": [],
+      "outputPath": "/wip/index.html",
+      "output": "sha256-1f8cee913a1c2f821325e5086981f0fa6f3eab4db31df4a57c51dc5414716a63",
+      "inputs": [
+        "#template",
+        "content/wip/2025-04-21-co-occurrences-are-here-again.md",
+        "content/wip/2025-04-24-learning-from-codestrates.md",
+        "content/wip/2025-09-25-more-inaturalist-shenanigans.md",
+        "content/wip/2025-09-26-this-week's-reactive-chats.md",
+        "content/wip/2025-09-30-module-system-once-more.md",
+        "content/wip/2025-10-07-josh-horowitz-review.md",
+        "content/wip/2025-12-12-infinite-apps-and-unshaking.md",
+        "content/wip/2025-12-15-understanding-reactivity.md",
+        "content/wip/2026-05-25-towards-deferred-stabilisation.md",
+        "content/wip/2026-07-31-researching-in-browser-ai.md"
+      ]
+    },
+    "/wip/page/2/": {
+      "title": "wip",
+      "kind": "section",
+      "headings": [],
+      "outputPath": "/wip/page/2/index.html",
+      "output": "sha256-e046084b7c8dc13de834f23cde9c83aa7ac381f5cdaeade3f75676c115f5b6f2",
+      "inputs": [
+        "#template",
+        "content/wip/2025-03-28-hunting-rich-editors.md",
+        "content/wip/2025-04-03-change-of-tack-on-templating.md",
+        "content/wip/2025-04-04-staring-at-the-wand.md",
+        "content/wip/2025-04-07-templates-and-weird-attributes-together.md"
+      ]
+    },
+    "/docs/": {
+      "title": "docs",
+      "kind": "section",
+      "headings": [],
+      "outputPath": "/docs/index.html",
+      "output": "sha256-ace40283ac77aec4a0286befaf12412a8684137332ffba1053ca8502bfe84c30",
+      "inputs": [
+        "#template",
+        "content/docs/fluid-integration-language.md",
+        "content/docs/fluid-ptf.md",
+        "content/docs/fluid-signals-background.md",
+        "content/docs/fluid-signals.md",
+        "content/docs/fluid-tldraw.md",
+        "content/docs/fluid-view.md",
+        "content/docs/linearisation-algorithm.md"
+      ]
+    },
+    "/page/": {
+      "title": "page",
+      "kind": "section",
+      "headings": [],
+      "outputPath": "/page/index.html",
+      "output": "sha256-fec430bb6ac7f36f3c264abc0e440ab9983aadc1a52f4f658e4fefbeca06457a",
+      "inputs": [
+        "#template",
+        "content/page/about.md"
+      ]
+    },
+    "/term/": {
+      "title": "term",
+      "kind": "section",
+      "headings": [],
+      "outputPath": "/term/index.html",
+      "output": "sha256-cf0cf888d36dc594e5bdbe8e54d97d86d35cc6fb8268e108bf4631a97f5d1a87",
+      "inputs": [
+        "#template",
+        "content/term/a-good-function.md",
+        "content/term/cod-reactivity.md",
+        "content/term/disclosable-computing.md",
+        "content/term/divergence.md",
+        "content/term/end-user-programming.md",
+        "content/term/externalisability.md",
+        "content/term/glitch.md",
+        "content/term/habitable.md",
+        "content/term/integration-domain.md",
+        "content/term/lithification.md"
+      ]
+    },
+    "/term/page/2/": {
+      "title": "term",
+      "kind": "section",
+      "headings": [],
+      "outputPath": "/term/page/2/index.html",
+      "output": "sha256-fee4b837781fe93596ae6820da2b7295a0609eb504849ce2882659b22e06a03d",
+      "inputs": [
+        "#template",
+        "content/term/substrate.md",
+        "content/term/unavailable-value.md"
+      ]
+    },
+    "/post/2026-06-28-fully-deferred-stabilization/": {
+      "title": "Bridging the gap between static and dynamic analysis through fully deferred stabilization",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "split-between-systems-and-languages",
+          "level": 2,
+          "text": "Split between systems and languages"
+        },
+        {
+          "id": "traditional-homeostasis-synchronous-depth-first",
+          "level": 2,
+          "text": "Traditional homeostasis: Synchronous, depth-first"
+        },
+        {
+          "id": "fully-deferred-stabilization",
+          "level": 2,
+          "text": "Fully deferred stabilization"
+        },
+        {
+          "id": "contextually-informed-analysis",
+          "level": 3,
+          "text": "Contextually informed analysis"
+        },
+        {
+          "id": "illustration",
+          "level": 3,
+          "text": "Illustration"
+        }
+      ],
+      "outputPath": "/post/2026-06-28-fully-deferred-stabilization/index.html",
+      "output": "sha256-5f01f7337eee321c4bca492b9b0f536915be87c99a214ef9226750aaf9c23d6f",
+      "inputs": [
+        "#template",
+        "content/post/2026-06-28-fully-deferred-stabilization.md"
+      ]
+    },
+    "/wip/2026-05-25-towards-deferred-stabilisation/": {
+      "title": "Towards Deferred Stabilisation",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "back-to-the-coalface",
+          "level": 2,
+          "text": "Back to the Coalface"
+        },
+        {
+          "id": "what-is-the-scope-of-a-reactive-framework",
+          "level": 2,
+          "text": "What is the scope of a reactive framework?"
+        },
+        {
+          "id": "deferred-stabilization-has-always-been-planned",
+          "level": 2,
+          "text": "Deferred stabilization has always been planned"
+        }
+      ],
+      "outputPath": "/wip/2026-05-25-towards-deferred-stabilisation/index.html",
+      "output": "sha256-29c0c866d2bd05487aa497bfe5853d408de715d2de982423b18bc66085237b53",
+      "inputs": [
+        "#template",
+        "content/wip/2026-05-25-towards-deferred-stabilisation.md"
+      ]
+    },
+    "/wip/2026-07-31-researching-in-browser-ai/": {
+      "title": "Researching in-browser AI",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "q1-is-there-a-chrome-extension-that-logs-into-ai-and-allows-mcp-from-in-page-js",
+          "level": 1,
+          "text": "Q1: Is there a Chrome extension that logs into AI and allows MCP from in-page js?"
+        },
+        {
+          "id": "core-architecture",
+          "level": 2,
+          "text": "Core Architecture"
+        },
+        {
+          "id": "1-registering-the-tool",
+          "level": 2,
+          "text": "1. Registering the Tool"
+        },
+        {
+          "id": "2-declarative-fallback-html-form",
+          "level": 2,
+          "text": "2. Declarative Fallback (HTML Form)"
+        },
+        {
+          "id": "q2-neither-i-want-locally-running-js-to-be-able-to-manually-synthesize-the-contents-of-the-context-window-and-invoke-ai-to-retrieve-its-response",
+          "level": 1,
+          "text": "Q2: Neither, I want locally running JS to be able to manually synthesize the contents of the context window and invoke AI to retrieve its response"
+        },
+        {
+          "id": "1-setup-flags",
+          "level": 2,
+          "text": "1. Setup Flags"
+        },
+        {
+          "id": "2-the-in-page-javascript-implementation",
+          "level": 2,
+          "text": "2. The In-Page JavaScript Implementation"
+        },
+        {
+          "id": "the-window-ai-implementation",
+          "level": 2,
+          "text": "The Window AI Implementation:"
+        },
+        {
+          "id": "q3-what-if-i-want-to-interact-with-a-cloud-model-such-as-claude-via-this-route",
+          "level": 1,
+          "text": "Q3: What if I want to interact with a cloud model such as Claude via this route?"
+        },
+        {
+          "id": "in-page-js-code",
+          "level": 2,
+          "text": "In-Page JS Code:"
+        },
+        {
+          "id": "in-page-js-code-1",
+          "level": 2,
+          "text": "In-Page JS Code:"
+        },
+        {
+          "id": "q4-alex-atallah-seemed-to-cease-to-maintain-windowio-about-3-years-ago-see-if-you-can-find-out-why-andor-whether-this-work-was-of-interest-to-others-or-why-not-picked-up",
+          "level": 1,
+          "text": "Q4: Alex Atallah seemed to cease to maintain window.io about 3 years ago, see if you can find out why and/or whether this work was of interest to others or why not picked up"
+        },
+        {
+          "id": "1-why-alex-atallah-stopped-maintaining-it",
+          "level": 2,
+          "text": "1. Why Alex Atallah Stopped Maintaining It"
+        },
+        {
+          "id": "2-was-the-work-picked-up-by-others",
+          "level": 2,
+          "text": "2. Was the Work Picked Up by Others?"
+        },
+        {
+          "id": "a-transition-to-browser-native-standards",
+          "level": 2,
+          "text": "A. Transition to Browser-Native Standards"
+        },
+        {
+          "id": "b-the-rise-of-server-side-routing-the-winner",
+          "level": 2,
+          "text": "B. The Rise of Server-Side Routing (The Winner)"
+        },
+        {
+          "id": "c-evolution-into-agentic-browser-tools",
+          "level": 2,
+          "text": "C. Evolution into Agentic Browser Tools"
+        },
+        {
+          "id": "summary",
+          "level": 2,
+          "text": "Summary"
+        },
+        {
+          "id": "q5-none-of-these-seem-to-accomplish-the-original-goals-of-windowai---to-allow-an-individual-user-access-to-a-specific-cloud-provider-that-they-have-already-paid-for-an-account-with",
+          "level": 1,
+          "text": "Q5: None of these seem to accomplish the original goals of window.ai - to allow an individual user access to a specific cloud provider that they have already paid for an account with"
+        },
+        {
+          "id": "how-to-build-your-own-local-injection-pipeline",
+          "level": 2,
+          "text": "How to build your own local injection pipeline:"
+        },
+        {
+          "id": "q6-does-some-barrier-prevent-the-source-for-windowai-being-forked-modernised-and-redeployed",
+          "level": 1,
+          "text": "Q6. Does some barrier prevent the source for window.ai being forked, modernised and redeployed?"
+        },
+        {
+          "id": "2-the-defensive-barrier-script-scraping-warfare",
+          "level": 2,
+          "text": "2. The Defensive Barrier: Script-Scraping Warfare"
+        },
+        {
+          "id": "3-the-protocol-shift-mcp-rendered-it-archaic",
+          "level": 2,
+          "text": "3. The Protocol Shift: MCP Rendered it Archaic"
+        },
+        {
+          "id": "4-browser-vendors-stole-the-monopolies",
+          "level": 2,
+          "text": "4. Browser Vendors Stole the Monopolies"
+        },
+        {
+          "id": "q7-can-i-get-and-use-such-an-api-key-from-a-20month-account",
+          "level": 1,
+          "text": "Q7: Can I get and use such an API key from a $20/month account?"
+        },
+        {
+          "id": "1-the-headless-terminal-wrap",
+          "level": 2,
+          "text": "1. The Headless Terminal Wrap"
+        },
+        {
+          "id": "2-cookie-extraction-session-token-scraping",
+          "level": 2,
+          "text": "2. Cookie Extraction (Session Token Scraping)"
+        },
+        {
+          "id": "q8-expand-on-claude-local-terminal-agent-route---could-a-dedicated-chrome-extension-act-as-such-an-agent",
+          "level": 1,
+          "text": "Q8: Expand on Claude local terminal agent route - could a dedicated chrome extension act as such an agent?"
+        },
+        {
+          "id": "step-1-the-in-page-javascript-your-local-app",
+          "level": 2,
+          "text": "Step 1: The In-Page JavaScript (Your Local App)"
+        },
+        {
+          "id": "step-2-the-custom-extension-contentjs--backgroundjs",
+          "level": 2,
+          "text": "Step 2: The Custom Extension (content.js + background.js)"
+        },
+        {
+          "id": "step-3-the-native-app-a-20-line-nodejs-script",
+          "level": 2,
+          "text": "Step 3: The Native App (A 20-line Node.js Script)"
+        }
+      ],
+      "outputPath": "/wip/2026-07-31-researching-in-browser-ai/index.html",
+      "output": "sha256-b772df9d2bd592227fee19cbabcb1e24f1a027a597fd7a1845b1ba13b5c05487",
+      "inputs": [
+        "#template",
+        "content/wip/2026-07-31-researching-in-browser-ai.md"
+      ]
+    },
+    "/post/2026-03-27-ai-cries-out-for-better-notations/": {
+      "title": "AI cries out for better notations",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/post/2026-03-27-ai-cries-out-for-better-notations/index.html",
+      "output": "sha256-3823c680a6bdaec4db7f6908c1444fd699aa529eb90bc6955b66e35f4c032e3f",
+      "inputs": [
+        "#template",
+        "content/post/2026-03-27-ai-cries-out-for-better-notations.md"
+      ]
+    },
+    "/post/2026-02-20-reactivity-for-malleability/": {
+      "title": "fluid.cell: A reactive implementation supporting malleable substrates",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "abstract",
+          "level": 3,
+          "text": "Abstract"
+        },
+        {
+          "id": "why-reactivity",
+          "level": 2,
+          "text": "Why reactivity?"
+        },
+        {
+          "id": "reactivity-for-disclosure",
+          "level": 3,
+          "text": "Reactivity for disclosure"
+        },
+        {
+          "id": "reactivity-for-liveness",
+          "level": 3,
+          "text": "Reactivity for liveness"
+        },
+        {
+          "id": "fine-grained-and-coarse-grained-reactivity-push-vs-pull",
+          "level": 3,
+          "text": "Fine-grained and coarse-grained reactivity, push vs pull"
+        },
+        {
+          "id": "substrate-nature-must-coexist-with-imperative-and-functional-backgrounds",
+          "level": 3,
+          "text": "Substrate nature must coexist with imperative and functional backgrounds"
+        },
+        {
+          "id": "fluidcell-offers-reactive-competence-for-substrates",
+          "level": 3,
+          "text": "fluid.cell offers reactive competence for substrates"
+        },
+        {
+          "id": "two-pillars-of-reactive-competence",
+          "level": 2,
+          "text": "Two pillars of reactive competence"
+        },
+        {
+          "id": "glitch-freedom",
+          "level": 3,
+          "text": "Glitch freedom"
+        },
+        {
+          "id": "early-cutoff",
+          "level": 3,
+          "text": "Early cutoff"
+        },
+        {
+          "id": "supporting-open-substrates",
+          "level": 2,
+          "text": "Supporting open substrates"
+        },
+        {
+          "id": "support-for-graphs-with-bidirectional-arcs-malleably-authorable",
+          "level": 3,
+          "text": "Support for graphs with bidirectional arcs, malleably authorable"
+        },
+        {
+          "id": "agnostic-to-asynchrony",
+          "level": 3,
+          "text": "Agnostic to asynchrony"
+        },
+        {
+          "id": "accounting-for-cause-of-updates",
+          "level": 3,
+          "text": "Accounting for cause of updates"
+        },
+        {
+          "id": "short-circuit-behaviour-on-errors-and-incompletion",
+          "level": 3,
+          "text": "Short-circuit behaviour on errors and incompletion"
+        },
+        {
+          "id": "dynamic-dependency-discovery",
+          "level": 3,
+          "text": "Dynamic dependency discovery"
+        },
+        {
+          "id": "motivation-and-roadmap",
+          "level": 2,
+          "text": "Motivation and roadmap"
+        },
+        {
+          "id": "consequences-of-bidirectionality",
+          "level": 3,
+          "text": "Consequences of bidirectionality"
+        },
+        {
+          "id": "roadmap-to-malleability",
+          "level": 3,
+          "text": "Roadmap to malleability"
+        },
+        {
+          "id": "structural-lensing-through-if-and-for",
+          "level": 4,
+          "text": "Structural lensing through $if and $for"
+        },
+        {
+          "id": "polymorphism-via-indirection-layers",
+          "level": 4,
+          "text": "Polymorphism via indirection: $layers$"
+        },
+        {
+          "id": "feature-comparison",
+          "level": 2,
+          "text": "Feature comparison"
+        },
+        {
+          "id": "demo-key",
+          "level": 2,
+          "text": "Demo key"
+        }
+      ],
+      "outputPath": "/post/2026-02-20-reactivity-for-malleability/index.html",
+      "output": "sha256-541ba85e5d2103a762480061e759b175f1a244ee9490eb32342352b1d9feca15",
+      "inputs": [
+        "#template",
+        "content/post/2026-02-20-reactivity-for-malleability.md"
+      ]
+    },
+    "/wip/2025-12-15-understanding-reactivity/": {
+      "title": "Understanding Reactivity",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "attractions-of-preact-signals",
+          "level": 3,
+          "text": "Attractions of preact-signals"
+        },
+        {
+          "id": "apparent-pluralism-of-reactivity",
+          "level": 3,
+          "text": "Apparent pluralism of reactivity"
+        },
+        {
+          "id": "why-was-i-notified",
+          "level": 3,
+          "text": "Why was I notified?"
+        },
+        {
+          "id": "milos-golden-malleability",
+          "level": 3,
+          "text": "Milo’s golden malleability"
+        },
+        {
+          "id": "from-two-to-three",
+          "level": 3,
+          "text": "From two to three"
+        },
+        {
+          "id": "essential-unity-of-reactivity",
+          "level": 3,
+          "text": "Essential unity of reactivity"
+        },
+        {
+          "id": "the-mysterious-frontier",
+          "level": 3,
+          "text": "The mysterious frontier"
+        }
+      ],
+      "outputPath": "/wip/2025-12-15-understanding-reactivity/index.html",
+      "output": "sha256-6d985bbb7400381bdba2d2d010e8c7e38f50831ad62a5c824f3169695cfca685",
+      "inputs": [
+        "#template",
+        "content/wip/2025-12-15-understanding-reactivity.md"
+      ]
+    },
+    "/wip/2025-12-12-infinite-apps-and-unshaking/": {
+      "title": "Infinite Apps, Asynchrony and Tree Unshaking",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "infinite-software",
+          "level": 3,
+          "text": "Infinite software"
+        },
+        {
+          "id": "tree-unshaking",
+          "level": 3,
+          "text": "Tree unshaking"
+        },
+        {
+          "id": "asynchronous-and-partial-construction",
+          "level": 3,
+          "text": "Asynchronous and partial construction"
+        },
+        {
+          "id": "signals-from-selectors",
+          "level": 3,
+          "text": "Signals from selectors"
+        },
+        {
+          "id": "anticipatory-construction",
+          "level": 3,
+          "text": "Anticipatory construction"
+        },
+        {
+          "id": "mapping-the-infinite-world",
+          "level": 3,
+          "text": "Mapping the infinite world"
+        }
+      ],
+      "outputPath": "/wip/2025-12-12-infinite-apps-and-unshaking/index.html",
+      "output": "sha256-cafef34530df40fe1ebdf8393c88c9a16819a37858095364f4c1cf1840bfae3f",
+      "inputs": [
+        "#template",
+        "content/wip/2025-12-12-infinite-apps-and-unshaking.md"
+      ]
+    },
+    "/wip/2025-10-07-josh-horowitz-review/": {
+      "title": "Josh Horowitz Review",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "other-things-im-curious-about-roughly-chronologically",
+          "level": 4,
+          "text": "Other things I’m curious about, roughly chronologically"
+        }
+      ],
+      "outputPath": "/wip/2025-10-07-josh-horowitz-review/index.html",
+      "output": "sha256-632a05afa2b0d87a67e3250693b10cfc030ae70bde48ff633b1c75c1c295ac1d",
+      "inputs": [
+        "#template",
+        "content/wip/2025-10-07-josh-horowitz-review.md"
+      ]
+    },
+    "/wip/2025-09-30-module-system-once-more/": {
+      "title": "The Module System Once More",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "when-one-infusion-meets-another",
+          "level": 4,
+          "text": "When one Infusion meets another"
+        },
+        {
+          "id": "start-simple---consolidate-build-code",
+          "level": 4,
+          "text": "Start simple - consolidate build code"
+        }
+      ],
+      "outputPath": "/wip/2025-09-30-module-system-once-more/index.html",
+      "output": "sha256-9fa2a36136dae19991e24357949471a0a87fd655bb390fb70ff88aeb0ed9151b",
+      "inputs": [
+        "#template",
+        "content/wip/2025-09-30-module-system-once-more.md"
+      ]
+    },
+    "/wip/2025-09-26-this-weeks-reactive-chats/": {
+      "title": "This week's reactive chats",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "alien-signals-and-adapton",
+          "level": 4,
+          "text": "Alien signals and Adapton"
+        },
+        {
+          "id": "reactivity-and-glitches",
+          "level": 4,
+          "text": "Reactivity and glitches"
+        },
+        {
+          "id": "dan-ingalls-fabrik",
+          "level": 4,
+          "text": "Dan Ingalls’ Fabrik"
+        },
+        {
+          "id": "bidirectionality-in-dataflow",
+          "level": 4,
+          "text": "Bidirectionality in dataflow"
+        },
+        {
+          "id": "ergonomic-problems-with-preact-signals",
+          "level": 4,
+          "text": "Ergonomic problems with preact-signals"
+        },
+        {
+          "id": "glitches-are-just-the-tip",
+          "level": 4,
+          "text": "Glitches are just the tip"
+        },
+        {
+          "id": "unavailable-values",
+          "level": 4,
+          "text": "Unavailable values"
+        },
+        {
+          "id": "helpful-pointers",
+          "level": 4,
+          "text": "Helpful pointers"
+        },
+        {
+          "id": "on-to-clemens",
+          "level": 3,
+          "text": "On to Clemens"
+        },
+        {
+          "id": "hierarchy-of-good-functions",
+          "level": 4,
+          "text": "Hierarchy of good functions"
+        }
+      ],
+      "outputPath": "/wip/2025-09-26-this-weeks-reactive-chats/index.html",
+      "output": "sha256-c50480ce5e7c9b2cf7b6a86f1d6518fbbc3f70e7a6a8b2065d76f55294a4514e",
+      "inputs": [
+        "#template",
+        "content/wip/2025-09-26-this-week's-reactive-chats.md"
+      ]
+    },
+    "/wip/2025-09-25-more-inaturalist-shenanigans/": {
+      "title": "More iNaturalist Shenanigans",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "commentary",
+          "level": 4,
+          "text": "Commentary"
+        }
+      ],
+      "outputPath": "/wip/2025-09-25-more-inaturalist-shenanigans/index.html",
+      "output": "sha256-44bd3063732bcaff86527cf1092675d7f6f880927ca87ad299f2dac4c9174bb0",
+      "inputs": [
+        "#template",
+        "content/wip/2025-09-25-more-inaturalist-shenanigans.md"
+      ]
+    },
+    "/post/2025-07-01-archaeology-of-glitches/": {
+      "title": "Archaeology of Glitches",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "glitches-appear-in-the-literature",
+          "level": 4,
+          "text": "Glitches appear in the literature"
+        },
+        {
+          "id": "how-can-glitch-freedom-be-demonstrated",
+          "level": 4,
+          "text": "How can glitch-freedom be demonstrated?"
+        },
+        {
+          "id": "glitch-freedom-in-practice-without-this-being-in-focus",
+          "level": 4,
+          "text": "Glitch-freedom in practice without this being in focus"
+        },
+        {
+          "id": "commodity-signals-implementations",
+          "level": 4,
+          "text": "Commodity signals implementations"
+        },
+        {
+          "id": "two-important-non-commodity-systems-adapton-and-observable",
+          "level": 4,
+          "text": "Two important non-commodity systems: Adapton and Observable"
+        }
+      ],
+      "outputPath": "/post/2025-07-01-archaeology-of-glitches/index.html",
+      "output": "sha256-fdd826803ee2204ebaea8f3f66a5ce84e0ba2250c7cd3de307e1a2cc740f81ea",
+      "inputs": [
+        "#template",
+        "content/post/2025-07-01-archaeology-of-glitches.md"
+      ]
+    },
+    "/post/2025-06-03-substrates-vision/": {
+      "title": "Substrates Vision Statement",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "to-disclosable-computing-through-concrete-abstractions",
+          "level": 2,
+          "text": "To disclosable computing through concrete abstractions"
+        },
+        {
+          "id": "what-is-a-substrate",
+          "level": 3,
+          "text": "What is a substrate?"
+        },
+        {
+          "id": "substrates-and-malleability",
+          "level": 3,
+          "text": "Substrates and Malleability"
+        },
+        {
+          "id": "disclosure-and-integration",
+          "level": 3,
+          "text": "Disclosure and Integration"
+        },
+        {
+          "id": "composition-and-components",
+          "level": 3,
+          "text": "Composition and Components"
+        },
+        {
+          "id": "errors-and-asynchrony",
+          "level": 3,
+          "text": "Errors and Asynchrony"
+        },
+        {
+          "id": "why-improve-notations-if-all-code-will-be-written-by-ai",
+          "level": 3,
+          "text": "Why improve notations if all code will be written by AI?"
+        },
+        {
+          "id": "upcoming-challenges",
+          "level": 3,
+          "text": "Upcoming challenges:"
+        },
+        {
+          "id": "better-reactive-primitives",
+          "level": 4,
+          "text": "Better reactive primitives:"
+        },
+        {
+          "id": "better-layout-primitives",
+          "level": 4,
+          "text": "Better layout primitives:"
+        },
+        {
+          "id": "references",
+          "level": 3,
+          "text": "References:"
+        }
+      ],
+      "outputPath": "/post/2025-06-03-substrates-vision/index.html",
+      "output": "sha256-f0d253017577fc0b0fdae1cb65d7baff4b55466746853ff4148f63c6e15f734a",
+      "inputs": [
+        "#template",
+        "content/post/2025-06-03-substrates-vision.md"
+      ]
+    },
+    "/wip/2025-04-24-learning-from-codestrates/": {
+      "title": "Learning from Codestrates",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "reuse-and-abstractions-in-substrates",
+          "level": 3,
+          "text": "Reuse and abstractions in Substrates"
+        },
+        {
+          "id": "taking-a-codestrate-for-a-spin",
+          "level": 3,
+          "text": "Taking a Codestrate for a Spin"
+        },
+        {
+          "id": "the-quine-flame",
+          "level": 3,
+          "text": "The Quine Flame"
+        }
+      ],
+      "outputPath": "/wip/2025-04-24-learning-from-codestrates/index.html",
+      "output": "sha256-99013807d12e0c917efb34d7b0f33e937dcb7101a4c8e566455cb200bfc65509",
+      "inputs": [
+        "#template",
+        "content/wip/2025-04-24-learning-from-codestrates.md"
+      ]
+    },
+    "/wip/2025-04-21-co-occurrences-are-here-again/": {
+      "title": "Co-occurrences are here again",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "reactive-control-flow",
+          "level": 3,
+          "text": "Reactive control flow"
+        },
+        {
+          "id": "possible-return-of-merge-policies",
+          "level": 3,
+          "text": "Possible return of merge policies"
+        }
+      ],
+      "outputPath": "/wip/2025-04-21-co-occurrences-are-here-again/index.html",
+      "output": "sha256-f68a6dc7f21b20de46c926a725002e465490d984939855944300b1477e99d7f1",
+      "inputs": [
+        "#template",
+        "content/wip/2025-04-21-co-occurrences-are-here-again.md"
+      ]
+    },
+    "/post/2025-04-19-new-notation-era/": {
+      "title": "An era for new notations",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "oversight-of-code",
+          "level": 2,
+          "text": "Oversight of code"
+        },
+        {
+          "id": "decline-of-incumbency",
+          "level": 2,
+          "text": "Decline of incumbency"
+        }
+      ],
+      "outputPath": "/post/2025-04-19-new-notation-era/index.html",
+      "output": "sha256-7128abb3123d8ad7d513a2bcb713a327420db69613983e151b12d02e725370f7",
+      "inputs": [
+        "#template",
+        "content/post/2025-04-19-new-notation-era.md"
+      ]
+    },
+    "/post/2025-04-13-coming-out-of-the-shadows/": {
+      "title": "Coming Out of the Shadows",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "this-is-not-control-flow",
+          "level": 3,
+          "text": "This is not control flow"
+        },
+        {
+          "id": "the-new-paradigm-is-an-old-paradigm",
+          "level": 3,
+          "text": "The new paradigm is an old paradigm"
+        }
+      ],
+      "outputPath": "/post/2025-04-13-coming-out-of-the-shadows/index.html",
+      "output": "sha256-d6c206ae0185e76c2bfd19c4ada2fd5657b7fff353b30cb79f1d2327c3d87a5e",
+      "inputs": [
+        "#template",
+        "content/post/2025-04-13-coming-out-of-the-shadows.md"
+      ]
+    },
+    "/wip/2025-04-07-templates-and-weird-attributes-together/": {
+      "title": "Templates and weird attributes together",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/wip/2025-04-07-templates-and-weird-attributes-together/index.html",
+      "output": "sha256-95cf592dd0b8fd5dc8f6cf7600826785c2d1761234e1073b236fe6379f7ed753",
+      "inputs": [
+        "#template",
+        "content/wip/2025-04-07-templates-and-weird-attributes-together.md"
+      ]
+    },
+    "/wip/2025-04-04-staring-at-the-wand/": {
+      "title": "Staring at the wand",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/wip/2025-04-04-staring-at-the-wand/index.html",
+      "output": "sha256-83204dc8e2c922dde5942c00c1f00e22334d256ee957d72d565187f019afa182",
+      "inputs": [
+        "#template",
+        "content/wip/2025-04-04-staring-at-the-wand.md"
+      ]
+    },
+    "/wip/2025-04-03-change-of-tack-on-templating/": {
+      "title": "Change of Tack on Templating",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/wip/2025-04-03-change-of-tack-on-templating/index.html",
+      "output": "sha256-ee3a9eadc9fd3b5f0d6f6d09e3d8697e4bf8f75d10476d1acfbaea89d530080d",
+      "inputs": [
+        "#template",
+        "content/wip/2025-04-03-change-of-tack-on-templating.md"
+      ]
+    },
+    "/wip/2025-03-28-hunting-rich-editors/": {
+      "title": "Hunting rich editors",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/wip/2025-03-28-hunting-rich-editors/index.html",
+      "output": "sha256-95ea1790848315c47869a35b9e50f23b5c2f681d917059564c0892ad3586a305",
+      "inputs": [
+        "#template",
+        "content/wip/2025-03-28-hunting-rich-editors.md"
+      ]
+    },
+    "/post/2025-03-20-ui-as-code/": {
+      "title": "On UI as code",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "ui-as-code-harbours-assumptions",
+          "level": 3,
+          "text": "UI as code harbours assumptions"
+        },
+        {
+          "id": "a-very-innocuous-seeming-design-change",
+          "level": 3,
+          "text": "A very innocuous-seeming design change"
+        },
+        {
+          "id": "jungle-dom-skills",
+          "level": 3,
+          "text": "Jungle DOM skills"
+        },
+        {
+          "id": "putting-it-all-together",
+          "level": 3,
+          "text": "Putting it all together"
+        },
+        {
+          "id": "what-does-ui-as-code-assume",
+          "level": 3,
+          "text": "What does UI as Code assume?"
+        },
+        {
+          "id": "building-a-substrate",
+          "level": 3,
+          "text": "Building a Substrate"
+        }
+      ],
+      "outputPath": "/post/2025-03-20-ui-as-code/index.html",
+      "output": "sha256-77d55a5c828370e6b51d27dad8cda14505db457c6eab6f39372198a0ca0c8246",
+      "inputs": [
+        "#template",
+        "content/post/2025-03-20-ui-as-code.md"
+      ]
+    },
+    "/post/2025-03-14-development-speed/": {
+      "title": "On Development Speed",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/post/2025-03-14-development-speed/index.html",
+      "output": "sha256-a46a2937adea7ef157d087d6671b2eb25ad688a1e732f49bf335c7d28371ff81",
+      "inputs": [
+        "#template",
+        "content/post/2025-03-14-development-speed.md"
+      ]
+    },
+    "/post/2025-02-07-benchmarking-dom-reconciliation/": {
+      "title": "Benchmarking DOM reconciliation algorithms",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "could-we-do-without-a-virtual-dom-entirely",
+          "level": 2,
+          "text": "Could we do without a virtual DOM entirely?"
+        },
+        {
+          "id": "benchmarks-for-preact-vs-vue-vs-innerhtml",
+          "level": 2,
+          "text": "Benchmarks for Preact vs Vue vs InnerHTML"
+        },
+        {
+          "id": "conclusions",
+          "level": 2,
+          "text": "Conclusions"
+        },
+        {
+          "id": "what-dom-mutations-are-idiomatic",
+          "level": 2,
+          "text": "What DOM mutations are idiomatic?"
+        }
+      ],
+      "outputPath": "/post/2025-02-07-benchmarking-dom-reconciliation/index.html",
+      "output": "sha256-72d14a8ac22445750a30308c981172810d9550b7b45fbbbc1a35dcaf9075649b",
+      "inputs": [
+        "#template",
+        "content/post/2025-02-07-benchmarking-dom-reconciliation.md"
+      ]
+    },
+    "/communities/": {
+      "title": "My Communities",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/communities/index.html",
+      "output": "sha256-d3f2626c5bdd00e43c961775c11340b855f59ebb2c9e974ccb82e4c2c63d3bac",
+      "inputs": [
+        "#template",
+        "content/communities.md"
+      ]
+    },
+    "/docs/fluid-integration-language/": {
+      "title": "Fluid Integration Language",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "model",
+          "level": 2,
+          "text": "Model"
+        },
+        {
+          "id": "reading-and-writing-layers",
+          "level": 2,
+          "text": "Reading and writing layers"
+        },
+        {
+          "id": "fluiddeflayername-layer",
+          "level": 3,
+          "text": "fluid.def(layerName, [layer])"
+        },
+        {
+          "id": "component-lifecycle",
+          "level": 2,
+          "text": "Component lifecycle"
+        },
+        {
+          "id": "creator-functions-layernameuserlayer",
+          "level": 3,
+          "text": "Creator functions: layerName([userLayer])"
+        },
+        {
+          "id": "componentdestroy",
+          "level": 3,
+          "text": "Component.destroy()"
+        },
+        {
+          "id": "unavailable-components",
+          "level": 3,
+          "text": "Unavailable components"
+        },
+        {
+          "id": "layers",
+          "level": 2,
+          "text": "Layers"
+        },
+        {
+          "id": "layers-1",
+          "level": 3,
+          "text": "$layers"
+        },
+        {
+          "id": "merging-and-precedence",
+          "level": 4,
+          "text": "Merging and precedence"
+        },
+        {
+          "id": "references",
+          "level": 2,
+          "text": "References"
+        },
+        {
+          "id": "literal-strings-beginning-with--or-",
+          "level": 3,
+          "text": "Literal strings beginning with { or $"
+        },
+        {
+          "id": "context-names",
+          "level": 3,
+          "text": "Context names"
+        },
+        {
+          "id": "selectors",
+          "level": 3,
+          "text": "Selectors"
+        },
+        {
+          "id": "signal-directives",
+          "level": 2,
+          "text": "Signal directives"
+        },
+        {
+          "id": "compute",
+          "level": 3,
+          "text": "$compute"
+        },
+        {
+          "id": "transient",
+          "level": 3,
+          "text": "$transient"
+        },
+        {
+          "id": "lens",
+          "level": 3,
+          "text": "$lens"
+        },
+        {
+          "id": "effect",
+          "level": 3,
+          "text": "$effect"
+        },
+        {
+          "id": "composite-effects",
+          "level": 4,
+          "text": "Composite effects"
+        },
+        {
+          "id": "method",
+          "level": 3,
+          "text": "$method"
+        },
+        {
+          "id": "other-directives",
+          "level": 2,
+          "text": "Other directives"
+        },
+        {
+          "id": "component",
+          "level": 3,
+          "text": "$component"
+        },
+        {
+          "id": "injecting-an-existing-component",
+          "level": 4,
+          "text": "Injecting an existing component"
+        },
+        {
+          "id": "refining-an-injected-component",
+          "level": 4,
+          "text": "Refining an injected component"
+        },
+        {
+          "id": "removing-a-subcomponent",
+          "level": 4,
+          "text": "Removing a subcomponent"
+        },
+        {
+          "id": "for",
+          "level": 3,
+          "text": "$for"
+        },
+        {
+          "id": "if",
+          "level": 3,
+          "text": "$if"
+        },
+        {
+          "id": "reactiveroot",
+          "level": 3,
+          "text": "$reactiveRoot"
+        },
+        {
+          "id": "importmap",
+          "level": 3,
+          "text": "$importMap"
+        },
+        {
+          "id": "linkage",
+          "level": 3,
+          "text": "$linkage"
+        },
+        {
+          "id": "bindable",
+          "level": 3,
+          "text": "$bindable"
+        },
+        {
+          "id": "variety",
+          "level": 3,
+          "text": "$variety"
+        },
+        {
+          "id": "additional-javascript-api",
+          "level": 2,
+          "text": "Additional JavaScript API"
+        },
+        {
+          "id": "fluidlivequeryilselectorroot-selector-flat",
+          "level": 3,
+          "text": "fluid.liveQueryILSelector(root, selector, [flat])"
+        },
+        {
+          "id": "fluidqueryilselectorroot-selector-flat",
+          "level": 3,
+          "text": "fluid.queryILSelector(root, selector, [flat])"
+        },
+        {
+          "id": "fluidlayerformembercomponent-path",
+          "level": 3,
+          "text": "fluid.layerForMember(component, path)"
+        },
+        {
+          "id": "fluidcontextreftopromisecontextref-root",
+          "level": 3,
+          "text": "fluid.contextRefToPromise(contextRef, root)"
+        },
+        {
+          "id": "fluidavatarlayername",
+          "level": 3,
+          "text": "fluid.avatar(layerName)"
+        },
+        {
+          "id": "utilities",
+          "level": 3,
+          "text": "Utilities"
+        }
+      ],
+      "outputPath": "/docs/fluid-integration-language/index.html",
+      "output": "sha256-148595859beef4048e694a9b0da58ddae84ed8053f5261f93a4d594ad41c34b7",
+      "inputs": [
+        "#template",
+        "content/docs/fluid-integration-language.md"
+      ]
+    },
+    "/docs/fluid-ptf/": {
+      "title": "Potentia Transmission Format",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "intention",
+          "level": 2,
+          "text": "Intention"
+        },
+        {
+          "id": "an-example",
+          "level": 2,
+          "text": "An example"
+        },
+        {
+          "id": "with-a-javascript-layer-and-a-subcomponent",
+          "level": 3,
+          "text": "With a JavaScript layer and a subcomponent"
+        },
+        {
+          "id": "transmitting-components-not-data",
+          "level": 2,
+          "text": "Transmitting components, not data"
+        },
+        {
+          "id": "preserving-authorship",
+          "level": 2,
+          "text": "Preserving authorship"
+        },
+        {
+          "id": "what-is-transmitted",
+          "level": 2,
+          "text": "What is transmitted"
+        },
+        {
+          "id": "reconstruction",
+          "level": 2,
+          "text": "Reconstruction"
+        },
+        {
+          "id": "trust",
+          "level": 3,
+          "text": "Trust"
+        },
+        {
+          "id": "embedding-ptf-the-tldraw-clipboard",
+          "level": 2,
+          "text": "Embedding PTF: the tldraw clipboard"
+        },
+        {
+          "id": "javascript-api",
+          "level": 2,
+          "text": "JavaScript API"
+        },
+        {
+          "id": "producing-documents",
+          "level": 3,
+          "text": "Producing documents"
+        },
+        {
+          "id": "reading-documents",
+          "level": 3,
+          "text": "Reading documents"
+        }
+      ],
+      "outputPath": "/docs/fluid-ptf/index.html",
+      "output": "sha256-d64effb468f226cb7598aa11bedf25a6c491b9c6d786324a7dd7160462443c19",
+      "inputs": [
+        "#template",
+        "content/docs/fluid-ptf.md"
+      ]
+    },
+    "/docs/fluid-signals-background/": {
+      "title": "Fluid Signals background",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "extra-capabilities-in-fluidcell",
+          "level": 2,
+          "text": "Extra capabilities in fluid.cell"
+        },
+        {
+          "id": "bidirectional-relationships",
+          "level": 3,
+          "text": "Bidirectional relationships"
+        },
+        {
+          "id": "multiple-inbound-compute-arcs",
+          "level": 3,
+          "text": "Multiple inbound compute arcs"
+        },
+        {
+          "id": "static-compute-arguments",
+          "level": 3,
+          "text": "Static compute arguments"
+        },
+        {
+          "id": "cycle-diagnostics",
+          "level": 3,
+          "text": "Cycle diagnostics"
+        },
+        {
+          "id": "cause-tracking",
+          "level": 3,
+          "text": "Cause tracking"
+        },
+        {
+          "id": "asynchronous-compute-arcs",
+          "level": 3,
+          "text": "Asynchronous compute arcs"
+        }
+      ],
+      "outputPath": "/docs/fluid-signals-background/index.html",
+      "output": "sha256-31a07249bd95eb60148b12c67b41cd97eff8255325683747852ec451b3def6aa",
+      "inputs": [
+        "#template",
+        "content/docs/fluid-signals-background.md"
+      ]
+    },
+    "/docs/fluid-signals/": {
+      "title": "Fluid Signals API",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "construction",
+          "level": 2,
+          "text": "Construction"
+        },
+        {
+          "id": "fluidcellinitialvalue-props",
+          "level": 3,
+          "text": "fluid.cell(initialValue, props)"
+        },
+        {
+          "id": "reading-and-writing",
+          "level": 2,
+          "text": "Reading and writing"
+        },
+        {
+          "id": "cellget",
+          "level": 3,
+          "text": "Cell.get()"
+        },
+        {
+          "id": "cellsetnewvalue-options",
+          "level": 3,
+          "text": "Cell.set(newValue, [options])"
+        },
+        {
+          "id": "cell_value",
+          "level": 3,
+          "text": "Cell._value"
+        },
+        {
+          "id": "relations-and-effects",
+          "level": 2,
+          "text": "Relations and effects"
+        },
+        {
+          "id": "cellcomputedfn-staticsources-props",
+          "level": 3,
+          "text": "Cell.computed(fn, staticSources, props)"
+        },
+        {
+          "id": "asynchronous-computations",
+          "level": 3,
+          "text": "Asynchronous computations"
+        },
+        {
+          "id": "fluidcelleffectfn-staticsources-props",
+          "level": 3,
+          "text": "fluid.cell.effect(fn, [staticSources], [props])"
+        },
+        {
+          "id": "fluidcellstabilize",
+          "level": 3,
+          "text": "fluid.cell.stabilize()"
+        },
+        {
+          "id": "fluidcellstabilizeasync",
+          "level": 3,
+          "text": "fluid.cell.stabilizeAsync()"
+        },
+        {
+          "id": "comprehension",
+          "level": 2,
+          "text": "Comprehension"
+        },
+        {
+          "id": "fluidcellexplaincell",
+          "level": 3,
+          "text": "fluid.cell.explain([cell])"
+        },
+        {
+          "id": "fluidcellfindallcauses",
+          "level": 3,
+          "text": "fluid.cell.findAllCauses()"
+        },
+        {
+          "id": "fluidcellpendingeffects",
+          "level": 3,
+          "text": "fluid.cell.pendingEffects()"
+        },
+        {
+          "id": "profiling",
+          "level": 3,
+          "text": "Profiling"
+        },
+        {
+          "id": "fluidcellfindcausecell",
+          "level": 3,
+          "text": "fluid.cell.findCause([cell])"
+        },
+        {
+          "id": "utilities",
+          "level": 2,
+          "text": "Utilities"
+        },
+        {
+          "id": "fluidcellsignaltopromisevalsignal",
+          "level": 3,
+          "text": "fluid.cell.signalToPromise(valSignal)"
+        },
+        {
+          "id": "cellrefreshstaticsources",
+          "level": 3,
+          "text": "Cell.refresh(staticSources)"
+        },
+        {
+          "id": "fluidcelluntrackedfn",
+          "level": 3,
+          "text": "fluid.cell.untracked(fn)"
+        },
+        {
+          "id": "unavailable-values",
+          "level": 2,
+          "text": "Unavailable values"
+        },
+        {
+          "id": "fluidunavailablecause---variety--error",
+          "level": 3,
+          "text": "fluid.unavailable(cause = {}, variety = “error”)"
+        },
+        {
+          "id": "fluidpendingstalevalue-site",
+          "level": 3,
+          "text": "fluid.pending(staleValue, site)"
+        },
+        {
+          "id": "fluidisunavailabletotest",
+          "level": 3,
+          "text": "fluid.isUnavailable(totest)"
+        }
+      ],
+      "outputPath": "/docs/fluid-signals/index.html",
+      "output": "sha256-7b51d43edd2eead1bb92b983c539b0259b115ff36712ec20ec0caff7307e0b1d",
+      "inputs": [
+        "#template",
+        "content/docs/fluid-signals.md"
+      ]
+    },
+    "/docs/fluid-tldraw/": {
+      "title": "Fluid tldraw integration",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "top-level-widgets",
+          "level": 2,
+          "text": "Top-level widgets"
+        },
+        {
+          "id": "hosting-on-the-canvas",
+          "level": 2,
+          "text": "Hosting on the canvas"
+        },
+        {
+          "id": "nested-widgets",
+          "level": 2,
+          "text": "Nested widgets"
+        },
+        {
+          "id": "transmitting-widgets",
+          "level": 2,
+          "text": "Transmitting widgets"
+        }
+      ],
+      "outputPath": "/docs/fluid-tldraw/index.html",
+      "output": "sha256-b388d026796e9997353dcd48cf55e8a9f905259144a7600e3230031ccc5e97f5",
+      "inputs": [
+        "#template",
+        "content/docs/fluid-tldraw.md"
+      ]
+    },
+    "/docs/fluid-view/": {
+      "title": "Fluid View",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "a-first-component",
+          "level": 2,
+          "text": "A first component"
+        },
+        {
+          "id": "what-the-sfc-loader-does",
+          "level": 3,
+          "text": "What the SFC loader does"
+        },
+        {
+          "id": "template-binding-syntax",
+          "level": 2,
+          "text": "Template binding syntax"
+        },
+        {
+          "id": "text-and-attribute-interpolation-",
+          "level": 3,
+          "text": "Text and attribute interpolation: @{...}"
+        },
+        {
+          "id": "attribute-and-property-binding",
+          "level": 3,
+          "text": "Attribute and property binding"
+        },
+        {
+          "id": "conditional-classes-class",
+          "level": 3,
+          "text": "Conditional classes: @class"
+        },
+        {
+          "id": "events-onevent",
+          "level": 3,
+          "text": "Events: @on<event>"
+        },
+        {
+          "id": "subcomponents-id",
+          "level": 3,
+          "text": "Subcomponents: @id"
+        },
+        {
+          "id": "fragment-slots-fluid-fragment",
+          "level": 4,
+          "text": "Fragment slots: <fluid-fragment>"
+        },
+        {
+          "id": "separators-between-list-members",
+          "level": 4,
+          "text": "Separators between list members"
+        },
+        {
+          "id": "conditional-elements-if-and-else",
+          "level": 3,
+          "text": "Conditional elements: @if and @else"
+        },
+        {
+          "id": "views",
+          "level": 2,
+          "text": "Views"
+        },
+        {
+          "id": "view-layers",
+          "level": 3,
+          "text": "View layers"
+        },
+        {
+          "id": "advanced-features",
+          "level": 2,
+          "text": "Advanced features"
+        },
+        {
+          "id": "generating-a-vtree-by-hand",
+          "level": 3,
+          "text": "Generating a vTree by hand"
+        },
+        {
+          "id": "partial-templates",
+          "level": 3,
+          "text": "Partial templates"
+        },
+        {
+          "id": "verbatim-markup-and-islands",
+          "level": 3,
+          "text": "Verbatim markup and islands"
+        },
+        {
+          "id": "wrapping-an-external-widget-with-bindable",
+          "level": 3,
+          "text": "Wrapping an external widget with $bindable"
+        },
+        {
+          "id": "source-tracking-and-the-dom",
+          "level": 3,
+          "text": "Source tracking and the DOM"
+        },
+        {
+          "id": "excluding-self-widgets-that-should-not-hear-their-own-changes",
+          "level": 4,
+          "text": "Excluding \"self\" : widgets that should not hear their own changes"
+        },
+        {
+          "id": "dom-changes-the-user-made",
+          "level": 4,
+          "text": "\"dom\" : changes the user made"
+        },
+        {
+          "id": "output-documents-and-server-side-rendering",
+          "level": 2,
+          "text": "Output documents and server-side rendering"
+        },
+        {
+          "id": "fluidoutputdocumentview",
+          "level": 3,
+          "text": "fluid.outputDocumentView"
+        },
+        {
+          "id": "writing-documents",
+          "level": 3,
+          "text": "Writing documents"
+        },
+        {
+          "id": "minimal-pages-and-placeholder-data",
+          "level": 4,
+          "text": "Minimal pages and placeholder data"
+        },
+        {
+          "id": "copying-out-the-files-a-page-depends-on",
+          "level": 4,
+          "text": "Copying out the files a page depends on"
+        },
+        {
+          "id": "development-affordances",
+          "level": 4,
+          "text": "Development affordances"
+        },
+        {
+          "id": "scripts",
+          "level": 3,
+          "text": "Scripts"
+        }
+      ],
+      "outputPath": "/docs/fluid-view/index.html",
+      "output": "sha256-7b363c43e341fe11f38e89407d5de204e4d13965026ff93ad435739b23b4b06a",
+      "inputs": [
+        "#template",
+        "content/docs/fluid-view.md"
+      ]
+    },
+    "/docs/linearisation-algorithm/": {
+      "title": "Layer Linearisation",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "the-rule-as-authors-see-it",
+          "level": 2,
+          "text": "The rule as authors see it"
+        },
+        {
+          "id": "c3-underneath",
+          "level": 2,
+          "text": "C3 underneath"
+        },
+        {
+          "id": "two-strengths-of-ordering",
+          "level": 3,
+          "text": "Two strengths of ordering"
+        },
+        {
+          "id": "ignoring-a-restated-ancestor",
+          "level": 3,
+          "text": "Ignoring a restated ancestor"
+        },
+        {
+          "id": "the-pedalo-example",
+          "level": 2,
+          "text": "The pedalo example"
+        },
+        {
+          "id": "consequences-of-the-relaxation",
+          "level": 3,
+          "text": "Consequences of the relaxation"
+        },
+        {
+          "id": "other-places-where-layer-names-are-combined",
+          "level": 2,
+          "text": "Other places where layer names are combined"
+        },
+        {
+          "id": "residual-issues",
+          "level": 2,
+          "text": "Residual issues"
+        }
+      ],
+      "outputPath": "/docs/linearisation-algorithm/index.html",
+      "output": "sha256-ae9e93a414aeea55b30f8d1bb9aa58d147de06472be3f2ee9a901ed24d93ff16",
+      "inputs": [
+        "#template",
+        "content/docs/linearisation-algorithm.md"
+      ]
+    },
+    "/edit-in-infusion-privacy/": {
+      "title": "Edit in Infusion - Privacy Policy",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "when-it-does-anything",
+          "level": 3,
+          "text": "When it does anything"
+        },
+        {
+          "id": "what-it-handles",
+          "level": 3,
+          "text": "What it handles"
+        },
+        {
+          "id": "where-it-is-kept",
+          "level": 3,
+          "text": "Where it is kept"
+        },
+        {
+          "id": "where-it-is-sent",
+          "level": 3,
+          "text": "Where it is sent"
+        },
+        {
+          "id": "removing-your-data",
+          "level": 3,
+          "text": "Removing your data"
+        },
+        {
+          "id": "contact",
+          "level": 3,
+          "text": "Contact"
+        }
+      ],
+      "outputPath": "/edit-in-infusion-privacy/index.html",
+      "output": "sha256-8a8ef46106e77632de24aeb540e6fda71b0ad814c8c9d0fdc92218a46481b474",
+      "inputs": [
+        "#template",
+        "content/edit-in-infusion-privacy.md"
+      ]
+    },
+    "/infusion/": {
+      "title": "Infusion",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/infusion/index.html",
+      "output": "sha256-b14b796756d3b8b64fcb0e314ccd0571150cd34a13e6eab88667ab0a4d423ff2",
+      "inputs": [
+        "#template",
+        "content/infusion.md"
+      ]
+    },
+    "/page/about/": {
+      "title": "About me",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/page/about/index.html",
+      "output": "sha256-618b7b19048b880000d049b910cc9891ec6ce4973f3431bddd16e82eb270ed35",
+      "inputs": [
+        "#template",
+        "content/page/about.md"
+      ]
+    },
+    "/projects/": {
+      "title": "My Projects",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/projects/index.html",
+      "output": "sha256-f32f6a4fb2dde098350e947731a44b4ccd851bd5ce6f749070075e0d9b25778a",
+      "inputs": [
+        "#template",
+        "content/projects.md"
+      ]
+    },
+    "/term/a-good-function/": {
+      "title": "A good function",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/term/a-good-function/index.html",
+      "output": "sha256-e7509148ad72d6c20b98a90105d1dd8b5abc7170db89653f28eb1518380fec5a",
+      "inputs": [
+        "#template",
+        "content/term/a-good-function.md"
+      ]
+    },
+    "/term/cod-reactivity/": {
+      "title": "Cod reactivity",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "further-thoughts-october-2026",
+          "level": 2,
+          "text": "Further thoughts [October 2026]"
+        }
+      ],
+      "outputPath": "/term/cod-reactivity/index.html",
+      "output": "sha256-0200aa73ccec12c75e99e799a2c17782fa160940d49593679af2632abc16dfbe",
+      "inputs": [
+        "#template",
+        "content/term/cod-reactivity.md"
+      ]
+    },
+    "/term/disclosable-computing/": {
+      "title": "Disclosable Computing",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/term/disclosable-computing/index.html",
+      "output": "sha256-e5de9b402eb4ba52a5e3654ff4456e877cc19fabe27fc2ace5c60b08ca14c715",
+      "inputs": [
+        "#template",
+        "content/term/disclosable-computing.md"
+      ]
+    },
+    "/term/divergence/": {
+      "title": "Divergence",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/term/divergence/index.html",
+      "output": "sha256-5ffb4b4be65d620ac39e1d13ddc2415eebb7c130e54fe56946c1eb876111cadd",
+      "inputs": [
+        "#template",
+        "content/term/divergence.md"
+      ]
+    },
+    "/term/end-user-programming/": {
+      "title": "End user programming",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/term/end-user-programming/index.html",
+      "output": "sha256-e7abcf87592930bc61761e97f5189e2f591ff8374775f0771a813cc11689ade9",
+      "inputs": [
+        "#template",
+        "content/term/end-user-programming.md"
+      ]
+    },
+    "/term/externalisability/": {
+      "title": "Externalisability",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/term/externalisability/index.html",
+      "output": "sha256-a8ad4758bee359c33cc788a258de7849776546d1c4d66f68c275de68ec9481a0",
+      "inputs": [
+        "#template",
+        "content/term/externalisability.md"
+      ]
+    },
+    "/term/glitch/": {
+      "title": "Glitch",
+      "kind": "page",
+      "headings": [
+        {
+          "id": "what-are-the-risks-of-glitching",
+          "level": 4,
+          "text": "What are the risks of glitching?"
+        },
+        {
+          "id": "how-can-glitching-be-prevented",
+          "level": 4,
+          "text": "How can glitching be prevented?"
+        },
+        {
+          "id": "why-does-this-term-carry-unhelpful-connotations",
+          "level": 4,
+          "text": "Why does this term carry unhelpful connotations?"
+        },
+        {
+          "id": "glitching-is-widespread-and-underappreciated",
+          "level": 4,
+          "text": "Glitching is widespread and underappreciated"
+        }
+      ],
+      "outputPath": "/term/glitch/index.html",
+      "output": "sha256-ad7b9c8fba29e0bc9a08236487af5ebdea3c62880fad5243355f2aef7f9c9c55",
+      "inputs": [
+        "#template",
+        "content/term/glitch.md"
+      ]
+    },
+    "/term/habitable/": {
+      "title": "Habitable",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/term/habitable/index.html",
+      "output": "sha256-4631fa6f69e1096327733bb689b5e0a33ce21df29921d0e585eb475f2c689d82",
+      "inputs": [
+        "#template",
+        "content/term/habitable.md"
+      ]
+    },
+    "/term/integration-domain/": {
+      "title": "Integration Domain",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/term/integration-domain/index.html",
+      "output": "sha256-bac3089749172a5473c4f6bb64a19b5057cea010253621ac26776c38d8900b0e",
+      "inputs": [
+        "#template",
+        "content/term/integration-domain.md"
+      ]
+    },
+    "/term/lithification/": {
+      "title": "Lithification",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/term/lithification/index.html",
+      "output": "sha256-672727609e270b95deafba7b126de3a10e3a42afd72a23d53a963e2df0d1122d",
+      "inputs": [
+        "#template",
+        "content/term/lithification.md"
+      ]
+    },
+    "/term/substrate/": {
+      "title": "Substrate",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/term/substrate/index.html",
+      "output": "sha256-599bae9d70406cfe7b523acaa3c993e818b56210e7fa37d2cde2224c2eecf5da",
+      "inputs": [
+        "#template",
+        "content/term/substrate.md"
+      ]
+    },
+    "/term/unavailable-value/": {
+      "title": "Unavailable Value",
+      "kind": "page",
+      "headings": [],
+      "outputPath": "/term/unavailable-value/index.html",
+      "output": "sha256-6ab05705c3d549f525bcbaccf7b76165cc570b74c9e345695af62264024e07f7",
+      "inputs": [
+        "#template",
+        "content/term/unavailable-value.md"
+      ]
+    },
+    "/tags/": {
+      "title": "tags",
+      "kind": "taxonomy",
+      "headings": [],
+      "outputPath": "/tags/index.html",
+      "output": "sha256-e13879ded6ac8d352790b4ca96619d8ac5d3a43583e99f46554761eff6d15ef8",
+      "inputs": [
+        "#template"
+      ]
+    },
+    "/categories/": {
+      "title": "categories",
+      "kind": "taxonomy",
+      "headings": [],
+      "outputPath": "/categories/index.html",
+      "output": "sha256-15aa03039d5b87238e5957918d35718040a7c89fbbe21d5504b979c1d2c7a34d",
+      "inputs": [
+        "#template",
+        "content/term/a-good-function.md",
+        "content/term/cod-reactivity.md",
+        "content/term/disclosable-computing.md",
+        "content/term/divergence.md",
+        "content/term/end-user-programming.md",
+        "content/term/externalisability.md",
+        "content/term/glitch.md",
+        "content/term/habitable.md",
+        "content/term/integration-domain.md",
+        "content/term/lithification.md",
+        "content/term/substrate.md",
+        "content/term/unavailable-value.md"
+      ]
+    },
+    "/categories/term/": {
+      "title": "term",
+      "kind": "term",
+      "headings": [],
+      "outputPath": "/categories/term/index.html",
+      "output": "sha256-2f96890991f15de15bfed957869a4ed621f1d2c9d3b212126de82a78413b6c83",
+      "inputs": [
+        "#template",
+        "content/term/a-good-function.md",
+        "content/term/cod-reactivity.md",
+        "content/term/disclosable-computing.md",
+        "content/term/divergence.md",
+        "content/term/end-user-programming.md",
+        "content/term/externalisability.md",
+        "content/term/glitch.md",
+        "content/term/habitable.md",
+        "content/term/integration-domain.md",
+        "content/term/lithification.md"
+      ]
+    },
+    "/categories/term/page/2/": {
+      "title": "term",
+      "kind": "term",
+      "headings": [],
+      "outputPath": "/categories/term/page/2/index.html",
+      "output": "sha256-2ca5589d1cf6f2c60176aaa5e21b05920ecf11bba64cbdefb5e0afb1899efbd1",
+      "inputs": [
+        "#template",
+        "content/term/substrate.md",
+        "content/term/unavailable-value.md"
+      ]
+    },
+    "/404.html": {
+      "title": "404 Page not found",
+      "kind": "404",
+      "headings": [],
+      "outputPath": "/404.html",
+      "output": "sha256-88407aee9d6d3c3ed87ca6d2645c9792cfd519a7d68458687777ebc75a0d9b64",
+      "inputs": [
+        "#template"
+      ]
+    }
+  },
+  "assets": [
+    "/img/20230209_135356 - bio - cropped.jpg",
+    "/img/20230209_135356 - bio.jpg",
+    "/img/Arachnoidiscus_schmidtii_web_1-2-scaled.jpg",
+    "/img/KCF-rendered.png",
+    "/img/KCF.jpg",
+    "/img/MoS.jpg",
+    "/img/Pentagramma triangularis.jpg",
+    "/img/batchstack.png",
+    "/img/beeatlas-logo3-03.jpg",
+    "/img/bees-all.png",
+    "/img/boxer-sunrise-2021-03.png",
+    "/img/boxer.png",
+    "/img/darwin-online.jpg",
+    "/img/dci-logo-white.svg",
+    "/img/douglas-fir.png",
+    "/img/early-cutoff.png",
+    "/img/excel-disclose.png",
+    "/img/fabrik-bidi.png",
+    "/img/glitch-3.png",
+    "/img/gpii-logo.jpg",
+    "/img/infusion.png",
+    "/img/lichen-logo.png",
+    "/img/lively-disclose.png",
+    "/img/magic-wand-demo.png",
+    "/img/malleable-header.svg",
+    "/img/malleable-systems.png",
+    "/img/milo-reactivity.svg",
+    "/img/networks-dci-1920x400-1-cropped.jpg",
+    "/img/networks-dci-1920x400-1.jpg",
+    "/img/observable-reactive.png",
+    "/img/ohm-grammar.png",
+    "/img/pond.jpg",
+    "/img/pond_favicon.png",
+    "/img/pond_favicon_stylized.png",
+    "/img/render-timings.png",
+    "/img/rsf.png",
+    "/img/substrate-asteroid.jpg",
+    "/img/todo-edit-arrow.png",
+    "/img/wordpress-disclose.png",
+    "/img/xetthecum-inspector.png",
+    "/img/xetthecum-menu-highlight.jpg",
+    "/img/xetthecum-menu.jpg",
+    "/papers/Substrates-25_paper_8.pdf",
+    "/papers/gpii-2014.pdf",
+    "/papers/onward-2016.pdf",
+    "/public/patent3.png",
+    "/weblogo/docs/command_list.pdf",
+    "/weblogo/docs/command_list.png",
+    "/weblogo/images/transparent.png",
+    "/weblogo/lib/css/themes/ui-darkness/images/ui-bg_glass_20_555555_1x400.png",
+    "/weblogo/lib/css/themes/ui-darkness/images/ui-bg_glass_40_0078a3_1x400.png",
+    "/weblogo/lib/css/themes/ui-darkness/images/ui-bg_inset-soft_25_000000_1x100.png",
+    "/weblogo/lib/css/themes/ui-darkness/images/ui-bg_inset-soft_30_f58400_1x100.png",
+    "/weblogo/lib/css/themes/ui-darkness/images/ui-icons_222222_256x240.png",
+    "/weblogo/lib/css/themes/ui-darkness/images/ui-icons_cccccc_256x240.png",
+    "/weblogo/lib/css/themes/ui-darkness/images/ui-icons_ffffff_256x240.png"
+  ],
+  "staticFiles": {
+    "static/CNAME": "sha256-e227a02e03a0c11474d0f9cef11714c8250169387259990ff8cc44f5ef2d3100",
+    "static/css/fluid-code-box.css": "sha256-2f8570cc33edefe25d3e4605a56d66232cf27424a773e5a0c86dfb1b46554ade",
+    "static/css/octicons.woff": "sha256-325fd4cdc3b90201c1852b6a7b03c03996fa7fa0020722c07fac02722a3c0021",
+    "static/css/ponder.css": "sha256-e9bcb18e1b51fa15793d5e58baf8d99989078b0cdd58bb960f8fc4f622ce4416",
+    "static/css/stabilization-regimes.css": "sha256-a00bc4c0d2f0f079393fa7f8a5cadd81fc1fc31c1a705d0854f65bd36175ca04",
+    "static/img/20230209_135356 - bio - cropped.jpg": "sha256-0bf2dfe4a3bbc69f3c822155d7615cf85933215db5947df7e612482c62fc053a",
+    "static/img/20230209_135356 - bio.jpg": "sha256-6c7d4382b80e7920f56ea56aea8f8ac225d2ee7b8dd296129bd3989cf6d62cdf",
+    "static/img/Arachnoidiscus_schmidtii_web_1-2-scaled.jpg": "sha256-e668b8c262ce5914a97135d583044373d0c8cf40df245faf8c764f67077e67b4",
+    "static/img/KCF-rendered.png": "sha256-bcbdf905a2786e040b0732084ad8125451163ab16e007d2d98baf7bdb0218dff",
+    "static/img/KCF.jpg": "sha256-f5d5d7c67d1d2e470fb4e03d6882b12cc151218c2d563a39f0486bf0092d8197",
+    "static/img/MoS.jpg": "sha256-cc301f589f7a5c6e1b93b5c7c091a26dfbe165ec994308638354adb63aa17726",
+    "static/img/Pentagramma triangularis.jpg": "sha256-2420296fba5b05f9bb958fac8ee0b0b4db492f8b92364a4d31b180f2eda72764",
+    "static/img/batchstack.png": "sha256-b8a3ed9e9d157732c920305cc3cccca3f864dfd19b0bbe4c48b8e62ab7035613",
+    "static/img/beeatlas-logo3-03.jpg": "sha256-79ad21760b947eb075371cdce1aaf2e232e46938adfbd6808e2675f2d5466d0d",
+    "static/img/bees-all.png": "sha256-c9fd6d2729afe2ba6e212808c141d317a69952656b74335b6991e6c41adc2429",
+    "static/img/boxer-sunrise-2021-03.png": "sha256-0fda74b69c6de8247e4fb919a6087e24dee0d254d6ae243b965067eeb26e9a08",
+    "static/img/boxer.png": "sha256-92af462214f78ed243449a30c69d6a4ec102936b41791b1cc2e229b4c39069d7",
+    "static/img/darwin-online.jpg": "sha256-ae2a067deb39662d664f09c6e4e9f8d05c278f7cf84d68c82230071d26d10c5d",
+    "static/img/dci-logo-white.svg": "sha256-7d6f209e92a8055b831235d7c8e5e904328beb6af8bb6a63f165947938be5424",
+    "static/img/douglas-fir.png": "sha256-56aa9b7eaea8f9307a846cb43e4577b1655e00e9e830e0ae45390899e0f78b73",
+    "static/img/early-cutoff.png": "sha256-08acaf2bd30bf24bec4c7ccb3d8077e70556b61ba01e740f6c166a16f3c5a553",
+    "static/img/excel-disclose.png": "sha256-7822e8dd1a7bf4a20cb06271502ecd8ba27f2fcc7b6ad1a6e2ce2f1d47996d98",
+    "static/img/fabrik-bidi.png": "sha256-ce1c2481a05c4661c27514511323404342c8cdb5143246148d509b4202a04a45",
+    "static/img/glitch-3.png": "sha256-aaa4da0068dc38270c5595618d42972ec3a0866cb298d13a8b08061960f7ebca",
+    "static/img/gpii-logo.jpg": "sha256-37affd8ce5279d1eacb1d69dfbe0bbc7e2977d19da26d322b6c06a29e189f8ed",
+    "static/img/infusion.png": "sha256-9c9221e8b4eec0c05484fbfb094e1164c428b888666d1de52ab716736beaf16f",
+    "static/img/lichen-logo.png": "sha256-0609baff913368d362ab95b1904eba5def80fb4f5d695f660551dac7741f6d6f",
+    "static/img/lively-disclose.png": "sha256-8ba6ea7b26fc4ceb74ece31f4c91c7a29d15d2844e09bb29523018b9e3ae8bcf",
+    "static/img/magic-wand-demo.png": "sha256-719f2b2fe5add79e17c25f768acc56b7b5a27294f5cc50cdbf43ffedaf67c1b1",
+    "static/img/malleable-header.svg": "sha256-91e4cac400ec42b2c5bc79a2f0f7e307d1c18f34268968440a0aad1b78f8f578",
+    "static/img/malleable-systems.png": "sha256-f32264224e9f600363c47aec221aa262d5da9074d83c55f1b76d4fc9b6fe7169",
+    "static/img/milo-reactivity.svg": "sha256-1bd7add968fccbd4b503203661181e30b3ba91aafdaef780ea83970738f8c833",
+    "static/img/networks-dci-1920x400-1-cropped.jpg": "sha256-7433c29bc4f57f96e7262fe03bd3253e6af3ef087f3899a63bb1e2c39ed0752f",
+    "static/img/networks-dci-1920x400-1.jpg": "sha256-41b7e0501c54f630093ac54df8aa50a6614918248b7dbaef409699b0c2db0669",
+    "static/img/observable-reactive.png": "sha256-c31f294de105ac9f05c8dacc71a14a51e341352b7a44cdc78c09ab021d9b4ca0",
+    "static/img/ohm-grammar.png": "sha256-805b995d248f5a1d28fe9c6c2cdb6499ff13f55609cb87399a901730d9d76718",
+    "static/img/pond.jpg": "sha256-4860c3a27fef560c491af335e53a588f03631547b8e0f4abf2195d31520083c0",
+    "static/img/pond_favicon.png": "sha256-578ed502d78b7bd3084e27f445bbb758c88a48b64a8c1de4580a33e80f0bacda",
+    "static/img/pond_favicon_stylized.png": "sha256-9213c9a064ba7ba72606129524dcb9b54a80e4cafe1bbe821bf29013b4e040fc",
+    "static/img/render-timings.png": "sha256-6be6a381b02366be8b37051ad73e27bf38af9e8412ca816a6c4d4726085859c8",
+    "static/img/rsf.png": "sha256-c5e58a7273024be42fbe7af6c55ff492ad938e660b22f3fc8266b2fe5021e15b",
+    "static/img/substrate-asteroid.jpg": "sha256-d878a3f33952a46c2cc0d6e456f765ee21e08678e4d9ed40a6a65ef1dd97bd64",
+    "static/img/todo-edit-arrow.png": "sha256-03f73f841510b6e3b71e5841025da68aa55972acbd054663f45e798563768844",
+    "static/img/wordpress-disclose.png": "sha256-93231da0521a3485dd12b2d80673c29eca45786ae13929c2034d7989d3f40ac7",
+    "static/img/xetthecum-inspector.png": "sha256-cc36904c9d84be2703948cdcbd1ea82f9b0df75217f95a2a285f4bb9743dc8d6",
+    "static/img/xetthecum-menu-highlight.jpg": "sha256-caf9ac6472b2f171327a14d9da9a5536323995549a302ec0c570e48d2870daa7",
+    "static/img/xetthecum-menu.jpg": "sha256-0a807f91234840e9566df37705cf67f41cd734ca032bcb474e0e4b888eafb42c",
+    "static/js/fluid-code-box.js": "sha256-09740f1ab0cda170e30a92847766e1185c8e7776f2c24dce7d0208c14c7eb106",
+    "static/papers/Substrates-25_paper_8.pdf": "sha256-fa933599c88bbf3793e43e7adfc46eb6674821ec79dd5d4f13aa1f09f6eed6d6",
+    "static/papers/gpii-2014.pdf": "sha256-b2086a0d8f9397475da944a97306db199c900494920a35e95b105806a41e2b6a",
+    "static/papers/onward-2016.pdf": "sha256-3376bcb8024345efb7e2335074d7300071ed3a2b6aae2e680ddec612b4b13ae4",
+    "static/public/patent3.png": "sha256-320dd91e7e1bdaf7c8f873c1e5cf6f88640edeee0c5c1bd91c5d02cf4de01e02",
+    "static/weblogo/client.html": "sha256-1e4e586b393a7b698a63b6f9f2ac334e6d6f32edbcd647db78cd0f7ff8f16801",
+    "static/weblogo/css/client.css": "sha256-09a3ce3c32cdf0f3bdac771709d23534128cab5a9bc6feb80f2977a99a762851",
+    "static/weblogo/css/codemirror-weblogo.css": "sha256-8f9efad766ff5ca6b6aacc0943f4ad3db68f43e968dc2a50c2363fbe26ab6ec9",
+    "static/weblogo/docs/command_list.html": "sha256-140d9822aba0c779580b35cc98d3d3fca4b14e5ff8e4f6f62134e3413ef353cb",
+    "static/weblogo/docs/command_list.pdf": "sha256-224b56675104d308d47c6abb0d48fd2add8333c4eac2000a7a6bfe355afd7a1c",
+    "static/weblogo/docs/command_list.png": "sha256-0344d6f089777c28c5d02e347d8c53a27a0ee59a66bb208428bf6719b661f22b",
+    "static/weblogo/docs/command_list.txt": "sha256-43efb28b5281d4cf262de51885a16026012a3e6ef3f9d04923bbf9c52c6f8283",
+    "static/weblogo/docs/commands_list.rtf": "sha256-a3df52348e55c2cfd5ba2718a254d1a47d5a2dacf093c0fb0619db86e72ac2e5",
+    "static/weblogo/images/transparent.png": "sha256-75f50cde6aad8913694f49f5362bcc1f244e6fe5c80e62613ed93e9eec849ff7",
+    "static/weblogo/jison/grammar.jison": "sha256-48de5b155b4ce69e44bf64c40ad599f5e154e991486af2677ed796b5d1872e88",
+    "static/weblogo/jison/grammar.js": "sha256-97fc8b89a348554b7912d4d301ed093412fbb7b97c24285c739cc30e857f88d3",
+    "static/weblogo/jison/orderly.jison": "sha256-ea1d73e5a42a84594b3b177b4b8feac4c638d1a1303bfa732d11a087e6504f23",
+    "static/weblogo/jison/test": "sha256-88d490fd68908903bf42e50a8b579a9fccde3fab7a143ebc994b2d37cfb77351",
+    "static/weblogo/jison/test.jison": "sha256-788b3742fa37e502c55c99c7a35e4f9b2334b91232a72a1ab671ee97a4552802",
+    "static/weblogo/jison/test.js": "sha256-6e542ca3e384606e5d0cb71d608f55e10f96cac942112eee30e5668afcc03f95",
+    "static/weblogo/js/client.js": "sha256-4a52443458498dc28afbcce7ed5ced1bea41952264f46e207adf4e03d35898f2",
+    "static/weblogo/js/codemirror-weblogo.js": "sha256-47ba14ab9a66075aedf6524e3a0fa91f6fef97b8a819988a1b3e9add61114e0f",
+    "static/weblogo/js/commands.js": "sha256-331da137d712aaebfba127e0067b5dc266a949c43334d2460b846b093dbe9efd",
+    "static/weblogo/js/complex.js": "sha256-56c3d3117029f30c0b28eec20e894d477a8b6d7f06f3a42066c2dfd8644b6205",
+    "static/weblogo/js/executor.js": "sha256-4c3dcc0afa51b994113d584f3f7e2271fdf08bc934d6077510a2ce27f43ba498",
+    "static/weblogo/js/geometry.js": "sha256-f8b20795a3531bf3e4509c3780664a915d40aa9ea8ec3e6b6c7e8a305c389ea0",
+    "static/weblogo/js/geometry2.js": "sha256-d89c4da5336134ee962781952acfa1d0ac02184df02f7809bd4fe50c03701e3d",
+    "static/weblogo/js/handlers.js": "sha256-b7ec834a0dcb7f5ad5683325436fc9eea20b4c77dbe94127e5ef8ff0d2b6bd45",
+    "static/weblogo/js/preload.js": "sha256-85c20910c87d9355c66d29784676fc7efae58989b3c80fdd334afff943f46204",
+    "static/weblogo/js/preview.js": "sha256-fa06ba0be85e6c4be740ce24be89f21074907dc111f7c3e3040c6cd91993e44f",
+    "static/weblogo/js/turtle.js": "sha256-e7daad82398724700c0e46ab7cc89ecd32e4e70c5d1faa241829e4834f4dd0aa",
+    "static/weblogo/js/webgl-utils.js": "sha256-0307d61a7753ccb2128096617cad6984b7bf48f423594b51b9ad80986608b0fc",
+    "static/weblogo/lib/css/codemirror.css": "sha256-63c82324c2d17fdffd06b606b6323117797a75a4abde3d848f226227eacbc555",
+    "static/weblogo/lib/css/default.css": "sha256-55f2fc9f34fa016f73a518dc3ee8090a9b15bda35a7d8521e473019f428b9c2f",
+    "static/weblogo/lib/css/jquery.terminal.css": "sha256-f4b5ac48e32687096984301868e0239bbcaa523b9c17a921eb8854ecfc7d8efd",
+    "static/weblogo/lib/css/themes/base/jquery.ui.core.css": "sha256-e52a8d9c24030377494c5a9e541ff300e6da12956b0924bda69a3c8a34c7215a",
+    "static/weblogo/lib/css/themes/base/jquery.ui.selectmenu.css": "sha256-d22cc0b94e02f78e0c62dfc28cbb3de9c3541d808cbd6ea7351a46dccea81d04",
+    "static/weblogo/lib/css/themes/ui-darkness/images/ui-bg_glass_20_555555_1x400.png": "sha256-28620ea07efea445eb88cb9fa527f471cbeee2dd31d6207d65c5cfec424ce57e",
+    "static/weblogo/lib/css/themes/ui-darkness/images/ui-bg_glass_40_0078a3_1x400.png": "sha256-2c60553760468bca61a332e9956c74afb7ac47b3042461bf309a1c3979034ca7",
+    "static/weblogo/lib/css/themes/ui-darkness/images/ui-bg_inset-soft_25_000000_1x100.png": "sha256-2c6cda1b46cbe7827c2c816b1b60df1183725aebd723e9440415dd9bdbdf3fae",
+    "static/weblogo/lib/css/themes/ui-darkness/images/ui-bg_inset-soft_30_f58400_1x100.png": "sha256-3f2b6e9dbcb8a881fa4917a1cf148437815723d2a9bb279e2ea7d222c6ab5d2f",
+    "static/weblogo/lib/css/themes/ui-darkness/images/ui-icons_222222_256x240.png": "sha256-57adb0d65f4e91dacfee975d9574422bee7486c8a182d60133728c672f2cdbbc",
+    "static/weblogo/lib/css/themes/ui-darkness/images/ui-icons_cccccc_256x240.png": "sha256-0e73e7f7cef0e465b56b7da355f2b8b18e4d59b86cab6215e4fe3c16caf9a8dd",
+    "static/weblogo/lib/css/themes/ui-darkness/images/ui-icons_ffffff_256x240.png": "sha256-f52f0b159664cc2f40dbba748e3bd0e8ec0e836faea7733cb9270e84f5c7f3a3",
+    "static/weblogo/lib/css/themes/ui-darkness/jquery-ui.css": "sha256-62401c0c9d08160de0d91133a7fbb7e5ac68f772407d1916545236c59f565820",
+    "static/weblogo/lib/js/codemirror.js": "sha256-17f7facb135cfeced75e63155fbfca908611475be9fbc7cfa10629b1987d07c2",
+    "static/weblogo/lib/js/fluidLite.js": "sha256-86fe22f62f587a715d62c3fef65aa6c44b0d6a3348e645f0a3ddb2bd936d4610",
+    "static/weblogo/lib/js/gl-matrix.js": "sha256-307798c5275ccbe09cb176761a5da824c0f039c6e0a1c4757087f1e2de386294",
+    "static/weblogo/lib/js/jquery.js": "sha256-54964f8b580ad795a962fb27066715d3281ae1ad13a28bf8aedd5d8859ebae37",
+    "static/weblogo/lib/js/jquery.terminal-0.3.6.js": "sha256-b22993ef3eefe840d3d8ab1805e6b2b0f023668f6ee3d8a7c2e60c33d9cd75c1",
+    "static/weblogo/lib/js/ui/jquery.ui.core.js": "sha256-018b9150029fcd46f2121f1432376e75eb101d61cf3e7b213b82a378b3c279c8",
+    "static/weblogo/lib/js/ui/jquery.ui.position.js": "sha256-753813a4e080af1a0b52eef00ca54729ff9a0a844f7f516969072e16f30cc571",
+    "static/weblogo/lib/js/ui/jquery.ui.selectmenu.js": "sha256-d6d1b54ea42d0642d09918552b8f532403f0fb7edc6ad92db02a008b1115e4f8",
+    "static/weblogo/lib/js/ui/jquery.ui.widget.js": "sha256-4b1024221cc1ba4179b490fccdf047363e911eda292c283a35c6008665a18b10",
+    "static/weblogo/lib/mode/javascript/index.html": "sha256-5cea77dae025ad42421b7e2713cb72b368c129dc470bbfe1def6d1dcf0be533a",
+    "static/weblogo/lib/mode/javascript/javascript.js": "sha256-35cbcc686869ec90aae4e2fd2ae6e56b3c8d016ae11ad469105d10181c3264c4",
+    "static/weblogo/lib/wbl/basic_drawing.wbl": "sha256-82b37aa4dfe7f22371bfdaf3d3174df930e398a6e6098b25184f7bf6da94694e",
+    "static/weblogo/lib/wbl/blank.wbl": "sha256-636159b35205da4142a43bc02d2849d77d3ac07a0946211585cde15a9c6ff21f",
+    "static/weblogo/lib/wbl/catt.wbl": "sha256-c607afcb1a8f1e12d972ab83f4ea2a27f409466845bb12df522a8aaf4f60153e",
+    "static/weblogo/lib/wbl/change_color.wbl": "sha256-00cc5863ae06fecf13e990e615bc5012cbbaadb6cbf020623eeb4e11404d3c5c",
+    "static/weblogo/lib/wbl/circle.wbl": "sha256-aa434ad31ba3f02d5beea200451fe1cfb88e8bc0462d3279000c62efbfb23cfa",
+    "static/weblogo/lib/wbl/dodeca_pursuit.wbl": "sha256-4f0cee795c5ff135b582dabff5dbc22624845fbc5f136ce0b5ba7968d203fc55",
+    "static/weblogo/lib/wbl/dragon_curve.wbl": "sha256-17b131233a1458b3603cb5414e8b1b2b8bbbd4670341c18905938d280a011c30",
+    "static/weblogo/lib/wbl/dragonfly.wbl": "sha256-f10efb9fd1d5e1a13a68b7ec6a7e7ca96ee453199aa6d796413c64b086f7ce63",
+    "static/weblogo/lib/wbl/fast_icosido.wbl": "sha256-146670cd1951352085a570ce9ec2b3d5cb434084a770d2a8dc2b892c39291532",
+    "static/weblogo/lib/wbl/flower.wbl": "sha256-1f829655848156b971271a3263c27d5210e91c513b561310ee35c4fc0047fbae",
+    "static/weblogo/lib/wbl/function_null_call.wbl": "sha256-30f628d8f7ec78a12ccaaa9393ca98bc9dfab497f8a28f9024511cce9ce67c3f",
+    "static/weblogo/lib/wbl/function_parameter_call.wbl": "sha256-0bac2383530cda730d5b33eb85703a1e7f11cd62f893ea551a8b36952fe0eca9",
+    "static/weblogo/lib/wbl/function_parameters_call.wbl": "sha256-16978f17fe441abfd12e0cab7c2e90cc9bf5d39342c34981220fb4ec9fbc6ecd",
+    "static/weblogo/lib/wbl/icosahedron.wbl": "sha256-66297d78f24e4a67ed6f2e7c52da2b87c02fee164f3ab9edac57d38647e44733",
+    "static/weblogo/lib/wbl/mask.wbl": "sha256-d99a46b43b72d5b2e7e2f75d60889441f22852564168590a2839c848658c82de",
+    "static/weblogo/lib/wbl/michelles_triangles.wbl": "sha256-caa2de929248e63fd7bc64bc5b7f4b78abf7f21a3715f145253797271a231fbf",
+    "static/weblogo/lib/wbl/pinata.wbl": "sha256-81821894644b4358d6ade2094883f76b7d26e92754e60a0175b844994972d5b5",
+    "static/weblogo/lib/wbl/pumekin.wbl": "sha256-68c3e55705d9ee0da259602db1a59704662e573739ef2da8227233e136e3cf93",
+    "static/weblogo/lib/wbl/randcircle.wbl": "sha256-06376fcd247c5a595609d000a5b1f54b32df691aac867e8b9bc11438ccada81c",
+    "static/weblogo/lib/wbl/soccer_ball.wbl": "sha256-768937363b33f54459f3c5315bd2f36cd25bcbb89c3212db58c5f69ad485cec9",
+    "static/weblogo/lib/wbl/spiral2.wbl": "sha256-ce2edf45851dd952f2913eca99016fad336a67106e7e26ea3a270a3e9afd0751",
+    "static/weblogo/lib/wbl/starburst.wbl": "sha256-507e7b8a69f51e3652854451fe3f34e070eec314eae68b26ce65933f5bfccb93",
+    "static/weblogo/lib/wbl/test_scope.wbl": "sha256-8f95a585aaeb9eafb76fadab6bd23c32940c9dfefa6896c240b56bf64e2fe88b",
+    "static/weblogo/lib/wbl/triangle_size.wbl": "sha256-159e32a6f4e1e49d4e221c6b1fe695ec91c746520c1931299e5477b09f9b27bb",
+    "static/weblogo/lib/wbl/triple_right_triangle.wbl": "sha256-c65ec15e2b19240d683f59b6ce1e53977c79c78cea976b1dba16da64497bbbd0",
+    "static/weblogo/shaders/directSphereFragment.c": "sha256-ec3dae9cc1ad507755f32314a745849b0c6bdd1e84a5c6c4ba447bacae12953d",
+    "static/weblogo/shaders/generalPolygon.c": "sha256-722e88fc2389b5e57d69c1c3c562327b3e51691c50f33eccf41b4943d444a295",
+    "static/weblogo/shaders/nullVertex.c": "sha256-55854732bb1ac5923f33ff7dee54a288ceae6d5988aa2de927c0c3be0be351cb",
+    "static/weblogo/shaders/sphericalHarmFragment.c": "sha256-d25507dc698f23f9114b239499b9c5c08fd32287f7eea4faedccaf162649e224"
+  }
+}

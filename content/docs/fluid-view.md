@@ -12,12 +12,19 @@ Single File Component (SFC) format, the machinery of views, and rendering pages 
 The raw markdown underlying these docs is available on [GitHub](https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/fluid-view.md),
 suitable for direct ingestion by your friendly local neighbourhood intelligence.
 
+Some examples on this page are live - complete and self-contained, they can be edited, and are run once they are
+free of errors: what each logs appears in the console beneath it, and a view it defines, or a Single File Component,
+is shown beside it. An example's code receives `console`, and `container`, the element beside it. The other examples
+show syntax alone, e.g. a fragment of a layer record, and are read-only. Every example is checked by Infusion's
+linter, down to the interiors of its references and directives as Infusion reads them - hover over a marked error to
+see what is wrong, and, for an editable example, a fix.
+
 ## A first component
 
 A Single File Component is a `.vue` file holding a `<script>` defining one layer, a `<template>` holding its markup,
 and optionally `<style>`. Here is a complete counter, in a file named `my-counter.vue`:
 
-```html
+```html live
 <script>
 fluid.def("my.counter", {
     count: 0,
@@ -57,7 +64,7 @@ related to the same component together in one place.
 To use it, declare the module and import the SFC in a host page, and mark an element with the layers to instantiate
 on it:
 
-```html
+```html syntax
 <head>
     <script src="../../src/framework/core/js/FluidBoot.js"></script>
     <fluid-module id="myApp" src="./" modules="fluid-modules.json"></fluid-module>
@@ -107,7 +114,7 @@ When the SFC is loaded, its script is patched before execution:
   relative to the importing SFC, so an SFC declares the SFCs it depends on, and a page need only import the root of the
   tree:
 
-```html
+```html syntax
 <fluid-import src="my-list-item.vue"></fluid-import>
 <script>
 fluid.def("my.list", {
@@ -125,7 +132,7 @@ fluid.def("my.list", {
   refers to with `<use href="#id">`. Its markup is injected verbatim as a `<defs>` element within a single hidden
   `<svg id="fl-symbols-host">`, shared by every SFC, at the start of the document's `<body>`:
 
-```html
+```html syntax
 <symbols>
     <symbol id="my-chevron" viewBox="0 0 16 16">
         <path d="M6 3l5 5-5 5" fill="none" stroke="currentColor"/>
@@ -159,7 +166,7 @@ that owns the view, exactly as in configuration.
 
 A function call is recomputed whenever any of its arguments changes, as for a `$compute`:
 
-```html
+```html syntax
 <a href="/tags/@{my.urlize({self}.tag)}/">@{tag}</a>
 ```
 
@@ -175,7 +182,7 @@ place, and an attribute binding removes the attribute.
 An attribute whose whole value is a single `@{...}` binds the **raw value**, not its string form. This allows
 booleans and live DOM state to be bound directly:
 
-```html
+```html syntax
 <button disabled="@{busy}" aria-pressed="@{busy}">Go</button>
 <input value="@{state.prompt}"/>
 <input type="checkbox" checked="@{done}"/>
@@ -229,8 +236,35 @@ what the user sees.
 
 ### Conditional classes: `@class`
 
-```html
-<span class="todo" @class="completed:@{todo.completed}, is-info:!@{todo.completed}">
+```html live
+<script>
+fluid.def("my.todoTag", {
+    todo: {text: "Write docs", completed: false},
+    toggle: {
+        $method: {
+            func: self => self.todo = {...self.todo, completed: !self.todo.completed},
+            args: "{self}"
+        }
+    }
+});
+</script>
+
+<template>
+    <div>
+        <span class="todo" @class="completed:@{todo.completed}, is-info:!@{todo.completed}">@{todo.text}</span>
+        <button @onclick="{self}.toggle()">Toggle</button>
+    </div>
+</template>
+
+<style>
+.todo.completed {
+    text-decoration: line-through;
+}
+
+.todo.is-info {
+    color: #0b5394;
+}
+</style>
 ```
 
 `@class` takes a comma-separated list of `className:@{reference}` pairs. Each class is present while its reference is
@@ -239,12 +273,46 @@ while the item is *not* completed. Classes in a static `class` attribute are kep
 
 ### Events: `@on<event>`
 
-```html
-<button @onclick="{self}.increment()">+1</button>
-<input @onkeyup="my.app.keyUp({0}, {todoList}.todos)"/>
-<button @onclick.stop="{self}.remove()">x</button>
-<button @onclick="{self}.open = !{self}.open">Toggle</button>
-<button @onclick="{self}.mode = edit">Edit</button>
+```html live
+<script>
+fluid.def("my.eventDemo", {
+    count: 0,
+    open: false,
+    mode: "view",
+    lastKey: "",
+    increment: "$method:my.eventDemo.increment({self})",
+    keyUp: "$method:my.eventDemo.keyUp({self}, {0})",
+    remove: "$method:my.eventDemo.remove({self})"
+});
+my.eventDemo.increment = self => self.count++;
+my.eventDemo.keyUp = (self, event) => self.lastKey = event.key;
+my.eventDemo.remove = self => self.count = 0;
+</script>
+
+<template>
+    <div class="event-demo">
+        <p>Count: @{count}, open: @{open}, mode: @{mode}, last key: @{lastKey}</p>
+        <button @onclick="{self}.increment()">+1</button>
+        <input @onkeyup="{self}.keyUp({0})" placeholder="Type here"/>
+        <button @onclick.stop="{self}.remove()">x</button>
+        <button @onclick="{self}.open = !{self}.open">Toggle</button>
+        <button @onclick="{self}.mode = edit">Edit</button>
+    </div>
+</template>
+
+<style>
+.event-demo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+
+.event-demo p {
+    flex-basis: 100%;
+    margin: 0;
+}
+</style>
 ```
 
 * **Invocation.** The value is a compact function call in the syntax of
@@ -265,7 +333,7 @@ while the item is *not* completed. Classes in a static `class` attribute are kep
 
 ### Subcomponents: `@id`
 
-```html
+```html syntax
 <div @id="todoItems" class="section"></div>
 ```
 
@@ -274,7 +342,7 @@ contents are taken as the subcomponent's template unless the subcomponent suppli
 component list (a [`$component` with `$for`](/docs/fluid-integration-language#for)), each list member is rendered in
 sequence inside the element.
 
-```js
+```js syntax
 fluid.def("my.todoList", {
     todos: {$reactiveRoot: []},
     todoItems: {
@@ -305,14 +373,14 @@ Where the subcomponent's nodes must appear without any wrapping element, for exa
 inside `<head>`, mark its place with a `<fluid-fragment>` element. The slot renders no element of its own, and the
 subcomponent's nodes, or those of each member of its list, are rendered in its place:
 
-```html
+```html syntax
 <head>
     <title>@{title}</title>
     <fluid-fragment @id="stylesheetLinks"></fluid-fragment>
 </head>
 ```
 
-```js
+```js syntax
 stylesheetLinks: {
     $component: {
         $layers: "fluid.component",
@@ -333,28 +401,51 @@ A list member can render a separator before itself using its position, bound by
 [`positionAs`](/docs/fluid-integration-language#for). This works the same way whether the source is an array or a
 keyed collection:
 
-```js
-tagLinks: {   // Rendered into <p @id="tagLinks"></p> as "Alpha, Beta, Gamma"
-    $component: {
-        $layers: "fluid.component",
-        $for: {source: "{post}.tags", valueAs: "tag", positionAs: "position"},
-        view: {
-            $component: {
-                $layers: "fluid.templateViewComponent",
-                elideParent: false,
-                template: `<span @if="!position.first" class="separator">, </span><a href="@{tag.url}">@{tag.name}</a>`
+```js live
+fluid.def("my.post", {
+    $layers: "fluid.component",
+    tags: [{name: "Alpha", url: "#alpha"}, {name: "Beta", url: "#beta"}, {name: "Gamma", url: "#gamma"}],
+    view: {
+        $component: {
+            $layers: "fluid.templateViewComponent",
+            template: `<div><p>Tagged: <span @id="tagLinks"></span></p></div>`
+        }
+    },
+    tagLinks: {   // Rendered into its container as "Alpha, Beta, Gamma"
+        $component: {
+            $layers: "fluid.component",
+            $for: {source: "{post}.tags", valueAs: "tag", positionAs: "position"},
+            view: {
+                $component: {
+                    $layers: "fluid.templateViewComponent",
+                    elideParent: false,
+                    template: `<span @if="!position.first" class="separator">, </span><a href="@{tag.url}">@{tag.name}</a>`
+                }
             }
         }
     }
-}
+});
 ```
 
 ### Conditional elements: `@if` and `@else`
 
-```html
-<h2 @if="subtitle" class="sub">@{subtitle}</h2>
-<p @else class="nosub">No subtitle</p>
-<hr @if="!@{compact}"/>
+```html live
+<script>
+fluid.def("my.titled", {
+    subtitle: "",
+    compact: false
+});
+</script>
+
+<template>
+    <div>
+        <input value="@{subtitle}" placeholder="Subtitle"/>
+        <label><input type="checkbox" checked="@{compact}"/> Compact</label>
+        <h2 @if="subtitle" class="sub">@{subtitle}</h2>
+        <p @else class="nosub">No subtitle</p>
+        <hr @if="!@{compact}"/>
+    </div>
+</template>
 ```
 
 An element bearing `@if` is rendered only while its condition is truthy. The condition is any expression which
@@ -378,7 +469,7 @@ and the effects that patch the DOM) lives in a subcomponent at the member `view`
 state and behaviour, and bears no view layers in its own `$layers`. An SFC adds the view automatically, but it can
 also be written out:
 
-```js
+```js live
 fluid.def("my.greeting", {
     $layers: "fluid.component",
     name: "World",
@@ -390,7 +481,7 @@ fluid.def("my.greeting", {
     }
 });
 
-my.greeting({container: document.getElementById("greeting")});
+my.greeting({container});
 ```
 
 The two components refer to each other across this boundary:
@@ -404,7 +495,7 @@ The two components refer to each other across this boundary:
 
 All view configuration therefore goes under `view.$component`, including settings such as `elideParent`:
 
-```js
+```js syntax
 fluid.def("my.footer", {
     view: {
         $component: {
@@ -420,7 +511,7 @@ accumulates the configuration, by the usual [merging rules](/docs/fluid-integrat
 Because the view is a subcomponent, the same component can be rendered differently by giving its `view` other layers,
 and it can exist with no view at all, or share the view of another component by having it injected across:
 
-```js
+```js syntax
 fluid.def("my.shared.component", {
     view: "{other.component}.view"
 });
@@ -491,7 +582,7 @@ attributes may use all of the binding syntax above, and are processed exactly as
 
 `fluid.UISelect`, from the todo list demo, renders a `<select>` from parallel arrays of values and names:
 
-```js
+```js live
 fluid.def("fluid.UISelect", {
     $layers: "fluid.component",
     optionValues: {$reactiveRoot: []},
@@ -524,6 +615,19 @@ fluid.def("fluid.UISelectView", {
         }
     }
 });
+fluid.def("my.filterSelect", {
+    $layers: "fluid.UISelect",
+    optionValues: ["all", "active", "completed"],
+    optionNames: ["All", "Active", "Completed"],
+    selection: "active",
+    logSelection: "$effect:my.logSelection({self}.selection)"
+});
+my.logSelection = selection => console.log("Selected " + selection);
+
+// With elideParent: false, the root of the tree, a <select>, is rendered onto the container itself
+const select = container.ownerDocument.createElement("select");
+container.appendChild(select);
+my.filterSelect({container: select});
 ```
 
 The `$compute` reruns whenever the selection or options change, and reconciliation updates only the nodes that
@@ -533,7 +637,7 @@ template that binds `<select value="@{selection}">` and needs no change handler.
 A heavier variant computes the template as an **HTML string**. The editor's `fluid.substrateTree` (in
 `src/framework/edit/js/substrateTree.js`) renders a large recursive tree this way:
 
-```js
+```js syntax
 view: {
     $component: {
         $layers: "fluid.templateViewComponent",
@@ -553,7 +657,7 @@ bearing it, without replacing that template. This lets independent layers each a
 page structure such as a header. The component's view must bear `fluid.partialViewComponent` alongside its template
 layer:
 
-```js
+```js live
 fluid.def("my.header", {
     $layers: "fluid.component",
     view: {
@@ -579,6 +683,13 @@ fluid.def("my.header.bare", {
             relativeContainer: "remove: .strapline"
         }
     }
+});
+
+// A header of a post with no strapline, which is rendered at the left
+fluid.def("my.postHeader", {
+    $layers: ["my.header", "my.header.post", "my.header.bare"],
+    title: "Partial templates",
+    date: "21 November 2026"
 });
 ```
 
@@ -607,7 +718,7 @@ error naming the layer.
 A view with `verbatim: true` renders markup produced elsewhere, such as HTML from a content pipeline, without treating
 it as a template:
 
-```js
+```js live
 fluid.def("my.article", {
     $layers: "fluid.component",
     html: "<p>Rendered from <em>Markdown</em></p><div fluid-layers=\"my.figure\" data-src=\"a.png\"></div>",
@@ -642,7 +753,7 @@ argument changes, but with `onceOnly: true` it constructs it exactly once for th
 `fluid.codemirror` (`src/framework/edit/sfc/fluid-codemirror.vue`) binds a CodeMirror editor to the textarea that
 its own view renders:
 
-```js
+```js syntax
 fluid.def("fluid.codemirror", {
     text: "",
     view: {
@@ -710,7 +821,7 @@ change runs the effect that writes the same text back into the widget. This can 
 if the change takes time to arrive, overwrite text the user has typed since. Annotate the effect that writes into the
 widget with `excludeSource: "self"`:
 
-```js
+```js syntax
 readEffect: {
     $effect: {
         func: "fluid.codemirror.readText",
@@ -731,7 +842,7 @@ component's own template with it automatically. A third-party widget's changes, 
 written back by an effect declaring `source: "self"`. Here the widget's listener only records what the widget reports,
 and the effect writes it back to the model:
 
-```js
+```js syntax
 validText: null,              // set by the widget's listener: self.validText = text
 writeEffect: {
     $effect: {
@@ -746,7 +857,7 @@ writeEffect: {
 Where a write can't be made from an effect, it can be wrapped instead, with the component's self source fetched by
 `fluid.selfSource(self)`:
 
-```js
+```js syntax
 instance.on("change", fluid.cell.withAmbientSource(fluid.selfSource(self), () => self.text = instance.getValue()));
 ```
 
@@ -755,7 +866,7 @@ would not hear each other's changes. Give each such widget a component of its ow
 
 At the level of raw cells, the same source can be supplied to an edge directly:
 
-```js
+```js syntax
 const toWidget = fluid.cell.effect(text => widget.setText(text), [model], {excludeSource: fluid.selfSource(self)});
 ```
 
@@ -771,7 +882,7 @@ tracking is needed where a widget can't make that comparison cheaply or without 
 `"dom"` marks every change made by the user through any view. It is useful with `includeSource`, to act on the user's
 own changes only. For example, an effect that records undo history, sets a dirty flag, or reports analytics:
 
-```js
+```js syntax
 markDirty: {
     $effect: {
         func: self => self.dirty = true,
@@ -797,7 +908,7 @@ implemented by [linkedom](https://github.com/WebReflection/linkedom), and is loa
 A view bearing `fluid.outputDocumentView` alongside its template layer renders into a whole document of its own. The
 root element of its template, normally `<html>`, is rendered onto the document's root element:
 
-```js
+```js syntax
 fluid.def("my.page", {
     $layers: "fluid.component",
     view: {
@@ -828,6 +939,15 @@ fluid.def("my.site", {
 * `baseURL` - Optional. The base URL of the site to which the page belongs. The page's root element then records the
   relative URL of the site's root in its `fluid-site-root` attribute, e.g. `"../../"`, so that in the browser the page
   recognises its own location wherever the site is served from, even from local files.
+
+**Site-absolute URLs.** In a page recording its site's root, every `href` and `src` which rendering writes and which
+begins with a single `/`, e.g. `/css/main.css`, is resolved against that root as it is written, e.g. to
+`../../css/main.css`. This applies alike to URLs bound in templates, to those in verbatim markup such as content
+rendered from markdown, and to those islands render. Templates and content can therefore name the site's resources
+site-absolutely, and the page still works wherever the site is served from, with no pass over the output, as Hugo's
+`relativeURLs` makes. The browser resolves them against the same attribute, so a page made live renders the same URLs as
+the build wrote. Protocol-relative URLs (`//host/...`), absolute URLs and relative URLs are left as written, as is
+everything in a page which records no site root.
 
 Under node, the view creates a fresh **output document** while `documentLocation` is available, and releases it when
 the location becomes unavailable or the view is destroyed. A changed location creates a fresh document. Every output
@@ -910,7 +1030,7 @@ URL, by the scheme `placeholder://{layerName}/{resourceName}`, and a runnable ap
 the URL of its real data. The component which fetches it bears the mixin `fluid.withPlaceholder`, beside a reader such
 as `fluid.jsonReader`:
 
-```js
+```js syntax
 fluid.def("my.app", {
     records: {
         $component: {
@@ -921,7 +1041,7 @@ fluid.def("my.app", {
 });
 
 // A runnable application, rendered from its real data, statically as in the browser
-fluid.def("my.site", {
+fluid.def("my.recordsSite", {
     $layers: "my.app",
     records: {url: "data/records.json"}
 });
@@ -931,7 +1051,7 @@ Since a placeholder is as small as possible, it is always held inline, by a top-
 layer's Single File Component, so that it travels with the SFC wherever it is copied. Its material is held as text, or,
 if it is binary or holds markup, in base64:
 
-```html
+```html syntax
 <placeholder name="records" type="application/json">[{"name": "Placeholder"}]</placeholder>
 <placeholder name="viz" type="application/octet-stream" encoding="base64">H4sIAAAAAAAA...</placeholder>
 ```
@@ -975,7 +1095,7 @@ Once ready, the page renders the same markup whether it was booted from its mini
 
 A page reaches every module through its bootstrap, for Infusion, and its module map, for the rest:
 
-```html
+```html syntax
 <script src="../vendor/infusion/src/framework/core/js/FluidBoot.js"></script>
 <fluid-module id="my-site" src="../" modules="fluid-modules.json"></fluid-module>
 <fluid-import src="%imerss-bioinfo/src/client/sfc/bbea/hortis-beaVizLoader.vue"></fluid-import>

@@ -14,6 +14,13 @@ deferred stabilization) it inherits throughout.
 The raw markdown underlying these docs is available on [GitHub](https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/fluid-integration-language.md),
 suitable for direct ingestion by your friendly local neighbourhood intelligence.
 
+Some examples on this page are live - complete and self-contained, they can be edited, and are run once they are
+free of errors: what each logs appears in the console beneath it, and a view it defines, or a Single File Component,
+is shown beside it. An example's code receives `console`, and `container`, the element beside it. The other examples
+show syntax alone, e.g. a fragment of a layer record, and are read-only. Every example is checked by Infusion's
+linter, down to the interiors of its references and directives as Infusion reads them - hover over a marked error to
+see what is wrong, and, for an editable example, a fix.
+
 ## Model
 
 A program in the IL is derived from a set of named **layers**: plain JSON-like records registered in a global, reactive layer store
@@ -50,14 +57,14 @@ With two arguments, writes or replaces the definition of `layerName` in the laye
 layers include `layerName`, directly or by inheritance, re-merges reactively. A global **creator function** is also
 registered at the path `layerName`, which constructs a free-standing component:
 
-```js
+```js live
 fluid.def("my.app.counter", {
     $layers: "fluid.component",
     count: 0
 });
 
 const counter = my.app.counter({count: 5}); // Creator function - argument is a "user" layer
-counter.count; // 5
+console.log(counter.count); // 5
 ```
 
 With one argument, reads back the stored definition. A layer whose definition is not yet written reads as unavailable,
@@ -139,25 +146,35 @@ readable at `that.$layers`, weakest first. To be instantiable
 as a component, its layer hierarchy must somewhere include `fluid.component`. The algorithm and its rationale are
 described in [Layer Linearisation](/docs/linearisation-algorithm).
 
-```js
+```js live
 fluid.def("my.shape", {$layers: "fluid.component", sides: 0, colour: "black"});
 fluid.def("my.red", {$layers: "fluid.component", colour: "red"});
 fluid.def("my.triangle", {$layers: "my.shape", sides: 3});
 fluid.def("my.redTriangle", {$layers: ["my.triangle", "my.red"]});
 
 const t = my.redTriangle();
-t.sides;   // 3 - my.triangle beats my.shape
-t.colour;  // "red" - my.red is listed after my.triangle and so beats my.shape
+console.log(t.sides); // 3 - my.triangle beats my.shape
+console.log(t.colour); // "red" - my.red is listed after my.triangle and so beats my.shape
 ```
 
 An entry in `$layers` which is itself a [reference](#references) is a **dynamic layer name**, resolved reactively from the
 component's context. The referenced value may be a layer name or array of names:
 
-```js
+```js live
+fluid.def("my.compactPanel", {$layers: "fluid.component", padding: 2});
+fluid.def("my.roomyPanel", {$layers: "fluid.component", padding: 12});
+
 fluid.def("my.panel", {
     $layers: ["fluid.component", "{self}.flavour"],
     flavour: "my.compactPanel"
 });
+
+const panel = my.panel();
+fluid.cell.stabilize();   // The dynamic layer is resolved and merged
+console.log(panel.padding); // 2
+panel.flavour = "my.roomyPanel";
+fluid.cell.stabilize();
+console.log(panel.padding); // 12
 ```
 
 Dynamic layers merge above all static layers and literal configuration, wherever they appear in the list (see
@@ -168,7 +185,9 @@ A dynamic layer name which names an undefined layer makes the component unavaila
 choose amongst candidate layers only those which exist, compute the name with `fluid.definedLayers` or
 `fluid.firstDefinedLayer` (see [Utilities](#utilities)):
 
-```js
+```js live
+fluid.def("my.type.default", {$layers: "fluid.component", heading: "Page"});
+
 fluid.def("my.document", {
     $layers: ["fluid.component", "{self}.typeLayers"],
     type: "post",
@@ -177,6 +196,13 @@ fluid.def("my.document", {
     typeLayers: "$compute:fluid.firstDefinedLayer({self}.candidates)"
 });
 my.document.candidates = type => ["my.type." + type, "my.type.default"];
+
+const doc = my.document();
+fluid.cell.stabilize();
+console.log(doc.heading); // "Page" - my.type.post is not yet defined
+fluid.def("my.type.post", {$layers: "fluid.component", heading: "Blog post"});
+fluid.cell.stabilize();
+console.log(doc.heading); // "Blog post"
 ```
 
 Since these test whether a layer is defined reactively, the component switches to the preferred layer as soon as it is
@@ -194,6 +220,7 @@ A component's contents are a deep merge of layer records, applied weakest first:
 | `subcomponent` | The body of the [`$component`](#component) record which created this component |
 | `forLayer` | The collection element merged into this component by [`$for`](#for)'s `layerAs` |
 | `user` | The argument to a creator function |
+| `distribution` | Options refining this component written at a member which injects it elsewhere - see [Refining an injected component](#refining-an-injected-component) |
 | `template` | Material contributed by the template which renders this component, e.g. the markup at its `@id` element, or the layers and `data-` attributes of an [island](/docs/fluid-view#verbatim-markup-and-islands) |
 | `dynamicLayers` | Layers named via references in `$layers` |
 | `variables` | Iteration variables bound by [`$for`](#for) |
@@ -218,6 +245,9 @@ Merge rules:
 * Where several layers supply `$component` records at the same member, the `$layers` named by each are combined, those
   of a stronger record beating those of a weaker one. Within one record, as in a layer's own `$layers`, a layer listed
   later beats one listed earlier.
+* A `$component` record naming no `$layers`, stronger than a reference at the same member, does not displace the
+  reference: it [refines](#refining-an-injected-component) the component the reference injects there. A record naming
+  `$layers` constructs a fresh component at the member, displacing the reference.
 
 Merging is reactive: changing any contributing layer re-merges the component. Signal products (computed values,
 effects, subcomponents) whose defining record is identical before and after are retained rather than rebuilt.
@@ -237,12 +267,17 @@ changes, so does the reference. A reference which can't be resolved yields an un
 A path which runs off the end of plain data yields `undefined`; a path naming a missing member of a component yields
 an unavailable value.
 
-```js
+```js live
 fluid.def("my.greeter", {
     $layers: "fluid.component",
     name: "World",
     shout: "{self}.name"           // tracks name
 });
+
+const greeter = my.greeter();
+console.log(greeter.shout); // "World"
+greeter.name = "Infusion";
+console.log(greeter.shout); // "Infusion"
 ```
 
 A reference to a path holding mutable configuration is **sited**: writing through it writes to the original site.
@@ -254,7 +289,7 @@ one beginning with `$` is a compact record such as `"$compute:..."`. To write a 
 escape its first character with a backslash. A string whose first character is a backslash is taken literally, without
 that backslash. A backslash anywhere else in a string has no special meaning.
 
-```js
+```js live
 fluid.def("my.prices", {
     $layers: "fluid.component",
     json: "\\{\"a\": 1}",       // the literal text {"a": 1}
@@ -262,6 +297,9 @@ fluid.def("my.prices", {
     share: "\\\\server",         // the literal text \server
     path: "C:\\temp"            // unchanged: the backslash is not the first character
 });
+
+const prices = my.prices();
+console.log(prices.json, prices.price, prices.share, prices.path); // {"a": 1} $5.00 \server C:\temp
 ```
 
 The escape applies wherever configuration is interpreted, including arguments and nested material. Values written at
@@ -292,7 +330,9 @@ The names of a component are its member name and each of its non-framework layer
 name beats a layer name at the same level. Components bearing `fluid.resolveRoot` are visible from everywhere.
 Scope is reactive: a reference re-resolves when a matching component appears or disappears.
 
-```js
+```js live
+fluid.def("my.toolbar", {$layers: "fluid.component", theme: "light"});
+
 fluid.def("my.app", {
     $layers: "fluid.component",
     theme: "dark",
@@ -303,6 +343,12 @@ fluid.def("my.app", {
         }
     }
 });
+
+const app = my.app();
+fluid.cell.stabilize();   // Scope is resolved once the component tree has settled
+console.log(app.toolbar.theme); // "dark"
+app.theme = "high-contrast";
+console.log(app.toolbar.theme); // "high-contrast"
 ```
 
 ### Selectors
@@ -315,7 +361,7 @@ values at that path in each match.
 Selector syntax follows CSS: whitespace-separated steps match descendants, `>` matches direct children, and each step
 is a context name (layer name, nickname or member name) or `&name`, or `#id`.
 
-```js
+```js syntax
 fluid.def("my.dashboard", {
     $layers: "fluid.component",
     allTitles: "{self my.widget}.title",
@@ -344,7 +390,7 @@ A signal record is an object with a single key starting with `$`, or equivalentl
 A value computed by a pure function from its resolved arguments. Recomputed lazily whenever any argument changes.
 If any argument is unavailable the function is not called and the value is unavailable.
 
-```js
+```js live
 fluid.def("my.rect", {
     $layers: "fluid.component",
     width: 3,
@@ -354,9 +400,9 @@ fluid.def("my.rect", {
 my.multiply = (a, b) => a * b;
 
 const r = my.rect();
-r.area;          // 12
+console.log(r.area); // 12
 r.width = 5;
-r.area;          // 20
+console.log(r.area); // 20
 ```
 
 The function may be asynchronous: if it returns a `Promise` or async iterator, e.g. as an `async` or `async*` function
@@ -378,7 +424,7 @@ The full form `{$compute: {func, args, equiv}}` accepts:
 An argument written as `{$oldValue}` receives the value the computation last produced, or `undefined` if it has
 produced none, so that it may build on its own previous result, as a reducer:
 
-```js
+```js live
 fluid.def("my.history", {
     $layers: "fluid.component",
     current: 0,
@@ -386,6 +432,13 @@ fluid.def("my.history", {
     seen: "$compute:my.appendValue({$oldValue}, {self}.current)"
 });
 my.appendValue = (seen, value) => [...seen || [], value];
+
+const history = my.history();
+console.log(history.seen); // [0]
+history.current = 1;
+console.log(history.seen); // [0, 1]
+history.current = 2;
+console.log(history.seen); // [0, 1, 2]
 ```
 
 ### $transient
@@ -393,7 +446,7 @@ my.appendValue = (seen, value) => [...seen || [], value];
 State belonging to one instance of a component which takes no part in the reactive graph, e.g. a drag in progress, a
 timer, or a handle onto an object outside the tree:
 
-```js
+```js syntax
 fluid.def("my.dragger", {
     $layers: "fluid.viewComponent",
     drag: {$transient: null},
@@ -420,7 +473,7 @@ A value which is a view of the value held at another site, its **source**, throu
 backward arcs are written together in one spot. Unlike a `$compute`, a lens may be written - a write to it, or beneath
 it, is applied to its source:
 
-```js
+```js syntax
 range: {
     $lens: {
         source: "{elevationFilter}.filterState",
@@ -451,7 +504,7 @@ afresh at the same site replaces it. Each write it makes carries that key as its
 recognise, or decline with `excludeSource`, the writes which arrived through the lens, and it records its last write
 for explanation.
 
-```js
+```js syntax
 // A filter's state held in one entry of a hash shared with other filters
 filterState: {
     $lens: {
@@ -488,7 +541,7 @@ argument is unavailable, and are disposed when the component is destroyed or the
   excluding `"self"` is then not notified of them. As for any writes made by an effect, this holds for members set
   synchronously by its function, not for any set after an `await`.
 
-```js
+```js live
 fluid.def("my.logger", {
     $layers: "fluid.component",
     count: 1,
@@ -519,7 +572,7 @@ effect's member holds the final payload, and is pending while the chain runs, so
 can depend on the chain having completed. If the arguments change again while a record is awaiting a promise, the
 superseded run dispatches no further records.
 
-```js
+```js live
 fluid.def("my.map", {
     $layers: "fluid.component",
     mapUrl: "maps/region.json",
@@ -537,13 +590,18 @@ fluid.def("my.map", {
     },
     report: "$effect:my.reportReady({self}.ready)"   // Runs once the whole chain has completed
 });
+my.loadMap = url => new Promise(resolve => setTimeout(() => resolve({url, regions: 12}), 200));
+my.applyStyle = map => ({...map, styled: true});
+my.reportReady = ready => console.log("Ready:", ready);
+
+my.map(); // Ready: {"url": "maps/region.json", "regions": 12, "styled": true} - logged once the map has loaded
 ```
 
 Effects supplied by several layers at the same member are **merged by namespace** rather than the stronger replacing
 the weaker. A stronger record displaces a weaker record of the same namespace in place, and a record with a new
 namespace joins the chain at the position given by its `priority`:
 
-```js
+```js syntax
 fluid.def("my.patternedMap", {
     $layers: "my.map",
     ready: {
@@ -577,7 +635,7 @@ A method is an action rather than a computation. Values its function reads are c
 of a `$compute` or `$effect` which calls it. An effect may therefore call a method which updates the values it reads,
 such as one appending to a history, without rerunning itself:
 
-```js
+```js syntax
 commit: "$method:my.commit({self}, {0}:text)",   // reads and writes {self}.history and {self}.text
 commitValid: {
     $effect: {
@@ -587,7 +645,7 @@ commitValid: {
 }
 ```
 
-```js
+```js live
 fluid.def("my.taxa", {
     $layers: "fluid.component",
     entries: ["Vicia hirsuta", "Stellaria graminea"],
@@ -597,8 +655,8 @@ fluid.def("my.taxa", {
 my.lookup = (entries, query, max) => entries.filter(e => e.includes(query)).slice(0, max);
 my.describe = (that, prefix) => prefix + that.entries.length;
 
-my.taxa().lookup("Vicia", 1);   // ["Vicia hirsuta"]
-my.taxa().describe("Count: ");  // "Count: 2"
+console.log(my.taxa().lookup("Vicia", 1)); // ["Vicia hirsuta"]
+console.log(my.taxa().describe("Count: ")); // "Count: 2"
 ```
 
 ## Other directives
@@ -607,22 +665,28 @@ my.taxa().describe("Count: ");  // "Count: 2"
 ### $component
 
 Declares a subcomponent at this member. The record body is a layer merged at `subcomponent` precedence and must
-name `$layers`. The subcomponent lives as long as the record is present in its parent's merged layers: removing or
-changing the record destroys or reconfigures it.
+name `$layers` - unless it is stronger than another record at the member which names them, onto whose subcomponent it
+accumulates, or than a reference injecting a component there, which it [refines](#refining-an-injected-component).
+The subcomponent lives as long as the record is present in its parent's merged layers: removing or changing the record
+destroys or reconfigures it.
 
-```js
-fluid.def("my.app", {
+```js live
+fluid.def("my.header", {$layers: "fluid.component", text: ""});
+
+fluid.def("my.inbox", {
     $layers: "fluid.component",
     title: "Inbox",
     header: {
         $component: {
             $layers: "my.header",
-            text: "{app}.title"
+            text: "{inbox}.title"
         }
     }
 });
 
-my.app().header.text;   // "Inbox"
+const inbox = my.inbox();
+fluid.cell.stabilize();
+console.log(inbox.header.text);   // "Inbox"
 ```
 
 #### Injecting an existing component
@@ -635,7 +699,11 @@ carried over. It is not moved or copied, and keeps its original path and lifetim
 reference stops resolving to a component, if a stronger layer overrides the reference, or if the component is
 destroyed.
 
-```js
+```js live
+fluid.def("my.library", {$layers: "fluid.component"});
+fluid.def("my.catalogue", {$layers: "fluid.component", entries: ["Vicia hirsuta", "Stellaria graminea"]});
+fluid.def("my.searchBox", {$layers: "fluid.component", entries: []});
+
 fluid.def("my.workspace", {
     $layers: "fluid.component",
     library: {
@@ -656,13 +724,81 @@ fluid.def("my.workspace", {
         }
     }
 });
+
+const workspace = my.workspace();
+fluid.cell.stabilize();
+console.log(workspace.current === workspace.library.items); // true
+console.log(workspace.searchBox.entries); // ["Vicia hirsuta", "Stellaria graminea"]
 ```
 
 `workspace.current` is the same component as `workspace.library.items`. Within `searchBox` it resolves as `{current}`,
 `{catalogue}` or `{my.catalogue}`, but not as `{items}`. A stronger layer may override a `$component` record with a
-reference at the same member, or the other way round. A reference to the component itself (`{self}`) is never
+reference at the same member, or the other way round with a record naming its `$layers` - a record naming none instead
+[refines](#refining-an-injected-component) the component injected. A reference to the component itself (`{self}`) is never
 injected, and a reference which turns out to designate plain data rather than a component simply yields that value.
 Injecting another component's [view](/docs/fluid-view#views) lets one component render through another's view.
+
+#### Refining an injected component
+
+Anything done at an injected member is done to the component injected there: a read of the member reads it, and a
+write through the member writes it. Merging is no exception. A `$component` record naming no `$layers`, written at a
+member by a layer stronger than the reference injecting a component there, **refines** that component - its options
+are merged into the injected component, just as options naming no `$layers` accumulate onto a subcomponent declared
+by a weaker layer. So options addressed to a member mean the same whether the component there was constructed there or
+injected.
+
+The usual case is a component which borrows the view of one of its subcomponents, and is supplied, as any component
+is, with a container for its view:
+
+```js live
+fluid.def("my.widget", {
+    $layers: "fluid.component",
+    view: {
+        $component: {
+            $layers: "fluid.templateViewComponent",
+            template: "<p>Rendered by the umbrella's first widget</p>"
+        }
+    }
+});
+
+fluid.def("my.umbrella", {
+    $layers: "fluid.component",
+    first: {
+        $component: {
+            $layers: "my.widget"
+        }
+    },
+    // The umbrella renders through its subcomponent's view
+    view: "{first}.view"
+});
+
+const umbrella = my.umbrella({container});
+fluid.cell.stabilize();
+console.log(umbrella.view === umbrella.first.view);   // true - the container refined the borrowed view, rather than displacing it
+```
+
+(A creator function forwards its `container` argument to `view: {$component: {container}}` - which, at a member
+injecting a view, refines it.)
+
+* **Where the refinement stands.** A refinement is merged into the injected component as a `distribution` - stronger
+  than the component's own layers, the record which created it and the arguments it was created with, and weaker than
+  material contributed by its template, its dynamic layers and live writes to it. Its layer map names it, e.g.
+  `distribution from umbrella-4.view`.
+* **One component, wherever it is seen.** The component injected is the same one at every site at which it appears,
+  and at its own: a refinement written at one member is seen through all of them. A refinement may reach a component
+  anywhere in the tree, e.g. through a global reference.
+* **Several refinements** of the same component, from members at different paths, are merged in the order of those
+  paths - that of the later path being the stronger.
+* **References within a refinement** resolve as they would at the member where the refinement was written, not from
+  the component refined, whose scope may hold none of their contexts, or others of the same names. `{self}` within the
+  record designates the component refined, as it does within any `$component` record.
+* **Withdrawal.** A refinement lasts as long as the injection: when the reference designates another component, stops
+  resolving to one, is overridden, or its component is destroyed, the refinement is withdrawn and the component it
+  refined remerges without it.
+* **Plain data.** A refinement of a reference which designates plain data rather than a component leaves the member
+  unavailable - write the record with `$layers` to construct a fresh component there instead.
+* **Transmission.** In [PTF](/docs/fluid-ptf) a refinement is transmitted where it was written, in the potentia of the
+  component holding the injecting member, and refines the injected component again as that component is reconstructed.
 
 #### Removing a subcomponent
 
@@ -670,7 +806,10 @@ A stronger layer may remove a subcomponent which a weaker one declared by writin
 member. The subcomponent is destroyed, and the records of all weaker layers at the member are discarded, so a still
 stronger layer restoring the member must supply a complete record, including its `$layers`:
 
-```js
+```js live
+fluid.def("my.header", {$layers: "fluid.component", text: ""});
+fluid.def("my.compactHeader", {$layers: "my.header", compact: true});
+
 fluid.def("my.page", {
     $layers: "fluid.component",
     header: {
@@ -691,6 +830,13 @@ fluid.def("my.headedSection", {
         }
     }
 });
+
+fluid.def("my.barePage", {$layers: ["my.page", "my.bareSection"]});
+fluid.def("my.reheadedPage", {$layers: ["my.page", "my.bareSection", "my.headedSection"]});
+const bare = my.barePage(), reheaded = my.reheadedPage();
+fluid.cell.stabilize();
+console.log(bare.header); // null - the header is removed
+console.log(reheaded.header.compact); // true - restored by a complete record
 ```
 
 If the subcomponent rendered into an element bearing `@id` in its parent's template, that element is omitted while the
@@ -712,7 +858,10 @@ member then holds a `fluid.componentList` whose `list` holds the instances.
 * `layerAs` - Name of a layer, holding each collection element, which is merged into its subcomponent as configuration -
   see [Configuring members from data](#configuring-members-from-data)
 
-```js
+```js live
+fluid.def("my.editor", {$layers: "fluid.component", label: ""});
+my.label = (index, name) => (index + 1) + ": " + name;
+
 fluid.def("my.editorHolder", {
     $layers: "fluid.component",
     names: {$reactiveRoot: ["alpha"]},
@@ -727,7 +876,9 @@ fluid.def("my.editorHolder", {
 
 const h = my.editorHolder();
 h.names.push("beta");      // Second editor is created on stabilize
-h.editors.list.length;     // 2
+fluid.cell.stabilize();
+console.log(h.editors.list.length); // 2
+console.log(h.editors.list.map(editor => editor.label)); // ["1: alpha", "2: beta"]
 ```
 
 **Keyed collections.** When the source is an object, one subcomponent is created per entry, in the order of the merged
@@ -736,8 +887,10 @@ object's keys, except that an entry holding a `priority` member is placed by it,
 `"after:key"` naming another entry. An entry whose value is `null` is skipped. Since an object source merges key by key, layers may
 therefore contribute, reorder and remove entries independently:
 
-```js
-fluid.def("my.page", {
+```js live
+fluid.def("my.stylesheetLink", {$layers: "fluid.component"});
+
+fluid.def("my.styledPage", {
     $layers: "fluid.component",
     stylesheets: {
         main: {href: "main.css"},
@@ -746,18 +899,22 @@ fluid.def("my.page", {
     links: {
         $component: {
             $layers: "my.stylesheetLink",
-            $for: {source: "{page}.stylesheets", valueAs: "sheet", keyAs: "key"}
+            $for: {source: "{styledPage}.stylesheets", valueAs: "sheet", keyAs: "key"}
         }
     }
 });
 
 fluid.def("my.mathsPage", {
-    $layers: "my.page",
+    $layers: "my.styledPage",
     stylesheets: {
         katex: {priority: "before:main", href: "katex.css"},
         print: null                    // No print stylesheet for this page
     }
 });
+
+const page = my.mathsPage();
+fluid.cell.stabilize();
+console.log(page.links.list.map(link => link.key + ": " + link.sheet.href)); // ["katex: katex.css", "main: main.css"]
 ```
 
 <a id="configuring-members-from-data"></a>**Configuring members from data.** Material reached through `valueAs` is data.
@@ -774,7 +931,10 @@ above the `$component` record and the member's own layers:
 
 Each element must be a plain object.
 
-```js
+```js live
+fluid.def("my.obsPaneHandler", {$layers: "fluid.component", title: "Observations"});
+fluid.def("my.choroplethSlider", {$layers: "fluid.component", obsRows: []});
+
 fluid.def("my.paneHandler", {
     $layers: "fluid.component",
     maxObsCount: 100
@@ -804,6 +964,11 @@ fluid.def("my.storyPage", {
         }
     }
 });
+
+const story = my.storyPage({obsRows: [{taxon: "Vicia hirsuta"}]});
+fluid.cell.stabilize();
+console.log(story.panes.list.map(pane => pane.title + ": " + pane.maxObsCount)); // ["Observations: 5273", "Status: 100"]
+console.log(story.panes.list[0].widgets.speciesPlot.obsRows); // [{"taxon": "Vicia hirsuta"}]
 ```
 
 **Writing through iteration variables.** When the source is sited, each `valueAs` variable keeps track of where its
@@ -817,7 +982,7 @@ list:
 This holds across intermediate projections. Elements selected by a non-mutating array method such as `filter()`
 remain linked to their original source:
 
-```js
+```js live
 fluid.def("my.todoItem", {
     $layers: "fluid.component",
     toggle: {
@@ -840,13 +1005,23 @@ fluid.def("my.todoList", {
     }
 });
 my.openTodos = todos => todos.filter(todo => !todo.completed);
+
+const list = my.todoList();
+list.todos.push({text: "Sow seeds", completed: false}, {text: "Water plants", completed: false});
+fluid.cell.stabilize();
+console.log(list.openItems.list.length); // 2
+list.openItems.list[0].toggle();
+fluid.cell.stabilize();
+console.log(list.todos[0].completed, list.openItems.list.length); // true 1
 ```
 ### $if
 
 Within a `$component` record, a condition whose truthiness controls whether the subcomponent exists. In its short
 form this is a reference:
 
-```js
+```js live
+fluid.def("my.assignee", {$layers: "fluid.component", name: "Unassigned"});
+
 fluid.def("my.task", {
     $layers: "fluid.component",
     assigned: false,
@@ -857,13 +1032,19 @@ fluid.def("my.task", {
         }
     }
 });
+
+const task = my.task();
+console.log(fluid.isUnavailable(task.assignee)); // true - no assignee exists
+task.assigned = true;
+fluid.cell.stabilize();
+console.log(task.assignee.name); // "Unassigned" - the assignee has been created
 ```
 
 In its long form it is a [function record](#signal-directives), as for `$compute`, and the truthiness of the computed
 value is tested. This avoids a separate boolean member for conditions where a value such as `0` or `""` should still
 count:
 
-```js
+```js syntax
 distanceLabel: {
     $component: {
         $layers: "my.distanceLabel",
@@ -895,23 +1076,25 @@ literal or reference from a weaker layer at that member, leaving the others in p
 `$compute` at the path of the root replaces it as a whole, but a member may not hold one - this fails, since only
 literal values and references may be merged alongside a root.
 
-```js
-fluid.def("my.todoList", {
+```js live
+fluid.def("my.checklist", {
     $layers: "fluid.component",
     todos: {$reactiveRoot: [{text: "Write docs", done: false}]},
     remaining: "$compute:my.countRemaining({self}.todos)"
 });
 my.countRemaining = todos => todos.filter(t => !t.done).length;
 
-const t = my.todoList();
+const t = my.checklist();
 t.todos[0].done = true;   // Immutable update of todos
-t.remaining;              // 0
+console.log(t.remaining); // 0
 ```
 
 A layer deriving from another may wire a single member of its reactive state to a value elsewhere, leaving the rest of
 the root as it was:
 
-```js
+```js live
+fluid.def("my.textFinder", {$layers: "fluid.component", foundText: "Vicia"});
+
 fluid.def("my.searchPanel", {
     $layers: "fluid.component",
     state: {$reactiveRoot: {query: "", results: []}}
@@ -928,6 +1111,13 @@ fluid.def("my.linkedSearchPanel", {
         query: "{finder}.foundText"   // Tracks foundText; results is retained from my.searchPanel
     }
 });
+
+const panel = my.linkedSearchPanel();
+fluid.cell.stabilize();
+console.log(panel.state.query, panel.state.results.length); // Vicia 0
+panel.finder.foundText = "Stellaria";
+fluid.cell.stabilize();
+console.log(panel.state.query); // Stellaria
 ```
 
 ### $importMap
@@ -936,10 +1126,10 @@ fluid.def("my.linkedSearchPanel", {
 their definitions are loaded on demand. This demand occurs when a component derived from the layer name begins to
 instantiate. While loading, dependent components are unavailable with pending status.
 
-```js
-fluid.def("my.app", {
+```js syntax
+fluid.def("my.chartApp", {
     $layers: "fluid.component",
-    $importMap: {"my.app.chart": "%my-app/src/chart.vue"}
+    $importMap: {"my.chartApp.chart": "%my-app/src/chart.vue"}
 });
 ```
 
@@ -949,7 +1139,11 @@ Registers a rule, for as long as the containing component exists, that any compo
 also acquires `outputLayers`. Allows a layer to be adapted to a context its author did not anticipate. Accepts a
 single linkage or an array.
 
-```js
+```js live
+fluid.def("my.table", {$layers: "fluid.component", background: "white"});
+fluid.def("my.darkTheme", {$layers: "fluid.component"});
+fluid.def("my.darkTable", {background: "black"});
+
 fluid.def("my.plugin", {
     $layers: "fluid.component",
     darkTables: {
@@ -957,8 +1151,22 @@ fluid.def("my.plugin", {
             inputLayers: ["my.table", "my.darkTheme"],
             outputLayers: ["my.darkTable"]
         }
+    },
+    plainTable: {
+        $component: {
+            $layers: "my.table"
+        }
+    },
+    themedTable: {
+        $component: {
+            $layers: ["my.table", "my.darkTheme"]
+        }
     }
 });
+
+const plugin = my.plugin();
+fluid.cell.stabilize();
+console.log(plugin.plainTable.background, plugin.themedTable.background); // white black
 ```
 
 Each entry of a linkage may also bear:
@@ -969,7 +1177,7 @@ Each entry of a linkage may also bear:
   `"my.post > my.header"` matches a component bearing `my.header` whose parent bears `my.post`.
 * `scope` - A reference to a component, e.g. `"{self}"`, confining the linkage to components at or below it.
 
-```js
+```js syntax
 fluid.def("my.site", {
     $layers: "fluid.component",
     headerLinkage: {
@@ -1009,7 +1217,7 @@ is re-merged. Anything `bind` reads other than its arguments is not tracked.
   can't be reconfigured without being rebuilt, and which would lose their state if they were (see
   [Wrapping an external widget](/docs/fluid-view#wrapping-an-external-widget-with-bindable)).
 
-```js
+```js live
 fluid.def("my.socketHolder", {
     $layers: "fluid.component",
     url: "wss://example.org/feed",
@@ -1020,6 +1228,18 @@ fluid.def("my.socketHolder", {
         }
     }
 });
+// Stand-ins for a real socket's opening and closing
+my.openSocket = url => {
+    console.log("Open " + url);
+    return {url};
+};
+my.closeSocket = socket => console.log("Close " + socket.url);
+
+const holder = my.socketHolder();
+fluid.cell.stabilize();                       // Open wss://example.org/feed
+holder.url = "wss://example.org/other";       // Close wss://example.org/feed, Open wss://example.org/other
+fluid.cell.stabilize();
+holder.destroy();                             // Close wss://example.org/other
 ```
 
 ### $variety
@@ -1043,11 +1263,25 @@ use is expected to be rare:
 Returns a live, cached cell which is recomputed whenever components below `root` are created, destroyed or change
 layers. If any traversed component is unavailable, the cell holds the merged unavailable value instead.
 
-```js
+```js live
 fluid.def("my.app.editor", {$layers: "fluid.component"});
+fluid.def("my.editorApp", {
+    $layers: "fluid.component",
+    names: {$reactiveRoot: ["notes"]},
+    editors: {
+        $component: {
+            $layers: "my.app.editor",
+            $for: {source: "{editorApp}.names", valueAs: "name"}
+        }
+    }
+});
 
+const app = my.editorApp();
+fluid.cell.stabilize();
 const editors = fluid.liveQueryILSelector(app, "my.app.editor");
-fluid.cell.effect(list => console.log(list.length + " editors"), [editors]);
+fluid.cell.effect(list => console.log(list.length + " editors"), [editors]); // 1 editors
+app.names.push("draft");
+fluid.cell.stabilize();                                                      // 2 editors
 ```
 
 In most cases, the same result should be achieved declaratively via a [selector reference](#selectors) `"{self my.app.editor}"`,

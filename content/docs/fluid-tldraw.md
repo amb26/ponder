@@ -17,13 +17,16 @@ framework, in `FluidView.js`, and say nothing about tldraw. The tldraw host itse
 The raw markdown underlying these docs is available on [GitHub](https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/fluid-tldraw.md),
 suitable for direct ingestion by your friendly local neighbourhood intelligence.
 
+The examples on this page show syntax, and are read-only. Each is checked by Infusion's linter, down to the
+interiors of its references and directives as Infusion reads them - hover over a marked error to see what is wrong.
+
 ## Top-level widgets
 
 Nothing in a layer's own definition otherwise says whether it makes sense as a free-standing widget, so a layer which
 does declares so by including `fluid.topLevelWidget` amongst its layers, directly or through a parent layer. The
 canvas offers exactly these layers in its "New shape" menu.
 
-```js
+```js syntax
 fluid.def("my.counter", {
     $layers: "fluid.topLevelWidget",
     preferredSize: {w: 260, h: 80},
@@ -66,7 +69,7 @@ that subcomponent instead.
 A widget therefore needs nothing beyond `fluid.topLevelWidget` to know where it is. For example, a widget showing the
 text of the sticky note nearest to it:
 
-```js
+```js syntax
 fluid.def("fluid.demos.closestNoteFinder", {
     $layers: "fluid.topLevelWidget",
     preferredSize: {w: 260, h: 200},

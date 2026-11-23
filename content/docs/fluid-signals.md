@@ -16,6 +16,12 @@ above traditional reactive libraries, and also a more
 The raw markdown underlying these docs is available on [GitHub](https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/fluid-signals.md),
 suitable for direct ingestion by your friendly local neighbourhood intelligence.
 
+Some examples on this page are live - complete and self-contained, they can be edited, and are run once they are
+free of errors: what each logs appears in the console beneath it. The other examples show syntax alone, e.g. a
+fragment of a layer record, and are read-only. Every example is checked by Infusion's linter, down to the interiors of
+its references and directives as Infusion reads them - hover over a marked error to see what is wrong, and, for an
+editable example, a fix.
+
 ## Construction
 
 ### fluid.cell(initialValue, props)
@@ -43,10 +49,19 @@ The supported properties in `props` are
     objects with the same keys holding identical values, are equivalent - e.g. a list of components assembled afresh
   * `fluid.equiv.byKey(keyOf)` - Values are equivalent if identical, or if `keyOf` returns the same key for each
 
-```js
+```js live
+const records = fluid.cell([{name: "Vicia", shown: true}, {name: "Stellaria", shown: false}]);
+const filter = fluid.cell(record => record.shown);
+
 // A recomputed list of the same records, freshly allocated, notifies nothing
 const visible = fluid.cell(undefined, {name: "visible", equiv: fluid.equiv.elementwise})
     .computed((records, filter) => records.filter(filter), [records, filter]);
+
+fluid.cell.effect(list => console.log("Visible:", list.map(record => record.name)), [visible]); // Visible: ["Vicia"]
+records.set([...records.get()]);                          // A fresh array of the same records - nothing logged
+fluid.cell.stabilize();
+records.set([...records.get(), {name: "Galium", shown: true}]); // Visible: ["Vicia", "Galium"]
+fluid.cell.stabilize();
 ```
 
 ## Reading and writing
@@ -304,7 +319,7 @@ back to the cell whose change began the reaction. Where that cell was given its 
 `cause` and sources supplied to [`Cell.set`](#cellsetnewvalue-options) - and continues from the update during which it
 was set, e.g. the effect which wrote it. The chain therefore reaches back past each write to what provoked it:
 
-```js
+```js syntax
 fluid.cell.explain(cell);
 // ["flatMergedComputer for path story-6.lostPlants",
 //  "potentia for path story-6.lostPlants (set: first write to cards of component at path story-6.lostPlants, ...)",
@@ -401,7 +416,7 @@ reads. This suits a value which is consulted rather than depended upon. For exam
 a press outside it should read whether the popup is open, but should not rerun when it is opened, since opening it is no
 reason to look again at a press made before it was opened:
 
-```js
+```js syntax
 fluid.cell.effect(press => {
     if (press && fluid.cell.untracked(() => popupOpen.get()) && !popup.contains(press.target)) {
         popupOpen.set(false);
@@ -412,11 +427,18 @@ fluid.cell.effect(press => {
 `untracked` is needed whenever an effect reads a value which it also writes, for example an effect which appends to a
 history:
 
-```js
+```js live
+const validText = fluid.cell("first"), current = fluid.cell("start"), history = fluid.cell([]);
+
 fluid.cell.effect(text => fluid.cell.untracked(() => {
     history.set([...history.get(), current.get()]);
     current.set(text);
 }), [validText]);
+fluid.cell.stabilize();
+
+validText.set("second");
+fluid.cell.stabilize();
+console.log(history.get(), current.get()); // ["start", "first"] second
 ```
 
 Without it, the effect depends on `history`, so each write reruns it, and it would append forever. An effect which keeps

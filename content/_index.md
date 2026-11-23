@@ -3,7 +3,7 @@ title: Antranig Basman
 comments: false
 ---
 
-<a href="/communities" class="front-link"><h2>My Communities</h2></a>
+<div><a href="/communities" class="front-link"><h2>My Communities</h2></a></div>
 
 <div class="community-row">
   <div class="community-picture">
@@ -36,7 +36,7 @@ their own technology, through making it as easy as possible to understand and ch
 
 
 
-<a href="/projects" class="front-link"><h2>My Projects</h2></a>
+<div><a href="/projects" class="front-link"><h2>My Projects</h2></a></div>
 
 <div class="community-row">
   <div class="community-picture">

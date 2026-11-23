@@ -1,0 +1,28 @@
+{
+    "repo": "amb26/ponder",
+    "branch": "ponder-infusion",
+    "bootLayers": [
+        "wend.shortcode.stabilization",
+        "wend.shortcode.vizreactive",
+        "fluid.liveExample"
+    ],
+    "framing": [
+        {
+            "module": "beautifulWend",
+            "file": "sfc/beautifulWend-footer.vue",
+            "layer": "beautifulWend.footer",
+            "label": "Footer"
+        },
+        {
+            "module": "beautifulWend",
+            "file": "sfc/beautifulWend-navbar.vue",
+            "layer": "beautifulWend.navbar",
+            "label": "Navigation bar"
+        },
+        {
+            "path": "wend.json",
+            "kind": "patch",
+            "label": "Site configuration"
+        }
+    ]
+}

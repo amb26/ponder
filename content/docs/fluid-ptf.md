@@ -13,6 +13,12 @@ another user's session. It is implemented in `FluidPTF.js`. It transmits a compo
 The raw markdown underlying these docs is available on [GitHub](https://raw.githubusercontent.com/amb26/ponder/refs/heads/main/content/docs/fluid-ptf.md),
 suitable for direct ingestion by your friendly local neighbourhood intelligence.
 
+Some examples on this page are live - complete and self-contained, they can be edited, and are run once they are
+free of errors: what each logs appears in the console beneath it. The other examples show syntax alone, e.g. a
+fragment of a layer record, and are read-only. Every example is checked by Infusion's linter, down to the interiors of
+its references and directives as Infusion reads them - hover over a marked error to see what is wrong, and, for an
+editable example, a fix.
+
 ## Intention
 
 A user should be able to point at any visible instance, choose "Copy", and paste a working replica elsewhere, together
@@ -33,7 +39,7 @@ The format is designed to be:
 Take the counter from [Fluid View](/docs/fluid-view#a-first-component), loaded from `my-counter.vue`, rendered and
 clicked three times:
 
-```js
+```js syntax
 const that = my.counter({container});
 // ... the user clicks +1 three times
 fluid.ptf.componentToPTF(that);
@@ -115,7 +121,15 @@ Pasting this into another page and calling `fluid.ptf.instantiate(text, {potenti
 
 If the counter is embedded in a panel defined in plain JavaScript:
 
-```js
+```js live
+// The counter, here defined in JavaScript rather than loaded from my-counter.vue
+fluid.def("my.counter", {
+    $layers: "fluid.component",
+    count: 0,
+    increment: "$method:my.increment({self})"
+});
+my.increment = self => self.count++;
+
 fluid.def("my.counterPanel", {
     $layers: "fluid.component",
     title: "Clicks",
@@ -129,6 +143,8 @@ fluid.def("my.counterPanel", {
 const panel = my.counterPanel({title: "Visitor clicks"});
 panel.counter.increment();
 panel.counter.increment();
+fluid.cell.stabilize();
+console.log(fluid.ptf.componentToPTF(panel));
 ```
 
 then the document holds these parts:

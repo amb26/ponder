@@ -1,0 +1,63 @@
+# Builds the site into docs/, from which GitHub Pages publishes it, whenever its sources change - see README.md. An edit
+# committed by the "Edit in Infusion" browser extension is a commit to content/ or wend/, so this is the step whose
+# completion the extension waits on: it recognises its edit as published once docs/fluid-trace.json records the hash of
+# the edited file. Only docs/ is committed, and this workflow is not triggered by changes to docs/, so its own commits
+# do not set it off again.
+name: Build site
+
+on:
+  push:
+    branches: [ponder-infusion]
+    paths:
+      - "content/**"
+      - "wend/**"
+      - "packages/**"
+      - "wend.site.json"
+      - "static/**"
+      - "wend.json"
+      - "package.json"
+      - "package-lock.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# One run at a time, so that two never commit at once. A run queued behind another builds the branch's latest commit,
+# so edits pushed while a build runs are published by the next
+concurrency:
+  group: build-site
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      # Infusion 6 is installed from npm - a moduleOverrides.json5 naming a checkout is never committed
+      - name: Install
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Commit any change
+        run: |
+          git add docs
+          if git diff --cached --quiet; then
+            echo "The published site is unchanged"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Build site for $(git rev-parse --short HEAD)"
+            # Should anything else have been pushed since the checkout, replay the commit onto it - only this job
+            # writes docs, and runs never overlap, so this can't conflict
+            for attempt in 1 2 3; do
+              git push && exit 0
+              git pull --rebase
+            done
+            exit 1
+          fi

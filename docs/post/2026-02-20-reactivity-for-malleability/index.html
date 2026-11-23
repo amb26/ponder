@@ -1,332 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/WebPage">
-  <head>
-    
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-      <title>fluid.cell: A reactive implementation supporting malleable substrates - Antranig Basman</title>
-
-  <meta name="description" content="
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Submission to the March Substrates 2026 Workshop, co-located with
-&lt;Programming 2026&gt;.">
-  <meta name="author" content="Antranig Basman"/><script type="application/ld+json">
-{
-    "@context": "http://schema.org",
-    "@type": "WebSite",
-    "name": "Antranig Basman",
-    
-    "url": "https:\/\/ponder.org.uk\/"
-}
-</script><script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Organization",
-  "name": "",
-  "url": "https:\/\/ponder.org.uk\/"
-  
-  
-  
-  
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@id": "https:\/\/ponder.org.uk\/",
-          "name": "home"
-        }
-    },{
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@id": "https:\/\/ponder.org.uk\/post\/2026-02-20-reactivity-for-malleability\/",
-          "name": "Fluid.cell a reactive implementation supporting malleable substrates"
-        }
-    }]
-}
-</script><script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Article",
-  "author": {
-    "name" : "Antranig Basman"
-  },
-  "headline": "fluid.cell: A reactive implementation supporting malleable substrates",
-  "description" : " Submission to the March Substrates 2026 Workshop, co-located with \u0026lt;Programming 2026\u0026gt;.\n",
-  "inLanguage" : "en",
-  "wordCount":  4693 ,
-  "datePublished" : "2026-02-20T00:00:00\u002b00:00",
-  "dateModified" : "2026-02-20T00:00:00\u002b00:00",
-  "image" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
-  "keywords" : [ "" ],
-  "mainEntityOfPage" : "https:\/\/ponder.org.uk\/post\/2026-02-20-reactivity-for-malleability\/",
-  "publisher" : {
-    "@type": "Organization",
-    "name" : "https:\/\/ponder.org.uk\/",
-    "logo" : {
-        "@type" : "ImageObject",
-        "url" : "https:\/\/ponder.org.uk\/img\/pond.jpg",
-        "height" :  60 ,
-        "width" :  60
-    }
-  }
-}
-</script>
-
-
-<meta property="og:title" content="fluid.cell: A reactive implementation supporting malleable substrates" />
-<meta property="og:description" content="
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Submission to the March Substrates 2026 Workshop, co-located with
-&lt;Programming 2026&gt;.">
-<meta property="og:image" content="https://ponder.org.uk/img/pond.jpg" />
-<meta property="og:url" content="https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="Antranig Basman" />
-
-  <meta name="twitter:title" content="fluid.cell: A reactive implementation supporting malleable substrates" />
-  <meta name="twitter:description" content="
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;/!--&gt;">
-  <meta name="twitter:image" content="https://ponder.org.uk/img/pond.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@amb26ponder" />
-  <meta name="twitter:creator" content="@amb26ponder" />
-  <link href='https://ponder.org.uk/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.154.5">
-  <link rel="alternate" href="https://ponder.org.uk/index.xml" type="application/rss+xml" title="Antranig Basman"><link rel="stylesheet" href="../../css/katex.min.css" />
-  <link rel="stylesheet" href="../../fontawesome/css/all.min.css" />
-  <link rel="stylesheet" href="../../css/bootstrap.min.css" /><link rel="stylesheet" href="../../css/main.css" />
-  <link rel="stylesheet" href="../../css/highlight.min.css" /><link rel="stylesheet" href="../../css/codeblock.css" /><link rel="stylesheet" href="../../css/ponder.css" />
-<script type="text/javascript" src="../../js/ponder.js" ></script>
-
-  </head>
-  <body class="post" >
-    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
-    <div class="navbar-ponder">
-      <a class="navbar-ponder-brand" href="../../">Antranig Basman</a>
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <svg width="36" height="36" viewBox="0 0 24 24" stroke="#888" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 7L4 7" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M20 12L4 12" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M20 17L4 17" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </button>
-
-
-      <div class="collapse navbar-collapse" id="main-navbar">
-        <ul class="nav navbar-nav navbar-right">
-          
-          
-          <li>
-            <a title="Posts" href="../../post">Posts</a>
-          </li>
-          
-          
-          
-          <li>
-            <a title="WiP" href="../../wip">WiP</a>
-          </li>
-          
-          
-          
-          <li>
-            <a title="About" href="../../page/about/">About</a>
-          </li>
-          
-          
-          
-          <li class="navlinks-container">
-            
-            <a class="navlinks-parent" href="../../docs">Docs</a>
-            
-            <div class="navlinks-children">
-              
-              <a href="../../docs/fluid-signals">Fluid Signals</a>
-              
-              <a href="../../docs/fluid-integration-language">Fluid Integration Language</a>
-              
-              <a href="../../docs/fluid-view">Fluid View</a>
-              
-              <a href="../../docs/fluid-ptf">Fluid PTF</a>
-              
-              <a href="../../docs/fluid-tldraw">Fluid tldraw integration</a>
-              
-              <a href="../../docs/linearisation-algorithm">Layer Linearisation</a>
-              
-            </div>
-          </li>
-          
-          
-          
-          <li>
-            <a title="Communities" href="../../communities">Communities</a>
-          </li>
-          
-          
-          
-          <li>
-            <a title="Projects" href="../../projects">Projects</a>
-          </li>
-          
-          
-          
-          <li>
-            <a title="Terms" href="../../term">Terms</a>
-          </li>
-          
-          
-
-          
-
-          
-        </ul>
-      </div>
-    </div>
-
-  </div>
-</nav>
-
-
-
-
-    
-  
-  
-  
-
-
-
-
-
-
-  
-
-  <header class="header-section ">
-    
-    
-    <div class="intro-header no-img">
-      <div class="container">
-        <div class="header-row">
-          
-
-            <div class="post-heading">
-              
-                <h1>fluid.cell: A reactive implementation supporting malleable substrates  
-                  <span class="post-meta">
-  
-    
-     – February 20, 2026
-  
-  
-</span>
-
-                  </h1>
-              
-              
-              
-
-            </div>
-        </div>
-      </div>
-    </div>
-  
-  </header>
-
-
-    
-<div role="main">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-      <article role="main" class="blog-post">
-        <!-- copied from snippets/reactive-viz.html -->
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/dagre-d3@0.6.4/dist/dagre-d3.min.js"></script>
-<script src="../../infusion-6/js/jshint.js"></script>
-<script src="../../infusion-6/js/codemirror.js"></script>
-<script src="../../infusion-6/js/javascript.js"></script>
-<script src="../../infusion-6/js/function-lint.js"></script>
-<script src="../../infusion-6/js/javascript-lint.js"></script>
-<link rel="stylesheet" href="../../infusion-6/css/codemirror.css" />
-<link rel="stylesheet" href="../../infusion-6/css/lint.css" />
-<script src="../../infusion-6/js/lezer-javascript-browser.js"></script>
-<script src="../../infusion-6/js/FluidCore.js"></script>
-<script src="../../infusion-6/js/FluidSignals.js"></script>
-<script src="../../infusion-6/js/FluidDebugging.js"></script>
-<script src="../../infusion-6/js/lezer-transform.js"></script>
-<script src="../../infusion-6/js/qunit-stub.js"></script>
-<script src="../../infusion-6/js/qunit-visual-signals.js"></script>
-<link rel="stylesheet" href="../../infusion-6/css/qunit-visual-signals.css" />
-<script src="../../infusion-6/js/visual-signals-test-gallery.js"></script>
-<script src="../../infusion-6/js/FluidSignalsTests-annotations.js"></script>
-<style>
+<!DOCTYPE html><html fluid-page-boot="" lang="en" itemtype="http://schema.org/WebPage" itemscope fluid-site-root="../../"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"><title>fluid.cell: A reactive implementation supporting malleable substrates - Antranig Basman</title><meta content="Submission to the March Substrates 2026 Workshop, co-located with <Programming 2026> . Updated 10th May 2026. Abstract This post explains why reactivity is a key requirement for o…" name="description"><meta content="Antranig Basman" name="author"><meta content="fluid.cell: A reactive implementation supporting malleable substrates" property="og:title"><meta content="Submission to the March Substrates 2026 Workshop, co-located with <Programming 2026> . Updated 10th May 2026. Abstract This post explains why reactivity is a key requirement for o…" property="og:description"><meta content="https://ponder.org.uk/img/pond.jpg" property="og:image"><meta content="https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/" property="og:url"><meta content="website" property="og:type"><meta content="Antranig Basman" property="og:site_name"><link href="https://ponder.org.uk/img/favicon.ico" type="image/x-icon" rel="icon"><meta content="Infusion 6" name="generator"><link title="Antranig Basman" href="https://ponder.org.uk/index.xml" type="application/rss+xml" rel="alternate"><link href="../../css/katex.min.css" rel="stylesheet"><link href="../../fontawesome/css/all.min.css" rel="stylesheet"><link href="../../css/bootstrap.min.css" rel="stylesheet"><link href="../../css/main.css" rel="stylesheet"><link href="../../css/highlight.min.css" rel="stylesheet"><link href="../../css/codeblock.css" rel="stylesheet"><link href="../../css/ponder.css" rel="stylesheet"><script fluid-hydrated="provenance" id="fluid-provenance" type="application/fluid-provenance+json">{"version":1,"repo":"amb26/ponder","branch":"ponder-infusion","trace":"../../fluid-trace.json","page":"/post/2026-02-20-reactivity-for-malleability/","model":"index.model.json","migration":{"framework":{"root":"../../js/infusion-6/","files":["src/framework/core/js/FluidCore.js","src/framework/core/js/FluidSignals.js","src/framework/core/js/Fluid.js","src/framework/core/js/FluidModules.js","src/framework/core/js/FluidIL.js","src/framework/core/js/FluidView.js","src/framework/core/js/FluidPTF.js","src/framework/core/js/template-parser.js","src/framework/core/js/FluidView-browser.js"]},"modules":{"wend":"../../js/wend-wend-b02ba16204a3/","beautifulWend":"../../js/wend-beautifulWend-d18b087d22f2/","ponderSite":"../../js/wend-ponderSite-d77c30e6608f/","wendWidgets":"../../sfc/"},"siteImports":["%beautifulWend/adapt/disclaimer/beautifulWend-feature-disclaimer.vue","%beautifulWend/adapt/disclaimer/beautifulWend-footer-disclaimer.vue","%beautifulWend/adapt/gcse/beautifulWend-document-gcse.vue","%beautifulWend/adapt/gcse/beautifulWend-feature-gcse.vue","%beautifulWend/adapt/gcse/beautifulWend-navbar-gcse.vue","%beautifulWend/adapt/gcse/beautifulWend-navItem-gcseSearch.vue","%beautifulWend/adapt/hljs/beautifulWend-document-hljs.vue","%beautifulWend/adapt/hljs/beautifulWend-feature-hljs.vue","%beautifulWend/adapt/multilingual/beautifulWend-feature-multilingual.vue","%beautifulWend/adapt/multilingual/beautifulWend-navbar-multilingual.vue","%beautifulWend/adapt/multilingual/beautifulWend-navItem-languages.vue","%beautifulWend/adapt/multilingual/beautifulWend-postMeta-translations.vue","%beautifulWend/adapt/piwik/beautifulWend-document-piwik.vue","%beautifulWend/adapt/piwik/beautifulWend-feature-piwik.vue","%beautifulWend/adapt/selfHosted/beautifulWend-document-selfHosted.vue","%beautifulWend/adapt/selfHosted/beautifulWend-feature-selfHosted.vue","%beautifulWend/adapt/staticman/beautifulWend-document-staticman.vue","%beautifulWend/adapt/staticman/beautifulWend-feature-staticman.vue","%beautifulWend/adapt/staticman/beautifulWend-postMeta-staticman.vue","%beautifulWend/sfc/i18n/beautifulWend-i18n-en.vue","%beautifulWend/sfc/i18n/beautifulWend-i18n.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-404.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-home.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-page.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-section.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-taxonomy.vue","%beautifulWend/sfc/kinds/beautifulWend-kind-term.vue","%beautifulWend/sfc/kinds/beautifulWend-type-page.vue","%beautifulWend/sfc/kinds/beautifulWend-type-post.vue","%beautifulWend/sfc/beautifulWend-comments-giscus.vue","%wend/sfc/wend-alias.vue","%wend/sfc/wend-content.vue","%beautifulWend/sfc/beautifulWend-document.vue","%beautifulWend/sfc/beautifulWend-footer.vue","%beautifulWend/sfc/beautifulWend-header-bigimg.vue","%beautifulWend/sfc/beautifulWend-header-home.vue","%beautifulWend/sfc/beautifulWend-header-page.vue","%beautifulWend/sfc/beautifulWend-header-post.vue","%beautifulWend/sfc/beautifulWend-header.vue","%beautifulWend/sfc/beautifulWend-head.vue","%beautifulWend/sfc/beautifulWend-listPager.vue","%beautifulWend/sfc/beautifulWend-main-home.vue","%beautifulWend/sfc/beautifulWend-main-list.vue","%beautifulWend/sfc/beautifulWend-main-notFound.vue","%beautifulWend/sfc/beautifulWend-main-single.vue","%beautifulWend/sfc/beautifulWend-main-terms.vue","%beautifulWend/sfc/beautifulWend-main.vue","%beautifulWend/sfc/beautifulWend-mediaIcons.vue","%beautifulWend/sfc/beautifulWend-navbar.vue","%beautifulWend/sfc/beautifulWend-navItem-leaf.vue","%beautifulWend/sfc/beautifulWend-navItem-parent.vue","%beautifulWend/sfc/beautifulWend-navItem.vue","%beautifulWend/sfc/beautifulWend-pageMeta.vue","%beautifulWend/sfc/beautifulWend-pager.vue","%beautifulWend/sfc/beautifulWend-postMeta.vue","%beautifulWend/sfc/beautifulWend-postPreview.vue","%beautifulWend/sfc/beautifulWend-relatedPosts.vue","%wend/sfc/wend-scriptTag.vue","%beautifulWend/sfc/beautifulWend-shareLinks.vue","%beautifulWend/sfc/beautifulWend-site.vue","%wend/sfc/wend-stylesheetTag.vue","%beautifulWend/sfc/beautifulWend-tags.vue","%beautifulWend/sfc/beautifulWend-termPanel.vue","%ponderSite/sfc/shortcodes/wend-shortcode-figure.vue","%ponderSite/sfc/shortcodes/wend-shortcode-stabilization.vue","%ponderSite/sfc/shortcodes/wend-shortcode-vizreactive.vue","%infusion-6/src/components/sfc/fluid-liveExample.vue"],"pageBoot":"../../js/wend-wend-b02ba16204a3/js/pageBoot.js","root":"beautifulWend.site"},"framing":[{"path":"wend/override/beautifulWend/sfc/beautifulWend-footer.vue","kind":"sfc","layer":"beautifulWend.footer","label":"Footer","hash":"sha256-0e7407de182a644fc7a80bd262df843fdf27f470189ab0929ba72ca717e35418","origin":"../../js/wend-beautifulWend-d18b087d22f2/sfc/beautifulWend-footer.vue"},{"path":"wend/override/beautifulWend/sfc/beautifulWend-navbar.vue","kind":"sfc","layer":"beautifulWend.navbar","label":"Navigation bar","hash":"sha256-7c0e5b12cef631b97ea4bc1c578bb3a2fab34f9876524569bfc298c338017b20","origin":"../../js/wend-beautifulWend-d18b087d22f2/sfc/beautifulWend-navbar.vue"},{"path":"wend.json","kind":"patch","label":"Site configuration","hash":"sha256-e225e29ce6c7520086d1aa231fe733a0cce0ca4dc05f6f4a8b296fa400a21bb3"}],"source":{"path":"content/post/2026-02-20-reactivity-for-malleability.md","hash":"sha256-5e065042edc1d56fc9ddcc91243dec0d06066fd71638929bf02f13f44961be6b"},"blocks":[{"selector":"[data-fluid-block=\"markdown\"]","kind":"markdown","key":"content/post/2026-02-20-reactivity-for-malleability.md#body","layers":["wend.content"]}],"renderers":{"markdown":{"scripts":["../../js/fluid-markdown/markdown-it-14.3.2.js","../../js/fluid-markdown/markdown-it-attrs-5.0.1.js","../../js/fluid-markdown/markdown-it-footnote-4.0.0.js","../../js/fluid-markdown/markdown-it-deflist-4.0.0.js","../../js/fluid-markdown/highlight-fa7fed3307d5.js","../../js/fluid-markdown/wend-markdown-1b00c5bac782.js"],"global":"wendMarkdown"}},"widgets":{"dir":"static/sfc","layers":[]},"images":{"dir":"static/img"}}</script></head><body class="post"><nav class="navbar navbar-default navbar-fixed-top navbar-custom"><div class="container-fluid"><div class="navbar-ponder"><a href="../../" class="navbar-ponder-brand">Antranig Basman</a><button data-target="#main-navbar" data-toggle="collapse" type="button" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><svg xmlns="http://www.w3.org/2000/svg" stroke="#888" viewBox="0 0 24 24" height="36" width="36"><path stroke-linecap="round" stroke-width="1.5" d="M20 7L4 7" /><path stroke-linecap="round" stroke-width="1.5" d="M20 12L4 12" /><path stroke-linecap="round" stroke-width="1.5" d="M20 17L4 17" /></svg></button><div id="main-navbar" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="../../post" title="Posts">Posts</a></li><li><a href="../../wip" title="WiP">WiP</a></li><li><a href="../../page/about/" title="About">About</a></li><li class="navlinks-container"><a href="../../docs" class="navlinks-parent">Docs</a><div class="navlinks-children"><a href="../../docs/fluid-signals">Fluid Signals</a><a href="../../docs/fluid-integration-language">Fluid Integration Language</a><a href="../../docs/fluid-view">Fluid View</a><a href="../../docs/fluid-ptf">Fluid PTF</a><a href="../../docs/fluid-tldraw">Fluid tldraw integration</a><a href="../../docs/linearisation-algorithm">Layer Linearisation</a></div></li><li><a href="../../communities" title="Communities">Communities</a></li><li><a href="../../projects" title="Projects">Projects</a></li><li><a href="../../term" title="Terms">Terms</a></li></ul></div></div></div></nav><header class="header-section"><div class="intro-header no-img"><div class="container"><div class="header-row"><div class="post-heading ponder-heading"><h1 class="ponder-title">fluid.cell: A reactive implementation supporting malleable substrates<span class="post-meta"><span class="ponder-date"> – February 20, 2026</span></span></h1></div></div></div></div></header><div role="main"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article role="main" class="blog-post"><div data-fluid-block="markdown"><style>
 .statement-color {
   color: #4a90e2
 }
@@ -365,7 +37,7 @@ Submission to the March Substrates 2026 Workshop, co-located with
 <p>Submission to the March <a href="https://2026.programming-conference.org/home/substrates-2026">Substrates 2026</a> Workshop, co-located with
 <a href="https://2026.programming-conference.org/">&lt;Programming 2026&gt;</a>.</p>
 <p>Updated 10th May 2026.</p>
-<h3 id="abstract">Abstract</h3>
+<h3 id="abstract"><a href="#abstract" aria-label="Abstract" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Abstract</h3>
 <p><em>This post explains why reactivity is a key requirement for openly authored, malleable substrates, and motivates <a href="../../docs/fluid-signals"><code>fluid.cell</code></a>,
 a reactive library designed to support the needs of these substrates. It preserves the good properties of widely available commodity reactive systems whilst
 expanding their domain. I explain the core reactive competencies of <em>glitch freedom</em> and <em>early cutoff</em>, and
@@ -373,18 +45,14 @@ how <code>fluid.cell</code> delivers these competencies whilst supporting reacti
 propagation of reactive updates and allows the cause of these updates to be tracked to their source, and why these
 expanded capabilities are vital to support successful substrates. The post includes a interactive visual demo of the reactive
 library on some simple test fixtures.</em></p>
-<div id="live-demo" class="vizreactive-target">
-</div>
-<script>
-    fluid.vizReactive.bootVizReactiveUI(".vizreactive-target");
-</script>
+<div class="vizreactive" fluid-layers="wend.shortcode.vizreactive"><link href="../../js/infusion-6/tests/test-core/qunit/css/qunit-visual-signals.css" rel="stylesheet"><div id="live-demo" class="vizreactive-target"></div></div>
 <div style="font-size: smaller; margin-top: -16px;">For explanation of colour coding and some notes, see the <a href="#demo-key">demo key</a> below.</div>
-<h2 id="why-reactivity">Why reactivity?</h2>
+<h2 id="why-reactivity"><a href="#why-reactivity" aria-label="Why reactivity?" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Why reactivity?</h2>
 <p>Why do we need reactivity in a substrate? In my vision of an openly authored, malleable <a href="../../term/substrate">substrate</a>, its interface and capabilities
 need to adjust dynamically to the gestures of the authors. As well as reflecting its change of function as it is built
 and maintained, the substrate also needs to reflect the needs of different audiences, sometimes simultaneously.</p>
-<p>Recently I have been working with a &ldquo;commodity&rdquo; reactive system, <a href="https://preactjs.com/guide/v10/signals/">preact-signals</a>, and part of my journey
-with that system was described in December 2025&rsquo;s <a href="../../wip/2025-12-15-understanding-reactivity">Understanding Reactivity</a>
+<p>Recently I have been working with a “commodity” reactive system, <a href="https://preactjs.com/guide/v10/signals/">preact-signals</a>, and part of my journey
+with that system was described in December 2025’s <a href="../../wip/2025-12-15-understanding-reactivity">Understanding Reactivity</a>
 posting. I learned a lot from these commodity systems about what valuable regularities and guarantees a reactive system
 needs to support, and also about the limitations of these commodity systems, some of which are fundamental, and some incidental. This learning fed into
 the development of <a href="../../docs/fluid-signals"><code>fluid.cell</code></a>, a reactive library designed
@@ -393,41 +61,41 @@ expanding their domain.</p>
 <p>Much of the discussion here is anticipated by my 2025 <a href="../../post/2025-06-03-substrates-vision">Substrates Vision Statement</a> which
 calls for many of the properties of the reactive system which has now been built. Documentation for <a href="../../docs/fluid-signals"><code>fluid.cell</code></a>
 is available on <a href="../../docs/fluid-signals">this site</a>, and a live demonstration can be seen above.</p>
-<h3 id="reactivity-for-disclosure">Reactivity for disclosure</h3>
-<p>Bridging the gap between use and change &mdash; following Lennart Lövstrand&rsquo;s notion in his 1990 <a href="https://dl.acm.org/doi/10.1145/97243.97271">Pressing the issues
-with buttons</a> that &ldquo;it should be as easy to change the environment as it is to use it&rdquo; &mdash;
+<h3 id="reactivity-for-disclosure"><a href="#reactivity-for-disclosure" aria-label="Reactivity for disclosure" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Reactivity for disclosure</h3>
+<p>Bridging the gap between use and change — following Lennart Lövstrand’s notion in his 1990 <a href="https://dl.acm.org/doi/10.1145/97243.97271">Pressing the issues
+with buttons</a> that “it should be as easy to change the environment as it is to use it” —
 could sound straightforward, but is actually a multi-faceted, socio-technical issue. Central to its difficulty is that
 <em>not all audiences will want this gap bridged</em>, and few will want it bridged all the time. This implies that these malleable
 capabilities need to lie latent within an ordinary-looking artefact, cheaply and fluidly ready to spring into existence
-when required. This is one of the key loci at which a substrate needs to deploy reactivity. I&rsquo;ve referred to this site
-of adaptation under the heading of <a href="../../term/disclosable-computing">disclosable computing</a> &mdash; those users who want to
-simply <em>use</em> an artefact shouldn&rsquo;t be bothered by the fact that it is malleable. Otherwise highly successful substrates
+when required. This is one of the key loci at which a substrate needs to deploy reactivity. I’ve referred to this site
+of adaptation under the heading of <a href="../../term/disclosable-computing">disclosable computing</a> — those users who want to
+simply <em>use</em> an artefact shouldn’t be bothered by the fact that it is malleable. Otherwise highly successful substrates
 such as <a href="https://boxer-project.github.io/">Boxer</a> and the <a href="https://github.com/LivelyKernel/lively4-core">Lively Kernel</a> are hampered by their lack of graceful support for disclosability. A Boxer interface
-always exposes all of its authoring capabilities, and a Lively interface, whilst it can be &ldquo;locked down&rdquo; still exposes
+always exposes all of its authoring capabilities, and a Lively interface, whilst it can be “locked down” still exposes
 this potential in a visually and technologically distracting way.</p>
-<p><a href="https://hyperclay.com/">Hyperclay</a> is an interesting recent HTML-based system with a clean approach to disclosure &mdash;
-it features a &ldquo;Save-Strip-Restore&rdquo; cycle that injects and removes interface elements related to malleability. However it
+<p><a href="https://hyperclay.com/">Hyperclay</a> is an interesting recent HTML-based system with a clean approach to disclosure —
+it features a “Save-Strip-Restore” cycle that injects and removes interface elements related to malleability. However it
 is not a reactive or generically adaptable system.</p>
-<h3 id="reactivity-for-liveness">Reactivity for liveness</h3>
-<p>Apart from the disclosure process, it&rsquo;s highly desirable that reactivity is available throughout the lifecycle
+<h3 id="reactivity-for-liveness"><a href="#reactivity-for-liveness" aria-label="Reactivity for liveness" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Reactivity for liveness</h3>
+<p>Apart from the disclosure process, it’s highly desirable that reactivity is available throughout the lifecycle
 of a substrate.
 Closely aligned with the disciplines of substrate-oriented and malleable programming is the discipline of live programming.
 To maintain the impression that <a href="http://davidungar.net/Live2013/Live_2013.html">The thing on the screen is supposed to be the actual thing</a> (David Ungar, 2013),
 the system should adapt smoothly and immediately to whatever gestures the author has made to modify it. This contributes
-to the impression that the substrate represents a material under the author&rsquo;s direction rather than having a hidden realm
-&ldquo;offstage&rdquo; where important things happen. Josh Horowitz in his 2024/2026 <a href="https://joshuahhh.com/dims-of-feedback/dims-of-feedback.pdf">Technical Dimensions of Feedback</a>
-has surveyed many of these dimensions, including &ldquo;reactivity&rdquo; in the everyday sense as experienced by
+to the impression that the substrate represents a material under the author’s direction rather than having a hidden realm
+“offstage” where important things happen. Josh Horowitz in his 2024/2026 <a href="https://joshuahhh.com/dims-of-feedback/dims-of-feedback.pdf">Technical Dimensions of Feedback</a>
+has surveyed many of these dimensions, including “reactivity” in the everyday sense as experienced by
 users rather than a specific technical phenomenon.</p>
-<h3 id="fine-grained-and-coarse-grained-reactivity-push-vs-pull">Fine-grained and coarse-grained reactivity, push vs pull</h3>
+<h3 id="fine-grained-and-coarse-grained-reactivity-push-vs-pull"><a href="#fine-grained-and-coarse-grained-reactivity-push-vs-pull" aria-label="Fine-grained and coarse-grained reactivity, push vs pull" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fine-grained and coarse-grained reactivity, push vs pull</h3>
 <p>Reactivity is a poorly-characterised phenomenon, coming with many kinds of granularities. A central source of confusion
 has been that the extremely popular <a href="https://legacy.reactjs.org/docs/design-principles.html#scheduling">React</a> framework
-<a href="https://dev.to/playfulprogramming/how-react-isn-t-reactive-and-why-you-shouldn-t-care-152m">is not itself reactive in the strongest sense</a><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.
-Subsequently, the distinction between &ldquo;fine-grained&rdquo; and &ldquo;coarse-grained&rdquo; reactivity emerged, in order to account
+<a href="https://dev.to/playfulprogramming/how-react-isn-t-reactive-and-why-you-shouldn-t-care-152m">is not itself reactive in the strongest sense</a><sup class="footnote-ref"><a id="fnref1" href="#fn1">[1]</a></sup>.
+Subsequently, the distinction between “fine-grained” and “coarse-grained” reactivity emerged, in order to account
 for the failure of some frameworks to support graphs built of autonomously reactive values. A further axis of confusion
-is between &ldquo;push-based&rdquo; and &ldquo;pull-based&rdquo; reactive systems. The former are sometimes called &ldquo;stream-based&rdquo; systems and
+is between “push-based” and “pull-based” reactive systems. The former are sometimes called “stream-based” systems and
 since they also inherently suffer from glitches, which I describe later, they lie outside our interest.</p>
-<h3 id="substrate-nature-must-coexist-with-imperative-and-functional-backgrounds">Substrate nature must coexist with imperative and functional backgrounds</h3>
-<p>It is possible to take the purity of a substrate&rsquo;s design too far. A successful substrate needs to coexist not only
+<h3 id="substrate-nature-must-coexist-with-imperative-and-functional-backgrounds"><a href="#substrate-nature-must-coexist-with-imperative-and-functional-backgrounds" aria-label="Substrate nature must coexist with imperative and functional backgrounds" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Substrate nature must coexist with imperative and functional backgrounds</h3>
+<p>It is possible to take the purity of a substrate’s design too far. A successful substrate needs to coexist not only
 against the background of what imperatively or functionally constructed software there already is, but also with
 the computational literacies that users already have. Pushing too rigorously for complete homogeneity, for a substrate
 constructed of a single material supporting an operation from a single paradigm, will produce a system with ergonomic problems.
@@ -437,117 +105,78 @@ algebraic expressions such as <em>(A * B) + (C * D)</em> to be idiomatically exp
 diSessa (1985) in
 <a href="https://boxer-project.github.io/boxer-literature/papers/A%20Principled%20Design%20for%20an%20Integrated%20Computational%20Environment%20-%20ACM%20HCI%20(diSessa,%201985).pdf">A Principled Design for an Integrated
 Computational Environment</a>
-describes as the &ldquo;formalist bug&rdquo; of providing a too sparse set of primitives from which to build all functions.</p>
+describes as the “formalist bug” of providing a too sparse set of primitives from which to build all functions.</p>
 <p>A successful substrate will cover and re-express some of the same ground as existing computational systems, but will not intrude on semantics that the public has
 already mastered at a grade school level.</p>
-<h3 id="fluidcell-offers-reactive-competence-for-substrates"><code>fluid.cell</code> offers reactive competence for substrates</h3>
+<h3 id="fluidcell-offers-reactive-competence-for-substrates"><a href="#fluidcell-offers-reactive-competence-for-substrates" aria-label="fluid.cell offers reactive competence for substrates" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>fluid.cell</code> offers reactive competence for substrates</h3>
 <p>Previous
 incarnations of <a href="../../infusion">Infusion</a>, my substrate supporting open authorship, imagined that we could apply a
-relatively coarse-grained reactivity<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, but work over the last decade bringing fine-grained reactivity to numerous
+relatively coarse-grained reactivity<sup class="footnote-ref"><a id="fnref2" href="#fn2">[2]</a></sup>, but work over the last decade bringing fine-grained reactivity to numerous
 JavaScript frameworks such as <a href="https://preactjs.com/guide/v10/signals/">preact-signals</a>,
 <a href="https://docs.solidjs.com/concepts/signals">solid signals</a>, <a href="https://vuejs.org/guide/extras/reactivity-in-depth">Vue signals</a>,
 etc. has shown that these systems can be highly performant, principled and capable.</p>
-<p>The community&rsquo;s wisdom has established two main properties of reactive competence that the best of these commodity reactive
-systems can enjoy. These have gone by various names over the years, but I&rsquo;ll adopt names for them which have become
+<p>The community’s wisdom has established two main properties of reactive competence that the best of these commodity reactive
+systems can enjoy. These have gone by various names over the years, but I’ll adopt names for them which have become
 pretty well-attested from high-profile treatments - <em>glitch freedom</em> and <em>early cutoff</em>.</p>
-<p>However, big gaps exist between even the best-of-breed of such &ldquo;commodity&rdquo; reactive systems and the requirements of
+<p>However, big gaps exist between even the best-of-breed of such “commodity” reactive systems and the requirements of
 a malleable, openly authorable substrate.</p>
-<p>I&rsquo;ve bridged these gaps with a fine-grained reactive library, <a href="../../docs/fluid-signals"><code>fluid.cell</code></a> which is specifically tailored to support open, malleable systems.
+<p>I’ve bridged these gaps with a fine-grained reactive library, <a href="../../docs/fluid-signals"><code>fluid.cell</code></a> which is specifically tailored to support open, malleable systems.
 Whilst it will be used to replace preact-signals as the underpinning of Infusion, <code>fluid.cell</code> is a self-contained small library with
 clearly explainable guarantees and capabilities which could support the development of other malleable systems too.</p>
-<p>Firstly I&rsquo;ll describe the two main properties constituting reactive competence
+<p>Firstly I’ll describe the two main properties constituting reactive competence
 which I have distilled from these commodity systems, and then I will explain how <code>fluid.cell</code> greatly extends the domain over which
 it provides these guarantees compared to commodity systems, to meet the needs of substrates. Some of the journey towards
 this implementation is described in my work in progress posting <a href="../../wip/2025-12-15-understanding-reactivity">understanding reactivity</a>.</p>
-<h2 id="two-pillars-of-reactive-competence">Two pillars of reactive competence</h2>
-<h3 id="glitch-freedom">Glitch freedom</h3>
+<h2 id="two-pillars-of-reactive-competence"><a href="#two-pillars-of-reactive-competence" aria-label="Two pillars of reactive competence" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Two pillars of reactive competence</h2>
+<h3 id="glitch-freedom"><a href="#glitch-freedom" aria-label="Glitch freedom" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Glitch freedom</h3>
 <p>Glitch freedom is a consistency property which has gone by various names as it was independently rediscovered by many workers over the last decades. The
-property is about dataflows which diverge and then reconverge &mdash; it is essential that only one update is received by
-a node at the top of a &ldquo;diamond&rdquo; of dataflow convergence, reflecting data which has been drawn from a consistent data
+property is about dataflows which diverge and then reconverge — it is essential that only one update is received by
+a node at the top of a “diamond” of dataflow convergence, reflecting data which has been drawn from a consistent data
 horizon, rather than a mixture of stale and fresh data. The diagram below shows the simplest possible graph which might glitch, with
-a core of 3 nodes, with a short path directly from X down to B, and a longer path from X to B via A. It&rsquo;s essential that when
-X updates, we don&rsquo;t happen to activate the arc X-&gt;B first, but make sure that we provide a consistent horizon of data to
+a core of 3 nodes, with a short path directly from X down to B, and a longer path from X to B via A. It’s essential that when
+X updates, we don’t happen to activate the arc X-&gt;B first, but make sure that we provide a consistent horizon of data to
 B by updating A from X first.</p>
-
-<link rel="stylesheet" href="https://ponder.org.uk/css/hugo-easy-gallery.css" />
-<div class="box" style="max-width:436px">
-  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-    <div class="img">
-      <img itemprop="thumbnail" src="../../img/glitch-3.png" alt="The simplest possible graph that might glitch, made of 3 nodes"/>
-    </div>
-    <a href="../../img/glitch-3.png" itemprop="contentUrl"></a>
-      <figcaption>
-          <p>The simplest possible graph that might glitch, made of 3 nodes</p>
-      </figcaption>
-  </figure>
-</div>
-
+<div style="max-width:436px" class="box" data-caption="The simplest possible graph that might glitch, made of 3 nodes" data-width="436px" data-src="/img/glitch-3.png" fluid-layers="wend.shortcode.figure"><figure itemtype="http://schema.org/ImageObject" itemscope itemprop="associatedMedia"><div class="img"><img alt="The simplest possible graph that might glitch, made of 3 nodes" src="../../img/glitch-3.png" itemprop="thumbnail"></div><a href="../../img/glitch-3.png" itemprop="contentUrl"></a><figcaption><p>The simplest possible graph that might glitch, made of 3 nodes</p></figcaption></figure></div>
 <p>An early and thorough treatment was in
-Kenny Tilton&rsquo;s <a href="https://smuglispweeny.blogspot.com/2008/02/cells-manifesto.html">Cells</a> system for CLOS, which in 2001,
-5 years before the coining of the terms &ldquo;<a href="../../term/glitch">glitch</a>&rdquo; and &ldquo;reactive programming&rdquo;, had already solved the problems of
-reactivity embedded in imperative programming languages. Kenny named this property &ldquo;data integrity&rdquo; which I quite like and
-think it is a shame it didn&rsquo;t stick. Jonathan Edwards named
+Kenny Tilton’s <a href="https://smuglispweeny.blogspot.com/2008/02/cells-manifesto.html">Cells</a> system for CLOS, which in 2001,
+5 years before the coining of the terms “<a href="../../term/glitch">glitch</a>” and “reactive programming”, had already solved the problems of
+reactivity embedded in imperative programming languages. Kenny named this property “data integrity” which I quite like and
+think it is a shame it didn’t stick. Jonathan Edwards named
 a closely related property as <a href="https://www.subtext-lang.org/Onward09.pdf">Coherence</a> in 2009.</p>
-<p>The naming of the property which has taken hold came in Cooper &amp; Krishnamurthi&rsquo;s 2006
+<p>The naming of the property which has taken hold came in Cooper &amp; Krishnamurthi’s 2006
 <a href="http://static.cs.brown.edu/~sk/Publications/Papers/Published/ck-frtime/paper.pdf">FrTime paper</a> which I cover in my
 <a href="../../post/2025-07-01-archaeology-of-glitches">archaeology of glitches</a> posting.</p>
-<h3 id="early-cutoff">Early cutoff</h3>
-<p>The other pillar of reactive competence is an efficiency guarantee, rather than a consistency property. It&rsquo;s essential
-that the reactive system does not do a certain kind of &ldquo;obviously unnecessary&rdquo; work &mdash; if a reactive update leaves
-the value of a node unchanged, that node&rsquo;s &ldquo;update&rdquo; should not be used to schedule further updates of nodes which might depend on it.</p>
+<h3 id="early-cutoff"><a href="#early-cutoff" aria-label="Early cutoff" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Early cutoff</h3>
+<p>The other pillar of reactive competence is an efficiency guarantee, rather than a consistency property. It’s essential
+that the reactive system does not do a certain kind of “obviously unnecessary” work — if a reactive update leaves
+the value of a node unchanged, that node’s “update” should not be used to schedule further updates of nodes which might depend on it.</p>
 <p>This property is less hard-edged than glitch freedom since in practice there is a huge sliding scale of kinds of
-&ldquo;unnecessary work&rdquo; which a sufficiently clever reactive system could avoid. You can consult treatments like Robert Lord&rsquo;s
-<a href="https://lord.io/spreadsheets/">How to Recalculate a Spreadsheet</a> and Jane Street&rsquo;s <a href="https://blog.janestreet.com/seven-implementations-of-incremental/">Seven Implementations of Incremental</a>
+“unnecessary work” which a sufficiently clever reactive system could avoid. You can consult treatments like Robert Lord’s
+<a href="https://lord.io/spreadsheets/">How to Recalculate a Spreadsheet</a> and Jane Street’s <a href="https://blog.janestreet.com/seven-implementations-of-incremental/">Seven Implementations of Incremental</a>
 for some of the fruity possibilities, but basic early cutoff support represents a straightforward everyday level of
 competence that every reactive system should aspire to.</p>
-<p>The diagram below shows a canonical situation, taken from Mokhov, Mitchell and Peyton Jones&rsquo; 2018
+<p>The diagram below shows a canonical situation, taken from Mokhov, Mitchell and Peyton Jones’ 2018
 <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2018/03/build-systems.pdf">Build Systems à la Carte</a> which is
 not ostensibly about reactive systems but build systems, but in practice the domains (as the paper argues, gearing through the
 primordial reactive system, Excel) are much the same. A user has changed a source file, <code>main.c</code>, in a way which
 leads to no change in the produced object file <code>main.o</code>, perhaps by editing a comment. A competent reactive build system
 should spot this, and, via early cutoff, not then go on to rebuild the executable <code>main.exe</code> once it sees that
 <code>main.o</code> is unchanged.</p>
-
-
-<div class="box" style="max-width:436px">
-  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-    <div class="img">
-      <img itemprop="thumbnail" src="../../img/early-cutoff.png" alt="Early cutoff in a simple graph of C language artefacts"/>
-    </div>
-    <a href="../../img/early-cutoff.png" itemprop="contentUrl"></a>
-      <figcaption>
-          <p>Early cutoff in a simple graph of C language artefacts</p>
-      </figcaption>
-  </figure>
-</div>
-
+<div style="max-width:436px" class="box" data-caption="Early cutoff in a simple graph of C language artefacts" data-width="436px" data-src="/img/early-cutoff.png" fluid-layers="wend.shortcode.figure"><figure itemtype="http://schema.org/ImageObject" itemscope itemprop="associatedMedia"><div class="img"><img alt="Early cutoff in a simple graph of C language artefacts" src="../../img/early-cutoff.png" itemprop="thumbnail"></div><a href="../../img/early-cutoff.png" itemprop="contentUrl"></a><figcaption><p>Early cutoff in a simple graph of C language artefacts</p></figcaption></figure></div>
 <p>This might seem to be a quite basic variety of competence but in fact several popular reactive systems, such as <a href="https://knockoutjs.com/documentation/introduction.html">knockout</a>
 and Adapton, were created without it.</p>
-<h2 id="supporting-open-substrates">Supporting open substrates</h2>
+<h2 id="supporting-open-substrates"><a href="#supporting-open-substrates" aria-label="Supporting open substrates" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Supporting open substrates</h2>
 <p>Whilst maintaining the two pillars of reactive competence, glitch freedom and early cutoff,
 here are the new use cases and capabilities which <code>fluid.cell</code> supports in order to support an open substrate:</p>
-<h3 id="support-for-graphs-with-bidirectional-arcs-malleably-authorable">Support for graphs with bidirectional arcs, malleably authorable</h3>
-
-
-<div class="box" style="max-width:600px">
-  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-    <div class="img">
-      <img itemprop="thumbnail" src="../../img/KCF-rendered.png" alt="A reactive graph with three nodes, two bidirectional arcs"/>
-    </div>
-    <a href="../../img/KCF-rendered.png" itemprop="contentUrl"></a>
-      <figcaption>
-          <p>A reactive graph with three nodes, two bidirectional arcs</p>
-      </figcaption>
-  </figure>
-</div>
-
+<h3 id="support-for-graphs-with-bidirectional-arcs-malleably-authorable"><a href="#support-for-graphs-with-bidirectional-arcs-malleably-authorable" aria-label="Support for graphs with bidirectional arcs, malleably authorable" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support for graphs with bidirectional arcs, malleably authorable</h3>
+<div style="max-width:600px" class="box" data-caption="A reactive graph with three nodes, two bidirectional arcs" data-width="600px" data-src="/img/KCF-rendered.png" fluid-layers="wend.shortcode.figure"><figure itemtype="http://schema.org/ImageObject" itemscope itemprop="associatedMedia"><div class="img"><img alt="A reactive graph with three nodes, two bidirectional arcs" src="../../img/KCF-rendered.png" itemprop="thumbnail"></div><a href="../../img/KCF-rendered.png" itemprop="contentUrl"></a><figcaption><p>A reactive graph with three nodes, two bidirectional arcs</p></figcaption></figure></div>
 <p>This diagram shows a reactive graph with three nodes connected by two bidirectional arcs, of the kind that is impossible to support
 in a commodity reactive system. In this context it represents a toy domain of a temperature conversion app holding
 temperatures in three scales, of the kind described in <a href="https://www.ppig.org/files/2015-PPIG-26th-Basman.pdf">Harmonious Authorship from Different Representations</a>
 (Basman et al, 2015). Whilst niche, this is already a simple kind of domain that should be natural to represent
-rather than require peculiar contortions or asymmetries (such as, for example, use of Vue-signals&rsquo; notion of a
+rather than require peculiar contortions or asymmetries (such as, for example, use of Vue-signals’ notion of a
 <a href="https://vuejs.org/guide/essentials/computed.html#writable-computed">writeable computed</a>).</p>
-<p>There are plenty of examples in the user domain of why it might be idiomatic to support such structures &mdash; for example
+<p>There are plenty of examples in the user domain of why it might be idiomatic to support such structures — for example
 the seminal Cooper &amp; Krishnamurthi 2006
 <a href="http://static.cs.brown.edu/~sk/Publications/Papers/Published/ck-frtime/paper.pdf">FrTime paper</a> mentions an example of
 RGB and HSV views in a color selection window, but there are more fundamental reasons in an openly authorable system.
@@ -557,43 +186,48 @@ systems design of a <em><a href="https://en.wikipedia.org/wiki/Single_source_of_
 pluralistic informational space implies there can be no privileged node from which dataflow only proceeds
 outwards.</p>
 <p>Handling bidirectional arcs requires a fundamental change in representation of the reactive graph with respect to all commodity implementations,
-which opportunistically fold together a &ldquo;node plus edge&rdquo; structure into a single data structure on the assumption that
+which opportunistically fold together a “node plus edge” structure into a single data structure on the assumption that
 each computed edge uniquely corresponds to a node, and that each node has only one incoming edge. Changes are also needed
 in many parts of the algorithm which traverse and invalidate the graph.</p>
 <p>For example, in a traditional reactive library, e.g. <a href="https://github.com/preactjs/signals/blob/main/packages/core/src/index.ts#L597">preact-signals</a>,
-a <code>Computed</code> signal &ldquo;is-a&rdquo; <code>Signal</code> and directly encodes the <code>_sources</code> nodes that it depends on:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">declare</span> <span class="k">class</span> <span class="n">Signal</span><span class="o">&lt;</span><span class="n">T</span> <span class="o">=</span> <span class="n">any</span><span class="o">&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="n">_value</span><span class="p">:</span> <span class="n">unknown</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="o">...</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">declare</span> <span class="k">class</span> <span class="n">Computed</span><span class="o">&lt;</span><span class="n">T</span> <span class="o">=</span> <span class="n">any</span><span class="o">&gt;</span> <span class="k">extends</span> <span class="n">Signal</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="n">_fn</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">T</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">_sources</span><span class="err">?</span><span class="p">:</span> <span class="ne">Node</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="o">...</span>
-</span></span></code></pre></div><p>and it is used as so:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">   <span class="k">const</span> <span class="n">a</span> <span class="o">=</span> <span class="k">signal</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">   <span class="k">const</span> <span class="n">b</span> <span class="o">=</span> <span class="n">computed</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-</span></span></code></pre></div><p>In <code>fluid.cell</code> there are separate node and edge structures, respecting the fact that a computed node may be computable
+a <code>Computed</code> signal “is-a” <code>Signal</code> and directly encodes the <code>_sources</code> nodes that it depends on:</p>
+<pre><code class="hljs php"><span class="hljs-keyword">declare</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Signal</span>&lt;<span class="hljs-title">T</span> = <span class="hljs-title">any</span>&gt; </span>{
+	_value: unknown;
+...
+
+<span class="hljs-keyword">declare</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Computed</span>&lt;<span class="hljs-title">T</span> = <span class="hljs-title">any</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">Signal</span>&lt;<span class="hljs-title">T</span>&gt; </span>{
+	_fn: () =&gt; T;
+	_sources?: Node;
+...
+</code></pre>
+<p>and it is used as so:</p>
+<pre><code class="hljs coffeescript">   <span class="hljs-reserved">const</span> a = signal(<span class="hljs-number">1</span>);
+   <span class="hljs-reserved">const</span> b = computed(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> a.value + <span class="hljs-number">1</span>);
+</code></pre>
+<p>In <code>fluid.cell</code> there are separate node and edge structures, respecting the fact that a computed node may be computable
 along multiple edges:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">@typedef {Object} Cell
-</span></span><span class="line"><span class="cl">@property {any} _value - The current value stored in the cell.
-</span></span><span class="line"><span class="cl">@property {Edge[]|null} _inEdges - Array of incoming edges which could update this node
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">@typedef {Object} Edge
-</span></span><span class="line"><span class="cl">@property {Function} fn - The function to be called to compute the value
-</span></span><span class="line"><span class="cl">@property {Cell[]|null} sources - Sources in reference order
-</span></span></code></pre></div><p>and it is used as so:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">   <span class="k">const</span> <span class="n">A</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">cell</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">   <span class="k">const</span> <span class="n">B</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">cell</span><span class="p">()</span><span class="o">.</span><span class="n">computed</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">A</span><span class="p">]);</span>
-</span></span></code></pre></div><p>Note that because relations are built up separately from the workflow of building up cells, it is possible to decouple
+<pre><code class="language-text">@typedef {Object} Cell
+@property {any} _value - The current value stored in the cell.
+@property {Edge[]|null} _inEdges - Array of incoming edges which could update this node
+
+@typedef {Object} Edge
+@property {Function} fn - The function to be called to compute the value
+@property {Cell[]|null} sources - Sources in reference order
+</code></pre>
+<p>and it is used as so:</p>
+<pre><code class="hljs php">   <span class="hljs-keyword">const</span> A = fluid.cell(<span class="hljs-number">1</span>);
+   <span class="hljs-keyword">const</span> B = fluid.cell().computed(a =&gt; a + <span class="hljs-number">1</span>, [A]);
+</code></pre>
+<p>Note that because relations are built up separately from the workflow of building up cells, it is possible to decouple
 the process of loading or defining parts of the substrate from building up relationships amongst those parts. In this
 simplest case, for example, one could have written</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">   <span class="k">const</span> <span class="n">A</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">cell</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">   <span class="k">const</span> <span class="n">B</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">cell</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">   <span class="n">B</span><span class="o">.</span><span class="n">computed</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">A</span><span class="p">]);</span>
-</span></span></code></pre></div><p>which is essential when dealing with cells whose relationships are cyclic (see the bidirectional samples at the head of
+<pre><code class="hljs php">   <span class="hljs-keyword">const</span> A = fluid.cell(<span class="hljs-number">1</span>);
+   <span class="hljs-keyword">const</span> B = fluid.cell();
+   B.computed(a =&gt; a + <span class="hljs-number">1</span>, [A]);
+</code></pre>
+<p>which is essential when dealing with cells whose relationships are cyclic (see the bidirectional samples at the head of
 this page) or not knowable by the same author who defined the cells.</p>
-<h3 id="agnostic-to-asynchrony">Agnostic to asynchrony</h3>
+<h3 id="agnostic-to-asynchrony"><a href="#agnostic-to-asynchrony" aria-label="Agnostic to asynchrony" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Agnostic to asynchrony</h3>
 <p>The issue of whether a value is available right away, or requires an asynchronous I/O operation to fetch it, is one that
 is guaranteed to be absolutely unfathomable to the end user, yet to a typical stack-hugging developer is one of a frightful
 viral nature. Bob Nystrom admirably sums up the situation in his <a href="https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/">What Color is Your Function</a> posting,
@@ -603,25 +237,25 @@ synchronous code, but the analogy breaks down pretty quickly, requires foresight
 a synchronous to asynchronous source of data must cascade all the way up a chain of consuming functions.</p>
 <p>Reactive systems, which by nature operate on values as they become ready, promise to free the user from having the issue
 of asynchrony in mind, which is usually irrelevant to their domain. However, very few reactive systems have so far
-delivered on this promise by putting asynchronous operations on a level footing with synchronous ones. Ryan Carniato&rsquo;s
+delivered on this promise by putting asynchronous operations on a level footing with synchronous ones. Ryan Carniato’s
 in-progress rewrite of <a href="https://docs.solidjs.com/concepts/signals">solid signals</a> is the notable exception, and
 <code>fluid.cell</code> adopts with thanks his <a href="https://github.com/solidjs/signals/blob/1005d57a4ee78ecf8d8b3395060e7005a0312fd5/tests/createMemo.test.ts#L310">test cases</a>
 verifying reactive competence in the face of asynchronous propagation, which our implementation passes.</p>
-<h3 id="accounting-for-cause-of-updates">Accounting for cause of updates</h3>
+<h3 id="accounting-for-cause-of-updates"><a href="#accounting-for-cause-of-updates" aria-label="Accounting for cause of updates" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Accounting for cause of updates</h3>
 <p>In the <a href="#substrate-nature-must-coexist-with-imperative-and-functional-backgrounds">background section</a> we explained that
-whilst moving beyond the &ldquo;execution paradigm&rdquo; which both imperative and functional idioms tie us to, we must coexist
+whilst moving beyond the “execution paradigm” which both imperative and functional idioms tie us to, we must coexist
 with them gracefully as well as respecting the computational literacies that users already have.</p>
 <p>However, a successful substrate will also need to offer equivalent guarantees, and especially, equivalent capabilities
 for explaining the state of the system, as we got from other paradigms. Reactivity has the potential to replace
 imperative and functional systems with far more malleable and democratic alternatives, but without providing
 the equivalent reassurances that users got from the coordinates of program counters and stack frames to explain
-the system&rsquo;s trajectory, we will again have serious ergonomic problems. <code>fluid.cell</code> provides a dedicated primitive
+the system’s trajectory, we will again have serious ergonomic problems. <code>fluid.cell</code> provides a dedicated primitive
 <a href="../../docs/fluid-signals/#fluidfindcausecell"><code>findCause</code></a> which is available whenever a reactive update is in progress, which
-will trace back through the graph to the original cause of the update. This can then be available to the substrate&rsquo;s
-own self-tooling which visually exports this information to the user &mdash; in the demo below, this path of nodes is highlighted
+will trace back through the graph to the original cause of the update. This can then be available to the substrate’s
+own self-tooling which visually exports this information to the user — in the demo below, this path of nodes is highlighted
 in red during a reactive update.</p>
-<h3 id="short-circuit-behaviour-on-errors-and-incompletion">Short-circuit behaviour on errors and incompletion</h3>
-<p><code>fluid.cell</code>&rsquo;s mechanism for supporting asynchronous computations, based around a specially marked payload named an
+<h3 id="short-circuit-behaviour-on-errors-and-incompletion"><a href="#short-circuit-behaviour-on-errors-and-incompletion" aria-label="Short-circuit behaviour on errors and incompletion" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Short-circuit behaviour on errors and incompletion</h3>
+<p><code>fluid.cell</code>’s mechanism for supporting asynchronous computations, based around a specially marked payload named an
 <a href="../../term/unavailable-value">unavailable value</a> generalises to some other substrate requirements.</p>
 <p>The short-circuit behaviour of unavailable values in the reactive graph is as follows:</p>
 <ul>
@@ -630,7 +264,7 @@ possibly accumulating an extra annotation holding the address of the computation
 <li>A reactive effect any of whose dependencies is unavailable does not activate.</li>
 </ul>
 <p>The lifecycle of a malleable substrate is quite different to that of a conventional reactive system. A commodity reactive system
-expects the dependence structure of its graph handed to it as a <em>fait accompli</em> &mdash; its structure is already
+expects the dependence structure of its graph handed to it as a <em>fait accompli</em> — its structure is already
 <em>implied</em> by the dependence structure of the body of code which has started to execute, and dependencies merely need
 to be <em>discovered</em>. However, a malleable substrate needs to supervise its own construction, which implies that
 considerable time is spent traversing reactive material on startup whose dependencies have not yet been loaded or
@@ -638,81 +272,70 @@ constructed. The short-circuit behaviour of unavailable values provides a natura
 make progress on constructing parts of the graph which are available without attempting to activate computations with missing values,
 a typical problem with commodity reactive libraries.</p>
 <p>Analogously to accounting for the cause of updates, a substrate also needs to account for the causes of errors, and
-route the user&rsquo;s attention through its surface to the cause that a value is unavailable, either through outstanding
+route the user’s attention through its surface to the cause that a value is unavailable, either through outstanding
 I/O, design incompletion or a structural/syntacic error. Unavailable values also handle this case within the
 substrate, accumulating all the addresses of substrate cells on the paths between visible error sites and their causes.
 <code>fluid.cell</code> is agnostic about the substrate structure which it supports and so does little to interpret these
 aspects of the payloads to unavailable values which are intended to be processed in a substrate-specific way.</p>
-<h3 id="dynamic-dependency-discovery">Dynamic dependency discovery</h3>
+<h3 id="dynamic-dependency-discovery"><a href="#dynamic-dependency-discovery" aria-label="Dynamic dependency discovery" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dynamic dependency discovery</h3>
 <p>This is a standard feature of all commodity reactive frameworks, but in the context of substrate work this appears as
 somewhat of a surplus feature. In an imperative/functional environement which privileges the world of executing code,
 it is an idiomatic and powerful feature to subscribe a reactive computation to dependencies as they are discovered
 through the course of executing a conventional function encoding a reactive computation. However, in an openly
-authored substrate constituting an <a href="../../term/integration-domain">integration domain</a>, the principle of <em>interface hiding</em><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>
+authored substrate constituting an <a href="../../term/integration-domain">integration domain</a>, the principle of <em>interface hiding</em><sup class="footnote-ref"><a id="fnref3" href="#fn3">[3]</a></sup>
 implies that executing code should properly have no power of reference to other than its immediate arguments. However,
 <code>fluid.cell</code> retains this feature to support interoperability with imperative codebases.</p>
-<h2 id="motivation-and-roadmap">Motivation and roadmap</h2>
+<h2 id="motivation-and-roadmap"><a href="#motivation-and-roadmap" aria-label="Motivation and roadmap" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Motivation and roadmap</h2>
 <p>In this section I respond to some comments from reviewers by motivating the need for bidirectionality in real applications
 and situating the <code>fluid.cell</code> implementation within the roadmap of implementing a malleable substrate.</p>
-<h3 id="consequences-of-bidirectionality">Consequences of bidirectionality</h3>
+<h3 id="consequences-of-bidirectionality"><a href="#consequences-of-bidirectionality" aria-label="Consequences of bidirectionality" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Consequences of bidirectionality</h3>
 <p>Support for bidirectional dataflow is required naturally in non-authoritarian app designs. The image below shows a snapshot
 of the UI of the self-editable Todo list application which you can run live from the <a href="https://fluid-project.github.io/infusion-6/demo/todo-list-sfc/">Infusion demos</a>.
-The application naturally exposes two representations of the same resource &mdash; the application interface itself,
-on the left, which has been put into self-editing mode using the &ldquo;magic wand&rdquo; icon, and the source code representation
+The application naturally exposes two representations of the same resource — the application interface itself,
+on the left, which has been put into self-editing mode using the “magic wand” icon, and the source code representation
 on the right. The orange arrow shows the path of bidirectional dataflow, which respects the fact that the application
 should be equally editable from either representation, and has us further bear in mind that additional linked representations
 may appear and disappear dynamically.</p>
-
-
-<div class="box" style="max-width:800px">
-  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-    <div class="img">
-      <img itemprop="thumbnail" src="../../img/todo-edit-arrow.png" alt="Bidirectional dataflow entailed by a non-authoritarian design"/>
-    </div>
-    <a href="../../img/todo-edit-arrow.png" itemprop="contentUrl"></a>
-      <figcaption>
-          <p>Bidirectional dataflow entailed by a non-authoritarian design</p>
-      </figcaption>
-  </figure>
-</div>
-
-<p>When updates &ldquo;go against the flow&rdquo; in an application built on authoritarian unidirectional dataflows, the developer is
+<div style="max-width:800px" class="box" data-caption="Bidirectional dataflow entailed by a non-authoritarian design" data-width="800px" data-src="/img/todo-edit-arrow.png" fluid-layers="wend.shortcode.figure"><figure itemtype="http://schema.org/ImageObject" itemscope itemprop="associatedMedia"><div class="img"><img alt="Bidirectional dataflow entailed by a non-authoritarian design" src="../../img/todo-edit-arrow.png" itemprop="thumbnail"></div><a href="../../img/todo-edit-arrow.png" itemprop="contentUrl"></a><figcaption><p>Bidirectional dataflow entailed by a non-authoritarian design</p></figcaption></figure></div>
+<p>When updates “go against the flow” in an application built on authoritarian unidirectional dataflows, the developer is
 snarled up in peculiar stateful makeshifts to deal with the book-keeping, or else non-standard primitives exposed by
-the reactive system such as Vue&rsquo;s <a href="https://vuejs.org/guide/essentials/computed.html#writable-computed">writeable computed</a>.
+the reactive system such as Vue’s <a href="https://vuejs.org/guide/essentials/computed.html#writable-computed">writeable computed</a>.
 These are awkward enough for professional developers let alone something which we expect to be exploitable by end-user
-developers. Here&rsquo;s the code contrivance required in the older version of Infusion&rsquo;s own demo for this feature, which was
+developers. Here’s the code contrivance required in the older version of Infusion’s own demo for this feature, which was
 built on the unidirectional preact-signals reactive library and CodeMirror 5:</p>
-<p>One one side, here&rsquo;s the &ldquo;readEffect&rdquo; in the CodeMirror component, which can&rsquo;t be a proper citizen
+<p>One one side, here’s the “readEffect” in the CodeMirror component, which can’t be a proper citizen
 of the reactive graph (a computed) since it is paired up with an update acting in the opposite direction. Note the stovepipe
 guarding against cyclic dataflows using an ad-hoc flag <code>inReadUpdate</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl">    <span class="nx">readEffect</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">$effect</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">func</span><span class="o">:</span> <span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">instance</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="nx">instance</span><span class="p">.</span><span class="nx">inReadUpdate</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="nx">fluid</span><span class="p">.</span><span class="nx">codemirror</span><span class="p">.</span><span class="nx">updateText</span><span class="p">(</span><span class="nx">instance</span><span class="p">,</span> <span class="nx">text</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="nx">instance</span><span class="p">.</span><span class="nx">inReadUpdate</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="nx">fluid</span><span class="p">.</span><span class="nx">invokeLater</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="nx">instance</span><span class="p">.</span><span class="nx">refresh</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">            <span class="p">},</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">args</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;{self}.text&#34;</span><span class="p">,</span> <span class="s2">&#34;{self}.instance&#34;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span></code></pre></div><p>The writes in the other direction consume these flags like so:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl">    <span class="nx">instance</span><span class="p">.</span><span class="nx">writeEffect</span> <span class="o">=</span> <span class="nx">fluid</span><span class="p">.</span><span class="nx">effect</span><span class="p">(</span><span class="nx">validText</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">instance</span><span class="p">.</span><span class="nx">firstValid</span> <span class="o">&amp;&amp;</span> <span class="nx">holder</span><span class="p">.</span><span class="nx">writeText</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">instance</span><span class="p">.</span><span class="nx">inReadUpdate</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">holder</span><span class="p">.</span><span class="nx">writeText</span><span class="p">(</span><span class="nx">validText</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">instance</span><span class="p">.</span><span class="nx">firstValid</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="p">[</span><span class="nx">validText</span><span class="p">]);</span>
-</span></span></code></pre></div><p>Developers take this kind of paradigm-breaking hack for granted as part of the costs of building real-world
+<pre><code class="language-javascript hljs">    readEffect: {
+        $effect: {
+            func: (text, instance) =&gt; {
+                instance.inReadUpdate = <span class="hljs-literal">true</span>;
+                fluid.codemirror.updateText(instance, text);
+                instance.inReadUpdate = <span class="hljs-literal">false</span>;
+                fluid.invokeLater(() =&gt; instance.refresh());
+            },
+            args: [<span class="hljs-string">"{self}.text"</span>, <span class="hljs-string">"{self}.instance"</span>]
+        }
+    }
+</code></pre>
+<p>The writes in the other direction consume these flags like so:</p>
+<pre><code class="language-javascript hljs">    instance.writeEffect = fluid.effect(validText =&gt; {
+        <span class="hljs-keyword">if</span> (instance.firstValid &amp;&amp; holder.writeText &amp;&amp; !instance.inReadUpdate) {
+            holder.writeText(validText);
+        }
+        instance.firstValid = <span class="hljs-literal">true</span>;
+    }, [validText]);
+</code></pre>
+<p>Developers take this kind of paradigm-breaking hack for granted as part of the costs of building real-world
 apps and seldom try to take account of them by feeding back the need for them to library developers.</p>
-<h3 id="roadmap-to-malleability">Roadmap to malleability</h3>
+<h3 id="roadmap-to-malleability"><a href="#roadmap-to-malleability" aria-label="Roadmap to malleability" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Roadmap to malleability</h3>
 <p><code>fluid.cell</code> aims to be agnostic as to how it is used to implement the primitives of
 a malleable substrate layered, but I have a particular roadmap for how this is to be achieved in Infusion. The
 design layer above the reactive cells aggregates these cells into <em><strong>layers</strong></em> which
 are the unit of design reuse, as well as the unit of structural malleability. The contents of one or
 more layers can be composited by dictionary merging into <em><strong>components</strong></em> which capture reusable units of reactive dataflow.</p>
 <p>The demos at the top of this page, whilst they represent an important class of use cases
-for interfacing with bodies of standard imperative code, don&rsquo;t represent the dominant pattern envisioned in a
+for interfacing with bodies of standard imperative code, don’t represent the dominant pattern envisioned in a
 substrate. They have been implemented here to establish parity with features in standard reactive
 libraries, as well as being a teaching aid in order to demonstrate how such features work in traditional contexts.</p>
 <p>Whilst it would be possible, and supported, to manipulate the reactive graph from inside the body of the
@@ -723,316 +346,195 @@ is expected to only refer to its immediate arguments.</p>
 <p>Other primitives than the following ones could be supported by the overlying substrate, but here I briefly describe
 the ones used by Infusion, which seem to constitute a small, self-sufficient set. Fuller
 documentation for these will appear in future postings.</p>
-<p>Infusion&rsquo;s strategy <em><strong>lifts</strong></em> the contents of reactive datacells up into the structure of the substrate
+<p>Infusion’s strategy <em><strong>lifts</strong></em> the contents of reactive datacells up into the structure of the substrate
 through two main mechanisms, structural lensing and indirection:</p>
-<h4 id="structural-lensing-through-if-and-for">Structural lensing through <code>$if</code> and <code>$for</code></h4>
+<h4 id="structural-lensing-through-if-and-for"><a href="#structural-lensing-through-if-and-for" aria-label="Structural lensing through $if and $for" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Structural lensing through <code>$if</code> and <code>$for</code></h4>
 <p>A reactive cell holding a boolean value can be lensed into the existence or non-existence of a component by referring
-to it in the <code>$if</code> member of a component&rsquo;s layer, e.g. in a textual, JSON form:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl">    <span class="nx">assignee</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.templateViewComponent&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">$if</span><span class="o">:</span> <span class="s2">&#34;{somethingInScope}.enabled&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="p">...</span>    
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span></code></pre></div><p>The component will exist at times when <code>{somethingInScope}.enabled</code> resolves to <code>true</code> and will not exist when
+to it in the <code>$if</code> member of a component’s layer, e.g. in a textual, JSON form:</p>
+<pre><code class="language-javascript hljs">    assignee: {
+        $component: {
+            $layers: <span class="hljs-string">"fluid.templateViewComponent"</span>,
+            $<span class="hljs-keyword">if</span>: <span class="hljs-string">"{somethingInScope}.enabled"</span>,
+            ...    
+        }
+    }
+</code></pre>
+<p>The component will exist at times when <code>{somethingInScope}.enabled</code> resolves to <code>true</code> and will not exist when
 it resolves to <code>false</code>.</p>
 <p>A reactive cell holding an array value can be lensed into the existence of a corresponding array of components by
-referring to it in the <code>$for</code> member of a component&rsquo;s layer, e.g.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl">    <span class="nx">todoItems</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">$layers</span><span class="o">:</span> <span class="s2">&#34;fluid.tests.todoItem&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">$for</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">source</span><span class="o">:</span> <span class="s2">&#34;{todoList}.todos&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                <span class="nx">value</span><span class="o">:</span> <span class="s2">&#34;todo&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                <span class="nx">key</span><span class="o">:</span> <span class="s2">&#34;itemIndex&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="p">...</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">},</span>
-</span></span></code></pre></div><p>These constructs are named after similar conditional and looping primitives seen in imperative programming, but
+referring to it in the <code>$for</code> member of a component’s layer, e.g.</p>
+<pre><code class="language-javascript hljs">    todoItems: {
+    $component: {
+        $layers: <span class="hljs-string">"fluid.tests.todoItem"</span>,
+            $<span class="hljs-keyword">for</span>: {
+            source: <span class="hljs-string">"{todoList}.todos"</span>,
+                value: <span class="hljs-string">"todo"</span>,
+                key: <span class="hljs-string">"itemIndex"</span>
+        },
+        ...
+    }
+},
+</code></pre>
+<p>These constructs are named after similar conditional and looping primitives seen in imperative programming, but
 rather than being control flow constructs, they instead set up reactive correspondences which are navigable through
 the kinds of bidirectional relationships described above.</p>
-<h4 id="polymorphism-via-indirection-layers">Polymorphism via indirection: <code>$layers$</code></h4>
+<h4 id="polymorphism-via-indirection-layers"><a href="#polymorphism-via-indirection-layers" aria-label="Polymorphism via indirection: $layers$" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Polymorphism via indirection: <code>$layers$</code></h4>
 <p>To achieve dynamic polymorphism in the substrate, the names of layers
 held in layer definitions can be looked up through reference into cell contents. Through this correspondence,
 reactive updates to the data cells become naturally lifted into structural updates of the dataflow graph itself.
 In a traditional programming paradigm this would be considered an exercise of <a href="https://en.wikipedia.org/wiki/Metaprogramming">metaprogramming</a>.</p>
 <p>For example, in the malleable IDE usable in the demo above, the flavour of editor constructed
 to edit a particular component is geared through this reference to <code>{self}.layerRec.editorModeLayer</code> in the <code>$layers</code>
-member of the component &mdash; this holds a string which, under the standard reactive evaluation semantics, will be
+member of the component — this holds a string which, under the standard reactive evaluation semantics, will be
 looked up to a layer name and then composited onto the component instantiated at this path:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl">    <span class="nx">editorHolders</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">$component</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">$layers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;fluid.editor&#34;</span><span class="p">,</span> <span class="s2">&#34;{self}.layerRec.editorModeLayer&#34;</span><span class="p">]</span>
-</span></span></code></pre></div><p>Full explanations of Infusion layer and component primitives are out of scope for this discussion and will appear
-in future postings &mdash; this discussion here is just intended to prime intuition about how coarse and fine-scaled malleability
+<pre><code class="language-javascript hljs">    editorHolders: {
+        $component: {
+            $layers: [<span class="hljs-string">"fluid.editor"</span>, <span class="hljs-string">"{self}.layerRec.editorModeLayer"</span>]
+</code></pre>
+<p>Full explanations of Infusion layer and component primitives are out of scope for this discussion and will appear
+in future postings — this discussion here is just intended to prime intuition about how coarse and fine-scaled malleability
 of the substrate as a whole is intended to arise from ordinary reactive updates to dataflow cells.</p>
-<h2 id="feature-comparison">Feature comparison</h2>
-<p>Here is table showing a feature comparison of <code>fluid.cell</code> against a number of historical reactive implementations &mdash;
-&ldquo;Discovery&rdquo; indicates dynamic dependency discovery and &ldquo;Bx ⟺&rdquo; indicates support for bidirectional reactive edges.</p>
+<h2 id="feature-comparison"><a href="#feature-comparison" aria-label="Feature comparison" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Feature comparison</h2>
+<p>Here is table showing a feature comparison of <code>fluid.cell</code> against a number of historical reactive implementations —
+“Discovery” indicates dynamic dependency discovery and “Bx ⟺” indicates support for bidirectional reactive edges.</p>
 <table>
-  <thead>
-      <tr>
-          <th>Year</th>
-          <th>System</th>
-          <th>Discovery</th>
-          <th>Glitch-Freedom</th>
-          <th>Early Cutoff</th>
-          <th>Async</th>
-          <th>Bx ⟺</th>
-          <th>Causes</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>2001</td>
-          <td>cells</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>2006</td>
-          <td>FrTime</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td>?</td>
-          <td></td>
-          <td>✓~</td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>2010</td>
-          <td>knockout</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>2012</td>
-          <td>S.js</td>
-          <td>✓</td>
-          <td></td>
-          <td>✓</td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>2014</td>
-          <td>mobX</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>2020</td>
-          <td>Observable</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>2023</td>
-          <td>Solid</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>2026</td>
-          <td>fluid.cell</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td>✓</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th>Year</th>
+<th>System</th>
+<th>Discovery</th>
+<th>Glitch-Freedom</th>
+<th>Early Cutoff</th>
+<th>Async</th>
+<th>Bx ⟺</th>
+<th>Causes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2001</td>
+<td>cells</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2006</td>
+<td>FrTime</td>
+<td>✓</td>
+<td>✓</td>
+<td>?</td>
+<td></td>
+<td>✓~</td>
+<td></td>
+</tr>
+<tr>
+<td>2010</td>
+<td>knockout</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2012</td>
+<td>S.js</td>
+<td>✓</td>
+<td></td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2014</td>
+<td>mobX</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2020</td>
+<td>Observable</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Solid</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2026</td>
+<td>fluid.cell</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody>
 </table>
-<h2 id="demo-key">Demo key</h2>
+<h2 id="demo-key"><a href="#demo-key" aria-label="Demo key" class="infusion-docs-anchor"><span aria-hidden="true" class="octicon octicon-link"></span></a>Demo key</h2>
 <p>You can see it working <a href="#abstract">above</a>. Understanding how control flow works in detail when embedding reactive primitives within
-an imperative backdrop can be a puzzle, so the legendary &ldquo;flag&rdquo; test case from preact-signals, together with some others, is here animated in a timeline alternating between
-imperative <span class="statement-color">statement steps</span> (S) in blue, and reactive <span class="computed-color">computation steps</span> (C) in purple.</p>
+an imperative backdrop can be a puzzle, so the legendary “flag” test case from preact-signals, together with some others, is here animated in a timeline alternating between
+imperative <span class="statement-color">statement steps</span> (S) in blue, and reactive <span class="computed-color">computation steps</span> © in purple.</p>
 <p>In addition, the <span class="cause-color">cause</span> of any current reactive computation, that is, the path to the node
 whose update originally scheduled it, is highlighted in red.</p>
 <p>You can step forwards and backwards
 through the test fixture to see nodes and arcs being built up and torn down, and also the reactive cell values and states
-being altered. Each node can be in one of three reactive states &mdash;</p>
+being altered. Each node can be in one of three reactive states —</p>
 <ul>
-<li><span class="clean-color">Clean</span> &mdash; The cell is fully up to date with all of its dependencies</li>
-<li><span class="dirty-color">Dirty</span> &mdash; The cell is provably dirty, since one of its immediate dependencies has recently updated</li>
-<li><span class="check-color">Check</span> &mdash; The cell may be dirty, since a distant upstream dependency has recently updated</li>
+<li><span class="clean-color">Clean</span> — The cell is fully up to date with all of its dependencies</li>
+<li><span class="dirty-color">Dirty</span> — The cell is provably dirty, since one of its immediate dependencies has recently updated</li>
+<li><span class="check-color">Check</span> — The cell may be dirty, since a distant upstream dependency has recently updated</li>
 </ul>
-<p>These states and their colours are taken from Milo Mighdoll&rsquo;s admirable <a href="https://milomg.dev/2022-12-01/reactivity">Super Charging
+<p>These states and their colours are taken from Milo Mighdoll’s admirable <a href="https://milomg.dev/2022-12-01/reactivity">Super Charging
 Fine-Grained Reactivity</a> illustration of his own <a href="https://github.com/milomg/reactively">reactively</a>
 system, from which a good part of the <code>fluid.cell</code> implementation has been adapted.</p>
 <p>Note that without support for asychronous propagation of reactive values, this demo could not have been implemented,
 since behind the scenes the original synchronous test fixture is rewritten to an asynchronous one which then suspends
 waiting for user interaction.</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>Section 4.4.4 of <a href="https://www.ppig.org/files/2016-PPIG-27th-Basman1.pdf">Software and How it Lives On</a>,
-Basman et al, 2016, describes a bulky, transaction-oriented style of reactivity named &ldquo;Queen of Sheba adaptation&rdquo;.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Section 4.4.4 of <a href="https://www.ppig.org/files/2016-PPIG-27th-Basman1.pdf">Software and How it Lives On</a>,
+Basman et al, 2016, describes a bulky, transaction-oriented style of reactivity named “Queen of Sheba adaptation”. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
 </li>
-<li id="fn:2">
-<p>Ryan&rsquo;s 2021 article is excellent but betrays the complexity of this terrain in the analysis of Svelte&rsquo;s
-reactivity &mdash; he observes that a touchstone of why Svelte is not reactive is that one can
-&ldquo;read a derived value on the next line of code it isn&rsquo;t updated. It is definitely not synchronous.&rdquo;, yet the latest
+<li id="fn2" class="footnote-item"><p>Ryan’s 2021 article is excellent but betrays the complexity of this terrain in the analysis of Svelte’s
+reactivity — he observes that a touchstone of why Svelte is not reactive is that one can
+“read a derived value on the next line of code it isn’t updated. It is definitely not synchronous.”, yet the latest
 incarnation of his signals system, solid-signals, shows <a href="https://github.com/solidjs/signals/blob/main/tests/createMemo.test.ts">just the same behaviour</a>.
 I actually agree with him that Svelte is not reactive, but not with this exact reasoning of why not, and yet at the same
-time I also support the behaviour of his latest test cases.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+time I also support the behaviour of his latest test cases. <a href="#fnref2" class="footnote-backref">↩︎</a></p>
 </li>
-<li id="fn:3">
-<p>Described in Stephen Kell&rsquo;s <a href="https://www.cl.cam.ac.uk/research/srg/netos/papers/2009-kell2009mythical.pdf">The Mythical Matched Modules</a> (2009).&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn3" class="footnote-item"><p>Described in Stephen Kell’s <a href="https://www.cl.cam.ac.uk/research/srg/netos/papers/2009-kell2009mythical.pdf">The Mythical Matched Modules</a> (2009). <a href="#fnref3" class="footnote-backref">↩︎</a></p>
 </li>
 </ol>
-</div>
-
-
-        
-
-        
-            <hr/>
-            <section id="social-share">
-              <div class="list-inline footer-links">
-                
-
-<div class="share-box" aria-hidden="true">
-    <ul class="share">
-      
-      <li>
-        
-        <a href="https://bsky.app/intent/compose?text=Just&#43;reading&#43;a&#43;post&#43;called&#43;fluid.cell%3A&#43;A&#43;reactive&#43;implementation&#43;supporting&#43;malleable&#43;substrates&#43;on&#43;Antranig&#43;Basman%27s&#43;blog%3A&#43;https%3A%2F%2Fponder.org.uk%2Fpost%2F2026-02-20-reactivity-for-malleability%2F" target="_blank" title="Share on BlueSky">
-          <i class="fab fa-fw fa-bluesky"></i>
-        </a>
-      </li>
-
-      
-      <li>
-        <a href="https://twitter.com/share?url=https%3a%2f%2fponder.org.uk%2fpost%2f2026-02-20-reactivity-for-malleability%2f&amp;text=fluid.cell%3a%20A%20reactive%20implementation%20supporting%20malleable%20substrates&amp;via=amb26ponder" target="_blank" title="Share on Twitter">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </li>
-
-      
-      <li>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fponder.org.uk%2fpost%2f2026-02-20-reactivity-for-malleability%2f" target="_blank" title="Share on Facebook">
-          <i class="fab fa-facebook"></i>
-        </a>
-      </li>
-
-      
-      <li>
-        <a href="https://reddit.com/submit?url=https%3a%2f%2fponder.org.uk%2fpost%2f2026-02-20-reactivity-for-malleability%2f&amp;title=fluid.cell%3a%20A%20reactive%20implementation%20supporting%20malleable%20substrates" target="_blank" title="Share on Reddit">
-          <i class="fab fa-reddit"></i>
-        </a>
-      </li>
-
-      
-      <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fponder.org.uk%2fpost%2f2026-02-20-reactivity-for-malleability%2f&amp;title=fluid.cell%3a%20A%20reactive%20implementation%20supporting%20malleable%20substrates" target="_blank" title="Share on LinkedIn">
-          <i class="fab fa-linkedin"></i>
-        </a>
-      </li>
-
-    </ul>
-  </div>
-  
-
-              </div>
-            </section>
-        
-
-        
-          
-
-          
-        
-      </article>
-
-      
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="../../post/2025-07-01-archaeology-of-glitches/" data-toggle="tooltip" data-placement="top" title="Archaeology of Glitches">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="../../post/2026-03-27-ai-cries-out-for-better-notations/" data-toggle="tooltip" data-placement="top" title="AI cries out for better notations">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-      <script src="https://giscus.app/client.js"
-                data-repo="amb26/ponder"
-                data-repo-id="R_kgDOOKllGA"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOOKllGM4CvhAS"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="0"
-                data-emit-metadata="0"
-                data-input-position="bottom"
-                data-theme="light"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script></div>
-  </div>
-</div>
-
-      <footer>
-  <div class="container">
-    
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <p class="credits copyright text-muted">
-          
-            
-              <a href="../../">Antranig Basman</a>
-            
-          
-          &nbsp;&copy;
-          2026
-
-        </p>
-        
-        <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.154.5</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &nbsp;&bull;&nbsp; further <a href="../../term/lithification">lithified</a> by Boz
-          
-        </p>
-      </div>
-    </div>
-  </div>
-</footer><script defer src="../../js/katex.min.js"></script>
-<script defer src="../../js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-<script src="../../js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-
-
-
-
-
-    
-  </body>
-</html>
+</section>
+</div><div><hr><section id="social-share"><div class="list-inline footer-links"><div aria-hidden="true" class="share-box"><ul class="share"><li><a href="https://bsky.app/intent/compose?text=Just%20reading%20a%20post%20called%20fluid.cell%3A%20A%20reactive%20implementation%20supporting%20malleable%20substrates%20on%20Antranig%20Basman's%20blog%3A%20https%3A%2F%2Fponder.org.uk%2Fpost%2F2026-02-20-reactivity-for-malleability%2F" title="Share on BlueSky" target="_blank"><i class="fab fa-fw fa-bluesky"></i></a></li><li><a href="https://twitter.com/share?url=https%3A%2F%2Fponder.org.uk%2Fpost%2F2026-02-20-reactivity-for-malleability%2F&text=fluid.cell%3A%20A%20reactive%20implementation%20supporting%20malleable%20substrates&via=amb26ponder" title="Share on Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fponder.org.uk%2Fpost%2F2026-02-20-reactivity-for-malleability%2F" title="Share on Facebook" target="_blank"><i class="fab fa-facebook"></i></a></li><li><a href="https://reddit.com/submit?url=https%3A%2F%2Fponder.org.uk%2Fpost%2F2026-02-20-reactivity-for-malleability%2F&title=fluid.cell%3A%20A%20reactive%20implementation%20supporting%20malleable%20substrates" title="Share on Reddit" target="_blank"><i class="fab fa-reddit"></i></a></li><li><a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fponder.org.uk%2Fpost%2F2026-02-20-reactivity-for-malleability%2F&title=fluid.cell%3A%20A%20reactive%20implementation%20supporting%20malleable%20substrates" title="Share on LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a></li></ul></div></div></section></div></article><ul class="pager blog-pager"><li class="previous"><a title="Archaeology of Glitches" href="../../post/2025-07-01-archaeology-of-glitches/" data-placement="top" data-toggle="tooltip">← Previous Post</a></li><li class="next"><a title="AI cries out for better notations" href="../../post/2026-03-27-ai-cries-out-for-better-notations/" data-placement="top" data-toggle="tooltip">Next Post →</a></li></ul><script data-lang="en" data-category-id="DIC_kwDOOKllGM4CvhAS" data-category="Announcements" data-repo-id="R_kgDOOKllGA" data-repo="amb26/ponder" async crossorigin="anonymous" data-theme="light" data-input-position="bottom" data-emit-metadata="0" data-reactions-enabled="0" data-strict="0" data-mapping="pathname" src="https://giscus.app/client.js"></script></div></div></div><footer><div class="container"><div class="row ponder-credits-row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p class="credits copyright text-muted"><a href="../../">Antranig Basman</a>
+                        &#160;©
+                        2026
+                    </p><p class="credits theme-by text-muted"><a href="https://github.com/fluid-project/infusion-6">Infusion 6</a> powered &#160;•&#160;
+                        Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from
+                        <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> &#160;•&#160;
+                        further <a href="../../term/lithification">lithified</a> by Boz
+                    </p></div></div></div></footer><script defer src="../../js/katex.min.js" fluid-client=""></script><script onload="renderMathInElement(document.body);" defer src="../../js/auto-render.min.js" fluid-client=""></script><fluid-module src="../../js/wend-wend-b02ba16204a3/" id="wend"></fluid-module><fluid-module src="../../js/wend-beautifulWend-d18b087d22f2/" id="beautifulWend"></fluid-module><fluid-module src="../../js/wend-ponderSite-d77c30e6608f/" id="ponderSite"></fluid-module><fluid-import src="%beautifulWend/adapt/disclaimer/beautifulWend-feature-disclaimer.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/disclaimer/beautifulWend-footer-disclaimer.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/gcse/beautifulWend-document-gcse.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/gcse/beautifulWend-feature-gcse.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/gcse/beautifulWend-navbar-gcse.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/gcse/beautifulWend-navItem-gcseSearch.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/hljs/beautifulWend-document-hljs.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/hljs/beautifulWend-feature-hljs.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/multilingual/beautifulWend-feature-multilingual.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/multilingual/beautifulWend-navbar-multilingual.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/multilingual/beautifulWend-navItem-languages.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/multilingual/beautifulWend-postMeta-translations.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/piwik/beautifulWend-document-piwik.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/piwik/beautifulWend-feature-piwik.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/selfHosted/beautifulWend-document-selfHosted.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/selfHosted/beautifulWend-feature-selfHosted.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/staticman/beautifulWend-document-staticman.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/staticman/beautifulWend-feature-staticman.vue"></fluid-import><fluid-import src="%beautifulWend/adapt/staticman/beautifulWend-postMeta-staticman.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/i18n/beautifulWend-i18n-en.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/i18n/beautifulWend-i18n.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/kinds/beautifulWend-kind-404.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/kinds/beautifulWend-kind-home.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/kinds/beautifulWend-kind-page.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/kinds/beautifulWend-kind-section.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/kinds/beautifulWend-kind-taxonomy.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/kinds/beautifulWend-kind-term.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/kinds/beautifulWend-type-page.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/kinds/beautifulWend-type-post.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-comments-giscus.vue"></fluid-import><fluid-import src="%wend/sfc/wend-alias.vue"></fluid-import><fluid-import src="%wend/sfc/wend-content.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-document.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-footer.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-header-bigimg.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-header-home.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-header-page.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-header-post.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-header.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-head.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-listPager.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-main-home.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-main-list.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-main-notFound.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-main-single.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-main-terms.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-main.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-mediaIcons.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-navbar.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-navItem-leaf.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-navItem-parent.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-navItem.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-pageMeta.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-pager.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-postMeta.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-postPreview.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-relatedPosts.vue"></fluid-import><fluid-import src="%wend/sfc/wend-scriptTag.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-shareLinks.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-site.vue"></fluid-import><fluid-import src="%wend/sfc/wend-stylesheetTag.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-tags.vue"></fluid-import><fluid-import src="%beautifulWend/sfc/beautifulWend-termPanel.vue"></fluid-import><fluid-import src="%ponderSite/sfc/shortcodes/wend-shortcode-figure.vue"></fluid-import><fluid-import src="%ponderSite/sfc/shortcodes/wend-shortcode-stabilization.vue"></fluid-import><fluid-import src="%ponderSite/sfc/shortcodes/wend-shortcode-vizreactive.vue"></fluid-import><fluid-import src="%infusion-6/src/components/sfc/fluid-liveExample.vue"></fluid-import><script fluid-hydrated="%infusion-6" src="../../js/infusion-6/src/framework/core/js/FluidBoot.js"></script><script data-fluid-boot-page="" fluid-hydrated="%wend" src="../../js/wend-wend-b02ba16204a3/js/pageBoot.js"></script></body></html>

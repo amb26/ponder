@@ -3,26 +3,6 @@ title: "fluid.cell: A reactive implementation supporting malleable substrates"
 date: 2026-02-20
 ---
 
-<!-- copied from snippets/reactive-viz.html -->
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/dagre-d3@0.6.4/dist/dagre-d3.min.js"></script>
-<script src="/infusion-6/js/jshint.js"></script>
-<script src="/infusion-6/js/codemirror.js"></script>
-<script src="/infusion-6/js/javascript.js"></script>
-<script src="/infusion-6/js/function-lint.js"></script>
-<script src="/infusion-6/js/javascript-lint.js"></script>
-<link rel="stylesheet" href="/infusion-6/css/codemirror.css" />
-<link rel="stylesheet" href="/infusion-6/css/lint.css" />
-<script src="/infusion-6/js/lezer-javascript-browser.js"></script>
-<script src="/infusion-6/js/FluidCore.js"></script>
-<script src="/infusion-6/js/FluidSignals.js"></script>
-<script src="/infusion-6/js/FluidDebugging.js"></script>
-<script src="/infusion-6/js/lezer-transform.js"></script>
-<script src="/infusion-6/js/qunit-stub.js"></script>
-<script src="/infusion-6/js/qunit-visual-signals.js"></script>
-<link rel="stylesheet" href="/infusion-6/css/qunit-visual-signals.css" />
-<script src="/infusion-6/js/visual-signals-test-gallery.js"></script>
-<script src="/infusion-6/js/FluidSignalsTests-annotations.js"></script>
 
 <style>
 .statement-color {
@@ -62,7 +42,7 @@ date: 2026-02-20
 </style>
 
 Submission to the March [Substrates 2026](https://2026.programming-conference.org/home/substrates-2026) Workshop, co-located with
-[<Programming 2026>](https://2026.programming-conference.org/).
+[&lt;Programming 2026&gt;](https://2026.programming-conference.org/).
 
 Updated 10th May 2026.
 
@@ -76,12 +56,7 @@ propagation of reactive updates and allows the cause of these updates to be trac
 expanded capabilities are vital to support successful substrates. The post includes a interactive visual demo of the reactive
 library on some simple test fixtures._
 
-<div id="live-demo" class="vizreactive-target">
-</div>
-
-<script>
-    fluid.vizReactive.bootVizReactiveUI(".vizreactive-target");
-</script>
+{{< vizreactive >}}
 
 <div style="font-size: smaller; margin-top: -16px;">For explanation of colour coding and some notes, see the <a href="#demo-key">demo key</a> below.</div>
 

@@ -1,0 +1,14 @@
+{
+    "//": "How wend builds this site - see packages/wend/js/site.js. Modules are listed from the most general to the site's own, and are published and imported in that order",
+    "modules": {
+        "wend": "packages/wend",
+        "beautifulWend": "packages/beautiful-wend",
+        "ponderSite": "wend"
+    },
+    "//root": "The layer of the root of the site's component tree, to which wend.json is a patch - the theme's",
+    "root": "beautifulWend.site",
+    "host": "wend/site.html",
+    "editing": "wend/editing.json",
+    "staticDirs": ["packages/beautiful-wend/static", "static"],
+    "overrides": "wend/override"
+}
