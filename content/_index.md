@@ -21,14 +21,14 @@ comments: false
 
 <div class="community-row">
   <div class="community-picture">
-  <a href="https://malleable.systems/" class="malleable-picture">
-      <img src="/img/malleable-header.svg" width="48" height="48">
-    <div>Malleable Systems Collective</div>
+  <a href="https://software-substrates.org/">
+      <img height="120px" src="img/substrates.png" />
     </a>
   </div>
   <div class="community-desc">
-The <a href="https://malleable.systems/">Malleable Systems Collective</a> believes, as I do, that it should be as easy
-to change software as it is to use it. We believe in widening the circle of those empowered to make decisions about
+The <a href="https://software-substrates.org/">Software Substrates group</a> is striving to make software more ownable, and build democratic
+infrastructure for real communities to express their relationships with others.
+We believe in widening the circle of those empowered to make decisions about
 their own technology, through making it as easy as possible to understand and change it.
 <a href="./communities/" class="post-read-more">[More Communities]</a>
   </div>

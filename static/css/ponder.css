@@ -205,7 +205,7 @@ a.malleable-picture {
 /** Another of the mad bootstrap breakpoints - move our headings into the margin on big pages **/
 
 @media (min-width: 992px) {
-    .ponder-front-page .ponder-content h2 {
+    .ponder-front-page h2 {
         margin-left: -8%;
         margin-top: 45px;
     }
@@ -234,4 +234,3 @@ a.dci-picture {
     max-width: 90%;
     max-height: 100%;
 }
-

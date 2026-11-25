@@ -1,11 +1,11 @@
 {
   "version": 1,
   "commit": null,
-  "infusion": "6.7.0",
-  "template": "sha256-7ee7ddd4d5652cd2ffb9461c38e089700d787a7dc7c7ba601101678924235e29",
+  "infusion": "6.7.1",
+  "template": "sha256-5a10c6fa9f22d37e022dfecff8a2ed3c847c585f39f722aa2a889dc919bf7d40",
   "sources": {
-    "content/_index.md": "sha256-c19aa9bdf10e838e56d93e1f9f018c6f49f3c0f6f4a43461312dfebbc1b48ace",
-    "content/communities.md": "sha256-8adbdf97dad45ee758c98ef4f681cbd0c5f240c7950b1279a1f55ef20f97840c",
+    "content/_index.md": "sha256-fb5a17c32f131c0fb5a87bf807d921fce3ace749274d7cfa59991dc929b9f563",
+    "content/communities.md": "sha256-0c77f9eb66edb04d3f3fbe7ef3d3463046622541e3056625c0d98682c8f1c37c",
     "content/docs/fluid-integration-language.md": "sha256-8eba5f58c343bf40d5d58137d82693bd7a49c71a85b82135d8e2a7e33eb0f4a9",
     "content/docs/fluid-ptf.md": "sha256-c3428f553fa6c285699b12fc9dc20f77c4f9cd1211d55fcdec7f3f4c00d6cc34",
     "content/docs/fluid-signals-background.md": "sha256-09b3f79ebe7fdd3b3924a793dee1eb6df9b57a014b06a2a47ab1687bbc7241dd",
@@ -65,7 +65,7 @@
       "kind": "home",
       "headings": [],
       "outputPath": "/index.html",
-      "output": "sha256-c9695768122fdbd30ea27fbb018562ddf6603248ee80a3a39af86edfa0180fdb",
+      "output": "sha256-7269c18bec0d1828b7ea8dab4d83be8babfaec2150cda1703c2965dfbda3b1a5",
       "inputs": [
         "#template",
         "content/post/2025-02-07-benchmarking-dom-reconciliation.md",
@@ -1102,7 +1102,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/communities/index.html",
-      "output": "sha256-42476fa8340098730ba43419b7af12bee50d3054b269f07fb3fc673de1458756",
+      "output": "sha256-b98e1ae8564ff635244fd0811e44203a6ad13b74e440660d964d3015d4a5adb5",
       "inputs": [
         "#template",
         "content/communities.md"
@@ -2211,6 +2211,7 @@
     "/img/render-timings.png",
     "/img/rsf.png",
     "/img/substrate-asteroid.jpg",
+    "/img/substrates.png",
     "/img/todo-edit-arrow.png",
     "/img/wordpress-disclose.png",
     "/img/xetthecum-inspector.png",
@@ -2235,7 +2236,7 @@
     "static/CNAME": "sha256-e227a02e03a0c11474d0f9cef11714c8250169387259990ff8cc44f5ef2d3100",
     "static/css/fluid-code-box.css": "sha256-2f8570cc33edefe25d3e4605a56d66232cf27424a773e5a0c86dfb1b46554ade",
     "static/css/octicons.woff": "sha256-325fd4cdc3b90201c1852b6a7b03c03996fa7fa0020722c07fac02722a3c0021",
-    "static/css/ponder.css": "sha256-61817ae333eeda68eab80640f37ec53fa43cd11d46ec520559e555974b76ea07",
+    "static/css/ponder.css": "sha256-afa938932ce9838a64ba76dc3e42aaa61be02ccbd1ceb42c7c65bae9458ad5e4",
     "static/css/stabilization-regimes.css": "sha256-a00bc4c0d2f0f079393fa7f8a5cadd81fc1fc31c1a705d0854f65bd36175ca04",
     "static/img/20230209_135356 - bio - cropped.jpg": "sha256-0bf2dfe4a3bbc69f3c822155d7615cf85933215db5947df7e612482c62fc053a",
     "static/img/20230209_135356 - bio.jpg": "sha256-6c7d4382b80e7920f56ea56aea8f8ac225d2ee7b8dd296129bd3989cf6d62cdf",
@@ -2274,6 +2275,7 @@
     "static/img/render-timings.png": "sha256-6be6a381b02366be8b37051ad73e27bf38af9e8412ca816a6c4d4726085859c8",
     "static/img/rsf.png": "sha256-c5e58a7273024be42fbe7af6c55ff492ad938e660b22f3fc8266b2fe5021e15b",
     "static/img/substrate-asteroid.jpg": "sha256-d878a3f33952a46c2cc0d6e456f765ee21e08678e4d9ed40a6a65ef1dd97bd64",
+    "static/img/substrates.png": "sha256-16986f3b8e8cb733adb13cef596691cac22024822361990fe75ce2b3c7dbfafd",
     "static/img/todo-edit-arrow.png": "sha256-03f73f841510b6e3b71e5841025da68aa55972acbd054663f45e798563768844",
     "static/img/wordpress-disclose.png": "sha256-93231da0521a3485dd12b2d80673c29eca45786ae13929c2034d7989d3f40ac7",
     "static/img/xetthecum-inspector.png": "sha256-cc36904c9d84be2703948cdcbd1ea82f9b0df75217f95a2a285f4bb9743dc8d6",

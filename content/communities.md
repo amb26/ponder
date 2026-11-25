@@ -18,20 +18,6 @@ title: My Communities
 
 <div class="community-row">
   <div class="community-picture">
-  <a href="https://malleable.systems/" class="malleable-picture">
-      <img src="/img/malleable-header.svg" width="48" height="48">
-    <div>Malleable Systems Collective</div>
-    </a>
-  </div>
-  <div class="community-desc">
-The <a href="https://malleable.systems/">Malleable Systems Collective</a> believes, as I do, that it should be as easy
-to change software as it is to use it. We believe in widening the circle of those empowered to make decisions about
-their own technology, through making it as easy as possible to understand and change it.</a>
-  </div>
-</div>
-
-<div class="community-row">
-  <div class="community-picture">
   <a href="https://cifar.ca/ai/ai-and-society/cifar-solution-networks/data-communities-for-inclusion/" class="dci-picture">
       <img src="/img/dci-logo-white.svg" />
     </a>
@@ -74,4 +60,19 @@ closely conforms to Jonathan Edwards' definition of a <a href="/term/substrate">
 Programming 2022</a> at Porto. I also maintain a helpful <a href="https://boxer-project.github.io/boxer-literature/Thematic%20index/">index to the Boxer
 literature</a>.
 </div>
+</div>
+
+<div class="community-row">
+  <div class="community-picture">
+  <a href="https://malleable.systems/" class="malleable-picture">
+      <img src="/img/malleable-header.svg" width="48" height="48">
+    <div>Malleable Systems Collective</div>
+    </a>
+  </div>
+  <div class="community-desc">
+The <a href="https://malleable.systems/">Malleable Systems Collective</a> believes, as I do, that it should be as easy
+to change software as it is to use it. We believe in widening the circle of those empowered to make decisions about
+their own technology, through making it as easy as possible to understand and change it. I am currently taking a break
+from the MSC on account of their hard no-AI policy.</a>
+  </div>
 </div>
