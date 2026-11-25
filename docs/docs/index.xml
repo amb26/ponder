@@ -51,5 +51,11 @@
       <guid>https://ponder.org.uk/docs/linearisation-algorithm/</guid>
       <description>This note describes how Infusion 6 orders the layers of a component: how the $layers lists written by authors are linearised into the single list held at that.$layers , and so which layer’s contributions win a merge. It records the decisions taken in FLUID-5743 , which made a layer listed further right beat those to its left, together with a relaxation of the C3 consistency rule and an assessment of its consequences against the “pedalo” example of Barrett et al., A Monotonic Superclass Linearization for Dylan (OOPSLA 1996).</description>
     </item>
+    <item>
+      <title>wend</title>
+      <link>https://ponder.org.uk/docs/wend/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
+      <guid>https://ponder.org.uk/docs/wend/</guid>
+      <description>wend builds a static site from Infusion 6 components, and lets the site be edited in place, in the browser, with the edits committed to its GitHub repository. This site is built with it. Edit in Infusion Download the latest Edit in Infusion extension (zip) “Edit in Infusion” is the Chrome extension which makes a wend site editable in place: edit a page as it is shown, or its markdown source beside it, and commit the edits to the site’s repository.</description>
+    </item>
   </channel>
 </rss>

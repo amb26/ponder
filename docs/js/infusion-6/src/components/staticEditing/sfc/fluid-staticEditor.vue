@@ -21,6 +21,11 @@ fluid.def("fluid.staticEditor", {
             ready: false,
             path: "",
             status: "",
+            statusKind: "",
+            // A notice that a base of the site has moved on since it was built, offering to rebuild it
+            basesHidden: true,
+            basesText: "",
+            basesDisabled: false,
             stateText: "",
             claimState: "none",
             commitDisabled: true,
@@ -72,6 +77,12 @@ fluid.def("fluid.staticEditor", {
         $method: {
             func: "fluid.staticEditing.framingChanged",
             args: ["{self}.controller", "{0}:event"]
+        }
+    },
+    rebuildBases: {
+        $method: {
+            func: "fluid.staticEditing.rebuildBases",
+            args: ["{self}.controller"]
         }
     },
     editConfig: {
@@ -132,7 +143,9 @@ fluid.def("fluid.staticEditor", {
         <header><strong>Edit in Infusion</strong> <span class="fluid-edit-path">@{state.path}</span>
             <button class="fluid-edit-close" title="Close the editor" @onclick="{self}.close()">×</button></header>
         <!-- Beneath the header, so that it is in view however long the source shown below it -->
-        <div class="fluid-edit-status">@{state.status}</div>
+        <div class="fluid-edit-status" data-fluid-status-kind="@{state.statusKind}" role="status">@{state.status}</div>
+        <div class="fluid-edit-bases" hidden="@{state.basesHidden}"><span>@{state.basesText}</span>
+            <button class="fluid-edit-rebuild" disabled="@{state.basesDisabled}" @onclick="{self}.rebuildBases()">Rebuild from it</button></div>
         <div class="fluid-edit-framing-row" hidden="@{state.framingRowHidden}">
             <label><input type="checkbox" class="fluid-edit-framing" checked="@{state.framing}"
                           @onchange="{self}.framingChanged({0})"> Also edit framing</label>
@@ -353,6 +366,34 @@ html[fl-docking-area-mode~="minimized"] > .fl-resize-bar {
     overflow-wrap: anywhere;
 }
 
+/* A notice that a base of the site has moved on, offering to rebuild it */
+.fluid-edit-bases {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    padding: 6px 10px;
+    border-left: 4px solid #2b6cb0;
+    border-radius: 3px;
+    background: #ebf4ff;
+    font-size: 13px;
+}
+
+.fluid-edit-bases[hidden] {
+    display: none;
+}
+
+/* An error, in the colour the extension's popup shows its own in, set apart from the notes of progress */
+.fluid-edit-status[data-fluid-status-kind="error"] {
+    padding: 6px 10px;
+    border-left: 4px solid #b7410e;
+    border-radius: 3px;
+    background: #fdf0ea;
+    color: #b7410e;
+    font-size: 13px;
+    font-weight: 600;
+}
+
 /* The framing of a page - e.g. its footer, rendered by an SFC shared by every page - marked by attributes alone, since
    the page's live tree renders it, and a label inserted amongst its nodes would be removed as it renders afresh */
 [data-fluid-framing] {
@@ -418,12 +459,13 @@ html[fl-docking-area-mode~="minimized"] > .fl-resize-bar {
 
 /* The markdown source, folded away while the page's blocks are edited in place - the panel is then a narrow card, leaving
    the page to be edited; unfolded, it fills the panel beside the page */
+/* It is never shrunk below its content - the source view's height is fixed, so shrunk, it would overflow onto the
+   buttons beneath it, e.g. in a short window, or with a status long enough to wrap - but the panel scrolls instead */
 .fluid-edit-source[open] {
-    flex: 1;
+    flex: 1 0 auto;
     display: flex;
     flex-direction: column;
     gap: 6px;
-    min-height: 0;
 }
 
 .fluid-edit-source[hidden] {

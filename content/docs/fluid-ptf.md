@@ -278,6 +278,109 @@ the cut restores the component with the state it had.
 Because the clipboard holds readable text, a copied component can be pasted into a text editor, modified there (for
 example by changing its template or its count) and pasted back onto the canvas as a modified component.
 
+## ZIP encoding
+
+A widget may also travel as a ZIP file, e.g. one dropped onto a page being edited with
+[Edit in Infusion](/docs/wend). This suits a widget written as a set of files, by an author or an agent, rather than
+copied from a live instance. A ZIP file is the same PTF document spelled as files: each part becomes a file, and the
+receiver reads the files back into the parts that `fluid.ptf.instantiateParts` takes. A ZIP file may also simply hold a
+PTF document as a file ending `.ptf`.
+
+| Part | File | Example |
+|---|---|---|
+| `layer` | A `.vue`, `.js` or `.json` file, named for the layer it defines, either at the top level or within `layers/` | `energy-driver.vue`, or `layers/energy.driver.vue` |
+| `potentia` of the root | `components/potentia.json`, which may be omitted for a [driver](#the-driver) | `{"$layers": ["energy.driver"]}` |
+| `potentia` of a subcomponent | `components/<member>/.../potentia.json` | `components/counter/potentia.json` |
+| `live` | `components/[<member>/...]live.json` | `components/live.json` |
+| An image | `img/<name>`, or any image file, written to the site's images as `<name>` | `img/cat.png` |
+
+Files made by an archiver, such as `__MACOSX/` and `.DS_Store`, are ignored.
+
+### Naming files for their layers
+
+A layer's file is named exactly as a site names it once the widget is published. The layer's name has its dots
+replaced by hyphens, as for any [SFC](/docs/fluid-view) loaded through `<fluid-import>`. The layer `energy.chartBase` is
+therefore held in `energy-chartBase.vue`, and the name is case-sensitive. A file whose name already holds dots, such as
+`layers/energy.chartBase.vue`, is read as that layer's name directly. A site finds a layer by its file's name, so:
+
+* **Each file defines the layer it is named for.** An SFC may define further layers used only within it, for example
+  the concrete charts its own template renders. Any layer which other files refer to needs a file of its own.
+* **Every relative `<fluid-import src>` names a file in the ZIP.** The widget's files are written side by side into the
+  site's directory of SFCs, so an import such as `<fluid-import src="./energy-chartBase.vue">` keeps working there.
+* **No plain scripts.** A `.js` file loaded by another file's `<script src>` is not a layer, and a widget can't yet
+  carry one. Put its code in the `<script>` of the SFC which loads it, or make it a layer of its own. A script from
+  outside the widget, such as a library loaded from a CDN by an absolute URL, is fine.
+
+A ZIP file which breaks any of these rules is refused as a whole, with a message naming each file at fault and, where
+it can, the name the file should have. The check matters because the editor's preview loads every file at once: a
+misnamed layer still renders there, and would fail only on the published site.
+
+A reference to `{self}.container` is refused too, since it names nothing: a component's element is
+`{self}.view.container`, and an effect waiting on what doesn't exist silently never runs.
+
+### The driver
+
+A PTF document always has a root `potentia` part, naming the layers the widget is made of. A ZIP file may leave out
+`components/potentia.json` when its root can be told from its files alone. The root is then made of a single layer,
+with no further potentia, which is the same as a `components/potentia.json` of `{"$layers": ["<root layer>"]}`. The
+root layer is:
+
+* the widget's only layer, if it has just one; or else
+* its **driver**: the one layer which none of its other files refers to. A file refers to a layer by importing its file
+  with `<fluid-import src>` or `<script src>`, or by its name as a string, e.g. in `$layers` or a `fluid-layers`
+  attribute.
+
+A ZIP file with several layers which no other file refers to, and no `components/potentia.json`, is refused. Name its
+root in `components/potentia.json` instead. Write `components/potentia.json` anyway whenever the root takes potentia of
+its own, such as a caption.
+
+### Checklist for writing a ZIP file
+
+To write a widget as a ZIP file that a site will accept, for instance as an agent:
+
+1. Choose a namespace for the widget's layers, e.g. `energy`, and give each layer a name within it, e.g.
+   `energy.chartBase`.
+2. Write each layer as an SFC named for it: `energy-chartBase.vue` containing `fluid.def("energy.chartBase", {...})`,
+   together with any `<template>` and `<style>` the layer has. A layer drawing into its own markup, e.g. with a
+   charting library, does so in an effect taking the element as `{self}.view.container`. A component has no member
+   `container` of its own, and an effect waiting on an argument that doesn't exist silently never runs.
+3. Write the driver as an SFC which pulls in the others with `<fluid-import src="./energy-chartBase.vue">`, and lays
+   out the widget in its `<template>`, placing each part of it by `fluid-layers`:
+
+   ```html
+   <template>
+   <main class="energy-driver">
+     <div fluid-layers="energy.historyChart"></div>
+     <div fluid-layers="energy.extrapolatedChart" fluid-id="projection"></div>
+   </main>
+   </template>
+   ```
+
+   Each such element is a subcomponent of the driver, named by its `fluid-id`, or else by its first layer's last
+   segment - here `historyChart` and `projection`. Two elements of one template may not share a name, so give
+   `fluid-id`s to two parts of the same layer. A part which other layers should be able to configure or remove with
+   `null` is declared instead as a member of the driver's layer, `historyChart: {$component: {$layers:
+   "energy.historyChart"}}`, and placed by `<div @id="historyChart"></div>`. An element may not bear both.
+4. Fold any shared helper script into the `<script>` of the base SFC which needs it.
+5. Put any images in `img/`, and refer to them from templates as `/img/<name>`.
+6. Zip the files, with the layers at the top level, or under `layers/` if you prefer. Add `components/potentia.json`
+   only to give the root potentia of its own, or when there are several candidates for the driver.
+
+For example:
+
+```
+energy-chart.zip
+├── energy-chartBase.vue        defines energy.chartBase - the chart's spec, legend and layout, and the helpers
+├── energy-chartSvg.vue         defines energy.chartSvg, on energy.chartBase - an SVG renderer
+├── energy-chartChartJs.vue     defines energy.chartChartJs - a Chart.js renderer, loaded from a CDN
+├── energy-dataHistory.vue      defines energy.dataHistory, on energy.chartBase - the data
+└── energy-driver.vue           defines energy.driver - imports the four files above, and defines and lays out
+                                energy.historyChart, as [energy.chartSvg, energy.dataHistory], placing
+                                it by fluid-layers in its template
+```
+
+Here `energy.driver` is the root, since none of the other files refers to it.
+
 ## JavaScript API
 
 ### Producing documents

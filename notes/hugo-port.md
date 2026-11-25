@@ -1,6 +1,6 @@
 > The record of porting this site from Hugo, with the Beautiful Hugo theme, to Infusion 6 - kept for reference while
 > its findings are moved elsewhere. Paths are as they were at the time: the build was then `infusion/js/`, and the
-> theme `infusion/sfc/` and `infusion/adapt/`. They are now `packages/wend/` and `packages/beautiful-wend/`. The
+> theme `infusion/sfc/` and `infusion/adapt/`. They are now the npm packages `@fluid-project/wend` and `@fluid-project/wend-theme-beautiful`, in `packages/` of Infusion 6. The
 > requirements it cites, `R1` and so on, are those of [REQUIREMENTS.md](REQUIREMENTS.md).
 
 # The port of ponder.org.uk from Hugo

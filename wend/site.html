@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <!-- Host document for wend's build, packages/wend/js/buildSite.js: declares Infusion and this site's SFCs, and renders nothing itself.
+    <!-- Host document for wend's build, js/buildSite.js of the wend package: declares Infusion and this site's SFCs, and renders nothing itself.
          The rendered pages are separate documents, one per beautifulWend.document.
          Under node Infusion is already loaded, and FluidBoot.js only declares the module infusion-6 at the directory
          holding it. Its files are read from the checkout which buildSite.js locates - that named for infusion-6 by
@@ -10,8 +10,8 @@
     <script src="../node_modules/infusion-6/src/framework/core/js/FluidBoot.js"></script>
 
     <!-- The site's modules, as wend.site.json names them: wend's own SFCs, its theme's, and the site's -->
-    <fluid-module id="wend" src="../packages/wend/"></fluid-module>
-    <fluid-module id="beautifulWend" src="../packages/beautiful-wend/"></fluid-module>
+    <fluid-module id="wend" src="../node_modules/@fluid-project/wend/"></fluid-module>
+    <fluid-module id="beautifulWend" src="../node_modules/@fluid-project/wend-theme-beautiful/"></fluid-module>
     <fluid-module id="ponderSite" src="./"></fluid-module>
 
     <!-- Every SFC of the site's modules, listed one by one, since Infusion has no import of a whole directory -->
@@ -63,6 +63,7 @@
     <fluid-import src="%beautifulWend/sfc/beautifulWend-main-terms.vue"></fluid-import>
     <fluid-import src="%beautifulWend/sfc/beautifulWend-main.vue"></fluid-import>
     <fluid-import src="%beautifulWend/sfc/beautifulWend-mediaIcons.vue"></fluid-import>
+    <fluid-import src="%beautifulWend/sfc/beautifulWend-mediaIcon.vue"></fluid-import>
     <fluid-import src="%beautifulWend/sfc/beautifulWend-navbar.vue"></fluid-import>
     <fluid-import src="%beautifulWend/sfc/beautifulWend-navItem-leaf.vue"></fluid-import>
     <fluid-import src="%beautifulWend/sfc/beautifulWend-navItem-parent.vue"></fluid-import>
@@ -81,7 +82,7 @@
     <fluid-import src="%ponderSite/sfc/shortcodes/wend-shortcode-figure.vue"></fluid-import>
     <fluid-import src="%ponderSite/sfc/shortcodes/wend-shortcode-stabilization.vue"></fluid-import>
     <fluid-import src="%ponderSite/sfc/shortcodes/wend-shortcode-vizreactive.vue"></fluid-import>
-    <!-- Infusion's live examples, which a fence marked "live" renders as - see packages/wend/js/markdown.js. Each loads
+    <!-- Infusion's live examples, which a fence marked "live" renders as - see js/markdown.js of the wend package. Each loads
          the editor %infusion-6/src/lib/fluid-lint/fluid-lint.js once it is booted in the browser -->
     <fluid-import src="%infusion-6/src/components/sfc/fluid-liveExample.vue"></fluid-import>
     <title>ponder.org.uk - Infusion site host</title>

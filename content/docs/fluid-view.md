@@ -367,6 +367,29 @@ the member is restored.
 The template of a subcomponent with `elideParent: false` may have several top-level nodes. All of them are rendered
 in sequence inside the `@id` element, after those of any preceding list member.
 
+#### Placing a component by its layers: `fluid-layers`
+
+A component a layer doesn't declare can be placed in a template by its layers alone:
+
+```html
+<main>
+    <div fluid-layers="energy.historyChart"></div>
+    <div fluid-layers="energy.chartSvg energy.dataExtrapolated" fluid-id="projection"></div>
+</main>
+```
+
+Each element bearing `fluid-layers` is rendered by a subcomponent of the owning component bearing those layers, as an
+[island](#verbatim-markup-and-islands) of verbatim markup is. It is named by its `fluid-id`, or else by the last segment
+of its first layer, so the two above are `historyChart` and `projection`. The name is stable however the template
+changes, so that state saved for the subcomponent, e.g. in [PTF](/docs/fluid-ptf), finds it again.
+
+- Two elements of one template may not share a name: give one a `fluid-id`.
+- An element may not bear both `@id` and `fluid-layers`.
+- Either mistake is logged as an error, and the element is rendered as plain markup.
+
+Since no layer declares such a subcomponent, no layer can configure it or remove it with `null`. For that, declare it
+as a member holding a `$component` record, and place it by `@id`.
+
 #### Fragment slots: `<fluid-fragment>`
 
 Where the subcomponent's nodes must appear without any wrapping element, for example a list of `<link>` elements

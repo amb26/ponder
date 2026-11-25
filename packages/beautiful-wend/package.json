@@ -1,9 +1,0 @@
-{
-    "name": "beautiful-wend",
-    "version": "0.1.0",
-    "description": "A theme for wend sites - the page furniture of Beautiful Hugo, as Infusion 6 layers. Mocked up within ponder's repository until it is published",
-    "license": "MIT",
-    "peerDependencies": {
-        "wend": "0.1.0"
-    }
-}

@@ -2,7 +2,7 @@
 // The {{< vizreactive >}} shortcode - the live visualisation of fluid.cell's test fixtures, rendered as an island within
 // the verbatim content of a page. It shows infusion-6's own visualiser, as its page
 // tests/manual-tests/framework/html/visual-signal-test.html does, from the copy of Infusion the site publishes (see
-// packages/wend/js/trace.js). Its libraries are payload for the browser, marked fluid-client so that they are never
+// js/trace.js of the wend package). Its libraries are payload for the browser, marked fluid-client so that they are never
 // evaluated whilst rendering. Once the island has rendered in the browser, its `widget` boots the visualiser into
 // the island's target, and clears it should the island be destroyed - e.g. when the page is migrated in place for
 // editing, whereupon the fresh island boots it afresh. Under node the libraries are never loaded, so that

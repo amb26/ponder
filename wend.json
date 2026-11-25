@@ -23,7 +23,21 @@
             "comments": true,
             "socialShare": true,
             "showRelatedPosts": true,
-            "commentsLayer": "beautifulWend.comments.giscus"
+            "commentsLayer": "beautifulWend.comments.giscus",
+            "customCSS": ["css/ponder.css"],
+            "mediaIcons": [
+                {"title": "Twitter profile", "href": "http://twitter.com/amb26ponder", "icon": "fab fa-twitter"},
+                {"title": "Send me a message", "href": "mailto:amb26webpage@ponder.org.uk", "icon": "fa fa-envelope"},
+                {"title": "Antranig's GitHub profile", "href": "http://github.com/amb26", "icon": "fab fa-github-alt"},
+                {"title": "My papers on DBLP", "href": "https://dblp.org/pid/68/5013.html", "icon": "fa fa-university"},
+                {"title": "My LinkedIn profile", "href": "https://www.linkedin.com/in/antranigbasman/", "icon": "fab fa-linkedin"}
+            ],
+            "giscus": {
+                "repo": "amb26/ponder",
+                "repoId": "R_kgDOOKllGA",
+                "category": "Announcements",
+                "categoryId": "DIC_kwDOOKllGM4CvhAS"
+            }
         },
         "menu": {
             "main": [

@@ -16,15 +16,14 @@ wend/             The site's own parts - see wend/README.md
   site.html         The host document, which declares Infusion and imports every SFC of the site's modules
   editing.json      The editing configuration - the repository and branch edits are committed to, and what may be edited
   sfc/shortcodes/   The site's shortcodes, as components
-packages/
-  wend/             The build, and the parts any wend site shares - see packages/wend/README.md
-  beautiful-wend/   The theme - see packages/beautiful-wend/README.md
 docs/             The built site, which GitHub Pages publishes - written by the build, never edited by hand
 notes/            Design notes and requirements gathered while building wend, to be moved elsewhere
 checklinks.js     Checks that every link of the built site resolves - npm test
 ```
 
-`packages/wend` and `packages/beautiful-wend` are kept in this repository until they are published to npm.
+The build, and the parts any wend site shares, are the npm package `@fluid-project/wend`, and the theme is `@fluid-project/wend-theme-beautiful` - both
+released from `packages/` of [Infusion 6's repository](https://github.com/fluid-project/infusion-6), whose READMEs
+describe them.
 
 ## Building
 
@@ -43,7 +42,7 @@ The build uses Infusion 6 as installed in `node_modules`. To build against a che
 [{"moduleName": "infusion-6", "baseDir": "../infusion-6/"}]
 ```
 
-or pass `--infusion <dir>`. The other options of `node packages/wend/js/buildSite.js` are:
+or pass `--infusion <dir>`. The other options of `npx wend-build` are:
 - `-o <dir>` writes the site elsewhere than `docs/`;
 - `--live true` keeps in each page the records from which it could be made live again;
 - `--from M --limit N` renders just N pages from the Mth, e.g. while working on the theme.
@@ -76,5 +75,5 @@ Each edit is committed, as the user signed in to GitHub, to the repository and b
 The workflow then rebuilds the site, and the extension recognises the edit as published once the rebuilt site's
 `docs/fluid-trace.json` records it.
 
-An edit to a file of the theme is not made in `packages/beautiful-wend` but in the site's own copy of the file, under
+An edit to a file of the theme is not made in `node_modules/@fluid-project/wend-theme-beautiful` but in the site's own copy of the file, under
 `wend/override/`, which takes the place of the theme's - see `overrides` in `wend.site.json`.

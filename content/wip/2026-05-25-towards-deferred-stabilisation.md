@@ -232,7 +232,7 @@ the explanation of the system's trajectory, and without machinery like `fluid.ce
 [`findCause`](/docs/fluid-signals/#fluidfindcausecell) it would be a troublesome loss to abandon this source of explanation.
 Reactive programming cannot be a satisfactory replacement for imperative programming without this kind of explanation, but now we have it,
 it must be time to kick off the stabilizer\[sic] wheels. As last year's
-[Vision Statement](https://ponder.org.uk/post/2025-06-03-substrates-vision/#composition-and-components) explains, both the
+[Vision Statement](/post/2025-06-03-substrates-vision/#composition-and-components) explains, both the
 stack and the heap are sources of unwelcome [divergence](/term/divergence) and so going for the shorter stacks resulting
 from deferred stabilisation is a clear architectural win.
 

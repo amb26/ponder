@@ -25,6 +25,8 @@ const fluidStaticEditingScope = function (fluid) {
 
     // The DOM event, on the document, by which the editing client asks for the panel to be opened
     fluid.staticEditing.activateEvent = "fluid-edit-activate";
+    // Dispatched on the document when a claim is removed from another page - see fluid.staticEditing.claimRemoved
+    fluid.staticEditing.claimRemovedEvent = "fluid-edit-claim-removed";
 
     /**
      * Ask the editing client for something only it may do, through the relay, unwrapping its reply
@@ -173,13 +175,14 @@ const fluidStaticEditingScope = function (fluid) {
     };
 
     /**
-     * Show the extension's badge for the page - marked if any claim is held on a source it renders
+     * Tell the extension what the page is showing, for the mark on its icon - whether any claim is held on a source it
+     * renders, and whether the editor is open
      * @param {Object} edit - The controller
      */
     fluid.staticEditing.updateBadge = function (edit) {
         const claims = fluid.staticEditing.allClaims(edit);
         fluid.staticEditing.send(edit, {type: "fluid-provenance-found", sourcePath: edit.provenance.source ? edit.provenance.source.path : edit.provenance.page,
-            claimState: claims.length > 0 ? claims[0].state : null});
+            claimState: claims.length > 0 ? claims[0].state : null, open: !edit.state.hidden}).catch(() => null);
     };
 
     /**
@@ -255,7 +258,7 @@ const fluidStaticEditingScope = function (fluid) {
             }
             await fluid.staticEditing.markFraming(edit, framing);
         } catch (error) {
-            fluid.staticEditing.setStatus(edit, String(error.message || error));
+            fluid.staticEditing.setError(edit, error);
         }
         fluid.staticEditing.updatePanel(edit);
         fluid.staticEditing.updateBadge(edit);
@@ -372,7 +375,7 @@ const fluidStaticEditingScope = function (fluid) {
             publishedOf(path) === undefined : publishedOf(path) === file.hash);
         let togo = false;
         if (published === claim.hash && filesPublished) {
-            await fluid.staticEditing.send(edit, {type: "claim-remove", id: claim.id});
+            await fluid.staticEditing.send(edit, {type: "claim-remove", id: claim.id, reason: "published"});
             togo = true;
         } else if (published !== undefined && published !== claim.baseHash && claim.state !== "conflict") {
             await fluid.staticEditing.putClaim(edit, {...claim, state: "conflict", message: "the published source is neither the one edited nor this edit"});
@@ -389,25 +392,61 @@ const fluidStaticEditingScope = function (fluid) {
         // Any claim held is polled - one shown here may have been committed from another page, e.g. one of the framing
         if (fluid.staticEditing.allClaims(edit).length > 0) {
             edit.pollTimer = setTimeout(async function () {
+                let published = false;
                 // Each claim is read afresh, since another page may have committed, or discarded, it
                 for (const claim of fluid.staticEditing.allClaims(edit)) {
                     const fresh = await fluid.staticEditing.send(edit, {type: "claim-get", repo: claim.repo, path: claim.path});
-                    if (!fresh || fresh.state !== claim.state || fresh.hash !== claim.hash) {
+                    if (!fresh && claim.state === "committed") {
+                        // Gone once committed - another page showing it found it published first, and dropped it. This
+                        // page is reloaded too, since shown without its claim it would revert to the page as it loaded,
+                        // from before the edit
+                        published = true;
+                    } else if (!fresh || fresh.state !== claim.state || fresh.hash !== claim.hash) {
                         await fluid.staticEditing.showClaimOf(edit, claim.path, fresh || null);
                     }
                 }
                 const trace = await fluid.staticEditing.fetchTrace(edit);
-                let published = false;
                 for (const claim of trace ? fluid.staticEditing.allClaims(edit).filter(one => one.state === "committed") : []) {
                     published = await fluid.staticEditing.reconcile(edit, trace, claim) || published;
                 }
                 if (published) {
-                    fluid.staticEditing.markBlocks(edit, "published", fluid.staticEditing.stateLabels.published + " - reloading the page");
-                    setTimeout(() => location.reload(), 1500);
-                } else {
+                    fluid.staticEditing.reloadPublished(edit);
+                } else if (!edit.reloading) {
                     fluid.staticEditing.poll(edit);
                 }
             }, edit.pollInterval);
+        }
+    };
+
+    /**
+     * Show the page's claims as published, and reload it to show the site as rebuilt - once, however many times asked,
+     * since both a poll and a notice from another page may find a claim published
+     * @param {Object} edit - The controller
+     */
+    fluid.staticEditing.reloadPublished = function (edit) {
+        if (!edit.reloading) {
+            edit.reloading = true;
+            clearTimeout(edit.pollTimer);
+            fluid.staticEditing.markBlocks(edit, "published", fluid.staticEditing.stateLabels.published + " - reloading the page");
+            setTimeout(() => location.reload(), 1500);
+        }
+    };
+
+    /**
+     * Respond to the removal of a claim by another page, of which the service worker tells every other page - see
+     * "claim-remove" in the extension's background.js. A claim this page shows which was removed as published is
+     * published here too, and the page reloads, whatever this page last knew of it - committed or not, since another
+     * page may have committed it since this one last polled. One removed as discarded, or moved, is shown gone
+     * @param {Object} edit - The controller
+     * @param {Object} removal - `{id, reason}` - the claim's key, and why it was removed: "published", "discarded" or "moved"
+     * @return {Promise} Resolves once shown
+     */
+    fluid.staticEditing.claimRemoved = async function (edit, removal) {
+        const claim = fluid.staticEditing.allClaims(edit).find(one => one.id === removal.id);
+        if (claim && removal.reason === "published") {
+            fluid.staticEditing.reloadPublished(edit);
+        } else if (claim) {
+            await fluid.staticEditing.showClaimOf(edit, claim.path, null);
         }
     };
 
@@ -426,7 +465,9 @@ const fluidStaticEditingScope = function (fluid) {
         } else if (edit.creating && edit.targetPath === edit.creating.path) {
             togo = {path: edit.creating.path, hash: null, label: "A new post", framing: null, creating: true};
         } else if (edit.provenance.source && edit.targetPath === edit.provenance.source.path) {
-            togo = {path: edit.provenance.source.path, hash: edit.provenance.source.hash, label: "This page's content", framing: null, creating: false};
+            togo = {path: edit.provenance.source.path, hash: edit.provenance.source.hash, label: "This page's content", framing: null, creating: false,
+                // A source the site inherits from one of its bases, not yet its own - see `inherited` in the provenance
+                inherited: edit.provenance.source.inherited || null};
         }
         return togo;
     };
@@ -551,6 +592,10 @@ const fluidStaticEditingScope = function (fluid) {
         if (target && !target.framing) {
             fluid.staticEditing.learnSite(edit).then(() => fluid.staticEditing.learnHeadings(edit, edit.source.getText()));
         }
+        if (!edit.basesChecked) {
+            edit.basesChecked = true;
+            fluid.staticEditing.checkBases(edit);
+        }
     };
 
     /**
@@ -566,8 +611,12 @@ const fluidStaticEditingScope = function (fluid) {
             // A source of the framing which the site forks from one of its modules - e.g. its theme's footer - and has
             // not yet forked is read as published, and its first commit creates the fork - see `origin` in the provenance
             const origin = target.framing && target.framing.origin;
+            // A source inherited from one of the site's bases is read from the base, at the commit the site was built from,
+            // and its first commit likewise creates the site's own copy of it
+            const inherited = target.inherited;
             const source = origin ? {text: await (await fetch(new URL(origin, location.href), {cache: "no-store"})).text(), sha: undefined} :
-                await fluid.staticEditing.send(edit, {type: "source-read", repo: edit.provenance.repo, branch: edit.provenance.branch, path: target.path});
+                inherited ? {text: (await fluid.staticEditing.send(edit, {type: "base-read", repo: inherited.repo, ref: inherited.sha, path: inherited.path})).text, sha: undefined} :
+                    await fluid.staticEditing.send(edit, {type: "source-read", repo: edit.provenance.repo, branch: edit.provenance.branch, path: target.path});
             const hash = await fluid.staticEditing.hashText(edit, source.text);
             edit.bases[target.path] = {text: source.text, sha: source.sha, hash};
             if (edit.targetPath === target.path) {
@@ -575,9 +624,11 @@ const fluidStaticEditingScope = function (fluid) {
             }
             fluid.staticEditing.setStatus(edit, hash !== target.hash ? "The repository's source differs from the one this page was published from - edits are based on the repository's" :
                 target.framing ? "Editing " + target.label + ", shared by every page of the site" +
-                    (origin ? " - the site's own copy of it, " + target.path + ", is made on committing" : "") : "Editing the source of this page");
+                    (origin ? " - the site's own copy of it, " + target.path + ", is made on committing" : "") :
+                    inherited ? "Editing the source of this page, which this site inherits from " + inherited.repo + " - the site's own copy of it is made on committing" :
+                        "Editing the source of this page");
         } catch (error) {
-            fluid.staticEditing.setStatus(edit, String(error.message || error));
+            fluid.staticEditing.setError(edit, error);
         }
     };
 
@@ -783,7 +834,7 @@ const fluidStaticEditingScope = function (fluid) {
         if (path !== edit.targetPath) {
             const old = edit.newClaims[edit.targetPath];
             if (old) {
-                await fluid.staticEditing.send(edit, {type: "claim-remove", id: old.id});
+                await fluid.staticEditing.send(edit, {type: "claim-remove", id: old.id, reason: "moved"});
                 delete edit.newClaims[edit.targetPath];
             }
             edit.bases[path] = edit.bases[edit.targetPath];
@@ -932,7 +983,7 @@ const fluidStaticEditingScope = function (fluid) {
             if (redefined.length > 0) {
                 await fluid.staticEditing.ask(edit, {op: "registerLayers", layers: redefined, override: true});
             }
-        }).catch(error => fluid.staticEditing.setStatus(edit, "The pasted widget's files can't be held, since " + (error.message || error)));
+        }).catch(error => fluid.staticEditing.setError(edit, error, "The pasted widget's files can't be held, since "));
         return edit.filesPromise;
     };
 
@@ -950,7 +1001,7 @@ const fluidStaticEditingScope = function (fluid) {
             fluid.staticEditing.ask(edit, {op: "widgetFromPTF", text, source: edit.source.getText()}).then(async ({markup, files}) => {
                 await fluid.staticEditing.addFiles(edit, files);
                 edit.source.insertBlock(markup);
-            }).catch(error => fluid.staticEditing.setStatus(edit, String(error.message || error)));
+            }).catch(error => fluid.staticEditing.setError(edit, error));
         }
         return taken;
     };
@@ -969,7 +1020,7 @@ const fluidStaticEditingScope = function (fluid) {
             Promise.all(files.map(async file => ({name: file.name, type: file.type, content: fluid.staticEditing.encodeBytes(edit, new Uint8Array(await file.arrayBuffer()))})))
                 .then(files => fluid.staticEditing.takeDroppedFiles(edit, files))
                 .then(markdown => edit.source.insertBlock(markdown))
-                .catch(error => fluid.staticEditing.setStatus(edit, String(error.message || error)));
+                .catch(error => fluid.staticEditing.setError(edit, error));
         }
         return taken;
     };
@@ -985,7 +1036,7 @@ const fluidStaticEditingScope = function (fluid) {
      */
     fluid.staticEditing.onBlockDrop = function (edit, {slot, files}) {
         return fluid.staticEditing.takeDroppedFiles(edit, files).then(markdown => fluid.staticEditing.ask(edit, {op: "fillSlot", slot, markdown}), error => {
-            fluid.staticEditing.setStatus(edit, String(error.message || error));
+            fluid.staticEditing.setError(edit, error);
             return fluid.staticEditing.ask(edit, {op: "fillSlot", slot, markdown: ""});
         });
     };
@@ -1064,22 +1115,30 @@ const fluidStaticEditingScope = function (fluid) {
         return path;
     };
 
+    // The MIME types of files held which are not images, by extension, as the site will serve them
+    fluid.staticEditing.fileTypes = {css: "text/css", js: "text/javascript", json: "application/json", vue: "text/plain",
+        txt: "text/plain", csv: "text/csv", pdf: "application/pdf", html: "text/html"};
+
     /**
-     * Show in the page the images held to be committed which it does not yet publish - those of a claim's further
-     * files, and those pending
+     * Show in the page the files held to be committed which the site does not yet publish - those of a claim's further
+     * files, and those pending, beneath static/: images wherever the page shows them, and, by the site's service worker
+     * if it publishes one, every file to whatever loads it, e.g. a stylesheet's `url()` or a widget's `fetch` - see
+     * previewWorker.js of wend
      * @param {Object} edit - The controller
      * @param {Object<String, ClaimFile>} files - Further files, by path, beside those pending
      * @return {Promise<Number>} The number of images previewed
      */
     fluid.staticEditing.previewImages = function (edit, files) {
-        const dir = fluid.staticEditing.imageDir(edit) + "/";
-        const images = Object.entries({...files, ...edit.pendingFiles}).filter(([path, file]) => path.startsWith(dir) && file && file.content)
+        const held = Object.entries({...files, ...edit.pendingFiles}).filter(([path, file]) => path.startsWith("static/") && file && file.content)
             .map(([path, file]) => {
                 const kind = fluid.staticEditing.sniffImage(edit, fluid.staticEditing.decodeBase64(edit, file.content));
-                return kind ? {url: new URL(fluid.sourceView.relativePath(edit.provenance.page, fluid.staticEditing.sitePathOf(edit, path)), location.href).href,
-                    type: kind.type, content: file.content} : null;
-            }).filter(image => image);
-        return images.length > 0 ? fluid.staticEditing.ask(edit, {op: "previewImages", images}) : Promise.resolve(0);
+                const extension = path.substring(path.lastIndexOf(".") + 1).toLowerCase();
+                return {url: new URL(fluid.sourceView.relativePath(edit.provenance.page, fluid.staticEditing.sitePathOf(edit, path)), location.href).href,
+                    type: kind ? kind.type : fluid.staticEditing.fileTypes[extension] || "application/octet-stream", content: file.content};
+            });
+        const worker = edit.provenance.previewWorker ? new URL(edit.provenance.previewWorker, location.href).href : null;
+        // With a worker, the files held are given even when there are none, so that it ceases to answer for any since published
+        return held.length > 0 || worker ? fluid.staticEditing.ask(edit, {op: "previewImages", images: held, worker}) : Promise.resolve(0);
     };
 
     /**
@@ -1169,12 +1228,94 @@ const fluidStaticEditingScope = function (fluid) {
     };
 
     /**
+     * Check whether any base of the site, held as a git repository, has moved on since the site was built, and if so
+     * offer to rebuild the site from it - see `bases` in wend.site.json, and the site's trace
+     * @param {Object} edit - The controller
+     * @return {Promise<Object[]>} `{repo, branch, sha, head}` for each base which has moved on
+     */
+    fluid.staticEditing.checkBases = async function (edit) {
+        const trace = await fluid.staticEditing.fetchTrace(edit);
+        const bases = trace && trace.bases || [];
+        let stale = [];
+        if (bases.length > 0) {
+            try {
+                const heads = await fluid.staticEditing.send(edit, {type: "base-heads", bases});
+                stale = heads.filter(base => base.head && base.head !== base.sha);
+            } catch (error) {
+                stale = [];
+            }
+        }
+        edit.staleBases = stale;
+        edit.state.basesHidden = stale.length === 0;
+        edit.state.basesText = stale.length === 0 ? "" : (stale.length === 1 ? "This site's base " + stale[0].repo + " has" :
+            "This site's bases " + stale.map(base => base.repo).join(", ") + " have") + " changed since the site was last built.";
+        edit.state.basesDisabled = false;
+        return stale;
+    };
+
+    /**
+     * Rebuild the site from the latest commits of its bases which have moved on, by committing its record of the
+     * commits it builds them at, and reload the page once the site is published afresh
+     * @param {Object} edit - The controller
+     * @return {Promise} Resolves once the rebuild is asked for
+     */
+    fluid.staticEditing.rebuildBases = async function (edit) {
+        const stale = edit.staleBases || [];
+        edit.state.basesDisabled = true;
+        try {
+            const result = await fluid.staticEditing.send(edit, {type: "bases-rebuild", repo: edit.provenance.repo, branch: edit.provenance.branch,
+                bases: stale.map(base => ({repo: base.repo, sha: base.head}))});
+            if (result.ok) {
+                edit.state.basesText = "Rebuilding the site from the latest of " + stale.map(base => base.repo).join(", ") +
+                    " - the page reloads once it is published.";
+                fluid.staticEditing.awaitBases(edit, stale);
+            } else {
+                edit.state.basesDisabled = false;
+                fluid.staticEditing.setError(edit, result.message);
+            }
+        } catch (error) {
+            edit.state.basesDisabled = false;
+            fluid.staticEditing.setError(edit, error);
+        }
+    };
+
+    /**
+     * Poll the published trace until it records the site built from the given commits of its bases, then reload the page
+     * @param {Object} edit - The controller
+     * @param {Object[]} bases - `{repo, head}` for each base rebuilt from
+     */
+    fluid.staticEditing.awaitBases = function (edit, bases) {
+        clearTimeout(edit.basesTimer);
+        edit.basesTimer = setTimeout(async function () {
+            const trace = await fluid.staticEditing.fetchTrace(edit);
+            const built = trace && bases.every(base => (trace.bases || []).some(one => one.repo === base.repo && one.sha === base.head));
+            if (built) {
+                location.reload();
+            } else {
+                fluid.staticEditing.awaitBases(edit, bases);
+            }
+        }, edit.pollInterval);
+    };
+
+    /**
      * Show a line of status in the panel
      * @param {Object} edit - The controller
      * @param {String} text - The status
      */
     fluid.staticEditing.setStatus = function (edit, text) {
         edit.state.status = text;
+        edit.state.statusKind = "";
+    };
+
+    /**
+     * Show an error in the panel's line of status, marked as one, so that it stands out from the panel's notes of progress
+     * @param {Object} edit - The controller
+     * @param {Error|String} error - The error
+     * @param {String} [prefix] - Text to precede the error's message
+     */
+    fluid.staticEditing.setError = function (edit, error, prefix) {
+        edit.state.status = (prefix || "") + String(error.message || error);
+        edit.state.statusKind = "error";
     };
 
     /**
@@ -1213,6 +1354,7 @@ const fluidStaticEditingScope = function (fluid) {
         const top = wasDocked ? document.body.scrollTop : window.scrollY;
         root.setAttribute("fl-docking-area-mode", on ? "right edge" : "minimized");
         edit.state.hidden = !on;
+        fluid.staticEditing.updateBadge(edit);
         if (on) {
             document.body.scrollTop = top;
         } else {
@@ -1221,7 +1363,7 @@ const fluidStaticEditingScope = function (fluid) {
         if (on && !edit.resizeBarBound) {
             edit.resizeBarBound = true;
             fluid.staticEditing.ask(edit, {op: "bindResizeBar", bar: ".fluid-edit-resize-bar", panel: ".fluid-edit-panel"})
-                .catch(error => fluid.staticEditing.setStatus(edit, "The panel cannot be resized, since " + (error.message || error)));
+                .catch(error => fluid.staticEditing.setError(edit, error, "The panel cannot be resized, since "));
         }
         fluid.staticEditing.rememberSession(edit);
         fluid.staticEditing.showListHead(edit);
@@ -1235,11 +1377,12 @@ const fluidStaticEditingScope = function (fluid) {
     fluid.staticEditing.commit = async function (edit) {
         fluid.staticEditing.setStatus(edit, "Committing - confirm the commit in the window the extension opens ...");
         try {
+            await fluid.staticEditing.flushInput(edit);
             const claim = await fluid.staticEditing.send(edit, {type: "claim-commit", id: fluid.staticEditing.claimOf(edit, edit.targetPath).id});
             await fluid.staticEditing.showClaimOf(edit, claim.path, claim);
             fluid.staticEditing.setStatus(edit, claim.state === "committed" ? "Committed as " + claim.commitSha.substring(0, 7) : claim.message || "");
         } catch (error) {
-            fluid.staticEditing.setStatus(edit, String(error.message || error));
+            fluid.staticEditing.setError(edit, error);
         }
         fluid.staticEditing.poll(edit);
     };
@@ -1252,7 +1395,7 @@ const fluidStaticEditingScope = function (fluid) {
     fluid.staticEditing.discard = async function (edit) {
         const path = edit.targetPath;
         const creating = fluid.staticEditing.target(edit) && fluid.staticEditing.target(edit).creating;
-        await fluid.staticEditing.send(edit, {type: "claim-remove", id: fluid.staticEditing.claimOf(edit, path).id});
+        await fluid.staticEditing.send(edit, {type: "claim-remove", id: fluid.staticEditing.claimOf(edit, path).id, reason: "discarded"});
         delete edit.bases[path];
         await fluid.staticEditing.showClaimOf(edit, path, null);
         edit.source.setText("");
@@ -1309,7 +1452,21 @@ const fluidStaticEditingScope = function (fluid) {
      */
     fluid.staticEditing.sourceChanged = function (edit, event) {
         clearTimeout(edit.inputTimer);
-        edit.inputTimer = setTimeout(() => fluid.staticEditing.onInput(edit, event.detail.text), 300);
+        edit.pendingInput = event.detail.text;
+        edit.inputTimer = setTimeout(() => fluid.staticEditing.flushInput(edit), 300);
+    };
+
+    /**
+     * Record at once any edit of the source view still awaiting its pause - see `sourceChanged` - e.g. before
+     * committing, so that what was typed or dropped a moment before is committed with the rest
+     * @param {Object} edit - The controller
+     * @return {Promise} Resolves once it is recorded, or at once if none awaits
+     */
+    fluid.staticEditing.flushInput = function (edit) {
+        clearTimeout(edit.inputTimer);
+        const text = edit.pendingInput;
+        edit.pendingInput = undefined;
+        return text === undefined ? Promise.resolve() : fluid.staticEditing.onInput(edit, text);
     };
 
     /**
@@ -1399,7 +1556,7 @@ const fluidStaticEditingScope = function (fluid) {
         const claim = await fluid.staticEditing.send(edit, {type: "claim-get", repo: edit.provenance.repo, path});
         let togo = claim || null;
         if (claim && claim.hash === hash) {
-            await fluid.staticEditing.send(edit, {type: "claim-remove", id: claim.id});
+            await fluid.staticEditing.send(edit, {type: "claim-remove", id: claim.id, reason: "published"});
             togo = null;
         }
         return togo;
@@ -1429,7 +1586,8 @@ const fluidStaticEditingScope = function (fluid) {
                     }
                 }
             },
-            [fluid.staticEditing.activateEvent]: () => edit.started.then(() => fluid.staticEditing.activate(edit))
+            [fluid.staticEditing.activateEvent]: () => edit.started.then(() => fluid.staticEditing.activate(edit)),
+            [fluid.staticEditing.claimRemovedEvent]: event => edit.started.then(() => fluid.staticEditing.claimRemoved(edit, JSON.parse(event.detail)))
         };
         Object.entries(edit.listeners).forEach(([type, listener]) => document.addEventListener(type, listener));
         edit.onFramingClick = event => fluid.staticEditing.onFramingClick(edit, event);
