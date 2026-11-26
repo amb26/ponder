@@ -230,7 +230,7 @@
       <title>wend</title>
       <link>https://ponder.org.uk/docs/wend/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
       <guid>https://ponder.org.uk/docs/wend/</guid>
-      <description>wend builds a static site from Infusion 6 components, and lets the site be edited in place, in the browser, with the edits committed to its GitHub repository. This site is built with it. Edit in Infusion Download the latest Edit in Infusion extension (zip) “Edit in Infusion” is the Chrome extension which makes a wend site editable in place: edit a page as it is shown, or its markdown source beside it, and commit the edits to the site’s repository.</description>
+      <description>Wend builds a static site from Infusion 6 components, and lets the site be edited in place, in the browser, with the edits committed to its GitHub repository. This site is built with it. Edit in Infusion Download the latest Edit in Infusion extension (zip) “Edit in Infusion” is the Chrome extension which makes a wend site editable in place: edit a page as it is shown, or its markdown source beside it, and commit the edits to the site’s repository.</description>
     </item>
     <item>
       <title>Edit in Infusion - Privacy Policy</title>
