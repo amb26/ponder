@@ -1,6 +1,6 @@
 {
     "repo": "amb26/ponder",
-    "branch": "ponder-infusion",
+    "branch": "main",
     "bootLayers": [
         "wend.shortcode.stabilization",
         "wend.shortcode.vizreactive",

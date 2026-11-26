@@ -2,7 +2,7 @@
   "version": 1,
   "commit": null,
   "infusion": "6.7.4",
-  "template": "sha256-db7f72cb3f205fd7a46d49525b601f9eff5348a9713822e4f8ea97398e89c574",
+  "template": "sha256-4fd0c984c490ffdb8a0786ce384fd79491b21a557beb11aca1654c9c6be37578",
   "sources": {
     "content/_index.md": "sha256-fb5a17c32f131c0fb5a87bf807d921fce3ace749274d7cfa59991dc929b9f563",
     "content/communities.md": "sha256-0c77f9eb66edb04d3f3fbe7ef3d3463046622541e3056625c0d98682c8f1c37c",
@@ -66,7 +66,7 @@
       "kind": "home",
       "headings": [],
       "outputPath": "/index.html",
-      "output": "sha256-02f7832001d0c4c1b75492ad90b6667e2be7afa8b51fddb68b93fd555ac0cd38",
+      "output": "sha256-8a94a9b131cc094d057ec7b39d573148aee5191d0ad86bf90283b45bcf04a3a9",
       "inputs": [
         "#template",
         "content/post/2025-02-07-benchmarking-dom-reconciliation.md",
@@ -87,7 +87,7 @@
       "kind": "section",
       "headings": [],
       "outputPath": "/post/index.html",
-      "output": "sha256-a18c2046be377d0115b98754a46ba53bd5e725b813e51071e8f3e3d856f97c83",
+      "output": "sha256-4d05cf3522858e7f41aa6236bae683cf9768d0de32257cdf2dfbca0bb930b357",
       "inputs": [
         "#template",
         "content/post/2025-02-07-benchmarking-dom-reconciliation.md",
@@ -108,7 +108,7 @@
       "kind": "section",
       "headings": [],
       "outputPath": "/wip/index.html",
-      "output": "sha256-07d34988ebf89105ec03822c8c61f4873fd11572ff646551b46df8e1ceb3c373",
+      "output": "sha256-bb573d211584a00fb0d35f197012d6fbda5544ecf0ba696b06b6b7acedd66aae",
       "inputs": [
         "#template",
         "content/wip/2025-04-21-co-occurrences-are-here-again.md",
@@ -129,7 +129,7 @@
       "kind": "section",
       "headings": [],
       "outputPath": "/wip/page/2/index.html",
-      "output": "sha256-198ce7a79bce945df96144a99eb0a617cedcad6e799f6f634b4337638193c4ee",
+      "output": "sha256-c10e7599102f6047806ee8c8107472b1a2de08e9277cc97d53c9a2d64e1d463a",
       "inputs": [
         "#template",
         "content/wip/2025-03-28-hunting-rich-editors.md",
@@ -144,7 +144,7 @@
       "kind": "section",
       "headings": [],
       "outputPath": "/docs/index.html",
-      "output": "sha256-348ce20f64c8ae94a488f38c55c09acf7fa5deab12db185a8fbc57e2fd076875",
+      "output": "sha256-178cb8993c0fddca667d07137a69d08bec1c463de784de7fd9669beb1a758ce0",
       "inputs": [
         "#template",
         "content/docs/fluid-integration-language.md",
@@ -163,7 +163,7 @@
       "kind": "section",
       "headings": [],
       "outputPath": "/page/index.html",
-      "output": "sha256-a29a602a1a666407363b5fe40f6cea7d04692c76a3286118c5789529bfde4035",
+      "output": "sha256-d6be003b10044f8363f8927785f4dd3fb5609a58b83a4129075ac3b4219f8114",
       "inputs": [
         "#template",
         "content/page/about.md"
@@ -175,7 +175,7 @@
       "kind": "section",
       "headings": [],
       "outputPath": "/term/index.html",
-      "output": "sha256-cf1285189a4506a94f6b3e587354832d0302be28b74774dfaa89c89cc4dce9f1",
+      "output": "sha256-4817ab68fa116a07190c060cdcfe303cf98ace0e6f69ba388330d40433183a7c",
       "inputs": [
         "#template",
         "content/term/a-good-function.md",
@@ -196,7 +196,7 @@
       "kind": "section",
       "headings": [],
       "outputPath": "/term/page/2/index.html",
-      "output": "sha256-063a60b014c22068e70072f0bd589ecc3fb081b53ba4bd9f5522019a20ec2176",
+      "output": "sha256-e3a9cb81b256fd3b0cde22b107cd046a1c53e1cff099994f3a7a7626cd98061f",
       "inputs": [
         "#template",
         "content/term/substrate.md",
@@ -237,7 +237,7 @@
         }
       ],
       "outputPath": "/post/2026-06-28-fully-deferred-stabilization/index.html",
-      "output": "sha256-36fc886ff8e8fc5398377d712558a17fd81fcf58aa08d27d92dbc0ff8c98a59d",
+      "output": "sha256-4ad4e236e84e6ae2db9e6a9b8106842ca8ddcaa3b62c7052bdbdc68ff72fa8da",
       "inputs": [
         "#template",
         "content/post/2026-06-28-fully-deferred-stabilization.md"
@@ -265,7 +265,7 @@
         }
       ],
       "outputPath": "/wip/2026-05-25-towards-deferred-stabilisation/index.html",
-      "output": "sha256-8bb33547a40420153196d16c96cd3469f5f78d4d17a411d6b36c069a00278829",
+      "output": "sha256-f5ca43d1fdb2b10a601a67fda5ed92eba87555697544e685cdf20daa1060dd2d",
       "inputs": [
         "#template",
         "content/wip/2026-05-25-towards-deferred-stabilisation.md"
@@ -433,7 +433,7 @@
         }
       ],
       "outputPath": "/wip/2026-07-31-researching-in-browser-ai/index.html",
-      "output": "sha256-ea59e0bdbfbf7abd74c5ad82f25f26059e02b5689494c21ae96db7d69a0e05a7",
+      "output": "sha256-adae645b427d9389132522acd7e262d86bdafba34e6e171c591f1fd4a00c558c",
       "inputs": [
         "#template",
         "content/wip/2026-07-31-researching-in-browser-ai.md"
@@ -445,7 +445,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/post/2026-03-27-ai-cries-out-for-better-notations/index.html",
-      "output": "sha256-8e99a3ca3924b3703d1ef759e3647813d8f49b09671ef186ac842f4e64bb994e",
+      "output": "sha256-72ff1a1896668f44c1f1b7f37340abbabeb9ae1df6c5ff0fabf81bdbb923db7f",
       "inputs": [
         "#template",
         "content/post/2026-03-27-ai-cries-out-for-better-notations.md"
@@ -576,7 +576,7 @@
         }
       ],
       "outputPath": "/post/2026-02-20-reactivity-for-malleability/index.html",
-      "output": "sha256-dd70f1be49b90933e55ce3fd41134f39092f5f8bfe42c567d2d5e377cb339349",
+      "output": "sha256-cc5037c0dd01d5f37b3ee18b09ec3133bb801399a05ec64b483ad8723b46ff59",
       "inputs": [
         "#template",
         "content/post/2026-02-20-reactivity-for-malleability.md"
@@ -626,7 +626,7 @@
         }
       ],
       "outputPath": "/wip/2025-12-15-understanding-reactivity/index.html",
-      "output": "sha256-8298cd82e68c3e9b90b79b7d7fd149f8b8c89f7e8c532ff2bfbed44e9a3b8538",
+      "output": "sha256-fae50dad031868b4863ad40a52b45e3ce02ce779ff4f5ff7aed5df660da5c7a9",
       "inputs": [
         "#template",
         "content/wip/2025-12-15-understanding-reactivity.md"
@@ -669,7 +669,7 @@
         }
       ],
       "outputPath": "/wip/2025-12-12-infinite-apps-and-unshaking/index.html",
-      "output": "sha256-568b77eae71488e2d12c9a4e49f1bea7a46991290df599125e64b54b5dfe5f84",
+      "output": "sha256-b7090641be288647f26ad254b73da0f37ea359f97a1ac5e55e1f14f496b8fd2d",
       "inputs": [
         "#template",
         "content/wip/2025-12-12-infinite-apps-and-unshaking.md"
@@ -687,7 +687,7 @@
         }
       ],
       "outputPath": "/wip/2025-10-07-josh-horowitz-review/index.html",
-      "output": "sha256-a6635d153ed80077ed7bd0c20ef10308ef165e921e64b6dd17716c5c31530468",
+      "output": "sha256-d14113c3b6f534482ec8810b23f8193d2e7dc12764e5817e42be610f88b29f08",
       "inputs": [
         "#template",
         "content/wip/2025-10-07-josh-horowitz-review.md"
@@ -710,7 +710,7 @@
         }
       ],
       "outputPath": "/wip/2025-09-30-module-system-once-more/index.html",
-      "output": "sha256-cdd14b52656019a9fc75d85513632f50ab2c1153b9a2cdfb77b93099c5d8093d",
+      "output": "sha256-80a5b280cde5be8c19fef716308951dff34420a65f35164f0ee0fedb6a28e7bb",
       "inputs": [
         "#template",
         "content/wip/2025-09-30-module-system-once-more.md"
@@ -773,7 +773,7 @@
         }
       ],
       "outputPath": "/wip/2025-09-26-this-weeks-reactive-chats/index.html",
-      "output": "sha256-518bcc32a805b6c8e6bd6919bae8604d588fc065e31c59575bca4ca533c866e5",
+      "output": "sha256-5bf838b8f26b8de6a5c62d788c2ffbce80597517c7a59ee3cd72fbed42ef9ea1",
       "inputs": [
         "#template",
         "content/wip/2025-09-26-this-week's-reactive-chats.md"
@@ -791,7 +791,7 @@
         }
       ],
       "outputPath": "/wip/2025-09-25-more-inaturalist-shenanigans/index.html",
-      "output": "sha256-b1174812da56046d0b758284a878ba7d06a5b6787de2c5eab904e7e0b45ea196",
+      "output": "sha256-5ed4f4b2400d4b7464c1a1dde5cecb3ddf9d91649991fababbe6f2c6b48c2bd6",
       "inputs": [
         "#template",
         "content/wip/2025-09-25-more-inaturalist-shenanigans.md"
@@ -829,7 +829,7 @@
         }
       ],
       "outputPath": "/post/2025-07-01-archaeology-of-glitches/index.html",
-      "output": "sha256-da943bc046b0104edaa2efd9af661e425e176d3402a1c3562bf27822c52af47e",
+      "output": "sha256-ffabd7a082ab235023dd425556c82fe4f783c0da32af82094c1b5ef0808b1bd5",
       "inputs": [
         "#template",
         "content/post/2025-07-01-archaeology-of-glitches.md"
@@ -897,7 +897,7 @@
         }
       ],
       "outputPath": "/post/2025-06-03-substrates-vision/index.html",
-      "output": "sha256-d05439ee592f06884fc3dedb50c93d01700efee7525a4667011c10fe54100edb",
+      "output": "sha256-5c9faa7318abc441fa468425058d5bd2f0bb4d463ee2f13ece1470ba9901c901",
       "inputs": [
         "#template",
         "content/post/2025-06-03-substrates-vision.md"
@@ -925,7 +925,7 @@
         }
       ],
       "outputPath": "/wip/2025-04-24-learning-from-codestrates/index.html",
-      "output": "sha256-09b202b50a99328cf07ac2c27164657ec25d41ea3bf06bee3e5acdadabbf2f2e",
+      "output": "sha256-fe495b4918fb082bbec0d638e0aa23782c63caaf32e5cf178ac9733491279426",
       "inputs": [
         "#template",
         "content/wip/2025-04-24-learning-from-codestrates.md"
@@ -948,7 +948,7 @@
         }
       ],
       "outputPath": "/wip/2025-04-21-co-occurrences-are-here-again/index.html",
-      "output": "sha256-0d33b2670f955449853782f2e10dc3e5c0bbfca2b56bc3535c7c175af7253b6c",
+      "output": "sha256-d0a00b46eb24386f94e618bd5367c7cc5726cfe369ed237ca94a6c260d1936e2",
       "inputs": [
         "#template",
         "content/wip/2025-04-21-co-occurrences-are-here-again.md"
@@ -971,7 +971,7 @@
         }
       ],
       "outputPath": "/post/2025-04-19-new-notation-era/index.html",
-      "output": "sha256-4294ea2221d8911059a3cd1b3d12283788b75dfa8fdf8d19c950b3ced7c6b26b",
+      "output": "sha256-238f11c4c2ab0ce89874cc2f840b648ffbe4cd8e14244da704bba1ae3c52359a",
       "inputs": [
         "#template",
         "content/post/2025-04-19-new-notation-era.md"
@@ -994,7 +994,7 @@
         }
       ],
       "outputPath": "/post/2025-04-13-coming-out-of-the-shadows/index.html",
-      "output": "sha256-2388c1b878a8662107dd304be8da42c345dbbda9e422a5a789324ef922c1f7bf",
+      "output": "sha256-89917dbcef790578b59b871b2d37ad07e8a828346a726bc4ec9215006967d173",
       "inputs": [
         "#template",
         "content/post/2025-04-13-coming-out-of-the-shadows.md"
@@ -1006,7 +1006,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/wip/2025-04-07-templates-and-weird-attributes-together/index.html",
-      "output": "sha256-7a9865b939cf04075ed8b94ef752790f2bedf87f6425485ebc7f2ea200ed19d7",
+      "output": "sha256-b0c6ea873009d03f83d545a739fbd0e75b75afac8eb64be44960a8184b12649b",
       "inputs": [
         "#template",
         "content/wip/2025-04-07-templates-and-weird-attributes-together.md"
@@ -1018,7 +1018,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/wip/2025-04-04-staring-at-the-wand/index.html",
-      "output": "sha256-6d0aeb3af6c9675a1d6a9dab69eaf3d3770ab1ed58c48317b8d634db7f45baf3",
+      "output": "sha256-184d78ed663daa50167eb3b7698cc3d26a6d8d5daee1a5161473c621881390fd",
       "inputs": [
         "#template",
         "content/wip/2025-04-04-staring-at-the-wand.md"
@@ -1030,7 +1030,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/wip/2025-04-03-change-of-tack-on-templating/index.html",
-      "output": "sha256-28291a806694d2924389130668456daa43efdd1506c561aa8d3c6aa279e4774a",
+      "output": "sha256-382817ae5a4e814e5027dff47a33f570387c071291a1b54c4d2a79bc72cbdeae",
       "inputs": [
         "#template",
         "content/wip/2025-04-03-change-of-tack-on-templating.md"
@@ -1042,7 +1042,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/wip/2025-03-28-hunting-rich-editors/index.html",
-      "output": "sha256-9c7572248fcdf60009325be3018bfe7142e44cffb3dee0ef0793327ed036ba41",
+      "output": "sha256-a3ed7ece8c128a1e7d83641e1ca492c3775e392e901a51666c3c13c4a9019e59",
       "inputs": [
         "#template",
         "content/wip/2025-03-28-hunting-rich-editors.md"
@@ -1085,7 +1085,7 @@
         }
       ],
       "outputPath": "/post/2025-03-20-ui-as-code/index.html",
-      "output": "sha256-2f0548a7de4e8bf6045383f51a59ea4cd9b30555549f8916f159b926d3b7ec2c",
+      "output": "sha256-5b6485ee17320d057e64504eaed2bf1fa53bdbe46321b057c4e2d85074c1852c",
       "inputs": [
         "#template",
         "content/post/2025-03-20-ui-as-code.md"
@@ -1097,7 +1097,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/post/2025-03-14-development-speed/index.html",
-      "output": "sha256-0dc455878a84d005e17038d70f5217bafe4752fa6b3084f26f073e83114f0362",
+      "output": "sha256-6195a4680b55323e0b0dfeecaf4ba9c91ca7cf538df4e094000645f6cb9fdf33",
       "inputs": [
         "#template",
         "content/post/2025-03-14-development-speed.md"
@@ -1130,7 +1130,7 @@
         }
       ],
       "outputPath": "/post/2025-02-07-benchmarking-dom-reconciliation/index.html",
-      "output": "sha256-f186f1f2df4c9400f60166f5e710e65659d0d09871911578c75fc516932fcc44",
+      "output": "sha256-5cd47cf814f81b7bc63c190f164673703870b15c405154423c3420f1e80cc2ae",
       "inputs": [
         "#template",
         "content/post/2025-02-07-benchmarking-dom-reconciliation.md"
@@ -1142,7 +1142,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/communities/index.html",
-      "output": "sha256-cbfc3d85cfa8441bc860ad96bf25042b06180fee65cd6a86ae0dfb6c6c2f3bd4",
+      "output": "sha256-d46d80245033ceae8e62baf45df1e9b614bb36b5aac4228586e4f148771bc890",
       "inputs": [
         "#template",
         "content/communities.md"
@@ -1357,7 +1357,7 @@
         }
       ],
       "outputPath": "/docs/fluid-integration-language/index.html",
-      "output": "sha256-40a4fb167f16c4250901d01cb2eae62adcbd94e23531f88532ce917e42355c7d",
+      "output": "sha256-24f08895a864ebc453683b31b728f664d0a70196bce680737142d42dec8dca3a",
       "inputs": [
         "#template",
         "content/docs/fluid-integration-language.md"
@@ -1452,7 +1452,7 @@
         }
       ],
       "outputPath": "/docs/fluid-ptf/index.html",
-      "output": "sha256-2092b1d95978d98dbfcaa8eccaf6ef6a83bfabad70f212a5c1ed6ee6ad90f26e",
+      "output": "sha256-19e424f0f24c4029917db5d751b6a344e54ce10069faca2376d5bbc50d7242f5",
       "inputs": [
         "#template",
         "content/docs/fluid-ptf.md"
@@ -1500,7 +1500,7 @@
         }
       ],
       "outputPath": "/docs/fluid-signals-background/index.html",
-      "output": "sha256-65e96a362817deeaaeb315670fc4d5f2e389074b269e6b9f9451e76bf193c312",
+      "output": "sha256-ff5947dcf6df3d08a90b01119b3f91e85646a6f44b13d12a774f723ec7ac6a2a",
       "inputs": [
         "#template",
         "content/docs/fluid-signals-background.md"
@@ -1645,7 +1645,7 @@
         }
       ],
       "outputPath": "/docs/fluid-signals/index.html",
-      "output": "sha256-b84eca4ef4b7b72978da201df80332b898d91cdfa688257d85a4fccc6d9dc4ed",
+      "output": "sha256-971c7475f2982e5fb05a025f0fe57a0168f9c6e39498d4f7a0843e1b174d8628",
       "inputs": [
         "#template",
         "content/docs/fluid-signals.md"
@@ -1680,7 +1680,7 @@
         }
       ],
       "outputPath": "/docs/fluid-tldraw/index.html",
-      "output": "sha256-351abac4bb19a3f093dc407a861566f1d86ec09c15313f138bacbd101eeb9f0b",
+      "output": "sha256-9e53e89dcc16f94dbbd02181db6190a5ad78c4ddd9e4315206594dd721e9f609",
       "inputs": [
         "#template",
         "content/docs/fluid-tldraw.md"
@@ -1841,7 +1841,7 @@
         }
       ],
       "outputPath": "/docs/fluid-view/index.html",
-      "output": "sha256-d6482a73f7b12d41f5a5382e5c7156b1f46af580d2e380ef9bb2710f5b01d7de",
+      "output": "sha256-da32818d099ea0380de3de60547681a31a5a4cdea14c7842a2a4d14a86f9d4f4",
       "inputs": [
         "#template",
         "content/docs/fluid-view.md"
@@ -1896,7 +1896,7 @@
         }
       ],
       "outputPath": "/docs/linearisation-algorithm/index.html",
-      "output": "sha256-b01cdae82c7b9059975fe4b1d984accef2a26ca4ae33ef90ab4416db4b43c980",
+      "output": "sha256-40bb0d21828fce8494b0e2c3cf19c7a76377328a22cc2cb8d6624ace64b6e0dc",
       "inputs": [
         "#template",
         "content/docs/linearisation-algorithm.md"
@@ -1919,7 +1919,7 @@
         }
       ],
       "outputPath": "/docs/wend/index.html",
-      "output": "sha256-46346a0072effee5b0fca165befe3fb2952ff03f02387f8d93a318b5bb532eb4",
+      "output": "sha256-1d750c0d1d2a92d9ab9e935461e82e4f283170949fae00ddc52601107ae3b7eb",
       "inputs": [
         "#template",
         "content/docs/wend.md"
@@ -1962,7 +1962,7 @@
         }
       ],
       "outputPath": "/edit-in-infusion-privacy/index.html",
-      "output": "sha256-94c493e344d8ff388e709f453a66dec092b1082b95713dc5da2a23da524b6d70",
+      "output": "sha256-32d5a772b6e6ef23a1b4708bb6784012c1c48bdd7c5f23d67f5bcaf88ebf829a",
       "inputs": [
         "#template",
         "content/edit-in-infusion-privacy.md"
@@ -1974,7 +1974,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/infusion/index.html",
-      "output": "sha256-f572fe70715b2d05377c790bc093a439f799b1558ead68b0572060f46e824cd7",
+      "output": "sha256-02e41fdb7424f58b69321bdb8cefa56217758ba54258d67aa447644ef33e8604",
       "inputs": [
         "#template",
         "content/infusion.md"
@@ -1986,7 +1986,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/page/about/index.html",
-      "output": "sha256-5ad2baa49dc81dd265fba06caecbf960fb73d8f5b3dc4e3c9252bb9f6e02d976",
+      "output": "sha256-fa717b1671b51d9cdbccfe90c358648b2a3bf2f9656d5f3fdf7e0f80b93482b2",
       "inputs": [
         "#template",
         "content/page/about.md"
@@ -1998,7 +1998,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/projects/index.html",
-      "output": "sha256-d97d5ca91feca77af89eebe6210f36200d989e7a56d05c0cff3879f381d0c5b0",
+      "output": "sha256-4946bce29bf4ca47e2fffc90d20b6254ca03dd0de22b7de2761a9dac29583bae",
       "inputs": [
         "#template",
         "content/projects.md"
@@ -2010,7 +2010,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/term/a-good-function/index.html",
-      "output": "sha256-1a7ac9e5fe54c600da4c388d024073f18e9493aa42eef2cd1de3629efdb61708",
+      "output": "sha256-d2ab93e52cbaed2ed7ff061c732e762770154c52d2ac2454cfb6907a60d5216a",
       "inputs": [
         "#template",
         "content/term/a-good-function.md"
@@ -2028,7 +2028,7 @@
         }
       ],
       "outputPath": "/term/cod-reactivity/index.html",
-      "output": "sha256-44e7f6cd873f01e09530347925679cdee4bdb5be19123f7770e43cda9e0f8bca",
+      "output": "sha256-1084f6f588af87865e7948901be8b895a5179d8d5d6bfa2ec353da53979588c7",
       "inputs": [
         "#template",
         "content/term/cod-reactivity.md"
@@ -2040,7 +2040,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/term/disclosable-computing/index.html",
-      "output": "sha256-f79edf5f7e02ec4dadbd14e94e37c0b827b572f6225442ce912d44362d6834c5",
+      "output": "sha256-0b3ddbac113294439ec0b36575ea80b500c6730b39534d49e95e09df9428a9f5",
       "inputs": [
         "#template",
         "content/term/disclosable-computing.md"
@@ -2052,7 +2052,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/term/divergence/index.html",
-      "output": "sha256-d10b32daa0f682795b8458eb9c0e61308df03312669ed77dd1bdd990eaee5709",
+      "output": "sha256-fc9b4705e74f25211e8f4a4d30c1c6667180df21f039467902716cd33b8a400e",
       "inputs": [
         "#template",
         "content/term/divergence.md"
@@ -2064,7 +2064,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/term/end-user-programming/index.html",
-      "output": "sha256-20693c390e94875911cecc2f7b5c746ebd3dbf249ba44fe2bd9461ac0f9b308f",
+      "output": "sha256-b64f61bc1f39ad28ed08ed42913b7c88addc5378c11c88c3b1a5c21c146aa6af",
       "inputs": [
         "#template",
         "content/term/end-user-programming.md"
@@ -2076,7 +2076,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/term/externalisability/index.html",
-      "output": "sha256-18a2e4c2040dee8dc33e07babe75738195c1b5afd0d480efcd2e6f2989ec337d",
+      "output": "sha256-1636946607a746eea724ed0e6ab973a025911497eb9beddbe6d45ec5013b9b0e",
       "inputs": [
         "#template",
         "content/term/externalisability.md"
@@ -2109,7 +2109,7 @@
         }
       ],
       "outputPath": "/term/glitch/index.html",
-      "output": "sha256-21a0d998f62358c5eb9e8ce3ab4f49be497d35e8497bf47f211f1ce0de791fd2",
+      "output": "sha256-a1a8dff4dd53ee93c92a404233338ffdf216eac0faaf0c08cca0b8011fbbbaa4",
       "inputs": [
         "#template",
         "content/term/glitch.md"
@@ -2121,7 +2121,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/term/habitable/index.html",
-      "output": "sha256-b380198c0850795a345a7e91be940768f155db816c784724842eee64ba639545",
+      "output": "sha256-9583b6cc77e1b26930230b84836e8f55c179291786c6afa83e56b411cc5977ef",
       "inputs": [
         "#template",
         "content/term/habitable.md"
@@ -2133,7 +2133,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/term/integration-domain/index.html",
-      "output": "sha256-50095ee1a4305eda4ba15b7cd9c89ebdc34566ec8671d1178573a7f7fa4e847a",
+      "output": "sha256-aa569532b532a1cea688e5ca1f81e12493bee5af58fac089caa15645886e38af",
       "inputs": [
         "#template",
         "content/term/integration-domain.md"
@@ -2145,7 +2145,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/term/lithification/index.html",
-      "output": "sha256-069ca44d87cdbf68eb5391c34a50254bd16904adfed3ef65c1ae2e13e7aacb84",
+      "output": "sha256-705564f4a092395085893cf846eaf01f9ba949fbb8a687cda2eeffa487657f1d",
       "inputs": [
         "#template",
         "content/term/lithification.md"
@@ -2157,7 +2157,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/term/substrate/index.html",
-      "output": "sha256-413003128231087a852f2f2b5f5753d2dc876a89d61bfd745ae67bd29bb400ae",
+      "output": "sha256-cb312cb2188b1f10de7736640ef4f1e5f46106582dfce2427a24421fd8fea0ec",
       "inputs": [
         "#template",
         "content/term/substrate.md"
@@ -2169,7 +2169,7 @@
       "kind": "page",
       "headings": [],
       "outputPath": "/term/unavailable-value/index.html",
-      "output": "sha256-dc4a22f3302f0e6e431e4d9057e533eb93362b15469ddf5d6c09fd462ef4c918",
+      "output": "sha256-4987d5844cfa444352b5a12a31935e47ef436375a38d0cff3baec8d10ae68c1c",
       "inputs": [
         "#template",
         "content/term/unavailable-value.md"
@@ -2181,7 +2181,7 @@
       "kind": "taxonomy",
       "headings": [],
       "outputPath": "/tags/index.html",
-      "output": "sha256-36cdbb7e27eb81c61eb11d6db72ec7ef0c61fcde9a8452da4aade0919b26f85b",
+      "output": "sha256-d57bc608d983ac5112e57a4d2db84bd01781eb10d4f74121c2af1e82b6b07f00",
       "inputs": [
         "#template"
       ]
@@ -2192,7 +2192,7 @@
       "kind": "taxonomy",
       "headings": [],
       "outputPath": "/categories/index.html",
-      "output": "sha256-33c657d940e35c37a111b3903e6802a17204bf4950b1bc828d7f5dd236b74106",
+      "output": "sha256-e0d70fbc6c99a67c2703a079f2fd4840635bf79e606d40f09fa81470a3b26fb3",
       "inputs": [
         "#template",
         "content/term/a-good-function.md",
@@ -2215,7 +2215,7 @@
       "kind": "term",
       "headings": [],
       "outputPath": "/categories/term/index.html",
-      "output": "sha256-58c646a8709e933d5dc4f99b163a6ec14ef21700e42252038b98b8c45dce3d1e",
+      "output": "sha256-a19e1c2d5b87d405ec1018166fef7fe9425a523eed7deed43d6ba2642581a047",
       "inputs": [
         "#template",
         "content/term/a-good-function.md",
@@ -2236,7 +2236,7 @@
       "kind": "term",
       "headings": [],
       "outputPath": "/categories/term/page/2/index.html",
-      "output": "sha256-0d297275b7e26cf25e6df0e294849181a727b68e4bd4f5e26109146f0cd23eec",
+      "output": "sha256-77d182d7ea41990a3d0c5ea9fe083637685fbbc1f52293268b4417399302e1e6",
       "inputs": [
         "#template",
         "content/term/substrate.md",
@@ -2249,7 +2249,7 @@
       "kind": "404",
       "headings": [],
       "outputPath": "/404.html",
-      "output": "sha256-a533f94884d5e33617a94e8b48cdf19db8852890174ad40c6447dc9d4e86dde1",
+      "output": "sha256-73fe26cbd02228b79a6fe4947edee6ab9feea84ed26c2d9f7c225039d65db696",
       "inputs": [
         "#template"
       ]
