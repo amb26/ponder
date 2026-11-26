@@ -1,8 +1,8 @@
 {
   "version": 1,
   "commit": null,
-  "infusion": "6.7.1",
-  "template": "sha256-5a10c6fa9f22d37e022dfecff8a2ed3c847c585f39f722aa2a889dc919bf7d40",
+  "infusion": "6.7.4",
+  "template": "sha256-db7f72cb3f205fd7a46d49525b601f9eff5348a9713822e4f8ea97398e89c574",
   "sources": {
     "content/_index.md": "sha256-fb5a17c32f131c0fb5a87bf807d921fce3ace749274d7cfa59991dc929b9f563",
     "content/communities.md": "sha256-0c77f9eb66edb04d3f3fbe7ef3d3463046622541e3056625c0d98682c8f1c37c",
@@ -57,15 +57,16 @@
     "content/wip/_index.md": "sha256-9b4e0e809645bf1d01a84e3768c48e45aae9539ead4429fa21558b9d13e0a1da",
     "wend/override/beautifulWend/sfc/beautifulWend-footer.vue": "sha256-0e7407de182a644fc7a80bd262df843fdf27f470189ab0929ba72ca717e35418",
     "wend/override/beautifulWend/sfc/beautifulWend-navbar.vue": "sha256-7c0e5b12cef631b97ea4bc1c578bb3a2fab34f9876524569bfc298c338017b20",
-    "wend.json": "sha256-f59653156be0fed397bf40df0d1ec17b53ce87b059a140f0adb1e0bf29f3d60c"
+    "wend.json": "sha256-03d74da6e8d126377aab1c5a2e68eaf2cc7d3efbf713ce5df718f673141828cf"
   },
   "pages": {
     "/": {
       "title": "Antranig Basman",
+      "layers": [],
       "kind": "home",
       "headings": [],
       "outputPath": "/index.html",
-      "output": "sha256-7269c18bec0d1828b7ea8dab4d83be8babfaec2150cda1703c2965dfbda3b1a5",
+      "output": "sha256-02f7832001d0c4c1b75492ad90b6667e2be7afa8b51fddb68b93fd555ac0cd38",
       "inputs": [
         "#template",
         "content/post/2025-02-07-benchmarking-dom-reconciliation.md",
@@ -82,10 +83,11 @@
     },
     "/post/": {
       "title": "post",
+      "layers": [],
       "kind": "section",
       "headings": [],
       "outputPath": "/post/index.html",
-      "output": "sha256-8bd33488157692014eb997e3f124243547dd1a5a43d13e51835e9168cefa79e8",
+      "output": "sha256-a18c2046be377d0115b98754a46ba53bd5e725b813e51071e8f3e3d856f97c83",
       "inputs": [
         "#template",
         "content/post/2025-02-07-benchmarking-dom-reconciliation.md",
@@ -102,10 +104,11 @@
     },
     "/wip/": {
       "title": "wip",
+      "layers": [],
       "kind": "section",
       "headings": [],
       "outputPath": "/wip/index.html",
-      "output": "sha256-4ff6dc2b2f58e312d4de22e624162e15e6247c54a43c09d977c8775ba9f8610f",
+      "output": "sha256-07d34988ebf89105ec03822c8c61f4873fd11572ff646551b46df8e1ceb3c373",
       "inputs": [
         "#template",
         "content/wip/2025-04-21-co-occurrences-are-here-again.md",
@@ -122,10 +125,11 @@
     },
     "/wip/page/2/": {
       "title": "wip",
+      "layers": [],
       "kind": "section",
       "headings": [],
       "outputPath": "/wip/page/2/index.html",
-      "output": "sha256-e313816028f9972ee492768a2b26946cdfe06bb25448c884191d5ec90d4b7405",
+      "output": "sha256-198ce7a79bce945df96144a99eb0a617cedcad6e799f6f634b4337638193c4ee",
       "inputs": [
         "#template",
         "content/wip/2025-03-28-hunting-rich-editors.md",
@@ -136,10 +140,11 @@
     },
     "/docs/": {
       "title": "docs",
+      "layers": [],
       "kind": "section",
       "headings": [],
       "outputPath": "/docs/index.html",
-      "output": "sha256-c5e2e3e97db1c3689081f5e8f0f87d37b8e059b72a1bd1f5dea29f99ff96c5fe",
+      "output": "sha256-348ce20f64c8ae94a488f38c55c09acf7fa5deab12db185a8fbc57e2fd076875",
       "inputs": [
         "#template",
         "content/docs/fluid-integration-language.md",
@@ -154,10 +159,11 @@
     },
     "/page/": {
       "title": "page",
+      "layers": [],
       "kind": "section",
       "headings": [],
       "outputPath": "/page/index.html",
-      "output": "sha256-7ec6aaaf6f1700ca798ce0607ca65803c029c6595583b65a406849c6e6449184",
+      "output": "sha256-a29a602a1a666407363b5fe40f6cea7d04692c76a3286118c5789529bfde4035",
       "inputs": [
         "#template",
         "content/page/about.md"
@@ -165,10 +171,11 @@
     },
     "/term/": {
       "title": "term",
+      "layers": [],
       "kind": "section",
       "headings": [],
       "outputPath": "/term/index.html",
-      "output": "sha256-819c415e2d8a5a96ff564f72bb8f986fa8deef4263ce46a91251614fd1dad7b5",
+      "output": "sha256-cf1285189a4506a94f6b3e587354832d0302be28b74774dfaa89c89cc4dce9f1",
       "inputs": [
         "#template",
         "content/term/a-good-function.md",
@@ -185,10 +192,11 @@
     },
     "/term/page/2/": {
       "title": "term",
+      "layers": [],
       "kind": "section",
       "headings": [],
       "outputPath": "/term/page/2/index.html",
-      "output": "sha256-5dad55d6d2407a75a8c429f71d44ee588821f48a0122553aafdf155744f0f9d1",
+      "output": "sha256-063a60b014c22068e70072f0bd589ecc3fb081b53ba4bd9f5522019a20ec2176",
       "inputs": [
         "#template",
         "content/term/substrate.md",
@@ -197,6 +205,9 @@
     },
     "/post/2026-06-28-fully-deferred-stabilization/": {
       "title": "Bridging the gap between static and dynamic analysis through fully deferred stabilization",
+      "layers": [
+        "wend.shortcode.stabilization"
+      ],
       "kind": "page",
       "headings": [
         {
@@ -226,7 +237,7 @@
         }
       ],
       "outputPath": "/post/2026-06-28-fully-deferred-stabilization/index.html",
-      "output": "sha256-8b112507dd67a46b4995dfb41e4ba67fb58516615bb8fd7b4128754a5214067f",
+      "output": "sha256-36fc886ff8e8fc5398377d712558a17fd81fcf58aa08d27d92dbc0ff8c98a59d",
       "inputs": [
         "#template",
         "content/post/2026-06-28-fully-deferred-stabilization.md"
@@ -234,6 +245,7 @@
     },
     "/wip/2026-05-25-towards-deferred-stabilisation/": {
       "title": "Towards Deferred Stabilisation",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -253,7 +265,7 @@
         }
       ],
       "outputPath": "/wip/2026-05-25-towards-deferred-stabilisation/index.html",
-      "output": "sha256-00c51d39114fa286b2d42344ec7ef3204fbf240efe00ae74af845b20ba162c3d",
+      "output": "sha256-8bb33547a40420153196d16c96cd3469f5f78d4d17a411d6b36c069a00278829",
       "inputs": [
         "#template",
         "content/wip/2026-05-25-towards-deferred-stabilisation.md"
@@ -261,6 +273,7 @@
     },
     "/wip/2026-07-31-researching-in-browser-ai/": {
       "title": "Researching in-browser AI",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -420,7 +433,7 @@
         }
       ],
       "outputPath": "/wip/2026-07-31-researching-in-browser-ai/index.html",
-      "output": "sha256-8c04bc4c38e8ae6d3659310400eb0668f78093df9ff09c2640879971f0ad2749",
+      "output": "sha256-ea59e0bdbfbf7abd74c5ad82f25f26059e02b5689494c21ae96db7d69a0e05a7",
       "inputs": [
         "#template",
         "content/wip/2026-07-31-researching-in-browser-ai.md"
@@ -428,10 +441,11 @@
     },
     "/post/2026-03-27-ai-cries-out-for-better-notations/": {
       "title": "AI cries out for better notations",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/post/2026-03-27-ai-cries-out-for-better-notations/index.html",
-      "output": "sha256-6fc0a36d1e83ccbb53413d1931bd2d0d375b13e5e469d44ce4c5735ced0e0023",
+      "output": "sha256-8e99a3ca3924b3703d1ef759e3647813d8f49b09671ef186ac842f4e64bb994e",
       "inputs": [
         "#template",
         "content/post/2026-03-27-ai-cries-out-for-better-notations.md"
@@ -439,6 +453,10 @@
     },
     "/post/2026-02-20-reactivity-for-malleability/": {
       "title": "fluid.cell: A reactive implementation supporting malleable substrates",
+      "layers": [
+        "wend.shortcode.figure",
+        "wend.shortcode.vizreactive"
+      ],
       "kind": "page",
       "headings": [
         {
@@ -558,7 +576,7 @@
         }
       ],
       "outputPath": "/post/2026-02-20-reactivity-for-malleability/index.html",
-      "output": "sha256-be04d06efc81e7f0d0dfac52329d0849d922eab28f55cee41d0cee914ce3f092",
+      "output": "sha256-dd70f1be49b90933e55ce3fd41134f39092f5f8bfe42c567d2d5e377cb339349",
       "inputs": [
         "#template",
         "content/post/2026-02-20-reactivity-for-malleability.md"
@@ -566,6 +584,9 @@
     },
     "/wip/2025-12-15-understanding-reactivity/": {
       "title": "Understanding Reactivity",
+      "layers": [
+        "wend.shortcode.figure"
+      ],
       "kind": "page",
       "headings": [
         {
@@ -605,7 +626,7 @@
         }
       ],
       "outputPath": "/wip/2025-12-15-understanding-reactivity/index.html",
-      "output": "sha256-09da5e2ed249a109ed1826de28be28be28b4cb70203bb22067f9167be1cf5bbf",
+      "output": "sha256-8298cd82e68c3e9b90b79b7d7fd149f8b8c89f7e8c532ff2bfbed44e9a3b8538",
       "inputs": [
         "#template",
         "content/wip/2025-12-15-understanding-reactivity.md"
@@ -613,6 +634,7 @@
     },
     "/wip/2025-12-12-infinite-apps-and-unshaking/": {
       "title": "Infinite Apps, Asynchrony and Tree Unshaking",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -647,7 +669,7 @@
         }
       ],
       "outputPath": "/wip/2025-12-12-infinite-apps-and-unshaking/index.html",
-      "output": "sha256-eda482e7138fb4a77f5d1f285ae5cc71733003fc6a6d7cda0ce857359b61ee23",
+      "output": "sha256-568b77eae71488e2d12c9a4e49f1bea7a46991290df599125e64b54b5dfe5f84",
       "inputs": [
         "#template",
         "content/wip/2025-12-12-infinite-apps-and-unshaking.md"
@@ -655,6 +677,7 @@
     },
     "/wip/2025-10-07-josh-horowitz-review/": {
       "title": "Josh Horowitz Review",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -664,7 +687,7 @@
         }
       ],
       "outputPath": "/wip/2025-10-07-josh-horowitz-review/index.html",
-      "output": "sha256-ac6dbb3bf78ba0b374752b7e9b456bdf188d666fe8ec5dc7dd20327b4ad6af54",
+      "output": "sha256-a6635d153ed80077ed7bd0c20ef10308ef165e921e64b6dd17716c5c31530468",
       "inputs": [
         "#template",
         "content/wip/2025-10-07-josh-horowitz-review.md"
@@ -672,6 +695,7 @@
     },
     "/wip/2025-09-30-module-system-once-more/": {
       "title": "The Module System Once More",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -686,7 +710,7 @@
         }
       ],
       "outputPath": "/wip/2025-09-30-module-system-once-more/index.html",
-      "output": "sha256-25bad3598271e351c510cc69b0f31540726e2e96c0443ddf4106beaa9b0520b7",
+      "output": "sha256-cdd14b52656019a9fc75d85513632f50ab2c1153b9a2cdfb77b93099c5d8093d",
       "inputs": [
         "#template",
         "content/wip/2025-09-30-module-system-once-more.md"
@@ -694,6 +718,7 @@
     },
     "/wip/2025-09-26-this-weeks-reactive-chats/": {
       "title": "This week's reactive chats",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -748,7 +773,7 @@
         }
       ],
       "outputPath": "/wip/2025-09-26-this-weeks-reactive-chats/index.html",
-      "output": "sha256-a0402ef587a5f41e0635938a1f673c5dc28b00dae07b75c25fcb5b060c00df92",
+      "output": "sha256-518bcc32a805b6c8e6bd6919bae8604d588fc065e31c59575bca4ca533c866e5",
       "inputs": [
         "#template",
         "content/wip/2025-09-26-this-week's-reactive-chats.md"
@@ -756,6 +781,7 @@
     },
     "/wip/2025-09-25-more-inaturalist-shenanigans/": {
       "title": "More iNaturalist Shenanigans",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -765,7 +791,7 @@
         }
       ],
       "outputPath": "/wip/2025-09-25-more-inaturalist-shenanigans/index.html",
-      "output": "sha256-245efb5376606f9ed9a0fcc1c46f2b92ce659858a729d1956778fed02e81bdcd",
+      "output": "sha256-b1174812da56046d0b758284a878ba7d06a5b6787de2c5eab904e7e0b45ea196",
       "inputs": [
         "#template",
         "content/wip/2025-09-25-more-inaturalist-shenanigans.md"
@@ -773,6 +799,7 @@
     },
     "/post/2025-07-01-archaeology-of-glitches/": {
       "title": "Archaeology of Glitches",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -802,7 +829,7 @@
         }
       ],
       "outputPath": "/post/2025-07-01-archaeology-of-glitches/index.html",
-      "output": "sha256-2fbc991418794df2c588b6c23c027e51c9b07c014b13b7debe24f290d9db24d6",
+      "output": "sha256-da943bc046b0104edaa2efd9af661e425e176d3402a1c3562bf27822c52af47e",
       "inputs": [
         "#template",
         "content/post/2025-07-01-archaeology-of-glitches.md"
@@ -810,6 +837,7 @@
     },
     "/post/2025-06-03-substrates-vision/": {
       "title": "Substrates Vision Statement",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -869,7 +897,7 @@
         }
       ],
       "outputPath": "/post/2025-06-03-substrates-vision/index.html",
-      "output": "sha256-adf350e7e984926d329cfb2419c49e13628c7e79b0ca13abfa35b66c153ba9ca",
+      "output": "sha256-d05439ee592f06884fc3dedb50c93d01700efee7525a4667011c10fe54100edb",
       "inputs": [
         "#template",
         "content/post/2025-06-03-substrates-vision.md"
@@ -877,6 +905,7 @@
     },
     "/wip/2025-04-24-learning-from-codestrates/": {
       "title": "Learning from Codestrates",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -896,7 +925,7 @@
         }
       ],
       "outputPath": "/wip/2025-04-24-learning-from-codestrates/index.html",
-      "output": "sha256-40c6b27b3ac8cb2afe20e95f6cddee4d71bd7fa8c2d5d8b70fb836820fb579eb",
+      "output": "sha256-09b202b50a99328cf07ac2c27164657ec25d41ea3bf06bee3e5acdadabbf2f2e",
       "inputs": [
         "#template",
         "content/wip/2025-04-24-learning-from-codestrates.md"
@@ -904,6 +933,7 @@
     },
     "/wip/2025-04-21-co-occurrences-are-here-again/": {
       "title": "Co-occurrences are here again",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -918,7 +948,7 @@
         }
       ],
       "outputPath": "/wip/2025-04-21-co-occurrences-are-here-again/index.html",
-      "output": "sha256-669befadaaa26efd245a4594531993a35e738f9159304db3860f33ac6e49d1da",
+      "output": "sha256-0d33b2670f955449853782f2e10dc3e5c0bbfca2b56bc3535c7c175af7253b6c",
       "inputs": [
         "#template",
         "content/wip/2025-04-21-co-occurrences-are-here-again.md"
@@ -926,6 +956,7 @@
     },
     "/post/2025-04-19-new-notation-era/": {
       "title": "An era for new notations",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -940,7 +971,7 @@
         }
       ],
       "outputPath": "/post/2025-04-19-new-notation-era/index.html",
-      "output": "sha256-4d88a5459e8381f70468128238d0733e83bc31ef346ea29efbac73f7179f516e",
+      "output": "sha256-4294ea2221d8911059a3cd1b3d12283788b75dfa8fdf8d19c950b3ced7c6b26b",
       "inputs": [
         "#template",
         "content/post/2025-04-19-new-notation-era.md"
@@ -948,6 +979,7 @@
     },
     "/post/2025-04-13-coming-out-of-the-shadows/": {
       "title": "Coming Out of the Shadows",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -962,7 +994,7 @@
         }
       ],
       "outputPath": "/post/2025-04-13-coming-out-of-the-shadows/index.html",
-      "output": "sha256-8e3a10b4845e7d570b645a6fc3c4158aa5ed60a1dc3e06adf196eebfbe8ecdcd",
+      "output": "sha256-2388c1b878a8662107dd304be8da42c345dbbda9e422a5a789324ef922c1f7bf",
       "inputs": [
         "#template",
         "content/post/2025-04-13-coming-out-of-the-shadows.md"
@@ -970,10 +1002,11 @@
     },
     "/wip/2025-04-07-templates-and-weird-attributes-together/": {
       "title": "Templates and weird attributes together",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/wip/2025-04-07-templates-and-weird-attributes-together/index.html",
-      "output": "sha256-04902249aa81dd7cd6c996b136a9cf3286ca6705f1662215a539775f919a8889",
+      "output": "sha256-7a9865b939cf04075ed8b94ef752790f2bedf87f6425485ebc7f2ea200ed19d7",
       "inputs": [
         "#template",
         "content/wip/2025-04-07-templates-and-weird-attributes-together.md"
@@ -981,10 +1014,11 @@
     },
     "/wip/2025-04-04-staring-at-the-wand/": {
       "title": "Staring at the wand",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/wip/2025-04-04-staring-at-the-wand/index.html",
-      "output": "sha256-bd02706cc3268d0e6b063ce370fe7493db1af2b9a96de495115eb2df23358f4c",
+      "output": "sha256-6d0aeb3af6c9675a1d6a9dab69eaf3d3770ab1ed58c48317b8d634db7f45baf3",
       "inputs": [
         "#template",
         "content/wip/2025-04-04-staring-at-the-wand.md"
@@ -992,10 +1026,11 @@
     },
     "/wip/2025-04-03-change-of-tack-on-templating/": {
       "title": "Change of Tack on Templating",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/wip/2025-04-03-change-of-tack-on-templating/index.html",
-      "output": "sha256-3a233e00f0ab6eed482596f6e7e889bec8dd5b82df57c762a410f697654d6932",
+      "output": "sha256-28291a806694d2924389130668456daa43efdd1506c561aa8d3c6aa279e4774a",
       "inputs": [
         "#template",
         "content/wip/2025-04-03-change-of-tack-on-templating.md"
@@ -1003,10 +1038,11 @@
     },
     "/wip/2025-03-28-hunting-rich-editors/": {
       "title": "Hunting rich editors",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/wip/2025-03-28-hunting-rich-editors/index.html",
-      "output": "sha256-f390460897ccf1b32e40cc5b41fac83a86504f9c7c4ab96e4257f42db7596a0d",
+      "output": "sha256-9c7572248fcdf60009325be3018bfe7142e44cffb3dee0ef0793327ed036ba41",
       "inputs": [
         "#template",
         "content/wip/2025-03-28-hunting-rich-editors.md"
@@ -1014,6 +1050,7 @@
     },
     "/post/2025-03-20-ui-as-code/": {
       "title": "On UI as code",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -1048,7 +1085,7 @@
         }
       ],
       "outputPath": "/post/2025-03-20-ui-as-code/index.html",
-      "output": "sha256-e4748624513c4ab94d019a21a5bdff99fb548ab495c59394db4fac8ef58fe902",
+      "output": "sha256-2f0548a7de4e8bf6045383f51a59ea4cd9b30555549f8916f159b926d3b7ec2c",
       "inputs": [
         "#template",
         "content/post/2025-03-20-ui-as-code.md"
@@ -1056,10 +1093,11 @@
     },
     "/post/2025-03-14-development-speed/": {
       "title": "On Development Speed",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/post/2025-03-14-development-speed/index.html",
-      "output": "sha256-12ab7583106f17aefd479f026541a11f3a7bb567e19af688356a2e683d4ca567",
+      "output": "sha256-0dc455878a84d005e17038d70f5217bafe4752fa6b3084f26f073e83114f0362",
       "inputs": [
         "#template",
         "content/post/2025-03-14-development-speed.md"
@@ -1067,6 +1105,7 @@
     },
     "/post/2025-02-07-benchmarking-dom-reconciliation/": {
       "title": "Benchmarking DOM reconciliation algorithms",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -1091,7 +1130,7 @@
         }
       ],
       "outputPath": "/post/2025-02-07-benchmarking-dom-reconciliation/index.html",
-      "output": "sha256-273678478d2202d73b98d480e2f3987dff8a1808a8eee4df14ca07037c494568",
+      "output": "sha256-f186f1f2df4c9400f60166f5e710e65659d0d09871911578c75fc516932fcc44",
       "inputs": [
         "#template",
         "content/post/2025-02-07-benchmarking-dom-reconciliation.md"
@@ -1099,10 +1138,11 @@
     },
     "/communities/": {
       "title": "My Communities",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/communities/index.html",
-      "output": "sha256-b98e1ae8564ff635244fd0811e44203a6ad13b74e440660d964d3015d4a5adb5",
+      "output": "sha256-cbfc3d85cfa8441bc860ad96bf25042b06180fee65cd6a86ae0dfb6c6c2f3bd4",
       "inputs": [
         "#template",
         "content/communities.md"
@@ -1110,6 +1150,9 @@
     },
     "/docs/fluid-integration-language/": {
       "title": "Fluid Integration Language",
+      "layers": [
+        "fluid.liveExample"
+      ],
       "kind": "page",
       "headings": [
         {
@@ -1314,7 +1357,7 @@
         }
       ],
       "outputPath": "/docs/fluid-integration-language/index.html",
-      "output": "sha256-1af1e574178c1596648bf79cb0c360b669495de9c3ae3fda2449face7d513ecb",
+      "output": "sha256-40a4fb167f16c4250901d01cb2eae62adcbd94e23531f88532ce917e42355c7d",
       "inputs": [
         "#template",
         "content/docs/fluid-integration-language.md"
@@ -1322,6 +1365,9 @@
     },
     "/docs/fluid-ptf/": {
       "title": "Potentia Transmission Format",
+      "layers": [
+        "fluid.liveExample"
+      ],
       "kind": "page",
       "headings": [
         {
@@ -1406,7 +1452,7 @@
         }
       ],
       "outputPath": "/docs/fluid-ptf/index.html",
-      "output": "sha256-73d8dfd2af4b38212828cd3824c38deb8edb43ca93f8005142d2960b0ac80c16",
+      "output": "sha256-2092b1d95978d98dbfcaa8eccaf6ef6a83bfabad70f212a5c1ed6ee6ad90f26e",
       "inputs": [
         "#template",
         "content/docs/fluid-ptf.md"
@@ -1414,6 +1460,7 @@
     },
     "/docs/fluid-signals-background/": {
       "title": "Fluid Signals background",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -1453,7 +1500,7 @@
         }
       ],
       "outputPath": "/docs/fluid-signals-background/index.html",
-      "output": "sha256-44dfec117db8bf68cb51304e9df4a0a53fbf5732bf406bf742caf69029324284",
+      "output": "sha256-65e96a362817deeaaeb315670fc4d5f2e389074b269e6b9f9451e76bf193c312",
       "inputs": [
         "#template",
         "content/docs/fluid-signals-background.md"
@@ -1461,6 +1508,9 @@
     },
     "/docs/fluid-signals/": {
       "title": "Fluid Signals API",
+      "layers": [
+        "fluid.liveExample"
+      ],
       "kind": "page",
       "headings": [
         {
@@ -1595,7 +1645,7 @@
         }
       ],
       "outputPath": "/docs/fluid-signals/index.html",
-      "output": "sha256-ce78c5925d2d11bd84fa1fd3eb89549dcde7ad99f6a54190b19d5b982ffaea0a",
+      "output": "sha256-b84eca4ef4b7b72978da201df80332b898d91cdfa688257d85a4fccc6d9dc4ed",
       "inputs": [
         "#template",
         "content/docs/fluid-signals.md"
@@ -1603,6 +1653,9 @@
     },
     "/docs/fluid-tldraw/": {
       "title": "Fluid tldraw integration",
+      "layers": [
+        "fluid.liveExample"
+      ],
       "kind": "page",
       "headings": [
         {
@@ -1627,7 +1680,7 @@
         }
       ],
       "outputPath": "/docs/fluid-tldraw/index.html",
-      "output": "sha256-e4552f3d82e482b3416696b6d4d6f948c9847693f96cd453f4dc81661b2eb4b4",
+      "output": "sha256-351abac4bb19a3f093dc407a861566f1d86ec09c15313f138bacbd101eeb9f0b",
       "inputs": [
         "#template",
         "content/docs/fluid-tldraw.md"
@@ -1635,6 +1688,10 @@
     },
     "/docs/fluid-view/": {
       "title": "Fluid View",
+      "layers": [
+        "fluid.liveExample",
+        "my.counter"
+      ],
       "kind": "page",
       "headings": [
         {
@@ -1784,7 +1841,7 @@
         }
       ],
       "outputPath": "/docs/fluid-view/index.html",
-      "output": "sha256-9230d924606ed447ba8098e9056c6d65c89b09fed417be269c708c45edf02317",
+      "output": "sha256-d6482a73f7b12d41f5a5382e5c7156b1f46af580d2e380ef9bb2710f5b01d7de",
       "inputs": [
         "#template",
         "content/docs/fluid-view.md"
@@ -1792,6 +1849,9 @@
     },
     "/docs/linearisation-algorithm/": {
       "title": "Layer Linearisation",
+      "layers": [
+        "fluid.liveExample"
+      ],
       "kind": "page",
       "headings": [
         {
@@ -1836,7 +1896,7 @@
         }
       ],
       "outputPath": "/docs/linearisation-algorithm/index.html",
-      "output": "sha256-60970f2b832bd8d6514806e8f43036945688a713776c0b924b01121325dc0afe",
+      "output": "sha256-b01cdae82c7b9059975fe4b1d984accef2a26ca4ae33ef90ab4416db4b43c980",
       "inputs": [
         "#template",
         "content/docs/linearisation-algorithm.md"
@@ -1844,6 +1904,7 @@
     },
     "/docs/wend/": {
       "title": "wend",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -1858,7 +1919,7 @@
         }
       ],
       "outputPath": "/docs/wend/index.html",
-      "output": "sha256-84dc547275f2258c9ca04925175ab2888eddbfa5748b064f2acca8bf21b61fe9",
+      "output": "sha256-46346a0072effee5b0fca165befe3fb2952ff03f02387f8d93a318b5bb532eb4",
       "inputs": [
         "#template",
         "content/docs/wend.md"
@@ -1866,6 +1927,7 @@
     },
     "/edit-in-infusion-privacy/": {
       "title": "Edit in Infusion - Privacy Policy",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -1900,7 +1962,7 @@
         }
       ],
       "outputPath": "/edit-in-infusion-privacy/index.html",
-      "output": "sha256-e5388d3b61805249c023f6905770fa2bf8bbd48eb0de0c547bb96cfdc53e0bfd",
+      "output": "sha256-94c493e344d8ff388e709f453a66dec092b1082b95713dc5da2a23da524b6d70",
       "inputs": [
         "#template",
         "content/edit-in-infusion-privacy.md"
@@ -1908,10 +1970,11 @@
     },
     "/infusion/": {
       "title": "Infusion",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/infusion/index.html",
-      "output": "sha256-97ce55baffc13da4f3757da3e9ffbf426dbf24f9aebacf87ad7619efba37e42a",
+      "output": "sha256-f572fe70715b2d05377c790bc093a439f799b1558ead68b0572060f46e824cd7",
       "inputs": [
         "#template",
         "content/infusion.md"
@@ -1919,10 +1982,11 @@
     },
     "/page/about/": {
       "title": "About me",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/page/about/index.html",
-      "output": "sha256-41ea803d1d9dad83d947e2a77ad5b5e5b54d3272ead585e77d290e5932821e6d",
+      "output": "sha256-5ad2baa49dc81dd265fba06caecbf960fb73d8f5b3dc4e3c9252bb9f6e02d976",
       "inputs": [
         "#template",
         "content/page/about.md"
@@ -1930,10 +1994,11 @@
     },
     "/projects/": {
       "title": "My Projects",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/projects/index.html",
-      "output": "sha256-6ac0531a400b347942b3d67ae33cae685227d661fbe89e2a695655e128cbb802",
+      "output": "sha256-d97d5ca91feca77af89eebe6210f36200d989e7a56d05c0cff3879f381d0c5b0",
       "inputs": [
         "#template",
         "content/projects.md"
@@ -1941,10 +2006,11 @@
     },
     "/term/a-good-function/": {
       "title": "A good function",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/term/a-good-function/index.html",
-      "output": "sha256-79985549bfac0d6539a1fd74cd9f37edfed777419a0646975ebd59ee4324f59f",
+      "output": "sha256-1a7ac9e5fe54c600da4c388d024073f18e9493aa42eef2cd1de3629efdb61708",
       "inputs": [
         "#template",
         "content/term/a-good-function.md"
@@ -1952,6 +2018,7 @@
     },
     "/term/cod-reactivity/": {
       "title": "Cod reactivity",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -1961,7 +2028,7 @@
         }
       ],
       "outputPath": "/term/cod-reactivity/index.html",
-      "output": "sha256-07dd27b4397c9065cc9392ff9bcecfa2634de27e4502fc75e1a360a0432fb655",
+      "output": "sha256-44e7f6cd873f01e09530347925679cdee4bdb5be19123f7770e43cda9e0f8bca",
       "inputs": [
         "#template",
         "content/term/cod-reactivity.md"
@@ -1969,10 +2036,11 @@
     },
     "/term/disclosable-computing/": {
       "title": "Disclosable Computing",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/term/disclosable-computing/index.html",
-      "output": "sha256-81037eefe2ad650ff92660da75cc7c78e82d37f99c8c93f9c20609835cad17fc",
+      "output": "sha256-f79edf5f7e02ec4dadbd14e94e37c0b827b572f6225442ce912d44362d6834c5",
       "inputs": [
         "#template",
         "content/term/disclosable-computing.md"
@@ -1980,10 +2048,11 @@
     },
     "/term/divergence/": {
       "title": "Divergence",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/term/divergence/index.html",
-      "output": "sha256-bbc8cf93320c179ca536bbc9deec83cd3c3a633a03e396f4ec0f564711deb9ba",
+      "output": "sha256-d10b32daa0f682795b8458eb9c0e61308df03312669ed77dd1bdd990eaee5709",
       "inputs": [
         "#template",
         "content/term/divergence.md"
@@ -1991,10 +2060,11 @@
     },
     "/term/end-user-programming/": {
       "title": "End user programming",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/term/end-user-programming/index.html",
-      "output": "sha256-db676f8e5d68eb8d94149028b8cb9c5a9f288e08ebb6a2ac4ce1df71f868b69c",
+      "output": "sha256-20693c390e94875911cecc2f7b5c746ebd3dbf249ba44fe2bd9461ac0f9b308f",
       "inputs": [
         "#template",
         "content/term/end-user-programming.md"
@@ -2002,10 +2072,11 @@
     },
     "/term/externalisability/": {
       "title": "Externalisability",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/term/externalisability/index.html",
-      "output": "sha256-7243adc6beaab03f348fce526363dd47d94e957c343bb65029d6e7914ea18825",
+      "output": "sha256-18a2e4c2040dee8dc33e07babe75738195c1b5afd0d480efcd2e6f2989ec337d",
       "inputs": [
         "#template",
         "content/term/externalisability.md"
@@ -2013,6 +2084,7 @@
     },
     "/term/glitch/": {
       "title": "Glitch",
+      "layers": [],
       "kind": "page",
       "headings": [
         {
@@ -2037,7 +2109,7 @@
         }
       ],
       "outputPath": "/term/glitch/index.html",
-      "output": "sha256-68939cfd13f6aea8097d40e89a8bb7f05e0e2c9a79771886f31ea1441a70b744",
+      "output": "sha256-21a0d998f62358c5eb9e8ce3ab4f49be497d35e8497bf47f211f1ce0de791fd2",
       "inputs": [
         "#template",
         "content/term/glitch.md"
@@ -2045,10 +2117,11 @@
     },
     "/term/habitable/": {
       "title": "Habitable",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/term/habitable/index.html",
-      "output": "sha256-1efa4f92b5c50540675a23bd0aef8296547b10b442e1b80a25146f4ead276be8",
+      "output": "sha256-b380198c0850795a345a7e91be940768f155db816c784724842eee64ba639545",
       "inputs": [
         "#template",
         "content/term/habitable.md"
@@ -2056,10 +2129,11 @@
     },
     "/term/integration-domain/": {
       "title": "Integration Domain",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/term/integration-domain/index.html",
-      "output": "sha256-54c35ead40e281de4b5c406cc6bc5121008be5705085f3ea240f00f7e3eee010",
+      "output": "sha256-50095ee1a4305eda4ba15b7cd9c89ebdc34566ec8671d1178573a7f7fa4e847a",
       "inputs": [
         "#template",
         "content/term/integration-domain.md"
@@ -2067,10 +2141,11 @@
     },
     "/term/lithification/": {
       "title": "Lithification",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/term/lithification/index.html",
-      "output": "sha256-46f5d7c0d4d78728bfcde0b75afd3cf06bacf797d3fc53a483054072851405ac",
+      "output": "sha256-069ca44d87cdbf68eb5391c34a50254bd16904adfed3ef65c1ae2e13e7aacb84",
       "inputs": [
         "#template",
         "content/term/lithification.md"
@@ -2078,10 +2153,11 @@
     },
     "/term/substrate/": {
       "title": "Substrate",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/term/substrate/index.html",
-      "output": "sha256-2f2932ea8f33ea5eda2f2621d91370c75a360ade85d0a630d625f0382a81e0ce",
+      "output": "sha256-413003128231087a852f2f2b5f5753d2dc876a89d61bfd745ae67bd29bb400ae",
       "inputs": [
         "#template",
         "content/term/substrate.md"
@@ -2089,10 +2165,11 @@
     },
     "/term/unavailable-value/": {
       "title": "Unavailable Value",
+      "layers": [],
       "kind": "page",
       "headings": [],
       "outputPath": "/term/unavailable-value/index.html",
-      "output": "sha256-16f3e514150e4dc45ec951a0a04303f87c05a0c75742a6948dd3d9c8cebec6c5",
+      "output": "sha256-dc4a22f3302f0e6e431e4d9057e533eb93362b15469ddf5d6c09fd462ef4c918",
       "inputs": [
         "#template",
         "content/term/unavailable-value.md"
@@ -2100,20 +2177,22 @@
     },
     "/tags/": {
       "title": "tags",
+      "layers": [],
       "kind": "taxonomy",
       "headings": [],
       "outputPath": "/tags/index.html",
-      "output": "sha256-f590d8479e505ee05874c98205e0cc6506656cb424a61d86bd62dca22a4e54de",
+      "output": "sha256-36cdbb7e27eb81c61eb11d6db72ec7ef0c61fcde9a8452da4aade0919b26f85b",
       "inputs": [
         "#template"
       ]
     },
     "/categories/": {
       "title": "categories",
+      "layers": [],
       "kind": "taxonomy",
       "headings": [],
       "outputPath": "/categories/index.html",
-      "output": "sha256-7e6097b46ca510294fdcf1e1cd233fdf77b348dde4a0dbae3cb03a77b72a1efa",
+      "output": "sha256-33c657d940e35c37a111b3903e6802a17204bf4950b1bc828d7f5dd236b74106",
       "inputs": [
         "#template",
         "content/term/a-good-function.md",
@@ -2132,10 +2211,11 @@
     },
     "/categories/term/": {
       "title": "term",
+      "layers": [],
       "kind": "term",
       "headings": [],
       "outputPath": "/categories/term/index.html",
-      "output": "sha256-e1f8b470c99c87b16f895482ba0073f6c917564c761eb5520f7c5ce54eb2d3dd",
+      "output": "sha256-58c646a8709e933d5dc4f99b163a6ec14ef21700e42252038b98b8c45dce3d1e",
       "inputs": [
         "#template",
         "content/term/a-good-function.md",
@@ -2152,10 +2232,11 @@
     },
     "/categories/term/page/2/": {
       "title": "term",
+      "layers": [],
       "kind": "term",
       "headings": [],
       "outputPath": "/categories/term/page/2/index.html",
-      "output": "sha256-fdee57a8d54985c9cc394f4d5fb0af6ee16cb1832da7777d7ac2f4bdd915f177",
+      "output": "sha256-0d297275b7e26cf25e6df0e294849181a727b68e4bd4f5e26109146f0cd23eec",
       "inputs": [
         "#template",
         "content/term/substrate.md",
@@ -2164,10 +2245,11 @@
     },
     "/404.html": {
       "title": "404 Page not found",
+      "layers": [],
       "kind": "404",
       "headings": [],
       "outputPath": "/404.html",
-      "output": "sha256-b5ba3da919d6ad00b9be5d136436bf4f78d5d0a972566c37594786a523da8c48",
+      "output": "sha256-a533f94884d5e33617a94e8b48cdf19db8852890174ad40c6447dc9d4e86dde1",
       "inputs": [
         "#template"
       ]
@@ -2366,5 +2448,7 @@
     "static/weblogo/shaders/generalPolygon.c": "sha256-722e88fc2389b5e57d69c1c3c562327b3e51691c50f33eccf41b4943d444a295",
     "static/weblogo/shaders/nullVertex.c": "sha256-55854732bb1ac5923f33ff7dee54a288ceae6d5988aa2de927c0c3be0be351cb",
     "static/weblogo/shaders/sphericalHarmFragment.c": "sha256-d25507dc698f23f9114b239499b9c5c08fd32287f7eea4faedccaf162649e224"
-  }
+  },
+  "widgets": {},
+  "bases": []
 }

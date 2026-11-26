@@ -169,6 +169,31 @@ fluid.sourceView.linkCompletions = function (getSite) {
 };
 
 /**
+ * Make the source of completions of the layers of widgets, as one is typed into the `fluid-layers` attribute of a
+ * widget's element - those of the site's widgets which may be inserted, whether published or held in the browser
+ * @param {Function} getSite - Returns what is known of the site, as for `linkCompletions` - its `widgetLayers`, as
+ * `{layer, note}`, are offered
+ * @return {Function} The completion source, for CodeMirror's autocompletion
+ */
+fluid.sourceView.layerCompletions = function (getSite) {
+    return function (context) {
+        // Within the attribute's quotes, after any layers already named - the name being typed is completed
+        const match = context.matchBefore(/\sfluid-layers\s*=\s*"[^"\n]*$/);
+        const site = match ? getSite() : null;
+        let togo = null;
+        if (match && site && site.widgetLayers) {
+            const typed = match.text.substring(match.text.lastIndexOf("\"") + 1).split(/\s+/).pop();
+            togo = {
+                from: context.pos - typed.length,
+                options: site.widgetLayers.map(({layer, note}) => ({label: layer, detail: note || "widget", type: "class"})),
+                validFor: /^[\w.$-]*$/
+            };
+        }
+        return togo;
+    };
+};
+
+/**
  * Make the source view in its rendered container - a CodeMirror 6 editor, and a hidden <textarea> mirroring its text.
  * What happens in it is announced as DOM events on the container, which bubble: "fluidsourcechange" {text} on each
  * edit; "fluidsourcecursor" {line} as the cursor moves to another line; "fluidsourcepaste" {text} and
@@ -213,7 +238,7 @@ fluid.sourceView.bind = function (parent) {
                 fluid.sourceView.CM.highlightSelectionMatches(),
                 fluid.sourceView.CM.syntaxHighlighting(fluid.sourceView.CM.defaultHighlightStyle, {fallback: true}),
                 fluid.sourceView.CM.EditorView.lineWrapping,
-                fluid.sourceView.CM.autocompletion({override: [fluid.sourceView.linkCompletions(getSite)], icons: false}),
+                fluid.sourceView.CM.autocompletion({override: [fluid.sourceView.linkCompletions(getSite), fluid.sourceView.layerCompletions(getSite)], icons: false}),
                 fluid.sourceView.CM.keymap.of([...fluid.sourceView.CM.completionKeymap, ...fluid.sourceView.CM.defaultKeymap, ...fluid.sourceView.CM.historyKeymap, ...fluid.sourceView.CM.searchKeymap, fluid.sourceView.CM.indentWithTab]),
                 language.of(fluid.sourceView.CM.markdown()),
                 fluid.sourceView.blockLinesField,
@@ -227,9 +252,11 @@ fluid.sourceView.bind = function (parent) {
                         }
                         return taken;
                     },
-                    // Files dragged over the source show where they would land - see fluid.sourceView.showDropCaret
+                    // Files, or a widget dragged out of another page as PTF, show where they would land over the source -
+                    // see fluid.sourceView.showDropCaret
                     dragover: (event, dropView) => {
-                        const carries = !!event.dataTransfer && [...event.dataTransfer.types].includes("Files");
+                        const types = event.dataTransfer ? [...event.dataTransfer.types] : [];
+                        const carries = types.includes("Files") || types.includes(fluid.sourceView.ptfDragType);
                         const pos = carries ? dropView.posAtCoords({x: event.clientX, y: event.clientY}) : null;
                         fluid.sourceView.showDropCaret(pos === null ? null : dropView.coordsAtPos(pos));
                         return false;
@@ -240,17 +267,19 @@ fluid.sourceView.bind = function (parent) {
                         }
                         return false;
                     },
-                    // A drop of files may be taken by the extension, e.g. a widget as a ZIP file, or an image
+                    // A drop of files may be taken by the extension, e.g. a widget as a ZIP file, or an image - and a widget
+                    // dragged as PTF is taken as its paste would be
                     drop: (event, dropView) => {
                         fluid.sourceView.showDropCaret(null);
                         const files = event.dataTransfer ? [...event.dataTransfer.files] : [];
+                        const ptf = event.dataTransfer && files.length === 0 ? event.dataTransfer.getData(fluid.sourceView.ptfDragType) : "";
                         let taken = false;
-                        if (files.length > 0) {
+                        if (files.length > 0 || ptf) {
                             const pos = dropView.posAtCoords({x: event.clientX, y: event.clientY});
                             if (pos !== null) {
                                 dropView.dispatch({selection: {anchor: pos}});
                             }
-                            taken = !!onDrop(files);
+                            taken = files.length > 0 ? !!onDrop(files) : !!onPaste(ptf);
                         }
                         if (taken) {
                             event.preventDefault();
@@ -373,6 +402,9 @@ fluid.sourceView.showDropCaret = function (coords) {
 // A drag ended anywhere leaves no caret behind
 document.addEventListener("dragend", () => fluid.sourceView.showDropCaret(null));
 document.addEventListener("drop", () => fluid.sourceView.showDropCaret(null));
+
+// The type under which a widget dragged out of another page is carried as PTF - as fluid.blockEditor.ptfDragType
+fluid.sourceView.ptfDragType = "application/x-ptf";
 
 fluid.sourceView.islandOpening = /^\s*<[a-zA-Z][\w-]*\s[^>]*\bfluid-layers\s*=/;
 

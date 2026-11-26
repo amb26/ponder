@@ -88,9 +88,9 @@
                     "weight": 5
                 },
                 {
-                    "name": "Layer Linearisation",
+                    "name": "wend",
                     "parent": "docs",
-                    "url": "docs/linearisation-algorithm",
+                    "url": "docs/wend",
                     "weight": 6
                 },
                 {

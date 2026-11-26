@@ -227,7 +227,7 @@ fluid.blockEditor.listen = function (container) {
     container.addEventListener("dragover", event => {
         // Text may be dropped onto a widget, e.g. another widget dragged as PTF - only its drop can tell whether it is one
         const textOntoIsland = !!event.dataTransfer && [...event.dataTransfer.types].includes("text/plain") && !!islandOf(event.target);
-        if (fluid.blockEditor.carriesFiles(event.dataTransfer) || textOntoIsland) {
+        if (fluid.blockEditor.carriesFiles(event.dataTransfer) || fluid.blockEditor.carriesPTF(event.dataTransfer) || textOntoIsland) {
             event.preventDefault();
             event.dataTransfer.dropEffect = "copy";
             fluid.blockEditor.showDropCaret(fluid.blockEditor.dropPlace(record, event, islandOf(event.target), editableOf));
@@ -244,9 +244,11 @@ fluid.blockEditor.listen = function (container) {
     container.addEventListener("drop", event => {
         fluid.blockEditor.hideDropCaret();
         const files = fluid.blockEditor.carriesFiles(event.dataTransfer) ? [...event.dataTransfer.files] : [];
-        const text = files.length === 0 && event.dataTransfer ? event.dataTransfer.getData("text/plain") : "";
+        // A widget dragged out of another page, e.g. a tldraw arena, as PTF under a type of its own, may fall anywhere
+        const ptf = files.length === 0 && fluid.blockEditor.carriesPTF(event.dataTransfer) ? event.dataTransfer.getData(fluid.blockEditor.ptfDragType) : "";
+        const text = ptf || (files.length === 0 && event.dataTransfer ? event.dataTransfer.getData("text/plain") : "");
         const island = islandOf(event.target);
-        if (files.length > 0 || (island && text && fluid.ptf.isPTF(text))) {
+        if (files.length > 0 || (ptf && fluid.ptf.isPTF(ptf)) || (island && text && fluid.ptf.isPTF(text))) {
             event.preventDefault();
             event.stopPropagation();
             const range = document.caretRangeFromPoint ? document.caretRangeFromPoint(event.clientX, event.clientY) : null;
@@ -298,6 +300,17 @@ fluid.blockEditor.listen = function (container) {
             element.blur();
         } else if (event.key === "Escape") {
             fluid.blockEditor.selectIsland(record, null);
+        }
+    });
+    // A widget selected is deleted by Delete or Backspace, as text is - unless a field of the widget's own is being
+    // typed into. Bound on the document, since a widget pressed on needn't take the focus
+    document.addEventListener("keydown", event => {
+        const island = record.selectedIsland;
+        if (island && island.isConnected && (event.key === "Delete" || event.key === "Backspace") &&
+            !event.ctrlKey && !event.metaKey && !event.altKey && !fluid.blockEditor.isTypingInto(document.activeElement)) {
+            event.preventDefault();
+            fluid.blockEditor.selectIsland(record, null);
+            fluid.blockEditor.removeIsland(record, island);
         }
     });
     return record;
@@ -657,6 +670,15 @@ fluid.blockEditor.saveIsland = function (record, island) {
     }
 };
 
+/**
+ * Determine whether an element takes typed text, so that Delete and Backspace are its own rather than deleting a widget
+ * @param {Element|null} element - The element, e.g. the document's active element
+ * @return {Boolean} `true` if it takes typed text
+ */
+fluid.blockEditor.isTypingInto = function (element) {
+    return !!element && (["INPUT", "TEXTAREA", "SELECT"].includes(element.tagName) || element.isContentEditable === true);
+};
+
 // The attribute marking the widget selected, e.g. to be copied - never written into the source, since a widget is
 // written from its layers, id and potentia alone. It is marked afresh on the widget's element as the blocks render
 // afresh, and removed once they cease to be edited - see fluid.blockEditor.apply
@@ -984,14 +1006,39 @@ fluid.blockEditor.layerFiles = function (layerParts) {
 };
 
 /**
+ * Remove from a widget's potentia where a host such as a tldraw arena placed it - the position and size of its shape,
+ * written at its view (see fluid.tldraw.writeShapeConfig) - which mean nothing in a page, together with any records
+ * thereby left empty
+ * @param {Object} potentia - The widget's potentia, as by `fluid.ptf.islandFromParts`, which is modified
+ * @return {Object} The potentia
+ */
+fluid.blockEditor.stripPlacement = function (potentia) {
+    const view = potentia.view && potentia.view.$component;
+    if (fluid.isPlainObject(view, true)) {
+        delete view.shape;
+        delete view.shapeId;
+        if (Object.keys(view).length === 0) {
+            delete potentia.view.$component;
+        }
+        if (Object.keys(potentia.view).length === 0) {
+            delete potentia.view;
+        }
+    }
+    return potentia;
+};
+
+/**
  * Make a pasted widget ready to insert - its layers registered, unless the page defines them already, in which case
  * the extension asks whether to replace them, and its element written
- * @param {PTFPart[]} parts - The parts of its PTF document
+ * @param {PTFPart[]} documentParts - The parts of its PTF document, perhaps wrapping it - see `fluid.ptf.componentParts`
  * @param {String} source - The source into which it is to be inserted, so that its `fluid-id` is unused there
  * @return {Object} `{markup, files}` - its element, and the files of its layers, as by `layerFiles`
  */
-fluid.blockEditor.widgetFromParts = function (parts, source) {
+fluid.blockEditor.widgetFromParts = function (documentParts, source) {
+    // A widget copied out of a tldraw arena arrives wrapped as the one component of its document
+    const parts = fluid.ptf.componentParts(documentParts);
     const island = fluid.ptf.islandFromParts(parts);
+    fluid.blockEditor.stripPlacement(island.potentia);
     const files = fluid.blockEditor.layerFiles(island.layerParts);
     fluid.ptf.registerLayerParts(parts);
     if (!fluid.blockEditor.widgets.some(widget => widget.layer === island.layers[0])) {
@@ -1028,6 +1075,16 @@ fluid.blockEditor.pasteWidget = function (record, slot, text) {
  * @return {Boolean} `true` if it does
  */
 fluid.blockEditor.carriesFiles = transfer => !!transfer && [...transfer.types].includes("Files");
+
+// The type under which a widget dragged out of another page is carried as PTF - see demo/tldraw/js/tldraw-dragout.js
+fluid.blockEditor.ptfDragType = "application/x-ptf";
+
+/**
+ * Determine whether a drag carries a widget as PTF, under its own type - only its type is known until it is dropped
+ * @param {DataTransfer|null} transfer - The drag's data
+ * @return {Boolean} `true` if it does
+ */
+fluid.blockEditor.carriesPTF = transfer => !!transfer && [...transfer.types].includes(fluid.blockEditor.ptfDragType);
 
 // The slots awaiting what the extension makes of files dropped into them, by id
 fluid.blockEditor.slots = new Map();
