@@ -4,8 +4,8 @@ category: Infusion
 type: infusion-docs
 ---
 
-wend builds a static site from Infusion 6 components, and lets the site be edited in place, in the browser, with
-the edits committed to its GitHub repository. This site is built with it.
+Wend builds a static site from Infusion 6 components, and lets the site be edited in place, in the browser,
+with the edits committed to its GitHub repository. This site is built with it.
 
 ## Edit in Infusion
 
@@ -21,6 +21,8 @@ repository. To install it from the zip:
 1. Unzip it into a directory of its own.
 2. Open `chrome://extensions` in Chrome, and turn on **Developer mode**, at the top right.
 3. Click **Load unpacked**, and choose the directory.
+
+You can also install the most recent published version from the [Chrome Extension Store](https://chromewebstore.google.com/detail/edit-in-infusion/epphpgiplmpablplnonaihjhfmkhcimn).
 
 ## Packages
 
