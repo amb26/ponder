@@ -254,7 +254,7 @@
       <title>My Projects</title>
       <link>https://ponder.org.uk/projects/</link><author>amb26web@ponder.org.uk (Antranig Basman)</author>
       <guid>https://ponder.org.uk/projects/</guid>
-      <description>Since 2022 I have worked for the Oregon Bee Atlas to help landowners understand plant-pollinator interactions and guide their land use decisions including evaluation of seed mixes, as well as supporting their volunteers' observation work. I have implemented the Melittoflora tool using a provisional version of the [Infusion](/infusion) framework which filters the project's data on wild bees by geographical, temporal and taxonomic filters and visualises the resulting interactions as a live, attractive bipartite ribbon graph.</description>
+      <description>Since 2022 I have worked for the Oregon Bee Atlas to help landowners understand plant-pollinator interactions and guide their land use decisions including evaluation of seed mixes, as well as supporting their volunteers' observation work. I have implemented the Melittoflora tool using a provisional version of the Infusion framework which filters the project's data on wild bees by geographical, temporal and taxonomic filters and visualises the resulting interactions as a live, attractive bipartite ribbon graph.</description>
     </item>
     <item>
       <title>A good function</title>
