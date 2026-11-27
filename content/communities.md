@@ -23,7 +23,8 @@ their natural environment. The umbrella for many of our recent visualisations is
     </a>
   </div>
   <div class="community-desc">
-The <a href="https://software-substrates.org/">Software Substrates group</a> is striving to make software more ownable, and build democratic
+
+The [Software Substrates group](https://software-substrates.org/) is striving to make software more ownable, and build democratic
 infrastructure for real communities to express their relationships with others.
 We believe in widening the circle of those empowered to make decisions about
 their own technology, through making it as easy as possible to understand and change it.
