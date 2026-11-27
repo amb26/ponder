@@ -20,11 +20,11 @@
   },
   "homepage": "https://github.com/amb26/ponder#readme",
   "dependencies": {
-    "infusion-6": "https://github.com/fluid-project/infusion-6/releases/download/6.7.9/infusion-6-6.7.9.tgz",
+    "infusion-6": "https://github.com/fluid-project/infusion-6/releases/download/6.7.10/infusion-6-6.7.10.tgz",
     "linkedom": "0.18.9",
     "node-fetch": "3.3.2",
-    "@fluid-project/wend": "https://github.com/fluid-project/infusion-6/releases/download/%40fluid-project/wend%401.2.2/fluid-project-wend-1.2.2.tgz",
-    "@fluid-project/wend-theme-beautiful": "https://github.com/fluid-project/infusion-6/releases/download/%40fluid-project/wend-theme-beautiful%401.0.5/fluid-project-wend-theme-beautiful-1.0.5.tgz"
+    "@fluid-project/wend": "https://github.com/fluid-project/infusion-6/releases/download/%40fluid-project/wend%401.3.0/fluid-project-wend-1.3.0.tgz",
+    "@fluid-project/wend-theme-beautiful": "https://github.com/fluid-project/infusion-6/releases/download/%40fluid-project/wend-theme-beautiful%401.2.0/fluid-project-wend-theme-beautiful-1.2.0.tgz"
   },
   "devDependencies": {
     "eslint": "8.57.0",

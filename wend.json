@@ -118,7 +118,6 @@
     },
     "features": {
         "selfHosted": true,
-        "hljs": true,
-        "katex": false
+        "hljs": true
     }
 }
