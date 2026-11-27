@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "commit": "34c6059eb3b2e9b4ef17c6d3be7599898d5129b7",
+  "commit": "21bc9ead9b0ba93cded1222cdc66e9e63a1cf145",
   "infusion": "6.7.7",
   "template": "sha256-f69511fd04f55176c462459ff17af04b2cb718c930da952bc20c2960268b8418",
   "sources": {
     "content/_index.md": "sha256-fb5a17c32f131c0fb5a87bf807d921fce3ace749274d7cfa59991dc929b9f563",
-    "content/communities.md": "sha256-0c77f9eb66edb04d3f3fbe7ef3d3463046622541e3056625c0d98682c8f1c37c",
+    "content/communities.md": "sha256-97bf702617112a7565c83c76a2066a764fd0b415afd8632eae2c09a850718a6d",
     "content/docs/fluid-integration-language.md": "sha256-8eba5f58c343bf40d5d58137d82693bd7a49c71a85b82135d8e2a7e33eb0f4a9",
     "content/docs/fluid-ptf.md": "sha256-c3428f553fa6c285699b12fc9dc20f77c4f9cd1211d55fcdec7f3f4c00d6cc34",
     "content/docs/fluid-signals-background.md": "sha256-09b3f79ebe7fdd3b3924a793dee1eb6df9b57a014b06a2a47ab1687bbc7241dd",
@@ -1176,7 +1176,7 @@
       "source": "content/communities.md",
       "headings": [],
       "outputPath": "/communities/index.html",
-      "output": "sha256-246e655ecfcdf0e050f8c388926d064d03bab0b9557c82efb419ab02e79904f7",
+      "output": "sha256-992949262261ea0a5ddecadc64260b39294df3077cdc3c31c7b2b20d1752b928",
       "inputs": [
         "#template",
         "content/communities.md"
