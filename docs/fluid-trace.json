@@ -5,7 +5,7 @@
   "template": "sha256-bc47045282e9d3b8f0b3b8c2f903740dc1a800f4a835a0a9109bd56bbe7ed9c3",
   "sources": {
     "content/_index.md": "sha256-fb5a17c32f131c0fb5a87bf807d921fce3ace749274d7cfa59991dc929b9f563",
-    "content/communities.md": "sha256-784dfa7b4c3b81bea79b646c04eb9f3c92053175d47473a86982d9ee5a7b0e01",
+    "content/communities.md": "sha256-c18cd296a441bb49022fcc4290fd9a2600a3b8270f4939b6c057189cb7b1efa7",
     "content/docs/fluid-integration-language.md": "sha256-8eba5f58c343bf40d5d58137d82693bd7a49c71a85b82135d8e2a7e33eb0f4a9",
     "content/docs/fluid-ptf.md": "sha256-c3428f553fa6c285699b12fc9dc20f77c4f9cd1211d55fcdec7f3f4c00d6cc34",
     "content/docs/fluid-signals-background.md": "sha256-09b3f79ebe7fdd3b3924a793dee1eb6df9b57a014b06a2a47ab1687bbc7241dd",
@@ -1176,7 +1176,7 @@
       "source": "content/communities.md",
       "headings": [],
       "outputPath": "/communities/index.html",
-      "output": "sha256-90bdd17667eadad2db33c3d46bc78dab24421e1f347ce443392d3596086da628",
+      "output": "sha256-973e425197dfbe0ee856d1581616beeeb02f23be8c7691e51fea479c169706ec",
       "inputs": [
         "#template",
         "content/communities.md"
