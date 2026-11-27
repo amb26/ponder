@@ -23,11 +23,12 @@ title: My Communities
     </a>
   </div>
   <div class="community-desc">
-Between 2022 and 2024 I was a Solutions Network Member for CIFAR's 
-<a href="https://cifar.ca/ai/ai-and-society/cifar-solution-networks/data-communities-for-inclusion/">Data Communities for Inclusion</a>
-project, finding ways that self-employed women in India's SEWA cooperatives could effectively own their own 
+
+Between 2022 and 2024 I was a Solutions Network Member for CIFAR's
+[Data Communities for Inclusion](https://cifar.ca/ai/ai-and-society/cifar-solution-networks/data-communities-for-inclusion/)
+project, finding ways that self-employed women in India's SEWA cooperatives could effectively own their own
 technological platforms. I developed a very low-cost spreadsheet-driven e-commerce platform for
-<a href="https://datacommunities.ca/toolkit/sewa-saamarth-app/">SEWA Saamarth</a> that allowed the members to advertise and sell vegetable products within the Federation.
+[SEWA Saamarth](https://datacommunities.ca/toolkit/sewa-saamarth-app/) that allowed the members to advertise and sell vegetable products within the Federation.
 </div>
 </div>
 
@@ -38,9 +39,10 @@ technological platforms. I developed a very low-cost spreadsheet-driven e-commer
     </a>
   </div>
   <div class="community-desc">
-I am affiliated with <a href="https://lichen.coop/">Lichen Community Systems</a>, a Canada-based worker-led cooperative building technologies to support the arts, disability
+
+I am affiliated with [Lichen Community Systems](https://lichen.coop/), a Canada-based worker-led cooperative building technologies to support the arts, disability
 and, non-profit and cooperative communities. Under this umbrella I have issued a manifesto for 
-<a href="https://lichen-community-systems.github.io/knitting-data-communities/">Knitting Data Communities</a> promoting an
+[Knitting Data Communities](https://lichen-community-systems.github.io/knitting-data-communities/) promoting an
 ethic for groups of overlapping communities sharing data that concerns them.
 </div>
 </div>
@@ -53,12 +55,12 @@ ethic for groups of overlapping communities sharing data that concerns them.
     </a>
   </div>
   <div class="community-desc">
-<a href="https://boxer-project.github.io">Boxer</a> is a highly interesting and ancient programming system which
-closely conforms to Jonathan Edwards' definition of a <a href="/term/substrate">substrate</a>. In 2022 I chaired the 
+
+[Boxer](https://boxer-project.github.io) is a highly interesting and ancient programming system which
+closely conforms to Jonathan Edwards' definition of a [substrate](/term/substrate). In 2022 I chaired the 
 2nd international workshop dedicated to Boxer in the form of the 
-<a href="https://2022.programming-conference.org/home/salon-2022">Boxer Salon</a> hosted at <a href="https://2022.programming-conference.org/">
-Programming 2022</a> at Porto. I also maintain a helpful <a href="https://boxer-project.github.io/boxer-literature/Thematic%20index/">index to the Boxer
-literature</a>.
+[Boxer Salon](https://2022.programming-conference.org/home/salon-2022) hosted at [Programming 2022](https://2022.programming-conference.org/)
+at Porto. I also maintain a helpful [index to the Boxer literature](https://boxer-project.github.io/boxer-literature/Thematic%20index/).
 </div>
 </div>
 
