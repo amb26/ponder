@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "commit": "a3c9aa7171033dc33cac53be0473cd6f6069ba0b",
-  "infusion": "6.7.7",
-  "template": "sha256-f69511fd04f55176c462459ff17af04b2cb718c930da952bc20c2960268b8418",
+  "commit": null,
+  "infusion": "6.7.9",
+  "template": "sha256-70ae0c0943dd16a050595de9cd058b9776f1ea696a62d81c76e21659182641cd",
   "sources": {
     "content/_index.md": "sha256-fb5a17c32f131c0fb5a87bf807d921fce3ace749274d7cfa59991dc929b9f563",
     "content/communities.md": "sha256-784dfa7b4c3b81bea79b646c04eb9f3c92053175d47473a86982d9ee5a7b0e01",
@@ -1392,7 +1392,7 @@
         }
       ],
       "outputPath": "/docs/fluid-integration-language/index.html",
-      "output": "sha256-c7e283d0b530af391a4f0778b5b922928c446d39ddecb35d4eb5f1dcfc67d7f6",
+      "output": "sha256-f5b56ff6d34cca2b2c601227a81a39554d9921c5c7d21041fe4e7033816585e2",
       "inputs": [
         "#template",
         "content/docs/fluid-integration-language.md"
@@ -1488,7 +1488,7 @@
         }
       ],
       "outputPath": "/docs/fluid-ptf/index.html",
-      "output": "sha256-9e283f5f58c93e4368229848e4ba49530310c6a8d1c48fb17840ea893ff385cc",
+      "output": "sha256-b1d08293ac5185dbcee21b11dd235786224682481f85e1e8e2227eefe7e116fb",
       "inputs": [
         "#template",
         "content/docs/fluid-ptf.md"
@@ -1683,7 +1683,7 @@
         }
       ],
       "outputPath": "/docs/fluid-signals/index.html",
-      "output": "sha256-38e9e6f260b72020d5ed3a7bb626d3b7f84951e2b4efd16bf837217f0f90e06e",
+      "output": "sha256-d691bdfdf0491446ed7af2fe26727a7be30aceab954cd7dd4e74ad15c2f4085c",
       "inputs": [
         "#template",
         "content/docs/fluid-signals.md"
@@ -1719,7 +1719,7 @@
         }
       ],
       "outputPath": "/docs/fluid-tldraw/index.html",
-      "output": "sha256-01c3529c34072c73702351fee50304ed2257bd6188f9c33df87cec5d2307e0c7",
+      "output": "sha256-0ac9bbc31e8aa6a86ac578b5447721d3d896a208569ef34f45f91ebf4355973e",
       "inputs": [
         "#template",
         "content/docs/fluid-tldraw.md"
@@ -1880,7 +1880,7 @@
         }
       ],
       "outputPath": "/docs/fluid-view/index.html",
-      "output": "sha256-4c6dc72e1e5142c1a773dc40a79a58b160e1be4a0056773b6f3383b6383b34a6",
+      "output": "sha256-5873dc97d808bf736874b761bf63a037e2388f8a7ecda81e931b4f48fa5dff7d",
       "inputs": [
         "#template",
         "content/docs/fluid-view.md"
@@ -1936,7 +1936,7 @@
         }
       ],
       "outputPath": "/docs/linearisation-algorithm/index.html",
-      "output": "sha256-3319b3b655b20de38a6818a2156df550f6f00b8c304aceedae810b294d7468fc",
+      "output": "sha256-6b0b34c0214339709d4f5af5165c04af14845db29f88b7c53dbaf3b5a2c7690b",
       "inputs": [
         "#template",
         "content/docs/linearisation-algorithm.md"

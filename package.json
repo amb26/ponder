@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/amb26/ponder#readme",
   "dependencies": {
-    "infusion-6": "https://github.com/fluid-project/infusion-6/releases/download/6.7.8/infusion-6-6.7.8.tgz",
+    "infusion-6": "https://github.com/fluid-project/infusion-6/releases/download/6.7.9/infusion-6-6.7.9.tgz",
     "linkedom": "0.18.9",
     "node-fetch": "3.3.2",
     "@fluid-project/wend": "https://github.com/fluid-project/infusion-6/releases/download/%40fluid-project/wend%401.2.2/fluid-project-wend-1.2.2.tgz",
